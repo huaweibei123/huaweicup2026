@@ -34,6 +34,8 @@ def main() -> int:
     node_platform = run("node_platform", ["node", "-p", "process.platform"])
     patch_path = ROOT / "docs" / "system-atlas-windows-patch.json"
     patch = json.loads(patch_path.read_text(encoding="utf-8")) if patch_path.is_file() else None
+    extra_path = ROOT / "docs" / "system-atlas-competition-patch.json"
+    extra_patch = json.loads(extra_path.read_text(encoding="utf-8")) if extra_path.is_file() else None
     patch_verified = False
     run("gh", ["gh", "--version"])
     run("commit", ["git", "rev-parse", "HEAD"])
@@ -62,15 +64,35 @@ def main() -> int:
                         errors.append("Windows patch original hash mismatch: " + item["path"])
                     else:
                         overrides[item["path"]] = item["patched_sha256"]
+        windows_override_count = len(overrides)
+        if name == "system-atlas" and extra_patch:
+            originals = {item["path"]: item["sha256"] for item in manifest["files"]}
+            if extra_patch["upstream_commit"] != manifest["commit"]:
+                errors.append("Competition patch upstream commit mismatch")
+            else:
+                for item in extra_patch["files"]:
+                    if originals.get(item["path"]) != item["upstream_sha256"] or item["path"] in overrides:
+                        errors.append("Competition patch original hash mismatch or duplicate: " + item["path"])
+                    else:
+                        overrides[item["path"]] = item["patched_sha256"]
         for item in manifest["files"]:
             path = ROOT / manifest["install_path"] / item["path"]
             expected = overrides.get(item["path"], item["sha256"])
             if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 mismatched.append(item["path"])
+        # Added local patch files have no upstream entry, but must also be hashed.
+        if name == "system-atlas" and extra_patch:
+            for item in extra_patch["files"]:
+                if item["path"] not in originals:
+                    added = ROOT / manifest["install_path"] / item["path"]
+                    if not added.is_file() or hashlib.sha256(added.read_bytes()).hexdigest() != overrides.get(item["path"]):
+                        mismatched.append(item["path"])
         report["checks"][name] = {"commit": manifest["commit"], "mismatched": mismatched}
         if name == "system-atlas" and patch:
-            patch_verified = not mismatched and len(overrides) == len(patch["files"]) and "design/authority.mjs" in overrides
+            patch_verified = not mismatched and windows_override_count == len(patch["files"]) and "design/authority.mjs" in overrides
             report["checks"][name]["local_patch"] = {"id": patch["id"], "verified": patch_verified}
+        if name == "system-atlas" and extra_patch:
+            report["checks"][name]["competition_patch"] = extra_patch["id"]
         if mismatched:
             errors.append(f"{name}: files differ from installation manifest")
     if node_platform == "win32":

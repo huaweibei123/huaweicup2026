@@ -47,4 +47,4 @@ gh issue comment NUMBER --repo huaweibei123/huaweicup2026 --body-file /path/to/r
 
 System Atlas 0.5.0 已安装，负责系统模型的节点/字段协作与共享任务看板，使用方式见 [SYSTEM_ATLAS.md](SYSTEM_ATLAS.md)。任务沟通继续使用 team-mailbox 的 Issues/PR；设计图谱的请求、签名和版本检查使用 Atlas 自己的协议。
 
-队长角色已确定，但尚未初始化真实 Atlas 身份、成员公钥、授权或同步分支，也未运行持续同步服务。按 [联测入口](rehearsal/START_HERE.md) 使用独立预演模型和同一 run ID；私有状态目录必须在所有 Git 工作区之外。任务指派标签不会自动授予权限或唤醒 Agent，每个人必须启动并授权自己的 Agent。
+预演已结束，证据见 [PR #12](https://github.com/huaweibei123/huaweicup2026/pull/12)，预演授权已撤销，不能当作正式协作授权。比赛期遵循 [Atlas Agent 短指南](ATLAS_AGENT_GUIDE.md)，不再复用已结束预演；私有状态目录必须在所有 Git 工作区之外。任务指派标签不会自动授予权限或唤醒 Agent，每个人必须启动并授权自己的 Agent。
