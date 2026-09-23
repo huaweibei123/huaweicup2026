@@ -18,15 +18,7 @@ import time
 from .engine import ENGINE_VERSION, E2Evaluator
 DEFAULT_CACHE_BYTES = 16 << 20
 from src.eval_exact._official import OFFICIAL_CODE_HASH
-
-
-def _peak_rss_bytes():
-    try:
-        import resource
-        value = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        return int(value if sys.platform == "darwin" else value * 1024)
-    except (ImportError, AttributeError):
-        return None
+from ._resources import peak_rss_bytes as _peak_rss_bytes
 
 
 class _BoundedLog(io.StringIO):
@@ -198,20 +190,20 @@ class E2BatchEvaluator:
                     self._start(slot_index)
                 for slot_index, (index, plan) in enumerate(chunk):
                     process, connection, _ = self._slots[slot_index]
-                    start = time.monotonic()
+                    start = time.perf_counter()
                     try:
                         connection.send((index, plan, config, full))
                         active[slot_index] = (index, start, process.pid)
                     except (OSError, EOFError) as error:
                         completed[index] = self._failure(index, "error", "WorkerError",
-                            str(error), time.monotonic() - start, process.pid)
+                            str(error), time.perf_counter() - start, process.pid)
                         self._stop(slot_index)
                 while active and not self._closed:
                     connections = [self._slots[i][1] for i in active]
                     ready = wait(connections, timeout=0.02)
                     for slot_index, (index, start, pid) in list(active.items()):
                         process, connection, _ = self._slots[slot_index]
-                        elapsed = time.monotonic() - start
+                        elapsed = time.perf_counter() - start
                         if self._timeout is not None and elapsed >= self._timeout:
                             completed[index] = self._failure(index, "timeout", "TimeoutError",
                                 "candidate exceeded wall-clock budget", elapsed, pid)
@@ -226,9 +218,10 @@ class E2BatchEvaluator:
                                 completed[index] = record
                                 self._slots[slot_index][2] += 1
                                 peak = record.get("worker_peak_rss_bytes")
-                                if self._recycle_rss is not None and peak is not None and peak >= self._recycle_rss:
+                                if self._recycle_rss is not None and (peak is None or peak >= self._recycle_rss):
                                     self._slots[slot_index][2] = self._max_tasks
                                     record["recycle_after_response"] = True
+                                    record['recycle_reason'] = 'rss_telemetry_unavailable' if peak is None else 'peak_rss_threshold'
                             except (OSError, EOFError, RuntimeError) as error:
                                 completed[index] = self._failure(index, "error", "WorkerError",
                                     str(error), elapsed, pid)
