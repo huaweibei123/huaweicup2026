@@ -1,0 +1,68 @@
+{
+  "commands": {
+    "e0": {
+      "argv": [
+        "./.venv/bin/python3",
+        "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+        "results/a/proxy/e2-native-cli-20260924/graph.json",
+        "results/a/proxy/e2-native-cli-20260924/plan.json",
+        "--config",
+        "./data/raw/a/official/data/config.txt",
+        "-o",
+        "results/a/proxy/e2-native-cli-20260924/e0.json",
+        "--trace-output",
+        "results/a/proxy/e2-native-cli-20260924/e0.trace.json",
+        "--log-output",
+        "results/a/proxy/e2-native-cli-20260924/e0.txt"
+      ],
+      "returncode": 0,
+      "stdout": "data movement: scheduled_copy_bytes=0, physical_ddr_bytes=0\nOK: problem 1 makespan=7; result=results/a/proxy/e2-native-cli-20260924/e0.json\n",
+      "stderr": ""
+    },
+    "e2": {
+      "argv": [
+        "./.venv/bin/python3",
+        "-m",
+        "research.a.e2_search.multicore_cut_evaluate_problem_1",
+        "results/a/proxy/e2-native-cli-20260924/graph.json",
+        "results/a/proxy/e2-native-cli-20260924/plan.json",
+        "--config",
+        "./data/raw/a/official/data/config.txt",
+        "-o",
+        "results/a/proxy/e2-native-cli-20260924/e2.json",
+        "--trace-output",
+        "results/a/proxy/e2-native-cli-20260924/e2.trace.json",
+        "--log-output",
+        "results/a/proxy/e2-native-cli-20260924/e2.txt"
+      ],
+      "returncode": 0,
+      "stdout": "data movement: scheduled_copy_bytes=0, physical_ddr_bytes=0\nOK: problem 1 makespan=7; result=results/a/proxy/e2-native-cli-20260924/e2.json\n",
+      "stderr": "[E2 ROUTE] E1 full diagnostics; native search scorer not used\n"
+    },
+    "search": {
+      "argv": [
+        "./.venv/bin/python3",
+        "-m",
+        "research.a.e2_search.cli",
+        "results/a/proxy/e2-native-cli-20260924/graph.json",
+        "results/a/proxy/e2-native-cli-20260924/plans.jsonl",
+        "--config",
+        "./data/raw/a/official/data/config.txt",
+        "--output",
+        "results/a/proxy/e2-native-cli-20260924/records.jsonl",
+        "--workers",
+        "1"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "full_fields_and_trace_equal": true,
+  "log_byte_equal": true,
+  "streaming_statuses": [
+    "ok",
+    "invalid",
+    "ok"
+  ]
+}
