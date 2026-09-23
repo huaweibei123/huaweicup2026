@@ -18,15 +18,7 @@ import time
 from .engine import ENGINE_VERSION, E2Evaluator
 DEFAULT_CACHE_BYTES = 16 << 20
 from src.eval_exact._official import OFFICIAL_CODE_HASH
-
-
-def _peak_rss_bytes():
-    try:
-        import resource
-        value = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        return int(value if sys.platform == "darwin" else value * 1024)
-    except (ImportError, AttributeError):
-        return None
+from ._resources import peak_rss_bytes as _peak_rss_bytes
 
 
 class _BoundedLog(io.StringIO):
@@ -36,10 +28,15 @@ class _BoundedLog(io.StringIO):
         return len(text)
 
 
-def _worker(connection, graph, cache_bytes, max_cache_entries):
+def _worker(connection, graph, cache_bytes, max_cache_entries, problem, native_enabled):
     try:
-        evaluator = E2Evaluator(graph, cache_bytes=cache_bytes,
-                                max_cache_entries=max_cache_entries)
+        if problem == 1:
+            evaluator = E2Evaluator(graph, cache_bytes=cache_bytes, max_cache_entries=max_cache_entries,
+                                    native_enabled=native_enabled)
+        else:
+            from .scene_b import SceneBEvaluator
+            evaluator = SceneBEvaluator(graph, problem=problem, cache_bytes=cache_bytes,
+                                         max_cache_entries=max_cache_entries, native_enabled=native_enabled)
         connection.send({"ready": True, "pid": os.getpid()})
         while True:
             request = connection.recv()
@@ -80,7 +77,12 @@ class E2BatchEvaluator:
     def __init__(self, graph, *, workers=1, cache_bytes=DEFAULT_CACHE_BYTES,
                  max_cache_entries=128, timeout_seconds=60.0,
                  startup_timeout_seconds=30.0, max_tasks_per_worker=256,
-                 recycle_peak_rss_bytes=None):
+                 recycle_peak_rss_bytes=None, problem=1, native_enabled=True):
+        if type(native_enabled) is not bool:
+            raise ValueError('native_enabled must be boolean')
+        if type(problem) is not int or problem not in (1, 2, 3):
+            raise ValueError('problem must be 1, 2 or 3')
+        self.problem = problem
         for name, value in (("workers", workers), ("max_cache_entries", max_cache_entries),
                             ("max_tasks_per_worker", max_tasks_per_worker)):
             if type(value) is not int or value < 1:
@@ -99,7 +101,7 @@ class E2BatchEvaluator:
         self._recycle_rss = recycle_peak_rss_bytes
         from copy import deepcopy
         self._graph = deepcopy(graph)
-        self._options = (cache_bytes, max_cache_entries)
+        self._options = (cache_bytes, max_cache_entries, problem, native_enabled)
         self._workers = workers
         self._timeout = timeout_seconds
         self._startup_timeout = startup_timeout_seconds
@@ -164,11 +166,10 @@ class E2BatchEvaluator:
             self._stop(index)
             raise
 
-    @staticmethod
-    def _failure(index, status, error_type, message, seconds, pid):
+    def _failure(self, index, status, error_type, message, seconds, pid):
         return dict(index=index, status=status, error_type=error_type, message=message,
                     wall_seconds=seconds, worker_pid=pid, cache=None,
-                    engine=ENGINE_VERSION, official_code_hash=OFFICIAL_CODE_HASH)
+                    problem=self.problem, engine=f'p{self.problem}-e2-native-search-v1', official_code_hash=OFFICIAL_CODE_HASH)
 
     def evaluate_batch(self, plans, *, full=False, **config):
         """Yield at most one worker-sized chunk in order; never retain all results.
@@ -198,20 +199,20 @@ class E2BatchEvaluator:
                     self._start(slot_index)
                 for slot_index, (index, plan) in enumerate(chunk):
                     process, connection, _ = self._slots[slot_index]
-                    start = time.monotonic()
+                    start = time.perf_counter()
                     try:
                         connection.send((index, plan, config, full))
                         active[slot_index] = (index, start, process.pid)
                     except (OSError, EOFError) as error:
                         completed[index] = self._failure(index, "error", "WorkerError",
-                            str(error), time.monotonic() - start, process.pid)
+                            str(error), time.perf_counter() - start, process.pid)
                         self._stop(slot_index)
                 while active and not self._closed:
                     connections = [self._slots[i][1] for i in active]
                     ready = wait(connections, timeout=0.02)
                     for slot_index, (index, start, pid) in list(active.items()):
                         process, connection, _ = self._slots[slot_index]
-                        elapsed = time.monotonic() - start
+                        elapsed = time.perf_counter() - start
                         if self._timeout is not None and elapsed >= self._timeout:
                             completed[index] = self._failure(index, "timeout", "TimeoutError",
                                 "candidate exceeded wall-clock budget", elapsed, pid)
@@ -226,9 +227,10 @@ class E2BatchEvaluator:
                                 completed[index] = record
                                 self._slots[slot_index][2] += 1
                                 peak = record.get("worker_peak_rss_bytes")
-                                if self._recycle_rss is not None and peak is not None and peak >= self._recycle_rss:
+                                if self._recycle_rss is not None and (peak is None or peak >= self._recycle_rss):
                                     self._slots[slot_index][2] = self._max_tasks
                                     record["recycle_after_response"] = True
+                                    record['recycle_reason'] = 'rss_telemetry_unavailable' if peak is None else 'peak_rss_threshold'
                             except (OSError, EOFError, RuntimeError) as error:
                                 completed[index] = self._failure(index, "error", "WorkerError",
                                     str(error), elapsed, pid)
