@@ -1,0 +1,295 @@
+[
+  {
+    "graph": {
+      "ops": [
+        {
+          "id": 2,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 3,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 4,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 5,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 6,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 7,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 8,
+          "op": "CONV",
+          "pipe": "PIPE_M",
+          "cycles": 4
+        },
+        {
+          "id": 23,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "cycles": 2185
+        },
+        {
+          "id": 24,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "cycles": 2185
+        },
+        {
+          "id": 25,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "cycles": 2185
+        },
+        {
+          "id": 26,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "cycles": 2185
+        }
+      ],
+      "tensors": [
+        {
+          "id": 10002,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10203,
+          "pos": "DDR",
+          "size": 131073
+        },
+        {
+          "id": 10003,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10004,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10204,
+          "pos": "DDR",
+          "size": 131073
+        },
+        {
+          "id": 10005,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10006,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10007,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10008,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10205,
+          "pos": "DDR",
+          "size": 131073
+        },
+        {
+          "id": 10009,
+          "pos": "L1",
+          "size": 131073
+        },
+        {
+          "id": 10206,
+          "pos": "DDR",
+          "size": 131073
+        },
+        {
+          "id": 10100,
+          "pos": "L1",
+          "size": 0
+        },
+        {
+          "id": 10101,
+          "pos": "L1",
+          "size": 0
+        }
+      ],
+      "edges": [
+        {
+          "source": 10002,
+          "target": 2
+        },
+        {
+          "source": 10002,
+          "target": 4
+        },
+        {
+          "source": 10002,
+          "target": 8
+        },
+        {
+          "source": 10203,
+          "target": 23
+        },
+        {
+          "source": 23,
+          "target": 10002
+        },
+        {
+          "source": 2,
+          "target": 10003
+        },
+        {
+          "source": 10003,
+          "target": 3
+        },
+        {
+          "source": 3,
+          "target": 10004
+        },
+        {
+          "source": 10004,
+          "target": 24
+        },
+        {
+          "source": 24,
+          "target": 10204
+        },
+        {
+          "source": 4,
+          "target": 10005
+        },
+        {
+          "source": 10005,
+          "target": 5
+        },
+        {
+          "source": 5,
+          "target": 10006
+        },
+        {
+          "source": 10006,
+          "target": 6
+        },
+        {
+          "source": 6,
+          "target": 10007
+        },
+        {
+          "source": 10007,
+          "target": 7
+        },
+        {
+          "source": 7,
+          "target": 10008
+        },
+        {
+          "source": 10008,
+          "target": 25
+        },
+        {
+          "source": 25,
+          "target": 10205
+        },
+        {
+          "source": 8,
+          "target": 10009
+        },
+        {
+          "source": 10009,
+          "target": 26
+        },
+        {
+          "source": 26,
+          "target": 10206
+        },
+        {
+          "source": 3,
+          "target": 10100
+        },
+        {
+          "source": 10100,
+          "target": 4
+        },
+        {
+          "source": 7,
+          "target": 10101
+        },
+        {
+          "source": 10101,
+          "target": 8
+        }
+      ]
+    },
+    "step1": [
+      23,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      26,
+      25,
+      24
+    ],
+    "actual_peak": {
+      "L1": 524292,
+      "UB": 0
+    },
+    "compute_only_peak": {
+      "L1": 393219,
+      "UB": 0
+    },
+    "spill_records": [
+      {
+        "spill_out_id": 10207,
+        "spill_in_id": 10208,
+        "swap_tid": 10209,
+        "backing_tid": 10209,
+        "backing_source": "new_spill_out",
+        "spill_out_copies_data": true,
+        "tid": 10004,
+        "logical_tid": 10004,
+        "from_tid": 10004,
+        "to_tid": 10210,
+        "version": 1,
+        "pos": "L1",
+        "size": 131073,
+        "prev_use_op": 3,
+        "next_use_op": 24,
+        "prev_use_step": 2,
+        "next_use_step": 10
+      }
+    ],
+    "task_id": 0
+  }
+]

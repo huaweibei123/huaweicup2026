@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import tarfile
 
-RAW_NAMES = {"result.json", "trace.json", "stdout.txt", "stderr.txt", "summary.log"}
+RAW_NAMES = {"result.json", "trace.json", "stdout.txt", "stderr.txt", "summary.log", "proposal.stderr.txt", "generated.json"}
 
 
 def sha(data):
@@ -16,14 +16,16 @@ def sha(data):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
+    parser.add_argument("--plans", action="store_true", help="Archive individual candidate plans; leave best_plan readable")
     args = parser.parse_args()
-    output = args.run / "execution-evidence.tar.xz"
+    basename = "candidate-plans" if args.plans else "execution-evidence"
+    output = args.run / (basename + ".tar.xz")
     if output.exists():
         raise FileExistsError(output)
     members = []
     with tarfile.open(output, "w:xz") as archive:
         for p in sorted(args.run.rglob("*")):
-            if p.is_file() and p.name in RAW_NAMES:
+            if p.is_file() and p.name in ({"plan.json"} if args.plans else RAW_NAMES):
                 data = p.read_bytes()
                 relative = str(p.relative_to(args.run))
                 item = tarfile.TarInfo(relative)
@@ -37,7 +39,7 @@ def main():
     receipt = {"archive": output.name, "bytes": output.stat().st_size, "sha256": sha(output.read_bytes()),
                "all_payload_hashes_equal": True, "members": members,
                "scope": "Exact raw CLI outputs, including captured runtime paths; no result normalization"}
-    (args.run / "execution-evidence.manifest.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    (args.run / (basename + ".manifest.json")).write_text(json.dumps(receipt, indent=2) + "\n")
     print(args.run, len(members), output.stat().st_size)
 
 

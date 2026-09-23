@@ -1,0 +1,291 @@
+{
+  "cases": [
+    {
+      "case": "projection_false_negative",
+      "graph_sha256": "9208849ddacb5491fe23ebc0a89e18d89ceb97bf08c1ca5446a10ca4cc0f8807",
+      "plan_sha256": "170e4f58b5761083cbf82243192f096d1cd9c3c6f297038d888567b391a7a890",
+      "cli": {
+        "status": "ok",
+        "returncode": 0,
+        "makespan": 13134,
+        "seconds": 0.03217900000163354
+      },
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 524292,
+        "scheduled_copy_bytes": 786438,
+        "added_copy_bytes": 262146,
+        "partition_added_copy_bytes": 0,
+        "spill_added_copy_bytes": 262146
+      },
+      "observed_traffic_matches_cli": true,
+      "tasks": [
+        {
+          "actual_peak": {
+            "L1": 524292,
+            "UB": 0
+          },
+          "compute_only_peak": {
+            "L1": 393219,
+            "UB": 0
+          },
+          "spill_records": [
+            {
+              "spill_out_id": 10207,
+              "spill_in_id": 10208,
+              "swap_tid": 10209,
+              "backing_tid": 10209,
+              "backing_source": "new_spill_out",
+              "spill_out_copies_data": true,
+              "tid": 10004,
+              "logical_tid": 10004,
+              "from_tid": 10004,
+              "to_tid": 10210,
+              "version": 1,
+              "pos": "L1",
+              "size": 131073,
+              "prev_use_op": 3,
+              "next_use_op": 24,
+              "prev_use_step": 2,
+              "next_use_step": 10
+            }
+          ],
+          "task_id": 0
+        }
+      ]
+    },
+    {
+      "case": "probes_v1/internal_split_backed",
+      "graph_sha256": "a10e5e917f538f348c96148914d4fb084453fa10bc6c002bc8f86d1b3bfebbe7",
+      "plan_sha256": "aafe20044e013b41bc8964b12e1fcc1f207b94cae61a7167912031740b9f9f8e",
+      "cli": {
+        "status": "ok",
+        "returncode": 0,
+        "makespan": 48203,
+        "seconds": 0.03175366600044072
+      },
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 786432,
+        "scheduled_copy_bytes": 2883584,
+        "added_copy_bytes": 2097152,
+        "partition_added_copy_bytes": 524288,
+        "spill_added_copy_bytes": 1572864
+      },
+      "observed_traffic_matches_cli": true,
+      "tasks": [
+        {
+          "actual_peak": {
+            "L1": 262144,
+            "UB": 0
+          },
+          "compute_only_peak": {
+            "L1": 262144,
+            "UB": 0
+          },
+          "spill_records": [],
+          "task_id": 0
+        },
+        {
+          "actual_peak": {
+            "L1": 1048576,
+            "UB": 0
+          },
+          "compute_only_peak": {
+            "L1": 786432,
+            "UB": 0
+          },
+          "spill_records": [
+            {
+              "spill_out_id": null,
+              "spill_in_id": 10307,
+              "swap_tid": 10303,
+              "backing_tid": 10303,
+              "backing_source": "original_copy_in",
+              "spill_out_copies_data": false,
+              "tid": 10002,
+              "logical_tid": 10002,
+              "from_tid": 10002,
+              "to_tid": 10308,
+              "version": 1,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 2,
+              "next_use_op": 4,
+              "prev_use_step": 1,
+              "next_use_step": 3
+            },
+            {
+              "spill_out_id": 10309,
+              "spill_in_id": 10310,
+              "swap_tid": 10311,
+              "backing_tid": 10311,
+              "backing_source": "new_spill_out",
+              "spill_out_copies_data": true,
+              "tid": 10004,
+              "logical_tid": 10004,
+              "from_tid": 10004,
+              "to_tid": 10312,
+              "version": 1,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 3,
+              "next_use_op": 94,
+              "prev_use_step": 2,
+              "next_use_step": 10
+            },
+            {
+              "spill_out_id": null,
+              "spill_in_id": 10313,
+              "swap_tid": 10303,
+              "backing_tid": 10303,
+              "backing_source": "original_copy_in",
+              "spill_out_copies_data": false,
+              "tid": 10002,
+              "logical_tid": 10002,
+              "from_tid": 10308,
+              "to_tid": 10314,
+              "version": 2,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 4,
+              "next_use_op": 8,
+              "prev_use_step": 3,
+              "next_use_step": 7
+            },
+            {
+              "spill_out_id": 10315,
+              "spill_in_id": 10316,
+              "swap_tid": 10317,
+              "backing_tid": 10317,
+              "backing_source": "new_spill_out",
+              "spill_out_copies_data": true,
+              "tid": 10008,
+              "logical_tid": 10008,
+              "from_tid": 10008,
+              "to_tid": 10318,
+              "version": 1,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 7,
+              "next_use_op": 95,
+              "prev_use_step": 6,
+              "next_use_step": 9
+            }
+          ],
+          "task_id": 1
+        }
+      ]
+    },
+    {
+      "case": "probes_v1/internal_merged_unbacked",
+      "graph_sha256": "a10e5e917f538f348c96148914d4fb084453fa10bc6c002bc8f86d1b3bfebbe7",
+      "plan_sha256": "0085df2bbb6d4dad128cb821025752716ca43e7b8f3929e7ebf15eac7387793d",
+      "cli": {
+        "status": "ok",
+        "returncode": 0,
+        "makespan": 43729,
+        "seconds": 0.03305974998511374
+      },
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 786432,
+        "scheduled_copy_bytes": 2621440,
+        "added_copy_bytes": 1835008,
+        "partition_added_copy_bytes": 0,
+        "spill_added_copy_bytes": 1835008
+      },
+      "observed_traffic_matches_cli": true,
+      "tasks": [
+        {
+          "actual_peak": {
+            "L1": 1048576,
+            "UB": 0
+          },
+          "compute_only_peak": {
+            "L1": 786432,
+            "UB": 0
+          },
+          "spill_records": [
+            {
+              "spill_out_id": 10305,
+              "spill_in_id": 10306,
+              "swap_tid": 10307,
+              "backing_tid": 10307,
+              "backing_source": "new_spill_out",
+              "spill_out_copies_data": true,
+              "tid": 10002,
+              "logical_tid": 10002,
+              "from_tid": 10002,
+              "to_tid": 10308,
+              "version": 1,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 2,
+              "next_use_op": 4,
+              "prev_use_step": 2,
+              "next_use_step": 4
+            },
+            {
+              "spill_out_id": 10309,
+              "spill_in_id": 10310,
+              "swap_tid": 10311,
+              "backing_tid": 10311,
+              "backing_source": "new_spill_out",
+              "spill_out_copies_data": true,
+              "tid": 10004,
+              "logical_tid": 10004,
+              "from_tid": 10004,
+              "to_tid": 10312,
+              "version": 1,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 3,
+              "next_use_op": 91,
+              "prev_use_step": 3,
+              "next_use_step": 11
+            },
+            {
+              "spill_out_id": null,
+              "spill_in_id": 10313,
+              "swap_tid": 10307,
+              "backing_tid": 10307,
+              "backing_source": "reused_spill_out",
+              "spill_out_copies_data": false,
+              "tid": 10002,
+              "logical_tid": 10002,
+              "from_tid": 10308,
+              "to_tid": 10314,
+              "version": 2,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 4,
+              "next_use_op": 8,
+              "prev_use_step": 4,
+              "next_use_step": 8
+            },
+            {
+              "spill_out_id": 10315,
+              "spill_in_id": 10316,
+              "swap_tid": 10317,
+              "backing_tid": 10317,
+              "backing_source": "new_spill_out",
+              "spill_out_copies_data": true,
+              "tid": 10008,
+              "logical_tid": 10008,
+              "from_tid": 10008,
+              "to_tid": 10318,
+              "version": 1,
+              "pos": "L1",
+              "size": 262144,
+              "prev_use_op": 7,
+              "next_use_op": 92,
+              "prev_use_step": 7,
+              "next_use_step": 10
+            }
+          ],
+          "task_id": 0
+        }
+      ]
+    }
+  ],
+  "official_code_unchanged": true,
+  "boundary": "3 CLI runs and separate Task construction observations; not a full-engine differential"
+}

@@ -1,0 +1,25 @@
+--- as-run/profile_refine.py
++++ delivered/profile_refine.py
+@@ -28,0 +29,10 @@
++
++
++def atomic_plan(path, data):
++    """A killed/failed promotion must not truncate the previously confirmed plan."""
++    pending = path.with_name(path.name + '.pending')
++    with pending.open('wb') as stream:
++        stream.write(data)
++        stream.flush()
++        os.fsync(stream.fileno())
++    os.replace(pending, path)
+@@ -101 +111 @@
+-        confirmed.write_bytes(seed.read_bytes())
++        atomic_plan(confirmed, seed.read_bytes())
+@@ -105 +115 @@
+-        proposal_parent.write_bytes(seed.read_bytes())
++        atomic_plan(proposal_parent, seed.read_bytes())
+@@ -174 +184 @@
+-                        proposal_parent.write_bytes(candidate_path.read_bytes())
++                        atomic_plan(proposal_parent, candidate_path.read_bytes())
+@@ -188 +198 @@
+-            confirmed.write_bytes(proposal_parent.read_bytes())
++            atomic_plan(confirmed, proposal_parent.read_bytes())
