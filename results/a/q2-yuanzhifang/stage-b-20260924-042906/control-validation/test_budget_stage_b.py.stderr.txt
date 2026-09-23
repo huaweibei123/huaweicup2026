@@ -1,0 +1,47 @@
+test_assignment_failure_reaps_gated_child (test_budget_stage_b.BudgetStageB.test_assignment_failure_reaps_gated_child) ... ok
+test_call_timeout_and_launch_callback (test_budget_stage_b.BudgetStageB.test_call_timeout_and_launch_callback) ... ok
+test_crashed_worker_cannot_leave_child_running (test_budget_stage_b.BudgetStageB.test_crashed_worker_cannot_leave_child_running) ... ok
+test_deadline_kills_worker_and_grandchild (test_budget_stage_b.BudgetStageB.test_deadline_kills_worker_and_grandchild) ... ok
+test_final_slot_persisted_and_no_reset (test_budget_stage_b.BudgetStageB.test_final_slot_persisted_and_no_reset) ... ok
+test_memory_threshold_reaps_tree (test_budget_stage_b.BudgetStageB.test_memory_threshold_reaps_tree) ... ERROR
+test_no_launch_after_deadline (test_budget_stage_b.BudgetStageB.test_no_launch_after_deadline) ... ok
+test_reserves_for_final_and_cleanup (test_budget_stage_b.BudgetStageB.test_reserves_for_final_and_cleanup) ... ok
+test_sampling_failure_is_not_evaluator_invalid (test_budget_stage_b.BudgetStageB.test_sampling_failure_is_not_evaluator_invalid) ... ok
+test_success_includes_output_tail (test_budget_stage_b.BudgetStageB.test_success_includes_output_tail) ... ok
+
+======================================================================
+ERROR: test_memory_threshold_reaps_tree (test_budget_stage_b.BudgetStageB.test_memory_threshold_reaps_tree)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<PYTHON_RUNTIME>\Lib\shutil.py", line 633, in _rmtree_unsafe
+    os.unlink(fullname)
+PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: '<TEMP>\\tmpju128j38\\worker-stderr.txt'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<WORKSPACE>\tests\q2\test_budget_stage_b.py", line 47, in test_memory_threshold_reaps_tree
+    result=self.run_dummy('p=subprocess.Popen([sys.executable,"-c","import time; time.sleep(60)"]); time.sleep(60)',sampler=sampler)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<WORKSPACE>\tests\q2\test_budget_stage_b.py", line 22, in run_dummy
+    with tempfile.TemporaryDirectory() as temp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<PYTHON_RUNTIME>\Lib\tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "<PYTHON_RUNTIME>\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "<PYTHON_RUNTIME>\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "<PYTHON_RUNTIME>\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<PYTHON_RUNTIME>\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "<PYTHON_RUNTIME>\Lib\tempfile.py", line 909, in onexc
+    _os.unlink(path)
+PermissionError: [WinError 32] 另一个程序正在使用此文件，进程无法访问。: '<TEMP>\\tmpju128j38\\worker-stderr.txt'
+
+----------------------------------------------------------------------
+Ran 10 tests in 4.397s
+
+FAILED (errors=1)
