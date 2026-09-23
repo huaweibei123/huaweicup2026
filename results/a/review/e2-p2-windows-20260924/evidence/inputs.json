@@ -1,0 +1,281 @@
+{
+  "graph": {
+    "ops": [
+      {
+        "id": 1,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 1
+      },
+      {
+        "id": 2,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 2
+      },
+      {
+        "id": 3,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 3
+      }
+    ],
+    "tensors": [],
+    "edges": [
+      {
+        "source": 1,
+        "target": 3,
+        "data_size": 17
+      }
+    ]
+  },
+  "plans": {
+    "R": {
+      "node_to_subgraph": {
+        "1": 0,
+        "2": 1,
+        "3": 2
+      },
+      "core_schedules": [
+        [
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "S": {
+      "node_to_subgraph": {
+        "1": 0,
+        "2": 1,
+        "3": 2
+      },
+      "core_schedules": [
+        [
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ]
+    },
+    "T": {
+      "node_to_subgraph": {
+        "1": 0,
+        "2": 1,
+        "3": 2
+      },
+      "core_schedules": [
+        [
+          0,
+          2
+        ],
+        [
+          1
+        ]
+      ]
+    }
+  },
+  "spill": {
+    "ops": [
+      {
+        "id": 1,
+        "op": "COPY_IN",
+        "pipe": "PIPE_MTE2",
+        "cycles": 0
+      },
+      {
+        "id": 2,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      },
+      {
+        "id": 3,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      },
+      {
+        "id": 4,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      },
+      {
+        "id": 5,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      },
+      {
+        "id": 6,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      },
+      {
+        "id": 7,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      },
+      {
+        "id": 8,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 4
+      }
+    ],
+    "tensors": [
+      {
+        "id": 10001,
+        "pos": "DDR",
+        "size": 262144
+      },
+      {
+        "id": 10002,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10003,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10004,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10005,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10006,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10007,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10008,
+        "pos": "L1",
+        "size": 262144
+      },
+      {
+        "id": 10009,
+        "pos": "L1",
+        "size": 262144
+      }
+    ],
+    "edges": [
+      {
+        "source": 10001,
+        "target": 1
+      },
+      {
+        "source": 1,
+        "target": 10002
+      },
+      {
+        "source": 10002,
+        "target": 2
+      },
+      {
+        "source": 2,
+        "target": 10003
+      },
+      {
+        "source": 10003,
+        "target": 3
+      },
+      {
+        "source": 3,
+        "target": 10004
+      },
+      {
+        "source": 3,
+        "target": 4
+      },
+      {
+        "source": 10002,
+        "target": 4
+      },
+      {
+        "source": 4,
+        "target": 10005
+      },
+      {
+        "source": 10005,
+        "target": 5
+      },
+      {
+        "source": 5,
+        "target": 10006
+      },
+      {
+        "source": 10006,
+        "target": 6
+      },
+      {
+        "source": 6,
+        "target": 10007
+      },
+      {
+        "source": 10007,
+        "target": 7
+      },
+      {
+        "source": 7,
+        "target": 10008
+      },
+      {
+        "source": 7,
+        "target": 8
+      },
+      {
+        "source": 10002,
+        "target": 8
+      },
+      {
+        "source": 8,
+        "target": 10009
+      }
+    ]
+  },
+  "spillplan": {
+    "node_to_subgraph": {
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    "core_schedules": [
+      [
+        0
+      ],
+      []
+    ]
+  },
+  "config": {
+    "bandwidth": 60,
+    "capacity": {
+      "L1": 524288,
+      "UB": 131072
+    },
+    "cross_core_copy_delay": 500,
+    "max_iter": 1000000
+  }
+}

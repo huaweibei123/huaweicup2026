@@ -1,0 +1,184 @@
+{
+  "scene": "B",
+  "makespan": 6,
+  "num_cores": 2,
+  "bandwidth_bytes_per_cycle": 60,
+  "capacity_bytes": {
+    "L1": 524288,
+    "UB": 131072
+  },
+  "memory_peak_by_core": {
+    "0": {
+      "L1": 0,
+      "UB": 17
+    },
+    "1": {
+      "L1": 0,
+      "UB": 17
+    }
+  },
+  "step3_by_core": {
+    "0": {
+      "local_makespan": 2,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 0,
+        "PIPE_MTE3": 1,
+        "PIPE_M": 1,
+        "PIPE_V": 0
+      }
+    },
+    "1": {
+      "local_makespan": 5,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 1,
+        "PIPE_MTE3": 0,
+        "PIPE_M": 2,
+        "PIPE_V": 0
+      }
+    }
+  },
+  "cross_core_copy_delay_cycles": 0,
+  "cross_task_traffic": 17,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 0,
+    "scheduled_copy_bytes": 34,
+    "added_copy_bytes": 34,
+    "partition_added_copy_bytes": 34,
+    "spill_added_copy_bytes": 0
+  },
+  "task_count": 2,
+  "task_dependencies": [
+    {
+      "tensor_id": 4,
+      "size": 17,
+      "source_core": 0,
+      "target_core": 1,
+      "source_copy_out_id": 6,
+      "target_copy_in_id": 7
+    }
+  ],
+  "cross_core_transfers": [
+    {
+      "tensor_id": 4,
+      "size": 17,
+      "source_core": 0,
+      "target_core": 1,
+      "source_copy_out_id": 6,
+      "target_copy_in_id": 7,
+      "transfer_id": 0,
+      "copy_out_end": 2,
+      "copy_in_release": 2,
+      "copy_in_start": 2,
+      "copy_in_end": 3
+    }
+  ],
+  "per_core_timeline": [
+    {
+      "core_id": 0,
+      "tasks": [
+        {
+          "task_id": 0,
+          "subgraph_ids": [
+            0
+          ],
+          "start": 0,
+          "end": 2,
+          "duration": 2
+        }
+      ],
+      "subgraphs": [
+        {
+          "subgraph_id": 0,
+          "start": 0,
+          "end": 2,
+          "duration": 2
+        }
+      ],
+      "ops": [
+        {
+          "task_id": 0,
+          "op_id": 1,
+          "op": "CONV",
+          "subgraph_id": 0,
+          "pipe": "PIPE_M",
+          "start": 0,
+          "end": 1,
+          "duration": 1
+        },
+        {
+          "task_id": 0,
+          "op_id": 6,
+          "op": "COPY_OUT",
+          "subgraph_id": 0,
+          "pipe": "PIPE_MTE3",
+          "start": 1,
+          "end": 2,
+          "duration": 1
+        }
+      ]
+    },
+    {
+      "core_id": 1,
+      "tasks": [
+        {
+          "task_id": 1,
+          "subgraph_ids": [
+            1,
+            2
+          ],
+          "start": 0,
+          "end": 6,
+          "duration": 6
+        }
+      ],
+      "subgraphs": [
+        {
+          "subgraph_id": 1,
+          "start": 0,
+          "end": 2,
+          "duration": 2
+        },
+        {
+          "subgraph_id": 2,
+          "start": 2,
+          "end": 6,
+          "duration": 4
+        }
+      ],
+      "ops": [
+        {
+          "task_id": 1,
+          "op_id": 2,
+          "op": "CONV",
+          "subgraph_id": 1,
+          "pipe": "PIPE_M",
+          "start": 0,
+          "end": 2,
+          "duration": 2
+        },
+        {
+          "task_id": 1,
+          "op_id": 7,
+          "op": "COPY_IN",
+          "subgraph_id": 2,
+          "pipe": "PIPE_MTE2",
+          "start": 2,
+          "end": 3,
+          "duration": 1
+        },
+        {
+          "task_id": 1,
+          "op_id": 3,
+          "op": "CONV",
+          "subgraph_id": 2,
+          "pipe": "PIPE_M",
+          "start": 3,
+          "end": 6,
+          "duration": 3
+        }
+      ]
+    }
+  ]
+}
