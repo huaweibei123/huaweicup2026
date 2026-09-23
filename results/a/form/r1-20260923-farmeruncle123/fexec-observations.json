@@ -1,0 +1,139 @@
+{
+  "run_id": "r1-20260923-farmeruncle123",
+  "scope": "F-EXEC validators; unit-level probes labelled as non-official input domain",
+  "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "note": "Unit-level probes feed crafted views straight to the validators. Reachability from the official entry is reported separately and is not claimed where not tested.",
+  "records": [
+    {
+      "probe": "unit: all cores have <=1 subgraph -> early return",
+      "outcome": "accepted",
+      "error": null
+    },
+    {
+      "probe": "unit: dependency cycle only (no core-order edge involved)",
+      "outcome": "rejected",
+      "error": "EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[subgraph dependency]-> 2; 2 -[subgraph dependency]-> 0"
+    },
+    {
+      "probe": "unit: core-order edge alone induces the cycle",
+      "outcome": "rejected",
+      "error": "EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task order]-> 0"
+    },
+    {
+      "probe": "real tasks: cross_links empty -> early return",
+      "outcome": "accepted",
+      "error": null
+    },
+    {
+      "probe": "real tasks: validate_task_order on the real view",
+      "outcome": "accepted",
+      "error": null
+    },
+    {
+      "probe": "real tasks: generated ids and pipes (context)",
+      "outcome": "observed",
+      "error": null,
+      "detail": {
+        "0": {
+          "ops": [
+            6,
+            7
+          ],
+          "pipe_ops": {
+            "PIPE_MTE2": [
+              6
+            ],
+            "PIPE_MTE3": [
+              7
+            ],
+            "PIPE_M": [
+              2
+            ],
+            "PIPE_V": []
+          }
+        },
+        "1": {
+          "ops": [
+            8,
+            9
+          ],
+          "pipe_ops": {
+            "PIPE_MTE2": [
+              8
+            ],
+            "PIPE_MTE3": [
+              9
+            ],
+            "PIPE_M": [
+              3
+            ],
+            "PIPE_V": []
+          }
+        },
+        "2": {
+          "ops": [
+            10,
+            11
+          ],
+          "pipe_ops": {
+            "PIPE_MTE2": [
+              10
+            ],
+            "PIPE_MTE3": [
+              11
+            ],
+            "PIPE_M": [
+              5
+            ],
+            "PIPE_V": []
+          }
+        }
+      }
+    },
+    {
+      "probe": "real tasks: forward cross-core COPY link",
+      "outcome": "accepted",
+      "error": null,
+      "link": [
+        {
+          "source_core": 0,
+          "source_copy_out_id": 7,
+          "target_core": 1,
+          "target_copy_in_id": 8
+        }
+      ]
+    },
+    {
+      "probe": "real tasks: reversed link (intentional misuse of ids)",
+      "outcome": "accepted",
+      "error": null,
+      "link": [
+        {
+          "source_core": 1,
+          "source_copy_out_id": 8,
+          "target_core": 0,
+          "target_copy_in_id": 7
+        }
+      ]
+    },
+    {
+      "probe": "real tasks: two opposite cross-core links (cycle)",
+      "outcome": "rejected",
+      "error": "EvaluationValidationError: global execution (core, op): dependency cycle; (0, 2) -[local data/memory dependency]-> (0, 7); (0, 7) -[cross-core COPY]-> (1, 8); (1, 8) -[local data/memory dependency]-> (1, 3); (1, 3) -[local data/memory dependency]-> (1, 9); (1, 9) -[cross-core COPY]-> (0, 6); (0, 6) -[local data/memory dependency]-> (0, 2)",
+      "link": [
+        {
+          "source_core": 0,
+          "source_copy_out_id": 7,
+          "target_core": 1,
+          "target_copy_in_id": 8
+        },
+        {
+          "source_core": 1,
+          "source_copy_out_id": 9,
+          "target_core": 0,
+          "target_copy_in_id": 6
+        }
+      ]
+    }
+  ]
+}
