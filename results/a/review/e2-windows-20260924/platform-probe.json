@@ -1,0 +1,391 @@
+{
+  "graph": {
+    "ops": [
+      {
+        "id": 1,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 1
+      },
+      {
+        "id": 2,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 2
+      },
+      {
+        "id": 3,
+        "op": "CONV",
+        "pipe": "PIPE_M",
+        "cycles": 3
+      }
+    ],
+    "tensors": [],
+    "edges": [
+      {
+        "source": 1,
+        "target": 3
+      }
+    ]
+  },
+  "plan": {
+    "node_to_subgraph": {
+      "1": 0,
+      "2": 1,
+      "3": 2
+    },
+    "core_schedules": [
+      [
+        0,
+        2
+      ],
+      [
+        1
+      ]
+    ]
+  },
+  "config": {
+    "bandwidth": 60,
+    "capacity": {
+      "L1": 524288,
+      "UB": 131072
+    },
+    "cross_core_wait": 1000,
+    "same_core_wait": 100
+  },
+  "direct_e0_calls": 0,
+  "completed_pool_records": 10,
+  "rss_rows": [
+    {
+      "status": "ok",
+      "makespan": 104,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 0,
+        "scheduled_copy_bytes": 0,
+        "added_copy_bytes": 0,
+        "partition_added_copy_bytes": 0,
+        "spill_added_copy_bytes": 0
+      },
+      "cross_task_traffic": 0,
+      "route": "native",
+      "execution": "native_replayed",
+      "numeric_kind": "computed",
+      "replay_iterations": 5,
+      "engine": "p1-e2-native-search-v1",
+      "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+      "wall_seconds": 0.0066972999993595295,
+      "cpu_seconds": 0.0,
+      "cache": {
+        "hits": 0,
+        "misses": 1,
+        "evictions": 0,
+        "bypasses": 0,
+        "native_calls": 1,
+        "fallback_calls": 0,
+        "full_calls": 0,
+        "accounted_bytes": 4744,
+        "limit_bytes": 16777216,
+        "entries": 1,
+        "max_entries": 128
+      },
+      "index": 0,
+      "worker_pid": 29600,
+      "worker_peak_rss_bytes": null,
+      "dispatch_wall_seconds": 0.01599999999962165
+    },
+    {
+      "status": "ok",
+      "makespan": 104,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 0,
+        "scheduled_copy_bytes": 0,
+        "added_copy_bytes": 0,
+        "partition_added_copy_bytes": 0,
+        "spill_added_copy_bytes": 0
+      },
+      "cross_task_traffic": 0,
+      "route": "native",
+      "execution": "native_replayed",
+      "numeric_kind": "computed",
+      "replay_iterations": 5,
+      "engine": "p1-e2-native-search-v1",
+      "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+      "wall_seconds": 0.0002555999999458436,
+      "cpu_seconds": 0.0,
+      "cache": {
+        "hits": 1,
+        "misses": 1,
+        "evictions": 0,
+        "bypasses": 0,
+        "native_calls": 2,
+        "fallback_calls": 0,
+        "full_calls": 0,
+        "accounted_bytes": 4744,
+        "limit_bytes": 16777216,
+        "entries": 1,
+        "max_entries": 128
+      },
+      "index": 1,
+      "worker_pid": 29600,
+      "worker_peak_rss_bytes": null,
+      "dispatch_wall_seconds": 0.0
+    }
+  ],
+  "timeout_trials": [
+    {
+      "wall_including_possible_spawn": 0.6168333000005077,
+      "record": {
+        "index": 0,
+        "status": "timeout",
+        "error_type": "TimeoutError",
+        "message": "candidate exceeded wall-clock budget",
+        "wall_seconds": 0.01599999999962165,
+        "worker_pid": 27472,
+        "cache": null,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0"
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.6128294999998616,
+      "record": {
+        "status": "ok",
+        "makespan": 104,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 0,
+          "scheduled_copy_bytes": 0,
+          "added_copy_bytes": 0,
+          "partition_added_copy_bytes": 0,
+          "spill_added_copy_bytes": 0
+        },
+        "cross_task_traffic": 0,
+        "route": "native",
+        "execution": "native_replayed",
+        "numeric_kind": "computed",
+        "replay_iterations": 5,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "wall_seconds": 0.004937899999276851,
+        "cpu_seconds": 0.0,
+        "cache": {
+          "hits": 0,
+          "misses": 1,
+          "evictions": 0,
+          "bypasses": 0,
+          "native_calls": 1,
+          "fallback_calls": 0,
+          "full_calls": 0,
+          "accounted_bytes": 4744,
+          "limit_bytes": 16777216,
+          "entries": 1,
+          "max_entries": 128
+        },
+        "index": 0,
+        "worker_pid": 33892,
+        "worker_peak_rss_bytes": null,
+        "dispatch_wall_seconds": 0.0
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.00213880000046629,
+      "record": {
+        "status": "ok",
+        "makespan": 104,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 0,
+          "scheduled_copy_bytes": 0,
+          "added_copy_bytes": 0,
+          "partition_added_copy_bytes": 0,
+          "spill_added_copy_bytes": 0
+        },
+        "cross_task_traffic": 0,
+        "route": "native",
+        "execution": "native_replayed",
+        "numeric_kind": "computed",
+        "replay_iterations": 5,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "wall_seconds": 0.00024059999850578606,
+        "cpu_seconds": 0.0,
+        "cache": {
+          "hits": 1,
+          "misses": 1,
+          "evictions": 0,
+          "bypasses": 0,
+          "native_calls": 2,
+          "fallback_calls": 0,
+          "full_calls": 0,
+          "accounted_bytes": 4744,
+          "limit_bytes": 16777216,
+          "entries": 1,
+          "max_entries": 128
+        },
+        "index": 0,
+        "worker_pid": 33892,
+        "worker_peak_rss_bytes": null,
+        "dispatch_wall_seconds": 0.0
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.007050600001093699,
+      "record": {
+        "index": 0,
+        "status": "timeout",
+        "error_type": "TimeoutError",
+        "message": "candidate exceeded wall-clock budget",
+        "wall_seconds": 0.01599999999962165,
+        "worker_pid": 33892,
+        "cache": null,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0"
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.6126674999995885,
+      "record": {
+        "index": 0,
+        "status": "timeout",
+        "error_type": "TimeoutError",
+        "message": "candidate exceeded wall-clock budget",
+        "wall_seconds": 0.01599999999962165,
+        "worker_pid": 34092,
+        "cache": null,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0"
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.6123084999999264,
+      "record": {
+        "status": "ok",
+        "makespan": 104,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 0,
+          "scheduled_copy_bytes": 0,
+          "added_copy_bytes": 0,
+          "partition_added_copy_bytes": 0,
+          "spill_added_copy_bytes": 0
+        },
+        "cross_task_traffic": 0,
+        "route": "native",
+        "execution": "native_replayed",
+        "numeric_kind": "computed",
+        "replay_iterations": 5,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "wall_seconds": 0.0065341000008629635,
+        "cpu_seconds": 0.0,
+        "cache": {
+          "hits": 0,
+          "misses": 1,
+          "evictions": 0,
+          "bypasses": 0,
+          "native_calls": 1,
+          "fallback_calls": 0,
+          "full_calls": 0,
+          "accounted_bytes": 4744,
+          "limit_bytes": 16777216,
+          "entries": 1,
+          "max_entries": 128
+        },
+        "index": 0,
+        "worker_pid": 33024,
+        "worker_peak_rss_bytes": null,
+        "dispatch_wall_seconds": 0.0
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.002042500000243308,
+      "record": {
+        "status": "ok",
+        "makespan": 104,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 0,
+          "scheduled_copy_bytes": 0,
+          "added_copy_bytes": 0,
+          "partition_added_copy_bytes": 0,
+          "spill_added_copy_bytes": 0
+        },
+        "cross_task_traffic": 0,
+        "route": "native",
+        "execution": "native_replayed",
+        "numeric_kind": "computed",
+        "replay_iterations": 5,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "wall_seconds": 0.00017069999921659473,
+        "cpu_seconds": 0.0,
+        "cache": {
+          "hits": 1,
+          "misses": 1,
+          "evictions": 0,
+          "bypasses": 0,
+          "native_calls": 2,
+          "fallback_calls": 0,
+          "full_calls": 0,
+          "accounted_bytes": 4744,
+          "limit_bytes": 16777216,
+          "entries": 1,
+          "max_entries": 128
+        },
+        "index": 0,
+        "worker_pid": 33024,
+        "worker_peak_rss_bytes": null,
+        "dispatch_wall_seconds": 0.0
+      }
+    },
+    {
+      "wall_including_possible_spawn": 0.002019300000029034,
+      "record": {
+        "status": "ok",
+        "makespan": 104,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 0,
+          "scheduled_copy_bytes": 0,
+          "added_copy_bytes": 0,
+          "partition_added_copy_bytes": 0,
+          "spill_added_copy_bytes": 0
+        },
+        "cross_task_traffic": 0,
+        "route": "native",
+        "execution": "native_replayed",
+        "numeric_kind": "computed",
+        "replay_iterations": 5,
+        "engine": "p1-e2-native-search-v1",
+        "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "wall_seconds": 0.00012659999993047677,
+        "cpu_seconds": 0.0,
+        "cache": {
+          "hits": 2,
+          "misses": 1,
+          "evictions": 0,
+          "bypasses": 0,
+          "native_calls": 3,
+          "fallback_calls": 0,
+          "full_calls": 0,
+          "accounted_bytes": 4744,
+          "limit_bytes": 16777216,
+          "entries": 1,
+          "max_entries": 128
+        },
+        "index": 0,
+        "worker_pid": 33024,
+        "worker_peak_rss_bytes": null,
+        "dispatch_wall_seconds": 0.0
+      }
+    }
+  ],
+  "monotonic": {
+    "implementation": "GetTickCount64()",
+    "monotonic": true,
+    "adjustable": false,
+    "resolution": 0.015625
+  },
+  "perf_counter": {
+    "implementation": "QueryPerformanceCounter()",
+    "monotonic": true,
+    "adjustable": false,
+    "resolution": 1e-07
+  },
+  "no_live_slots": true
+}
