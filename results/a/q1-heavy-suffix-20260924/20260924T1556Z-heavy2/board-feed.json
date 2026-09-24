@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "nikolastarx-20260924T1556Z-heavy2-P1-049-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1556Z-heavy2",
+      "algorithm_id": "q1-heavy-component-suffix",
+      "algorithm_name": "P1 dominant-component suffix waves",
+      "variant": "dominant-pipe-suffix-waves",
+      "solver_commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+      "parameters": {
+        "cores": 5,
+        "dominant_percent": 80,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "selected": "heavy-suffix",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 300,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "049",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 62114,
+        "solver_wall_seconds": 0.13265141600277275,
+        "evaluation_wall_seconds": 0.45323724998161197,
+        "ddr_bytes": 745780,
+        "extra_ddr_bytes": 593240,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "444854fe118a208ddfa10fa0ddd48d7b5e6cfd3780a8049f2145fc1a9b674a08",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "ded033e4d0af36cf8198231b8bfc82c65cb6119fc0f8b9bb6b55a71775e8b89c"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/049/k5/case_049_multicore_res.json",
+          "sha256": "ded033e4d0af36cf8198231b8bfc82c65cb6119fc0f8b9bb6b55a71775e8b89c"
+        },
+        "result": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/049/k5/result.json.gz",
+          "sha256": "37cb2f1dee43f0efabb68ce3d10648fa3eb5edb7ac8121c93698a7b645937fc7"
+        },
+        "trace": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/049/k5/trace.json.gz",
+          "sha256": "85d35dc78c0e4c5b306eab63f9c0f9e2707d440a49bcb9ad0a12d7a930e38a63"
+        },
+        "log": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/049/k5/official.log",
+          "sha256": "cf3c6a087907f5076c920666b47406bc0d5c7c09f246a07183308c0c4663abd8"
+        },
+        "run": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/049/k5/run.json",
+          "sha256": "9c84e1a1a8afedbeb50059e9ca757552d91d4e1617658fcf89ff782aba0d7740"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T15:56:17.890Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+            "path": "src/q1/heavy_suffix.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Fixed80-percent dominant compute-pipe component trigger; bounded sink-exclusive suffix peeling; whole minor components placed in final wave; per-pipe greedy packet placement. Builds sink/bounded fallback first; no scoring/search.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f/docs/a/Q1_HEAVY_SUFFIX.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/sink_peel.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "09851e40d79dfded6afebd97ceb2fa711b0ce6b8",
+            "path": "src/q1_benchmarks/heavy_suffix_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/heavy_suffix_e0.py",
+            "run",
+            "20260924T1556Z-heavy2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:56:17.279Z",
+          "finished_at": "2026-09-24T15:56:17.890Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.003173750010319054 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "Parent confirmed P2/P3 currently0 real scores and granted049/088 window; one worker, no exclusive-host claim, no cloud/GPU",
+        "Two preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "444854fe118a208ddfa10fa0ddd48d7b5e6cfd3780a8049f2145fc1a9b674a08",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/references/bounded-049-baseline-singlecore-049.json.gz",
+          "sha256": "7042c3d480194b513f6f904d47491b43ee019e6424eb1abe00a047a7a39351e7"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-20260924T1556Z-heavy2-P1-088-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1556Z-heavy2",
+      "algorithm_id": "q1-heavy-component-suffix",
+      "algorithm_name": "P1 dominant-component suffix waves",
+      "variant": "dominant-pipe-suffix-waves",
+      "solver_commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+      "parameters": {
+        "cores": 5,
+        "dominant_percent": 80,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "selected": "heavy-suffix",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 300,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "088",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 92700,
+        "solver_wall_seconds": 0.12988879100885242,
+        "evaluation_wall_seconds": 0.45440933300415054,
+        "ddr_bytes": 3858952,
+        "extra_ddr_bytes": 2029154,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "2ff71575ba33875431f54823fc1f2214e018edcfc9d568edfb7c47b0f264b825",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "1bdd1970222686e8285cd026662575081c242b425181199cfd98b5be3a8b091e"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/088/k5/case_088_multicore_res.json",
+          "sha256": "1bdd1970222686e8285cd026662575081c242b425181199cfd98b5be3a8b091e"
+        },
+        "result": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/088/k5/result.json.gz",
+          "sha256": "e4a46335e0e8b63684d0be8a23b99141564830e9f673b86c369b76d61f7c4b37"
+        },
+        "trace": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/088/k5/trace.json.gz",
+          "sha256": "e4f27694ef8faecb6bdebd9609c50b7d71d16c269fc67effb497c29fddf34e26"
+        },
+        "log": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/088/k5/official.log",
+          "sha256": "05d3c2d8c712fdb2f28660b86655b0718b3aa6811802d9852751c473afc6ff56"
+        },
+        "run": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/cells/088/k5/run.json",
+          "sha256": "2efc561872b036f12c39cf65fea70e9993635b354f8f80acb4706ad0bb4490c6"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T15:56:18.644Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+            "path": "src/q1/heavy_suffix.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Fixed80-percent dominant compute-pipe component trigger; bounded sink-exclusive suffix peeling; whole minor components placed in final wave; per-pipe greedy packet placement. Builds sink/bounded fallback first; no scoring/search.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f/docs/a/Q1_HEAVY_SUFFIX.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/sink_peel.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "09851e40d79dfded6afebd97ceb2fa711b0ce6b8",
+            "path": "src/q1_benchmarks/heavy_suffix_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/heavy_suffix_e0.py",
+            "run",
+            "20260924T1556Z-heavy2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:56:18.034Z",
+          "finished_at": "2026-09-24T15:56:18.644Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.003173750010319054 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "Parent confirmed P2/P3 currently0 real scores and granted049/088 window; one worker, no exclusive-host claim, no cloud/GPU",
+        "Two preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "2ff71575ba33875431f54823fc1f2214e018edcfc9d568edfb7c47b0f264b825",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-heavy-suffix-20260924/20260924T1556Z-heavy2/references/bounded-088-baseline-singlecore-088.json.gz",
+          "sha256": "01dd2341d82589e8ddaa451a08d88c81be3ba9168481c960c334f94f32085f27"
+        }
+      }
+    }
+  ]
+}

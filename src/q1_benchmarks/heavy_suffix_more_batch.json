@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "Extend the frozen heavy-suffix mechanism check to three predeclared cases; no online selection and no repeat of the prior pair",
+  "solver_commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+  "algorithm_id": "q1-heavy-component-suffix",
+  "variant": "dominant-pipe-suffix-waves",
+  "entrypoint": "src/q1/heavy_suffix.py",
+  "cells": [["003", 5], ["056", 5], ["068", 5]],
+  "parameters": {"dominant_percent": 80, "max_rounds": 64, "max_sinks": 64},
+  "workers": 1,
+  "maximum_calls": {"solver": 3, "E0": 3, "E1": 0, "E2": 0},
+  "timeouts_seconds": {"solver": 30, "E0": 90, "batch": 420},
+  "retries": 0,
+  "stop_policy": "First failure stops the batch; preserve failure and remaining not_run. No retries, no other cells, no E1/E2.",
+  "coordination": "Parent reports P2/P3 each explicitly confirmed zero active scoring and allowed the 003/056/068 short window; one worker, nonexclusive host, no Colab/GPU.",
+  "baseline_commit": "d63001eb01cc254a20bc60cae5e50b1eb1ee2808",
+  "baseline_policy": "Reuse exact old bounded04 same-cell plan/result and official singlecore originals without evaluating baselines"
+}

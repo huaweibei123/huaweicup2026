@@ -1,0 +1,307 @@
+{
+  "kind": "synthetic-structural-review-not-official-performance",
+  "source_commit": "4c8c58866cc8ffa5a3fa468adc727f8a0800bd0f",
+  "source_file_sha256": {
+    "src/q1/heavy_suffix.py": "b5255ad275f5105a8307284ad855b2a23fce731088d695b9eab3b207330b9129",
+    "src/q1/sink_peel.py": "dee3072795e98ef643240cf684a37c0ba1731db2c02081fca5def747c8ce3042",
+    "src/q1/bounded_tasks.py": "b6f2e4df1f6e4e98f817cc2127e7c3dfbb52e3e77a5abb80cec376376ded4d73",
+    "src/q1/tree_frontier.py": "bf3688f1cde57cda0b4bb97911dc721d020ff907e7cab1d477296a80a2eaa400",
+    "src/q1/component_pack.py": "edfa0eb4526e415aec2a983f030ea4872dabe65872873c8edb96ecc4839adb9c",
+    "tests/q1/test_component_pack.py": "601e064452abf205189a81f3dfd953eaea174a13b7dd4a5350cf8f3d52f28abc"
+  },
+  "python": "3.14.5",
+  "calls": {
+    "synthetic_construct": 3,
+    "public_case_solver": 0,
+    "E0": 0,
+    "E1": 0,
+    "E2": 0,
+    "task_compilation": 0
+  },
+  "threshold_checks": [
+    {
+      "label": "exact80",
+      "selected": "heavy-suffix",
+      "heavy_pipe_work": {
+        "PIPE_V": 80
+      },
+      "total_pipe_work": {
+        "PIPE_V": 100,
+        "PIPE_M": 1
+      }
+    },
+    {
+      "label": "below80",
+      "selected": "sink-or-bounded",
+      "heavy_pipe_work": {
+        "PIPE_V": 79
+      },
+      "total_pipe_work": {
+        "PIPE_V": 100,
+        "PIPE_M": 1
+      }
+    }
+  ],
+  "graph": {
+    "ops": [
+      {
+        "id": 1,
+        "op": "RELU",
+        "pipe": "PIPE_V",
+        "cycles": 10000
+      },
+      {
+        "id": 2,
+        "op": "RELU",
+        "pipe": "PIPE_V",
+        "cycles": 40000
+      },
+      {
+        "id": 3,
+        "op": "RELU",
+        "pipe": "PIPE_V",
+        "cycles": 40000
+      },
+      {
+        "id": 10,
+        "op": "MATMUL",
+        "pipe": "PIPE_M",
+        "cycles": 89000
+      },
+      {
+        "id": 11,
+        "op": "MATMUL",
+        "pipe": "PIPE_M",
+        "cycles": 1
+      },
+      {
+        "id": 12,
+        "op": "MATMUL",
+        "pipe": "PIPE_M",
+        "cycles": 1
+      }
+    ],
+    "tensors": [
+      {
+        "id": 1000,
+        "size": 64,
+        "pos": "UB"
+      },
+      {
+        "id": 1001,
+        "size": 64,
+        "pos": "UB"
+      }
+    ],
+    "edges": [
+      {
+        "source": 1,
+        "target": 1000
+      },
+      {
+        "source": 1000,
+        "target": 2
+      },
+      {
+        "source": 1,
+        "target": 1001
+      },
+      {
+        "source": 1001,
+        "target": 3
+      }
+    ]
+  },
+  "current_plan": {
+    "node_to_subgraph": {
+      "1": 0,
+      "2": 2,
+      "3": 3,
+      "10": 1,
+      "11": 4,
+      "12": 4
+    },
+    "core_schedules": [
+      [
+        0,
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ]
+  },
+  "current_info": {
+    "algorithm_id": "q1-heavy-component-suffix",
+    "variant": "dominant-pipe-suffix-waves",
+    "selected": "heavy-suffix",
+    "dominant_percent": 80,
+    "max_rounds": 64,
+    "max_sinks": 64,
+    "base": {
+      "algorithm_id": "q1-sink-peel",
+      "variant": "exclusive-suffix-waves",
+      "selected": "bounded04",
+      "base": {
+        "algorithm_id": "q1-bounded-component-tasks",
+        "variant": "frontier-then-independent-chunks",
+        "base": {
+          "algorithm_id": "q1-tree-frontier-pack",
+          "variant": "threshold-antichain-tail",
+          "packet_factor": 4,
+          "base": {
+            "algorithm_id": "q1-component-pack",
+            "variant": "pipe-lpt-one-task-per-core",
+            "compute_ops": 6,
+            "components": 4,
+            "largest_component_ops": 3,
+            "tasks": 4,
+            "core_compute_ops": [
+              3,
+              1,
+              1,
+              1
+            ],
+            "compute_pipe_work_by_core": [
+              {
+                "PIPE_V": 90000
+              },
+              {
+                "PIPE_M": 89000
+              },
+              {
+                "PIPE_M": 1
+              },
+              {
+                "PIPE_M": 1
+              }
+            ],
+            "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+          },
+          "selected": "component-pack",
+          "scope": "Structural proof only; E0 required",
+          "reason": "enough independent components or one core"
+        },
+        "chunks": {
+          "trigger_ops": 4096,
+          "chunk_ops": 1024,
+          "split_tasks": [],
+          "oversize_indivisible_components": [],
+          "tasks_before": 4,
+          "tasks_after": 4
+        },
+        "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+      },
+      "max_rounds": 64,
+      "max_sinks": 64,
+      "scope": "Task-order proof only; no spill, performance or E0 feasibility guarantee",
+      "reason": "existing bounded04 structural route retained"
+    },
+    "scope": "Structural candidate; neither dominance nor zero spill proves quality",
+    "components": 4,
+    "dominant_pipe": "PIPE_V",
+    "total_pipe_work": {
+      "PIPE_V": 90000,
+      "PIPE_M": 89002
+    },
+    "heavy_pipe_work": {
+      "PIPE_V": 90000
+    },
+    "heavy_anchor": 1,
+    "heavy_ops": 3,
+    "reason": "dominant multi-sink component",
+    "wave_count": 2,
+    "tasks": 5,
+    "waves": [
+      {
+        "packets": 1,
+        "packet_ops": [
+          1
+        ],
+        "core_ops": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "pipe_work_by_core": [
+          {
+            "PIPE_V": 10000
+          },
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "packets": 5,
+        "packet_ops": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "core_ops": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "pipe_work_by_core": [
+          {
+            "PIPE_M": 89000
+          },
+          {
+            "PIPE_V": 40000
+          },
+          {
+            "PIPE_V": 40000
+          },
+          {
+            "PIPE_M": 2
+          }
+        ]
+      }
+    ],
+    "minor_components": 3,
+    "minor_ops": 3,
+    "minor_placement": "whole packets in final wave"
+  },
+  "alternative_plan_task_order_validated_only": {
+    "node_to_subgraph": {
+      "1": 0,
+      "2": 1,
+      "3": 2,
+      "10": 3,
+      "11": 3,
+      "12": 3
+    },
+    "core_schedules": [
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ]
+    ]
+  },
+  "current_plan_necessary_lower_bound_cycles": 99100,
+  "current_bound_reason": "Same core: root compute >=10000, then official same-core Task wait >=100, then independent M op >=89000. COPY may increase it.",
+  "alternative_compute_only_completion_cycles": 89002,
+  "alternative_official_makespan": null,
+  "alternative_official_upper_bound": null,
+  "caveat": "89002 belongs to a simplified compute-resource schedule. Alternative has cross-core 1000 waits and boundary COPY writes/reads under P1; no Task compilation or event replay was performed, so this is not a proven official U or measured result."
+}
