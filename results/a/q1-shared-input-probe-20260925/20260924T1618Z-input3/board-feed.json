@@ -1,0 +1,570 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "nikolastarx-20260924T1618Z-input3-P1-044-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1618Z-input3",
+      "algorithm_id": "q1-shared-input-budget",
+      "algorithm_name": "P1 active cores and local input windows",
+      "variant": "active-core-then-local-windows",
+      "solver_commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+      "parameters": {
+        "cores": 5,
+        "input_budget_bytes": 262144,
+        "activation_bytes": 524288,
+        "max_phases": 32,
+        "selected": "shared-input-budget",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 420,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "044",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 64624,
+        "solver_wall_seconds": 0.07858958299038932,
+        "evaluation_wall_seconds": 0.18236620799871162,
+        "ddr_bytes": 2026944,
+        "extra_ddr_bytes": 1051488,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "25502a9e3e75c9c1c1e04ed3f65a9ec35d342e1343dc7bf7faab4f2800c59446"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/044/k5/case_044_multicore_res.json",
+          "sha256": "25502a9e3e75c9c1c1e04ed3f65a9ec35d342e1343dc7bf7faab4f2800c59446"
+        },
+        "result": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/044/k5/result.json.gz",
+          "sha256": "98d72685dc026fdc06b9e7d0cffb4ab2513d85ebbedbfb6ed2bcfbfe48d0f8a4"
+        },
+        "trace": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/044/k5/trace.json.gz",
+          "sha256": "d650a893b202b97e4e5c258ec5bd6ac89abe775f6abbfaab0966763571ed16a4"
+        },
+        "log": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/044/k5/official.log",
+          "sha256": "d616cf9fe647e42d0d233dd424a088e3da0d78785471fa6cbbf46d6145758d9d"
+        },
+        "run": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/044/k5/run.json",
+          "sha256": "a7c2c6822bf74dd0a8d1a416dc8d4ba85496e77702ea6cdefefb763c2d4c1f79"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T16:18:30.570Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+            "path": "src/q1/shared_input_budget.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Compare at most requested K static component-pack and Task input-window metadata configurations; choose active cores by fixed copy/work proxy; call bounded constructor once; refine each chosen base Task into local depth/input windows; pad inactive core schedules. No online scorer or quality guarantee.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/288dd520caa5c7baaa1413e4021eb2d4221b6e66/docs/a/Q1_SHARED_INPUT_BUDGET.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "77e2234a443a580db1953138d4e5b7fee25774f9",
+            "path": "src/q1_benchmarks/shared_input_probe_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/shared_input_probe_e0.py",
+            "run",
+            "20260924T1618Z-input3"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:18:30.299Z",
+          "finished_at": "2026-09-24T16:18:30.570Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.002810957987094298 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "Preparation only: wait-P2. Parent reports P2 holds the next six-cell window, at most 600 seconds; do not run until root explicitly sends execute after release. Then one nonexclusive worker, no Colab/GPU; record the new authorization receipt. Execution released: EXECUTE 授权：P2刚明确报告统一首6格全部结束、18份owned进程回执ok且当前0评分；P3也已释放。请将已冻结77e2234a443a580db1953138d4e5b7fee25774f9准备态按既有入口更新authorized并保存本条原文，仅运行算法288dd520caa5c7baaa1413e4021eb2d4221b6e66的044/046/090 k5新独立run。上限3solver+3外E0、1worker、solver30s/E090s/batch420s、首失败停、0retry/E1/E2，旧05f8对照不重评。原参数262144/524288/32不改，保留全部退化。终态先报资源释放，再封存原件/固定SHA/feed/precheck；不要顺便跑其他图或候选。",
+        "3 preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/references/bounded-044-baseline-singlecore-044.json.gz",
+          "sha256": "73f1d15fdea4f706b22099d2339a0e74a76c4114a68672077a98a8e15faa913c"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-20260924T1618Z-input3-P1-046-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1618Z-input3",
+      "algorithm_id": "q1-shared-input-budget",
+      "algorithm_name": "P1 active cores and local input windows",
+      "variant": "active-core-then-local-windows",
+      "solver_commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+      "parameters": {
+        "cores": 5,
+        "input_budget_bytes": 262144,
+        "activation_bytes": 524288,
+        "max_phases": 32,
+        "selected": "shared-input-budget",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 420,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "046",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 103846,
+        "solver_wall_seconds": 0.07534487498924136,
+        "evaluation_wall_seconds": 0.13086504201055504,
+        "ddr_bytes": 4204928,
+        "extra_ddr_bytes": 3143456,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "1917fbb2bfe1141fd8dc4bdac6119dd44014df9a13eb18faa3e55f25bcc91659",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "dc97fe7bbbfdb141a3d2f3d23e5b6757a12181e52042dfc61d99ebf28aa40289"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/046/k5/case_046_multicore_res.json",
+          "sha256": "dc97fe7bbbfdb141a3d2f3d23e5b6757a12181e52042dfc61d99ebf28aa40289"
+        },
+        "result": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/046/k5/result.json.gz",
+          "sha256": "412f44be191a10291bf7b5d50274db78ac2e7635172ddb9783d2d3fe52cc6ae4"
+        },
+        "trace": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/046/k5/trace.json.gz",
+          "sha256": "5aca7f8ef9103b922734271ed3dff0a3d499ced8da4455b4f7a7ff65e7ff4ba8"
+        },
+        "log": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/046/k5/official.log",
+          "sha256": "d5b4292148f135d14afbdf18b04c014a8ceb5efe4c00a370d40f9b8de06d5c53"
+        },
+        "run": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/046/k5/run.json",
+          "sha256": "a598be562f2adc60f6a556e0da648cac7d55c5ef98ac89d817fa599660b5b373"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T16:18:30.979Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+            "path": "src/q1/shared_input_budget.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Compare at most requested K static component-pack and Task input-window metadata configurations; choose active cores by fixed copy/work proxy; call bounded constructor once; refine each chosen base Task into local depth/input windows; pad inactive core schedules. No online scorer or quality guarantee.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/288dd520caa5c7baaa1413e4021eb2d4221b6e66/docs/a/Q1_SHARED_INPUT_BUDGET.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "77e2234a443a580db1953138d4e5b7fee25774f9",
+            "path": "src/q1_benchmarks/shared_input_probe_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/shared_input_probe_e0.py",
+            "run",
+            "20260924T1618Z-input3"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:18:30.763Z",
+          "finished_at": "2026-09-24T16:18:30.979Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.002810957987094298 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "Preparation only: wait-P2. Parent reports P2 holds the next six-cell window, at most 600 seconds; do not run until root explicitly sends execute after release. Then one nonexclusive worker, no Colab/GPU; record the new authorization receipt. Execution released: EXECUTE 授权：P2刚明确报告统一首6格全部结束、18份owned进程回执ok且当前0评分；P3也已释放。请将已冻结77e2234a443a580db1953138d4e5b7fee25774f9准备态按既有入口更新authorized并保存本条原文，仅运行算法288dd520caa5c7baaa1413e4021eb2d4221b6e66的044/046/090 k5新独立run。上限3solver+3外E0、1worker、solver30s/E090s/batch420s、首失败停、0retry/E1/E2，旧05f8对照不重评。原参数262144/524288/32不改，保留全部退化。终态先报资源释放，再封存原件/固定SHA/feed/precheck；不要顺便跑其他图或候选。",
+        "3 preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "1917fbb2bfe1141fd8dc4bdac6119dd44014df9a13eb18faa3e55f25bcc91659",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/references/bounded-046-baseline-singlecore-046.json.gz",
+          "sha256": "d34869c92f2f414dfe9c6f1bf715e0c26f4f2438c8f8cb4840868b9199b6997f"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-20260924T1618Z-input3-P1-090-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1618Z-input3",
+      "algorithm_id": "q1-shared-input-budget",
+      "algorithm_name": "P1 active cores and local input windows",
+      "variant": "active-core-then-local-windows",
+      "solver_commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+      "parameters": {
+        "cores": 5,
+        "input_budget_bytes": 262144,
+        "activation_bytes": 524288,
+        "max_phases": 32,
+        "selected": "shared-input-budget",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 420,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "090",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 319844,
+        "solver_wall_seconds": 0.07452583301346749,
+        "evaluation_wall_seconds": 0.24099562500487082,
+        "ddr_bytes": 11066880,
+        "extra_ddr_bytes": 8838528,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "a91d3ad4c40e53d5731b81b3eb72bcf922f5ef06094e860b5c5729619cb2d312",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "c63428e8a512447d48f50c58854e68ff8b19e2afb92aac1493f3f631e82eaf4e"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/090/k5/case_090_multicore_res.json",
+          "sha256": "c63428e8a512447d48f50c58854e68ff8b19e2afb92aac1493f3f631e82eaf4e"
+        },
+        "result": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/090/k5/result.json.gz",
+          "sha256": "b9769e540c3d3307acb0018e23cf3ad3bbae3d5b40241a92de5a4a19e48c8d23"
+        },
+        "trace": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/090/k5/trace.json.gz",
+          "sha256": "c7373c3d2b0624502d4af3ee29801111a4ed1b6726c848087a348ebfe862881b"
+        },
+        "log": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/090/k5/official.log",
+          "sha256": "ee516db7345c33a102fb7eabedee0c896c247ac1422cecd59a4ff89c82546377"
+        },
+        "run": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/cells/090/k5/run.json",
+          "sha256": "6c4f0c9cec784587d893517ed10dbc5c730827cc9382dff118e9a4aeef71c1f6"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T16:18:31.521Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+            "path": "src/q1/shared_input_budget.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Compare at most requested K static component-pack and Task input-window metadata configurations; choose active cores by fixed copy/work proxy; call bounded constructor once; refine each chosen base Task into local depth/input windows; pad inactive core schedules. No online scorer or quality guarantee.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/288dd520caa5c7baaa1413e4021eb2d4221b6e66/docs/a/Q1_SHARED_INPUT_BUDGET.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "77e2234a443a580db1953138d4e5b7fee25774f9",
+            "path": "src/q1_benchmarks/shared_input_probe_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/shared_input_probe_e0.py",
+            "run",
+            "20260924T1618Z-input3"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:18:31.187Z",
+          "finished_at": "2026-09-24T16:18:31.521Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.002810957987094298 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "Preparation only: wait-P2. Parent reports P2 holds the next six-cell window, at most 600 seconds; do not run until root explicitly sends execute after release. Then one nonexclusive worker, no Colab/GPU; record the new authorization receipt. Execution released: EXECUTE 授权：P2刚明确报告统一首6格全部结束、18份owned进程回执ok且当前0评分；P3也已释放。请将已冻结77e2234a443a580db1953138d4e5b7fee25774f9准备态按既有入口更新authorized并保存本条原文，仅运行算法288dd520caa5c7baaa1413e4021eb2d4221b6e66的044/046/090 k5新独立run。上限3solver+3外E0、1worker、solver30s/E090s/batch420s、首失败停、0retry/E1/E2，旧05f8对照不重评。原参数262144/524288/32不改，保留全部退化。终态先报资源释放，再封存原件/固定SHA/feed/precheck；不要顺便跑其他图或候选。",
+        "3 preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "a91d3ad4c40e53d5731b81b3eb72bcf922f5ef06094e860b5c5729619cb2d312",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-shared-input-probe-20260925/20260924T1618Z-input3/references/bounded-090-baseline-singlecore-090.json.gz",
+          "sha256": "6db414a3150b9be0297b72301e29bab9635e47312714f4f058821d52bb7de6c6"
+        }
+      }
+    }
+  ]
+}

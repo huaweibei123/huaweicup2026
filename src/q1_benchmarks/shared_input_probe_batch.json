@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "purpose": "Three predeclared P1 k5 shared-input mechanism probes; prepare first, wait for root execution signal",
+  "solver_commit": "288dd520caa5c7baaa1413e4021eb2d4221b6e66",
+  "algorithm_id": "q1-shared-input-budget",
+  "algorithm_name": "P1 active cores and local input windows",
+  "variant": "active-core-then-local-windows",
+  "entrypoint": "src/q1/shared_input_budget.py",
+  "algorithm_sources": ["src/q1/shared_input_budget.py", "src/q1/bounded_tasks.py", "src/q1/tree_frontier.py", "src/q1/component_pack.py"],
+  "runner_path": "src/q1_benchmarks/shared_input_probe_e0.py",
+  "manifest_path": "src/q1_benchmarks/shared_input_probe_batch.json",
+  "documentation": "docs/a/Q1_SHARED_INPUT_BUDGET.md",
+  "method": "Compare at most requested K static component-pack and Task input-window metadata configurations; choose active cores by fixed copy/work proxy; call bounded constructor once; refine each chosen base Task into local depth/input windows; pad inactive core schedules. No online scorer or quality guarantee.",
+  "cells": [["044", 5], ["046", 5], ["090", 5]],
+  "parameters": {"input_budget_bytes": 262144, "activation_bytes": 524288, "max_phases": 32},
+  "solver_extra_argv": ["--input-budget-bytes", "262144", "--activation-bytes", "524288", "--max-phases", "32"],
+  "workers": 1,
+  "maximum_calls": {"solver": 3, "E0": 3, "E1": 0, "E2": 0},
+  "timeouts_seconds": {"solver": 30, "E0": 90, "batch": 420},
+  "retries": 0,
+  "stop_policy": "First constructor/E0/source/resource/cleanup failure stops the batch; no retry; retain remaining not_run",
+  "coordination": "Preparation only: wait-P2. Parent reports P2 holds the next six-cell window, at most 600 seconds; do not run until root explicitly sends execute after release. Then one nonexclusive worker, no Colab/GPU; record the new authorization receipt.",
+  "comparison_source": {
+    "commit": "d63001eb01cc254a20bc60cae5e50b1eb1ee2808",
+    "feed": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/board-feed.json",
+    "scope": "Exact old bounded04 same-cell plans/results and official singlecore originals reused; no baseline calls"
+  }
+}
