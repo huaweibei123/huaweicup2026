@@ -1,0 +1,71 @@
+{
+  "comparisons": {
+    "cpp_vs_python": {
+      "byte_equal": true,
+      "output_bytes": 31387,
+      "output_sha256": "30b2a06e4fde37cb43f5feb59e7e0735049e2c610e35eb09fd5238a5e25f3186",
+      "status": "pass",
+      "timing": {
+        "iterations": 11,
+        "kind": "end_to_end_process_ms",
+        "median_ms": 39.4891,
+        "min_ms": 34.9286,
+        "p95_ms": 55.1419,
+        "warmup": 1
+      }
+    },
+    "python_reference_cli": {
+      "byte_equal": true,
+      "output_bytes": 31387,
+      "output_sha256": "30b2a06e4fde37cb43f5feb59e7e0735049e2c610e35eb09fd5238a5e25f3186",
+      "status": "pass",
+      "timing": {
+        "iterations": 11,
+        "kind": "end_to_end_process_ms",
+        "median_ms": 256.8738,
+        "min_ms": 227.8571,
+        "p95_ms": 358.1325,
+        "warmup": 1
+      }
+    },
+    "rust_vs_python": {
+      "byte_equal": null,
+      "status": "unavailable"
+    }
+  },
+  "environment": {
+    "machine": "AMD64",
+    "os": "Windows",
+    "python": "3.12.13"
+  },
+  "experiment": "native-proxy-kernel-smoke-v1",
+  "failed_comparisons": [],
+  "failed_toolchains": [],
+  "scope": "synthetic feature/ranking kernel only; not official I/O and not E2/E0 accuracy evidence",
+  "status": "partial_toolchain",
+  "timing_note": "Warm process launches over identical stdin; includes startup, parsing, ranking, and serialization.",
+  "toolchains": {
+    "cpp": {
+      "command": "cl /nologo /EHsc /std:c++17 /O2 /W4 src/eval_proxy/native/cpp/kernel.cpp /Fo:<temp>/native_proxy_cpp.obj /Fe:<temp>/native_proxy_cpp.exe",
+      "compiler": "cl.EXE",
+      "status": "ran",
+      "version": "Microsoft C/C++ 19.35.32215"
+    },
+    "rust": {
+      "reason": "rustc not found on PATH; cargo not found on PATH",
+      "status": "unavailable"
+    }
+  },
+  "unavailable_toolchains": [
+    "rust"
+  ],
+  "workload": {
+    "candidates": 512,
+    "expected_output_bytes": 31387,
+    "expected_output_sha256": "30b2a06e4fde37cb43f5feb59e7e0735049e2c610e35eb09fd5238a5e25f3186",
+    "generator": "xorshift64-v1",
+    "input_bytes": 30817,
+    "input_sha256": "d0c5b3d20a77337e6db594b8cc10eb0dcc19728f708cc27d64169781f651dc9a",
+    "seed": 20260923
+  }
+}

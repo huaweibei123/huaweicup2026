@@ -26,4 +26,26 @@
 
 ## 交付记录
 
-实际命令、代码/输入版本、测试范围、原生/回退性能、失败与图表、结论及限制、未验证项、PR：由负责人按实际结果填写。有限测试不能宣称所有输入等效。
+状态：首批阶段交付，待队长独立复核；未达到 E1/E2 联合发布门槛。
+
+| 字段 | 实际交付 |
+| --- | --- |
+| 目标 | E1 索引化 Problem 1 Task 边界构图；E2 静态排序与粗粒度事件估计两条路线；C++/Rust 同一合成小内核探索。 |
+| 输入 | main `8ba6248f16a85324901a787676b1658e532f5c1c`；官方 code hash `de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0`；config SHA-256 `dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9`；FORM PR #17 最终固定开发证据 `dab91d612bd26183e12d30848b13d5fb14e071c7`（排序夹具 blob 与此前版本相同）。 |
+| 输出 | `src/eval_exact/`、`src/eval_proxy/`、对应测试；`results/a/exact/r20260923-e1-matrix/`、`results/a/proxy/r20260923-e2-dev64-gzip/`、`r20260923-e2-route-compare/`、`native-smoke/`；两份方法文档及论文片段。 |
+| 限制 | 仅 Problem 1 开发范围；单图开发池不是校准/封存集；E1 未到 3x；event E2 数值误差失败；Rust 未运行；浏览器 Canvas/Board 未由本客户端实际打开。 |
+| 验收观察 | E1 三例 full 对象零差分，配对几何平均 1.0910x/1.1193x/1.1642x；case 001 的 `>=0.8x` 配对占 80%，另两例为 100%；成功 CLI 结果/Trace/日志 byte-exact，非法 plan 行为一致。rank E2 64/64 有 E0、遗憾 0、Spearman 0.8568；event E2 遗憾 0、Spearman 0.8127，但误差 median 25.7591%、P95 28.8954%。最新同池内存计时为 E2 0.3559557 s、E0 full 28.7685327 s、观察比 80.8205x；两路线 route median 分别 0.3385280 s、0.3438034 s。C++/Python 31,387 字节 SHA-256 相同；Rust toolchain unavailable。 |
+| 交付 | 分支 `codex/a-r1-fast-eval-lyx0217`；PR [#20](https://github.com/huaweibei123/huaweicup2026/pull/20)；Atlas 仅在 PR 可访问后提交 `review + deliverables`，pending 不记成功。 |
+
+2026-09-23 后续 E1 增量：提交 `8edccee2c85b3b46c55b0f08f3273b01d501f8b2` 在候选私有 Step3 runtime 中加入受 schema/别名 guard 保护的扩展图复制，未知结构回退官方 `deepcopy`。固定开发池 64/64 和独立生成的 169 个微型输入未发现 full 结果或异常语义差分；新增后 E1 单测 11/11 通过。三例更新证据位于 `results/a/exact/r20260923-e1-schema-copy-v2/`，配对几何平均为 1.2264x/1.2015x/1.2189x，仍未达到 3x，任务继续保持 review。
+
+主要复现命令：
+
+```powershell
+uv run python -m unittest discover -s tests/eval_exact -p 'test_*.py' -v
+uv run python -m unittest discover -s tests/eval_proxy -p 'test_*.py' -v
+uv run python -m unittest discover -s tests/eval_proxy_native -p 'test_*.py' -v
+uv run python -m src.eval_proxy.compare_routes --graph data/raw/a/official/data/case_001.json --config data/raw/a/official/data/config.txt --pool-dir results/a/proxy/r20260923-e2-dev64-gzip --output results/a/proxy/<new-route-run>/summary.json --warmup 1 --repeats 3
+```
+
+完整基准命令、环境、seed、计时边界和局限见 `docs/a/exact/PROFILE.md`、`docs/a/proxy/APPROXIMATIONS.md` 与各结果目录。有限测试只表示所列样本未发现差异，不证明全部输入等效。
