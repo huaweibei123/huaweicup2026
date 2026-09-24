@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "run_id": "nikolastarx-q2-vector-arrival-016-k2-20260925",
+  "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+  "cases": [
+    "016"
+  ],
+  "cores": [
+    2
+  ],
+  "methods": [
+    "vector_arrival"
+  ],
+  "solver_mode": "direct",
+  "solver_module": "src.q2_nikolastarx.vector_arrival",
+  "source_files": [
+    "src/q2_nikolastarx/baseline.py",
+    "src/q2_nikolastarx/direct.py",
+    "src/q2_nikolastarx/vector_lanes.py",
+    "src/q2_nikolastarx/vector_arrival.py"
+  ],
+  "algorithm_id": "q2-vector-arrival",
+  "algorithm_name": "P2 fixed-lane arrival-tree scalar placement",
+  "variant": "arrival-tree-dp-one-stage-broadcast-v1",
+  "method_description": "Preserve whole vector lanes; choose scalar owners with root-conditioned tree DP, then materialize a contention-aware V word. One deterministic construction, zero online evaluator calls.",
+  "output_prefix": "results/a/q2-nikolastarx/vector-arrival-pilot-20260925/run/016-k2",
+  "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "max_E0": 1,
+  "max_internal_per_cell": 0,
+  "max_E1": 0,
+  "max_E2": 0,
+  "evaluation_timeout_seconds": 60,
+  "solver_wall_seconds": 30,
+  "batch_wall_seconds": 100,
+  "rss_observation_stop_bytes": 4294967296,
+  "workers": 1,
+  "retries": 0,
+  "case_selection": "Only016k2: fixed-plan lower bounds already exceed achieved incumbents for k4/k5, pruning them without E0. Development mechanism test, not holdout.",
+  "failure_policy": "First unsuccessful or unverified attempt stops; no retry.",
+  "resources": "One local macOS worker after P3 explicitly yields window, one solver plus one final E0, aggregate120s, sampled4GiB RSS; no Colab.",
+  "offline_costs": "9 synthetic tests and3 single static constructions recorded separately; root independently recomputed all3 bounds. No training or online score tables.",
+  "authors": [
+    "NikolaStarx"
+  ],
+  "references": [
+    "docs/a/q2-nikolastarx/VECTOR_TRACE_DIAGNOSIS.md",
+    "docs/a/q2-nikolastarx/VECTOR_ARRIVAL.md"
+  ],
+  "comparison": "Against existing vector k2 M4170750 at data d15f27fe3ad41be63c9e837af0a7afae440eca66, fixed-plan new LB4026386. No old E0 rerun. Preserve a loss if observed."
+}

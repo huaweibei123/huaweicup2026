@@ -1,0 +1,120 @@
+{
+  "selected_strategy": "tree_frontier",
+  "cores": 2,
+  "eligible_ops": 19636,
+  "components": 1,
+  "sink": 23998,
+  "sources": 2181,
+  "capacity_bytes": {
+    "L1": 524288,
+    "UB": 131072
+  },
+  "private_profile": {
+    "private_scalar_peak_units": 79872,
+    "scalar_units_per_capacity": 524288,
+    "private_pool_peak_bytes": {
+      "L1": 1536,
+      "UB": 19968
+    },
+    "sibling_rule": "descending private P-R, then op id",
+    "optimality_scope": "private scalar noninterleaving subtree order only"
+  },
+  "packet_threshold_rational_cycles": [
+    3011088,
+    4
+  ],
+  "packet_count": 5,
+  "skeleton_ops": 4,
+  "packets": [
+    {
+      "root": 23993,
+      "ops": 4615,
+      "work_cycles": 707868,
+      "core": 0
+    },
+    {
+      "root": 23991,
+      "ops": 4607,
+      "work_cycles": 706524,
+      "core": 1
+    },
+    {
+      "root": 23992,
+      "ops": 4607,
+      "work_cycles": 706524,
+      "core": 1
+    },
+    {
+      "root": 23994,
+      "ops": 4607,
+      "work_cycles": 706524,
+      "core": 0
+    },
+    {
+      "root": 23990,
+      "ops": 1196,
+      "work_cycles": 183504,
+      "core": 1
+    }
+  ],
+  "compute_load_by_core": [
+    1414500,
+    1596588
+  ],
+  "active_cores": 2,
+  "per_core": [
+    {
+      "core": 0,
+      "ops": 9225,
+      "raw_priority_peak_bytes": {
+        "L1": 7680,
+        "UB": 18432
+      },
+      "graph_input_tensors": 2048,
+      "shared_graph_input_tensors": 1024
+    },
+    {
+      "core": 1,
+      "ops": 10411,
+      "raw_priority_peak_bytes": {
+        "L1": 7680,
+        "UB": 18432
+      },
+      "graph_input_tensors": 2314,
+      "shared_graph_input_tensors": 1157
+    }
+  ],
+  "cut_edges": [
+    {
+      "source_op": 23995,
+      "target_op": 23997,
+      "tensor": 1000028356,
+      "bytes": 1536,
+      "source_core": 1,
+      "target_core": 0
+    },
+    {
+      "source_op": 23990,
+      "target_op": 23998,
+      "tensor": 1000028351,
+      "bytes": 1536,
+      "source_core": 1,
+      "target_core": 0
+    }
+  ],
+  "tensor_copy_bytes_without_spill": {
+    "external_input_bytes": 13400064,
+    "cross_core_bytes": 6144,
+    "output_bytes": 1536,
+    "extra_vs_unique_input_output": 6144
+  },
+  "zero_spill_claim": false,
+  "limitations": [
+    "LPT uses total compute work, not exact multi-pipe execution time",
+    "capacity-normalized scalar ordering does not optimize each pool jointly",
+    "shared graph inputs excluded from private profile and counted in per-core intervals",
+    "raw intervals exclude inserted COPY timing, Step2 spill and Step3 reorder",
+    "global postorder projection proves original-order acyclicity, not complete E0 feasibility",
+    "skeleton locality rule and packet threshold do not guarantee balanced core loads"
+  ]
+}

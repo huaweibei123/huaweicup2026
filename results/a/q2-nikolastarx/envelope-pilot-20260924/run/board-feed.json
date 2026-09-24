@@ -1,0 +1,1320 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "nikolastarx-q2-envelope-pilot-20260924-p2-014-k2",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+      "algorithm_id": "q2-component-envelope",
+      "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+      "variant": "original-order-capacity-cohorts-v1",
+      "solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "014",
+            "025"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "component_envelope"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.component_envelope",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py",
+            "src/q2_nikolastarx/component_envelope.py"
+          ],
+          "algorithm_id": "q2-component-envelope",
+          "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+          "variant": "original-order-capacity-cohorts-v1",
+          "method_description": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "output_prefix": "results/a/q2-nikolastarx/envelope-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 6,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 600,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Two fixed mechanism counterexamples from the preceding 24-cell pilot: 025 has many independent components and excess spill; 014 has cross-core fragmentation and shared inputs whose reserve can exceed L1 even for a singleton component. Both at 2/4/5 cores. No holdout/full-suite claim, no replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed RSS. P1 previously authorized two-worker shared window; no exclusive timing claim. No Colab/GPU use. Scale and Windows runs remain with central s7c98 dispatcher.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "comparison": "Compare all six official outcomes to source dd9d8991/data81219bf9 direct pilot (same cases, cores, inputs/config/E0), fixed Fang contiguous and historical snapshot. In particular check whether extra DDR and spill decrease without sacrificing makespan. Both successful and negative/unsupported outcomes are published; construction count is one per cell."
+        },
+        "selected": "component_envelope",
+        "selected_strategy": "component_envelope",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "014",
+      "cores": 2,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 8869498,
+        "solver_wall_seconds": 1.2252712500048801,
+        "evaluation_wall_seconds": 12.720985208987258,
+        "ddr_bytes": 60433276,
+        "extra_ddr_bytes": 50500536,
+        "spill_bytes": 40607328,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "aa6744c96635d8c8f63db725b1dd82ed481b591bfe17e6e97fbeebac31fcc992"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k2/run.json",
+          "sha256": "481f851323e1d3766fe154d5be61640e1a69fc407e6600e76750ebdf71a4e871"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k2/manifest.json",
+          "sha256": "809db85f1c1b4a3599cd81417f79347dd6af1f8435ae674d190c79bf35610434"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k2/plan.json",
+          "sha256": "aa6744c96635d8c8f63db725b1dd82ed481b591bfe17e6e97fbeebac31fcc992"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k2/final/result.json.gz",
+          "sha256": "3b4b77a1b2d1ac01877ab1fa153d44ecf24d590d64f1ec5cfd2d77b72bdf2e33"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-envelope-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:22:29.784187Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "path": "src/q2_nikolastarx/component_envelope.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "component_envelope",
+          "selected_solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "aa714b3811fa3722e5e126be12268917af0da93f",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/envelope-pilot-20260924/protocol.json",
+            "--source-commit",
+            "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "--runner-commit",
+            "aa714b3811fa3722e5e126be12268917af0da93f"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 627949568
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:22:29.784187Z",
+          "finished_at": "2026-09-24T15:22:43.789982Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/014/result.json.gz",
+          "sha256": "131db064f7aa2f8488edfa65921b970d116baf246ad4f0865e685ae2e857aff6"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-q2-envelope-pilot-20260924-p2-014-k4",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+      "algorithm_id": "q2-component-envelope",
+      "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+      "variant": "original-order-capacity-cohorts-v1",
+      "solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "014",
+            "025"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "component_envelope"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.component_envelope",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py",
+            "src/q2_nikolastarx/component_envelope.py"
+          ],
+          "algorithm_id": "q2-component-envelope",
+          "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+          "variant": "original-order-capacity-cohorts-v1",
+          "method_description": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "output_prefix": "results/a/q2-nikolastarx/envelope-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 6,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 600,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Two fixed mechanism counterexamples from the preceding 24-cell pilot: 025 has many independent components and excess spill; 014 has cross-core fragmentation and shared inputs whose reserve can exceed L1 even for a singleton component. Both at 2/4/5 cores. No holdout/full-suite claim, no replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed RSS. P1 previously authorized two-worker shared window; no exclusive timing claim. No Colab/GPU use. Scale and Windows runs remain with central s7c98 dispatcher.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "comparison": "Compare all six official outcomes to source dd9d8991/data81219bf9 direct pilot (same cases, cores, inputs/config/E0), fixed Fang contiguous and historical snapshot. In particular check whether extra DDR and spill decrease without sacrificing makespan. Both successful and negative/unsupported outcomes are published; construction count is one per cell."
+        },
+        "selected": "component_envelope",
+        "selected_strategy": "component_envelope",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "014",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 4510101,
+        "solver_wall_seconds": 1.2135024169983808,
+        "evaluation_wall_seconds": 9.547308125009295,
+        "ddr_bytes": 68849500,
+        "extra_ddr_bytes": 58916760,
+        "spill_bytes": 29287824,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "80640194f9c5c78f5b77190a8815ae9b38632bae0d4f10f13138ebf9266b6f9f"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k4/run.json",
+          "sha256": "1f1211c28784ae861c7855b48ad38613718f58da19ca6689c8e0b43a6c33bd94"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k4/manifest.json",
+          "sha256": "a6b00c8797f1fdee9d0d8d8ff71d9b6496a9317448393be189391745a4193305"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k4/plan.json",
+          "sha256": "80640194f9c5c78f5b77190a8815ae9b38632bae0d4f10f13138ebf9266b6f9f"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k4/final/result.json.gz",
+          "sha256": "4eec0783581cc04bba3ae9d8805629bb8ce3a7fc1fd10c0d6dd56c7ce0208071"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-envelope-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:22:45.252352Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "path": "src/q2_nikolastarx/component_envelope.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "component_envelope",
+          "selected_solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "aa714b3811fa3722e5e126be12268917af0da93f",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/envelope-pilot-20260924/protocol.json",
+            "--source-commit",
+            "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "--runner-commit",
+            "aa714b3811fa3722e5e126be12268917af0da93f"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 572375040
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:22:45.252352Z",
+          "finished_at": "2026-09-24T15:22:56.074199Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/014/result.json.gz",
+          "sha256": "131db064f7aa2f8488edfa65921b970d116baf246ad4f0865e685ae2e857aff6"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-q2-envelope-pilot-20260924-p2-014-k5",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+      "algorithm_id": "q2-component-envelope",
+      "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+      "variant": "original-order-capacity-cohorts-v1",
+      "solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "014",
+            "025"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "component_envelope"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.component_envelope",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py",
+            "src/q2_nikolastarx/component_envelope.py"
+          ],
+          "algorithm_id": "q2-component-envelope",
+          "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+          "variant": "original-order-capacity-cohorts-v1",
+          "method_description": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "output_prefix": "results/a/q2-nikolastarx/envelope-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 6,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 600,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Two fixed mechanism counterexamples from the preceding 24-cell pilot: 025 has many independent components and excess spill; 014 has cross-core fragmentation and shared inputs whose reserve can exceed L1 even for a singleton component. Both at 2/4/5 cores. No holdout/full-suite claim, no replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed RSS. P1 previously authorized two-worker shared window; no exclusive timing claim. No Colab/GPU use. Scale and Windows runs remain with central s7c98 dispatcher.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "comparison": "Compare all six official outcomes to source dd9d8991/data81219bf9 direct pilot (same cases, cores, inputs/config/E0), fixed Fang contiguous and historical snapshot. In particular check whether extra DDR and spill decrease without sacrificing makespan. Both successful and negative/unsupported outcomes are published; construction count is one per cell."
+        },
+        "selected": "component_envelope",
+        "selected_strategy": "component_envelope",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "014",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 3666823,
+        "solver_wall_seconds": 1.1857832499954384,
+        "evaluation_wall_seconds": 8.802513999980874,
+        "ddr_bytes": 73255372,
+        "extra_ddr_bytes": 63322632,
+        "spill_bytes": 28088664,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "bcb108838ee79593f3871434c2efec045d902e2dec2c865416ee1242991adf1f"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k5/run.json",
+          "sha256": "f198f26676ab63c54a1d3b7ea92f7740577095bacbb569d066beb7186966c914"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k5/manifest.json",
+          "sha256": "ec4c9c0df85b81b8b4b02dded9f92e73450a5eb1140734942f2d0d0a7af7ac54"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k5/plan.json",
+          "sha256": "bcb108838ee79593f3871434c2efec045d902e2dec2c865416ee1242991adf1f"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/014-k5/final/result.json.gz",
+          "sha256": "42b9388b7f6b88d75e4e4546ccb6036496dcc2b88ab45f92c9ba1a581a53cda4"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-envelope-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:22:57.619728Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "path": "src/q2_nikolastarx/component_envelope.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "component_envelope",
+          "selected_solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "aa714b3811fa3722e5e126be12268917af0da93f",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/envelope-pilot-20260924/protocol.json",
+            "--source-commit",
+            "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "--runner-commit",
+            "aa714b3811fa3722e5e126be12268917af0da93f"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 552271872
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:22:57.619728Z",
+          "finished_at": "2026-09-24T15:23:07.669215Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/014/result.json.gz",
+          "sha256": "131db064f7aa2f8488edfa65921b970d116baf246ad4f0865e685ae2e857aff6"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-q2-envelope-pilot-20260924-p2-025-k2",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+      "algorithm_id": "q2-component-envelope",
+      "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+      "variant": "original-order-capacity-cohorts-v1",
+      "solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "014",
+            "025"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "component_envelope"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.component_envelope",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py",
+            "src/q2_nikolastarx/component_envelope.py"
+          ],
+          "algorithm_id": "q2-component-envelope",
+          "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+          "variant": "original-order-capacity-cohorts-v1",
+          "method_description": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "output_prefix": "results/a/q2-nikolastarx/envelope-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 6,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 600,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Two fixed mechanism counterexamples from the preceding 24-cell pilot: 025 has many independent components and excess spill; 014 has cross-core fragmentation and shared inputs whose reserve can exceed L1 even for a singleton component. Both at 2/4/5 cores. No holdout/full-suite claim, no replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed RSS. P1 previously authorized two-worker shared window; no exclusive timing claim. No Colab/GPU use. Scale and Windows runs remain with central s7c98 dispatcher.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "comparison": "Compare all six official outcomes to source dd9d8991/data81219bf9 direct pilot (same cases, cores, inputs/config/E0), fixed Fang contiguous and historical snapshot. In particular check whether extra DDR and spill decrease without sacrificing makespan. Both successful and negative/unsupported outcomes are published; construction count is one per cell."
+        },
+        "selected": "component_envelope",
+        "selected_strategy": "component_envelope",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "025",
+      "cores": 2,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 2351860,
+        "solver_wall_seconds": 0.6576496249763295,
+        "evaluation_wall_seconds": 4.685390917002223,
+        "ddr_bytes": 8245248,
+        "extra_ddr_bytes": 27648,
+        "spill_bytes": 0,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "053e037f1223594febd1f10948a98488ca48f39d7c54be97c7b894b311987876"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k2/run.json",
+          "sha256": "9a74dec6c9121fb6a9e4530164c4d9711b1576a5b7c42e9e4942b4af5e2c4443"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k2/manifest.json",
+          "sha256": "f2224da088252289a7d6565256894b866cfb1e7b07d372a211bbb78df821a499"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k2/plan.json",
+          "sha256": "053e037f1223594febd1f10948a98488ca48f39d7c54be97c7b894b311987876"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k2/final/result.json.gz",
+          "sha256": "29c9d855a77987d88820f6986b770a1ffc8bd3600f0e693390ff1c283ae6c1e8"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-envelope-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:23:09.234906Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "path": "src/q2_nikolastarx/component_envelope.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "component_envelope",
+          "selected_solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "aa714b3811fa3722e5e126be12268917af0da93f",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/envelope-pilot-20260924/protocol.json",
+            "--source-commit",
+            "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "--runner-commit",
+            "aa714b3811fa3722e5e126be12268917af0da93f"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 336117760
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:23:09.234906Z",
+          "finished_at": "2026-09-24T15:23:14.604739Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/025/result.json.gz",
+          "sha256": "962955c8c2f962f7a6188be15c65ab3fec5f34ac6e307612aa2500a048ff87b6"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-q2-envelope-pilot-20260924-p2-025-k4",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+      "algorithm_id": "q2-component-envelope",
+      "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+      "variant": "original-order-capacity-cohorts-v1",
+      "solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "014",
+            "025"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "component_envelope"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.component_envelope",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py",
+            "src/q2_nikolastarx/component_envelope.py"
+          ],
+          "algorithm_id": "q2-component-envelope",
+          "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+          "variant": "original-order-capacity-cohorts-v1",
+          "method_description": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "output_prefix": "results/a/q2-nikolastarx/envelope-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 6,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 600,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Two fixed mechanism counterexamples from the preceding 24-cell pilot: 025 has many independent components and excess spill; 014 has cross-core fragmentation and shared inputs whose reserve can exceed L1 even for a singleton component. Both at 2/4/5 cores. No holdout/full-suite claim, no replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed RSS. P1 previously authorized two-worker shared window; no exclusive timing claim. No Colab/GPU use. Scale and Windows runs remain with central s7c98 dispatcher.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "comparison": "Compare all six official outcomes to source dd9d8991/data81219bf9 direct pilot (same cases, cores, inputs/config/E0), fixed Fang contiguous and historical snapshot. In particular check whether extra DDR and spill decrease without sacrificing makespan. Both successful and negative/unsupported outcomes are published; construction count is one per cell."
+        },
+        "selected": "component_envelope",
+        "selected_strategy": "component_envelope",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "025",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 1177396,
+        "solver_wall_seconds": 0.6431165829999372,
+        "evaluation_wall_seconds": 3.6275032080011442,
+        "ddr_bytes": 8300544,
+        "extra_ddr_bytes": 82944,
+        "spill_bytes": 0,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "256468c49476970a315ce1c05c82a8287b90214dbcde81d36b32a59c657fcb85"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k4/run.json",
+          "sha256": "6805d07e8f23421b14821f27cb7eaa33e429fdaa0ce83ea06145a0a265b91257"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k4/manifest.json",
+          "sha256": "87633ed382d16981d8563593b5f0eb15fadfd28ecd12572fec70ded39c6a9b5f"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k4/plan.json",
+          "sha256": "256468c49476970a315ce1c05c82a8287b90214dbcde81d36b32a59c657fcb85"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k4/final/result.json.gz",
+          "sha256": "a144036ccdd1871c16e01c307bbad59f51a968b962a74554e545a28fba938935"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-envelope-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:23:15.369219Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "path": "src/q2_nikolastarx/component_envelope.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "component_envelope",
+          "selected_solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "aa714b3811fa3722e5e126be12268917af0da93f",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/envelope-pilot-20260924/protocol.json",
+            "--source-commit",
+            "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "--runner-commit",
+            "aa714b3811fa3722e5e126be12268917af0da93f"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 316162048
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:23:15.369219Z",
+          "finished_at": "2026-09-24T15:23:19.668078Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/025/result.json.gz",
+          "sha256": "962955c8c2f962f7a6188be15c65ab3fec5f34ac6e307612aa2500a048ff87b6"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-q2-envelope-pilot-20260924-p2-025-k5",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+      "algorithm_id": "q2-component-envelope",
+      "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+      "variant": "original-order-capacity-cohorts-v1",
+      "solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-envelope-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "014",
+            "025"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "component_envelope"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.component_envelope",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py",
+            "src/q2_nikolastarx/component_envelope.py"
+          ],
+          "algorithm_id": "q2-component-envelope",
+          "algorithm_name": "P2 whole-component capacity-envelope direct constructor",
+          "variant": "original-order-capacity-cohorts-v1",
+          "method_description": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "output_prefix": "results/a/q2-nikolastarx/envelope-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 6,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 600,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Two fixed mechanism counterexamples from the preceding 24-cell pilot: 025 has many independent components and excess spill; 014 has cross-core fragmentation and shared inputs whose reserve can exceed L1 even for a singleton component. Both at 2/4/5 cores. No holdout/full-suite claim, no replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed RSS. P1 previously authorized two-worker shared window; no exclusive timing claim. No Colab/GPU use. Scale and Windows runs remain with central s7c98 dispatcher.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "comparison": "Compare all six official outcomes to source dd9d8991/data81219bf9 direct pilot (same cases, cores, inputs/config/E0), fixed Fang contiguous and historical snapshot. In particular check whether extra DDR and spill decrease without sacrificing makespan. Both successful and negative/unsupported outcomes are published; construction count is one per cell."
+        },
+        "selected": "component_envelope",
+        "selected_strategy": "component_envelope",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "025",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 942938,
+        "solver_wall_seconds": 0.6551729160128161,
+        "evaluation_wall_seconds": 3.29926025000168,
+        "ddr_bytes": 8328192,
+        "extra_ddr_bytes": 110592,
+        "spill_bytes": 0,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "266128e054661d6461e8282a78d604080d2379b1f0b045484a110a87bc8003e3"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k5/run.json",
+          "sha256": "ee78f13105b80b5d2bbdc7110dc95a1bdf6972329ae65ff192164df4e0b9060c"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k5/manifest.json",
+          "sha256": "5ff65e9811ce28012b1d3198b449f921b44f9a9caf22b4c416a1655eabf3062c"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k5/plan.json",
+          "sha256": "266128e054661d6461e8282a78d604080d2379b1f0b045484a110a87bc8003e3"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/envelope-pilot-20260924/run/025-k5/final/result.json.gz",
+          "sha256": "0f33d56a7f38ba89e86e41ab5aa134f62ff7115aaa15f63791d4339afd825d40"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-envelope-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:23:20.448861Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "path": "src/q2_nikolastarx/component_envelope.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Whole-component multidimensional pipe-load ownership; retain original component order, reserve cross-component shared tensors across first/last-use component positions, greedily close a cohort before raw L1/UB envelope overflow, and merge only component sequence heads inside each cohort. Oversized singleton envelopes remain uncertified; no claim of zero official spill. No online scoring or tunable grid.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_PILOT_DIAGNOSIS.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/comparison/ANALYSIS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "component_envelope",
+          "selected_solver_commit": "919c82370a42eca9fcff444bef4c1e1e3ea78282"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "aa714b3811fa3722e5e126be12268917af0da93f",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/envelope-pilot-20260924/protocol.json",
+            "--source-commit",
+            "919c82370a42eca9fcff444bef4c1e1e3ea78282",
+            "--runner-commit",
+            "aa714b3811fa3722e5e126be12268917af0da93f"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 310083584
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:23:20.448861Z",
+          "finished_at": "2026-09-24T15:23:24.430925Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/025/result.json.gz",
+          "sha256": "962955c8c2f962f7a6188be15c65ab3fec5f34ac6e307612aa2500a048ff87b6"
+        }
+      }
+    }
+  ]
+}

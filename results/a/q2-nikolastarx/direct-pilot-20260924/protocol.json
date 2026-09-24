@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "run_id": "nikolastarx-q2-direct-pilot-20260924",
+  "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+  "cases": [
+    "002",
+    "008",
+    "014",
+    "016",
+    "025",
+    "035",
+    "062",
+    "071"
+  ],
+  "cores": [
+    2,
+    4,
+    5
+  ],
+  "methods": [
+    "structural_router"
+  ],
+  "solver_mode": "direct",
+  "solver_module": "src.q2_nikolastarx.direct_solve",
+  "source_files": [
+    "src/q2_nikolastarx/baseline.py",
+    "src/q2_nikolastarx/direct.py",
+    "src/q2_nikolastarx/dag_direct.py",
+    "src/q2_nikolastarx/direct_solve.py"
+  ],
+  "algorithm_id": "q2-structural-direct",
+  "algorithm_name": "P2 guarded resource word and tensor-aware DAG direct constructor",
+  "variant": "word-or-dag-eft-v1",
+  "method_description": "One structural route, no evaluator selection: homogeneous guarded M-V*-M resource word; otherwise critical-tail ready order with tensor-aware earliest predicted core finish. Singleton subgraphs are lowered in a common global topological order. Shared DDR contention and spill are excluded from the predictor and remain explicit falsification risks.",
+  "output_prefix": "results/a/q2-nikolastarx/direct-pilot-20260924/run",
+  "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "max_E0": 24,
+  "max_internal_per_cell": 0,
+  "max_E1": 0,
+  "max_E2": 0,
+  "evaluation_timeout_seconds": 60,
+  "solver_wall_seconds": 30,
+  "batch_wall_seconds": 1200,
+  "rss_observation_stop_bytes": 4294967296,
+  "workers": 1,
+  "retries": 0,
+  "case_selection": "Static extrema documented in docs/a/q2-nikolastarx/DAG_DIRECT.md before scoring this algorithm. 008 is known narrow-domain control; previously measured examples are development data, not a holdout. No case replacement.",
+  "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+  "resources": "One local worker, at most 4 GiB observed process-tree RSS. P1 may run its previously coordinated two workers concurrently; wall times are nonexclusive. No Colab runtime or GPU is used in this pilot.",
+  "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+  "authors": [
+    "NikolaStarx"
+  ],
+  "references": [
+    "docs/a/q2-nikolastarx/DAG_DIRECT.md",
+    "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+    "docs/a/q2-nikolastarx/OPTIMALITY_BOUNDS.md"
+  ],
+  "comparison": "Report all 24 paired makespans, bytes and outer solver wall against fixed Fang source 0b58c123cccf02fc993b741d79dcd8511e4dd38f, historical scores and certified lower bounds. Pilot subset means are not full100-case means. Independent final E0 does not compare against an online score because there is none."
+}

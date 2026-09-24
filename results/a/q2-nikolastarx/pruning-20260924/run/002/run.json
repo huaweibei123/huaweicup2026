@@ -1,0 +1,224 @@
+{
+  "case": "002",
+  "status": "ok",
+  "started_at": "2026-09-24T14:24:54.505338Z",
+  "online_E0_calls": 2,
+  "final_E0_calls": 1,
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.solve",
+      "data/raw/a/official/data/case_002.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "4",
+      "--output",
+      "results/a/q2-nikolastarx/pruning-20260924/run/002/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/pruning-20260924/run/002/online",
+      "--evaluation-timeout",
+      "60",
+      "--wall",
+      "240",
+      "--prune-bounds"
+    ],
+    "started_at": "2026-09-24T14:24:54.616130Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 80281600,
+    "rss_samples": 8,
+    "cleanup_killed_pids": [],
+    "pid": 75905,
+    "observer_inclusive_peak_rss_bytes": 113213440,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T14:24:55.224706Z",
+    "wall_seconds": 0.608573500008788
+  },
+  "online": {
+    "started_at": "2026-09-24T14:24:54.641762+00:00",
+    "calls": {
+      "E0": 2,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "contiguous",
+        "status": "ok",
+        "started_at": "2026-09-24T14:24:54.644257+00:00",
+        "plan_sha256": "5bfd25b8b5ee79eb7a7abb8e72165f9f89d8592e7de1b5f8ce461f5051608975",
+        "detail": {
+          "selected_strategy": "contiguous"
+        },
+        "construction_elapsed_seconds": 0.014767249987926334,
+        "assigned_pipe_lower_bound_cycles": 61800,
+        "argv": [
+          ".venv/bin/python",
+          "-B",
+          "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+          "data/raw/a/official/data/case_002.json",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/contiguous/plan.json",
+          "--config",
+          "data/raw/a/official/data/config.txt",
+          "-o",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/contiguous/result.json",
+          "--trace-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/contiguous/trace.json",
+          "--log-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/contiguous/official.log"
+        ],
+        "exit_code": 0,
+        "evaluation_wall_seconds": 0.1852052080212161,
+        "finished_at": "2026-09-24T14:24:54.842421+00:00",
+        "makespan_cycles": 132209,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1709568,
+          "added_copy_bytes": 485376,
+          "partition_added_copy_bytes": 485376,
+          "spill_added_copy_bytes": 0
+        }
+      },
+      {
+        "name": "chain_critical",
+        "status": "ok",
+        "started_at": "2026-09-24T14:24:54.844507+00:00",
+        "plan_sha256": "988c0f095027ee20ab8315263ca52b5851ab46cf68578c3e170c628188cd5bbc",
+        "detail": {
+          "selected_strategy": "chain_critical"
+        },
+        "construction_elapsed_seconds": 0.23582820800947957,
+        "assigned_pipe_lower_bound_cycles": 60000,
+        "argv": [
+          ".venv/bin/python",
+          "-B",
+          "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+          "data/raw/a/official/data/case_002.json",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/chain_critical/plan.json",
+          "--config",
+          "data/raw/a/official/data/config.txt",
+          "-o",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/chain_critical/result.json",
+          "--trace-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/chain_critical/trace.json",
+          "--log-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/002/online/chain_critical/official.log"
+        ],
+        "exit_code": 0,
+        "evaluation_wall_seconds": 0.18716033300734125,
+        "finished_at": "2026-09-24T14:24:55.065370+00:00",
+        "makespan_cycles": 72795,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1829376,
+          "added_copy_bytes": 605184,
+          "partition_added_copy_bytes": 605184,
+          "spill_added_copy_bytes": 0
+        }
+      },
+      {
+        "name": "affine_eighth",
+        "status": "bound_pruned",
+        "started_at": "2026-09-24T14:24:55.068291+00:00",
+        "plan_sha256": "4340998a3ec8b12356c68e61ec7ac452db122b878a66981737209232745c0749",
+        "detail": {
+          "strategy": "affine_eighth",
+          "components": 1,
+          "eligible_ops": 1798,
+          "cores": 4,
+          "selected_strategy": "affine_eighth"
+        },
+        "construction_elapsed_seconds": 0.44185750000178814,
+        "assigned_pipe_lower_bound_cycles": 240000,
+        "incumbent_name": "chain_critical",
+        "incumbent_makespan_cycles": 72795,
+        "prune_reason": "assigned_pipe_work_cannot_strictly_improve"
+      },
+      {
+        "name": "guarded_reentry",
+        "status": "bound_pruned",
+        "started_at": "2026-09-24T14:24:55.084212+00:00",
+        "plan_sha256": "4f7221345c0057185bab32e6e4d4f4aaa84f1fb843bea3e6a2de01f2642f9587",
+        "detail": {
+          "strategy": "guarded_reentry",
+          "components": 1,
+          "eligible_ops": 1798,
+          "cores": 4,
+          "selected_strategy": "pipe_ready"
+        },
+        "construction_elapsed_seconds": 0.4598093329987023,
+        "assigned_pipe_lower_bound_cycles": 240000,
+        "incumbent_name": "chain_critical",
+        "incumbent_makespan_cycles": 72795,
+        "prune_reason": "assigned_pipe_work_cannot_strictly_improve"
+      }
+    ],
+    "prune_bounds": true,
+    "budget": {
+      "max_E0": 4,
+      "wall_seconds": 240.0,
+      "evaluation_timeout_seconds": 60.0
+    },
+    "status": "ok",
+    "selected": "chain_critical",
+    "makespan_cycles": 72795,
+    "plan_sha256": "988c0f095027ee20ab8315263ca52b5851ab46cf68578c3e170c628188cd5bbc",
+    "selected_result": "chain_critical/result.json",
+    "stop_reason": "fixed_structural_candidates_exhausted",
+    "finished_at": "2026-09-24T14:24:55.102549+00:00",
+    "internal_wall_seconds": 0.46084254200104624
+  },
+  "online_reserved_E0": 2,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_002.json",
+      "results/a/q2-nikolastarx/pruning-20260924/run/002/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/pruning-20260924/run/002/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/pruning-20260924/run/002/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/pruning-20260924/run/002/final/official.log"
+    ],
+    "started_at": "2026-09-24T14:24:55.225875Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 47775744,
+    "rss_samples": 4,
+    "cleanup_killed_pids": [],
+    "pid": 75921,
+    "observer_inclusive_peak_rss_bytes": 81149952,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T14:24:55.523762Z",
+    "wall_seconds": 0.29789295900263824
+  },
+  "full_result_bytes_equal": true,
+  "full_result_json_equal": true,
+  "makespan_type": "int",
+  "first_batch_comparison": {
+    "commit": "5e5d688ca473a80b7d72b26b397ce568ac70f534",
+    "plan_bytes_equal": true,
+    "full_result_bytes_equal": true,
+    "prior_plan_sha256": "988c0f095027ee20ab8315263ca52b5851ab46cf68578c3e170c628188cd5bbc",
+    "prior_raw_result_sha256": "952a3351714b2f412d2b5d7bc7a5ccd4e4956ec61a2cd03a85e87e94c7931500",
+    "candidate_plan_bytes_equal": {
+      "contiguous": true,
+      "chain_critical": true,
+      "affine_eighth": true,
+      "guarded_reentry": true
+    }
+  },
+  "makespan_cycles": 72795,
+  "reason": "confirmed_complete_result",
+  "finished_at": "2026-09-24T14:24:55.593589Z"
+}

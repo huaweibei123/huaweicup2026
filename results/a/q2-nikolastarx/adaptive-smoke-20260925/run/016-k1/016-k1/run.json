@@ -1,0 +1,152 @@
+{
+  "case": "016",
+  "cores": 1,
+  "status": "ok",
+  "started_at": "2026-09-24T16:15:21.104047Z",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "phase": "complete",
+  "solver_mode": "direct",
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.adaptive_direct",
+      "data/raw/a/official/data/case_016.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "1",
+      "--output",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/016-k1/016-k1/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/016-k1/016-k1/online",
+      "--wall",
+      "30"
+    ],
+    "started_at": "2026-09-24T16:15:21.104278Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 119734272,
+    "rss_samples": 5,
+    "cleanup_killed_pids": [],
+    "pid": 9646,
+    "observer_inclusive_peak_rss_bytes": 152469504,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T16:15:21.528202Z",
+    "wall_seconds": 0.42393433302640915
+  },
+  "online": {
+    "status": "ok",
+    "calls": {
+      "E0": 0,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "adaptive_direct",
+        "status": "constructed",
+        "detail": {
+          "selected_strategy": "component_envelope",
+          "eligible_ops": 17995,
+          "components": 1,
+          "cores": 1,
+          "capacity_bytes": {
+            "L1": 524288,
+            "UB": 131072
+          },
+          "per_core": [
+            {
+              "core": 0,
+              "components": 1,
+              "shared_tensors": 0,
+              "cohorts": [
+                {
+                  "components": [
+                    0
+                  ],
+                  "shared_reserve_bytes": {
+                    "L1": 0,
+                    "UB": 0
+                  },
+                  "private_peak_sum_bytes": {
+                    "L1": 393216,
+                    "UB": 65558
+                  },
+                  "raw_priority_envelope_bytes": {
+                    "L1": 393216,
+                    "UB": 65558
+                  },
+                  "within_capacity": true
+                }
+              ],
+              "max_open_components_bound": 1,
+              "all_raw_envelopes_fit": true
+            }
+          ],
+          "certificate_scope": "raw tensor priority-prefix envelope and component open-count only",
+          "zero_spill_claim": false,
+          "limitations": [
+            "shared input residency spans cohorts and is retained in reserves",
+            "oversized singleton cohorts are emitted without a memory certificate",
+            "no Step2/Step3 or global runtime feasibility guarantee"
+          ],
+          "adaptive_route": "component_envelope",
+          "index_constructions": 1,
+          "resource_word_guard": false,
+          "guard_reason": "requires M -> V* -> M components",
+          "routing_condition": "components >= cores",
+          "route_limitations": "Structural choice only; no official feasibility, score or zero-spill certificate"
+        },
+        "plan_sha256": "cc7250eb747247b16edb417c9d301db2f599d5a940737e748d60a71210174e04"
+      }
+    ],
+    "started_at": "2026-09-24T16:15:21.141975+00:00",
+    "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+    "selected": "adaptive_direct",
+    "plan_sha256": "cc7250eb747247b16edb417c9d301db2f599d5a940737e748d60a71210174e04",
+    "stop_reason": "single_structural_route_completed",
+    "finished_at": "2026-09-24T16:15:21.405031+00:00",
+    "internal_wall_seconds": 0.2632736249943264
+  },
+  "final_reserved": true,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_016.json",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/016-k1/016-k1/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/016-k1/016-k1/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/016-k1/016-k1/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/016-k1/016-k1/final/official.log"
+    ],
+    "started_at": "2026-09-24T16:15:21.531395Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 246349824,
+    "rss_samples": 68,
+    "cleanup_killed_pids": [],
+    "pid": 9665,
+    "observer_inclusive_peak_rss_bytes": 275824640,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T16:15:26.717668Z",
+    "wall_seconds": 5.18626833401504
+  },
+  "full_online_result_equal": null,
+  "makespan_cycles": 7715523,
+  "finished_at": "2026-09-24T16:15:26.737901Z"
+}

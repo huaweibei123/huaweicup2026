@@ -1,0 +1,51 @@
+{
+  "status": "ok",
+  "calls": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "structural_router",
+      "status": "constructed",
+      "detail": {
+        "strategy": "tensor_dag_eft",
+        "eligible_ops": 19636,
+        "components": 1,
+        "cores": 4,
+        "bandwidth": 60,
+        "cross_core_delay": 500,
+        "predicted_finish_cycles": 667837,
+        "predicted_ddr_bytes_without_spill": {
+          "external_input_bytes": 28440576,
+          "cross_core_bytes": 23482368,
+          "output_bytes": 1536
+        },
+        "predicted_cross_core_pairs": 7644,
+        "compute_load_by_core": [
+          752808,
+          752700,
+          753096,
+          752484
+        ],
+        "model_limitations": [
+          "isolated COPY bandwidth; shared DDR contention omitted",
+          "spill, memory reuse dependencies and Step3 reorder omitted",
+          "predicted times are not bounds or official scores"
+        ],
+        "selected_strategy": "dag_eft",
+        "resource_word_guard": false,
+        "guard_reason": "requires M -> V* -> M components"
+      },
+      "plan_sha256": "330276edcb8e8de146fdeeea0690682e132939b62c45e118047ccf17ebf26875"
+    }
+  ],
+  "started_at": "2026-09-24T15:08:50.978908+00:00",
+  "validation_scope": "Official derive_multicore_plan structural validation only",
+  "selected": "structural_router",
+  "plan_sha256": "330276edcb8e8de146fdeeea0690682e132939b62c45e118047ccf17ebf26875",
+  "stop_reason": "single_structural_route_completed",
+  "finished_at": "2026-09-24T15:08:51.691399+00:00",
+  "internal_wall_seconds": 0.712583332991926
+}

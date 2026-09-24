@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "nikolastarx-q2-direct-pilot-20260924-p2-025-k5",
+      "revision": 1,
+      "run_id": "nikolastarx-q2-direct-pilot-20260924",
+      "algorithm_id": "q2-structural-direct",
+      "algorithm_name": "P2 guarded resource word and tensor-aware DAG direct constructor",
+      "variant": "word-or-dag-eft-v1",
+      "solver_commit": "dd9d89918f7a4e3d2cfab48d4d0246db3408310b",
+      "parameters": {
+        "protocol": {
+          "schema_version": 1,
+          "run_id": "nikolastarx-q2-direct-pilot-20260924",
+          "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+          "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+          "cases": [
+            "002",
+            "008",
+            "014",
+            "016",
+            "025",
+            "035",
+            "062",
+            "071"
+          ],
+          "cores": [
+            2,
+            4,
+            5
+          ],
+          "methods": [
+            "structural_router"
+          ],
+          "solver_mode": "direct",
+          "solver_module": "src.q2_nikolastarx.direct_solve",
+          "source_files": [
+            "src/q2_nikolastarx/baseline.py",
+            "src/q2_nikolastarx/direct.py",
+            "src/q2_nikolastarx/dag_direct.py",
+            "src/q2_nikolastarx/direct_solve.py"
+          ],
+          "algorithm_id": "q2-structural-direct",
+          "algorithm_name": "P2 guarded resource word and tensor-aware DAG direct constructor",
+          "variant": "word-or-dag-eft-v1",
+          "method_description": "One structural route, no evaluator selection: homogeneous guarded M-V*-M resource word; otherwise critical-tail ready order with tensor-aware earliest predicted core finish. Singleton subgraphs are lowered in a common global topological order. Shared DDR contention and spill are excluded from the predictor and remain explicit falsification risks.",
+          "output_prefix": "results/a/q2-nikolastarx/direct-pilot-20260924/run",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "max_E0": 24,
+          "max_internal_per_cell": 0,
+          "max_E1": 0,
+          "max_E2": 0,
+          "evaluation_timeout_seconds": 60,
+          "solver_wall_seconds": 30,
+          "batch_wall_seconds": 1200,
+          "rss_observation_stop_bytes": 4294967296,
+          "workers": 1,
+          "retries": 0,
+          "case_selection": "Static extrema documented in docs/a/q2-nikolastarx/DAG_DIRECT.md before scoring this algorithm. 008 is known narrow-domain control; previously measured examples are development data, not a holdout. No case replacement.",
+          "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+          "resources": "One local worker, at most 4 GiB observed process-tree RSS. P1 may run its previously coordinated two workers concurrently; wall times are nonexclusive. No Colab runtime or GPU is used in this pilot.",
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "authors": [
+            "NikolaStarx"
+          ],
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_DIRECT.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "docs/a/q2-nikolastarx/OPTIMALITY_BOUNDS.md"
+          ],
+          "comparison": "Report all 24 paired makespans, bytes and outer solver wall against fixed Fang source 0b58c123cccf02fc993b741d79dcd8511e4dd38f, historical scores and certified lower bounds. Pilot subset means are not full100-case means. Independent final E0 does not compare against an online score because there is none."
+        },
+        "selected": "structural_router",
+        "selected_strategy": "dag_eft",
+        "online_evaluation_in_solver_wall": false
+      },
+      "problem": "P2",
+      "case_id": "025",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 2279371,
+        "solver_wall_seconds": 0.905528500006767,
+        "evaluation_wall_seconds": 7.796552124986192,
+        "ddr_bytes": 100835328,
+        "extra_ddr_bytes": 92617728,
+        "spill_bytes": 88224768,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "dd9d89918f7a4e3d2cfab48d4d0246db3408310b",
+        "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py"
+      },
+      "identity": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "143d6e548f5dbc193c785c62c389c2aad08dd0fb2277f22cd9264b222cc8312c"
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q2-nikolastarx/direct-pilot-20260924/run/025-k5/run.json",
+          "sha256": "a4e41f36c198c03c3cb3d6bfbfa1f11857c7502c8d14c8622c12c4d0769e8039"
+        },
+        "manifest": {
+          "path": "results/a/q2-nikolastarx/direct-pilot-20260924/run/025-k5/manifest.json",
+          "sha256": "8d14b254d67b33419d84904e83e541ce82f0eb6234bcfc9b5fa66c219e1f07c9"
+        },
+        "plan": {
+          "path": "results/a/q2-nikolastarx/direct-pilot-20260924/run/025-k5/plan.json",
+          "sha256": "143d6e548f5dbc193c785c62c389c2aad08dd0fb2277f22cd9264b222cc8312c"
+        },
+        "result": {
+          "path": "results/a/q2-nikolastarx/direct-pilot-20260924/run/025-k5/final/result.json.gz",
+          "sha256": "46ec699c95f16394ad5312e599a4dc1fa13ddb29b77713ac9058d892756bb93e"
+        }
+      },
+      "runtime_id": "nikolastarx-q2-direct-pilot-20260924-runtime",
+      "observed_at": "2026-09-24T15:08:24.654616Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter seconds; ps observer and cleanup overhead included",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "dd9d89918f7a4e3d2cfab48d4d0246db3408310b",
+            "path": "src/q2_nikolastarx/direct_solve.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "One structural route, no evaluator selection: homogeneous guarded M-V*-M resource word; otherwise critical-tail ready order with tensor-aware earliest predicted core finish. Singleton subgraphs are lowered in a common global topological order. Shared DDR contention and spill are excluded from the predictor and remain explicit falsification risks.",
+          "references": [
+            "docs/a/q2-nikolastarx/DAG_DIRECT.md",
+            "docs/a/q2-nikolastarx/GOAL_ITERATION.md",
+            "docs/a/q2-nikolastarx/OPTIMALITY_BOUNDS.md"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": "dag_eft",
+          "selected_solver_commit": "dd9d89918f7a4e3d2cfab48d4d0246db3408310b"
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "75c51e9faad12a3134ff3f060c4dae8991c4f54d",
+            "path": "src/q2_nikolastarx/evaluate_matrix.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.evaluate_matrix",
+            "run",
+            "--protocol",
+            "results/a/q2-nikolastarx/direct-pilot-20260924/protocol.json",
+            "--source-commit",
+            "dd9d89918f7a4e3d2cfab48d4d0246db3408310b",
+            "--runner-commit",
+            "75c51e9faad12a3134ff3f060c4dae8991c4f54d"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "not used; CPU-only Python solver and official evaluator",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked prepared before this run; no compilation/training",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": 547520512
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:08:24.654616Z",
+          "finished_at": "2026-09-24T15:08:33.402940Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process launch through observed exit and owned-descendant cleanup; input, construction and any online scoring included. OS caches not flushed; concurrent machine load not isolated.",
+          "evaluation_scope": "Zero online E0. The reported evaluation_wall_seconds is the separate final E0 outside solver wall; no online result exists to compare.",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "single_structural_route_completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic solver, no random seed."
+        }
+      },
+      "notes": [
+        "Producer evidence and format checks are not central import or scientific acceptance.",
+        "Subprocess/RSS observations can miss short peaks. All dispatched failures remain in the journal; no automatic retry.",
+        "Direct mode uses zero online E0; independently reported final E0 is outside solver wall."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+      "baseline": {
+        "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/025/result.json.gz",
+          "sha256": "962955c8c2f962f7a6188be15c65ab3fec5f34ac6e307612aa2500a048ff87b6"
+        }
+      }
+    }
+  ]
+}

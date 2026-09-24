@@ -1,0 +1,134 @@
+{
+  "started_at": "2026-09-24T14:24:59.060047+00:00",
+  "calls": {
+    "E0": 2,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "contiguous",
+      "status": "ok",
+      "started_at": "2026-09-24T14:24:59.061855+00:00",
+      "plan_sha256": "f3768e39b80b721322fcc0130a5071d988055582c2c7f2567c84914b2eec54b5",
+      "detail": {
+        "selected_strategy": "contiguous"
+      },
+      "construction_elapsed_seconds": 0.011006792017724365,
+      "assigned_pipe_lower_bound_cycles": 151770,
+      "argv": [
+        ".venv/bin/python",
+        "-B",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+        "data/raw/a/official/data/case_051.json",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/contiguous/plan.json",
+        "--config",
+        "data/raw/a/official/data/config.txt",
+        "-o",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/contiguous/result.json",
+        "--trace-output",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/contiguous/trace.json",
+        "--log-output",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/contiguous/official.log"
+      ],
+      "exit_code": 0,
+      "evaluation_wall_seconds": 0.12921545800054446,
+      "finished_at": "2026-09-24T14:24:59.200751+00:00",
+      "makespan_cycles": 610775,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 393218,
+        "scheduled_copy_bytes": 1572878,
+        "added_copy_bytes": 1179660,
+        "partition_added_copy_bytes": 1179660,
+        "spill_added_copy_bytes": 0
+      }
+    },
+    {
+      "name": "chain_critical",
+      "status": "ok",
+      "started_at": "2026-09-24T14:24:59.202128+00:00",
+      "plan_sha256": "68d6e3318e942865e099a416de5eeb5f2edf7111bffa8e0bb3909b96bb4292f2",
+      "detail": {
+        "selected_strategy": "chain_critical"
+      },
+      "construction_elapsed_seconds": 0.15721358300652355,
+      "assigned_pipe_lower_bound_cycles": 151783,
+      "argv": [
+        ".venv/bin/python",
+        "-B",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+        "data/raw/a/official/data/case_051.json",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/chain_critical/plan.json",
+        "--config",
+        "data/raw/a/official/data/config.txt",
+        "-o",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/chain_critical/result.json",
+        "--trace-output",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/chain_critical/trace.json",
+        "--log-output",
+        "results/a/q2-nikolastarx/pruning-20260924/run/051/online/chain_critical/official.log"
+      ],
+      "exit_code": 0,
+      "evaluation_wall_seconds": 0.18219683298957534,
+      "finished_at": "2026-09-24T14:24:59.400037+00:00",
+      "makespan_cycles": 207134,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 393218,
+        "scheduled_copy_bytes": 1574198,
+        "added_copy_bytes": 1180980,
+        "partition_added_copy_bytes": 1180980,
+        "spill_added_copy_bytes": 0
+      }
+    },
+    {
+      "name": "affine_eighth",
+      "status": "bound_pruned",
+      "started_at": "2026-09-24T14:24:59.402524+00:00",
+      "plan_sha256": "7c38593b66cb47d0930797e903c8c690e0028b179e668322a452646ec2beab1f",
+      "detail": {
+        "strategy": "affine_eighth",
+        "components": 1,
+        "eligible_ops": 1416,
+        "cores": 4,
+        "selected_strategy": "affine_eighth"
+      },
+      "construction_elapsed_seconds": 0.35431433300254866,
+      "assigned_pipe_lower_bound_cycles": 607080,
+      "incumbent_name": "chain_critical",
+      "incumbent_makespan_cycles": 207134,
+      "prune_reason": "assigned_pipe_work_cannot_strictly_improve"
+    },
+    {
+      "name": "guarded_reentry",
+      "status": "bound_pruned",
+      "started_at": "2026-09-24T14:24:59.414930+00:00",
+      "plan_sha256": "a96b589418b266feb94c66e6efc908503c47aa9cbc92eaa6e9d856c48683bc32",
+      "detail": {
+        "strategy": "guarded_reentry",
+        "components": 1,
+        "eligible_ops": 1416,
+        "cores": 4,
+        "selected_strategy": "pipe_ready"
+      },
+      "construction_elapsed_seconds": 0.3676263329980429,
+      "assigned_pipe_lower_bound_cycles": 607080,
+      "incumbent_name": "chain_critical",
+      "incumbent_makespan_cycles": 207134,
+      "prune_reason": "assigned_pipe_work_cannot_strictly_improve"
+    }
+  ],
+  "prune_bounds": true,
+  "budget": {
+    "max_E0": 4,
+    "wall_seconds": 240.0,
+    "evaluation_timeout_seconds": 60.0
+  },
+  "status": "ok",
+  "selected": "chain_critical",
+  "makespan_cycles": 207134,
+  "plan_sha256": "68d6e3318e942865e099a416de5eeb5f2edf7111bffa8e0bb3909b96bb4292f2",
+  "selected_result": "chain_critical/result.json",
+  "stop_reason": "fixed_structural_candidates_exhausted",
+  "finished_at": "2026-09-24T14:24:59.428697+00:00",
+  "internal_wall_seconds": 0.36871433301712386
+}

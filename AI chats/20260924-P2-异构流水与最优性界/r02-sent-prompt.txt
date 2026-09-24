@@ -1,0 +1,25 @@
+P2 专项数学研究 r02：少量切开向量链，能否用通信隐藏突破整链分核的离散负载瓶颈？
+
+请继续用 6 Pro 深度研究这一个具体问题，不重复 r01 的 M–V–M 综述。我是同一 P2 会话 s-8ee。我们已核查 r01：固定 compute FIFO + 保留张量依赖的最长路界有用，但它只是固定候选下界；独立 MVM 定理不能直接套在下面的全 V 图上。官方本机新结果：062 配对叶链流水在原 packets-first 上使 k2/k4/k5 Makespan 再下降 8.25/8.23/8.19%，搬运不变；016 k2 的整链归约放置 4170750→4027481 cycles、额外 DDR 4876→9144B、spill=0。它们是我们本机 E0 实测，不能反过来验证你的所有数学命题。
+
+真实可提交量仍只有 node_to_subgraph / core_schedules。P2 每核合一个 Task，singleton 子图可给拓扑优先级；官方生成 COPY、Step2/3、Pipe FIFO、内存复用依赖和共享 DDR 事件。不能直接指定开始时间、增添任意同步边、改变算子/张量大小或带宽。
+
+当前结构：原图016有305个串接的 fork–join 阶段，每阶段12条独立向量链，各4个 V 算子、每个524 cycles，向量32768B，末端变成2B标量；11个二叉归约 V 算子各13 cycles，唯一根广播到下一阶段。12份外部 L1 输入跨阶段复用。核数5，L1=524288B，UB=131072B，DDR共享带宽60B/cycle，跨核 COPY_OUT 完成到 COPY_IN 可释放相隔500 cycles。单个32768B跨核对的无竞争下界是1594 cycles；多对并发、FIFO、spill不能忽略。现有保留整链的好方案官方 Makespan=2240622（零spill）；这不是已证全局最优。
+
+待检验构造（尚无官方成绩，也不预先称为定理）：
+令 n=qk+r，链长L为偶数、等时p，且0<2r<k。每核先分 q 条完整链；余下 r 条各在 L/2 处一分为二，使用互不重叠的 r 对 sender/receiver。每个 sender 先做额外半链前段，再做 q 条整链；每个 receiver 先做 q 条整链，再做收到的半链后段。跨阶段保持分配，未参与半链的核之一固定承接全部标量归约。按这个局部优先序提交 singleton，并非强行指定实际时间。对 n=12,k=5,L=4,p=524，q=2,r=2：4核各10算子/5240cycles，剩余核8算子/4192cycles。整链分核至少一核12算子/6288cycles（仅该限制下）。理想等时释放时，sender前半完成于1048，receiver后半到4192才需要输入；允许通信窗口3144。两条大向量若按 r 对全部串行服务的粗界500+2r*ceil(32768/60)=2688，似有456cycles余量。这个粗界未计标量广播、边界输入或其他DMA竞争，不是官方上界。估计额外大向量DDR约 2*r*32768*305=39976960B，是清楚的时间/搬运取舍。
+
+请按优先级解决：
+1. 对清楚列出的理想通信模型，证明或反驳上述构造能达到 ceil(nL/k)*p 的链计算完工下界。给出严格充分条件（同时考虑 r 对共享链路、两个复制方向及每核DMA FIFO），不能把各边最小时延相加当充分保证。推广只做能直接用于构造的范围；若不可能，给最小反例。
+2. 加入阶段标量树和下一阶段广播，推导可检查的阶段完成上界/下界，明确是否选择“空余核归约”足够好。标量树既定不能改成任意树。允许给有界树DP/确定性局部构造，但请明确忽略的核上争用。
+3. 在官方 singleton COPY lowering 与 UB/L1 规则下，这个前缀顺序是否真正实现预期重叠？sender/receiver 的驻留粗估最多3个向量加标量，但 COPY 首尾触碰和 Step3 credit 可能改变依赖。能给出可验证的充分条件或最小失败模式吗？raw interval 证明不要冒充最终 zero-spill/时序证书。
+4. 给一个决定“整链/受控切链”的结构性判据，而非靠case ID、旧分数表或在线暴力评估选优。尤其判断何时拆链收益上界都抵不过不可隐藏通信；区分能安全剪枝的必要界和仅启发式门槛。
+5. 请给最小证伪实验及复杂度，优先本机一次构造+一次E0即可判断的候选。我们同步推进实现；无需你做大规模官方实验，也不要声称未运行的成绩。
+
+材料已由统一同步脚本确认到 Vioano 镜像固定提交 97e44f27b774132e7b60fa895378606647a85ef3（你只获授权这个账号，不能用组织库作为读取入口）。入口：
+https://github.com/Vioano/huaweicup2026/blob/97e44f27b774132e7b60fa895378606647a85ef3/src/q2_nikolastarx/vector_arrival.py
+https://github.com/Vioano/huaweicup2026/blob/97e44f27b774132e7b60fa895378606647a85ef3/src/q2_nikolastarx/vector_lanes.py
+https://github.com/Vioano/huaweicup2026/blob/97e44f27b774132e7b60fa895378606647a85ef3/data/raw/a/official/code/multicore_cut_evaluate_problem_2.py
+https://github.com/Vioano/huaweicup2026/blob/97e44f27b774132e7b60fa895378606647a85ef3/data/raw/a/official/code/schedule_step2.py
+https://github.com/Vioano/huaweicup2026/blob/97e44f27b774132e7b60fa895378606647a85ef3/data/raw/a/official/code/schedule_step3.py
+同提交 data/raw/a/official/data/config.txt、case_016.json 和 docs/a/q2-nikolastarx/PRO_R01_REVIEW.md 可补读。开头列明实际读到的文件；读不到就把结论限于上面的自包含模型，不假装核对了源码。请在答复正文写完整关键证明和反例，不把关键内容只放下载附件。

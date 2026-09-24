@@ -1,0 +1,24 @@
+P2 专项数学研究 r01：异构重入流水的直接构造与可证明界
+
+请用 Pro 深度推理，聚焦下面的数学问题，不写一篇泛综述。本 chat 归 NikolaStarx 的 P2 算法会话 s-8ee；这是 huaweicup project 内的新专项，不打断其他研究。
+
+真实任务：情况B/P2，给定原始算子-张量图、1–5核、固定官方配置，提交只能含 node_to_subgraph 和 core_schedules。P2 每核合为一个 Task，按子图次序约束拓扑优先级；官方仍生成 COPY、SPILL、依赖、FIFO和共享DDR事件。主目标最小化官方 Makespan；同时兼顾额外搬运量与求解端到端墙钟。必须区分模拟cycles与求解秒。不要把理想两个Pipe模型当完整官方语义。
+
+已确认事实：同构独立 M(a)→V*(总b)→M(a), 0<b<=2a 的资源字方案在008/084/095有效；b/a≈2、前瞻3。四核008官方63768，计算资源下界62532。异构且有树/汇合的一般图尚有很大差距。简单pipe-ready在051/016反而严重恶化，被官方评价保护拒绝。另一个有限active-job启发式在三同构图也略差于资源字，008末尾出现额外1038cycles的M空闲；原因仍是作者定位意见，不是一般定理。
+
+核心请研究一个可独立落地的中间模型：n个独立异构job，各为 M(a_i)→V(b_i)→M(c_i)，a_i,b_i,c_i>0；每个M/V均单槽不可抢占，同一job顺序固定，两台资源可重叠；可附job从首M开始到末M结束期间占用q_i的驻留容量Q。先研究无容量，再研究容量约束。
+1. 给出一个无需参数网格、可直接编译为每Pipe FIFO字的构造规则，尽量达到 max(sum(a_i+c_i),sum b_i,max_i(a_i+b_i+c_i))；证明真正适用的近似比/加性尾项界，或者给出最小反例明确不能保证。特别审计“优先完成已开始job”“先填满active-job窗口”的坏例，以及同构成功规则能否推广到有限种类/有界时长比。
+2. 给出比上述work/path更强但仍易算的必要下界或精确最优证书：哪些实例可证已到极限，哪些仅有间隙而不能用多次无改进声称最优？不要预设能同时严格降低所有指标，若驻留/通信与Makespan有不可兼得性，给可检查反例或条件。
+3. 将最有希望的一条规则落回P2：如何将核内字降为官方允许的子图顺序，哪些COPY/容量/依赖条件必须另核，复杂度、最小证伪实验、首个可实现伪代码。若你认为该模型不是一般图的主要突破口，请给出具体结构原因和一个更有价值的数学问题，而不是要求大规模盲扫。
+
+新本机成果只作边界信息：四个固定结构候选+官方incumbent保护；分核后 L=max_(core,pipe)sum原始非COPY max(1,cycles) 是成功Makespan下界，因此L>=成功incumbent时可安全跳过候选。6公开开发图的在线E0由24降18，全部最终计划和完整结果逐字相同；不是新方案质量突破，也未证明全100图最优。
+
+材料读取请只用已授权Vioano镜像固定提交 affd4e6718e790a233c19c22203ad28b10ea8cc7（已同步），不要用组织库。入口：
+https://github.com/Vioano/huaweicup2026/blob/affd4e6718e790a233c19c22203ad28b10ea8cc7/docs/a/q2-nikolastarx/THEORY_REVIEW.md
+https://github.com/Vioano/huaweicup2026/blob/affd4e6718e790a233c19c22203ad28b10ea8cc7/docs/a/q2-nikolastarx/FEEDBACK_SUMMARY.md
+https://github.com/Vioano/huaweicup2026/blob/affd4e6718e790a233c19c22203ad28b10ea8cc7/src/q2_nikolastarx/direct.py
+https://github.com/Vioano/huaweicup2026/blob/affd4e6718e790a233c19c22203ad28b10ea8cc7/data/raw/a/official/code/multicore_cut_evaluate_problem_2.py
+https://github.com/Vioano/huaweicup2026/blob/affd4e6718e790a233c19c22203ad28b10ea8cc7/data/raw/a/official/code/schedule_step2.py
+https://github.com/Vioano/huaweicup2026/blob/affd4e6718e790a233c19c22203ad28b10ea8cc7/data/raw/a/official/code/schedule_step3.py
+
+请报告实际读到的文件/缺件，不把连接可用当已读；读不到时可先解上面完全给定的独立数学模型，但不要假称官方已核。另注意：原图COPY会被删除，contract-through-COPY的校验关系不一定直接成为运行依赖；任何critical-path界只能用实际保留的依赖。我们静态核对100官方图没有这种额外收缩边，但不应无条件推广到任意输入。结论请标明已证明、仅有条件、猜想/作者实验与最小验证动作。请不要自行运行全100图或声称本机成绩。

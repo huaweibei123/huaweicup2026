@@ -1,0 +1,168 @@
+{
+  "case": "016",
+  "cores": 2,
+  "status": "ok",
+  "started_at": "2026-09-24T15:52:26.706318Z",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "phase": "complete",
+  "solver_mode": "direct",
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.vector_lanes",
+      "data/raw/a/official/data/case_016.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "2",
+      "--output",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k2/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k2/online",
+      "--wall",
+      "30"
+    ],
+    "started_at": "2026-09-24T15:52:26.706532Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 133005312,
+    "rss_samples": 7,
+    "cleanup_killed_pids": [],
+    "pid": 35753,
+    "observer_inclusive_peak_rss_bytes": 165822464,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:52:27.498004Z",
+    "wall_seconds": 0.7914841669844463
+  },
+  "online": {
+    "status": "ok",
+    "calls": {
+      "E0": 0,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "vector_lanes",
+        "status": "constructed",
+        "detail": {
+          "selected_strategy": "vector_lanes",
+          "eligible_ops": 17995,
+          "stages": 305,
+          "lanes": 12,
+          "cores": 2,
+          "scalar_bytes": 2,
+          "fixed_lane_ownership": true,
+          "maximum_open_vector_chains_per_core_in_priority": 1,
+          "input_consumer_cores_per_lane": 1,
+          "contiguous_lane_compute_partition_bound": 3835680,
+          "cross_core_raw_tensor_transfers": {
+            "tensor_source_destination_pairs": 1219,
+            "copy_bytes_without_spill": 4876
+          },
+          "per_core": [
+            {
+              "core": 0,
+              "lane_inputs": [
+                1000000001,
+                1000000003,
+                1000000017,
+                1000000019,
+                1000000021,
+                1000000023
+              ],
+              "compute_work_cycles": 3859470,
+              "raw_priority_peak_bytes": {
+                "L1": 196608,
+                "UB": 65542
+              },
+              "raw_envelope_bytes": {
+                "L1": 196608,
+                "UB": 65584
+              },
+              "raw_envelope_within_capacity": true
+            },
+            {
+              "core": 1,
+              "lane_inputs": [
+                1000000005,
+                1000000007,
+                1000000009,
+                1000000011,
+                1000000013,
+                1000000015
+              ],
+              "compute_work_cycles": 3855505,
+              "raw_priority_peak_bytes": {
+                "L1": 196608,
+                "UB": 65540
+              },
+              "raw_envelope_bytes": {
+                "L1": 196608,
+                "UB": 65584
+              },
+              "raw_envelope_within_capacity": true
+            }
+          ],
+          "certificate_scope": "original eligible DAG plus compute FIFO acyclic; raw tensor priority intervals only",
+          "zero_spill_claim": false,
+          "official_score_available": false,
+          "limitations": [
+            "Step2/Step3 and inserted COPY FIFO still require final E0",
+            "fixed lane granularity can imbalance cores",
+            "compute closure may sacrifice DMA overlap; no optimality claim"
+          ]
+        },
+        "plan_sha256": "009338de55db3bbe3c89696400573d4a7e44d6999a333bee43f080c753fcc53b"
+      }
+    ],
+    "started_at": "2026-09-24T15:52:26.736587+00:00",
+    "validation_scope": "Official derive structural check plus original compute/FIFO acyclicity only",
+    "selected": "vector_lanes",
+    "plan_sha256": "009338de55db3bbe3c89696400573d4a7e44d6999a333bee43f080c753fcc53b",
+    "stop_reason": "single_guarded_construction",
+    "finished_at": "2026-09-24T15:52:27.345868+00:00",
+    "internal_wall_seconds": 0.6094119159970433
+  },
+  "final_reserved": true,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_016.json",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k2/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k2/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k2/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k2/final/official.log"
+    ],
+    "started_at": "2026-09-24T15:52:27.501825Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 234160128,
+    "rss_samples": 55,
+    "cleanup_killed_pids": [],
+    "pid": 35782,
+    "observer_inclusive_peak_rss_bytes": 263634944,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:52:31.645168Z",
+    "wall_seconds": 4.143342915980611
+  },
+  "full_online_result_equal": null,
+  "makespan_cycles": 4170750,
+  "finished_at": "2026-09-24T15:52:31.664609Z"
+}

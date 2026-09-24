@@ -1,0 +1,127 @@
+{
+  "case": "035",
+  "cores": 2,
+  "status": "ok",
+  "started_at": "2026-09-24T15:08:34.419837Z",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "phase": "complete",
+  "solver_mode": "direct",
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.direct_solve",
+      "data/raw/a/official/data/case_035.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "2",
+      "--output",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/035-k2/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/035-k2/online",
+      "--wall",
+      "30"
+    ],
+    "started_at": "2026-09-24T15:08:34.420207Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 41500672,
+    "rss_samples": 3,
+    "cleanup_killed_pids": [],
+    "pid": 99354,
+    "observer_inclusive_peak_rss_bytes": 559218688,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:08:34.702143Z",
+    "wall_seconds": 0.2819455420249142
+  },
+  "online": {
+    "status": "ok",
+    "calls": {
+      "E0": 0,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "structural_router",
+        "status": "constructed",
+        "detail": {
+          "strategy": "tensor_dag_eft",
+          "eligible_ops": 3857,
+          "components": 16,
+          "cores": 2,
+          "bandwidth": 60,
+          "cross_core_delay": 500,
+          "predicted_finish_cycles": 112699,
+          "predicted_ddr_bytes_without_spill": {
+            "external_input_bytes": 620150,
+            "cross_core_bytes": 3107928,
+            "output_bytes": 13976
+          },
+          "predicted_cross_core_pairs": 1132,
+          "compute_load_by_core": [
+            95147,
+            110954
+          ],
+          "model_limitations": [
+            "isolated COPY bandwidth; shared DDR contention omitted",
+            "spill, memory reuse dependencies and Step3 reorder omitted",
+            "predicted times are not bounds or official scores"
+          ],
+          "selected_strategy": "dag_eft",
+          "resource_word_guard": false,
+          "guard_reason": "requires M -> V* -> M components"
+        },
+        "plan_sha256": "8f94b17769a7cd84e200b7461615408bc1a075c0553fee2fb50183a133d2fc46"
+      }
+    ],
+    "started_at": "2026-09-24T15:08:34.463760+00:00",
+    "validation_scope": "Official derive_multicore_plan structural validation only",
+    "selected": "structural_router",
+    "plan_sha256": "8f94b17769a7cd84e200b7461615408bc1a075c0553fee2fb50183a133d2fc46",
+    "stop_reason": "single_structural_route_completed",
+    "finished_at": "2026-09-24T15:08:34.543565+00:00",
+    "internal_wall_seconds": 0.07990491599775851
+  },
+  "final_reserved": true,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_035.json",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/035-k2/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/035-k2/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/035-k2/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/035-k2/final/official.log"
+    ],
+    "started_at": "2026-09-24T15:08:34.703851Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 93306880,
+    "rss_samples": 10,
+    "cleanup_killed_pids": [],
+    "pid": 99363,
+    "observer_inclusive_peak_rss_bytes": 609992704,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:08:35.535942Z",
+    "wall_seconds": 0.8321041250019334
+  },
+  "full_online_result_equal": null,
+  "makespan_cycles": 128427,
+  "finished_at": "2026-09-24T15:08:35.544104Z"
+}

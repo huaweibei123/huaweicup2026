@@ -1,0 +1,133 @@
+{
+  "case": "062",
+  "cores": 4,
+  "status": "ok",
+  "started_at": "2026-09-24T16:15:35.730381Z",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "phase": "complete",
+  "solver_mode": "direct",
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.adaptive_direct",
+      "data/raw/a/official/data/case_062.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "4",
+      "--output",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/062-k4/062-k4/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/062-k4/062-k4/online",
+      "--wall",
+      "30"
+    ],
+    "started_at": "2026-09-24T16:15:35.730623Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 173867008,
+    "rss_samples": 10,
+    "cleanup_killed_pids": [],
+    "pid": 10810,
+    "observer_inclusive_peak_rss_bytes": 208912384,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T16:15:36.496614Z",
+    "wall_seconds": 0.7660029589897022
+  },
+  "online": {
+    "status": "ok",
+    "calls": {
+      "E0": 0,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "adaptive_direct",
+        "status": "constructed",
+        "detail": {
+          "strategy": "tensor_dag_eft",
+          "eligible_ops": 19636,
+          "components": 1,
+          "cores": 4,
+          "bandwidth": 60,
+          "cross_core_delay": 500,
+          "predicted_finish_cycles": 667837,
+          "predicted_ddr_bytes_without_spill": {
+            "external_input_bytes": 28440576,
+            "cross_core_bytes": 23482368,
+            "output_bytes": 1536
+          },
+          "predicted_cross_core_pairs": 7644,
+          "compute_load_by_core": [
+            752808,
+            752700,
+            753096,
+            752484
+          ],
+          "model_limitations": [
+            "isolated COPY bandwidth; shared DDR contention omitted",
+            "spill, memory reuse dependencies and Step3 reorder omitted",
+            "predicted times are not bounds or official scores"
+          ],
+          "selected_strategy": "dag_eft",
+          "adaptive_route": "dag_eft",
+          "index_constructions": 1,
+          "resource_word_guard": false,
+          "guard_reason": "requires M -> V* -> M components",
+          "routing_condition": "components < cores",
+          "route_limitations": "Structural choice only; no official feasibility, score or zero-spill certificate"
+        },
+        "plan_sha256": "330276edcb8e8de146fdeeea0690682e132939b62c45e118047ccf17ebf26875"
+      }
+    ],
+    "started_at": "2026-09-24T16:15:35.769887+00:00",
+    "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+    "selected": "adaptive_direct",
+    "plan_sha256": "330276edcb8e8de146fdeeea0690682e132939b62c45e118047ccf17ebf26875",
+    "stop_reason": "single_structural_route_completed",
+    "finished_at": "2026-09-24T16:15:36.352928+00:00",
+    "internal_wall_seconds": 0.583125959004974
+  },
+  "final_reserved": true,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_062.json",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/062-k4/062-k4/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/062-k4/062-k4/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/062-k4/062-k4/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/adaptive-smoke-20260925/run/062-k4/062-k4/final/official.log"
+    ],
+    "started_at": "2026-09-24T16:15:36.500617Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 499679232,
+    "rss_samples": 92,
+    "cleanup_killed_pids": [],
+    "pid": 10837,
+    "observer_inclusive_peak_rss_bytes": 529203200,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T16:15:43.576869Z",
+    "wall_seconds": 7.076240666006925
+  },
+  "full_online_result_equal": null,
+  "makespan_cycles": 1607053,
+  "finished_at": "2026-09-24T16:15:43.627445Z"
+}

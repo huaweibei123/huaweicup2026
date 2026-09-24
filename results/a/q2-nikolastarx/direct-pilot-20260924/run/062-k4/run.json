@@ -1,0 +1,129 @@
+{
+  "case": "062",
+  "cores": 4,
+  "status": "ok",
+  "started_at": "2026-09-24T15:08:50.941209Z",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "phase": "complete",
+  "solver_mode": "direct",
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.direct_solve",
+      "data/raw/a/official/data/case_062.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "4",
+      "--output",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/062-k4/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/062-k4/online",
+      "--wall",
+      "30"
+    ],
+    "started_at": "2026-09-24T15:08:50.941463Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 175374336,
+    "rss_samples": 11,
+    "cleanup_killed_pids": [],
+    "pid": 662,
+    "observer_inclusive_peak_rss_bytes": 605093888,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:08:51.834653Z",
+    "wall_seconds": 0.8931887079961598
+  },
+  "online": {
+    "status": "ok",
+    "calls": {
+      "E0": 0,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "structural_router",
+        "status": "constructed",
+        "detail": {
+          "strategy": "tensor_dag_eft",
+          "eligible_ops": 19636,
+          "components": 1,
+          "cores": 4,
+          "bandwidth": 60,
+          "cross_core_delay": 500,
+          "predicted_finish_cycles": 667837,
+          "predicted_ddr_bytes_without_spill": {
+            "external_input_bytes": 28440576,
+            "cross_core_bytes": 23482368,
+            "output_bytes": 1536
+          },
+          "predicted_cross_core_pairs": 7644,
+          "compute_load_by_core": [
+            752808,
+            752700,
+            753096,
+            752484
+          ],
+          "model_limitations": [
+            "isolated COPY bandwidth; shared DDR contention omitted",
+            "spill, memory reuse dependencies and Step3 reorder omitted",
+            "predicted times are not bounds or official scores"
+          ],
+          "selected_strategy": "dag_eft",
+          "resource_word_guard": false,
+          "guard_reason": "requires M -> V* -> M components"
+        },
+        "plan_sha256": "330276edcb8e8de146fdeeea0690682e132939b62c45e118047ccf17ebf26875"
+      }
+    ],
+    "started_at": "2026-09-24T15:08:50.978908+00:00",
+    "validation_scope": "Official derive_multicore_plan structural validation only",
+    "selected": "structural_router",
+    "plan_sha256": "330276edcb8e8de146fdeeea0690682e132939b62c45e118047ccf17ebf26875",
+    "stop_reason": "single_structural_route_completed",
+    "finished_at": "2026-09-24T15:08:51.691399+00:00",
+    "internal_wall_seconds": 0.712583332991926
+  },
+  "final_reserved": true,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_062.json",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/062-k4/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/062-k4/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/062-k4/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/direct-pilot-20260924/run/062-k4/final/official.log"
+    ],
+    "started_at": "2026-09-24T15:08:51.838429Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 522518528,
+    "rss_samples": 106,
+    "cleanup_killed_pids": [],
+    "pid": 749,
+    "observer_inclusive_peak_rss_bytes": 877084672,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:09:00.058820Z",
+    "wall_seconds": 8.220392832998186
+  },
+  "full_online_result_equal": null,
+  "makespan_cycles": 1607053,
+  "finished_at": "2026-09-24T15:09:00.113993Z"
+}

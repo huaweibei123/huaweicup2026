@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "run_id": "nikolastarx-q2-vector-pilot-20260924",
+  "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+  "cases": [
+    "016"
+  ],
+  "cores": [
+    2,
+    4,
+    5
+  ],
+  "methods": [
+    "vector_lanes"
+  ],
+  "solver_mode": "direct",
+  "solver_module": "src.q2_nikolastarx.vector_lanes",
+  "source_files": [
+    "src/q2_nikolastarx/baseline.py",
+    "src/q2_nikolastarx/direct.py",
+    "src/q2_nikolastarx/dag_direct.py",
+    "src/q2_nikolastarx/vector_lanes.py"
+  ],
+  "algorithm_id": "q2-vector-lanes",
+  "algorithm_name": "P2 vector_lanes structural constructor",
+  "variant": "guarded-vector-closure-v1",
+  "method_description": "Guarded repeated all-vector fork-chain-reduce stages; persistent input-lane ownership by direct contiguous minimax partition, close full chains then scalar tree; zero online scores.",
+  "output_prefix": "results/a/q2-nikolastarx/vector-pilot-20260924/run",
+  "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "max_E0": 3,
+  "max_internal_per_cell": 0,
+  "max_E1": 0,
+  "max_E2": 0,
+  "evaluation_timeout_seconds": 60,
+  "solver_wall_seconds": 30,
+  "batch_wall_seconds": 300,
+  "rss_observation_stop_bytes": 4294967296,
+  "workers": 1,
+  "retries": 0,
+  "case_selection": "Fixed known single-component mechanism failure in preceding direct24 pilot, at cores2/4/5; development sample, not holdout, no replacement.",
+  "failure_policy": "Record every dispatched attempt, preserve exact failed plan/process evidence and no retry. Ordinary completed cell failures do not erase later predeclared cells; memory-limit or unresolved dispatch/observation failures stop further dispatch. No automatic resume of an existing output directory.",
+  "resources": "One macOS local worker, observed RSS stop4GiB; shared machine with independently coordinated P1 single worker. No exclusive timing claim or Colab use. Independent owner mechanism batch, not central adaptive500 scale cells.",
+  "offline_costs": "Existing locked Python environment and official extraction reused. No training. Static 100-graph audits and proof calculations are reported separately; no per-case online plan or score table is consumed. Pro theory consultation remains in flight and is not code input.",
+  "authors": [
+    "NikolaStarx"
+  ],
+  "references": [
+    "docs/a/q2-nikolastarx/TREE_FRONTIER_THEORY.md"
+  ],
+  "comparison": "All three exact official outcomes vs fixed direct data81219bf923524fb60616e39b5ad2dced67aec3e2 on same case/core/config/E0; also fixed Fang historical comparison. Preserve failures/regressions and all raw artifacts. No retuning or extra cases under this protocol."
+}

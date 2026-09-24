@@ -1,0 +1,198 @@
+{
+  "case": "016",
+  "cores": 4,
+  "status": "ok",
+  "started_at": "2026-09-24T15:52:32.474222Z",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "phase": "complete",
+  "solver_mode": "direct",
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.vector_lanes",
+      "data/raw/a/official/data/case_016.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "4",
+      "--output",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k4/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k4/online",
+      "--wall",
+      "30"
+    ],
+    "started_at": "2026-09-24T15:52:32.474441Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 130072576,
+    "rss_samples": 7,
+    "cleanup_killed_pids": [],
+    "pid": 36595,
+    "observer_inclusive_peak_rss_bytes": 219004928,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:52:33.050365Z",
+    "wall_seconds": 0.5759387500002049
+  },
+  "online": {
+    "status": "ok",
+    "calls": {
+      "E0": 0,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "vector_lanes",
+        "status": "constructed",
+        "detail": {
+          "selected_strategy": "vector_lanes",
+          "eligible_ops": 17995,
+          "stages": 305,
+          "lanes": 12,
+          "cores": 4,
+          "scalar_bytes": 2,
+          "fixed_lane_ownership": true,
+          "maximum_open_vector_chains_per_core_in_priority": 1,
+          "input_consumer_cores_per_lane": 1,
+          "contiguous_lane_compute_partition_bound": 1917840,
+          "cross_core_raw_tensor_transfers": {
+            "tensor_source_destination_pairs": 3047,
+            "copy_bytes_without_spill": 12188
+          },
+          "per_core": [
+            {
+              "core": 0,
+              "lane_inputs": [
+                1000000017,
+                1000000019,
+                1000000021
+              ],
+              "compute_work_cycles": 1933700,
+              "raw_priority_peak_bytes": {
+                "L1": 98304,
+                "UB": 65540
+              },
+              "raw_envelope_bytes": {
+                "L1": 98304,
+                "UB": 65584
+              },
+              "raw_envelope_within_capacity": true
+            },
+            {
+              "core": 1,
+              "lane_inputs": [
+                1000000001,
+                1000000003,
+                1000000023
+              ],
+              "compute_work_cycles": 1925770,
+              "raw_priority_peak_bytes": {
+                "L1": 98304,
+                "UB": 65538
+              },
+              "raw_envelope_bytes": {
+                "L1": 98304,
+                "UB": 65584
+              },
+              "raw_envelope_within_capacity": true
+            },
+            {
+              "core": 2,
+              "lane_inputs": [
+                1000000005,
+                1000000007,
+                1000000009
+              ],
+              "compute_work_cycles": 1929735,
+              "raw_priority_peak_bytes": {
+                "L1": 98304,
+                "UB": 65540
+              },
+              "raw_envelope_bytes": {
+                "L1": 98304,
+                "UB": 65584
+              },
+              "raw_envelope_within_capacity": true
+            },
+            {
+              "core": 3,
+              "lane_inputs": [
+                1000000011,
+                1000000013,
+                1000000015
+              ],
+              "compute_work_cycles": 1925770,
+              "raw_priority_peak_bytes": {
+                "L1": 98304,
+                "UB": 65538
+              },
+              "raw_envelope_bytes": {
+                "L1": 98304,
+                "UB": 65584
+              },
+              "raw_envelope_within_capacity": true
+            }
+          ],
+          "certificate_scope": "original eligible DAG plus compute FIFO acyclic; raw tensor priority intervals only",
+          "zero_spill_claim": false,
+          "official_score_available": false,
+          "limitations": [
+            "Step2/Step3 and inserted COPY FIFO still require final E0",
+            "fixed lane granularity can imbalance cores",
+            "compute closure may sacrifice DMA overlap; no optimality claim"
+          ]
+        },
+        "plan_sha256": "57563e380c32663f73afea7a0228e57d09431468b767b8b112c3eb0bd721d83f"
+      }
+    ],
+    "started_at": "2026-09-24T15:52:32.499395+00:00",
+    "validation_scope": "Official derive structural check plus original compute/FIFO acyclicity only",
+    "selected": "vector_lanes",
+    "plan_sha256": "57563e380c32663f73afea7a0228e57d09431468b767b8b112c3eb0bd721d83f",
+    "stop_reason": "single_guarded_construction",
+    "finished_at": "2026-09-24T15:52:32.912479+00:00",
+    "internal_wall_seconds": 0.4131691250076983
+  },
+  "final_reserved": true,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_016.json",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k4/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k4/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k4/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/vector-pilot-20260924/run/016-k4/final/official.log"
+    ],
+    "started_at": "2026-09-24T15:52:33.054344Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 253378560,
+    "rss_samples": 51,
+    "cleanup_killed_pids": [],
+    "pid": 36674,
+    "observer_inclusive_peak_rss_bytes": 288636928,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T15:52:37.068929Z",
+    "wall_seconds": 4.014563583012205
+  },
+  "full_online_result_equal": null,
+  "makespan_cycles": 2552270,
+  "finished_at": "2026-09-24T15:52:37.096399Z"
+}

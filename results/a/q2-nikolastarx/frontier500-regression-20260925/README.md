@@ -1,0 +1,7 @@
+# Frontier 500 paired regression table
+
+Per-case B/M uses the feed-referenced official E0 single-core result (baseline.result.path + sha256) as B, common to old and new. The initial version incorrectly used each feed's k1 as denominator; all derived outputs here replace that version. Delta is new minus old; negative means regression. Baseline identities and hashes were verified across both feeds for all 100 cases.
+
+Inputs: new `/Users/nikolastar/.codex/worktrees/p2-frontier500-s59ee-20260925/huaweicup2026/results/a/q2-nikolastarx/frontier-benchmark-s59ee-20260925/20260924T1827Z-s59ee/board-feed-500.json` SHA-256 `15347fde245b5777edefc7d1b76bc7d49ba6c2989c278b8bdc3732b51fea3576`; old `/Users/nikolastar/.codex/worktrees/p2-semantic-s59ee-20260925/huaweicup2026/results/a/q2-nikolastarx/semantic-benchmark-s59ee-20260925/20260924T1729Z-s59ee/board-feed-500.json` SHA-256 `b1652e0ef23699bd6c8139de948fff91d03ecacc64cf6b627e15e8d31fe9df3c`. New dataset source commit `ee1b8fd39efab8c8ed8140bbebe4c08e778052b9`, runner `861a1f32073ba714a1bde555cea5d53f10a26b21`; new data commit is unpublished and is not frozen. Parent reported all 500 new runs exited.
+
+`paired-cells.csv` contains all 200 paired cases. `negative-top10.csv` contains the ten most negative rows for each core count. `summary.json` aggregates effects by new selected strategy and preserves input hashes. Route names come from each cell's `online/solver.json` selected attempt detail. No solver or evaluator was run.

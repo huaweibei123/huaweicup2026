@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "run_id": "nikolastarx-q2-tree-packets-first-062-k2-20260925",
+  "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+  "cases": [
+    "062"
+  ],
+  "cores": [
+    2
+  ],
+  "methods": [
+    "tree_packets_first"
+  ],
+  "solver_mode": "direct",
+  "solver_module": "src.q2_nikolastarx.tree_packets_first",
+  "source_files": [
+    "src/q2_nikolastarx/baseline.py",
+    "src/q2_nikolastarx/direct.py",
+    "src/q2_nikolastarx/dag_direct.py",
+    "src/q2_nikolastarx/tree_frontier.py",
+    "src/q2_nikolastarx/tree_packets_first.py"
+  ],
+  "algorithm_id": "q2-tree-packets-first",
+  "algorithm_name": "P2 closed tree packets before remote joins",
+  "variant": "same-ownership-packets-before-skeleton-v1",
+  "method_description": "Preserve guarded tree_frontier packets and owner; stable partition each core order into all closed packets then skeleton. One deterministic candidate; zero online evaluator calls.",
+  "output_prefix": "results/a/q2-nikolastarx/tree-packets-first-pilot-20260925/run/062-k2",
+  "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "max_E0": 1,
+  "max_internal_per_cell": 0,
+  "max_E1": 0,
+  "max_E2": 0,
+  "evaluation_timeout_seconds": 60,
+  "solver_wall_seconds": 30,
+  "batch_wall_seconds": 100,
+  "rss_observation_stop_bytes": 4294967296,
+  "workers": 1,
+  "retries": 0,
+  "case_selection": "Same062 k2/4/5 as frozen tree pilot; isolated ordering intervention based on fixed-FIFO bound and existing trace. Selected development cells, no holdout.",
+  "failure_policy": "First unsuccessful cell, unknown outcome, observer error, timeout, RSS violation or survivors stops the aggregate six-cell driver; no retries.",
+  "resources": "One localmacOS worker after P1 releases; independent P2 mechanism experiment, not part of adaptive500. Aggregate300s, sampled4GiB RSS; noColab.",
+  "offline_costs": "6 synthetic tests and3 static graph checks reported separately, existing locked environment; zero training or online score tables.",
+  "authors": [
+    "NikolaStarx"
+  ],
+  "references": [
+    "docs/a/q2-nikolastarx/TREE_TRACE_DIAGNOSIS.md",
+    "docs/a/q2-nikolastarx/TREE_PACKETS_FIRST.md"
+  ],
+  "comparison": "Paired against exact previous tree data d15f27fe3ad41be63c9e837af0a7afae440eca66. Retain no-change/negative cells as controls; no old E0 rerun or threshold/owner changes."
+}

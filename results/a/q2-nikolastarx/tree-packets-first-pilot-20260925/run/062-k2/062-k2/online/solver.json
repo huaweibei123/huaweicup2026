@@ -1,0 +1,149 @@
+{
+  "status": "ok",
+  "calls": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "tree_packets_first",
+      "status": "constructed",
+      "detail": {
+        "cores": 2,
+        "eligible_ops": 19636,
+        "components": 1,
+        "sink": 23998,
+        "sources": 2181,
+        "capacity_bytes": {
+          "L1": 524288,
+          "UB": 131072
+        },
+        "packet_threshold_rational_cycles": [
+          3011088,
+          4
+        ],
+        "packet_count": 5,
+        "skeleton_ops": 4,
+        "packets": [
+          {
+            "root": 23993,
+            "ops": 4615,
+            "work_cycles": 707868,
+            "core": 0
+          },
+          {
+            "root": 23991,
+            "ops": 4607,
+            "work_cycles": 706524,
+            "core": 1
+          },
+          {
+            "root": 23992,
+            "ops": 4607,
+            "work_cycles": 706524,
+            "core": 1
+          },
+          {
+            "root": 23994,
+            "ops": 4607,
+            "work_cycles": 706524,
+            "core": 0
+          },
+          {
+            "root": 23990,
+            "ops": 1196,
+            "work_cycles": 183504,
+            "core": 1
+          }
+        ],
+        "compute_load_by_core": [
+          1414500,
+          1596588
+        ],
+        "active_cores": 2,
+        "cut_edges": [
+          {
+            "source_op": 23995,
+            "target_op": 23997,
+            "tensor": 1000028356,
+            "bytes": 1536,
+            "source_core": 1,
+            "target_core": 0
+          },
+          {
+            "source_op": 23990,
+            "target_op": 23998,
+            "tensor": 1000028351,
+            "bytes": 1536,
+            "source_core": 1,
+            "target_core": 0
+          }
+        ],
+        "tensor_copy_bytes_without_spill": {
+          "external_input_bytes": 13400064,
+          "cross_core_bytes": 6144,
+          "output_bytes": 1536,
+          "extra_vs_unique_input_output": 6144
+        },
+        "selected_strategy": "tree_packets_first",
+        "priority_rule": "all closed packets first, then original topological skeleton subsequence",
+        "index_constructions": 1,
+        "base_construct_calls": 1,
+        "unchanged_ownership": true,
+        "per_core": [
+          {
+            "core": 0,
+            "ops": 9225,
+            "raw_priority_peak_bytes": {
+              "L1": 7680,
+              "UB": 18432
+            },
+            "graph_input_tensors": 2048,
+            "shared_graph_input_tensors": 1024,
+            "packet_root_reserve_bytes": {
+              "L1": 0,
+              "UB": 3072
+            },
+            "raw_peaks_fit_capacity": true
+          },
+          {
+            "core": 1,
+            "ops": 10411,
+            "raw_priority_peak_bytes": {
+              "L1": 7680,
+              "UB": 18432
+            },
+            "graph_input_tensors": 2314,
+            "shared_graph_input_tensors": 1157,
+            "packet_root_reserve_bytes": {
+              "L1": 0,
+              "UB": 4608
+            },
+            "raw_peaks_fit_capacity": true
+          }
+        ],
+        "changed_core_orders": 1,
+        "fixed_compute_fifo_bound_before": 1513704,
+        "fixed_compute_fifo_bound_after": 1513740,
+        "bound_scope": "candidate-specific compute dependency plus pipe FIFO; not a predicted Makespan",
+        "zero_spill_claim": false,
+        "limitations": [
+          "whole packets and their original internal word/ownership are unchanged",
+          "deferring skeleton can retain more packet-root tensors",
+          "raw priority peaks omit COPY allocation timing and Step2/Step3 execution",
+          "a smaller compute FIFO lower bound does not prove faster official execution",
+          "no balance or optimality guarantee and no fallback for unsupported graphs"
+        ]
+      },
+      "plan_sha256": "45476c2a03fb724d9eb0cbf463186ef2bdfb9439be665f8734f97913d6401309"
+    }
+  ],
+  "started_at": "2026-09-24T16:26:56.544818+00:00",
+  "validation_scope": "structure, guarded compute-FIFO lower bounds and raw priority intervals only",
+  "selected": "tree_packets_first",
+  "plan_sha256": "45476c2a03fb724d9eb0cbf463186ef2bdfb9439be665f8734f97913d6401309",
+  "stop_reason": "single_structural_construction_completed",
+  "finished_at": "2026-09-24T16:26:57.383603+00:00",
+  "internal_wall_seconds": 0.8388884579762816
+}

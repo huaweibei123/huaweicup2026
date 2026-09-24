@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "run_id": "nikolastarx-q2-shared-wave-044-k4-20260925",
+  "session": "nikolastarx/s-8ee33b891eb94c529bf5be94bb5d8894",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33",
+  "cases": [
+    "044"
+  ],
+  "cores": [
+    4
+  ],
+  "methods": [
+    "adaptive_frontier"
+  ],
+  "solver_mode": "direct",
+  "solver_module": "src.q2_nikolastarx.adaptive_frontier",
+  "source_files": [
+    "src/q2_nikolastarx/adaptive_frontier.py",
+    "src/q2_nikolastarx/adaptive_semantic.py",
+    "src/q2_nikolastarx/component_envelope.py",
+    "src/q2_nikolastarx/shared_input_wave.py",
+    "src/q2_nikolastarx/dag_direct.py",
+    "src/q2_nikolastarx/direct.py",
+    "src/q2_nikolastarx/baseline.py",
+    "src/q2_nikolastarx/tree_frontier.py",
+    "src/q2_nikolastarx/tree_packets_first.py",
+    "src/q2_nikolastarx/tree_paired_leaves.py",
+    "src/q2_nikolastarx/vector_lanes.py",
+    "src/q2_nikolastarx/vector_arrival.py"
+  ],
+  "algorithm_id": "q2-adaptive-frontier",
+  "algorithm_name": "P2 component balance and shared input waves",
+  "variant": "frozen-structural-frontier-v1",
+  "method_description": "Structural component-work imbalance triggers tensor DAG split; overcapacity shared input uses guarded waves; retains prior word/tree/vector guards. No score tables or online scoring.",
+  "output_prefix": "results/a/q2-nikolastarx/shared-wave-pilot-20260925/run/044-k4",
+  "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "max_E0": 1,
+  "max_internal_per_cell": 0,
+  "max_E1": 0,
+  "max_E2": 0,
+  "evaluation_timeout_seconds": 50,
+  "solver_wall_seconds": 25,
+  "batch_wall_seconds": 85,
+  "rss_observation_stop_bytes": 4294967296,
+  "workers": 1,
+  "retries": 0,
+  "case_selection": "Three weakest shared-input family graphs from fixed full500 audit; not a full-suite performance result.",
+  "failure_policy": "First unsuccessful or unverified attempt stops; no retry.",
+  "resources": "One macOS worker; each cell 1 solver and 1 final E0, three cells 270s aggregate, sampled4GiB RSS. Wait for s59 release. No Colab.",
+  "offline_costs": "Existing20 synthetic tests and existing static wave constructions; no new training or evaluation.",
+  "authors": [
+    "NikolaStarx"
+  ],
+  "references": [
+    "docs/a/q2-nikolastarx/ADAPTIVE_FRONTIER.md"
+  ],
+  "comparison": "Compare same case/core to fixed b7 full500 data571536; measure both makespan and DDR/spill. Raw static peaks are not a zero-spill guarantee."
+}

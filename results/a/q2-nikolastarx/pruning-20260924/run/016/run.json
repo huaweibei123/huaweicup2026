@@ -1,0 +1,224 @@
+{
+  "case": "016",
+  "status": "ok",
+  "started_at": "2026-09-24T14:24:59.876560Z",
+  "online_E0_calls": 2,
+  "final_E0_calls": 1,
+  "solver": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "-m",
+      "src.q2_nikolastarx.solve",
+      "data/raw/a/official/data/case_016.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "--cores",
+      "4",
+      "--output",
+      "results/a/q2-nikolastarx/pruning-20260924/run/016/plan.json",
+      "--evidence",
+      "results/a/q2-nikolastarx/pruning-20260924/run/016/online",
+      "--evaluation-timeout",
+      "60",
+      "--wall",
+      "240",
+      "--prune-bounds"
+    ],
+    "started_at": "2026-09-24T14:24:59.988886Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 386744320,
+    "rss_samples": 82,
+    "cleanup_killed_pids": [],
+    "pid": 76148,
+    "observer_inclusive_peak_rss_bytes": 427245568,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T14:25:06.021824Z",
+    "wall_seconds": 6.032933707989287
+  },
+  "online": {
+    "started_at": "2026-09-24T14:25:00.011242+00:00",
+    "calls": {
+      "E0": 2,
+      "E1": 0,
+      "E2": 0
+    },
+    "attempts": [
+      {
+        "name": "contiguous",
+        "status": "ok",
+        "started_at": "2026-09-24T14:25:00.029852+00:00",
+        "plan_sha256": "2d8d779a178eb82c91fd7b2da7c9df6802543a60da0d6a225ff6a77a8f034489",
+        "detail": {
+          "selected_strategy": "contiguous"
+        },
+        "construction_elapsed_seconds": 0.15343066601781175,
+        "assigned_pipe_lower_bound_cycles": 1929232,
+        "argv": [
+          ".venv/bin/python",
+          "-B",
+          "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+          "data/raw/a/official/data/case_016.json",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/contiguous/plan.json",
+          "--config",
+          "data/raw/a/official/data/config.txt",
+          "-o",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/contiguous/result.json",
+          "--trace-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/contiguous/trace.json",
+          "--log-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/contiguous/official.log"
+        ],
+        "exit_code": 0,
+        "evaluation_wall_seconds": 1.7596938750066329,
+        "finished_at": "2026-09-24T14:25:01.929499+00:00",
+        "makespan_cycles": 7720311,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 393218,
+          "scheduled_copy_bytes": 1769558,
+          "added_copy_bytes": 1376340,
+          "partition_added_copy_bytes": 1376340,
+          "spill_added_copy_bytes": 0
+        }
+      },
+      {
+        "name": "chain_critical",
+        "status": "ok",
+        "started_at": "2026-09-24T14:25:01.939861+00:00",
+        "plan_sha256": "cab4217bd2c8d142dc64fd4d5c11c30c63f60dab21aa387616fc1e944baea956",
+        "detail": {
+          "selected_strategy": "chain_critical"
+        },
+        "construction_elapsed_seconds": 2.1826317080121953,
+        "assigned_pipe_lower_bound_cycles": 1928760,
+        "argv": [
+          ".venv/bin/python",
+          "-B",
+          "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+          "data/raw/a/official/data/case_016.json",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/chain_critical/plan.json",
+          "--config",
+          "data/raw/a/official/data/config.txt",
+          "-o",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/chain_critical/result.json",
+          "--trace-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/chain_critical/trace.json",
+          "--log-output",
+          "results/a/q2-nikolastarx/pruning-20260924/run/016/online/chain_critical/official.log"
+        ],
+        "exit_code": 0,
+        "evaluation_wall_seconds": 3.3052654589992017,
+        "finished_at": "2026-09-24T14:25:05.506816+00:00",
+        "makespan_cycles": 2556787,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 393218,
+          "scheduled_copy_bytes": 1589934,
+          "added_copy_bytes": 1196716,
+          "partition_added_copy_bytes": 1196716,
+          "spill_added_copy_bytes": 0
+        }
+      },
+      {
+        "name": "affine_eighth",
+        "status": "bound_pruned",
+        "started_at": "2026-09-24T14:25:05.534707+00:00",
+        "plan_sha256": "d4c2504189f37fe3a9392f84dac844e08c17b70b1b7bec3e13ed3d15399eeeba",
+        "detail": {
+          "strategy": "affine_eighth",
+          "components": 1,
+          "eligible_ops": 17995,
+          "cores": 4,
+          "selected_strategy": "affine_eighth"
+        },
+        "construction_elapsed_seconds": 5.681747666007141,
+        "assigned_pipe_lower_bound_cycles": 7714975,
+        "incumbent_name": "chain_critical",
+        "incumbent_makespan_cycles": 2556787,
+        "prune_reason": "assigned_pipe_work_cannot_strictly_improve"
+      },
+      {
+        "name": "guarded_reentry",
+        "status": "bound_pruned",
+        "started_at": "2026-09-24T14:25:05.698494+00:00",
+        "plan_sha256": "fa2ec6ed8b16b368d3b6a4e3bc78e06873257d6bb6c638c617f37f906d56b272",
+        "detail": {
+          "strategy": "guarded_reentry",
+          "components": 1,
+          "eligible_ops": 17995,
+          "cores": 4,
+          "selected_strategy": "pipe_ready"
+        },
+        "construction_elapsed_seconds": 5.862859457993181,
+        "assigned_pipe_lower_bound_cycles": 7714975,
+        "incumbent_name": "chain_critical",
+        "incumbent_makespan_cycles": 2556787,
+        "prune_reason": "assigned_pipe_work_cannot_strictly_improve"
+      }
+    ],
+    "prune_bounds": true,
+    "budget": {
+      "max_E0": 4,
+      "wall_seconds": 240.0,
+      "evaluation_timeout_seconds": 60.0
+    },
+    "status": "ok",
+    "selected": "chain_critical",
+    "makespan_cycles": 2556787,
+    "plan_sha256": "cab4217bd2c8d142dc64fd4d5c11c30c63f60dab21aa387616fc1e944baea956",
+    "selected_result": "chain_critical/result.json",
+    "stop_reason": "fixed_structural_candidates_exhausted",
+    "finished_at": "2026-09-24T14:25:05.879871+00:00",
+    "internal_wall_seconds": 5.868686500005424
+  },
+  "online_reserved_E0": 2,
+  "final": {
+    "argv": [
+      ".venv/bin/python",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+      "data/raw/a/official/data/case_016.json",
+      "results/a/q2-nikolastarx/pruning-20260924/run/016/plan.json",
+      "--config",
+      "data/raw/a/official/data/config.txt",
+      "-o",
+      "results/a/q2-nikolastarx/pruning-20260924/run/016/final/result.json",
+      "--trace-output",
+      "results/a/q2-nikolastarx/pruning-20260924/run/016/final/trace.json",
+      "--log-output",
+      "results/a/q2-nikolastarx/pruning-20260924/run/016/final/official.log"
+    ],
+    "started_at": "2026-09-24T14:25:06.026046Z",
+    "status": "ok",
+    "sample_interval_seconds": 0.05,
+    "observed_peak_rss_bytes": 282361856,
+    "rss_samples": 48,
+    "cleanup_killed_pids": [],
+    "pid": 76420,
+    "observer_inclusive_peak_rss_bytes": 323371008,
+    "exit_code": 0,
+    "surviving_pids": [],
+    "finished_at": "2026-09-24T14:25:09.591598Z",
+    "wall_seconds": 3.5655567919893656
+  },
+  "full_result_bytes_equal": true,
+  "full_result_json_equal": true,
+  "makespan_type": "int",
+  "first_batch_comparison": {
+    "commit": "5e5d688ca473a80b7d72b26b397ce568ac70f534",
+    "plan_bytes_equal": true,
+    "full_result_bytes_equal": true,
+    "prior_plan_sha256": "cab4217bd2c8d142dc64fd4d5c11c30c63f60dab21aa387616fc1e944baea956",
+    "prior_raw_result_sha256": "0d97369915a2cadac62ad032cbedc2c20f43664dec03931162f6174dc03367d0",
+    "candidate_plan_bytes_equal": {
+      "contiguous": true,
+      "chain_critical": true,
+      "affine_eighth": true,
+      "guarded_reentry": true
+    }
+  },
+  "makespan_cycles": 2556787,
+  "reason": "confirmed_complete_result",
+  "finished_at": "2026-09-24T14:25:09.772708Z"
+}

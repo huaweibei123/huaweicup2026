@@ -1,0 +1,194 @@
+{
+  "source_commit": "ee1b8fd39efab8c8ed8140bbebe4c08e778052b9",
+  "runner_commit": "64e0133b97eb7dee50aa835e9c1714d84ce508eb",
+  "started_at": "2026-09-24T18:00:25.667428Z",
+  "status": "completed",
+  "cells": [
+    {
+      "cell": "056-k5",
+      "driver": {
+        "argv": [
+          "/Users/nikolastar/.codex/worktrees/q2-adaptive-smoke-s8ee/huaweicup2026/.venv/bin/python",
+          "-B",
+          "-m",
+          "src.q2_nikolastarx.evaluate_matrix",
+          "run",
+          "--protocol",
+          "results/a/q2-nikolastarx/frontier-pilot-20260925/protocol-056-k5.json",
+          "--source-commit",
+          "ee1b8fd39efab8c8ed8140bbebe4c08e778052b9",
+          "--runner-commit",
+          "64e0133b97eb7dee50aa835e9c1714d84ce508eb"
+        ],
+        "started_at": "2026-09-24T18:00:25.668325Z",
+        "status": "ok",
+        "sample_interval_seconds": 0.05,
+        "observed_peak_rss_bytes": 198410240,
+        "rss_samples": 48,
+        "cleanup_killed_pids": [],
+        "pid": 89930,
+        "observer_inclusive_peak_rss_bytes": 224870400,
+        "exit_code": 0,
+        "surviving_pids": [],
+        "finished_at": "2026-09-24T18:00:29.192895Z",
+        "wall_seconds": 3.5245530000247527
+      },
+      "attempt": {
+        "case": "056",
+        "cores": 5,
+        "status": "ok",
+        "started_at": "2026-09-24T18:00:26.596187Z",
+        "calls": {
+          "solver": 1,
+          "E0": 1,
+          "E1": 0,
+          "E2": 0
+        },
+        "phase": "complete",
+        "solver_mode": "direct",
+        "solver": {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "-m",
+            "src.q2_nikolastarx.adaptive_frontier",
+            "data/raw/a/official/data/case_056.json",
+            "--config",
+            "data/raw/a/official/data/config.txt",
+            "--cores",
+            "5",
+            "--output",
+            "results/a/q2-nikolastarx/frontier-pilot-20260925/run/056-k5/056-k5/plan.json",
+            "--evidence",
+            "results/a/q2-nikolastarx/frontier-pilot-20260925/run/056-k5/056-k5/online",
+            "--wall",
+            "25"
+          ],
+          "started_at": "2026-09-24T18:00:26.596452Z",
+          "status": "ok",
+          "sample_interval_seconds": 0.05,
+          "observed_peak_rss_bytes": 75579392,
+          "rss_samples": 5,
+          "cleanup_killed_pids": [],
+          "pid": 90058,
+          "observer_inclusive_peak_rss_bytes": 102055936,
+          "exit_code": 0,
+          "surviving_pids": [],
+          "finished_at": "2026-09-24T18:00:26.951369Z",
+          "wall_seconds": 0.3549263750028331
+        },
+        "online": {
+          "status": "ok",
+          "calls": {
+            "E0": 0,
+            "E1": 0,
+            "E2": 0
+          },
+          "attempts": [
+            {
+              "name": "adaptive_frontier",
+              "status": "constructed",
+              "detail": {
+                "strategy": "tensor_dag_eft",
+                "eligible_ops": 7678,
+                "components": 19,
+                "cores": 5,
+                "bandwidth": 60,
+                "cross_core_delay": 500,
+                "predicted_finish_cycles": 109810,
+                "predicted_ddr_bytes_without_spill": {
+                  "external_input_bytes": 404944,
+                  "cross_core_bytes": 7038604,
+                  "output_bytes": 74
+                },
+                "predicted_cross_core_pairs": 3750,
+                "compute_load_by_core": [
+                  80340,
+                  75536,
+                  71029,
+                  71304,
+                  78760
+                ],
+                "model_limitations": [
+                  "isolated COPY bandwidth; shared DDR contention omitted",
+                  "spill, memory reuse dependencies and Step3 reorder omitted",
+                  "predicted times are not bounds or official scores"
+                ],
+                "selected_strategy": "dominant_component_dag",
+                "component_pressure": {
+                  "largest_component_pipe_work": {
+                    "PIPE_M": 125808,
+                    "PIPE_V": 238272
+                  },
+                  "balanced_pipe_work_lower_bound": {
+                    "PIPE_M": 26204,
+                    "PIPE_V": 49191
+                  },
+                  "component_exceeds_balanced_pipe_work": true,
+                  "shared_external_bytes": {},
+                  "shared_external_exceeds_capacity": false
+                },
+                "route_guarantee": "heuristic; splitting may add COPY, spill and delays",
+                "adaptive_route": "dominant_component_dag",
+                "index_constructions": 1,
+                "base_construct_calls": 1,
+                "repair_construct_calls": 0,
+                "repair_trigger": {
+                  "recognized": false,
+                  "large_crossings": 0,
+                  "large_crossing_bytes": 0,
+                  "reason": "vector lanes: all eligible ops must use PIPE_V"
+                },
+                "route_limitations": "unchanged general plan; no official feasibility/score/zero-spill certificate"
+              },
+              "plan_sha256": "bf79ff0685a6837c77871acba410e17cf3eb9697b4e8f077fbeec70dbffb5869"
+            }
+          ],
+          "started_at": "2026-09-24T18:00:26.642261+00:00",
+          "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+          "selected": "adaptive_frontier",
+          "plan_sha256": "bf79ff0685a6837c77871acba410e17cf3eb9697b4e8f077fbeec70dbffb5869",
+          "stop_reason": "single_structural_route_completed",
+          "finished_at": "2026-09-24T18:00:26.831208+00:00",
+          "internal_wall_seconds": 0.1890356669900939
+        },
+        "final_reserved": true,
+        "final": {
+          "argv": [
+            ".venv/bin/python",
+            "-B",
+            "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+            "data/raw/a/official/data/case_056.json",
+            "results/a/q2-nikolastarx/frontier-pilot-20260925/run/056-k5/056-k5/plan.json",
+            "--config",
+            "data/raw/a/official/data/config.txt",
+            "-o",
+            "results/a/q2-nikolastarx/frontier-pilot-20260925/run/056-k5/056-k5/final/result.json",
+            "--trace-output",
+            "results/a/q2-nikolastarx/frontier-pilot-20260925/run/056-k5/056-k5/final/trace.json",
+            "--log-output",
+            "results/a/q2-nikolastarx/frontier-pilot-20260925/run/056-k5/056-k5/final/official.log"
+          ],
+          "started_at": "2026-09-24T18:00:26.953273Z",
+          "status": "ok",
+          "sample_interval_seconds": 0.05,
+          "observed_peak_rss_bytes": 167182336,
+          "rss_samples": 21,
+          "cleanup_killed_pids": [],
+          "pid": 90085,
+          "observer_inclusive_peak_rss_bytes": 195526656,
+          "exit_code": 0,
+          "surviving_pids": [],
+          "finished_at": "2026-09-24T18:00:28.532365Z",
+          "wall_seconds": 1.5790940409933683
+        },
+        "full_online_result_equal": null,
+        "makespan_cycles": 165886,
+        "finished_at": "2026-09-24T18:00:28.548648Z"
+      },
+      "accepted": true
+    }
+  ],
+  "finished_at": "2026-09-24T18:00:29.193765Z",
+  "aggregate_wall_seconds": 3.5263377079972997
+}
