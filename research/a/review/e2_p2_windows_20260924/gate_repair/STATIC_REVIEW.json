@@ -1,0 +1,387 @@
+{
+  "kind": "static_only",
+  "new_modules_imported": false,
+  "controlled_launches": 0,
+  "new_T0": false,
+  "E0": 0,
+  "E2": 0,
+  "debug": 0,
+  "BC_DLL_loads": 0,
+  "native_or_bytecode_compilation": false,
+  "installations": 0,
+  "source_identity": {
+    "files": {
+      "gate_helper.py": "e5af8da2e6cc4288d7066769bb246c68f51da8bc3c2d6da2f4acc45698c88621",
+      "control_runner.py": "0682cba55dde7915cd43b508087b969202dea001af78fd69676dd955ab3398aa",
+      "contract.json": "495b992f2f50a1f87bf739cac3a75667623e38a8d3a9f5d9be98325de9c615eb"
+    },
+    "sha256": "3c6185050e61cd64b776e1870a5acb4a4469b050a268f28867d791ba1107e69d"
+  },
+  "ast": {
+    "control_runner.py": {
+      "parse_ok": true,
+      "lines": 449,
+      "imports": [
+        "import argparse",
+        "from datetime import datetime, timezone",
+        "import hashlib",
+        "import hmac",
+        "import json",
+        "import os",
+        "from pathlib import Path",
+        "import secrets",
+        "import sys",
+        "import time",
+        "from gate_helper import WinAPI, close_all, save, sha256, source_identity"
+      ],
+      "functions": [
+        {
+          "name": "digest",
+          "line": 45
+        },
+        {
+          "name": "load",
+          "line": 49
+        },
+        {
+          "name": "require",
+          "line": 53
+        },
+        {
+          "name": "wait_for",
+          "line": 58
+        },
+        {
+          "name": "current_head",
+          "line": 67
+        },
+        {
+          "name": "child",
+          "line": 95
+        },
+        {
+          "name": "verify_ready",
+          "line": 167
+        },
+        {
+          "name": "one_case",
+          "line": 178
+        },
+        {
+          "name": "parent",
+          "line": 364
+        },
+        {
+          "name": "main",
+          "line": 433
+        },
+        {
+          "name": "finish",
+          "line": 109
+        },
+        {
+          "name": "ready_or_failure",
+          "line": 249
+        }
+      ],
+      "kernel32_call_sites": [],
+      "explicit_dynamic_library_calls": [],
+      "control_launch_calls": [
+        {
+          "line": 214,
+          "name": "api.launch_assigned"
+        }
+      ]
+    },
+    "gate_helper.py": {
+      "parse_ok": true,
+      "lines": 422,
+      "imports": [
+        "import ctypes as ct",
+        "import hashlib",
+        "import json",
+        "import msvcrt",
+        "import os",
+        "from pathlib import Path",
+        "import subprocess",
+        "import tempfile",
+        "import time"
+      ],
+      "functions": [
+        {
+          "name": "sha256",
+          "line": 87
+        },
+        {
+          "name": "source_identity",
+          "line": 91
+        },
+        {
+          "name": "save",
+          "line": 98
+        },
+        {
+          "name": "close_all",
+          "line": 136
+        },
+        {
+          "name": "__init__",
+          "line": 118
+        },
+        {
+          "name": "close",
+          "line": 124
+        },
+        {
+          "name": "__init__",
+          "line": 149
+        },
+        {
+          "name": "check",
+          "line": 189
+        },
+        {
+          "name": "tick",
+          "line": 194
+        },
+        {
+          "name": "inherit",
+          "line": 197
+        },
+        {
+          "name": "job",
+          "line": 206
+        },
+        {
+          "name": "exact_membership",
+          "line": 227
+        },
+        {
+          "name": "pids",
+          "line": 243
+        },
+        {
+          "name": "accounting",
+          "line": 263
+        },
+        {
+          "name": "observer",
+          "line": 270
+        },
+        {
+          "name": "exited",
+          "line": 280
+        },
+        {
+          "name": "exit_code",
+          "line": 286
+        },
+        {
+          "name": "terminate_job",
+          "line": 291
+        },
+        {
+          "name": "reopen_for_cleanup",
+          "line": 295
+        },
+        {
+          "name": "launch_assigned",
+          "line": 310
+        }
+      ],
+      "kernel32_call_sites": [
+        {
+          "line": 208,
+          "name": "self.k.CreateJobObjectW"
+        },
+        {
+          "line": 281,
+          "name": "self.k.WaitForSingleObject"
+        },
+        {
+          "line": 296,
+          "name": "self.k.OpenJobObjectW"
+        },
+        {
+          "line": 195,
+          "name": "self.k.GetTickCount64"
+        },
+        {
+          "line": 199,
+          "name": "self.k.GetHandleInformation"
+        },
+        {
+          "line": 265,
+          "name": "self.k.QueryInformationJobObject"
+        },
+        {
+          "line": 288,
+          "name": "self.k.GetExitCodeProcess"
+        },
+        {
+          "line": 292,
+          "name": "self.k.TerminateJobObject"
+        },
+        {
+          "line": 326,
+          "name": "self.k.GetCurrentProcess"
+        },
+        {
+          "line": 339,
+          "name": "self.k.InitializeProcThreadAttributeList"
+        },
+        {
+          "line": 382,
+          "name": "self.k.ResumeThread"
+        },
+        {
+          "line": 388,
+          "name": "self.k.DeleteProcThreadAttributeList"
+        },
+        {
+          "line": 220,
+          "name": "self.k.SetInformationJobObject"
+        },
+        {
+          "line": 228,
+          "name": "self.k.OpenJobObjectW"
+        },
+        {
+          "line": 234,
+          "name": "self.k.IsProcessInJob"
+        },
+        {
+          "line": 250,
+          "name": "self.k.QueryInformationJobObject"
+        },
+        {
+          "line": 271,
+          "name": "self.k.OpenProcess"
+        },
+        {
+          "line": 343,
+          "name": "self.k.InitializeProcThreadAttributeList"
+        },
+        {
+          "line": 346,
+          "name": "self.k.UpdateProcThreadAttribute"
+        },
+        {
+          "line": 369,
+          "name": "self.k.CreateProcessW"
+        },
+        {
+          "line": 379,
+          "name": "self.k.AssignProcessToJobObject"
+        },
+        {
+          "line": 417,
+          "name": "self.k.DeleteProcThreadAttributeList"
+        },
+        {
+          "line": 234,
+          "name": "self.k.GetCurrentProcess"
+        },
+        {
+          "line": 332,
+          "name": "self.k.DuplicateHandle"
+        },
+        {
+          "line": 402,
+          "name": "self.k.WaitForSingleObject"
+        },
+        {
+          "line": 400,
+          "name": "self.k.TerminateProcess"
+        }
+      ],
+      "explicit_dynamic_library_calls": [
+        {
+          "line": 153,
+          "name": "ct.WinDLL"
+        }
+      ],
+      "control_launch_calls": []
+    }
+  },
+  "limits": "AST/source/byte checks only; no runtime claims",
+  "caps": {
+    "launch_requests": 4,
+    "wall_seconds_including_delivery": 300,
+    "preparation_seconds": 45,
+    "launch_cutoff_seconds": 150,
+    "case_seconds": 20,
+    "cleanup_seconds": 5,
+    "gate_seconds": 5,
+    "ack_seconds": 5,
+    "g4_ack_seconds": 15,
+    "g4_minimum_self_exit_margin_seconds": 6,
+    "g4_observation_seconds": 2,
+    "max_active_processes_per_job": 4,
+    "E0": 0,
+    "E2": 0,
+    "BC_DLL": 0,
+    "debug": 0
+  },
+  "cases": [
+    "G1",
+    "G2",
+    "G3",
+    "G4"
+  ],
+  "single_CreateProcessW_call_site": 369,
+  "bound_kernel32_apis": [
+    "GetCurrentProcess",
+    "GetTickCount64",
+    "CloseHandle",
+    "GetHandleInformation",
+    "CreateJobObjectW",
+    "OpenJobObjectW",
+    "SetInformationJobObject",
+    "QueryInformationJobObject",
+    "IsProcessInJob",
+    "AssignProcessToJobObject",
+    "TerminateJobObject",
+    "TerminateProcess",
+    "OpenProcess",
+    "WaitForSingleObject",
+    "GetExitCodeProcess",
+    "ResumeThread",
+    "DuplicateHandle",
+    "InitializeProcThreadAttributeList",
+    "UpdateProcThreadAttribute",
+    "DeleteProcThreadAttributeList",
+    "CreateProcessW"
+  ],
+  "prohibited_call_sites": 0,
+  "frozen_old_files_current_sha256": {
+    "research/a/review/e2_p2_windows_20260924/run.py": "ef0de14c1a1eaa80cea8ed7b5686cab80e4b131d7746a465c1e3517fff749f75",
+    "research/a/review/e2_p2_windows_20260924/continuation/run_continuation.py": "de2eab3d229826a67d5553f735f3b88ef63f09f1519af45309b39acaae0f61eb",
+    "research/a/review/e2_p2_windows_20260924/continuation/contract.json": "8c07684fd26ea95fd0983d3219f148bc855583ad74e24ff9e2f156e3b3366aed"
+  },
+  "official_objectives_read": {
+    "commit": "6a7c678df58613445efaf89d9a5221702955fa22",
+    "files": [
+      "AGENTS.md",
+      "docs/a/OFFICIAL_OBJECTIVES.md"
+    ],
+    "session": "yuanzhifang30-sudo/s-b4329d86154348de9401afcbe48b34ce"
+  },
+  "free_collaboration_read": {
+    "commit": "b59d97233c5768526b734e4c02fe33ee6cc2eb7d",
+    "files": [
+      "AGENTS.md: free collaboration and captain account permissions",
+      "docs/GITHUB_FREE_COLLABORATION.md"
+    ],
+    "actions_triggered": false,
+    "paid_services_enabled": false
+  },
+  "metadata_scan": {
+    "platform": "Windows",
+    "dot_clean_available": false,
+    "scoped_readonly_scan": "new gate_repair directory recursively; modified plan parent directory directly",
+    "residuals": [],
+    "deleted": false
+  },
+  "static_command": "External stdin Python -I -S -B: ast.parse, ast.literal_eval CAPS/CASES, allowed-import and call-site checks, SHA-256 bytes; neither new module imported/executed."
+}
