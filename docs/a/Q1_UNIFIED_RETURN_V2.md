@@ -1,4 +1,4 @@
-# Unified P1 return-cut v2 (awaiting real integrated validation)
+# Unified P1 return-cut v2 (three-cell integrated validation)
 
 Baseline: frozen v1 algorithm `48faef6f1386c3dc7d037674a38af29d533ba774`,
 full500 run `20260924T1810Z-s59ee`, five-core arithmetic mean 3.987519066.
@@ -42,6 +42,12 @@ guard is therefore essential. No wholesale adoption without integrated E0.
 Validation so far:25 synthetic tests (Python3.12.13), including original
 controller tests, capacity boundaries, partial packets, shared-input
 rejection, both beneficial and harmful candidate scoring, and the K1 fast
-path. No real v2 solver/E1/E0 has run yet. Next finite validation should cover
-the three strict private-chain families at K5 before any new full matrix;
-coordinate resources with the production owner rather than overlap P2.
+path. A subsequent fixed-source run `20260924T1844Z-return3` completed
+008/084/095 at K5: 3 solver calls, 9 E1 calls, 3 external E0 calls, no retries.
+Selected official Makespans were 100603, 399121 and 420852 respectively.
+Only 084 selected the new return candidate; 008/095 retained the bounded
+candidate. All selected E1 Makespan and movement values matched E0.
+Data commit: `f552c2c5e87f2d760bda2f9a0a3b175d4f99157c`.
+This is three-cell validation of v2, not a new full500 result. Future batches
+still require coordination with the production owner. The research priority
+and remaining generalization limits are in [Q1_GENERALIZATION_STRATEGY.md](Q1_GENERALIZATION_STRATEGY.md).

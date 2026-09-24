@@ -6,6 +6,7 @@ Peel the packets, recurse on that prefix, then schedule waves in reverse peel
 order. This keeps whole multi-branch output regions together, not just chains.
 """
 from __future__ import annotations
+from copy import deepcopy
 
 from collections import Counter, deque
 
@@ -73,12 +74,13 @@ def peel_packets(ids, pred, succ, *, max_rounds=64, max_sinks=64):
     return list(reversed(peeled))
 
 
-def construct(graph, cores, *, max_rounds=64, max_sinks=64):
+def construct(graph, cores, *, max_rounds=64, max_sinks=64, fallback_candidate=None):
     """Build a legal Task-order candidate; E0 feasibility/quality remain untested."""
     for value in (max_rounds, max_sinks):
         if type(value) is not int or value < 1:
             raise ValueError("decomposition budgets must be positive integers")
-    fallback, base = bounded_construct(graph, cores)
+    fallback, base = (bounded_construct(graph, cores) if fallback_candidate is None
+                      else deepcopy(fallback_candidate))
     info = {"algorithm_id": "q1-sink-peel", "variant": "exclusive-suffix-waves",
             "selected": "bounded04", "base": base,
             "max_rounds": max_rounds, "max_sinks": max_sinks,

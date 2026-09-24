@@ -6,6 +6,7 @@ components for every core. Minor components remain whole in the final wave.
 No scorer is called, and neither the trigger nor peeling is a quality bound.
 """
 from __future__ import annotations
+from copy import deepcopy
 
 import argparse
 from collections import Counter
@@ -22,10 +23,16 @@ from stub_multicore_cut_and_schedule import (
 from evaluation_validation import validate_task_order
 
 
-def construct(graph, cores, *, dominant_percent=80, max_rounds=64, max_sinks=64):
+def construct(graph, cores, *, dominant_percent=80, max_rounds=64, max_sinks=64,
+              fallback_candidate=None, fallback_factory=None):
     if type(dominant_percent) is not int or not 1 <= dominant_percent <= 100:
         raise ValueError("dominant_percent must be an integer in 1..100")
-    fallback, base = sink_construct(graph, cores, max_rounds=max_rounds, max_sinks=max_sinks)
+    if fallback_candidate is not None:
+        fallback, base = deepcopy(fallback_candidate)
+    elif fallback_factory is not None:
+        fallback, base = deepcopy(fallback_factory())
+    else:
+        fallback, base = sink_construct(graph, cores, max_rounds=max_rounds, max_sinks=max_sinks)
     info = {"algorithm_id": "q1-heavy-component-suffix", "variant": "dominant-pipe-suffix-waves",
             "selected": "sink-or-bounded", "dominant_percent": dominant_percent,
             "max_rounds": max_rounds, "max_sinks": max_sinks, "base": base,

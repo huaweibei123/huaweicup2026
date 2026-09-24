@@ -183,8 +183,8 @@ class RoutingTests(PlanContract):
                 mocks[name] = stack.enter_context(patch.object(
                     unified, name, return_value=(plan, {"synthetic_constructor": name})))
             candidates, diagnostics = unified.generate_candidates(g, cores)
-        self.assertLessEqual(len(candidates), 4)
-        self.assertEqual(unified.MAX_DISTINCT_CANDIDATES, 5)
+        self.assertLessEqual(len(candidates), 5)
+        self.assertEqual(unified.MAX_DISTINCT_CANDIDATES, 6)
         return candidates, diagnostics, mocks
 
     def test_large_private_input_union_activates_shared_route(self):
@@ -195,9 +195,9 @@ class RoutingTests(PlanContract):
         self.assertEqual(d["features"]["external_input_bytes"], 600000)
         self.assertEqual(d["features"]["additional_route"], "shared-input")
         self.assertEqual([c["name"] for c in candidates],
-                         ["bounded", "heavy-or-sink", "overload", "shared-input"])
+                         ["bounded", "heavy-or-sink", "overload", "shared-input", "fork-frontier"])
         mocks["shared_input"].assert_called_once_with(g, 2)
-        mocks["fork_frontier"].assert_not_called()
+        mocks["fork_frontier"].assert_called_once_with(g, 2, grain=4)
         for c in candidates:
             self.assert_plan_contract(c["plan"], g, 2, [])
 
@@ -228,13 +228,13 @@ class RoutingTests(PlanContract):
         mocks["fork_frontier"].assert_called_once_with(g, 2, grain=4)
         mocks["shared_input"].assert_not_called()
 
-    def test_component_shortage_without_fork_keeps_three_primary_candidates(self):
+    def test_component_shortage_without_fork_keeps_primary_and_appends_frontier(self):
         g = graph([(u, "V", 10) for u in (1, 2, 3)], [(1, 2), (2, 3)])
         candidates, d, mocks = self.generate_mocked(g, 5)
         self.assertEqual(d["features"]["additional_route"], "none")
         self.assertEqual([c["name"] for c in candidates],
-                         ["bounded", "heavy-or-sink", "overload"])
-        mocks["fork_frontier"].assert_not_called()
+                         ["bounded", "heavy-or-sink", "overload", "fork-frontier"])
+        mocks["fork_frontier"].assert_called_once_with(g, 5, grain=4)
         mocks["shared_input"].assert_not_called()
 
     def test_single_core_skips_feature_analysis_and_other_constructors(self):
@@ -250,7 +250,7 @@ class RoutingTests(PlanContract):
         g = private_inputs([300000, 300000])
         candidates, d, _ = self.generate_mocked(g, 2, identical=True)
         self.assertEqual(len(candidates), 1)
-        self.assertEqual(len(d["duplicates"]), 3)
+        self.assertEqual(len(d["duplicates"]), 4)
         self.assertEqual({x["duplicate_of"] for x in d["duplicates"]}, {"bounded"})
         score = Mock(side_effect=AssertionError("Duplicate-only scoring"))
         self.assertEqual(unified.choose(candidates, score)[1], [])

@@ -5,6 +5,7 @@ it is not a guarantee that splitting is profitable. Ready-list times are
 compute/gate proxies, not E0 predictions or optimality certificates.
 """
 from __future__ import annotations
+from copy import deepcopy
 
 import argparse
 from collections import Counter
@@ -111,8 +112,9 @@ def _place(tasks, successors, ops, cores, same_wait, cross_wait):
                      task_finish_proxy=[finishes[t] for t in range(len(tasks))])
 
 
-def construct(graph, cores, *, max_rounds=64, max_sinks=64):
-    fallback, base = fallback_construct(graph, cores, max_rounds=max_rounds, max_sinks=max_sinks)
+def construct(graph, cores, *, max_rounds=64, max_sinks=64, fallback_candidate=None):
+    fallback, base = (fallback_construct(graph, cores, max_rounds=max_rounds, max_sinks=max_sinks)
+                      if fallback_candidate is None else deepcopy(fallback_candidate))
     info = dict(algorithm_id="q1-component-overload-list", variant="any-pipe-overload-quotient-ready-list",
                 max_rounds=max_rounds, max_sinks=max_sinks, base=base, selected="heavy-suffix-fallback",
                 scope="Direct structural proposal; proxy times omit DDR, FIFO and capacity")
