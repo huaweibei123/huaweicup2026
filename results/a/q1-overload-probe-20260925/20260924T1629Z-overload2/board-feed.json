@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "nikolastarx-20260924T1629Z-overload2-P1-054-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1629Z-overload2",
+      "algorithm_id": "q1-component-overload-list",
+      "algorithm_name": "P1 per-pipe overloaded components and quotient ready list",
+      "variant": "any-pipe-overload-quotient-ready-list",
+      "solver_commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+      "parameters": {
+        "cores": 5,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "selected": "overload-list",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 300,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "054",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 211904,
+        "solver_wall_seconds": 0.6072827920143027,
+        "evaluation_wall_seconds": 2.7391223330050707,
+        "ddr_bytes": 4122010,
+        "extra_ddr_bytes": 2515734,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "4c874b67351e0a6d336af3117c1289099c54993581f90de11e8f49fb33bb9828",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "aea5e38659e9b275b31e2178af324321bdb2066db1dcce39af1e11f0a12b995a"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/054/k5/case_054_multicore_res.json",
+          "sha256": "aea5e38659e9b275b31e2178af324321bdb2066db1dcce39af1e11f0a12b995a"
+        },
+        "result": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/054/k5/result.json.gz",
+          "sha256": "0004558ce7220bdafb5ea776119b6b33e8040dba9e707d9941116463b8b9fe42"
+        },
+        "trace": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/054/k5/trace.json.gz",
+          "sha256": "d64edc91bb5454645c2145b540a4b2b05e727f7fb2953366326c37ecef3f99b6"
+        },
+        "log": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/054/k5/official.log",
+          "sha256": "3541799a93734f0c4d0cfb575c5a6d19b1f12653b254214e42876dc116290de2"
+        },
+        "run": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/054/k5/run.json",
+          "sha256": "ece420aa6fc93e79a388e1ad7739815719d315dd8b796fd3a69d5ed68c8b2409"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T16:29:24.609Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+            "path": "src/q1/component_overload.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Build heavy/sink/bounded fallback, identify each whole component exceeding any compute-pipe fair share, peel independent suffix waves within fixed bounds, pack waves and retained components into coarse Tasks, place their acyclic quotient using a deterministic compute/gate ready-list proxy, apply bounded independent-component chunks and official structural validation. No online E0 or score search.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/3c6e41b938c764d207de45584fb526c64f4eb845/docs/a/Q1_COMPONENT_OVERLOAD.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/heavy_suffix.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/sink_peel.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "1d238dedba5380c7d78e17c4b0ccf276300d356b",
+            "path": "src/q1_benchmarks/overload_probe_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/overload_probe_e0.py",
+            "run",
+            "20260924T1629Z-overload2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:29:21.174Z",
+          "finished_at": "2026-09-24T16:29:24.609Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.007020249991910532 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "WAIT_ROOT_REVIEW_AND_P2_RELEASE: preparation only. P2 is preparing its 062 three-cell batch; this probe must wait for root explicit EXECUTE after review and resource release. One nonexclusive worker, no Colab/GPU; preserve actual authorization receipt. Execution released: EXECUTE overload054/050 k5。P2已明确实质释放，P3已被通知等待我们；独立静态审阅无合法性阻塞。只用冻结算法3c6e41b938c764d207de45584fb526c64f4eb845、runner1d238dedba5380c7d78e17c4b0ccf276300d356b，按已冻结预算2solver+2外部E0/1worker/30-90-300s/首失败停/0重试E1E2，无旧baseline重跑；保存本授权文字、实际runID/UTC与所有原件。完成立即回报结果和自有PID退出/资源release，关闭执行门，再封存data/feed固定SHA。不要拓展第三格或改参数。",
+        "2 preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "4c874b67351e0a6d336af3117c1289099c54993581f90de11e8f49fb33bb9828",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/references/bounded-054-baseline-singlecore-054.json.gz",
+          "sha256": "d0deccdfe3e316ecc9e23d94e26332042c1cd08b1e9850e4146833ff2702187a"
+        }
+      }
+    },
+    {
+      "attempt_id": "nikolastarx-20260924T1629Z-overload2-P1-050-k5-r0",
+      "revision": 1,
+      "run_id": "20260924T1629Z-overload2",
+      "algorithm_id": "q1-component-overload-list",
+      "algorithm_name": "P1 per-pipe overloaded components and quotient ready list",
+      "variant": "any-pipe-overload-quotient-ready-list",
+      "solver_commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+      "parameters": {
+        "cores": 5,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "selected": "overload-list",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 90,
+        "batch_timeout_seconds": 300,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "First constructor/E0/source/resource/cleanup failure stops batch; no retry; retain remaining not_run",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "050",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 42597,
+        "solver_wall_seconds": 0.18031683302251622,
+        "evaluation_wall_seconds": 0.6048477090080269,
+        "ddr_bytes": 840412,
+        "extra_ddr_bytes": 521036,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "3b6b1abd65fbfbb2a40972bdbd643c43107c4b232512741740ff351c366367aa",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "3256518db78807eec1f17a3adbe6d8f24e4e687b2e6eeaddacd4b6adf006d637"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/050/k5/case_050_multicore_res.json",
+          "sha256": "3256518db78807eec1f17a3adbe6d8f24e4e687b2e6eeaddacd4b6adf006d637"
+        },
+        "result": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/050/k5/result.json.gz",
+          "sha256": "4a6986ad74e938a5469c07ff6a1f29a3dfa5398d44a2bbe8fcd131454c4d035f"
+        },
+        "trace": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/050/k5/trace.json.gz",
+          "sha256": "ec7e97d1d34867ccaa6b0185248c4c98fb7357dc8bc621e96176ca7e5bcff47b"
+        },
+        "log": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/050/k5/official.log",
+          "sha256": "8ca9a955436f0a1274fd515c2468361c05df1eab80df802175878f56a715a8c8"
+        },
+        "run": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/cells/050/k5/run.json",
+          "sha256": "23022bbd66fe0da3910156e232825dfcd522a9db506e894f718fea4fcc48eab1"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T16:29:25.654Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+            "path": "src/q1/component_overload.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Build heavy/sink/bounded fallback, identify each whole component exceeding any compute-pipe fair share, peel independent suffix waves within fixed bounds, pack waves and retained components into coarse Tasks, place their acyclic quotient using a deterministic compute/gate ready-list proxy, apply bounded independent-component chunks and official structural validation. No online E0 or score search.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/3c6e41b938c764d207de45584fb526c64f4eb845/docs/a/Q1_COMPONENT_OVERLOAD.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/heavy_suffix.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/sink_peel.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/tree_frontier.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+              "path": "src/q1/component_pack.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "1d238dedba5380c7d78e17c4b0ccf276300d356b",
+            "path": "src/q1_benchmarks/overload_probe_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/overload_probe_e0.py",
+            "run",
+            "20260924T1629Z-overload2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:29:24.829Z",
+          "finished_at": "2026-09-24T16:29:25.654Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct construction complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and verified ZIP materialization (0.007020249991910532 seconds); no training, online scorer or baseline rerun. Source/coverage audits and gzip/export outside constructor/E0 timers.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count not sampled; OMP/BLAS/MKL environment1",
+          "provenance.environment.peak_rss_bytes": "Not sampled; host memory proxy sampled before cells",
+          "provenance.measurement.seed": "Deterministic construction has no RNG"
+        }
+      },
+      "notes": [
+        "WAIT_ROOT_REVIEW_AND_P2_RELEASE: preparation only. P2 is preparing its 062 three-cell batch; this probe must wait for root explicit EXECUTE after review and resource release. One nonexclusive worker, no Colab/GPU; preserve actual authorization receipt. Execution released: EXECUTE overload054/050 k5。P2已明确实质释放，P3已被通知等待我们；独立静态审阅无合法性阻塞。只用冻结算法3c6e41b938c764d207de45584fb526c64f4eb845、runner1d238dedba5380c7d78e17c4b0ccf276300d356b，按已冻结预算2solver+2外部E0/1worker/30-90-300s/首失败停/0重试E1E2，无旧baseline重跑；保存本授权文字、实际runID/UTC与所有原件。完成立即回报结果和自有PID退出/资源release，关闭执行门，再封存data/feed固定SHA。不要拓展第三格或改参数。",
+        "2 preselected mechanism probes; not all-case quality or independent blind acceptance. No sink8 batch executed.",
+        "Fresh interpreter per cell, OS caches not flushed; previous bounded04 used two workers, so timings are descriptive and cannot establish controlled speedups.",
+        "Bounded04 same-cell plan/result and singlecore originals reused from d63001eb01cc254a20bc60cae5e50b1eb1ee2808; no comparison or baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "3b6b1abd65fbfbb2a40972bdbd643c43107c4b232512741740ff351c366367aa",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/references/bounded-050-baseline-singlecore-050.json.gz",
+          "sha256": "0101698c7011e9da894383ab5219889b473ceb3d6b78599f35a46b339b2912f0"
+        }
+      }
+    }
+  ]
+}

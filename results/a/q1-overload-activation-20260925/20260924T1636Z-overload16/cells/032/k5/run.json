@@ -1,0 +1,300 @@
+{
+  "case_id": "032",
+  "cores": 5,
+  "status": "ok",
+  "started_at": "2026-09-24T16:36:21.449Z",
+  "finished_at": "2026-09-24T16:36:21.658Z",
+  "graph_sha256": "7b325807b10636edbb8ada6fe9086e639ece5d42d4aad151b0fc7cd8f6277385",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/case_032_multicore_res.json",
+      "sha256": "38bdee2a87cb8884bd6c661d416dd3eae92e97c16ad2fedc509a431ab16df630"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/diagnostics.json",
+      "sha256": "73b4ef88e620312132395e18ab8a757bb94c9fdaa5fac72a5d96a65464e4e361"
+    },
+    "result": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/result.json.gz",
+      "sha256": "a551b7d9cdba25f90f4341e61c32f63e8ef0e50927d6a6912338995e64891af7"
+    },
+    "trace": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/trace.json.gz",
+      "sha256": "99cf41cce22160fa8a5c18b7823baed65d3063ef1a7e1eb2ca81b8885ab5c2fa"
+    },
+    "log": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/official.log",
+      "sha256": "2f8aed80e5e8040a625c1ec5f57d597866a42c0c302203949db9c48dd4923217"
+    }
+  },
+  "failure": null,
+  "makespan_cycles": 10939,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "src/q1/component_overload.py",
+      "<verified-inputs>/case_032.json",
+      "--cores",
+      "5",
+      "--output",
+      "./results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/case_032_multicore_res.json",
+      "--diagnostics",
+      "./results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T16:36:21.449Z",
+    "finished_at": "2026-09-24T16:36:21.525Z",
+    "wall_seconds": 0.07538720898446627,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/solver.stdout.txt",
+      "sha256": "c5891a3b08edac866b98a52e9cd4f4dbec24fa2a566b12061130b29628d977dd"
+    },
+    "stderr": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "plan_sha256": "38bdee2a87cb8884bd6c661d416dd3eae92e97c16ad2fedc509a431ab16df630",
+  "diagnostics": {
+    "algorithm_id": "q1-component-overload-list",
+    "variant": "any-pipe-overload-quotient-ready-list",
+    "max_rounds": 64,
+    "max_sinks": 64,
+    "base": {
+      "algorithm_id": "q1-heavy-component-suffix",
+      "variant": "dominant-pipe-suffix-waves",
+      "selected": "sink-or-bounded",
+      "dominant_percent": 80,
+      "max_rounds": 64,
+      "max_sinks": 64,
+      "base": {
+        "algorithm_id": "q1-sink-peel",
+        "variant": "exclusive-suffix-waves",
+        "selected": "bounded04",
+        "base": {
+          "algorithm_id": "q1-bounded-component-tasks",
+          "variant": "frontier-then-independent-chunks",
+          "base": {
+            "algorithm_id": "q1-tree-frontier-pack",
+            "variant": "threshold-antichain-tail",
+            "packet_factor": 4,
+            "base": {
+              "algorithm_id": "q1-component-pack",
+              "variant": "pipe-lpt-one-task-per-core",
+              "compute_ops": 827,
+              "components": 25,
+              "largest_component_ops": 189,
+              "tasks": 5,
+              "core_compute_ops": [
+                150,
+                189,
+                189,
+                149,
+                150
+              ],
+              "compute_pipe_work_by_core": [
+                {
+                  "PIPE_V": 9510
+                },
+                {
+                  "PIPE_V": 7617
+                },
+                {
+                  "PIPE_M": 5782,
+                  "PIPE_V": 5418
+                },
+                {
+                  "PIPE_M": 1956,
+                  "PIPE_V": 5805
+                },
+                {
+                  "PIPE_M": 2412,
+                  "PIPE_V": 5645
+                }
+              ],
+              "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+            },
+            "selected": "component-pack",
+            "scope": "Structural proof only; E0 required",
+            "reason": "enough independent components or one core"
+          },
+          "chunks": {
+            "trigger_ops": 4096,
+            "chunk_ops": 1024,
+            "split_tasks": [],
+            "oversize_indivisible_components": [],
+            "tasks_before": 5,
+            "tasks_after": 5
+          },
+          "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+        },
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "scope": "Task-order proof only; no spill, performance or E0 feasibility guarantee",
+        "reason": "existing bounded04 structural route retained"
+      },
+      "scope": "Structural candidate; neither dominance nor zero spill proves quality",
+      "components": 25,
+      "dominant_pipe": "PIPE_V",
+      "total_pipe_work": {
+        "PIPE_M": 10150,
+        "PIPE_V": 33995
+      },
+      "heavy_pipe_work": {
+        "PIPE_V": 9510
+      },
+      "heavy_anchor": 1346,
+      "heavy_ops": 150,
+      "reason": "no dominant component"
+    },
+    "selected": "overload-list",
+    "scope": "Direct structural proposal; proxy times omit DDR, FIFO and capacity",
+    "total_pipe_work": {
+      "PIPE_M": 10150,
+      "PIPE_V": 33995
+    },
+    "components": 25,
+    "split_components": [
+      {
+        "anchor": 398,
+        "ops": 189,
+        "overloaded_pipes": [
+          "PIPE_V"
+        ],
+        "pipe_work": {
+          "PIPE_V": 7617
+        },
+        "waves": 2,
+        "tasks": 8
+      }
+    ],
+    "retained_components": 24,
+    "placement": {
+      "placement_order": [
+        8,
+        12,
+        10,
+        9,
+        11,
+        0,
+        1,
+        2,
+        5,
+        6,
+        7,
+        3,
+        4
+      ],
+      "tasks_before_soft_chunks": 13,
+      "compute_gate_proxy_finish": 9510,
+      "task_compute_weight": [
+        855,
+        855,
+        855,
+        1000,
+        987,
+        1026,
+        1026,
+        1013,
+        9510,
+        3991,
+        4033,
+        3909,
+        4935
+      ],
+      "task_start_proxy": [
+        4009,
+        4091,
+        4133,
+        5946,
+        7046,
+        5946,
+        5988,
+        5988,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "task_finish_proxy": [
+        4864,
+        4946,
+        4988,
+        6946,
+        8033,
+        6972,
+        7014,
+        7001,
+        9510,
+        3991,
+        4033,
+        3909,
+        4935
+      ]
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [],
+      "oversize_indivisible_components": [],
+      "tasks_before": 13,
+      "tasks_after": 13
+    },
+    "reason": "some per-pipe whole-component loads exceed the K-core fair share"
+  },
+  "compute_coverage_checked": true,
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_032.json",
+      "./results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/case_032_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/result.json",
+      "--trace-output",
+      "./results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/trace.json",
+      "--log-output",
+      "./results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T16:36:21.528Z",
+    "finished_at": "2026-09-24T16:36:21.652Z",
+    "wall_seconds": 0.12308008401305415,
+    "timeout_seconds": 90,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/E0.stdout.txt",
+      "sha256": "efd7502e4a177643769667f007954b98abe6a40a602114d8dccbd04a14e8af14"
+    },
+    "stderr": {
+      "path": "results/a/q1-overload-activation-20260925/20260924T1636Z-overload16/cells/032/k5/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 293088,
+    "scheduled_copy_bytes": 377192,
+    "added_copy_bytes": 84104,
+    "partition_added_copy_bytes": 84104,
+    "spill_added_copy_bytes": 0
+  }
+}

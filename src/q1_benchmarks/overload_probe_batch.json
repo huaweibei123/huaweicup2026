@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "purpose": "Two predeclared P1 k5 component-overload probes; prepare only until root review and P2 resource release",
+  "solver_commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+  "algorithm_id": "q1-component-overload-list",
+  "algorithm_name": "P1 per-pipe overloaded components and quotient ready list",
+  "variant": "any-pipe-overload-quotient-ready-list",
+  "entrypoint": "src/q1/component_overload.py",
+  "algorithm_sources": ["src/q1/component_overload.py", "src/q1/heavy_suffix.py", "src/q1/sink_peel.py", "src/q1/bounded_tasks.py", "src/q1/tree_frontier.py", "src/q1/component_pack.py"],
+  "runner_path": "src/q1_benchmarks/overload_probe_e0.py",
+  "manifest_path": "src/q1_benchmarks/overload_probe_batch.json",
+  "documentation": "docs/a/Q1_COMPONENT_OVERLOAD.md",
+  "method": "Build heavy/sink/bounded fallback, identify each whole component exceeding any compute-pipe fair share, peel independent suffix waves within fixed bounds, pack waves and retained components into coarse Tasks, place their acyclic quotient using a deterministic compute/gate ready-list proxy, apply bounded independent-component chunks and official structural validation. No online E0 or score search.",
+  "cells": [["054", 5], ["050", 5]],
+  "parameters": {"max_rounds": 64, "max_sinks": 64},
+  "solver_extra_argv": [],
+  "workers": 1,
+  "maximum_calls": {"solver": 2, "E0": 2, "E1": 0, "E2": 0},
+  "timeouts_seconds": {"solver": 30, "E0": 90, "batch": 300},
+  "retries": 0,
+  "stop_policy": "First constructor/E0/source/resource/cleanup failure stops the batch; no retry; retain remaining not_run",
+  "coordination": "WAIT_ROOT_REVIEW_AND_P2_RELEASE: preparation only. P2 is preparing its 062 three-cell batch; this probe must wait for root explicit EXECUTE after review and resource release. One nonexclusive worker, no Colab/GPU; preserve actual authorization receipt.",
+  "comparison_source": {
+    "commit": "d63001eb01cc254a20bc60cae5e50b1eb1ee2808",
+    "feed": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/board-feed.json",
+    "scope": "Exact old bounded04 same-cell plans/results and official singlecore originals reused; no baseline calls"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "purpose": "All remaining 16 statically activated k5 graphs from the 18-graph enough_components_and_parallel_peel audit, excluding previously measured 050/054; includes quiet-pipe and retained heavy single-sink potential negative cases; not selected by observed scores",
+  "solver_commit": "3c6e41b938c764d207de45584fb526c64f4eb845",
+  "algorithm_id": "q1-component-overload-list",
+  "algorithm_name": "P1 per-pipe overloaded components and quotient ready list",
+  "variant": "any-pipe-overload-quotient-ready-list",
+  "entrypoint": "src/q1/component_overload.py",
+  "algorithm_sources": [
+    "src/q1/component_overload.py",
+    "src/q1/heavy_suffix.py",
+    "src/q1/sink_peel.py",
+    "src/q1/bounded_tasks.py",
+    "src/q1/tree_frontier.py",
+    "src/q1/component_pack.py"
+  ],
+  "runner_path": "src/q1_benchmarks/overload_activation_e0.py",
+  "manifest_path": "src/q1_benchmarks/overload_activation_batch.json",
+  "documentation": "docs/a/Q1_COMPONENT_OVERLOAD.md",
+  "method": "Build heavy/sink/bounded fallback, identify each whole component exceeding any compute-pipe fair share, peel independent suffix waves within fixed bounds, pack waves and retained components into coarse Tasks, place their acyclic quotient using a deterministic compute/gate ready-list proxy, apply bounded independent-component chunks and official structural validation. No online E0 or score search.",
+  "cells": [
+    [
+      "003",
+      5
+    ],
+    [
+      "009",
+      5
+    ],
+    [
+      "031",
+      5
+    ],
+    [
+      "032",
+      5
+    ],
+    [
+      "035",
+      5
+    ],
+    [
+      "040",
+      5
+    ],
+    [
+      "043",
+      5
+    ],
+    [
+      "049",
+      5
+    ],
+    [
+      "053",
+      5
+    ],
+    [
+      "056",
+      5
+    ],
+    [
+      "057",
+      5
+    ],
+    [
+      "066",
+      5
+    ],
+    [
+      "068",
+      5
+    ],
+    [
+      "077",
+      5
+    ],
+    [
+      "087",
+      5
+    ],
+    [
+      "088",
+      5
+    ]
+  ],
+  "parameters": {
+    "max_rounds": 64,
+    "max_sinks": 64
+  },
+  "solver_extra_argv": [],
+  "workers": 1,
+  "maximum_calls": {
+    "solver": 16,
+    "E0": 16,
+    "E1": 0,
+    "E2": 0
+  },
+  "timeouts_seconds": {
+    "solver": 30,
+    "E0": 90,
+    "batch": 900
+  },
+  "retries": 0,
+  "stop_policy": "First constructor/E0/source/resource/cleanup failure stops the batch; no retry; retain remaining not_run",
+  "coordination": "WAIT_ROOT_REVIEW_AND_P3_RELEASE: preparation only while P3 prepares its short three-cell batch. Requires explicit root EXECUTE after review/release. Reuse the completed overload-probe worktree, one nonexclusive worker, no new checkout/Colab/GPU.",
+  "comparison_source": {
+    "commit": "d63001eb01cc254a20bc60cae5e50b1eb1ee2808",
+    "feed": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/board-feed.json",
+    "scope": "Exact old bounded04 same-cell plans/results and official singlecore originals reused; no baseline calls",
+    "overrides": {
+      "087/k5": {
+        "commit": "f0dde725a047f1fb3bce03a30a3850d49b708463",
+        "feed": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/board-feed.json",
+        "reason": "Original 400-run E0 attempt timed out. Reuse separately frozen successful diagnostic attempt from identical 05f8 algorithm and verified identical plan bytes; retain old timeout history. No baseline rerun."
+      }
+    }
+  },
+  "already_completed": {
+    "commit": "11491834c74b5d5930af11ea70e9e452d4f7666c",
+    "feed": "results/a/q1-overload-probe-20260925/20260924T1629Z-overload2/board-feed.json",
+    "cells": [
+      [
+        "050",
+        5
+      ],
+      [
+        "054",
+        5
+      ]
+    ],
+    "policy": "Do not execute or duplicate attempts in the new 16-record feed; may identify these original attempts in a separate 18-activation summary"
+  }
+}
