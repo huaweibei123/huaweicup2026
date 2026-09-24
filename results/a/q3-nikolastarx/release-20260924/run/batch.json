@@ -1,0 +1,4084 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-release-direct-20260924",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-tree-direct",
+    "name": "归约树单候选直接构造",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+        "path": "src/q3/fragment_tree.py",
+        "entrypoint": "src.q3.fragment_tree.construct"
+      }
+    ]
+  },
+  "runtime_id": "q3-local-macos-arm64-20260924",
+  "budget": {
+    "max_e0_calls": 8,
+    "total_wall_seconds": 300,
+    "per_job_seconds": 60
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "started_at": "2026-09-24T14:56:08.494934Z",
+  "status": "stage_complete",
+  "stages": [
+    {
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:08.561819Z",
+      "manifest": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+        "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+      },
+      "source_input_sha256": {
+        "data/raw/a/official/code/contest_io.py": "d5936908e4c261c7003b78e783f30bd7d65cb38d6b53a269ea67f0103cac848e",
+        "data/raw/a/official/code/evaluation_validation.py": "103206b8c5c25e37de50cc3193de3989d7c1e01d4a11cc5f509dedd8f9be9a64",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py": "2095f188a6c24ce3899f156bef21d50dcd87cbd9368488046b1e77e2bf91af3f",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py": "0b39f84d5ec0a7fba9a4c92a598a9044b97ab79c71393824c1ba130ecfe6c464",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_3.py": "eab1504dead881f4b67c0f0498cbc2dbbd9039dc3c9d198c6af58773c127eeb0",
+        "data/raw/a/official/code/schedule_step1.py": "d8fe721ff3dbe036e34a20c00cce6430960860000a49eb467e63465f76b84034",
+        "data/raw/a/official/code/schedule_step2.py": "2836baac176f4e0bdd9eec59b8d9ce254e209e5f7a251e23837ab684312fa0c3",
+        "data/raw/a/official/code/schedule_step3.py": "50053db0436f1d166dd75436693ba3af49b5c339576beb6e7299477f6b69fc7a",
+        "data/raw/a/official/code/singlecore_evaluate.py": "446b753ee134ef1fec8e052356bb077a2602fbe95572ccd3dddd7928e894b77a",
+        "data/raw/a/official/code/stub_multicore_cut_and_schedule.py": "0a3a3b79b5173b466fc05fc8d33b72d11d90b4df78995435853d91c632a35892",
+        "data/raw/a/official/data/case_002.json": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "data/raw/a/official/data/case_062.json": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "data/raw/a/official/data/case_063.json": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "data/raw/a/official/data/case_080.json": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "data/raw/a/official/data/config.txt": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "src/q3/__init__.py": "2cc8f5aef26ab2ee35c15cd531394a5baa2bf0b3189370807b1e2433e563a417",
+        "src/q3/board_export.py": "0e130adb1404a80a0d5a14f9ca00f259176030c0e811c55b6c64ced77be1792e",
+        "src/q3/capacity_tree.py": "7da01071b83125cf1adc7952667d2dff063013f41c1ce69d991cb9e4f1669ffd",
+        "src/q3/construct.py": "942450f2751eb5b0cf4817d392acdd6e4316e751c48ea8e84b509d4ce1e97d73",
+        "src/q3/experiment.py": "b1bddfbf32aad5bee36600c004568a696e2edef3e900735ae08c1dec37ce9226",
+        "src/q3/feedback_benchmark.py": "07a662b02f2fcf8fbe0e3342bc98ee8c00a7d87d93609ee0a93e6f123b0d6058",
+        "src/q3/feedback_report.py": "1efe25bc54de8b566361941f206f3bd5e2f28be18a3c660d436e575e9d724419",
+        "src/q3/fragment_tree.py": "e9912965676247351004b07f3df21ea0f244fcbab0c5ee76053e94efc14d2da6",
+        "src/q3/highgain_audit.py": "540dc2a0dc32646ec1a76796badd1ada36e955830af74a087eaa7afaebdcb71d",
+        "src/q3/online_check.py": "1c1eb9d048e6e62d5d9ba13cd809f7daea0755cf9c8ea6e7831f152dc27beab7",
+        "src/q3/oracle.py": "25662ff1323546a2fd3e95aed00761bc020cc1c2e4d94481b9d4fb38e4a80965",
+        "src/q3/pipe_bound.py": "656865f7b124dd546f45d961819c67a6c72c8da4fede9c8cb50df9fe67465d26",
+        "src/q3/reduction_tree.py": "28e78dfdd2713f7f5c269e2092ab63241e27b1c0b89ce518269d31bba40d2458",
+        "src/q3/release_tree.py": "7f5ec7f0f8405a0e3cd36d65fb64a06faaf93acb04823cb1b2a08eb34c9afb7d",
+        "src/q3/report.py": "cf15da908d9cef4970166417e1a01eb6eabb3bf171e045e481cbbdfc55df9759",
+        "src/q3/safe_solve.py": "9423bda1ece151c18470c87bc7d9a46647b90d96220235dbaed1de470d3e4c86",
+        "src/q3/solve.py": "b911207bcbfbab23fa1924c0a4426c8340963c8c6e7b5879fadbe6047caaffdd",
+        "src/q3/tree_solve.py": "b0ca58b32eb4cd9a900484d3f6307ea6d707f9d5b77fbb2610ea704607d036b9",
+        "uv.lock": "7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4"
+      },
+      "status": "stage_complete",
+      "runner_argv": [
+        "python",
+        "-m",
+        "src.q3.feedback_benchmark",
+        "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+        "results/a/q3-nikolastarx/release-20260924/run"
+      ],
+      "finished_at": "2026-09-24T14:56:17.204939Z"
+    }
+  ],
+  "records": [
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "002-k5-release-order-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:08.598518Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/case_002_multicore_res.json",
+          "sha256": "8c0ef1ee8fb7f3b3c5d19a694ce71afa74b19d3048593dedb84c0ba28cabf508"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/evidence/result.json.gz",
+          "sha256": "6eed333684fd59bfd844d4d2e11d8487cbb1f0f8d022aecc67f3da7092deba45"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/evidence/receipt.json",
+          "sha256": "ab0ef4198115597d22fe488b4e65d0fb80a7304a08d681a53f35740e57d83c09"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.15780799998901784,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_002.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/case_002_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/evidence",
+          "--tree-method",
+          "release-order"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "8c0ef1ee8fb7f3b3c5d19a694ce71afa74b19d3048593dedb84c0ba28cabf508"
+      },
+      "makespan_cycles": 55156,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1224192,
+        "scheduled_copy_bytes": 1291776,
+        "added_copy_bytes": 67584,
+        "partition_added_copy_bytes": 67584,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 420,
+        "hit_bytes": 0,
+        "miss_bytes": 1256448,
+        "hits": 0,
+        "accesses": 420,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "release_order_forest",
+        "selected_strategy": "release_order_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-order"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_order_forest",
+            "status": "ok",
+            "makespan": 55156,
+            "metadata": {
+              "strategy": "release_order_forest",
+              "fragment_threshold_cycles": 13797,
+              "fragment_count": 25,
+              "fragment_work_cycles": [
+                11004,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11112,
+                12348,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11148,
+                11004,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11112,
+                9696
+              ],
+              "cuts": [
+                [
+                  2148,
+                  2173
+                ],
+                [
+                  2150,
+                  2174
+                ],
+                [
+                  2152,
+                  2175
+                ],
+                [
+                  2154,
+                  2176
+                ],
+                [
+                  2156,
+                  2177
+                ],
+                [
+                  2158,
+                  2178
+                ],
+                [
+                  2160,
+                  2179
+                ],
+                [
+                  2162,
+                  2180
+                ],
+                [
+                  2164,
+                  2181
+                ],
+                [
+                  2166,
+                  2182
+                ],
+                [
+                  2168,
+                  2183
+                ],
+                [
+                  2170,
+                  2184
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2177,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2187,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ],
+                [
+                  2194,
+                  2196
+                ]
+              ],
+              "core_work_cycles": [
+                55092,
+                55236,
+                55200,
+                55200,
+                55200
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 2,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 0,
+                  "proxy_finish": 11952,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 0,
+                  "proxy_finish": 22416,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 2,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 2,
+                  "proxy_finish": 31536,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 3,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 4,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 1,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 18,
+                  "core": 3,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 20,
+                  "core": 4,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 0,
+                  "proxy_finish": 32880,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 22,
+                  "core": 1,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 3,
+                  "proxy_finish": 31572,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 13,
+                  "core": 3,
+                  "proxy_finish": 42036,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 9,
+                  "core": 0,
+                  "proxy_finish": 43380,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 5,
+                  "core": 1,
+                  "proxy_finish": 31572,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 21,
+                  "core": 1,
+                  "proxy_finish": 42036,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 17,
+                  "core": 4,
+                  "proxy_finish": 32072,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 3,
+                  "core": 4,
+                  "proxy_finish": 42452,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 19,
+                  "core": 2,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 23,
+                  "core": 3,
+                  "proxy_finish": 52572,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 7,
+                  "core": 2,
+                  "proxy_finish": 52572,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 11,
+                  "core": 4,
+                  "proxy_finish": 52916,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 15,
+                  "core": 1,
+                  "proxy_finish": 53488,
+                  "remote_inputs": 4
+                },
+                {
+                  "fragment": 24,
+                  "core": 0,
+                  "proxy_finish": 54024,
+                  "remote_inputs": 2
+                }
+              ],
+              "proxy_makespan_cycles": 54024,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [
+                [
+                  2148,
+                  2173
+                ],
+                [
+                  2150,
+                  2174
+                ],
+                [
+                  2152,
+                  2175
+                ],
+                [
+                  2154,
+                  2176
+                ],
+                [
+                  2160,
+                  2179
+                ],
+                [
+                  2162,
+                  2180
+                ],
+                [
+                  2164,
+                  2181
+                ],
+                [
+                  2166,
+                  2182
+                ],
+                [
+                  2168,
+                  2183
+                ],
+                [
+                  2170,
+                  2184
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2177,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2187,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ],
+                [
+                  2194,
+                  2196
+                ]
+              ],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "unchanged LPT",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "8c0ef1ee8fb7f3b3c5d19a694ce71afa74b19d3048593dedb84c0ba28cabf508"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "6eed333684fd59bfd844d4d2e11d8487cbb1f0f8d022aecc67f3da7092deba45"
+              }
+            }
+          }
+        ],
+        "makespan": 55156,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1291776,
+          "added_copy_bytes": 67584,
+          "partition_added_copy_bytes": 67584,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 420,
+          "hit_bytes": 0,
+          "miss_bytes": 1256448,
+          "hits": 0,
+          "accesses": 420,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "8c0ef1ee8fb7f3b3c5d19a694ce71afa74b19d3048593dedb84c0ba28cabf508",
+        "result_sha256": "6eed333684fd59bfd844d4d2e11d8487cbb1f0f8d022aecc67f3da7092deba45",
+        "read_index_seconds": 0.009226249996572733,
+        "construct_seconds": 0.011001625010976568,
+        "config_prepare_ledger_seconds": 0.0017270419921260327,
+        "evaluation_seconds": 0.09407566700247116,
+        "result_write_seconds": 0.016812500020023435,
+        "main_until_evidence_seconds": 0.13284308402216993,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/evidence/evaluations.json",
+        "sha256": "caa6a40e1ba87a2a8833fd080fcec9b43b09369844862146f330c587f3968f07"
+      },
+      "finished_at": "2026-09-24T14:56:08.803502Z"
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "002-k5-release-place-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:08.841899Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/case_002_multicore_res.json",
+          "sha256": "ea6c992c11db5677685f75cfb1edcf166d013c765f558e0ab72621bc6a2a2527"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/evidence/result.json.gz",
+          "sha256": "f5d18a12536e68338a5a8532a21c4453d3f1b7ea1ed7ddc100de52ab954a4c72"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/evidence/receipt.json",
+          "sha256": "b10a4c5262b96dcdae85c02fa59bf43e25eb59f6354d3c2cf045e865a57bff27"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.1533701669832226,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_002.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/case_002_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/evidence",
+          "--tree-method",
+          "release-place"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "ea6c992c11db5677685f75cfb1edcf166d013c765f558e0ab72621bc6a2a2527"
+      },
+      "makespan_cycles": 54341,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1224192,
+        "scheduled_copy_bytes": 1273344,
+        "added_copy_bytes": 49152,
+        "partition_added_copy_bytes": 49152,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 414,
+        "hit_bytes": 0,
+        "miss_bytes": 1247232,
+        "hits": 0,
+        "accesses": 414,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "release_place_forest",
+        "selected_strategy": "release_place_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-place"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_place_forest",
+            "status": "ok",
+            "makespan": 54341,
+            "metadata": {
+              "strategy": "release_place_forest",
+              "fragment_threshold_cycles": 13797,
+              "fragment_count": 25,
+              "fragment_work_cycles": [
+                11004,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11112,
+                12348,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11148,
+                11004,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11112,
+                9696
+              ],
+              "cuts": [
+                [
+                  2148,
+                  2173
+                ],
+                [
+                  2150,
+                  2174
+                ],
+                [
+                  2152,
+                  2175
+                ],
+                [
+                  2154,
+                  2176
+                ],
+                [
+                  2156,
+                  2177
+                ],
+                [
+                  2158,
+                  2178
+                ],
+                [
+                  2160,
+                  2179
+                ],
+                [
+                  2162,
+                  2180
+                ],
+                [
+                  2164,
+                  2181
+                ],
+                [
+                  2166,
+                  2182
+                ],
+                [
+                  2168,
+                  2183
+                ],
+                [
+                  2170,
+                  2184
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2177,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2187,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ],
+                [
+                  2194,
+                  2196
+                ]
+              ],
+              "core_work_cycles": [
+                55128,
+                55164,
+                55164,
+                55236,
+                55236
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 0,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 1,
+                  "proxy_finish": 11952,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 2,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 3,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 4,
+                  "proxy_finish": 10608,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 0,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 2,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 3,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 18,
+                  "core": 4,
+                  "proxy_finish": 21072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 20,
+                  "core": 1,
+                  "proxy_finish": 22416,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 0,
+                  "proxy_finish": 31536,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 22,
+                  "core": 2,
+                  "proxy_finish": 31536,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 3,
+                  "proxy_finish": 31572,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 5,
+                  "core": 4,
+                  "proxy_finish": 31572,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 17,
+                  "core": 1,
+                  "proxy_finish": 32916,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 9,
+                  "core": 0,
+                  "proxy_finish": 42036,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 13,
+                  "core": 3,
+                  "proxy_finish": 42036,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 21,
+                  "core": 2,
+                  "proxy_finish": 42036,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 3,
+                  "core": 4,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 19,
+                  "core": 1,
+                  "proxy_finish": 43416,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 11,
+                  "core": 0,
+                  "proxy_finish": 52536,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 7,
+                  "core": 4,
+                  "proxy_finish": 52572,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 23,
+                  "core": 2,
+                  "proxy_finish": 52572,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 15,
+                  "core": 3,
+                  "proxy_finish": 53108,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 24,
+                  "core": 1,
+                  "proxy_finish": 53644,
+                  "remote_inputs": 2
+                }
+              ],
+              "proxy_makespan_cycles": 53644,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [
+                [
+                  2148,
+                  2173
+                ],
+                [
+                  2150,
+                  2174
+                ],
+                [
+                  2152,
+                  2175
+                ],
+                [
+                  2154,
+                  2176
+                ],
+                [
+                  2156,
+                  2177
+                ],
+                [
+                  2158,
+                  2178
+                ],
+                [
+                  2162,
+                  2180
+                ],
+                [
+                  2164,
+                  2181
+                ],
+                [
+                  2166,
+                  2182
+                ],
+                [
+                  2168,
+                  2183
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2187,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ],
+                [
+                  2194,
+                  2196
+                ]
+              ],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "minimum proxy completion",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "ea6c992c11db5677685f75cfb1edcf166d013c765f558e0ab72621bc6a2a2527"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "f5d18a12536e68338a5a8532a21c4453d3f1b7ea1ed7ddc100de52ab954a4c72"
+              }
+            }
+          }
+        ],
+        "makespan": 54341,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1273344,
+          "added_copy_bytes": 49152,
+          "partition_added_copy_bytes": 49152,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 414,
+          "hit_bytes": 0,
+          "miss_bytes": 1247232,
+          "hits": 0,
+          "accesses": 414,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "ea6c992c11db5677685f75cfb1edcf166d013c765f558e0ab72621bc6a2a2527",
+        "result_sha256": "f5d18a12536e68338a5a8532a21c4453d3f1b7ea1ed7ddc100de52ab954a4c72",
+        "read_index_seconds": 0.009082165983272716,
+        "construct_seconds": 0.013284375017974526,
+        "config_prepare_ledger_seconds": 0.0015736249915789813,
+        "evaluation_seconds": 0.08837866701651365,
+        "result_write_seconds": 0.015883457992458716,
+        "main_until_evidence_seconds": 0.12820229100179859,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/evidence/evaluations.json",
+        "sha256": "6948f9a50518c3fa6e2913158fe50a486e171488dd02b9ab077ce622a45f57a6"
+      },
+      "finished_at": "2026-09-24T14:56:09.046486Z"
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "062-k5-release-order-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:09.090645Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/case_062_multicore_res.json",
+          "sha256": "159466161f0b565d0118d7c3b45a8fd7c69a4ec2be5f59d177bb1e866c80264b"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/evidence/result.json.gz",
+          "sha256": "54f75556c9b487a2619679b456f473c939ba6499004f62c267fb53eaa6dcfe7f"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/evidence/receipt.json",
+          "sha256": "7bc0850db5990c91c11005b2b8917d0fbb0f8cdf3f811958d2240ac3d1edd4fe"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 2.877617582998937,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_062.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/case_062_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/evidence",
+          "--tree-method",
+          "release-order"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "159466161f0b565d0118d7c3b45a8fd7c69a4ec2be5f59d177bb1e866c80264b"
+      },
+      "makespan_cycles": 589441,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 13401600,
+        "scheduled_copy_bytes": 13478400,
+        "added_copy_bytes": 76800,
+        "partition_added_copy_bytes": 76800,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 4387,
+        "hit_bytes": 0,
+        "miss_bytes": 13438464,
+        "hits": 0,
+        "accesses": 4387,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "release_order_forest",
+        "selected_strategy": "release_order_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-order"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_order_forest",
+            "status": "ok",
+            "makespan": 589441,
+            "metadata": {
+              "strategy": "release_order_forest",
+              "fragment_threshold_cycles": 150555,
+              "fragment_count": 34,
+              "fragment_work_cycles": [
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88428,
+                89628,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88500,
+                88284,
+                95220
+              ],
+              "cuts": [
+                [
+                  23931,
+                  23965
+                ],
+                [
+                  23933,
+                  23966
+                ],
+                [
+                  23935,
+                  23967
+                ],
+                [
+                  23937,
+                  23968
+                ],
+                [
+                  23939,
+                  23969
+                ],
+                [
+                  23941,
+                  23970
+                ],
+                [
+                  23943,
+                  23971
+                ],
+                [
+                  23945,
+                  23972
+                ],
+                [
+                  23947,
+                  23973
+                ],
+                [
+                  23949,
+                  23974
+                ],
+                [
+                  23951,
+                  23975
+                ],
+                [
+                  23953,
+                  23976
+                ],
+                [
+                  23955,
+                  23977
+                ],
+                [
+                  23957,
+                  23978
+                ],
+                [
+                  23959,
+                  23979
+                ],
+                [
+                  23961,
+                  23980
+                ],
+                [
+                  23963,
+                  23981
+                ],
+                [
+                  23965,
+                  23982
+                ],
+                [
+                  23967,
+                  23983
+                ],
+                [
+                  23969,
+                  23984
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23979,
+                  23989
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23986,
+                  23993
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ],
+                [
+                  23990,
+                  23998
+                ]
+              ],
+              "core_work_cycles": [
+                536748,
+                619440,
+                618348,
+                618276,
+                618276
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 1,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 1,
+                  "proxy_finish": 169020,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 0,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 3,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 2,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 4,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 1,
+                  "proxy_finish": 252732,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 0,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 18,
+                  "core": 4,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 20,
+                  "core": 2,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 24,
+                  "core": 0,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 32,
+                  "core": 1,
+                  "proxy_finish": 336444,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 3,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 22,
+                  "core": 1,
+                  "proxy_finish": 420156,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 26,
+                  "core": 3,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 28,
+                  "core": 4,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 30,
+                  "core": 2,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 9,
+                  "core": 2,
+                  "proxy_finish": 335136,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 3,
+                  "proxy_finish": 335136,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 5,
+                  "core": 4,
+                  "proxy_finish": 335136,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 13,
+                  "core": 1,
+                  "proxy_finish": 503904,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 21,
+                  "core": 3,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 17,
+                  "core": 0,
+                  "proxy_finish": 335136,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 25,
+                  "core": 4,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 29,
+                  "core": 2,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 3,
+                  "core": 3,
+                  "proxy_finish": 502596,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 11,
+                  "core": 2,
+                  "proxy_finish": 502596,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 19,
+                  "core": 1,
+                  "proxy_finish": 587652,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 33,
+                  "core": 0,
+                  "proxy_finish": 425424,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 27,
+                  "core": 0,
+                  "proxy_finish": 509160,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 7,
+                  "core": 4,
+                  "proxy_finish": 503132,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 15,
+                  "core": 3,
+                  "proxy_finish": 586404,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 23,
+                  "core": 4,
+                  "proxy_finish": 588188,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 31,
+                  "core": 2,
+                  "proxy_finish": 588796,
+                  "remote_inputs": 4
+                }
+              ],
+              "proxy_makespan_cycles": 588796,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [
+                [
+                  23931,
+                  23965
+                ],
+                [
+                  23933,
+                  23966
+                ],
+                [
+                  23935,
+                  23967
+                ],
+                [
+                  23941,
+                  23970
+                ],
+                [
+                  23943,
+                  23971
+                ],
+                [
+                  23947,
+                  23973
+                ],
+                [
+                  23949,
+                  23974
+                ],
+                [
+                  23951,
+                  23975
+                ],
+                [
+                  23953,
+                  23976
+                ],
+                [
+                  23955,
+                  23977
+                ],
+                [
+                  23957,
+                  23978
+                ],
+                [
+                  23959,
+                  23979
+                ],
+                [
+                  23963,
+                  23981
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23986,
+                  23993
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23990,
+                  23998
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ]
+              ],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "unchanged LPT",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "159466161f0b565d0118d7c3b45a8fd7c69a4ec2be5f59d177bb1e866c80264b"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "54f75556c9b487a2619679b456f473c939ba6499004f62c267fb53eaa6dcfe7f"
+              }
+            }
+          }
+        ],
+        "makespan": 589441,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 13401600,
+          "scheduled_copy_bytes": 13478400,
+          "added_copy_bytes": 76800,
+          "partition_added_copy_bytes": 76800,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 4387,
+          "hit_bytes": 0,
+          "miss_bytes": 13438464,
+          "hits": 0,
+          "accesses": 4387,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "159466161f0b565d0118d7c3b45a8fd7c69a4ec2be5f59d177bb1e866c80264b",
+        "result_sha256": "54f75556c9b487a2619679b456f473c939ba6499004f62c267fb53eaa6dcfe7f",
+        "read_index_seconds": 0.130803542007925,
+        "construct_seconds": 0.21411404199898243,
+        "config_prepare_ledger_seconds": 0.0027885409945156425,
+        "evaluation_seconds": 2.3278870420181192,
+        "result_write_seconds": 0.16642449999926612,
+        "main_until_evidence_seconds": 2.8420176670188084,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/evidence/evaluations.json",
+        "sha256": "4add3ca7b3b54f0228805994470027b84793576e7dd80ef0a444517ae304c78a"
+      },
+      "finished_at": "2026-09-24T14:56:12.077482Z"
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "062-k5-release-place-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:12.120647Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/case_062_multicore_res.json",
+          "sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/evidence/result.json.gz",
+          "sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/evidence/receipt.json",
+          "sha256": "6666d240713b1b6c579228a732b1ef8e1ce02bc09babde56b133fead6124cfe5"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 2.7993892500235233,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_062.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/case_062_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/evidence",
+          "--tree-method",
+          "release-place"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+      },
+      "makespan_cycles": 588101,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 13401600,
+        "scheduled_copy_bytes": 13466112,
+        "added_copy_bytes": 64512,
+        "partition_added_copy_bytes": 64512,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 4383,
+        "hit_bytes": 0,
+        "miss_bytes": 13432320,
+        "hits": 0,
+        "accesses": 4383,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "release_place_forest",
+        "selected_strategy": "release_place_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-place"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_place_forest",
+            "status": "ok",
+            "makespan": 588101,
+            "metadata": {
+              "strategy": "release_place_forest",
+              "fragment_threshold_cycles": 150555,
+              "fragment_count": 34,
+              "fragment_work_cycles": [
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88428,
+                89628,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88500,
+                88284,
+                95220
+              ],
+              "cuts": [
+                [
+                  23931,
+                  23965
+                ],
+                [
+                  23933,
+                  23966
+                ],
+                [
+                  23935,
+                  23967
+                ],
+                [
+                  23937,
+                  23968
+                ],
+                [
+                  23939,
+                  23969
+                ],
+                [
+                  23941,
+                  23970
+                ],
+                [
+                  23943,
+                  23971
+                ],
+                [
+                  23945,
+                  23972
+                ],
+                [
+                  23947,
+                  23973
+                ],
+                [
+                  23949,
+                  23974
+                ],
+                [
+                  23951,
+                  23975
+                ],
+                [
+                  23953,
+                  23976
+                ],
+                [
+                  23955,
+                  23977
+                ],
+                [
+                  23957,
+                  23978
+                ],
+                [
+                  23959,
+                  23979
+                ],
+                [
+                  23961,
+                  23980
+                ],
+                [
+                  23963,
+                  23981
+                ],
+                [
+                  23965,
+                  23982
+                ],
+                [
+                  23967,
+                  23983
+                ],
+                [
+                  23969,
+                  23984
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23979,
+                  23989
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23986,
+                  23993
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ],
+                [
+                  23990,
+                  23998
+                ]
+              ],
+              "core_work_cycles": [
+                618168,
+                538092,
+                618312,
+                618276,
+                618240
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 0,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 1,
+                  "proxy_finish": 85308,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 2,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 3,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 4,
+                  "proxy_finish": 83964,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 0,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 2,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 3,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 18,
+                  "core": 4,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 20,
+                  "core": 1,
+                  "proxy_finish": 169020,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 24,
+                  "core": 0,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 32,
+                  "core": 2,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 3,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 22,
+                  "core": 4,
+                  "proxy_finish": 251388,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 26,
+                  "core": 1,
+                  "proxy_finish": 252732,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 28,
+                  "core": 0,
+                  "proxy_finish": 335100,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 30,
+                  "core": 2,
+                  "proxy_finish": 335100,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 3,
+                  "proxy_finish": 335136,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 5,
+                  "core": 4,
+                  "proxy_finish": 335136,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 9,
+                  "core": 1,
+                  "proxy_finish": 336480,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 17,
+                  "core": 0,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 13,
+                  "core": 3,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 21,
+                  "core": 2,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 25,
+                  "core": 4,
+                  "proxy_finish": 418848,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 33,
+                  "core": 1,
+                  "proxy_finish": 426768,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 29,
+                  "core": 0,
+                  "proxy_finish": 502560,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 3,
+                  "core": 2,
+                  "proxy_finish": 502596,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 11,
+                  "core": 3,
+                  "proxy_finish": 502596,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 19,
+                  "core": 4,
+                  "proxy_finish": 502596,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 27,
+                  "core": 1,
+                  "proxy_finish": 510504,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 7,
+                  "core": 0,
+                  "proxy_finish": 586344,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 23,
+                  "core": 4,
+                  "proxy_finish": 586368,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 15,
+                  "core": 3,
+                  "proxy_finish": 586880,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 31,
+                  "core": 2,
+                  "proxy_finish": 587452,
+                  "remote_inputs": 5
+                }
+              ],
+              "proxy_makespan_cycles": 587452,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [
+                [
+                  23931,
+                  23965
+                ],
+                [
+                  23935,
+                  23967
+                ],
+                [
+                  23939,
+                  23969
+                ],
+                [
+                  23941,
+                  23970
+                ],
+                [
+                  23947,
+                  23973
+                ],
+                [
+                  23951,
+                  23975
+                ],
+                [
+                  23955,
+                  23977
+                ],
+                [
+                  23963,
+                  23981
+                ],
+                [
+                  23965,
+                  23982
+                ],
+                [
+                  23967,
+                  23983
+                ],
+                [
+                  23969,
+                  23984
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23979,
+                  23989
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23990,
+                  23998
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ]
+              ],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "minimum proxy completion",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350"
+              }
+            }
+          }
+        ],
+        "makespan": 588101,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 13401600,
+          "scheduled_copy_bytes": 13466112,
+          "added_copy_bytes": 64512,
+          "partition_added_copy_bytes": 64512,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 4383,
+          "hit_bytes": 0,
+          "miss_bytes": 13432320,
+          "hits": 0,
+          "accesses": 4383,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b",
+        "result_sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350",
+        "read_index_seconds": 0.12218650002614595,
+        "construct_seconds": 0.24298983300104737,
+        "config_prepare_ledger_seconds": 0.002804666990414262,
+        "evaluation_seconds": 2.227606458007358,
+        "result_write_seconds": 0.16738704199087806,
+        "main_until_evidence_seconds": 2.7629745000158437,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/evidence/evaluations.json",
+        "sha256": "df8294eae3c1768dbbc6fcab68ee13f9754dc6863ebef91b457dfc338da6ce21"
+      },
+      "finished_at": "2026-09-24T14:56:15.031676Z"
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "063-k5-release-order-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:15.072089Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/case_063_multicore_res.json",
+          "sha256": "1eeca95e301d0a7f7e560e1b3d307e7a4a4a51d995613b1e93275101955ca3aa"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/evidence/result.json.gz",
+          "sha256": "1b5110c858a3f012f8d7342ed2eabc22fcc4b8ebe08d85f6d0275af59f972464"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/evidence/receipt.json",
+          "sha256": "956461675e1a7c836d86fdc241bfa47b088fde0374d0df96a89ca62619c75138"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.7352062500140164,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_063.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/case_063_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/evidence",
+          "--tree-method",
+          "release-order"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "1eeca95e301d0a7f7e560e1b3d307e7a4a4a51d995613b1e93275101955ca3aa"
+      },
+      "makespan_cycles": 232405,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 5021184,
+        "scheduled_copy_bytes": 5091840,
+        "added_copy_bytes": 70656,
+        "partition_added_copy_bytes": 70656,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 1657,
+        "hit_bytes": 0,
+        "miss_bytes": 5054976,
+        "hits": 0,
+        "accesses": 1657,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "release_order_forest",
+        "selected_strategy": "release_order_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-order"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_order_forest",
+            "status": "ok",
+            "makespan": 232405,
+            "metadata": {
+              "strategy": "release_order_forest",
+              "fragment_threshold_cycles": 56439,
+              "fragment_count": 26,
+              "fragment_work_cycles": [
+                44124,
+                44160,
+                44124,
+                44196,
+                44160,
+                45468,
+                44124,
+                44232,
+                44124,
+                44160,
+                44124,
+                44196,
+                44124,
+                44160,
+                44124,
+                44268,
+                44124,
+                44160,
+                44124,
+                44196,
+                44124,
+                44160,
+                44124,
+                44232,
+                44124,
+                23532
+              ],
+              "cuts": [
+                [
+                  8944,
+                  8970
+                ],
+                [
+                  8946,
+                  8971
+                ],
+                [
+                  8949,
+                  8972
+                ],
+                [
+                  8950,
+                  8973
+                ],
+                [
+                  8952,
+                  8974
+                ],
+                [
+                  8954,
+                  8975
+                ],
+                [
+                  8956,
+                  8976
+                ],
+                [
+                  8958,
+                  8977
+                ],
+                [
+                  8960,
+                  8978
+                ],
+                [
+                  8962,
+                  8979
+                ],
+                [
+                  8964,
+                  8980
+                ],
+                [
+                  8966,
+                  8981
+                ],
+                [
+                  8968,
+                  8982
+                ],
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8978,
+                  8987
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "core_work_cycles": [
+                222000,
+                220836,
+                244332,
+                220800,
+                220800
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 2,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 5,
+                  "core": 0,
+                  "proxy_finish": 43416,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 0,
+                  "proxy_finish": 85272,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 3,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 2,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 2,
+                  "proxy_finish": 125784,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 4,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 1,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 18,
+                  "core": 3,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 20,
+                  "core": 4,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 0,
+                  "proxy_finish": 127128,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 22,
+                  "core": 1,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 24,
+                  "core": 0,
+                  "proxy_finish": 168984,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 3,
+                  "proxy_finish": 125820,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 9,
+                  "core": 0,
+                  "proxy_finish": 210876,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 13,
+                  "core": 3,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 4,
+                  "core": 1,
+                  "proxy_finish": 125820,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 17,
+                  "core": 4,
+                  "proxy_finish": 125820,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 21,
+                  "core": 1,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 3,
+                  "core": 4,
+                  "proxy_finish": 167712,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 19,
+                  "core": 2,
+                  "proxy_finish": 167712,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 7,
+                  "core": 2,
+                  "proxy_finish": 209604,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 23,
+                  "core": 3,
+                  "proxy_finish": 209604,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 11,
+                  "core": 4,
+                  "proxy_finish": 211412,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 15,
+                  "core": 1,
+                  "proxy_finish": 211984,
+                  "remote_inputs": 4
+                },
+                {
+                  "fragment": 25,
+                  "core": 2,
+                  "proxy_finish": 231864,
+                  "remote_inputs": 3
+                }
+              ],
+              "proxy_makespan_cycles": 231864,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [
+                [
+                  8944,
+                  8970
+                ],
+                [
+                  8946,
+                  8971
+                ],
+                [
+                  8949,
+                  8972
+                ],
+                [
+                  8952,
+                  8974
+                ],
+                [
+                  8956,
+                  8976
+                ],
+                [
+                  8958,
+                  8977
+                ],
+                [
+                  8960,
+                  8978
+                ],
+                [
+                  8962,
+                  8979
+                ],
+                [
+                  8964,
+                  8980
+                ],
+                [
+                  8966,
+                  8981
+                ],
+                [
+                  8968,
+                  8982
+                ],
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8978,
+                  8987
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "unchanged LPT",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "1eeca95e301d0a7f7e560e1b3d307e7a4a4a51d995613b1e93275101955ca3aa"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "1b5110c858a3f012f8d7342ed2eabc22fcc4b8ebe08d85f6d0275af59f972464"
+              }
+            }
+          }
+        ],
+        "makespan": 232405,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 5021184,
+          "scheduled_copy_bytes": 5091840,
+          "added_copy_bytes": 70656,
+          "partition_added_copy_bytes": 70656,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 1657,
+          "hit_bytes": 0,
+          "miss_bytes": 5054976,
+          "hits": 0,
+          "accesses": 1657,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "1eeca95e301d0a7f7e560e1b3d307e7a4a4a51d995613b1e93275101955ca3aa",
+        "result_sha256": "1b5110c858a3f012f8d7342ed2eabc22fcc4b8ebe08d85f6d0275af59f972464",
+        "read_index_seconds": 0.04291520800325088,
+        "construct_seconds": 0.05907345801824704,
+        "config_prepare_ledger_seconds": 0.0018574589921627194,
+        "evaluation_seconds": 0.5398551659891382,
+        "result_write_seconds": 0.062016625015530735,
+        "main_until_evidence_seconds": 0.7057179160183296,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/evidence/evaluations.json",
+        "sha256": "c3df54b7b831cb0ba8a999479fd0f8dfa149ea4b4c780695891b4cf05ff8ebd1"
+      },
+      "finished_at": "2026-09-24T14:56:15.875150Z"
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "063-k5-release-place-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:15.918394Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/case_063_multicore_res.json",
+          "sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/evidence/result.json.gz",
+          "sha256": "1b5830b55f9ba35d31d956ab4f5f18df9a97868b75f6c99ad47fa5b415e3ac3f"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/evidence/receipt.json",
+          "sha256": "d0dac6b7b3de4a5e9761aa5089c861f17a258ac6d436d580b68dcd6e7fd1af4a"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.7734087499848101,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_063.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/case_063_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/evidence",
+          "--tree-method",
+          "release-place"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244"
+      },
+      "makespan_cycles": 232381,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 5021184,
+        "scheduled_copy_bytes": 5076480,
+        "added_copy_bytes": 55296,
+        "partition_added_copy_bytes": 55296,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 1652,
+        "hit_bytes": 0,
+        "miss_bytes": 5047296,
+        "hits": 0,
+        "accesses": 1652,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "release_place_forest",
+        "selected_strategy": "release_place_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-place"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_place_forest",
+            "status": "ok",
+            "makespan": 232381,
+            "metadata": {
+              "strategy": "release_place_forest",
+              "fragment_threshold_cycles": 56439,
+              "fragment_count": 26,
+              "fragment_work_cycles": [
+                44124,
+                44160,
+                44124,
+                44196,
+                44160,
+                45468,
+                44124,
+                44232,
+                44124,
+                44160,
+                44124,
+                44196,
+                44124,
+                44160,
+                44124,
+                44268,
+                44124,
+                44160,
+                44124,
+                44196,
+                44124,
+                44160,
+                44124,
+                44232,
+                44124,
+                23532
+              ],
+              "cuts": [
+                [
+                  8944,
+                  8970
+                ],
+                [
+                  8946,
+                  8971
+                ],
+                [
+                  8949,
+                  8972
+                ],
+                [
+                  8950,
+                  8973
+                ],
+                [
+                  8952,
+                  8974
+                ],
+                [
+                  8954,
+                  8975
+                ],
+                [
+                  8956,
+                  8976
+                ],
+                [
+                  8958,
+                  8977
+                ],
+                [
+                  8960,
+                  8978
+                ],
+                [
+                  8962,
+                  8979
+                ],
+                [
+                  8964,
+                  8980
+                ],
+                [
+                  8966,
+                  8981
+                ],
+                [
+                  8968,
+                  8982
+                ],
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8978,
+                  8987
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "core_work_cycles": [
+                220764,
+                222216,
+                244260,
+                220764,
+                220764
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 0,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 5,
+                  "core": 1,
+                  "proxy_finish": 43416,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 2,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 3,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 4,
+                  "proxy_finish": 42072,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 0,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 2,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 3,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 18,
+                  "core": 4,
+                  "proxy_finish": 83928,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 20,
+                  "core": 1,
+                  "proxy_finish": 85272,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 0,
+                  "proxy_finish": 125784,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 22,
+                  "core": 2,
+                  "proxy_finish": 125784,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 24,
+                  "core": 3,
+                  "proxy_finish": 125784,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 4,
+                  "proxy_finish": 125820,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 9,
+                  "core": 1,
+                  "proxy_finish": 127164,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 17,
+                  "core": 4,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 0,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 13,
+                  "core": 3,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 21,
+                  "core": 2,
+                  "proxy_finish": 167676,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 3,
+                  "core": 1,
+                  "proxy_finish": 169056,
+                  "remote_inputs": 2
+                },
+                {
+                  "fragment": 11,
+                  "core": 2,
+                  "proxy_finish": 209568,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 19,
+                  "core": 4,
+                  "proxy_finish": 209568,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 7,
+                  "core": 0,
+                  "proxy_finish": 209604,
+                  "remote_inputs": 1
+                },
+                {
+                  "fragment": 23,
+                  "core": 3,
+                  "proxy_finish": 210104,
+                  "remote_inputs": 3
+                },
+                {
+                  "fragment": 15,
+                  "core": 1,
+                  "proxy_finish": 210984,
+                  "remote_inputs": 4
+                },
+                {
+                  "fragment": 25,
+                  "core": 2,
+                  "proxy_finish": 231840,
+                  "remote_inputs": 3
+                }
+              ],
+              "proxy_makespan_cycles": 231840,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [
+                [
+                  8944,
+                  8970
+                ],
+                [
+                  8946,
+                  8971
+                ],
+                [
+                  8949,
+                  8972
+                ],
+                [
+                  8952,
+                  8974
+                ],
+                [
+                  8958,
+                  8977
+                ],
+                [
+                  8964,
+                  8980
+                ],
+                [
+                  8966,
+                  8981
+                ],
+                [
+                  8968,
+                  8982
+                ],
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "minimum proxy completion",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "1b5830b55f9ba35d31d956ab4f5f18df9a97868b75f6c99ad47fa5b415e3ac3f"
+              }
+            }
+          }
+        ],
+        "makespan": 232381,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 5021184,
+          "scheduled_copy_bytes": 5076480,
+          "added_copy_bytes": 55296,
+          "partition_added_copy_bytes": 55296,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 1652,
+          "hit_bytes": 0,
+          "miss_bytes": 5047296,
+          "hits": 0,
+          "accesses": 1652,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244",
+        "result_sha256": "1b5830b55f9ba35d31d956ab4f5f18df9a97868b75f6c99ad47fa5b415e3ac3f",
+        "read_index_seconds": 0.04307033299119212,
+        "construct_seconds": 0.062043334008194506,
+        "config_prepare_ledger_seconds": 0.0025418750010430813,
+        "evaluation_seconds": 0.5717702079855371,
+        "result_write_seconds": 0.06309583300026134,
+        "main_until_evidence_seconds": 0.7425215829862282,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/evidence/evaluations.json",
+        "sha256": "7da97538cb37d7eed73b251f9f4682a1b571c6337e6ac8c83c4a6653a888fe72"
+      },
+      "finished_at": "2026-09-24T14:56:16.760434Z"
+    },
+    {
+      "case_id": "080",
+      "cores": 4,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "080-k4-release-order-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:16.799199Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/case_080_multicore_res.json",
+          "sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/evidence/result.json.gz",
+          "sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/evidence/receipt.json",
+          "sha256": "f9482a86e0d15654e6326fb121741a4069e613e0becc5e4566894042562ff92a"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.13100366599974222,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_080.json",
+          "--cores",
+          "4",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/case_080_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/evidence",
+          "--tree-method",
+          "release-order"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+      },
+      "makespan_cycles": 90622,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1978368,
+        "scheduled_copy_bytes": 6168576,
+        "added_copy_bytes": 4190208,
+        "partition_added_copy_bytes": 4190208,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 458,
+        "copy_in_misses": 472,
+        "hit_bytes": 2899968,
+        "miss_bytes": 3194880,
+        "hits": 458,
+        "accesses": 930,
+        "hit_rate": 0.47580645161290325
+      },
+      "solver_receipt": {
+        "strategy": "release_order_forest",
+        "selected_strategy": "release_order_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-order"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_order_forest",
+            "status": "ok",
+            "makespan": 90622,
+            "metadata": {
+              "strategy": "release_order_forest",
+              "fragment_threshold_cycles": 19348,
+              "fragment_count": 18,
+              "fragment_work_cycles": [
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198
+              ],
+              "cuts": [],
+              "core_work_cycles": [
+                85990,
+                85990,
+                68792,
+                68792
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 0,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 1,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 2,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 3,
+                  "core": 3,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 0,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 5,
+                  "core": 1,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 2,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 7,
+                  "core": 3,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 0,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 9,
+                  "core": 1,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 2,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 11,
+                  "core": 3,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 0,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 13,
+                  "core": 1,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 2,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 15,
+                  "core": 3,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 0,
+                  "proxy_finish": 80480,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 17,
+                  "core": 1,
+                  "proxy_finish": 80480,
+                  "remote_inputs": 0
+                }
+              ],
+              "proxy_makespan_cycles": 80480,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "unchanged LPT",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461"
+              }
+            }
+          }
+        ],
+        "makespan": 90622,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1978368,
+          "scheduled_copy_bytes": 6168576,
+          "added_copy_bytes": 4190208,
+          "partition_added_copy_bytes": 4190208,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 458,
+          "copy_in_misses": 472,
+          "hit_bytes": 2899968,
+          "miss_bytes": 3194880,
+          "hits": 458,
+          "accesses": 930,
+          "hit_rate": 0.47580645161290325
+        },
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c",
+        "result_sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461",
+        "read_index_seconds": 0.006279250024817884,
+        "construct_seconds": 0.006746207975083962,
+        "config_prepare_ledger_seconds": 0.0016252080095000565,
+        "evaluation_seconds": 0.07813670899486169,
+        "result_write_seconds": 0.014840791001915932,
+        "main_until_evidence_seconds": 0.10762816600617953,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/evidence/evaluations.json",
+        "sha256": "c3667d3a6318d65960f0b2938d71697187cf3b8cc5968d68c0f96036fa519e25"
+      },
+      "finished_at": "2026-09-24T14:56:16.978517Z"
+    },
+    {
+      "case_id": "080",
+      "cores": 4,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1,
+      "job_key": "080-k4-release-place-e0",
+      "stage_id": "release-fourcells",
+      "started_at": "2026-09-24T14:56:17.018162Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/case_080_multicore_res.json",
+          "sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/evidence/result.json.gz",
+          "sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/evidence/receipt.json",
+          "sha256": "efb9c4e5693bd051782ff49334df777ec03404350b8af0ea3e5d7a495a66d36c"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.13570504100061953,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_080.json",
+          "--cores",
+          "4",
+          "-o",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/case_080_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/evidence",
+          "--tree-method",
+          "release-place"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+      },
+      "makespan_cycles": 90622,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1978368,
+        "scheduled_copy_bytes": 6168576,
+        "added_copy_bytes": 4190208,
+        "partition_added_copy_bytes": 4190208,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 458,
+        "copy_in_misses": 472,
+        "hit_bytes": 2899968,
+        "miss_bytes": 3194880,
+        "hits": 458,
+        "accesses": 930,
+        "hit_rate": 0.47580645161290325
+      },
+      "solver_receipt": {
+        "strategy": "release_place_forest",
+        "selected_strategy": "release_place_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "release-place"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "release_place_forest",
+            "status": "ok",
+            "makespan": 90622,
+            "metadata": {
+              "strategy": "release_place_forest",
+              "fragment_threshold_cycles": 19348,
+              "fragment_count": 18,
+              "fragment_work_cycles": [
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198,
+                17198
+              ],
+              "cuts": [],
+              "core_work_cycles": [
+                85990,
+                85990,
+                68792,
+                68792
+              ],
+              "fragment_dispatch": [
+                {
+                  "fragment": 0,
+                  "core": 0,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 1,
+                  "core": 1,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 2,
+                  "core": 2,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 3,
+                  "core": 3,
+                  "proxy_finish": 16248,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 4,
+                  "core": 0,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 5,
+                  "core": 1,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 6,
+                  "core": 2,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 7,
+                  "core": 3,
+                  "proxy_finish": 32306,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 8,
+                  "core": 0,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 9,
+                  "core": 1,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 10,
+                  "core": 2,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 11,
+                  "core": 3,
+                  "proxy_finish": 48364,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 12,
+                  "core": 0,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 13,
+                  "core": 1,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 14,
+                  "core": 2,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 15,
+                  "core": 3,
+                  "proxy_finish": 64422,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 16,
+                  "core": 0,
+                  "proxy_finish": 80480,
+                  "remote_inputs": 0
+                },
+                {
+                  "fragment": 17,
+                  "core": 1,
+                  "proxy_finish": 80480,
+                  "remote_inputs": 0
+                }
+              ],
+              "proxy_makespan_cycles": 80480,
+              "cross_delay_proxy": 500,
+              "cross_core_compute_edges": [],
+              "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+              "placement": "minimum proxy completion",
+              "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461"
+              }
+            }
+          }
+        ],
+        "makespan": 90622,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1978368,
+          "scheduled_copy_bytes": 6168576,
+          "added_copy_bytes": 4190208,
+          "partition_added_copy_bytes": 4190208,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 458,
+          "copy_in_misses": 472,
+          "hit_bytes": 2899968,
+          "miss_bytes": 3194880,
+          "hits": 458,
+          "accesses": 930,
+          "hit_rate": 0.47580645161290325
+        },
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c",
+        "result_sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461",
+        "read_index_seconds": 0.006492582993814722,
+        "construct_seconds": 0.007604542013723403,
+        "config_prepare_ledger_seconds": 0.0014103330031502992,
+        "evaluation_seconds": 0.0805066250031814,
+        "result_write_seconds": 0.015708499995525926,
+        "main_until_evidence_seconds": 0.11172258300939575,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/evidence/evaluations.json",
+        "sha256": "2a0914f30ec1716715066144b48660d95e0acfbbf53158315d671ecdf17f0db6"
+      },
+      "finished_at": "2026-09-24T14:56:17.202931Z"
+    }
+  ],
+  "e0_budget_used": 8,
+  "environment": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "cpu": "Apple M5 Pro",
+    "gpu": "none used (CPU-only solver)",
+    "ram_bytes": 51539607552,
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+    "threads": null,
+    "workers": 1,
+    "peak_rss_bytes": null
+  },
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "finished_at": "2026-09-24T14:56:17.204939Z",
+  "elapsed_wall_seconds": 8.710011720657349
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-stage-rotate-20260925",
+  "stage_id": "first-051-k5",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "b1dd5d7e7420f48baa37d3dee6801a04aecb15b2",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-stage-rotate",
+    "name": "两重载核交替归约collector",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Exact stage guard; keep every original lane on its fixed owner and every pure scalar ADD local. Exactly two maximum lane-work cores alternate as collector for mixed original ADDs. Original graph/tree unchanged. One direct singleton plan and one online E0, no search or online comparison.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-macos-arm64-20260925",
+  "budget": {
+    "max_e0_calls": 3,
+    "total_wall_seconds": 600,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "jobs": [
+    {
+      "case_id": "051",
+      "cores": 5,
+      "variant": "stage-rotate-e0",
+      "solver_args": [
+        "--tree-method",
+        "stage-rotate"
+      ],
+      "parameters": {
+        "tree_method": "stage-rotate",
+        "collector_policy": "rotate_heavy",
+        "candidate_limit": 1,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}

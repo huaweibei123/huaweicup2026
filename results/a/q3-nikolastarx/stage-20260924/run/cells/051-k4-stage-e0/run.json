@@ -1,0 +1,460 @@
+{
+  "case_id": "051",
+  "cores": 4,
+  "variant": "stage-e0",
+  "solver_args": [
+    "--tree-method",
+    "stage"
+  ],
+  "parameters": {
+    "tree_method": "stage",
+    "candidate_limit": 1,
+    "selection": "one direct construction; no online comparison"
+  },
+  "e0_call_limit": 1,
+  "job_key": "051-k4-stage-e0",
+  "stage_id": "first-051",
+  "started_at": "2026-09-24T15:30:37.709702Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 1,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/case_051_multicore_res.json",
+      "sha256": "dd52351c11cd448c7a062ce5614093d7592a98f55bfa53fe696b32e1f2249c89"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/evidence/result.json.gz",
+      "sha256": "1ad4b8333d46bbf21801e40e1e6c15688e9fcce6e0fa7b7e31d628ebcff7e846"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/evidence/receipt.json",
+      "sha256": "91a54c90fab9305f17ef23eb4a3962f84f11042db7785852bd23dae49b812dd8"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 0.17883083401829936,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.tree_solve",
+      "data/raw/a/official/data/case_051.json",
+      "--cores",
+      "4",
+      "-o",
+      "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/case_051_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/evidence",
+      "--tree-method",
+      "stage"
+    ],
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "884e8b12ac1f7a9b569958909680e8c2f6055966a59c9f929ffd5cee48aae43b",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "dd52351c11cd448c7a062ce5614093d7592a98f55bfa53fe696b32e1f2249c89"
+  },
+  "makespan_cycles": 178800,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 393218,
+    "scheduled_copy_bytes": 394070,
+    "added_copy_bytes": 852,
+    "partition_added_copy_bytes": 852,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 46,
+    "copy_in_misses": 179,
+    "hit_bytes": 92,
+    "miss_bytes": 393550,
+    "hits": 46,
+    "accesses": 225,
+    "hit_rate": 0.00023371489830861545
+  },
+  "solver_receipt": {
+    "strategy": "stage_fork_join",
+    "selected_strategy": "stage_fork_join",
+    "official_e0_calls": 1,
+    "candidate_limit": 1,
+    "seed_selection": {
+      "rule": "guarded_direct_tree",
+      "method": "stage"
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "stage_fork_join",
+        "status": "ok",
+        "makespan": 178800,
+        "metadata": {
+          "strategy": "stage_fork_join",
+          "guard": "constant-input homogeneous vector-lane chains + unchanged binary scalar ADD tree + scalar broadcast stage chain",
+          "lane_count": 12,
+          "stage_count": 24,
+          "chain_signature": [
+            4,
+            [
+              524,
+              524,
+              524,
+              524
+            ],
+            [
+              "RELU",
+              "RELU",
+              "REDUCE"
+            ],
+            32768,
+            2
+          ],
+          "lane_core": {
+            "1000000001": 0,
+            "1000000003": 0,
+            "1000000005": 0,
+            "1000000007": 1,
+            "1000000009": 1,
+            "1000000011": 1,
+            "1000000013": 2,
+            "1000000015": 2,
+            "1000000017": 2,
+            "1000000019": 3,
+            "1000000021": 3,
+            "1000000023": 3
+          },
+          "collector_core": 0,
+          "stage_diagnostics": [
+            {
+              "root": 71,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 130,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 189,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 248,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 307,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 366,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 425,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 484,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 543,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 602,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 661,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 720,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 779,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 838,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 897,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 956,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1015,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1074,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1133,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1192,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1251,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1310,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1369,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            },
+            {
+              "root": 1428,
+              "work_by_core": [
+                6392,
+                6301,
+                6301,
+                6301
+              ],
+              "pure_adds": 4,
+              "mixed_adds": 7
+            }
+          ],
+          "total_work_by_core": [
+            153408,
+            151224,
+            151224,
+            151224
+          ],
+          "cross_core_compute_edges": 351,
+          "order": "per stage: full original lane chains, pure-local original ADDs, mixed original ADDs on fixed collector",
+          "official_e0_calls": 0,
+          "legality": "compute/plan static validation only, no memory or full official feasibility claim"
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "dd52351c11cd448c7a062ce5614093d7592a98f55bfa53fe696b32e1f2249c89"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "1ad4b8333d46bbf21801e40e1e6c15688e9fcce6e0fa7b7e31d628ebcff7e846"
+          }
+        }
+      }
+    ],
+    "makespan": 178800,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 393218,
+      "scheduled_copy_bytes": 394070,
+      "added_copy_bytes": 852,
+      "partition_added_copy_bytes": 852,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 46,
+      "copy_in_misses": 179,
+      "hit_bytes": 92,
+      "miss_bytes": 393550,
+      "hits": 46,
+      "accesses": 225,
+      "hit_rate": 0.00023371489830861545
+    },
+    "graph_sha256": "884e8b12ac1f7a9b569958909680e8c2f6055966a59c9f929ffd5cee48aae43b",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "dd52351c11cd448c7a062ce5614093d7592a98f55bfa53fe696b32e1f2249c89",
+    "result_sha256": "1ad4b8333d46bbf21801e40e1e6c15688e9fcce6e0fa7b7e31d628ebcff7e846",
+    "read_index_seconds": 0.008804792014416307,
+    "construct_seconds": 0.013704167009564117,
+    "config_prepare_ledger_seconds": 0.007100249989889562,
+    "evaluation_seconds": 0.09981812498881482,
+    "result_write_seconds": 0.01574704100494273,
+    "main_until_evidence_seconds": 0.14517437500762753,
+    "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/stage-20260924/run/cells/051-k4-stage-e0/evidence/evaluations.json",
+    "sha256": "b3b68dd35f34a15b09a1b9ab75226684a010b5be35ec205f3c4878ff61561271"
+  },
+  "finished_at": "2026-09-24T15:30:37.935970Z"
+}

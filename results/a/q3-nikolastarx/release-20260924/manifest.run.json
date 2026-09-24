@@ -1,0 +1,165 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-release-direct-20260924",
+  "stage_id": "release-fourcells",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-tree-direct",
+    "name": "归约树单候选直接构造",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+        "path": "src/q3/fragment_tree.py",
+        "entrypoint": "src.q3.fragment_tree.construct"
+      }
+    ]
+  },
+  "runtime_id": "q3-local-macos-arm64-20260924",
+  "budget": {
+    "max_e0_calls": 8,
+    "total_wall_seconds": 300,
+    "per_job_seconds": 60
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "jobs": [
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "080",
+      "cores": 4,
+      "variant": "release-order-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-order"
+      ],
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "080",
+      "cores": 4,
+      "variant": "release-place-e0",
+      "solver_args": [
+        "--tree-method",
+        "release-place"
+      ],
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}

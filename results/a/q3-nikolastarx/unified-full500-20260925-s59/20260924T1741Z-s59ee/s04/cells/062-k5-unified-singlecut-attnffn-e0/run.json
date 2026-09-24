@@ -1,0 +1,708 @@
+{
+  "case_id": "062",
+  "cores": 5,
+  "variant": "unified-singlecut-attnffn-e0",
+  "solver_args": [],
+  "parameters": {
+    "structural_router": "single_cut_guard_then_stage_then_attention_ffn_then_guarded",
+    "candidate_limit": 2,
+    "selection": "deterministic structure only; no case ID or historical winner lookup"
+  },
+  "e0_call_limit": 2,
+  "job_key": "062-k5-unified-singlecut-attnffn-e0",
+  "stage_id": "shard-04",
+  "started_at": "2026-09-24T17:40:16.616352Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 2,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 2,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/case_062_multicore_res.json",
+      "sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/evidence/result.json.gz",
+      "sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/evidence/receipt.json",
+      "sha256": "3d7960aeb077418f75f53dcd30cddf65d27ee60aeccd259853db38d6aea60c50"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "reason": null,
+    "exit_code": 0,
+    "wall_seconds": 9.937156915984815,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.adaptive_solve",
+      "data/raw/a/official/data/case_062.json",
+      "--cores",
+      "5",
+      "-o",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/case_062_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/evidence"
+    ],
+    "process_tree_cleanup": "POSIX process group",
+    "memory": {
+      "limit_bytes": null,
+      "sampled_peak_rss_bytes": null,
+      "poll_seconds": null,
+      "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+    },
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+  },
+  "makespan_cycles": 588101,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 13401600,
+    "scheduled_copy_bytes": 13466112,
+    "added_copy_bytes": 64512,
+    "partition_added_copy_bytes": 64512,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 0,
+    "copy_in_misses": 4383,
+    "hit_bytes": 0,
+    "miss_bytes": 13432320,
+    "hits": 0,
+    "accesses": 4383,
+    "hit_rate": 0.0
+  },
+  "solver_receipt": {
+    "strategy": "release_place_forest",
+    "selected_strategy": "release_place_forest",
+    "official_e0_calls": 2,
+    "candidate_limit": 2,
+    "seed_selection": {
+      "rule": "single_reduction_tree_balanced_anchor",
+      "router": {
+        "stage_request": {
+          "collector_policy": "fixed",
+          "source_count": 2181,
+          "lanes_by_core": [
+            437,
+            436,
+            436,
+            436,
+            436
+          ],
+          "heaviest_lane_cores": [
+            0
+          ],
+          "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+        },
+        "migration_construct_attempts": 0,
+        "migration_candidate_plans": 0,
+        "stage_construct_attempts": 1,
+        "stage_candidate_plans": 0,
+        "attention_construct_attempts": 1,
+        "attention_candidate_plans": 0,
+        "guarded_policy_invocations": 1,
+        "stage_guard_reason": "requires one V pipe family",
+        "attention_cross_delay_cycles": 500,
+        "attention_guard_reason": "no closed attention query row matched",
+        "route": "guarded",
+        "route_e0_limit": 2,
+        "evaluation_calls": 2,
+        "count_scope": "Router attempts only; guarded internal construction/decision records are preserved unchanged."
+      }
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "balanced_reduction_tree",
+        "status": "ok",
+        "makespan": 673177,
+        "metadata": {
+          "strategy": "balanced_reduction_tree",
+          "cuts": [
+            [
+              23996,
+              23997
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ],
+            [
+              23984,
+              23992
+            ]
+          ],
+          "block_work_cycles": [
+            706524,
+            353244,
+            536892,
+            707868,
+            706560
+          ],
+          "block_operations": [
+            4607,
+            2303,
+            3503,
+            4615,
+            4608
+          ],
+          "order": "original-op-id depth-first postorder"
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "974c007b39877e5f367d0fdd607a107bc52392abae296ced0fea49488c8c44f4"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "587cb5cbb31eb93c9139b9aa13672f8d2d4b5d091971de208c701d7e581c0f80"
+          }
+        }
+      },
+      {
+        "name": "release",
+        "strategy": "release_place_forest",
+        "makespan": 588101,
+        "metadata": {
+          "strategy": "release_place_forest",
+          "fragment_threshold_cycles": 150555,
+          "fragment_count": 34,
+          "fragment_work_cycles": [
+            88284,
+            88320,
+            88284,
+            88356,
+            88284,
+            88320,
+            88284,
+            88392,
+            88284,
+            88320,
+            88284,
+            88356,
+            88284,
+            88320,
+            88284,
+            88428,
+            89628,
+            88320,
+            88284,
+            88356,
+            88284,
+            88320,
+            88284,
+            88392,
+            88284,
+            88320,
+            88284,
+            88356,
+            88284,
+            88320,
+            88284,
+            88500,
+            88284,
+            95220
+          ],
+          "cuts": [
+            [
+              23931,
+              23965
+            ],
+            [
+              23933,
+              23966
+            ],
+            [
+              23935,
+              23967
+            ],
+            [
+              23937,
+              23968
+            ],
+            [
+              23939,
+              23969
+            ],
+            [
+              23941,
+              23970
+            ],
+            [
+              23943,
+              23971
+            ],
+            [
+              23945,
+              23972
+            ],
+            [
+              23947,
+              23973
+            ],
+            [
+              23949,
+              23974
+            ],
+            [
+              23951,
+              23975
+            ],
+            [
+              23953,
+              23976
+            ],
+            [
+              23955,
+              23977
+            ],
+            [
+              23957,
+              23978
+            ],
+            [
+              23959,
+              23979
+            ],
+            [
+              23961,
+              23980
+            ],
+            [
+              23963,
+              23981
+            ],
+            [
+              23965,
+              23982
+            ],
+            [
+              23967,
+              23983
+            ],
+            [
+              23969,
+              23984
+            ],
+            [
+              23971,
+              23985
+            ],
+            [
+              23973,
+              23986
+            ],
+            [
+              23975,
+              23987
+            ],
+            [
+              23977,
+              23988
+            ],
+            [
+              23979,
+              23989
+            ],
+            [
+              23982,
+              23991
+            ],
+            [
+              23984,
+              23992
+            ],
+            [
+              23986,
+              23993
+            ],
+            [
+              23988,
+              23994
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ],
+            [
+              23995,
+              23997
+            ],
+            [
+              23990,
+              23998
+            ]
+          ],
+          "core_work_cycles": [
+            618168,
+            538092,
+            618312,
+            618276,
+            618240
+          ],
+          "fragment_dispatch": [
+            {
+              "fragment": 0,
+              "core": 0,
+              "proxy_finish": 83964,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 16,
+              "core": 1,
+              "proxy_finish": 85308,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 2,
+              "core": 2,
+              "proxy_finish": 83964,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 4,
+              "core": 3,
+              "proxy_finish": 83964,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 8,
+              "core": 4,
+              "proxy_finish": 83964,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 6,
+              "core": 0,
+              "proxy_finish": 167676,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 10,
+              "core": 2,
+              "proxy_finish": 167676,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 12,
+              "core": 3,
+              "proxy_finish": 167676,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 18,
+              "core": 4,
+              "proxy_finish": 167676,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 20,
+              "core": 1,
+              "proxy_finish": 169020,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 24,
+              "core": 0,
+              "proxy_finish": 251388,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 32,
+              "core": 2,
+              "proxy_finish": 251388,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 14,
+              "core": 3,
+              "proxy_finish": 251388,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 22,
+              "core": 4,
+              "proxy_finish": 251388,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 26,
+              "core": 1,
+              "proxy_finish": 252732,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 28,
+              "core": 0,
+              "proxy_finish": 335100,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 30,
+              "core": 2,
+              "proxy_finish": 335100,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 1,
+              "core": 3,
+              "proxy_finish": 335136,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 5,
+              "core": 4,
+              "proxy_finish": 335136,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 9,
+              "core": 1,
+              "proxy_finish": 336480,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 17,
+              "core": 0,
+              "proxy_finish": 418848,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 13,
+              "core": 3,
+              "proxy_finish": 418848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 21,
+              "core": 2,
+              "proxy_finish": 418848,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 25,
+              "core": 4,
+              "proxy_finish": 418848,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 33,
+              "core": 1,
+              "proxy_finish": 426768,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 29,
+              "core": 0,
+              "proxy_finish": 502560,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 3,
+              "core": 2,
+              "proxy_finish": 502596,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 11,
+              "core": 3,
+              "proxy_finish": 502596,
+              "remote_inputs": 2
+            },
+            {
+              "fragment": 19,
+              "core": 4,
+              "proxy_finish": 502596,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 27,
+              "core": 1,
+              "proxy_finish": 510504,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 7,
+              "core": 0,
+              "proxy_finish": 586344,
+              "remote_inputs": 2
+            },
+            {
+              "fragment": 23,
+              "core": 4,
+              "proxy_finish": 586368,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 15,
+              "core": 3,
+              "proxy_finish": 586880,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 31,
+              "core": 2,
+              "proxy_finish": 587452,
+              "remote_inputs": 5
+            }
+          ],
+          "proxy_makespan_cycles": 587452,
+          "cross_delay_proxy": 500,
+          "cross_core_compute_edges": [
+            [
+              23931,
+              23965
+            ],
+            [
+              23935,
+              23967
+            ],
+            [
+              23939,
+              23969
+            ],
+            [
+              23941,
+              23970
+            ],
+            [
+              23947,
+              23973
+            ],
+            [
+              23951,
+              23975
+            ],
+            [
+              23955,
+              23977
+            ],
+            [
+              23963,
+              23981
+            ],
+            [
+              23965,
+              23982
+            ],
+            [
+              23967,
+              23983
+            ],
+            [
+              23969,
+              23984
+            ],
+            [
+              23973,
+              23986
+            ],
+            [
+              23975,
+              23987
+            ],
+            [
+              23977,
+              23988
+            ],
+            [
+              23979,
+              23989
+            ],
+            [
+              23982,
+              23991
+            ],
+            [
+              23988,
+              23994
+            ],
+            [
+              23990,
+              23998
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ],
+            [
+              23995,
+              23997
+            ]
+          ],
+          "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+          "placement": "minimum proxy completion",
+          "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+        },
+        "certified_lower_bound_cycles": 587452,
+        "status": "ok",
+        "artifacts": {
+          "plan": {
+            "path": "release/plan.json",
+            "sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+          },
+          "result": {
+            "path": "release/result.json.gz",
+            "sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350"
+          }
+        }
+      }
+    ],
+    "makespan": 588101,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 13401600,
+      "scheduled_copy_bytes": 13466112,
+      "added_copy_bytes": 64512,
+      "partition_added_copy_bytes": 64512,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 0,
+      "copy_in_misses": 4383,
+      "hit_bytes": 0,
+      "miss_bytes": 13432320,
+      "hits": 0,
+      "accesses": 4383,
+      "hit_rate": 0.0
+    },
+    "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b",
+    "result_sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350",
+    "evaluation_seconds": 7.453743666992523,
+    "main_until_evidence_seconds": 9.76338662498165,
+    "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s04/cells/062-k5-unified-singlecut-attnffn-e0/evidence/evaluations.json",
+    "sha256": "6dc7216b67a5bf49b04cfb002b9e85c7e2c1e82f3a731cd7a97e08ba27079a8c"
+  },
+  "finished_at": "2026-09-24T17:40:26.729661Z"
+}

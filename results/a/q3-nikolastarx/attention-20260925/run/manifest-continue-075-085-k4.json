@@ -1,0 +1,61 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-attention-rows-20260925",
+  "stage_id": "continue-075-085-k4",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-attention-rows",
+    "name": "Attention row同核与原算子ready重排",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Exact closed-row tensor motif guard; row co-location with explicit Q/K/V and maximal exclusive peripheral chains. One quotient EFT ownership pass and one fixed-owner original-op min-start ready pass preserving per-pipe concurrency. Singleton output, original graph unchanged; one online E0; no online search. Placement proxy omits COPY service/cache/capacity.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/src/q3_yuanzhifang/dag_list.py"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-macos-arm64-20260925",
+  "budget": {
+    "max_e0_calls": 3,
+    "total_wall_seconds": 600,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+  "jobs": [
+    {
+      "case_id": "075",
+      "cores": 4,
+      "variant": "attention-rows-e0",
+      "solver_args": [
+        "--tree-method",
+        "attention"
+      ],
+      "parameters": {
+        "tree_method": "attention",
+        "candidate_limit": 1,
+        "selection": "one structural construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "085",
+      "cores": 4,
+      "variant": "attention-rows-e0",
+      "solver_args": [
+        "--tree-method",
+        "attention"
+      ],
+      "parameters": {
+        "tree_method": "attention",
+        "candidate_limit": 1,
+        "selection": "one structural construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}

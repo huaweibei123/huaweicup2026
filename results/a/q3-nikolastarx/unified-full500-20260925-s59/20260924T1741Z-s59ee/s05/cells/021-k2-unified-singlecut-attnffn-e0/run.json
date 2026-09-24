@@ -1,0 +1,768 @@
+{
+  "case_id": "021",
+  "cores": 2,
+  "variant": "unified-singlecut-attnffn-e0",
+  "solver_args": [],
+  "parameters": {
+    "structural_router": "single_cut_guard_then_stage_then_attention_ffn_then_guarded",
+    "candidate_limit": 2,
+    "selection": "deterministic structure only; no case ID or historical winner lookup"
+  },
+  "e0_call_limit": 2,
+  "job_key": "021-k2-unified-singlecut-attnffn-e0",
+  "stage_id": "shard-05",
+  "started_at": "2026-09-24T17:40:37.765783Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 2,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/case_021_multicore_res.json",
+      "sha256": "b08bf8a867f161885c60586b5ea3f231bd57056b6de2ff2662344bb0af95857d"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/evidence/result.json.gz",
+      "sha256": "849f7aec1daec37824059a93641755e60d29f0b994eebf9664847e63693a9267"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/evidence/receipt.json",
+      "sha256": "025d6fbab04f610bc78f174b939a68c407cce6c23dbe72129a720992bd5f868f"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "reason": null,
+    "exit_code": 0,
+    "wall_seconds": 1.3413967080123257,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.adaptive_solve",
+      "data/raw/a/official/data/case_021.json",
+      "--cores",
+      "2",
+      "-o",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/case_021_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/evidence"
+    ],
+    "process_tree_cleanup": "POSIX process group",
+    "memory": {
+      "limit_bytes": null,
+      "sampled_peak_rss_bytes": null,
+      "poll_seconds": null,
+      "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+    },
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "d1b1b8a543eab9b359421f0d67baaee43f2890b2562bf2bfa1dfeb5fa5f87b37",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "b08bf8a867f161885c60586b5ea3f231bd57056b6de2ff2662344bb0af95857d"
+  },
+  "makespan_cycles": 3226472,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 3338240,
+    "scheduled_copy_bytes": 39763968,
+    "added_copy_bytes": 36425728,
+    "partition_added_copy_bytes": 1536000,
+    "spill_added_copy_bytes": 34889728
+  },
+  "cache_stats": {
+    "copy_in_hits": 20,
+    "copy_in_misses": 3458,
+    "hit_bytes": 81920,
+    "miss_bytes": 24592384,
+    "hits": 20,
+    "accesses": 3478,
+    "hit_rate": 0.0033200531208499337
+  },
+  "solver_receipt": {
+    "strategy": "affine_eighth",
+    "selected_strategy": "affine_eighth",
+    "official_e0_calls": 1,
+    "candidate_limit": 2,
+    "seed_selection": {
+      "rule": "general_affine",
+      "word_declined": "requires M -> V* -> M components",
+      "router": {
+        "stage_request": {
+          "collector_policy": "rotate_heavy",
+          "source_count": 2000,
+          "lanes_by_core": [
+            1000,
+            1000
+          ],
+          "heaviest_lane_cores": [
+            0,
+            1
+          ],
+          "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+        },
+        "migration_construct_attempts": 0,
+        "migration_candidate_plans": 0,
+        "stage_construct_attempts": 1,
+        "stage_candidate_plans": 0,
+        "attention_construct_attempts": 1,
+        "attention_candidate_plans": 0,
+        "guarded_policy_invocations": 1,
+        "stage_guard_reason": "requires one weak component",
+        "attention_cross_delay_cycles": 500,
+        "attention_guard_reason": "no closed attention query row matched",
+        "route": "guarded",
+        "route_e0_limit": 2,
+        "evaluation_calls": 1,
+        "count_scope": "Router attempts only; guarded internal construction/decision records are preserved unchanged."
+      }
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "affine_eighth",
+        "status": "ok",
+        "makespan": 3226472,
+        "metadata": {
+          "strategy": "affine_eighth",
+          "components": 80,
+          "eligible_ops": 3920,
+          "cores": 2
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "b08bf8a867f161885c60586b5ea3f231bd57056b6de2ff2662344bb0af95857d"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "849f7aec1daec37824059a93641755e60d29f0b994eebf9664847e63693a9267"
+          }
+        }
+      },
+      {
+        "name": "release",
+        "strategy": "release_place_forest",
+        "makespan": null,
+        "metadata": {
+          "strategy": "release_place_forest",
+          "fragment_threshold_cycles": 871920,
+          "fragment_count": 80,
+          "fragment_work_cycles": [
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192,
+            87192
+          ],
+          "cuts": [],
+          "core_work_cycles": [
+            3487680,
+            3487680
+          ],
+          "fragment_dispatch": [
+            {
+              "fragment": 0,
+              "core": 0,
+              "proxy_finish": 79848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 1,
+              "core": 1,
+              "proxy_finish": 79848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 2,
+              "core": 0,
+              "proxy_finish": 157248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 3,
+              "core": 1,
+              "proxy_finish": 157248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 4,
+              "core": 0,
+              "proxy_finish": 234648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 5,
+              "core": 1,
+              "proxy_finish": 234648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 6,
+              "core": 0,
+              "proxy_finish": 312048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 7,
+              "core": 1,
+              "proxy_finish": 312048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 8,
+              "core": 0,
+              "proxy_finish": 389448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 9,
+              "core": 1,
+              "proxy_finish": 389448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 10,
+              "core": 0,
+              "proxy_finish": 466848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 11,
+              "core": 1,
+              "proxy_finish": 466848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 12,
+              "core": 0,
+              "proxy_finish": 544248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 13,
+              "core": 1,
+              "proxy_finish": 544248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 14,
+              "core": 0,
+              "proxy_finish": 621648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 15,
+              "core": 1,
+              "proxy_finish": 621648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 16,
+              "core": 0,
+              "proxy_finish": 699048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 17,
+              "core": 1,
+              "proxy_finish": 699048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 18,
+              "core": 0,
+              "proxy_finish": 776448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 19,
+              "core": 1,
+              "proxy_finish": 776448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 20,
+              "core": 0,
+              "proxy_finish": 853848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 21,
+              "core": 1,
+              "proxy_finish": 853848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 22,
+              "core": 0,
+              "proxy_finish": 931248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 23,
+              "core": 1,
+              "proxy_finish": 931248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 24,
+              "core": 0,
+              "proxy_finish": 1008648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 25,
+              "core": 1,
+              "proxy_finish": 1008648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 26,
+              "core": 0,
+              "proxy_finish": 1086048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 27,
+              "core": 1,
+              "proxy_finish": 1086048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 28,
+              "core": 0,
+              "proxy_finish": 1163448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 29,
+              "core": 1,
+              "proxy_finish": 1163448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 30,
+              "core": 0,
+              "proxy_finish": 1240848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 31,
+              "core": 1,
+              "proxy_finish": 1240848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 32,
+              "core": 0,
+              "proxy_finish": 1318248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 33,
+              "core": 1,
+              "proxy_finish": 1318248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 34,
+              "core": 0,
+              "proxy_finish": 1395648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 35,
+              "core": 1,
+              "proxy_finish": 1395648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 36,
+              "core": 0,
+              "proxy_finish": 1473048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 37,
+              "core": 1,
+              "proxy_finish": 1473048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 38,
+              "core": 0,
+              "proxy_finish": 1550448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 39,
+              "core": 1,
+              "proxy_finish": 1550448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 40,
+              "core": 0,
+              "proxy_finish": 1627848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 41,
+              "core": 1,
+              "proxy_finish": 1627848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 42,
+              "core": 0,
+              "proxy_finish": 1705248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 43,
+              "core": 1,
+              "proxy_finish": 1705248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 44,
+              "core": 0,
+              "proxy_finish": 1782648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 45,
+              "core": 1,
+              "proxy_finish": 1782648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 46,
+              "core": 0,
+              "proxy_finish": 1860048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 47,
+              "core": 1,
+              "proxy_finish": 1860048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 48,
+              "core": 0,
+              "proxy_finish": 1937448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 49,
+              "core": 1,
+              "proxy_finish": 1937448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 50,
+              "core": 0,
+              "proxy_finish": 2014848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 51,
+              "core": 1,
+              "proxy_finish": 2014848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 52,
+              "core": 0,
+              "proxy_finish": 2092248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 53,
+              "core": 1,
+              "proxy_finish": 2092248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 54,
+              "core": 0,
+              "proxy_finish": 2169648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 55,
+              "core": 1,
+              "proxy_finish": 2169648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 56,
+              "core": 0,
+              "proxy_finish": 2247048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 57,
+              "core": 1,
+              "proxy_finish": 2247048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 58,
+              "core": 0,
+              "proxy_finish": 2324448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 59,
+              "core": 1,
+              "proxy_finish": 2324448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 60,
+              "core": 0,
+              "proxy_finish": 2401848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 61,
+              "core": 1,
+              "proxy_finish": 2401848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 62,
+              "core": 0,
+              "proxy_finish": 2479248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 63,
+              "core": 1,
+              "proxy_finish": 2479248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 64,
+              "core": 0,
+              "proxy_finish": 2556648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 65,
+              "core": 1,
+              "proxy_finish": 2556648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 66,
+              "core": 0,
+              "proxy_finish": 2634048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 67,
+              "core": 1,
+              "proxy_finish": 2634048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 68,
+              "core": 0,
+              "proxy_finish": 2711448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 69,
+              "core": 1,
+              "proxy_finish": 2711448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 70,
+              "core": 0,
+              "proxy_finish": 2788848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 71,
+              "core": 1,
+              "proxy_finish": 2788848,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 72,
+              "core": 0,
+              "proxy_finish": 2866248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 73,
+              "core": 1,
+              "proxy_finish": 2866248,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 74,
+              "core": 0,
+              "proxy_finish": 2943648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 75,
+              "core": 1,
+              "proxy_finish": 2943648,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 76,
+              "core": 0,
+              "proxy_finish": 3021048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 77,
+              "core": 1,
+              "proxy_finish": 3021048,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 78,
+              "core": 0,
+              "proxy_finish": 3098448,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 79,
+              "core": 1,
+              "proxy_finish": 3098448,
+              "remote_inputs": 0
+            }
+          ],
+          "proxy_makespan_cycles": 3098448,
+          "cross_delay_proxy": 500,
+          "cross_core_compute_edges": [],
+          "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+          "placement": "minimum proxy completion",
+          "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+        },
+        "status": "unsupported",
+        "reason": "uncut multi-tree forest: preserve structural overlap policy"
+      }
+    ],
+    "makespan": 3226472,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 3338240,
+      "scheduled_copy_bytes": 39763968,
+      "added_copy_bytes": 36425728,
+      "partition_added_copy_bytes": 1536000,
+      "spill_added_copy_bytes": 34889728
+    },
+    "cache_stats": {
+      "copy_in_hits": 20,
+      "copy_in_misses": 3458,
+      "hit_bytes": 81920,
+      "miss_bytes": 24592384,
+      "hits": 20,
+      "accesses": 3478,
+      "hit_rate": 0.0033200531208499337
+    },
+    "graph_sha256": "d1b1b8a543eab9b359421f0d67baaee43f2890b2562bf2bfa1dfeb5fa5f87b37",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "b08bf8a867f161885c60586b5ea3f231bd57056b6de2ff2662344bb0af95857d",
+    "result_sha256": "849f7aec1daec37824059a93641755e60d29f0b994eebf9664847e63693a9267",
+    "evaluation_seconds": 0.859244374994887,
+    "main_until_evidence_seconds": 1.1654920000000857,
+    "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s05/cells/021-k2-unified-singlecut-attnffn-e0/evidence/evaluations.json",
+    "sha256": "f55d18a093f8637d42642291b0619de05dfa1701a9255a6c2d39a1a6330e73d6"
+  },
+  "finished_at": "2026-09-24T17:40:39.234167Z"
+}

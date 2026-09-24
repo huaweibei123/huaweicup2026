@@ -1,0 +1,89 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-tree-feedback-20260924",
+  "stage_id": "second",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "3c789a9a56945f8c1358daa4e2c9ce34309dda3f",
+  "solver_module": "src.q3.safe_solve",
+  "algorithm": {
+    "id": "q3-guarded-tree-select",
+    "name": "结构种子与平衡归约树精确选择",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Deterministic structural seed, at most one guarded balanced reduction-tree candidate, accept only strict P3 Makespan improvement; preserve seed on ties.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/blob/3c789a9a56945f8c1358daa4e2c9ce34309dda3f/docs/a/q3/FEEDBACK_ITERATION_01.md"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+        "path": "src/q3/solve.py",
+        "entrypoint": "src.q3.solve.main"
+      }
+    ]
+  },
+  "runtime_id": "q3-local-macos-arm64-20260924",
+  "budget": {
+    "max_e0_calls": 20,
+    "total_wall_seconds": 900,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No offline training or graph-specific score precomputation; development/testing excluded from solver wall and reported separately. No new dependencies or native compilation.",
+  "jobs": [
+    {
+      "case_id": "002",
+      "cores": 2,
+      "variant": "seed-plus-balanced-tree-e0",
+      "solver_args": [],
+      "parameters": {
+        "seed_policy": "original-structural",
+        "tree_guard": "one weak component, outdegree <= 1, at least one join",
+        "acceptance": "strict Makespan improvement; tie keeps seed",
+        "candidate_limit": 2
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "seed-plus-balanced-tree-e0",
+      "solver_args": [],
+      "parameters": {
+        "seed_policy": "original-structural",
+        "tree_guard": "one weak component, outdegree <= 1, at least one join",
+        "acceptance": "strict Makespan improvement; tie keeps seed",
+        "candidate_limit": 2
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "063",
+      "cores": 2,
+      "variant": "seed-plus-balanced-tree-e0",
+      "solver_args": [],
+      "parameters": {
+        "seed_policy": "original-structural",
+        "tree_guard": "one weak component, outdegree <= 1, at least one join",
+        "acceptance": "strict Makespan improvement; tie keeps seed",
+        "candidate_limit": 2
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "seed-plus-balanced-tree-e0",
+      "solver_args": [],
+      "parameters": {
+        "seed_policy": "original-structural",
+        "tree_guard": "one weak component, outdegree <= 1, at least one join",
+        "acceptance": "strict Makespan improvement; tie keeps seed",
+        "candidate_limit": 2
+      },
+      "e0_call_limit": 2
+    }
+  ]
+}

@@ -1,0 +1,1486 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-002-k5-release-order-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-order-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-order"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "002",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 55156,
+        "solver_wall_seconds": 0.15780799998901784,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 1291776,
+        "extra_ddr_bytes": 67584,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "8c0ef1ee8fb7f3b3c5d19a694ce71afa74b19d3048593dedb84c0ba28cabf508"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/case_002_multicore_res.json",
+          "sha256": "8c0ef1ee8fb7f3b3c5d19a694ce71afa74b19d3048593dedb84c0ba28cabf508"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/evidence/result.json.gz",
+          "sha256": "6eed333684fd59bfd844d4d2e11d8487cbb1f0f8d022aecc67f3da7092deba45"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/evidence/receipt.json",
+          "sha256": "ab0ef4198115597d22fe488b4e65d0fb80a7304a08d681a53f35740e57d83c09"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-order-e0/run.json",
+          "sha256": "8a8372e73b6ae8650000e1b5e8b5c616cce75bfa0ca3b9092b5e79a5bc50a651"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:08.803502Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:08.598518Z",
+          "finished_at": "2026-09-24T14:56:08.803502Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/002.json.gz",
+          "sha256": "5e3c105c26bac55622cf56191e5ae8b54e1ed19602c0d72c457a55caef86c519"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-002-k5-release-place-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-place-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-place"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "002",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 54341,
+        "solver_wall_seconds": 0.1533701669832226,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 1273344,
+        "extra_ddr_bytes": 49152,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "ea6c992c11db5677685f75cfb1edcf166d013c765f558e0ab72621bc6a2a2527"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/case_002_multicore_res.json",
+          "sha256": "ea6c992c11db5677685f75cfb1edcf166d013c765f558e0ab72621bc6a2a2527"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/evidence/result.json.gz",
+          "sha256": "f5d18a12536e68338a5a8532a21c4453d3f1b7ea1ed7ddc100de52ab954a4c72"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/evidence/receipt.json",
+          "sha256": "b10a4c5262b96dcdae85c02fa59bf43e25eb59f6354d3c2cf045e865a57bff27"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/002-k5-release-place-e0/run.json",
+          "sha256": "4deb06e56aea04a558db82f5cf64e16ae1cd903d18c3782bba6a92dbdf979597"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:09.046486Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:08.841899Z",
+          "finished_at": "2026-09-24T14:56:09.046486Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/002.json.gz",
+          "sha256": "5e3c105c26bac55622cf56191e5ae8b54e1ed19602c0d72c457a55caef86c519"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-062-k5-release-order-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-order-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-order"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "062",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 589441,
+        "solver_wall_seconds": 2.877617582998937,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 13478400,
+        "extra_ddr_bytes": 76800,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "159466161f0b565d0118d7c3b45a8fd7c69a4ec2be5f59d177bb1e866c80264b"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/case_062_multicore_res.json",
+          "sha256": "159466161f0b565d0118d7c3b45a8fd7c69a4ec2be5f59d177bb1e866c80264b"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/evidence/result.json.gz",
+          "sha256": "54f75556c9b487a2619679b456f473c939ba6499004f62c267fb53eaa6dcfe7f"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/evidence/receipt.json",
+          "sha256": "7bc0850db5990c91c11005b2b8917d0fbb0f8cdf3f811958d2240ac3d1edd4fe"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-order-e0/run.json",
+          "sha256": "816ce7a5512247a35318541c1f2309cb7f422362f303d2c0a80ed2fac1faf93c"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:12.077482Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:09.090645Z",
+          "finished_at": "2026-09-24T14:56:12.077482Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/062.json.gz",
+          "sha256": "13f64782982efba14c2b31cfb7266b967fc78c7cb7d3ff4e30650488f8dd7cb9"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-062-k5-release-place-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-place-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-place"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "062",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 588101,
+        "solver_wall_seconds": 2.7993892500235233,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 13466112,
+        "extra_ddr_bytes": 64512,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/case_062_multicore_res.json",
+          "sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/evidence/result.json.gz",
+          "sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/evidence/receipt.json",
+          "sha256": "6666d240713b1b6c579228a732b1ef8e1ce02bc09babde56b133fead6124cfe5"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/062-k5-release-place-e0/run.json",
+          "sha256": "2735e66ebe643915fccf2a49f27217316883c770abe79ba5e460731cab64ccf3"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:15.031676Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:12.120647Z",
+          "finished_at": "2026-09-24T14:56:15.031676Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/062.json.gz",
+          "sha256": "13f64782982efba14c2b31cfb7266b967fc78c7cb7d3ff4e30650488f8dd7cb9"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-063-k5-release-order-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-order-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-order"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "063",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 232405,
+        "solver_wall_seconds": 0.7352062500140164,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 5091840,
+        "extra_ddr_bytes": 70656,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "1eeca95e301d0a7f7e560e1b3d307e7a4a4a51d995613b1e93275101955ca3aa"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/case_063_multicore_res.json",
+          "sha256": "1eeca95e301d0a7f7e560e1b3d307e7a4a4a51d995613b1e93275101955ca3aa"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/evidence/result.json.gz",
+          "sha256": "1b5110c858a3f012f8d7342ed2eabc22fcc4b8ebe08d85f6d0275af59f972464"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/evidence/receipt.json",
+          "sha256": "956461675e1a7c836d86fdc241bfa47b088fde0374d0df96a89ca62619c75138"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-order-e0/run.json",
+          "sha256": "d64da94e4383730ef830b38b919938b4610d19d37f7b4ada9b8e80582a213a5a"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:15.875150Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:15.072089Z",
+          "finished_at": "2026-09-24T14:56:15.875150Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/063.json.gz",
+          "sha256": "4a9f6f8cc267c0444c1dee1b02b109c603b592c5c2686c5925012dcd457630ad"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-063-k5-release-place-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-place-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-place"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "063",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 232381,
+        "solver_wall_seconds": 0.7734087499848101,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 5076480,
+        "extra_ddr_bytes": 55296,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/case_063_multicore_res.json",
+          "sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/evidence/result.json.gz",
+          "sha256": "1b5830b55f9ba35d31d956ab4f5f18df9a97868b75f6c99ad47fa5b415e3ac3f"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/evidence/receipt.json",
+          "sha256": "d0dac6b7b3de4a5e9761aa5089c861f17a258ac6d436d580b68dcd6e7fd1af4a"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/063-k5-release-place-e0/run.json",
+          "sha256": "a379fd07f41b3ecb1127dcdeabda21a667e8d5436bec6bb77417d7e26a5101cf"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:16.760434Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:15.918394Z",
+          "finished_at": "2026-09-24T14:56:16.760434Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/063.json.gz",
+          "sha256": "4a9f6f8cc267c0444c1dee1b02b109c603b592c5c2686c5925012dcd457630ad"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-080-k4-release-order-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-order-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-order",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-order"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "080",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 90622,
+        "solver_wall_seconds": 0.13100366599974222,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 6168576,
+        "extra_ddr_bytes": 4190208,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.47580645161290325
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/case_080_multicore_res.json",
+          "sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/evidence/result.json.gz",
+          "sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/evidence/receipt.json",
+          "sha256": "f9482a86e0d15654e6326fb121741a4069e613e0becc5e4566894042562ff92a"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-order-e0/run.json",
+          "sha256": "9f69854b3de3825138bca69579563ff44ff24e1774ae0d63ec6eb5099f30f155"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:16.978517Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:16.799199Z",
+          "finished_at": "2026-09-24T14:56:16.978517Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/080.json.gz",
+          "sha256": "ac2a1d25f8319d6fa55747be8c4f0f506ffd72194c5ed26452f53fa3d2f23cb3"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-release-direct-20260924-P3-080-k4-release-place-e0",
+      "revision": 1,
+      "run_id": "q3-release-direct-20260924",
+      "algorithm_id": "q3-tree-direct",
+      "algorithm_name": "归约树单候选直接构造",
+      "variant": "release-place-e0",
+      "solver_commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+      "parameters": {
+        "tree_method": "release-place",
+        "candidate_limit": 1,
+        "fragment_granularity_denominator": 4,
+        "selection": "one direct construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "release-place"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 8,
+          "total_wall_seconds": 300,
+          "per_job_seconds": 60
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "080",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 90622,
+        "solver_wall_seconds": 0.13570504100061953,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 6168576,
+        "extra_ddr_bytes": 4190208,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.47580645161290325
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/case_080_multicore_res.json",
+          "sha256": "62d4a2c6634db823ebc08e2cd46805658a55bb642584de7ff534b8647a66bd1c"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/evidence/result.json.gz",
+          "sha256": "7deec9c2b23b69658de6d26e3bcc4818536f2defb2daf56009b2f818153a8461"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/evidence/receipt.json",
+          "sha256": "efb9c4e5693bd051782ff49334df777ec03404350b8af0ea3e5d7a495a66d36c"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/cells/080-k4-release-place-e0/run.json",
+          "sha256": "7088cb79de67300e91d294a1d7329228e9202d819d89e6e202540ec965ea755f"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/manifest-release-fourcells.json",
+          "sha256": "53d43cf0917b11de71c1aad8a5086dff74ce78e7433460255d71bcb7df3d13b8"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260924",
+      "observed_at": "2026-09-24T14:56:17.202931Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Direct release-aware fragment construction. Same threshold partition; order variant retains LPT ownership; place variant chooses per-operation pipe-model completion and jointly changes ownership/dispatch. One plan and one online E0 each; no cross-variant online oracle.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+              "path": "src/q3/fragment_tree.py",
+              "entrypoint": "src.q3.fragment_tree.construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "results/a/q3-nikolastarx/release-20260924/manifest.run.json",
+            "results/a/q3-nikolastarx/release-20260924/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:56:17.018162Z",
+          "finished_at": "2026-09-24T14:56:17.202931Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 60,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/release-20260924/run/baselines/080.json.gz",
+          "sha256": "ac2a1d25f8319d6fa55747be8c4f0f506ffd72194c5ed26452f53fa3d2f23cb3"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "case_id": "002",
+  "cores": 2,
+  "variant": "seed-plus-balanced-tree-e0",
+  "solver_args": [],
+  "parameters": {
+    "seed_policy": "original-structural",
+    "tree_guard": "one weak component, outdegree <= 1, at least one join",
+    "acceptance": "strict Makespan improvement; tie keeps seed",
+    "candidate_limit": 2
+  },
+  "e0_call_limit": 2,
+  "job_key": "002-k2-seed-plus-balanced-tree-e0",
+  "stage_id": "second",
+  "started_at": "2026-09-24T14:13:30.036894Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 2,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 2,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/case_002_multicore_res.json",
+      "sha256": "ac9d71e3905f8fb2ae3b46e2b8aff9d05af34ac944503f104d82cf96e8d0e791"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/evidence/result.json.gz",
+      "sha256": "28446bc59948808a467ddbb6de3e30885490ab969242d916381eca9ed9a34ad3"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/evidence/receipt.json",
+      "sha256": "b37f97cd45779fb6459542376d756da6df8c2510f0dccfb93d77baddf1fab5d3"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 0.33466370799578726,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.safe_solve",
+      "data/raw/a/official/data/case_002.json",
+      "--cores",
+      "2",
+      "-o",
+      "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/case_002_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/evidence"
+    ],
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "ac9d71e3905f8fb2ae3b46e2b8aff9d05af34ac944503f104d82cf96e8d0e791"
+  },
+  "makespan_cycles": 169876,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 1224192,
+    "scheduled_copy_bytes": 1227264,
+    "added_copy_bytes": 3072,
+    "partition_added_copy_bytes": 3072,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 0,
+    "copy_in_misses": 399,
+    "hit_bytes": 0,
+    "miss_bytes": 1224192,
+    "hits": 0,
+    "accesses": 399,
+    "hit_rate": 0.0
+  },
+  "solver_receipt": {
+    "strategy": "balanced_reduction_tree",
+    "selected_strategy": "balanced_reduction_tree",
+    "official_e0_calls": 2,
+    "candidate_limit": 2,
+    "seed_selection": {
+      "rule": "general_affine",
+      "word_declined": "requires M -> V* -> M components"
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "affine_eighth",
+        "status": "ok",
+        "makespan": 270245,
+        "metadata": {
+          "strategy": "affine_eighth",
+          "components": 1,
+          "eligible_ops": 1798,
+          "cores": 2
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "0dfa4b65beab9ea297a4e24166b9b8b46cb2961101b0b8d41ff5bccbec25b967"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "d7fd655de8dd6d3cef39bd0207223414073c5e17f8b5f7cb2d4a6e5509d8a8bd"
+          }
+        }
+      },
+      {
+        "name": "tree",
+        "strategy": "balanced_reduction_tree",
+        "status": "ok",
+        "makespan": 169876,
+        "metadata": {
+          "strategy": "balanced_reduction_tree",
+          "cuts": [
+            [
+              2194,
+              2196
+            ]
+          ],
+          "block_work_cycles": [
+            177948,
+            97980
+          ],
+          "block_operations": [
+            1159,
+            639
+          ],
+          "order": "original-op-id depth-first postorder"
+        },
+        "artifacts": {
+          "plan": {
+            "path": "tree/plan.json",
+            "sha256": "ac9d71e3905f8fb2ae3b46e2b8aff9d05af34ac944503f104d82cf96e8d0e791"
+          },
+          "result": {
+            "path": "tree/result.json.gz",
+            "sha256": "28446bc59948808a467ddbb6de3e30885490ab969242d916381eca9ed9a34ad3"
+          }
+        }
+      }
+    ],
+    "makespan": 169876,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 1224192,
+      "scheduled_copy_bytes": 1227264,
+      "added_copy_bytes": 3072,
+      "partition_added_copy_bytes": 3072,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 0,
+      "copy_in_misses": 399,
+      "hit_bytes": 0,
+      "miss_bytes": 1224192,
+      "hits": 0,
+      "accesses": 399,
+      "hit_rate": 0.0
+    },
+    "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "ac9d71e3905f8fb2ae3b46e2b8aff9d05af34ac944503f104d82cf96e8d0e791",
+    "result_sha256": "28446bc59948808a467ddbb6de3e30885490ab969242d916381eca9ed9a34ad3",
+    "evaluation_seconds": 0.23403412499465048,
+    "main_until_evidence_seconds": 0.3087648749933578,
+    "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/feedback-20260924/run/cells/002-k2-seed-plus-balanced-tree-e0/evidence/evaluations.json",
+    "sha256": "b7a164c877920469c01816ac436838ec00d0fdd7f28eaf7d9ebba68c43679c4c"
+  },
+  "finished_at": "2026-09-24T14:13:30.417667Z"
+}

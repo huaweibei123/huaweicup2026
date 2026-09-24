@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "q3-attention-ffn-20260925-P3-082-k4-attention-ffn-e0",
+      "revision": 1,
+      "run_id": "q3-attention-ffn-20260925",
+      "algorithm_id": "q3-attention-rows-ffn",
+      "algorithm_name": "Attention row与闭合FFN同核原算子重排",
+      "variant": "attention-ffn-e0",
+      "solver_commit": "e3df1cdca0729a972b5408bc6bd2f9e8ffbc90f5",
+      "parameters": {
+        "tree_method": "attention-ffn",
+        "candidate_limit": 1,
+        "selection": "one direct construction; no online incumbent comparison",
+        "solver_args": [
+          "--tree-method",
+          "attention-ffn"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 1,
+          "total_wall_seconds": 180,
+          "per_job_seconds": 90
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "082",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 172746,
+        "solver_wall_seconds": 0.5915351249859668,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 3450134,
+        "extra_ddr_bytes": 2858128,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.3810358380003558
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "e3df1cdca0729a972b5408bc6bd2f9e8ffbc90f5",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "2c35a3c2917c45650e1b1781bca205f92375c7df71f883c34e1c3a48f7b70a35"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/attention-ffn-20260925/run/cells/082-k4-attention-ffn-e0/case_082_multicore_res.json",
+          "sha256": "2c35a3c2917c45650e1b1781bca205f92375c7df71f883c34e1c3a48f7b70a35"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-ffn-20260925/run/cells/082-k4-attention-ffn-e0/evidence/result.json.gz",
+          "sha256": "365e84b33bafcf955dd93564807346e53bd39bbb4228c386c81175f0cf26765d"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/attention-ffn-20260925/run/cells/082-k4-attention-ffn-e0/evidence/receipt.json",
+          "sha256": "202b632fa51367277b82e43dc60779a4c683b42c3cc86411baa12f5c23111d6a"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/attention-ffn-20260925/run/cells/082-k4-attention-ffn-e0/run.json",
+          "sha256": "83fa2b484f388bb10bb2d55a62a85985778757bff9fee934f8ee963a85cfa0bc"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/attention-ffn-20260925/run/manifest-one-082-k4.json",
+          "sha256": "c445e5ddde17b7d20875d8aa126b7ffd82cef4b8608f9a02cc820414cdb1d700"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260925",
+      "observed_at": "2026-09-24T17:10:10.256641Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e3df1cdca0729a972b5408bc6bd2f9e8ffbc90f5",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Exact closed attention rows and nonoverlapping raw-port-closed original four-op M/V/V/M FFN co-location; quotient EFT placement followed by fixed-owner original-op ready scheduling. One direct plan, one online E0; no search, fusion or cloning.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51",
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/src/q3_yuanzhifang/dag_list.py"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "e3df1cdca0729a972b5408bc6bd2f9e8ffbc90f5",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "/tmp/q3-attention-ffn-one.json",
+            "results/a/q3-nikolastarx/attention-ffn-20260925/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T17:10:09.610441Z",
+          "finished_at": "2026-09-24T17:10:10.256641Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 90,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/baselines/082.json.gz",
+          "sha256": "b151858b2a5713d3dc763f6369a3736b1912e677806f26c42da56c90e19946c6"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    }
+  ]
+}

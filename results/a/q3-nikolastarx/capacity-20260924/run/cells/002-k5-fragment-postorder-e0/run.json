@@ -1,0 +1,419 @@
+{
+  "case_id": "002",
+  "cores": 5,
+  "variant": "fragment-postorder-e0",
+  "solver_args": [
+    "--tree-method",
+    "fragment"
+  ],
+  "parameters": {
+    "tree_method": "fragment",
+    "candidate_limit": 1,
+    "selection": "single direct construction; no online comparison with other variant",
+    "fragment_granularity_denominator": 4,
+    "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+    "core_assignment": "LPT by fragment total compute work",
+    "order": "global DFS postorder projected onto each core"
+  },
+  "e0_call_limit": 1,
+  "job_key": "002-k5-fragment-postorder-e0",
+  "stage_id": "paired-sixcells",
+  "started_at": "2026-09-24T14:39:38.738051Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 1,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/case_002_multicore_res.json",
+      "sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence/result.json.gz",
+      "sha256": "ff41566a71b77bd3b99d56490a52bdf146ca78dbf699322725a99e33d3bdb80e"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence/receipt.json",
+      "sha256": "f8da121e7f06aefed784c56a5ec1c0ac819dca0ba1b6ba538c8da1ed23b92150"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 0.16398675000527874,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.tree_solve",
+      "data/raw/a/official/data/case_002.json",
+      "--cores",
+      "5",
+      "-o",
+      "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/case_002_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence",
+      "--tree-method",
+      "fragment"
+    ],
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60"
+  },
+  "makespan_cycles": 67948,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 1224192,
+    "scheduled_copy_bytes": 1291776,
+    "added_copy_bytes": 67584,
+    "partition_added_copy_bytes": 67584,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 0,
+    "copy_in_misses": 420,
+    "hit_bytes": 0,
+    "miss_bytes": 1256448,
+    "hits": 0,
+    "accesses": 420,
+    "hit_rate": 0.0
+  },
+  "solver_receipt": {
+    "strategy": "fragment_reduction_forest",
+    "selected_strategy": "fragment_reduction_forest",
+    "official_e0_calls": 1,
+    "candidate_limit": 1,
+    "seed_selection": {
+      "rule": "guarded_direct_tree",
+      "method": "fragment"
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "fragment_reduction_forest",
+        "status": "ok",
+        "makespan": 67948,
+        "metadata": {
+          "strategy": "fragment_reduction_forest",
+          "fragment_threshold_cycles": 13797,
+          "fragment_work_cycles": [
+            11004,
+            11040,
+            11004,
+            11076,
+            11004,
+            11040,
+            11004,
+            11112,
+            12348,
+            11040,
+            11004,
+            11076,
+            11004,
+            11040,
+            11004,
+            11148,
+            11004,
+            11040,
+            11004,
+            11076,
+            11004,
+            11040,
+            11004,
+            11112,
+            9696
+          ],
+          "fragment_count": 25,
+          "fragments_by_core": [
+            [
+              8,
+              9,
+              2,
+              14,
+              24
+            ],
+            [
+              15,
+              5,
+              21,
+              12,
+              22
+            ],
+            [
+              7,
+              19,
+              0,
+              4,
+              16
+            ],
+            [
+              23,
+              1,
+              13,
+              6,
+              18
+            ],
+            [
+              3,
+              11,
+              17,
+              10,
+              20
+            ]
+          ],
+          "core_work_cycles": [
+            55092,
+            55236,
+            55200,
+            55200,
+            55200
+          ],
+          "compute_load_upper_bound_cycles": 66223,
+          "cuts": [
+            [
+              2148,
+              2173
+            ],
+            [
+              2150,
+              2174
+            ],
+            [
+              2152,
+              2175
+            ],
+            [
+              2154,
+              2176
+            ],
+            [
+              2156,
+              2177
+            ],
+            [
+              2158,
+              2178
+            ],
+            [
+              2160,
+              2179
+            ],
+            [
+              2162,
+              2180
+            ],
+            [
+              2164,
+              2181
+            ],
+            [
+              2166,
+              2182
+            ],
+            [
+              2168,
+              2183
+            ],
+            [
+              2170,
+              2184
+            ],
+            [
+              2173,
+              2185
+            ],
+            [
+              2175,
+              2186
+            ],
+            [
+              2177,
+              2187
+            ],
+            [
+              2179,
+              2188
+            ],
+            [
+              2181,
+              2189
+            ],
+            [
+              2183,
+              2190
+            ],
+            [
+              2185,
+              2191
+            ],
+            [
+              2187,
+              2192
+            ],
+            [
+              2189,
+              2193
+            ],
+            [
+              2191,
+              2194
+            ],
+            [
+              2193,
+              2195
+            ],
+            [
+              2194,
+              2196
+            ]
+          ],
+          "cross_core_compute_edges": [
+            [
+              2148,
+              2173
+            ],
+            [
+              2150,
+              2174
+            ],
+            [
+              2152,
+              2175
+            ],
+            [
+              2154,
+              2176
+            ],
+            [
+              2160,
+              2179
+            ],
+            [
+              2162,
+              2180
+            ],
+            [
+              2164,
+              2181
+            ],
+            [
+              2166,
+              2182
+            ],
+            [
+              2168,
+              2183
+            ],
+            [
+              2170,
+              2184
+            ],
+            [
+              2173,
+              2185
+            ],
+            [
+              2175,
+              2186
+            ],
+            [
+              2177,
+              2187
+            ],
+            [
+              2179,
+              2188
+            ],
+            [
+              2181,
+              2189
+            ],
+            [
+              2183,
+              2190
+            ],
+            [
+              2185,
+              2191
+            ],
+            [
+              2187,
+              2192
+            ],
+            [
+              2189,
+              2193
+            ],
+            [
+              2191,
+              2194
+            ],
+            [
+              2193,
+              2195
+            ],
+            [
+              2194,
+              2196
+            ]
+          ],
+          "weak_components": 1,
+          "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+          "order": "original-op-id depth-first postorder"
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "ff41566a71b77bd3b99d56490a52bdf146ca78dbf699322725a99e33d3bdb80e"
+          }
+        }
+      }
+    ],
+    "makespan": 67948,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 1224192,
+      "scheduled_copy_bytes": 1291776,
+      "added_copy_bytes": 67584,
+      "partition_added_copy_bytes": 67584,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 0,
+      "copy_in_misses": 420,
+      "hit_bytes": 0,
+      "miss_bytes": 1256448,
+      "hits": 0,
+      "accesses": 420,
+      "hit_rate": 0.0
+    },
+    "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60",
+    "result_sha256": "ff41566a71b77bd3b99d56490a52bdf146ca78dbf699322725a99e33d3bdb80e",
+    "read_index_seconds": 0.008835832995828241,
+    "construct_seconds": 0.009813375014346093,
+    "config_prepare_ledger_seconds": 0.0028468749951571226,
+    "evaluation_seconds": 0.10157604201231152,
+    "result_write_seconds": 0.015429791004862636,
+    "main_until_evidence_seconds": 0.1385019160225056,
+    "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence/evaluations.json",
+    "sha256": "610f58833345194c132068be5b842db617467a8a64c1eef516b2ca3628c35d8e"
+  },
+  "finished_at": "2026-09-24T14:39:38.952455Z"
+}

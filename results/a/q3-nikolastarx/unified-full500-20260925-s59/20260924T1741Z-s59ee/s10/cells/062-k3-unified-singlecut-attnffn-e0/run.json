@@ -1,0 +1,471 @@
+{
+  "case_id": "062",
+  "cores": 3,
+  "variant": "unified-singlecut-attnffn-e0",
+  "solver_args": [],
+  "parameters": {
+    "structural_router": "single_cut_guard_then_stage_then_attention_ffn_then_guarded",
+    "candidate_limit": 2,
+    "selection": "deterministic structure only; no case ID or historical winner lookup"
+  },
+  "e0_call_limit": 2,
+  "job_key": "062-k3-unified-singlecut-attnffn-e0",
+  "stage_id": "shard-10",
+  "started_at": "2026-09-24T17:43:24.671077Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 2,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 2,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/case_062_multicore_res.json",
+      "sha256": "41e27d3d912ebdebbfa68625ec38d45d2b5b9f96ccace20c27a7df6ccf6e825e"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/evidence/result.json.gz",
+      "sha256": "09e2983d695127cb854c7d3a1c369123137ec86aa248642559ef192586182b01"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/evidence/receipt.json",
+      "sha256": "f56dbe6d02e008fe7869c6809ba7f2fb5d8dee69fd1c46c965533875e220896a"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "reason": null,
+    "exit_code": 0,
+    "wall_seconds": 10.449772249994567,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.adaptive_solve",
+      "data/raw/a/official/data/case_062.json",
+      "--cores",
+      "3",
+      "-o",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/case_062_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/evidence"
+    ],
+    "process_tree_cleanup": "POSIX process group",
+    "memory": {
+      "limit_bytes": null,
+      "sampled_peak_rss_bytes": null,
+      "poll_seconds": null,
+      "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+    },
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "41e27d3d912ebdebbfa68625ec38d45d2b5b9f96ccace20c27a7df6ccf6e825e"
+  },
+  "makespan_cycles": 1006775,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 13401600,
+    "scheduled_copy_bytes": 13438464,
+    "added_copy_bytes": 36864,
+    "partition_added_copy_bytes": 36864,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 0,
+    "copy_in_misses": 4374,
+    "hit_bytes": 0,
+    "miss_bytes": 13418496,
+    "hits": 0,
+    "accesses": 4374,
+    "hit_rate": 0.0
+  },
+  "solver_receipt": {
+    "strategy": "release_place_forest",
+    "selected_strategy": "release_place_forest",
+    "official_e0_calls": 2,
+    "candidate_limit": 2,
+    "seed_selection": {
+      "rule": "single_reduction_tree_balanced_anchor",
+      "router": {
+        "stage_request": {
+          "collector_policy": "fixed",
+          "source_count": 2181,
+          "lanes_by_core": [
+            727,
+            727,
+            727
+          ],
+          "heaviest_lane_cores": [
+            0,
+            1,
+            2
+          ],
+          "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+        },
+        "migration_construct_attempts": 0,
+        "migration_candidate_plans": 0,
+        "stage_construct_attempts": 1,
+        "stage_candidate_plans": 0,
+        "attention_construct_attempts": 1,
+        "attention_candidate_plans": 0,
+        "guarded_policy_invocations": 1,
+        "stage_guard_reason": "requires one V pipe family",
+        "attention_cross_delay_cycles": 500,
+        "attention_guard_reason": "no closed attention query row matched",
+        "route": "guarded",
+        "route_e0_limit": 2,
+        "evaluation_calls": 2,
+        "count_scope": "Router attempts only; guarded internal construction/decision records are preserved unchanged."
+      }
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "balanced_reduction_tree",
+        "status": "ok",
+        "makespan": 1342199,
+        "metadata": {
+          "strategy": "balanced_reduction_tree",
+          "cuts": [
+            [
+              23996,
+              23997
+            ],
+            [
+              23991,
+              23995
+            ]
+          ],
+          "block_work_cycles": [
+            706524,
+            890136,
+            1414428
+          ],
+          "block_operations": [
+            4607,
+            5806,
+            9223
+          ],
+          "order": "original-op-id depth-first postorder"
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "1dc785fa0d4095dbcd8f78e68c8b88a2fe28a42eec08af9cf302e1d02754f2e4"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "fab71fe32da768717a9aac5feac278121b6256476889629bf3e4e2a32094cc0c"
+          }
+        }
+      },
+      {
+        "name": "release",
+        "strategy": "release_place_forest",
+        "makespan": 1006775,
+        "metadata": {
+          "strategy": "release_place_forest",
+          "fragment_threshold_cycles": 250924,
+          "fragment_count": 17,
+          "fragment_work_cycles": [
+            176604,
+            176640,
+            176604,
+            176676,
+            176604,
+            176640,
+            176604,
+            176712,
+            177948,
+            176640,
+            176604,
+            176676,
+            176604,
+            176640,
+            176604,
+            176784,
+            183504
+          ],
+          "cuts": [
+            [
+              23965,
+              23982
+            ],
+            [
+              23967,
+              23983
+            ],
+            [
+              23969,
+              23984
+            ],
+            [
+              23971,
+              23985
+            ],
+            [
+              23973,
+              23986
+            ],
+            [
+              23975,
+              23987
+            ],
+            [
+              23977,
+              23988
+            ],
+            [
+              23979,
+              23989
+            ],
+            [
+              23982,
+              23991
+            ],
+            [
+              23984,
+              23992
+            ],
+            [
+              23986,
+              23993
+            ],
+            [
+              23988,
+              23994
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ],
+            [
+              23995,
+              23997
+            ],
+            [
+              23990,
+              23998
+            ]
+          ],
+          "core_work_cycles": [
+            1059804,
+            1061256,
+            890028
+          ],
+          "fragment_dispatch": [
+            {
+              "fragment": 0,
+              "core": 0,
+              "proxy_finish": 167712,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 8,
+              "core": 1,
+              "proxy_finish": 169056,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 2,
+              "core": 2,
+              "proxy_finish": 167712,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 4,
+              "core": 0,
+              "proxy_finish": 335136,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 6,
+              "core": 2,
+              "proxy_finish": 335136,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 10,
+              "core": 1,
+              "proxy_finish": 336480,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 12,
+              "core": 0,
+              "proxy_finish": 502560,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 16,
+              "core": 2,
+              "proxy_finish": 509136,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 14,
+              "core": 1,
+              "proxy_finish": 503904,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 1,
+              "core": 0,
+              "proxy_finish": 670020,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 9,
+              "core": 1,
+              "proxy_finish": 671364,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 5,
+              "core": 2,
+              "proxy_finish": 676584,
+              "remote_inputs": 1
+            },
+            {
+              "fragment": 13,
+              "core": 0,
+              "proxy_finish": 837468,
+              "remote_inputs": 0
+            },
+            {
+              "fragment": 3,
+              "core": 1,
+              "proxy_finish": 838848,
+              "remote_inputs": 2
+            },
+            {
+              "fragment": 11,
+              "core": 2,
+              "proxy_finish": 844068,
+              "remote_inputs": 2
+            },
+            {
+              "fragment": 7,
+              "core": 0,
+              "proxy_finish": 1004988,
+              "remote_inputs": 3
+            },
+            {
+              "fragment": 15,
+              "core": 1,
+              "proxy_finish": 1006440,
+              "remote_inputs": 4
+            }
+          ],
+          "proxy_makespan_cycles": 1006440,
+          "cross_delay_proxy": 500,
+          "cross_core_compute_edges": [
+            [
+              23967,
+              23983
+            ],
+            [
+              23969,
+              23984
+            ],
+            [
+              23971,
+              23985
+            ],
+            [
+              23975,
+              23987
+            ],
+            [
+              23982,
+              23991
+            ],
+            [
+              23984,
+              23992
+            ],
+            [
+              23986,
+              23993
+            ],
+            [
+              23988,
+              23994
+            ],
+            [
+              23990,
+              23998
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ],
+            [
+              23995,
+              23997
+            ]
+          ],
+          "order": "minimum incoming release then quotient bottom-level ready list; within-fragment DFS postorder",
+          "placement": "minimum proxy completion",
+          "limitations": "No COPY/Cache/bandwidth/capacity model; no official performance or zero-spill guarantee."
+        },
+        "certified_lower_bound_cycles": 1006440,
+        "status": "ok",
+        "artifacts": {
+          "plan": {
+            "path": "release/plan.json",
+            "sha256": "41e27d3d912ebdebbfa68625ec38d45d2b5b9f96ccace20c27a7df6ccf6e825e"
+          },
+          "result": {
+            "path": "release/result.json.gz",
+            "sha256": "09e2983d695127cb854c7d3a1c369123137ec86aa248642559ef192586182b01"
+          }
+        }
+      }
+    ],
+    "makespan": 1006775,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 13401600,
+      "scheduled_copy_bytes": 13438464,
+      "added_copy_bytes": 36864,
+      "partition_added_copy_bytes": 36864,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 0,
+      "copy_in_misses": 4374,
+      "hit_bytes": 0,
+      "miss_bytes": 13418496,
+      "hits": 0,
+      "accesses": 4374,
+      "hit_rate": 0.0
+    },
+    "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "41e27d3d912ebdebbfa68625ec38d45d2b5b9f96ccace20c27a7df6ccf6e825e",
+    "result_sha256": "09e2983d695127cb854c7d3a1c369123137ec86aa248642559ef192586182b01",
+    "evaluation_seconds": 8.135836250003194,
+    "main_until_evidence_seconds": 10.29167358399718,
+    "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s10/cells/062-k3-unified-singlecut-attnffn-e0/evidence/evaluations.json",
+    "sha256": "a35097004a25032e1537026dd7ba0ba33f942d9f51ed7056cda7b6cbb11724d5"
+  },
+  "finished_at": "2026-09-24T17:43:35.341304Z"
+}

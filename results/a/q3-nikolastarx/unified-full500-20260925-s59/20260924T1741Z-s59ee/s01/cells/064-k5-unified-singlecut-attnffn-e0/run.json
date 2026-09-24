@@ -1,0 +1,5188 @@
+{
+  "case_id": "064",
+  "cores": 5,
+  "variant": "unified-singlecut-attnffn-e0",
+  "solver_args": [],
+  "parameters": {
+    "structural_router": "single_cut_guard_then_stage_then_attention_ffn_then_guarded",
+    "candidate_limit": 2,
+    "selection": "deterministic structure only; no case ID or historical winner lookup"
+  },
+  "e0_call_limit": 2,
+  "job_key": "064-k5-unified-singlecut-attnffn-e0",
+  "stage_id": "shard-01",
+  "started_at": "2026-09-24T17:41:31.745733Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 2,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/case_064_multicore_res.json",
+      "sha256": "12aa5504ff55b4938acc40cc8d351403bc05a8d8afcf3e11c707790ff46879b5"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/evidence/result.json.gz",
+      "sha256": "8c9ea35d01da640185a2d22d04c7d2edb4aa240274d5e7b86571af65b3736a58"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/evidence/receipt.json",
+      "sha256": "80e49620928b285b8261fa0ee870592de7dbb284320f80c7da855b7e82a72ce8"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "reason": null,
+    "exit_code": 0,
+    "wall_seconds": 0.3189861249993555,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.adaptive_solve",
+      "data/raw/a/official/data/case_064.json",
+      "--cores",
+      "5",
+      "-o",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/case_064_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/evidence"
+    ],
+    "process_tree_cleanup": "POSIX process group",
+    "memory": {
+      "limit_bytes": null,
+      "sampled_peak_rss_bytes": null,
+      "poll_seconds": null,
+      "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+    },
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "871f65b73fc1da6a48501998fbfde6684fc78e5dd022ddc68085d1384d2e2280",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "12aa5504ff55b4938acc40cc8d351403bc05a8d8afcf3e11c707790ff46879b5"
+  },
+  "makespan_cycles": 6981,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 37414,
+    "scheduled_copy_bytes": 131412,
+    "added_copy_bytes": 93998,
+    "partition_added_copy_bytes": 93998,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 86,
+    "copy_in_misses": 127,
+    "hit_bytes": 38126,
+    "miss_bytes": 55942,
+    "hits": 86,
+    "accesses": 213,
+    "hit_rate": 0.40530254709359187
+  },
+  "solver_receipt": {
+    "strategy": "attention_rows_ffn",
+    "selected_strategy": "attention_rows_ffn",
+    "official_e0_calls": 1,
+    "candidate_limit": 2,
+    "seed_selection": {
+      "rule": "strict_stage_declined_then_closed_attention_ffn",
+      "router": {
+        "stage_request": {
+          "collector_policy": "rotate_heavy",
+          "source_count": 22,
+          "lanes_by_core": [
+            5,
+            4,
+            5,
+            4,
+            4
+          ],
+          "heaviest_lane_cores": [
+            0,
+            2
+          ],
+          "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+        },
+        "migration_construct_attempts": 0,
+        "migration_candidate_plans": 0,
+        "stage_construct_attempts": 1,
+        "stage_candidate_plans": 0,
+        "attention_construct_attempts": 1,
+        "attention_candidate_plans": 1,
+        "guarded_policy_invocations": 0,
+        "stage_guard_reason": "requires one V pipe family",
+        "attention_cross_delay_cycles": 500,
+        "route": "attention",
+        "attention_pack_ffn": true,
+        "route_e0_limit": 1,
+        "evaluation_calls": 1,
+        "count_scope": "One successful direct construction and one injected online evaluation; no anchor comparison."
+      }
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "attention_rows_ffn",
+        "status": "ok",
+        "makespan": 6981,
+        "metadata": {
+          "strategy": "attention_rows_ffn",
+          "cores": 5,
+          "row_count": 12,
+          "row_compute_ops": 528,
+          "eligible_ops": 906,
+          "capsule_count": 268,
+          "chain_capsule_count": 244,
+          "total_compute_work_cycles": {
+            "PIPE_M": 7308,
+            "PIPE_V": 15744
+          },
+          "row_compute_work_cycles": {
+            "PIPE_M": 3504,
+            "PIPE_V": 9150
+          },
+          "capsule_dispatch": [
+            {
+              "capsule": 6,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                33,
+                34
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 40
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 40,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 12,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                43,
+                44
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 40
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 40,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 18,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                53,
+                54
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 40
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 40,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 7,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                35,
+                36,
+                37,
+                38
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 40,
+              "proxy_finish": 107,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 13,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                45,
+                46,
+                47,
+                48
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 40,
+              "proxy_finish": 107,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 19,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                55,
+                56,
+                57,
+                58
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 40,
+              "proxy_finish": 107,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 24,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                63,
+                64
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 32
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 32,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 25,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                65,
+                66,
+                67,
+                68
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 58
+              },
+              "proxy_first_start": 32,
+              "proxy_finish": 90,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 8,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                39
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 107,
+              "proxy_finish": 151,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 14,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                49
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 107,
+              "proxy_finish": 151,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 20,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                59
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 107,
+              "proxy_finish": 151,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 0,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                10
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 14,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 9,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                40
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 151,
+              "proxy_finish": 164,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 15,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                50
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 164,
+              "proxy_finish": 177,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 21,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                60
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 177,
+              "proxy_finish": 190,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 26,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                69
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 28
+              },
+              "proxy_first_start": 90,
+              "proxy_finish": 118,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 3,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                22,
+                70
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 27,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 10,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                41
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 190,
+              "proxy_finish": 210,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 16,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                51
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 651,
+              "proxy_finish": 671,
+              "remote_boundary_bytes_proxy": 512
+            },
+            {
+              "capsule": 22,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                61
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 671,
+              "proxy_finish": 691,
+              "remote_boundary_bytes_proxy": 512
+            },
+            {
+              "capsule": 1,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                12
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 14,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 11,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                42
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 691,
+              "proxy_finish": 711,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 17,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                52
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 711,
+              "proxy_finish": 731,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 23,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                62
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 731,
+              "proxy_finish": 751,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 27,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                71
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 527,
+              "proxy_finish": 543,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 4,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                24
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 0,
+              "proxy_finish": 14,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 28,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                72
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 543,
+              "proxy_finish": 559,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 29,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                73
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 711,
+              "proxy_finish": 755,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 30,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                74
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 755,
+              "proxy_finish": 799,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 31,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                75
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 799,
+              "proxy_finish": 843,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 32,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                76
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 843,
+              "proxy_finish": 887,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 33,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                77
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 887,
+              "proxy_finish": 931,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 34,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                78
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 931,
+              "proxy_finish": 975,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 35,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                79
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 975,
+              "proxy_finish": 1019,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 36,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                80
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 1019,
+              "proxy_finish": 1063,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 37,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                81
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 1063,
+              "proxy_finish": 1107,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 39,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                83
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 559,
+              "proxy_finish": 587,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 40,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                84
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 587,
+              "proxy_finish": 615,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 41,
+              "kind": "attention_row",
+              "core": 0,
+              "nodes": [
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 1107,
+              "proxy_finish": 1959,
+              "remote_boundary_bytes_proxy": 512
+            },
+            {
+              "capsule": 42,
+              "kind": "attention_row",
+              "core": 3,
+              "nodes": [
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141,
+                142,
+                143,
+                144,
+                145,
+                146,
+                147,
+                148,
+                149,
+                150,
+                151,
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170,
+                171,
+                172
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 1387,
+              "proxy_finish": 2327,
+              "remote_boundary_bytes_proxy": 3584
+            },
+            {
+              "capsule": 43,
+              "kind": "attention_row",
+              "core": 1,
+              "nodes": [
+                173,
+                174,
+                175,
+                176,
+                177,
+                178,
+                179,
+                180,
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209,
+                210,
+                211,
+                212,
+                213,
+                214,
+                215,
+                216
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 1519,
+              "proxy_finish": 2371,
+              "remote_boundary_bytes_proxy": 4096
+            },
+            {
+              "capsule": 38,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                82
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 1059,
+              "proxy_finish": 1087,
+              "remote_boundary_bytes_proxy": 256
+            },
+            {
+              "capsule": 44,
+              "kind": "attention_row",
+              "core": 2,
+              "nodes": [
+                217,
+                218,
+                219,
+                220,
+                221,
+                222,
+                223,
+                224,
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234,
+                235,
+                236,
+                237,
+                238,
+                239,
+                240,
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248,
+                249,
+                250,
+                251,
+                252,
+                253,
+                254,
+                255,
+                256,
+                257,
+                258,
+                259,
+                260
+              ],
+              "work": {
+                "PIPE_M": 208,
+                "PIPE_V": 626
+              },
+              "proxy_first_start": 1299,
+              "proxy_finish": 2161,
+              "remote_boundary_bytes_proxy": 3584
+            },
+            {
+              "capsule": 45,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                261
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 1959,
+              "proxy_finish": 2003,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 55,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                278
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2327,
+              "proxy_finish": 2371,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 65,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                295
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2371,
+              "proxy_finish": 2415,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 2,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                14
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 14,
+              "proxy_finish": 28,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 46,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                262
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 28,
+              "proxy_finish": 43,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 56,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                279
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 43,
+              "proxy_finish": 58,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 66,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                296
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 58,
+              "proxy_finish": 73,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 47,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                263,
+                264
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 40
+              },
+              "proxy_first_start": 2003,
+              "proxy_finish": 2043,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 57,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                280,
+                281
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 40
+              },
+              "proxy_first_start": 2371,
+              "proxy_finish": 2411,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 67,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                297,
+                298
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 40
+              },
+              "proxy_first_start": 2415,
+              "proxy_finish": 2455,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 48,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                265
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2043,
+              "proxy_finish": 2063,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 58,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                282
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2411,
+              "proxy_finish": 2431,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 68,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                299
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2455,
+              "proxy_finish": 2475,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 49,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                266
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2063,
+              "proxy_finish": 2083,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 59,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                283
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2431,
+              "proxy_finish": 2451,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 69,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                300
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2475,
+              "proxy_finish": 2495,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 50,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                267,
+                268,
+                269,
+                270
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 2083,
+              "proxy_finish": 2150,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 60,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                284,
+                285,
+                286,
+                287
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 2451,
+              "proxy_finish": 2518,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 70,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                301,
+                302,
+                303,
+                304
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 2495,
+              "proxy_finish": 2562,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 51,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                271
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 2150,
+              "proxy_finish": 2194,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 61,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                288
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 2518,
+              "proxy_finish": 2562,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 71,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                305
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 2562,
+              "proxy_finish": 2606,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 52,
+              "kind": "ffn_diamond",
+              "core": 0,
+              "nodes": [
+                272,
+                273,
+                274,
+                275
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 2194,
+              "proxy_finish": 2482,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 62,
+              "kind": "ffn_diamond",
+              "core": 3,
+              "nodes": [
+                289,
+                290,
+                291,
+                292
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 2562,
+              "proxy_finish": 2850,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 72,
+              "kind": "ffn_diamond",
+              "core": 1,
+              "nodes": [
+                306,
+                307,
+                308,
+                309
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 2606,
+              "proxy_finish": 2894,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 5,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                26,
+                313
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 28,
+              "proxy_finish": 88,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 75,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                312
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2161,
+              "proxy_finish": 2189,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 76,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                314,
+                315
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 32
+              },
+              "proxy_first_start": 2189,
+              "proxy_finish": 2221,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 77,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                316
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2221,
+              "proxy_finish": 2237,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 78,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                317
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2237,
+              "proxy_finish": 2253,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 79,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                318,
+                319,
+                320,
+                321
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 58
+              },
+              "proxy_first_start": 2253,
+              "proxy_finish": 2311,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 80,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                322
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 28
+              },
+              "proxy_first_start": 2311,
+              "proxy_finish": 2339,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 81,
+              "kind": "ffn_diamond",
+              "core": 2,
+              "nodes": [
+                323,
+                324,
+                325,
+                326
+              ],
+              "work": {
+                "PIPE_M": 88,
+                "PIPE_V": 80
+              },
+              "proxy_first_start": 2339,
+              "proxy_finish": 2507,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 53,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                276
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2482,
+              "proxy_finish": 2502,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 63,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                293
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2850,
+              "proxy_finish": 2870,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 73,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                310
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2894,
+              "proxy_finish": 2914,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 54,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                277
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2502,
+              "proxy_finish": 2522,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 64,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                294
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2870,
+              "proxy_finish": 2890,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 74,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                311
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2914,
+              "proxy_finish": 2934,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 90,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                353
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2522,
+              "proxy_finish": 2542,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 97,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                363
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2890,
+              "proxy_finish": 2910,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 104,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                373
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2934,
+              "proxy_finish": 2954,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 91,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                354
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2542,
+              "proxy_finish": 2562,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 98,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                364
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2910,
+              "proxy_finish": 2930,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 105,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                374
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2954,
+              "proxy_finish": 2974,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 82,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                327
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2507,
+              "proxy_finish": 2523,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 92,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                355,
+                356,
+                357,
+                358
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 2562,
+              "proxy_finish": 2629,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 99,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                365,
+                366,
+                367,
+                368
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 2930,
+              "proxy_finish": 2997,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 106,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                375,
+                376,
+                377,
+                378
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 2974,
+              "proxy_finish": 3041,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 83,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                328
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2523,
+              "proxy_finish": 2539,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 111,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                383
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2539,
+              "proxy_finish": 2555,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 112,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                384
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2555,
+              "proxy_finish": 2571,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 113,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                385,
+                386,
+                387,
+                388
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 58
+              },
+              "proxy_first_start": 2571,
+              "proxy_finish": 2629,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 93,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                359
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 2629,
+              "proxy_finish": 2673,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 100,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                369
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 2997,
+              "proxy_finish": 3041,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 107,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                379
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 3041,
+              "proxy_finish": 3085,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 84,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                330
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 42,
+              "proxy_finish": 56,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 94,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                360
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 88,
+              "proxy_finish": 101,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 101,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                370
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 101,
+              "proxy_finish": 114,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 108,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                380
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 114,
+              "proxy_finish": 127,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 114,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                389
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 28
+              },
+              "proxy_first_start": 2629,
+              "proxy_finish": 2657,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 87,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                342,
+                390
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 56,
+              "proxy_finish": 140,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 95,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                361
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2673,
+              "proxy_finish": 2693,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 102,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                371
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 3041,
+              "proxy_finish": 3061,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 109,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                381
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 3085,
+              "proxy_finish": 3105,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 85,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                332
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 70,
+              "proxy_finish": 84,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 96,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                362
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 2693,
+              "proxy_finish": 2713,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 103,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                372
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 3061,
+              "proxy_finish": 3081,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 110,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                382
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 3105,
+              "proxy_finish": 3125,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 115,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                391
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2657,
+              "proxy_finish": 2673,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 88,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                344
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 84,
+              "proxy_finish": 98,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 116,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                392
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 2673,
+              "proxy_finish": 2689,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 117,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                393
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2713,
+              "proxy_finish": 2757,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 118,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                394
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2757,
+              "proxy_finish": 2801,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 119,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                395
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2801,
+              "proxy_finish": 2845,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 120,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                396
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 3081,
+              "proxy_finish": 3125,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 121,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                397
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 3125,
+              "proxy_finish": 3169,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 122,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                398
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 3169,
+              "proxy_finish": 3213,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 123,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                399
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 3125,
+              "proxy_finish": 3169,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 124,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                400
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 3169,
+              "proxy_finish": 3213,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 125,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                401
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 3213,
+              "proxy_finish": 3257,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 127,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                403
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2689,
+              "proxy_finish": 2717,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 128,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                404
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2717,
+              "proxy_finish": 2745,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 129,
+              "kind": "attention_row",
+              "core": 0,
+              "nodes": [
+                405,
+                406,
+                407,
+                408,
+                409,
+                410,
+                411,
+                412,
+                413,
+                414,
+                415,
+                416,
+                417,
+                418,
+                419,
+                420,
+                421,
+                422,
+                423,
+                424,
+                425,
+                426,
+                427,
+                428,
+                429,
+                430,
+                431,
+                432,
+                433,
+                434,
+                435,
+                436,
+                437,
+                438,
+                439,
+                440,
+                441,
+                442,
+                443,
+                444,
+                445,
+                446,
+                447,
+                448
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 2845,
+              "proxy_finish": 4477,
+              "remote_boundary_bytes_proxy": 2560
+            },
+            {
+              "capsule": 130,
+              "kind": "attention_row",
+              "core": 3,
+              "nodes": [
+                449,
+                450,
+                451,
+                452,
+                453,
+                454,
+                455,
+                456,
+                457,
+                458,
+                459,
+                460,
+                461,
+                462,
+                463,
+                464,
+                465,
+                466,
+                467,
+                468,
+                469,
+                470,
+                471,
+                472,
+                473,
+                474,
+                475,
+                476,
+                477,
+                478,
+                479,
+                480,
+                481,
+                482,
+                483,
+                484,
+                485,
+                486,
+                487,
+                488,
+                489,
+                490,
+                491,
+                492
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 3301,
+              "proxy_finish": 4477,
+              "remote_boundary_bytes_proxy": 2560
+            },
+            {
+              "capsule": 131,
+              "kind": "attention_row",
+              "core": 1,
+              "nodes": [
+                493,
+                494,
+                495,
+                496,
+                497,
+                498,
+                499,
+                500,
+                501,
+                502,
+                503,
+                504,
+                505,
+                506,
+                507,
+                508,
+                509,
+                510,
+                511,
+                512,
+                513,
+                514,
+                515,
+                516,
+                517,
+                518,
+                519,
+                520,
+                521,
+                522,
+                523,
+                524,
+                525,
+                526,
+                527,
+                528,
+                529,
+                530,
+                531,
+                532,
+                533,
+                534,
+                535,
+                536
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 3301,
+              "proxy_finish": 4477,
+              "remote_boundary_bytes_proxy": 2560
+            },
+            {
+              "capsule": 126,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                402
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 2745,
+              "proxy_finish": 2773,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 132,
+              "kind": "attention_row",
+              "core": 2,
+              "nodes": [
+                537,
+                538,
+                539,
+                540,
+                541,
+                542,
+                543,
+                544,
+                545,
+                546,
+                547,
+                548,
+                549,
+                550,
+                551,
+                552,
+                553,
+                554,
+                555,
+                556,
+                557,
+                558,
+                559,
+                560,
+                561,
+                562,
+                563,
+                564,
+                565,
+                566,
+                567,
+                568,
+                569,
+                570,
+                571,
+                572,
+                573,
+                574,
+                575,
+                576,
+                577,
+                578,
+                579,
+                580
+              ],
+              "work": {
+                "PIPE_M": 208,
+                "PIPE_V": 626
+              },
+              "proxy_first_start": 3301,
+              "proxy_finish": 4311,
+              "remote_boundary_bytes_proxy": 3072
+            },
+            {
+              "capsule": 133,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                581
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4477,
+              "proxy_finish": 4521,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 144,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                598
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4477,
+              "proxy_finish": 4521,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 155,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                615
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4477,
+              "proxy_finish": 4521,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 86,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                334
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 98,
+              "proxy_finish": 112,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 134,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                582
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 140,
+              "proxy_finish": 155,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 145,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                599
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 155,
+              "proxy_finish": 170,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 156,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                616
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 170,
+              "proxy_finish": 185,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 135,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                583
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4521,
+              "proxy_finish": 4541,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 146,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                600
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4521,
+              "proxy_finish": 4541,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 157,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                617
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4521,
+              "proxy_finish": 4541,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 136,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                584
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4541,
+              "proxy_finish": 4561,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 147,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                601
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4541,
+              "proxy_finish": 4561,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 158,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                618
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4541,
+              "proxy_finish": 4561,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 137,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                585
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4561,
+              "proxy_finish": 4581,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 148,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                602
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4561,
+              "proxy_finish": 4581,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 159,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                619
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4561,
+              "proxy_finish": 4581,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 138,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                586
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4581,
+              "proxy_finish": 4601,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 149,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                603
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4581,
+              "proxy_finish": 4601,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 160,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                620
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 4581,
+              "proxy_finish": 4601,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 139,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                587,
+                588,
+                589,
+                590
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 4601,
+              "proxy_finish": 4668,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 150,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                604,
+                605,
+                606,
+                607
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 4601,
+              "proxy_finish": 4668,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 161,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                621,
+                622,
+                623,
+                624
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 4601,
+              "proxy_finish": 4668,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 140,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                591
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 4668,
+              "proxy_finish": 4712,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 151,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                608
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 4668,
+              "proxy_finish": 4712,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 162,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                625
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 4668,
+              "proxy_finish": 4712,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 141,
+              "kind": "ffn_diamond",
+              "core": 0,
+              "nodes": [
+                592,
+                593,
+                594,
+                595
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 4712,
+              "proxy_finish": 5000,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 152,
+              "kind": "ffn_diamond",
+              "core": 3,
+              "nodes": [
+                609,
+                610,
+                611,
+                612
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 4712,
+              "proxy_finish": 5000,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 163,
+              "kind": "ffn_diamond",
+              "core": 1,
+              "nodes": [
+                626,
+                627,
+                628,
+                629
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 4712,
+              "proxy_finish": 5000,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 89,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                346,
+                633
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 112,
+              "proxy_finish": 200,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 166,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                632
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4311,
+              "proxy_finish": 4339,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 167,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                634
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4339,
+              "proxy_finish": 4355,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 168,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                635
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4355,
+              "proxy_finish": 4371,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 169,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                636
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4371,
+              "proxy_finish": 4387,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 170,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                637
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4387,
+              "proxy_finish": 4403,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 171,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                638,
+                639,
+                640,
+                641
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 58
+              },
+              "proxy_first_start": 4403,
+              "proxy_finish": 4461,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 172,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                642
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 28
+              },
+              "proxy_first_start": 4461,
+              "proxy_finish": 4489,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 173,
+              "kind": "ffn_diamond",
+              "core": 2,
+              "nodes": [
+                643,
+                644,
+                645,
+                646
+              ],
+              "work": {
+                "PIPE_M": 88,
+                "PIPE_V": 80
+              },
+              "proxy_first_start": 4489,
+              "proxy_finish": 4657,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 142,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                596
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5000,
+              "proxy_finish": 5020,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 153,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                613
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5000,
+              "proxy_finish": 5020,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 164,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                630
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5000,
+              "proxy_finish": 5020,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 143,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                597
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5020,
+              "proxy_finish": 5040,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 154,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                614
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5020,
+              "proxy_finish": 5040,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 165,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                631
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5020,
+              "proxy_finish": 5040,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 182,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                673
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5040,
+              "proxy_finish": 5060,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 189,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                683
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5040,
+              "proxy_finish": 5060,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 196,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                693
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5040,
+              "proxy_finish": 5060,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 183,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                674
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5060,
+              "proxy_finish": 5080,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 190,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                684
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5060,
+              "proxy_finish": 5080,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 197,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                694
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5060,
+              "proxy_finish": 5080,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 174,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                647
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4657,
+              "proxy_finish": 4673,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 184,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                675,
+                676,
+                677,
+                678
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 5080,
+              "proxy_finish": 5147,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 191,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                685,
+                686,
+                687,
+                688
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 5080,
+              "proxy_finish": 5147,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 198,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                695,
+                696,
+                697,
+                698
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 5080,
+              "proxy_finish": 5147,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 175,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                648
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4673,
+              "proxy_finish": 4689,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 203,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                703
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4689,
+              "proxy_finish": 4705,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 204,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                704
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4705,
+              "proxy_finish": 4721,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 205,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                705,
+                706,
+                707,
+                708
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 58
+              },
+              "proxy_first_start": 4721,
+              "proxy_finish": 4779,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 185,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                679
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 5147,
+              "proxy_finish": 5191,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 192,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                689
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 5147,
+              "proxy_finish": 5191,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 199,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                699
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 5147,
+              "proxy_finish": 5191,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 176,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                650
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 126,
+              "proxy_finish": 140,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 186,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                680
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 200,
+              "proxy_finish": 213,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 193,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                690
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 213,
+              "proxy_finish": 226,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 200,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                700
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 226,
+              "proxy_finish": 239,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 206,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                709
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 28
+              },
+              "proxy_first_start": 4779,
+              "proxy_finish": 4807,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 179,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                662,
+                710
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 13
+              },
+              "proxy_first_start": 140,
+              "proxy_finish": 252,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 187,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                681
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5191,
+              "proxy_finish": 5211,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 194,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                691
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5191,
+              "proxy_finish": 5211,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 201,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                701
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5191,
+              "proxy_finish": 5211,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 177,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                652
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 154,
+              "proxy_finish": 168,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 188,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                682
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5211,
+              "proxy_finish": 5231,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 195,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                692
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5211,
+              "proxy_finish": 5231,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 202,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                702
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 5211,
+              "proxy_finish": 5231,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 207,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                711
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4807,
+              "proxy_finish": 4823,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 180,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                664
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 168,
+              "proxy_finish": 182,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 208,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                712
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 4823,
+              "proxy_finish": 4839,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 209,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                713
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5231,
+              "proxy_finish": 5275,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 210,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                714
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5275,
+              "proxy_finish": 5319,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 211,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                715
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5319,
+              "proxy_finish": 5363,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 212,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                716
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5231,
+              "proxy_finish": 5275,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 213,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                717
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5275,
+              "proxy_finish": 5319,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 214,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                718
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5319,
+              "proxy_finish": 5363,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 215,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                719
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5231,
+              "proxy_finish": 5275,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 216,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                720
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5275,
+              "proxy_finish": 5319,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 217,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                721
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 5319,
+              "proxy_finish": 5363,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 219,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                723
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4839,
+              "proxy_finish": 4867,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 220,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                724
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4867,
+              "proxy_finish": 4895,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 221,
+              "kind": "attention_row",
+              "core": 0,
+              "nodes": [
+                725,
+                726,
+                727,
+                728,
+                729,
+                730,
+                731,
+                732,
+                733,
+                734,
+                735,
+                736,
+                737,
+                738,
+                739,
+                740,
+                741,
+                742,
+                743,
+                744,
+                745,
+                746,
+                747,
+                748,
+                749,
+                750,
+                751,
+                752,
+                753,
+                754,
+                755,
+                756,
+                757,
+                758,
+                759,
+                760,
+                761,
+                762,
+                763,
+                764,
+                765,
+                766,
+                767,
+                768
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 5363,
+              "proxy_finish": 6627,
+              "remote_boundary_bytes_proxy": 2560
+            },
+            {
+              "capsule": 222,
+              "kind": "attention_row",
+              "core": 3,
+              "nodes": [
+                769,
+                770,
+                771,
+                772,
+                773,
+                774,
+                775,
+                776,
+                777,
+                778,
+                779,
+                780,
+                781,
+                782,
+                783,
+                784,
+                785,
+                786,
+                787,
+                788,
+                789,
+                790,
+                791,
+                792,
+                793,
+                794,
+                795,
+                796,
+                797,
+                798,
+                799,
+                800,
+                801,
+                802,
+                803,
+                804,
+                805,
+                806,
+                807,
+                808,
+                809,
+                810,
+                811,
+                812
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 5819,
+              "proxy_finish": 6671,
+              "remote_boundary_bytes_proxy": 2560
+            },
+            {
+              "capsule": 223,
+              "kind": "attention_row",
+              "core": 1,
+              "nodes": [
+                813,
+                814,
+                815,
+                816,
+                817,
+                818,
+                819,
+                820,
+                821,
+                822,
+                823,
+                824,
+                825,
+                826,
+                827,
+                828,
+                829,
+                830,
+                831,
+                832,
+                833,
+                834,
+                835,
+                836,
+                837,
+                838,
+                839,
+                840,
+                841,
+                842,
+                843,
+                844,
+                845,
+                846,
+                847,
+                848,
+                849,
+                850,
+                851,
+                852,
+                853,
+                854,
+                855,
+                856
+              ],
+              "work": {
+                "PIPE_M": 320,
+                "PIPE_V": 808
+              },
+              "proxy_first_start": 5819,
+              "proxy_finish": 6671,
+              "remote_boundary_bytes_proxy": 2560
+            },
+            {
+              "capsule": 218,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                722
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 4895,
+              "proxy_finish": 4923,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 224,
+              "kind": "attention_row",
+              "core": 2,
+              "nodes": [
+                857,
+                858,
+                859,
+                860,
+                861,
+                862,
+                863,
+                864,
+                865,
+                866,
+                867,
+                868,
+                869,
+                870,
+                871,
+                872,
+                873,
+                874,
+                875,
+                876,
+                877,
+                878,
+                879,
+                880,
+                881,
+                882,
+                883,
+                884,
+                885,
+                886,
+                887,
+                888,
+                889,
+                890,
+                891,
+                892,
+                893,
+                894,
+                895,
+                896,
+                897,
+                898,
+                899,
+                900
+              ],
+              "work": {
+                "PIPE_M": 208,
+                "PIPE_V": 626
+              },
+              "proxy_first_start": 5819,
+              "proxy_finish": 6473,
+              "remote_boundary_bytes_proxy": 3072
+            },
+            {
+              "capsule": 225,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                901
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 6627,
+              "proxy_finish": 6671,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 236,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                918
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 6671,
+              "proxy_finish": 6715,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 247,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                935
+              ],
+              "work": {
+                "PIPE_M": 44,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 6671,
+              "proxy_finish": 6715,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 178,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                654
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 182,
+              "proxy_finish": 196,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 226,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                902
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 252,
+              "proxy_finish": 267,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 237,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                919
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 267,
+              "proxy_finish": 282,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 248,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                936
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 282,
+              "proxy_finish": 297,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 227,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                903
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6671,
+              "proxy_finish": 6691,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 238,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                920
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6715,
+              "proxy_finish": 6735,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 249,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                937
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6715,
+              "proxy_finish": 6735,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 228,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                904
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6691,
+              "proxy_finish": 6711,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 239,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                921
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6735,
+              "proxy_finish": 6755,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 250,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                938
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6735,
+              "proxy_finish": 6755,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 229,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                905
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6711,
+              "proxy_finish": 6731,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 240,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                922
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6755,
+              "proxy_finish": 6775,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 251,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                939
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6755,
+              "proxy_finish": 6775,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 230,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                906
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6731,
+              "proxy_finish": 6751,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 241,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                923
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6775,
+              "proxy_finish": 6795,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 252,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                940
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 6775,
+              "proxy_finish": 6795,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 231,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                907,
+                908,
+                909,
+                910
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 6751,
+              "proxy_finish": 6818,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 242,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                924,
+                925,
+                926,
+                927
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 6795,
+              "proxy_finish": 6862,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 253,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                941,
+                942,
+                943,
+                944
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 67
+              },
+              "proxy_first_start": 6795,
+              "proxy_finish": 6862,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 181,
+              "kind": "exclusive_chain",
+              "core": 4,
+              "nodes": [
+                666,
+                953
+              ],
+              "work": {
+                "PIPE_M": 14,
+                "PIPE_V": 15
+              },
+              "proxy_first_start": 196,
+              "proxy_finish": 312,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 258,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                952
+              ],
+              "work": {
+                "PIPE_M": 28,
+                "PIPE_V": 0
+              },
+              "proxy_first_start": 6473,
+              "proxy_finish": 6501,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 232,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                911
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 6818,
+              "proxy_finish": 6862,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 243,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                928
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 6862,
+              "proxy_finish": 6906,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 254,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                945
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 44
+              },
+              "proxy_first_start": 6862,
+              "proxy_finish": 6906,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 259,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                954
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 6501,
+              "proxy_finish": 6517,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 260,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                955
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 6517,
+              "proxy_finish": 6533,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 233,
+              "kind": "ffn_diamond",
+              "core": 0,
+              "nodes": [
+                912,
+                913,
+                914,
+                915
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 6862,
+              "proxy_finish": 7150,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 244,
+              "kind": "ffn_diamond",
+              "core": 3,
+              "nodes": [
+                929,
+                930,
+                931,
+                932
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 6906,
+              "proxy_finish": 7194,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 255,
+              "kind": "ffn_diamond",
+              "core": 1,
+              "nodes": [
+                946,
+                947,
+                948,
+                949
+              ],
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "proxy_first_start": 6906,
+              "proxy_finish": 7194,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 261,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                956
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 6533,
+              "proxy_finish": 6549,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 262,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                957
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 6549,
+              "proxy_finish": 6565,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 263,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                958,
+                959,
+                960,
+                961
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 58
+              },
+              "proxy_first_start": 6565,
+              "proxy_finish": 6623,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 264,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                962
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 28
+              },
+              "proxy_first_start": 6623,
+              "proxy_finish": 6651,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 265,
+              "kind": "ffn_diamond",
+              "core": 2,
+              "nodes": [
+                963,
+                964,
+                965,
+                966
+              ],
+              "work": {
+                "PIPE_M": 88,
+                "PIPE_V": 80
+              },
+              "proxy_first_start": 6651,
+              "proxy_finish": 6819,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 234,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                916
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 7150,
+              "proxy_finish": 7170,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 245,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                933
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 7194,
+              "proxy_finish": 7214,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 256,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                950
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 7194,
+              "proxy_finish": 7214,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 266,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                967
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 6819,
+              "proxy_finish": 6835,
+              "remote_boundary_bytes_proxy": 32
+            },
+            {
+              "capsule": 235,
+              "kind": "exclusive_chain",
+              "core": 0,
+              "nodes": [
+                917
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 7170,
+              "proxy_finish": 7190,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 246,
+              "kind": "exclusive_chain",
+              "core": 3,
+              "nodes": [
+                934
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 7214,
+              "proxy_finish": 7234,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 257,
+              "kind": "exclusive_chain",
+              "core": 1,
+              "nodes": [
+                951
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 20
+              },
+              "proxy_first_start": 7214,
+              "proxy_finish": 7234,
+              "remote_boundary_bytes_proxy": 0
+            },
+            {
+              "capsule": 267,
+              "kind": "exclusive_chain",
+              "core": 2,
+              "nodes": [
+                968
+              ],
+              "work": {
+                "PIPE_M": 0,
+                "PIPE_V": 16
+              },
+              "proxy_first_start": 6835,
+              "proxy_finish": 6851,
+              "remote_boundary_bytes_proxy": 0
+            }
+          ],
+          "placement_proxy_makespan_cycles": 7234,
+          "proxy_makespan_cycles": 6788,
+          "ffn_diamonds": [
+            {
+              "nodes": [
+                272,
+                273,
+                274,
+                275
+              ],
+              "cores": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                289,
+                290,
+                291,
+                292
+              ],
+              "cores": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                306,
+                307,
+                308,
+                309
+              ],
+              "cores": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                323,
+                324,
+                325,
+                326
+              ],
+              "cores": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 88,
+                "PIPE_V": 80
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                592,
+                593,
+                594,
+                595
+              ],
+              "cores": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                609,
+                610,
+                611,
+                612
+              ],
+              "cores": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                626,
+                627,
+                628,
+                629
+              ],
+              "cores": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                643,
+                644,
+                645,
+                646
+              ],
+              "cores": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 88,
+                "PIPE_V": 80
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                912,
+                913,
+                914,
+                915
+              ],
+              "cores": [
+                0,
+                0,
+                0,
+                0
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                929,
+                930,
+                931,
+                932
+              ],
+              "cores": [
+                3,
+                3,
+                3,
+                3
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                946,
+                947,
+                948,
+                949
+              ],
+              "cores": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 152,
+                "PIPE_V": 136
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            },
+            {
+              "nodes": [
+                963,
+                964,
+                965,
+                966
+              ],
+              "cores": [
+                2,
+                2,
+                2,
+                2
+              ],
+              "split": false,
+              "work": {
+                "PIPE_M": 88,
+                "PIPE_V": 80
+              },
+              "remote_internal_tensors": [],
+              "remote_internal_tensor_bytes_proxy": 0
+            }
+          ],
+          "cross_delay_proxy": 500,
+          "core_compute_work_cycles": [
+            {
+              "PIPE_M": 2222,
+              "PIPE_V": 4217
+            },
+            {
+              "PIPE_M": 1826,
+              "PIPE_V": 4058
+            },
+            {
+              "PIPE_M": 1182,
+              "PIPE_V": 3115
+            },
+            {
+              "PIPE_M": 1868,
+              "PIPE_V": 4057
+            },
+            {
+              "PIPE_M": 210,
+              "PIPE_V": 297
+            }
+          ],
+          "order": "placement: quotient bottom-level ready; final fixed-owner order: minimum feasible op start, negative op bottom-level, ID; one global word projected per core",
+          "placement": "minimum per-operation compute/pipe finish, distinct remote boundary bytes, core ID",
+          "complexity": "recognition worst-case O(C*(V+E)) for C final-DIV candidates; quotient/placement O(k*(V+E)+(V+E) log V); final ready pass O((V+E) log V+kV)",
+          "guards": [
+            "positive M/V compute cycles",
+            "unique tensor producers and no direct op edges",
+            "raw tensor dependencies equal COPY-contracted compute dependencies",
+            "closed nonoverlapping attention/FFN capsules and acyclic quotient",
+            "one raw output and shared Q/K/V plus scalar frontier",
+            "four original M/V/V/M FFN ops outside rows; no raw nonterminal tensor consumer outside the diamond"
+          ],
+          "submission": "Original ops remain singleton subgraphs; per-core Tasks are rederived by official P3.",
+          "limitations": [
+            "No COPY service, DDR contention, cache, capacity or spill model; not an official score or claimed official bound.",
+            "Only row/FFN placement is shared; each op uses its own original predecessor release, no all-frontier barrier.",
+            "Placement is chosen using contiguous capsule trial words; the final op-level ready pass may improve or worsen that proxy and does not revisit ownership.",
+            "Bottom-level and remote tensor bytes are proxies, not optimality guarantees or actual traffic.",
+            "A fixed row/FFN/chain placement family can miss useful splits; packing does not fuse, clone or remove original ops."
+          ],
+          "packed_ffn_count": 12,
+          "route": "attention",
+          "pack_ffn": true,
+          "router": {
+            "stage_request": {
+              "collector_policy": "rotate_heavy",
+              "source_count": 22,
+              "lanes_by_core": [
+                5,
+                4,
+                5,
+                4,
+                4
+              ],
+              "heaviest_lane_cores": [
+                0,
+                2
+              ],
+              "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+            },
+            "migration_construct_attempts": 0,
+            "migration_candidate_plans": 0,
+            "stage_construct_attempts": 1,
+            "stage_candidate_plans": 0,
+            "attention_construct_attempts": 1,
+            "attention_candidate_plans": 1,
+            "guarded_policy_invocations": 0,
+            "stage_guard_reason": "requires one V pipe family",
+            "attention_cross_delay_cycles": 500,
+            "route": "attention",
+            "attention_pack_ffn": true,
+            "route_e0_limit": 1,
+            "evaluation_calls": 1,
+            "count_scope": "One successful direct construction and one injected online evaluation; no anchor comparison."
+          },
+          "construction_note": "The constructor performs no E0 calls; this saved candidate received one online evaluation. No historical or cross-route non-regression guarantee."
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "12aa5504ff55b4938acc40cc8d351403bc05a8d8afcf3e11c707790ff46879b5"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "8c9ea35d01da640185a2d22d04c7d2edb4aa240274d5e7b86571af65b3736a58"
+          }
+        }
+      }
+    ],
+    "makespan": 6981,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 37414,
+      "scheduled_copy_bytes": 131412,
+      "added_copy_bytes": 93998,
+      "partition_added_copy_bytes": 93998,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 86,
+      "copy_in_misses": 127,
+      "hit_bytes": 38126,
+      "miss_bytes": 55942,
+      "hits": 86,
+      "accesses": 213,
+      "hit_rate": 0.40530254709359187
+    },
+    "graph_sha256": "871f65b73fc1da6a48501998fbfde6684fc78e5dd022ddc68085d1384d2e2280",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "12aa5504ff55b4938acc40cc8d351403bc05a8d8afcf3e11c707790ff46879b5",
+    "result_sha256": "8c9ea35d01da640185a2d22d04c7d2edb4aa240274d5e7b86571af65b3736a58",
+    "evaluation_seconds": 0.0784967920044437,
+    "main_until_evidence_seconds": 0.14123729200218804,
+    "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/unified-full500-20260925-s59/20260924T1741Z-s59ee/s01/cells/064-k5-unified-singlecut-attnffn-e0/evidence/evaluations.json",
+    "sha256": "7cdf6c2a53894a1c4778aed35638065b8af92850bd16513a4804a318d00383a9"
+  },
+  "finished_at": "2026-09-24T17:41:32.216772Z"
+}

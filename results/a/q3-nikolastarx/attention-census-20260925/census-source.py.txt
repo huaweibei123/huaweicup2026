@@ -1,0 +1,126 @@
+"""One recognize(Index(graph)) call per frozen graph; no plans or scoring."""
+from collections import Counter
+import csv
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import platform
+import subprocess
+import sys
+import time
+import traceback
+
+ROOT = Path('/Users/nikolastar/Projects/huaweicup2026/.worktrees/q3-core-nikolastarx')
+OUT = Path(__file__).resolve().parent
+EXPECTED = 'd02f0493386f1248533856447be98194bb09867eca55f55d18a186ad3f9d6964'
+SOURCE = ROOT / 'src/q3/attention_rows.py'
+sha = lambda raw: hashlib.sha256(raw).hexdigest()
+dump = lambda path, obj: path.write_text(json.dumps(obj, indent=2, ensure_ascii=False, allow_nan=False)+'\n', encoding='utf-8')
+before = sha(SOURCE.read_bytes())
+assert before == EXPECTED, 'recognizer source changed before scan'
+manifest_raw = (ROOT/'docs/a/source-manifest.json').read_bytes()
+manifest = json.loads(manifest_raw)
+frozen = {f['path']: f for f in manifest['files']}
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(ROOT))
+from src.q3.construct import Index, UnsupportedStructure
+from src.q3.attention_rows import recognize
+
+started = datetime.now(timezone.utc).isoformat()
+t0 = time.monotonic()
+rows = []
+with (OUT/'case-records.jsonl').open('x',encoding='utf-8') as log:
+    for n in range(1,101):
+        case=f'{n:03d}'
+        path=ROOT/f'data/raw/a/official/data/case_{case}.json'
+        raw=path.read_bytes()
+        digest=sha(raw)
+        assert digest == frozen[f'data/case_{case}.json']['sha256']
+        graph=json.loads(raw)
+        record={'case_id':case,'input_path':str(path.relative_to(ROOT)),
+                'input_sha256':digest,'input_bytes':len(raw),'recognizer_source_sha256':before,
+                'recognize_calls':0,'plan_constructions':0,'E0':0,'E1':0,'E2':0}
+        phase='Index'
+        try:
+            index=Index(graph)
+            graph_work={p:sum(max(1,o['cycles']) for o in index.ops.values() if o['pipe']==p)
+                        for p in ('PIPE_M','PIPE_V')}
+            record.update(compute_ops=len(index.ops),graph_work=graph_work)
+            phase='recognize'
+            record['recognize_calls']=1
+            try:
+                recognized=recognize(index)
+            except UnsupportedStructure as error:
+                record.update(status='unsupported',reason=str(error),row_count=None,rows_work=None,
+                              rows_fraction_of_graph_pipe_work=None,rows=[])
+            else:
+                node_union={u for row in recognized for u in row['nodes']}
+                assert len(node_union)==sum(len(row['nodes']) for row in recognized)
+                work={p:sum(row['work'][p] for row in recognized) for p in graph_work}
+                assert work=={p:sum(index.duration(u) for u in node_union if index.ops[u]['pipe']==p)
+                              for p in graph_work}
+                total=sum(work.values())
+                record.update(status='recognized',reason=None,row_count=len(recognized),row_ops=len(node_union),
+                    rows_work=work,rows_fraction_of_graph_pipe_work={p:work[p]/graph_work[p] if graph_work[p] else None for p in work},
+                    rows_work_composition={p:work[p]/total for p in work},
+                    row_work_fraction_of_total=sum(work.values())/sum(graph_work.values()),
+                    rows=[{'sink':r['sink'],'nodes':list(r['nodes']),'q':r['q'],'kv_pairs':len(r['k']),
+                           'work':r['work'],'kv_distinct_boundary_bytes':r['kv_distinct_boundary_bytes'],
+                           'private_q_raw_closed':r['private_q_raw_closed']} for r in recognized])
+        except Exception as error:
+            record.update(status='programming_error',phase=phase,error_type=type(error).__name__,
+                          reason=str(error),traceback=traceback.format_exc())
+            log.write(json.dumps(record,ensure_ascii=False)+'\n');log.flush()
+            dump(OUT/'programming-error.json',record)
+            raise
+        rows.append(record)
+        log.write(json.dumps(record,ensure_ascii=False)+'\n');log.flush()
+after=sha(SOURCE.read_bytes())
+assert after == before == EXPECTED, 'recognizer source changed during scan'
+dump(OUT/'census.json',rows)
+top_root=Path('/tmp/q3-global-bound-audit')
+top=json.loads((top_root/'top-contributors.json').read_text())
+by_case={r['case_id']:r for r in rows}
+intersections={}
+for k, ranking in top.items():
+    selected=[]
+    for rank, r in enumerate(ranking,1):
+        case=r['case_id']; c=by_case[case]
+        assert c['input_sha256']==r['graph_sha256']
+        if c['status']=='recognized':
+            selected.append({'rank':rank,'case_id':case,'row_count':c['row_count'],
+                'relaxed_mean_contribution_div100':r['relaxed_mean_contribution_div100'],
+                'current_speedup':r['snapshot_best_speedup'],'upper_speedup':r['speedup_upper'],
+                'rows_fraction_of_graph_pipe_work':c['rows_fraction_of_graph_pipe_work']})
+    intersections[k]=selected
+dump(OUT/'top20-intersection.json',intersections)
+flat=[]
+for r in rows:
+    flat.append({'case_id':r['case_id'],'status':r['status'],'row_count':r['row_count'],
+        'row_ops':r.get('row_ops'),'graph_M_cycles':r['graph_work']['PIPE_M'],'graph_V_cycles':r['graph_work']['PIPE_V'],
+        'rows_M_cycles':(r['rows_work'] or {}).get('PIPE_M'),'rows_V_cycles':(r['rows_work'] or {}).get('PIPE_V'),
+        'rows_fraction_graph_M':(r['rows_fraction_of_graph_pipe_work'] or {}).get('PIPE_M'),
+        'rows_fraction_graph_V':(r['rows_fraction_of_graph_pipe_work'] or {}).get('PIPE_V'),
+        'reason':r['reason'],'input_sha256':r['input_sha256'],'source_sha256':before})
+with (OUT/'census.csv').open('w',encoding='utf-8',newline='') as f:
+    writer=csv.DictWriter(f,fieldnames=list(flat[0]));writer.writeheader();writer.writerows(flat)
+summary={'started_at':started,'finished_at':datetime.now(timezone.utc).isoformat(),
+    'recognizer_and_input_index_scan_wall_seconds':time.monotonic()-t0,
+    'scope':'one static guard census, not a solver performance benchmark or E0 legality proof',
+    'cases':len(rows),'recognize_calls':sum(r['recognize_calls'] for r in rows),
+    'statuses':dict(Counter(r['status'] for r in rows)),
+    'recognized_cases':[r['case_id'] for r in rows if r['status']=='recognized'],
+    'unsupported_reasons':dict(Counter(r['reason'] for r in rows if r['status']=='unsupported')),
+    'new_calls':{'solver':0,'construct':0,'E0':0,'E1':0,'E2':0},'source_before_sha256':before,
+    'source_after_sha256':after,'source_hash_unchanged':after==before,
+    'read_repo_head':subprocess.check_output(['git','-C',str(ROOT),'rev-parse','HEAD']).decode().strip(),
+    'source_manifest_sha256':sha(manifest_raw),'official_code_hash':manifest['official_code_hash'],
+    'dependency_hashes':{'src/q3/construct.py':sha((ROOT/'src/q3/construct.py').read_bytes())},
+    'top20_snapshot':json.loads((top_root/'summary.json').read_text())['snapshot_as_of'],
+    'top20_source_sha256':sha((top_root/'top-contributors.json').read_bytes()),
+    'python':platform.python_version()}
+dump(OUT/'summary.json',summary)
+(OUT/'attention_rows-source.py').write_bytes(SOURCE.read_bytes())
+print(json.dumps(summary,indent=2))
+print('k5 top20 recognized', [(r['rank'],r['case_id'],r['row_count']) for r in intersections['5']])

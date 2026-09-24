@@ -1,0 +1,185 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-guarded-crossplatform-REPLACE_ACTUAL_RUN",
+  "stage_id": "verification-fivecells",
+  "producer_session": "REPLACE_WITH_MEMBER_SESSION",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "6389818b1028ada74c685483dd1cd75fb8e16285",
+  "solver_module": "src.q3.guarded_solve",
+  "algorithm": {
+    "id": "q3-guarded-release",
+    "name": "归约树释放感知构造与官方回退",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Evaluate one structure-based anchor (balanced for a single reduction tree; existing structural policy otherwise). Construct at most one fixed-granularity release-place proposal. Preserve uncut multi-tree overlap policy. Skip duplicates or candidates whose certified singleton pipe bound cannot strictly improve the evaluated anchor. Otherwise evaluate once more and retain strict E0 improvement only. All scoring and bounds are online.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "e782353b1a78ec0cca21b647552693caebbc8724",
+        "path": "src/q3/release_tree.py",
+        "entrypoint": "src.q3.release_tree.construct"
+      }
+    ]
+  },
+  "runtime_id": "REPLACE_WITH_ACTUAL_HOST",
+  "budget": {
+    "max_e0_calls": 10,
+    "total_wall_seconds": 600,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "jobs": [
+    {
+      "case_id": "002",
+      "cores": 3,
+      "variant": "anchor-release-bound-e0",
+      "solver_args": [],
+      "parameters": {
+        "candidate_limit": 2,
+        "fragment_granularity_denominator": 4,
+        "selection": "official strict improvement versus structure-based anchor; certified lower bound rejection only"
+      },
+      "e0_call_limit": 2,
+      "expected": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/002-k3-anchor-release-bound-e0/case_002_multicore_res.json",
+          "sha256": "b69da7e6518a8120ece8d5f118801d5c0d28b5825f5516b8489a1f46b7aba232"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/002-k3-anchor-release-bound-e0/evidence/result.json.gz",
+          "sha256": "efd355becf9c52f3b4e8990b3676aa0f534b9484579db5b13ddb7943f1dbb486"
+        },
+        "receipt": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/002-k3-anchor-release-bound-e0/evidence/receipt.json",
+          "sha256": "5f8b46e4fec4434f5316393f68f2e1c3aba22002a8f31e1a07b65f8a10f1d847"
+        }
+      }
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "anchor-release-bound-e0",
+      "solver_args": [],
+      "parameters": {
+        "candidate_limit": 2,
+        "fragment_granularity_denominator": 4,
+        "selection": "official strict improvement versus structure-based anchor; certified lower bound rejection only"
+      },
+      "e0_call_limit": 2,
+      "expected": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/062-k5-anchor-release-bound-e0/case_062_multicore_res.json",
+          "sha256": "c57fa0df141b0be1d165ad013d335101fb272603ff670c617398c8369ae7897b"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/062-k5-anchor-release-bound-e0/evidence/result.json.gz",
+          "sha256": "2c74ded8ff31cdb362044c46c167801f4caef4276509c4bf88b2cc38e5458350"
+        },
+        "receipt": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/062-k5-anchor-release-bound-e0/evidence/receipt.json",
+          "sha256": "818d7bc7b2fce9f6e7762710712328c63252a4f5b83ede0fbad079742dccae31"
+        }
+      }
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "anchor-release-bound-e0",
+      "solver_args": [],
+      "parameters": {
+        "candidate_limit": 2,
+        "fragment_granularity_denominator": 4,
+        "selection": "official strict improvement versus structure-based anchor; certified lower bound rejection only"
+      },
+      "e0_call_limit": 2,
+      "expected": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/063-k5-anchor-release-bound-e0/case_063_multicore_res.json",
+          "sha256": "cd5e4cb0769ced6752c9503f29d67f9b132d441b532664c457c4c3ee7a7b7244"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/063-k5-anchor-release-bound-e0/evidence/result.json.gz",
+          "sha256": "1b5830b55f9ba35d31d956ab4f5f18df9a97868b75f6c99ad47fa5b415e3ac3f"
+        },
+        "receipt": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/063-k5-anchor-release-bound-e0/evidence/receipt.json",
+          "sha256": "8c350c65267f126bd9e0f504ef33bc3ccbf00c12b893c16d33bf9afc27fb781d"
+        }
+      }
+    },
+    {
+      "case_id": "080",
+      "cores": 4,
+      "variant": "anchor-release-bound-e0",
+      "solver_args": [],
+      "parameters": {
+        "candidate_limit": 2,
+        "fragment_granularity_denominator": 4,
+        "selection": "official strict improvement versus structure-based anchor; certified lower bound rejection only"
+      },
+      "e0_call_limit": 2,
+      "expected": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/080-k4-anchor-release-bound-e0/case_080_multicore_res.json",
+          "sha256": "a0a3d2a173a363cc569f89b9f1198c23f3ce0c00ed5eae8d5c24ad03db52bc3f"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/080-k4-anchor-release-bound-e0/evidence/result.json.gz",
+          "sha256": "ab2374a998f3237001abfd359a4e521d9644073fee00f2446188244501bf19a9"
+        },
+        "receipt": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/080-k4-anchor-release-bound-e0/evidence/receipt.json",
+          "sha256": "cc17ca9edb4348b32a1b3b2256abdd6be808186ecaa2c74290a65fe074037bcf"
+        }
+      }
+    },
+    {
+      "case_id": "008",
+      "cores": 5,
+      "variant": "anchor-release-bound-e0",
+      "solver_args": [],
+      "parameters": {
+        "candidate_limit": 2,
+        "fragment_granularity_denominator": 4,
+        "selection": "official strict improvement versus structure-based anchor; certified lower bound rejection only"
+      },
+      "e0_call_limit": 2,
+      "expected": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/008-k5-anchor-release-bound-e0/case_008_multicore_res.json",
+          "sha256": "80e464e565f31fc4f598bfbc623d7d7cec93432825ffda88ad7fb6c7775664b1"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/008-k5-anchor-release-bound-e0/evidence/result.json.gz",
+          "sha256": "61ba1cd0ded5a43e8639e9504dd929041355685c20e22af0fbf6e9ce83d6eec6"
+        },
+        "receipt": {
+          "path": "results/a/q3-nikolastarx/guarded-20260924/run/cells/008-k5-anchor-release-bound-e0/evidence/receipt.json",
+          "sha256": "f643cdd09c6a7a65f233f50cd04937e2d06147dc191ee9efc10d1be6b236639f"
+        }
+      }
+    }
+  ],
+  "execution": {
+    "runner_commit": "c99d19467ad2c6d28355b163c06b6d01efb3c1e6",
+    "output_root": "results/a/q3-verification",
+    "solver_files": {
+      "src/q3/__init__.py": "2cc8f5aef26ab2ee35c15cd531394a5baa2bf0b3189370807b1e2433e563a417",
+      "src/q3/guarded_solve.py": "72bebecc3debdaae2e1846ce3942abb4cbada5d1c276cac804a8a8e858230771",
+      "src/q3/safe_solve.py": "369c833aa3f671fcb0a23ef7c7c553c05264b5c0ef171f1c6802b4b99aa8c0e0",
+      "src/q3/solve.py": "b911207bcbfbab23fa1924c0a4426c8340963c8c6e7b5879fadbe6047caaffdd",
+      "src/q3/construct.py": "942450f2751eb5b0cf4817d392acdd6e4316e751c48ea8e84b509d4ce1e97d73",
+      "src/q3/reduction_tree.py": "28e78dfdd2713f7f5c269e2092ab63241e27b1c0b89ce518269d31bba40d2458",
+      "src/q3/release_tree.py": "7f5ec7f0f8405a0e3cd36d65fb64a06faaf93acb04823cb1b2a08eb34c9afb7d",
+      "src/q3/capacity_tree.py": "7da01071b83125cf1adc7952667d2dff063013f41c1ce69d991cb9e4f1669ffd",
+      "src/q3/pipe_bound.py": "656865f7b124dd546f45d961819c67a6c72c8da4fede9c8cb50df9fe67465d26"
+    },
+    "expected_commit": "11bd277697839b14f513bdb3e38cf7a4d43d913a",
+    "memory_limit_bytes": 8589934592,
+    "memory_poll_seconds": 0.1
+  }
+}

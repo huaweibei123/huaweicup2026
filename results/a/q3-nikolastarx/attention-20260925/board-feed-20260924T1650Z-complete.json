@@ -1,0 +1,542 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "q3-attention-rows-20260925-P3-082-k4-attention-rows-e0",
+      "revision": 1,
+      "run_id": "q3-attention-rows-20260925",
+      "algorithm_id": "q3-attention-rows",
+      "algorithm_name": "Attention row同核与原算子ready重排",
+      "variant": "attention-rows-e0",
+      "solver_commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+      "parameters": {
+        "tree_method": "attention",
+        "candidate_limit": 1,
+        "selection": "one structural construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "attention"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 3,
+          "total_wall_seconds": 600,
+          "per_job_seconds": 90
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "082",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 183595,
+        "solver_wall_seconds": 0.5668168329866603,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 4149910,
+        "extra_ddr_bytes": 3557904,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.3607488633730757
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "0b39598187c5ecd3a699542156f55275c1e4e537297ee2a70c7be61867445e16"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/082-k4-attention-rows-e0/case_082_multicore_res.json",
+          "sha256": "0b39598187c5ecd3a699542156f55275c1e4e537297ee2a70c7be61867445e16"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/082-k4-attention-rows-e0/evidence/result.json.gz",
+          "sha256": "7684853b854d1a33e4b8119aef1a91dfe0465d593668945bc2955c0e23e7d192"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/082-k4-attention-rows-e0/evidence/receipt.json",
+          "sha256": "a4099a4547255c69322cc7e05842cbb37765327ac66b7ca6e52be9dab0cde6f0"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/082-k4-attention-rows-e0/run.json",
+          "sha256": "face1aa0357b70cea53616972fa1b474f66fdd5a4ce1c33a20c01b7d530e2677"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/manifest-first-082-k4.json",
+          "sha256": "072e523995e5ea5622b7f9abb079809647ee6c04b02886843099efd27f2827be"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260925",
+      "observed_at": "2026-09-24T16:45:00.765519Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Exact closed-row tensor motif guard; row co-location with explicit Q/K/V and maximal exclusive peripheral chains. One quotient EFT ownership pass and one fixed-owner original-op min-start ready pass preserving per-pipe concurrency. Singleton output, original graph unchanged; one online E0; no online search. Placement proxy omits COPY service/cache/capacity.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51",
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/src/q3_yuanzhifang/dag_list.py"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "/tmp/q3-attention-first.json",
+            "results/a/q3-nikolastarx/attention-20260925/run"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:45:00.143212Z",
+          "finished_at": "2026-09-24T16:45:00.765519Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 90,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/baselines/082.json.gz",
+          "sha256": "b151858b2a5713d3dc763f6369a3736b1912e677806f26c42da56c90e19946c6"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-attention-rows-20260925-P3-075-k4-attention-rows-e0",
+      "revision": 1,
+      "run_id": "q3-attention-rows-20260925",
+      "algorithm_id": "q3-attention-rows",
+      "algorithm_name": "Attention row同核与原算子ready重排",
+      "variant": "attention-rows-e0",
+      "solver_commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+      "parameters": {
+        "tree_method": "attention",
+        "candidate_limit": 1,
+        "selection": "one structural construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "attention"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 3,
+          "total_wall_seconds": 600,
+          "per_job_seconds": 90
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "075",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 383620,
+        "solver_wall_seconds": 1.1379244580166414,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 9339544,
+        "extra_ddr_bytes": 7502354,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.3935336131790163
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "5c24beddea6d09e1df3c8f8843d3593b90affb117ba38450fa9bea8a8db3351c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "5895837f494e49d755614d88f51c474f8d4d2398674c67849e795f0603700536"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/075-k4-attention-rows-e0/case_075_multicore_res.json",
+          "sha256": "5895837f494e49d755614d88f51c474f8d4d2398674c67849e795f0603700536"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/075-k4-attention-rows-e0/evidence/result.json.gz",
+          "sha256": "f6f0519c2ede15da146742932e4b909b61885563cf502cfc11b422894c034d6b"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/075-k4-attention-rows-e0/evidence/receipt.json",
+          "sha256": "00f62b2af20a459ef0cb2d16e98c09db5b0edde77ceb5ea1281c1f046e823844"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/075-k4-attention-rows-e0/run.json",
+          "sha256": "68833d8e638985a61888364c7464ac5c75acae706ba0a287d6c00401fb59ea99"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/manifest-continue-075-085-k4.json",
+          "sha256": "c554ac8fe7aeeb5f9d8e842c2c3b06643a6a4e34175a334c7effd9d889fe3782"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260925",
+      "observed_at": "2026-09-24T16:46:12.016032Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Exact closed-row tensor motif guard; row co-location with explicit Q/K/V and maximal exclusive peripheral chains. One quotient EFT ownership pass and one fixed-owner original-op min-start ready pass preserving per-pipe concurrency. Singleton output, original graph unchanged; one online E0; no online search. Placement proxy omits COPY service/cache/capacity.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51",
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/src/q3_yuanzhifang/dag_list.py"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "/tmp/q3-attention-rest.json",
+            "results/a/q3-nikolastarx/attention-20260925/run",
+            "--continue"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:46:10.812958Z",
+          "finished_at": "2026-09-24T16:46:12.016032Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 90,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "5c24beddea6d09e1df3c8f8843d3593b90affb117ba38450fa9bea8a8db3351c",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/baselines/075.json.gz",
+          "sha256": "58784813755a0a2007d093a0fa270c41a2809c64aa0edd6f81ec07592e1017d5"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "q3-attention-rows-20260925-P3-085-k4-attention-rows-e0",
+      "revision": 1,
+      "run_id": "q3-attention-rows-20260925",
+      "algorithm_id": "q3-attention-rows",
+      "algorithm_name": "Attention row同核与原算子ready重排",
+      "variant": "attention-rows-e0",
+      "solver_commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+      "parameters": {
+        "tree_method": "attention",
+        "candidate_limit": 1,
+        "selection": "one structural construction; no online comparison",
+        "solver_args": [
+          "--tree-method",
+          "attention"
+        ],
+        "e0_call_limit": 1,
+        "global_budget": {
+          "max_e0_calls": 3,
+          "total_wall_seconds": 600,
+          "per_job_seconds": 90
+        },
+        "workers": 1,
+        "retry": false
+      },
+      "problem": "P3",
+      "case_id": "085",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 813950,
+        "solver_wall_seconds": 3.6035302499949466,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": 15211160,
+        "extra_ddr_bytes": 13521426,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.34196159223968403
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "b63169e9cd0f21dc2da6617e7138472e95937465c703b7e4bf4dbc80125ed4f6",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "6da56511471a19acb2db611ec7e474a10f34a480c454a3a664b59fbe4333b54e"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/085-k4-attention-rows-e0/case_085_multicore_res.json",
+          "sha256": "6da56511471a19acb2db611ec7e474a10f34a480c454a3a664b59fbe4333b54e"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/085-k4-attention-rows-e0/evidence/result.json.gz",
+          "sha256": "22dde9d055758a76e6c4a8adc49d957589c940cd489177cfbc5cc1088604f3a8"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/085-k4-attention-rows-e0/evidence/receipt.json",
+          "sha256": "7c8bffa4082fb492c718426765474bab625ee600d4fe9081d63214a6d87079c8"
+        },
+        "run": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/cells/085-k4-attention-rows-e0/run.json",
+          "sha256": "970b943c3aa13beb08548796366536c06c82b76edd7a5befa9cc69316e82c528"
+        },
+        "manifest": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/manifest-continue-075-085-k4.json",
+          "sha256": "c554ac8fe7aeeb5f9d8e842c2c3b06643a6a4e34175a334c7effd9d889fe3782"
+        }
+      },
+      "runtime_id": "q3-local-macos-arm64-20260925",
+      "observed_at": "2026-09-24T16:46:15.803148Z",
+      "timing": {
+        "solver_includes_evaluation": true,
+        "evaluation_precision": "External perf_counter whole-child wall; no standalone external final-evaluation timer.",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+            "path": "src/q3/tree_solve.py",
+            "entrypoint": "src.q3.tree_solve.main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Exact closed-row tensor motif guard; row co-location with explicit Q/K/V and maximal exclusive peripheral chains. One quotient EFT ownership pass and one fixed-owner original-op min-start ready pass preserving per-pipe concurrency. Singleton output, original graph unchanged; one online E0; no online search. Placement proxy omits COPY service/cache/capacity.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/issues/51",
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/src/q3_yuanzhifang/dag_list.py"
+          ],
+          "upstream": [],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "80fabde1bd49faf28765d3caa8541780579d89d4",
+            "path": "src/q3/feedback_benchmark.py",
+            "entrypoint": "src.q3.feedback_benchmark.main"
+          },
+          "argv": [
+            "python",
+            "-m",
+            "src.q3.feedback_benchmark",
+            "/tmp/q3-attention-rest.json",
+            "results/a/q3-nikolastarx/attention-20260925/run",
+            "--continue"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none used (CPU-only solver)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T16:46:12.077239Z",
+          "finished_at": "2026-09-24T16:46:15.803148Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": null,
+          "solver_scope": "Fresh child spawn through reaped exit: interpreter/import, read graph, construct, integrated E0 selection/verification, final plan and evidence writes, required cleanup. External parent preflight excluded and retained in batch wall.",
+          "evaluation_scope": "No separate external final evaluation. Integrated E0 calls are included in solver wall; internal diagnostics are retained in trace and are not substituted for external timing.",
+          "budget": {
+            "wall_seconds": 90,
+            "candidate_limit": 1,
+            "stop_reason": "completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; one worker is a dispatch constraint, not an observed thread count.",
+          "provenance.environment.peak_rss_bytes": "Per-child peak RSS was not measured; no aggregate/high-water proxy is substituted.",
+          "provenance.measurement.seed": "Deterministic construction; no random generator or seed.",
+          "provenance.measurement.cold_start": "Fresh interpreter per job; OS page-cache state is uncontrolled, so strict cold/warm classification is unknown."
+        }
+      },
+      "notes": [
+        "One explicit development batch; no independent-platform or full-suite acceptance is claimed.",
+        "Final E0 JSON is preserved unchanged, including scene=B/problem=3/cache_mode=read_only.",
+        "ddr_bytes is official scheduled_copy_bytes, not physical DDR traffic.",
+        "Fresh process does not imply a cold OS cache; one observation is not a tail-latency estimate.",
+        "Whole-batch original deadline and all reservations are retained in batch.json; continuation never resets them.",
+        "Official single-core denominator reuses existing bytes; fixed upstream provenance is in baselines.json. No new baseline evaluation."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "graph_sha256": "b63169e9cd0f21dc2da6617e7138472e95937465c703b7e4bf4dbc80125ed4f6",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "result": {
+          "path": "results/a/q3-nikolastarx/attention-20260925/run/baselines/085.json.gz",
+          "sha256": "c5fc551ed610a15089f26c0b153a5d765edf926c87de21a0bd79b9e767640ed6"
+        },
+        "route": "E0"
+      },
+      "cache_pair": null
+    }
+  ]
+}

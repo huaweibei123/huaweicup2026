@@ -1,0 +1,321 @@
+{
+  "case_id": "062",
+  "cores": 3,
+  "variant": "fragment-postorder-e0",
+  "solver_args": [
+    "--tree-method",
+    "fragment"
+  ],
+  "parameters": {
+    "tree_method": "fragment",
+    "candidate_limit": 1,
+    "selection": "single direct construction; no online comparison with other variant",
+    "fragment_granularity_denominator": 4,
+    "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+    "core_assignment": "LPT by fragment total compute work",
+    "order": "global DFS postorder projected onto each core"
+  },
+  "e0_call_limit": 1,
+  "job_key": "062-k3-fragment-postorder-e0",
+  "stage_id": "paired-sixcells",
+  "started_at": "2026-09-24T14:39:43.011390Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "e0_reserved": 1,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/case_062_multicore_res.json",
+      "sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878"
+    },
+    "result": {
+      "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence/result.json.gz",
+      "sha256": "65e78e26c93483bf36bcfe58994b8b16457974656fa43dca6954ebc0d6fcd7bb"
+    },
+    "trace": {
+      "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence/receipt.json",
+      "sha256": "8ab774664b74857150ec768ff62e565f46d88f151790c7dbd63eab0cebda5ec1"
+    }
+  },
+  "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/run.json",
+  "failure": null,
+  "solver_process": {
+    "status": "ok",
+    "exit_code": 0,
+    "wall_seconds": 3.65259183300077,
+    "argv": [
+      "python",
+      "-B",
+      "-m",
+      "src.q3.tree_solve",
+      "data/raw/a/official/data/case_062.json",
+      "--cores",
+      "3",
+      "-o",
+      "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/case_062_multicore_res.json",
+      "--evidence",
+      "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence",
+      "--tree-method",
+      "fragment"
+    ],
+    "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+  },
+  "identity": {
+    "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878"
+  },
+  "makespan_cycles": 1183248,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 13401600,
+    "scheduled_copy_bytes": 13435392,
+    "added_copy_bytes": 33792,
+    "partition_added_copy_bytes": 33792,
+    "spill_added_copy_bytes": 0
+  },
+  "cache_stats": {
+    "copy_in_hits": 0,
+    "copy_in_misses": 4373,
+    "hit_bytes": 0,
+    "miss_bytes": 13416960,
+    "hits": 0,
+    "accesses": 4373,
+    "hit_rate": 0.0
+  },
+  "solver_receipt": {
+    "strategy": "fragment_reduction_forest",
+    "selected_strategy": "fragment_reduction_forest",
+    "official_e0_calls": 1,
+    "candidate_limit": 1,
+    "seed_selection": {
+      "rule": "guarded_direct_tree",
+      "method": "fragment"
+    },
+    "candidates": [
+      {
+        "name": "seed",
+        "strategy": "fragment_reduction_forest",
+        "status": "ok",
+        "makespan": 1183248,
+        "metadata": {
+          "strategy": "fragment_reduction_forest",
+          "fragment_threshold_cycles": 250924,
+          "fragment_work_cycles": [
+            176604,
+            176640,
+            176604,
+            176676,
+            176604,
+            176640,
+            176604,
+            176712,
+            177948,
+            176640,
+            176604,
+            176676,
+            176604,
+            176640,
+            176604,
+            176784,
+            183504
+          ],
+          "fragment_count": 17,
+          "fragments_by_core": [
+            [
+              16,
+              11,
+              9,
+              2,
+              10
+            ],
+            [
+              8,
+              3,
+              5,
+              0,
+              6,
+              14
+            ],
+            [
+              15,
+              7,
+              1,
+              13,
+              4,
+              12
+            ]
+          ],
+          "core_work_cycles": [
+            890028,
+            1061076,
+            1059984
+          ],
+          "compute_load_upper_bound_cycles": 1170978,
+          "cuts": [
+            [
+              23965,
+              23982
+            ],
+            [
+              23967,
+              23983
+            ],
+            [
+              23969,
+              23984
+            ],
+            [
+              23971,
+              23985
+            ],
+            [
+              23973,
+              23986
+            ],
+            [
+              23975,
+              23987
+            ],
+            [
+              23977,
+              23988
+            ],
+            [
+              23979,
+              23989
+            ],
+            [
+              23982,
+              23991
+            ],
+            [
+              23984,
+              23992
+            ],
+            [
+              23986,
+              23993
+            ],
+            [
+              23988,
+              23994
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ],
+            [
+              23995,
+              23997
+            ],
+            [
+              23990,
+              23998
+            ]
+          ],
+          "cross_core_compute_edges": [
+            [
+              23965,
+              23982
+            ],
+            [
+              23967,
+              23983
+            ],
+            [
+              23969,
+              23984
+            ],
+            [
+              23971,
+              23985
+            ],
+            [
+              23973,
+              23986
+            ],
+            [
+              23979,
+              23989
+            ],
+            [
+              23982,
+              23991
+            ],
+            [
+              23984,
+              23992
+            ],
+            [
+              23990,
+              23998
+            ],
+            [
+              23991,
+              23995
+            ],
+            [
+              23993,
+              23996
+            ]
+          ],
+          "weak_components": 1,
+          "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+          "order": "original-op-id depth-first postorder"
+        },
+        "artifacts": {
+          "plan": {
+            "path": "seed/plan.json",
+            "sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878"
+          },
+          "result": {
+            "path": "seed/result.json.gz",
+            "sha256": "65e78e26c93483bf36bcfe58994b8b16457974656fa43dca6954ebc0d6fcd7bb"
+          }
+        }
+      }
+    ],
+    "makespan": 1183248,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 13401600,
+      "scheduled_copy_bytes": 13435392,
+      "added_copy_bytes": 33792,
+      "partition_added_copy_bytes": 33792,
+      "spill_added_copy_bytes": 0
+    },
+    "cache_stats": {
+      "copy_in_hits": 0,
+      "copy_in_misses": 4373,
+      "hit_bytes": 0,
+      "miss_bytes": 13416960,
+      "hits": 0,
+      "accesses": 4373,
+      "hit_rate": 0.0
+    },
+    "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "plan_sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878",
+    "result_sha256": "65e78e26c93483bf36bcfe58994b8b16457974656fa43dca6954ebc0d6fcd7bb",
+    "read_index_seconds": 0.11122095899190754,
+    "construct_seconds": 0.19258341600652784,
+    "config_prepare_ledger_seconds": 0.0027950420044362545,
+    "evaluation_seconds": 3.1320297500060406,
+    "result_write_seconds": 0.17812987498473376,
+    "main_until_evidence_seconds": 3.616759041993646,
+    "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+  },
+  "evaluation_ledger": {
+    "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence/evaluations.json",
+    "sha256": "40bb8f63eb216b4872d58891bd572b7e7a7521bb874e16a2381b1c60556ea931"
+  },
+  "finished_at": "2026-09-24T14:39:46.770530Z"
+}
