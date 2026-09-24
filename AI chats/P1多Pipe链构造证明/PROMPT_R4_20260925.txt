@@ -1,0 +1,19 @@
+继续本 chat 的 P1/情况 A 研究，进行一次聚焦的深度推理。R3 的 390425 已由我们本机未修改官方 E0 证实：084/K5，scheduled COPY 22268010B、extra DDR 9031680B、spill 0；本机独立构造输出与该 E0 计划字节相同。统一生产算法全100图×1–5核仍是 v4，K5均值4.025907；新机制两格试验不能代替全量成绩。无需重做此前完整报告。
+
+现在发现一个可证伪的突破口：旧 Family.fits 和 Qmax/Rmax 以总张量足迹不超容量作充分性筛选；008/095因此Qmax=Rmax=1。这个保守域不是官方全部无spill可执行域。我们没有说R1/R3错误，它们原来就限定了充分条件；请审计放宽后哪些证明仍成立。
+
+材料固定提交 d8e41115c86cdb5c16ca34d01b08d2dd291243df，组织库现已公开，可直接访问以下固定入口；若连接只能读 Vioano，请先报告不可读文件，不假装读过：
+https://github.com/huaweibei123/huaweicup2026/blob/d8e41115c86cdb5c16ca34d01b08d2dd291243df/src/q1/compiled_memory_response.py
+https://github.com/huaweibei123/huaweicup2026/blob/d8e41115c86cdb5c16ca34d01b08d2dd291243df/src/q1/variable_packet.py
+https://github.com/huaweibei123/huaweicup2026/blob/d8e41115c86cdb5c16ca34d01b08d2dd291243df/results/a/p1-memory-response-probe-20260925/README.md
+同提交还请读 response_compile.py、packet_dp.py、response_oracle.py，以及冻结官方 data/raw/a/official/code/ 下 schedule_step3.py、multicore_cut_evaluate_problem_1.py 和它们实际依赖的内存分配逻辑；不得自行替换官方配置。探针 receipt.json 和三份 certificate 同目录可读。
+
+新证据仅为3次静态Task编译，0 E0/E1/E2，不是成绩：008/K5的(r,q,s)=(0,2,0),(0,2,2),(1,2,2)，UB总足迹148228,148228,166660B，均大于131072B；冻结Step3编译峰值分别37056,37058,55488B，无Step2 spill，有3,3,6条MEM前驱对，execution_contract_validated=True。峰值是编译时证据，非回放实测。新适配器从Step3 execution_graph的全部op_preds编码PortOp.need，不再拒绝这些MEM边；仍拒绝spill、跨核Task依赖等。旧生产入口、DP和缓存守卫尚未改。我们源码复核看到Step4不重新动态分配内存，只遵循Task门控、FIFO/单槽和op前驱；有理数响应与binary64/EPS/ceil等价仍是独立未证问题。
+
+请集中解决：
+1. 证明或反驳：在上述限定域，固定MEM边完整编入need后，响应状态无需新增地址/占用/释放历史。逐项说明R3三状态同步DP、K倍DDR工作量等价及最优性证书哪些可沿用、哪些须收紧；不要把有限域最优扩大为全P1最优。
+2. R3的Family.prekey保留原compute与touched-tensor相对顺序、边界状态及尺寸。允许Step3复用/分配分支后，它是否仍能保证所有位置的编译FIFO+need同构？审核allocator的地址选择、同分ID、释放及MEM生成；给充分条件证明或最小反例。最终被选方案重编译吻合并不能单独证明未选转移缓存正确。
+3. 放宽后q/r不再由总足迹给出小常数，直接扫到B会爆炸。设计一个可落地、结构驱动的扩域方法：有效断点、周期/支配规则、或带可验证未展开边下界的惰性生成。不要只给更大的网格/随机搜索，也不要在未证条件下宣布提前停止仍精确。若只能启发式，明确范围与上界缺口。重点008/095的多Pipe链，兼顾084；只按图结构选规则，不用case ID特判。
+4. 给出下一步至多两个最小实验，分别能推翻什么，并说明预期编译量、响应计算量及端到端复杂度。可给短伪代码/关键实现，不要默认启动大批官方评测。
+
+P1真实提交仍仅node_to_subgraph和core_schedules，Task内顺序由官方产生；不能用P2/P3自由顺序接口。目标是更好官方Makespan与合理端到端时间的共同推进，不是消耗满5–10分钟。先列实际读取清单，区分证明、猜想、你的实验和我们上述本机证据；读不到材料就指出缺口。
