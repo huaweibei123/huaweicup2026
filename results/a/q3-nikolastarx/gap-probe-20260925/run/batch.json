@@ -1,0 +1,766 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-general-gap-probe-20260925",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "a5dafdf94d0694132fb9ec7121f5fe1fe0d6ee3b",
+  "solver_module": "src.q3.expanded_solve",
+  "algorithm": {
+    "id": "q3-expanded-structure",
+    "name": "阶段与Attention守卫加一般DAG空隙插入择优",
+    "authors": [
+      "NikolaStarx",
+      "yuanzhifang30-sudo"
+    ],
+    "method": "Preserve fixed stage/attention routes; general fork/join gap insertion adapted from Fang a37eb931 competes against a freshly evaluated structural anchor. No history lookup, at most two E0 calls, zero parameter sweep.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "https://github.com/huaweibei123/huaweicup2026/blob/a37eb931a22fb7df7e0d00d193538ce5289ae045/src/q3_yuanzhifang/gap_list.py"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-gap-probe-20260925",
+  "budget": {
+    "max_e0_calls": 6,
+    "total_wall_seconds": 120,
+    "per_job_seconds": 30
+  },
+  "offline_costs": "Six static constructors checked adapter/upstream plan equality on three graphs; 119 software tests passed, one explicit E0 gate skipped. No model training or scored lookup. This limited probe is not full500 acceptance.",
+  "started_at": "2026-09-24T18:16:48.122662Z",
+  "status": "stage_complete",
+  "stages": [
+    {
+      "stage_id": "three",
+      "started_at": "2026-09-24T18:16:48.172455Z",
+      "manifest": {
+        "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/manifest-three.json",
+        "sha256": "9d4978c43884a2d6f95f40a932939ab6aad505b4150294f2c80b489df795278d"
+      },
+      "source_input_sha256": {
+        "data/raw/a/official/code/contest_io.py": "d5936908e4c261c7003b78e783f30bd7d65cb38d6b53a269ea67f0103cac848e",
+        "data/raw/a/official/code/evaluation_validation.py": "103206b8c5c25e37de50cc3193de3989d7c1e01d4a11cc5f509dedd8f9be9a64",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py": "2095f188a6c24ce3899f156bef21d50dcd87cbd9368488046b1e77e2bf91af3f",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py": "0b39f84d5ec0a7fba9a4c92a598a9044b97ab79c71393824c1ba130ecfe6c464",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_3.py": "eab1504dead881f4b67c0f0498cbc2dbbd9039dc3c9d198c6af58773c127eeb0",
+        "data/raw/a/official/code/schedule_step1.py": "d8fe721ff3dbe036e34a20c00cce6430960860000a49eb467e63465f76b84034",
+        "data/raw/a/official/code/schedule_step2.py": "2836baac176f4e0bdd9eec59b8d9ce254e209e5f7a251e23837ab684312fa0c3",
+        "data/raw/a/official/code/schedule_step3.py": "50053db0436f1d166dd75436693ba3af49b5c339576beb6e7299477f6b69fc7a",
+        "data/raw/a/official/code/singlecore_evaluate.py": "446b753ee134ef1fec8e052356bb077a2602fbe95572ccd3dddd7928e894b77a",
+        "data/raw/a/official/code/stub_multicore_cut_and_schedule.py": "0a3a3b79b5173b466fc05fc8d33b72d11d90b4df78995435853d91c632a35892",
+        "data/raw/a/official/data/case_010.json": "fd0b07588473d8b2ce05fab4798808cbc7f60cf1638e05608adc3d62061b8775",
+        "data/raw/a/official/data/case_044.json": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "data/raw/a/official/data/case_100.json": "bb78167d482a9e1663bb947945def049c2d66392c3897613ce5cb145d3a2eb19",
+        "data/raw/a/official/data/config.txt": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "src/q3/__init__.py": "2cc8f5aef26ab2ee35c15cd531394a5baa2bf0b3189370807b1e2433e563a417",
+        "src/q3/adaptive_solve.py": "e0558028a07089b263ff4eb2f162dbff4e167d58a6677670f5129574638019ac",
+        "src/q3/attention_rows.py": "f48ad288c047cbdd61e168ba7d571431218b8115a6563088ed84a5725681682b",
+        "src/q3/board_export.py": "46bfb0e405a5c4f86a0c578da450920d5aa3ca32935ace0f2d2782a45a76f2a4",
+        "src/q3/capacity_tree.py": "7da01071b83125cf1adc7952667d2dff063013f41c1ce69d991cb9e4f1669ffd",
+        "src/q3/construct.py": "942450f2751eb5b0cf4817d392acdd6e4316e751c48ea8e84b509d4ce1e97d73",
+        "src/q3/expanded_solve.py": "8d5cff38a3a537119deef792913c063991638f24df4638ac2dd7c1edcca57170",
+        "src/q3/experiment.py": "b1bddfbf32aad5bee36600c004568a696e2edef3e900735ae08c1dec37ce9226",
+        "src/q3/feedback_benchmark.py": "1a416c2dfa0ceeef479559962af4340d5eeba36cdc075562ed150b97e5b28607",
+        "src/q3/feedback_report.py": "1efe25bc54de8b566361941f206f3bd5e2f28be18a3c660d436e575e9d724419",
+        "src/q3/fragment_tree.py": "e9912965676247351004b07f3df21ea0f244fcbab0c5ee76053e94efc14d2da6",
+        "src/q3/gap_calendar.py": "6721c062a33d2bb3ee8da80cead110e4415a6b81be05fb2c54fbbdaa6f8be8e3",
+        "src/q3/gap_dag.py": "b61b1e33fcddc3491b7c37b12b41f8314d9744909957528296c0684bf57fc219",
+        "src/q3/guarded_solve.py": "72bebecc3debdaae2e1846ce3942abb4cbada5d1c276cac804a8a8e858230771",
+        "src/q3/highgain_audit.py": "540dc2a0dc32646ec1a76796badd1ada36e955830af74a087eaa7afaebdcb71d",
+        "src/q3/online_check.py": "1c1eb9d048e6e62d5d9ba13cd809f7daea0755cf9c8ea6e7831f152dc27beab7",
+        "src/q3/oracle.py": "25662ff1323546a2fd3e95aed00761bc020cc1c2e4d94481b9d4fb38e4a80965",
+        "src/q3/pipe_bound.py": "656865f7b124dd546f45d961819c67a6c72c8da4fede9c8cb50df9fe67465d26",
+        "src/q3/reduction_tree.py": "28e78dfdd2713f7f5c269e2092ab63241e27b1c0b89ce518269d31bba40d2458",
+        "src/q3/release_tree.py": "7f5ec7f0f8405a0e3cd36d65fb64a06faaf93acb04823cb1b2a08eb34c9afb7d",
+        "src/q3/report.py": "cf15da908d9cef4970166417e1a01eb6eabb3bf171e045e481cbbdfc55df9759",
+        "src/q3/safe_solve.py": "369c833aa3f671fcb0a23ef7c7c553c05264b5c0ef171f1c6802b4b99aa8c0e0",
+        "src/q3/solve.py": "b911207bcbfbab23fa1924c0a4426c8340963c8c6e7b5879fadbe6047caaffdd",
+        "src/q3/stage_fork_join.py": "80c590b7a4e9a03058a728cb4a22790d30a9f0f6a7bbdeec531b1939130a35e0",
+        "src/q3/stage_migration.py": "99053add8f18ed68185da1094c780f45393e9816faf29b04d0222c31a63a44af",
+        "src/q3/tree_solve.py": "ddb00b676f379dfc79611f2f3124e0ed41b0be9ee1b25f622cfb9a1c3da6fe7a",
+        "uv.lock": "7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4"
+      },
+      "status": "stage_complete",
+      "runner_argv": [
+        "python",
+        "-m",
+        "src.q3.feedback_benchmark",
+        "results/a/q3-nikolastarx/gap-probe-20260925/manifest.json",
+        "results/a/q3-nikolastarx/gap-probe-20260925/run"
+      ],
+      "finished_at": "2026-09-24T18:16:49.795609Z"
+    }
+  ],
+  "records": [
+    {
+      "case_id": "010",
+      "cores": 5,
+      "variant": "unified-general-gap-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "stage_then_attention_then_gap_vs_anchor_else_guarded",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than the fresh structural anchor"
+      },
+      "e0_call_limit": 2,
+      "job_key": "010-k5-unified-general-gap-e0",
+      "stage_id": "three",
+      "started_at": "2026-09-24T18:16:48.204077Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 2,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 2,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/case_010_multicore_res.json",
+          "sha256": "4e9b1c875014bad7800596def5097ffcdcd224d5737ac2d8fdf096bc88af1a89"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/evidence/result.json.gz",
+          "sha256": "f507f160ae6fb307e4b9097a0a9abe7bc5b03a1182a7057a91267e1525003a0a"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/evidence/receipt.json",
+          "sha256": "165d2fc18bc0e9d95c4eb8a5c9288201d83e5c763c43111a907630139619e10e"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "reason": null,
+        "exit_code": 0,
+        "wall_seconds": 0.329773750010645,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.expanded_solve",
+          "data/raw/a/official/data/case_010.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/case_010_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/evidence"
+        ],
+        "process_tree_cleanup": "POSIX process group",
+        "memory": {
+          "limit_bytes": null,
+          "sampled_peak_rss_bytes": null,
+          "poll_seconds": null,
+          "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+        },
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fd0b07588473d8b2ce05fab4798808cbc7f60cf1638e05608adc3d62061b8775",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "4e9b1c875014bad7800596def5097ffcdcd224d5737ac2d8fdf096bc88af1a89"
+      },
+      "makespan_cycles": 20608,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 384150,
+        "scheduled_copy_bytes": 1398306,
+        "added_copy_bytes": 1014156,
+        "partition_added_copy_bytes": 1014156,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 84,
+        "copy_in_misses": 234,
+        "hit_bytes": 337542,
+        "miss_bytes": 755022,
+        "hits": 84,
+        "accesses": 318,
+        "hit_rate": 0.3089448306918405
+      },
+      "solver_receipt": {
+        "strategy": "dag_join_gap_list",
+        "selected_strategy": "dag_join_gap_list",
+        "official_e0_calls": 2,
+        "candidate_limit": 2,
+        "seed_selection": {
+          "rule": "general_affine",
+          "word_declined": "requires M -> V* -> M components",
+          "general_proposal": "frozen_fang_gap_insertion",
+          "acceptance": "strictly_lower_official_makespan_than_fresh_anchor",
+          "router": {
+            "stage_request": {
+              "collector_policy": "fixed",
+              "source_count": 80,
+              "lanes_by_core": [
+                16,
+                16,
+                16,
+                16,
+                16
+              ],
+              "heaviest_lane_cores": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+            },
+            "migration_construct_attempts": 0,
+            "migration_candidate_plans": 0,
+            "stage_construct_attempts": 1,
+            "stage_candidate_plans": 0,
+            "attention_construct_attempts": 1,
+            "attention_candidate_plans": 0,
+            "guarded_policy_invocations": 0,
+            "stage_guard_reason": "requires one weak component",
+            "attention_cross_delay_cycles": 500,
+            "attention_guard_reason": "no closed attention query row matched",
+            "route": "general_gap",
+            "route_e0_limit": 2,
+            "evaluation_calls": 2,
+            "count_scope": "Router attempts only; guarded internal construction/decision records are preserved unchanged.",
+            "general_gap_policy_invocations": 1
+          }
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "affine_eighth",
+            "status": "ok",
+            "makespan": 30674,
+            "metadata": {
+              "strategy": "affine_eighth",
+              "components": 36,
+              "eligible_ops": 667,
+              "cores": 5
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "3f4bc09dab1a680fc79febfa66f2012d904354d818bdc47f205ac2dd6b221bd9"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "447b0c10f337d1174e16e21c6564d010506b4d36132e8d732ea72166c2f9a50b"
+              }
+            }
+          },
+          {
+            "name": "gap",
+            "strategy": "dag_join_gap_list",
+            "metadata": {
+              "guard": true,
+              "selected": "dag_join_gap_list",
+              "strategy": "dag_join_gap_list",
+              "cores": 5,
+              "upstream_commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+              "official_e0_calls": 0,
+              "chains": 270,
+              "paired_joins": 85,
+              "operations_inserted_before_tail": 231,
+              "modeled_compute_finish": 12019,
+              "cross_chain_edges": 176,
+              "assumption": "persistent idle calendars; no official COPY/cache/capacity simulation"
+            },
+            "makespan": 20608,
+            "certified_lower_bound_cycles": 11991,
+            "status": "ok",
+            "artifacts": {
+              "plan": {
+                "path": "gap/plan.json",
+                "sha256": "4e9b1c875014bad7800596def5097ffcdcd224d5737ac2d8fdf096bc88af1a89"
+              },
+              "result": {
+                "path": "gap/result.json.gz",
+                "sha256": "f507f160ae6fb307e4b9097a0a9abe7bc5b03a1182a7057a91267e1525003a0a"
+              }
+            }
+          }
+        ],
+        "makespan": 20608,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 384150,
+          "scheduled_copy_bytes": 1398306,
+          "added_copy_bytes": 1014156,
+          "partition_added_copy_bytes": 1014156,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 84,
+          "copy_in_misses": 234,
+          "hit_bytes": 337542,
+          "miss_bytes": 755022,
+          "hits": 84,
+          "accesses": 318,
+          "hit_rate": 0.3089448306918405
+        },
+        "graph_sha256": "fd0b07588473d8b2ce05fab4798808cbc7f60cf1638e05608adc3d62061b8775",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "4e9b1c875014bad7800596def5097ffcdcd224d5737ac2d8fdf096bc88af1a89",
+        "result_sha256": "f507f160ae6fb307e4b9097a0a9abe7bc5b03a1182a7057a91267e1525003a0a",
+        "evaluation_seconds": 0.07945862499764189,
+        "main_until_evidence_seconds": 0.19573608398786746,
+        "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/010-k5-unified-general-gap-e0/evidence/evaluations.json",
+        "sha256": "a703cc45a4df1bcb6765372280bfe6c41a9fc56716b5cc1c04ced78b2f79a57e"
+      },
+      "finished_at": "2026-09-24T18:16:48.573064Z"
+    },
+    {
+      "case_id": "044",
+      "cores": 5,
+      "variant": "unified-general-gap-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "stage_then_attention_then_gap_vs_anchor_else_guarded",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than the fresh structural anchor"
+      },
+      "e0_call_limit": 2,
+      "job_key": "044-k5-unified-general-gap-e0",
+      "stage_id": "three",
+      "started_at": "2026-09-24T18:16:48.606127Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 2,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 2,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/case_044_multicore_res.json",
+          "sha256": "657db6a0859df0fa8065d1cf5709124364614917c03d64ede994c51a38bb0c39"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/evidence/result.json.gz",
+          "sha256": "665689d150e8f470474cda046419a8770fb1b694755c64d58fd6a91f9c28fc8c"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/evidence/receipt.json",
+          "sha256": "6b2eca45d9785de9c4bbe46ca140be22f9a9f8294eff1f030129a5da4e7b8e6b"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "reason": null,
+        "exit_code": 0,
+        "wall_seconds": 0.464584666013252,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.expanded_solve",
+          "data/raw/a/official/data/case_044.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/case_044_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/evidence"
+        ],
+        "process_tree_cleanup": "POSIX process group",
+        "memory": {
+          "limit_bytes": null,
+          "sampled_peak_rss_bytes": null,
+          "poll_seconds": null,
+          "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+        },
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "657db6a0859df0fa8065d1cf5709124364614917c03d64ede994c51a38bb0c39"
+      },
+      "makespan_cycles": 83958,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 975456,
+        "scheduled_copy_bytes": 4930016,
+        "added_copy_bytes": 3954560,
+        "partition_added_copy_bytes": 3954560,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 94,
+        "copy_in_misses": 290,
+        "hit_bytes": 222464,
+        "miss_bytes": 4568544,
+        "hits": 94,
+        "accesses": 384,
+        "hit_rate": 0.04643365237545001
+      },
+      "solver_receipt": {
+        "strategy": "dag_join_gap_list",
+        "selected_strategy": "dag_join_gap_list",
+        "official_e0_calls": 2,
+        "candidate_limit": 2,
+        "seed_selection": {
+          "rule": "general_affine",
+          "word_declined": "requires M -> V* -> M components",
+          "general_proposal": "frozen_fang_gap_insertion",
+          "acceptance": "strictly_lower_official_makespan_than_fresh_anchor",
+          "router": {
+            "stage_request": {
+              "collector_policy": "fixed",
+              "source_count": 11,
+              "lanes_by_core": [
+                3,
+                2,
+                2,
+                2,
+                2
+              ],
+              "heaviest_lane_cores": [
+                0
+              ],
+              "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+            },
+            "migration_construct_attempts": 0,
+            "migration_candidate_plans": 0,
+            "stage_construct_attempts": 1,
+            "stage_candidate_plans": 0,
+            "attention_construct_attempts": 1,
+            "attention_candidate_plans": 0,
+            "guarded_policy_invocations": 0,
+            "stage_guard_reason": "requires one weak component",
+            "attention_cross_delay_cycles": 500,
+            "attention_guard_reason": "no closed attention query row matched",
+            "route": "general_gap",
+            "route_e0_limit": 2,
+            "evaluation_calls": 2,
+            "count_scope": "Router attempts only; guarded internal construction/decision records are preserved unchanged.",
+            "general_gap_policy_invocations": 1
+          }
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "affine_eighth",
+            "status": "ok",
+            "makespan": 85406,
+            "metadata": {
+              "strategy": "affine_eighth",
+              "components": 11,
+              "eligible_ops": 1364,
+              "cores": 5
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "09c1ea9cca39810902b8dba87614ef8d884b4c14000df90c31e3c666e302368b"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "04d3b21dbcc3b64d47e2fb80a02906538d60715452e5ace9d04283e3d30a45e6"
+              }
+            }
+          },
+          {
+            "name": "gap",
+            "strategy": "dag_join_gap_list",
+            "metadata": {
+              "guard": true,
+              "selected": "dag_join_gap_list",
+              "strategy": "dag_join_gap_list",
+              "cores": 5,
+              "upstream_commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+              "official_e0_calls": 0,
+              "chains": 539,
+              "paired_joins": 220,
+              "operations_inserted_before_tail": 96,
+              "modeled_compute_finish": 16950,
+              "cross_chain_edges": 210,
+              "assumption": "persistent idle calendars; no official COPY/cache/capacity simulation"
+            },
+            "makespan": 83958,
+            "certified_lower_bound_cycles": 16680,
+            "status": "ok",
+            "artifacts": {
+              "plan": {
+                "path": "gap/plan.json",
+                "sha256": "657db6a0859df0fa8065d1cf5709124364614917c03d64ede994c51a38bb0c39"
+              },
+              "result": {
+                "path": "gap/result.json.gz",
+                "sha256": "665689d150e8f470474cda046419a8770fb1b694755c64d58fd6a91f9c28fc8c"
+              }
+            }
+          }
+        ],
+        "makespan": 83958,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 975456,
+          "scheduled_copy_bytes": 4930016,
+          "added_copy_bytes": 3954560,
+          "partition_added_copy_bytes": 3954560,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 94,
+          "copy_in_misses": 290,
+          "hit_bytes": 222464,
+          "miss_bytes": 4568544,
+          "hits": 94,
+          "accesses": 384,
+          "hit_rate": 0.04643365237545001
+        },
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "657db6a0859df0fa8065d1cf5709124364614917c03d64ede994c51a38bb0c39",
+        "result_sha256": "665689d150e8f470474cda046419a8770fb1b694755c64d58fd6a91f9c28fc8c",
+        "evaluation_seconds": 0.14787504100240767,
+        "main_until_evidence_seconds": 0.34545062502729706,
+        "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/044-k5-unified-general-gap-e0/evidence/evaluations.json",
+        "sha256": "e7fe896b184ce4498cf19828ecac5edd14eecd3c8d223d5e3d6c4e5c6ffa3933"
+      },
+      "finished_at": "2026-09-24T18:16:49.111449Z"
+    },
+    {
+      "case_id": "100",
+      "cores": 5,
+      "variant": "unified-general-gap-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "stage_then_attention_then_gap_vs_anchor_else_guarded",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than the fresh structural anchor"
+      },
+      "e0_call_limit": 2,
+      "job_key": "100-k5-unified-general-gap-e0",
+      "stage_id": "three",
+      "started_at": "2026-09-24T18:16:49.144244Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 2,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 2,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/case_100_multicore_res.json",
+          "sha256": "5b3fcc39b72ce740d7d0646c10a952924c14effa29c880e0416bbda09eddf0f0"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/evidence/result.json.gz",
+          "sha256": "a3f3eb504e0413495f98d424b87e7790414d72714445afb67dc2df797241412b"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/evidence/receipt.json",
+          "sha256": "70ffd4e1c426b71fd8c72125f1608db0da7035be432c29856c5380720520b742"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "reason": null,
+        "exit_code": 0,
+        "wall_seconds": 0.5999204590043519,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.expanded_solve",
+          "data/raw/a/official/data/case_100.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/case_100_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/evidence"
+        ],
+        "process_tree_cleanup": "POSIX process group",
+        "memory": {
+          "limit_bytes": null,
+          "sampled_peak_rss_bytes": null,
+          "poll_seconds": null,
+          "scope": "sum of process-group RSS / Windows job WorkingSetSize; sampled tripwire, not OS hard limit; shared pages may be counted more than once"
+        },
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "bb78167d482a9e1663bb947945def049c2d66392c3897613ce5cb145d3a2eb19",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "5b3fcc39b72ce740d7d0646c10a952924c14effa29c880e0416bbda09eddf0f0"
+      },
+      "makespan_cycles": 33676,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 454598,
+        "scheduled_copy_bytes": 2307172,
+        "added_copy_bytes": 1852574,
+        "partition_added_copy_bytes": 1852574,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 233,
+        "copy_in_misses": 438,
+        "hit_bytes": 747852,
+        "miss_bytes": 1005228,
+        "hits": 233,
+        "accesses": 671,
+        "hit_rate": 0.4265931959750838
+      },
+      "solver_receipt": {
+        "strategy": "dag_join_gap_list",
+        "selected_strategy": "dag_join_gap_list",
+        "official_e0_calls": 2,
+        "candidate_limit": 2,
+        "seed_selection": {
+          "rule": "general_affine",
+          "word_declined": "requires M -> V* -> M components",
+          "general_proposal": "frozen_fang_gap_insertion",
+          "acceptance": "strictly_lower_official_makespan_than_fresh_anchor",
+          "router": {
+            "stage_request": {
+              "collector_policy": "rotate_heavy",
+              "source_count": 187,
+              "lanes_by_core": [
+                38,
+                37,
+                38,
+                37,
+                37
+              ],
+              "heaviest_lane_cores": [
+                0,
+                2
+              ],
+              "feature_scope": "Provisional source-count partition; lane/load meaning is confirmed only by the strict stage guard."
+            },
+            "migration_construct_attempts": 0,
+            "migration_candidate_plans": 0,
+            "stage_construct_attempts": 1,
+            "stage_candidate_plans": 0,
+            "attention_construct_attempts": 1,
+            "attention_candidate_plans": 0,
+            "guarded_policy_invocations": 0,
+            "stage_guard_reason": "requires one weak component",
+            "attention_cross_delay_cycles": 500,
+            "attention_guard_reason": "no closed attention query row matched",
+            "route": "general_gap",
+            "route_e0_limit": 2,
+            "evaluation_calls": 2,
+            "count_scope": "Router attempts only; guarded internal construction/decision records are preserved unchanged.",
+            "general_gap_policy_invocations": 1
+          }
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "affine_eighth",
+            "status": "ok",
+            "makespan": 61639,
+            "metadata": {
+              "strategy": "affine_eighth",
+              "components": 43,
+              "eligible_ops": 1394,
+              "cores": 5
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "39c96ff82a41d80955347d5507cf4af78007da6d63234b1b800ba612288b83b6"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "e0d5be83aff60e27b3004dcda2abdad5b285fdde51994c06b7af191785272911"
+              }
+            }
+          },
+          {
+            "name": "gap",
+            "strategy": "dag_join_gap_list",
+            "metadata": {
+              "guard": true,
+              "selected": "dag_join_gap_list",
+              "strategy": "dag_join_gap_list",
+              "cores": 5,
+              "upstream_commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+              "official_e0_calls": 0,
+              "chains": 651,
+              "paired_joins": 228,
+              "operations_inserted_before_tail": 612,
+              "modeled_compute_finish": 20527,
+              "cross_chain_edges": 358,
+              "assumption": "persistent idle calendars; no official COPY/cache/capacity simulation"
+            },
+            "makespan": 33676,
+            "certified_lower_bound_cycles": 20508,
+            "status": "ok",
+            "artifacts": {
+              "plan": {
+                "path": "gap/plan.json",
+                "sha256": "5b3fcc39b72ce740d7d0646c10a952924c14effa29c880e0416bbda09eddf0f0"
+              },
+              "result": {
+                "path": "gap/result.json.gz",
+                "sha256": "a3f3eb504e0413495f98d424b87e7790414d72714445afb67dc2df797241412b"
+              }
+            }
+          }
+        ],
+        "makespan": 33676,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 454598,
+          "scheduled_copy_bytes": 2307172,
+          "added_copy_bytes": 1852574,
+          "partition_added_copy_bytes": 1852574,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 233,
+          "copy_in_misses": 438,
+          "hit_bytes": 747852,
+          "miss_bytes": 1005228,
+          "hits": 233,
+          "accesses": 671,
+          "hit_rate": 0.4265931959750838
+        },
+        "graph_sha256": "bb78167d482a9e1663bb947945def049c2d66392c3897613ce5cb145d3a2eb19",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "5b3fcc39b72ce740d7d0646c10a952924c14effa29c880e0416bbda09eddf0f0",
+        "result_sha256": "a3f3eb504e0413495f98d424b87e7790414d72714445afb67dc2df797241412b",
+        "evaluation_seconds": 0.18423283399897628,
+        "main_until_evidence_seconds": 0.47686441702535376,
+        "timing_note": "All E0 calls are online; use outer subprocess wall for full solver cost."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/gap-probe-20260925/run/cells/100-k5-unified-general-gap-e0/evidence/evaluations.json",
+        "sha256": "605d0a11460d8a887d152bf7bf4e72c6ca54f82531c0f8158195f7b388a18c10"
+      },
+      "finished_at": "2026-09-24T18:16:49.794728Z"
+    }
+  ],
+  "e0_budget_used": 6,
+  "environment": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "cpu": "Apple M5 Pro",
+    "gpu": "none used (CPU-only solver)",
+    "ram_bytes": 51539607552,
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+    "threads": null,
+    "workers": 1,
+    "peak_rss_bytes": null
+  },
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "finished_at": "2026-09-24T18:16:49.795609Z",
+  "elapsed_wall_seconds": 1.6729538440704346
+}

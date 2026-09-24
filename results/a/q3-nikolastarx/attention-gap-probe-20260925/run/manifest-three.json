@@ -1,0 +1,68 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-attention-gap-probe-20260925",
+  "stage_id": "three",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "035a398c4883d46217b3e0ac475b70ac5ca72f05",
+  "solver_module": "src.q3.calendar_solve",
+  "algorithm": {
+    "id": "q3-calendar-structure",
+    "name": "统一结构构造加Attention日历归核择优",
+    "authors": [
+      "NikolaStarx",
+      "yuanzhifang30-sudo"
+    ],
+    "method": "Expanded router retained; attention gets one persistent M/V calendar capsule-placement proposal versus the same freshly evaluated append anchor; same row/FFN guards and final operation ready word; strictly lower official M only. At most2 onlineE0, no parameter sweep.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "https://github.com/huaweibei123/huaweicup2026/blob/a37eb931a22fb7df7e0d00d193538ce5289ae045/src/q3_yuanzhifang/gap_list.py"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-attention-gap-probe-20260925",
+  "budget": {
+    "max_e0_calls": 6,
+    "total_wall_seconds": 120,
+    "per_job_seconds": 30
+  },
+  "offline_costs": "Six append/gap static constructions on 071/069/005; 128 software tests,127 pass and one explicit E0 gate skipped, including60 synthetic structure variations; these are not unseen performance validation. No training/history-score lookup. Limited mechanism probe only.",
+  "jobs": [
+    {
+      "case_id": "071",
+      "cores": 5,
+      "variant": "unified-attention-calendar-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "expanded_then_one_attention_calendar_proposal",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than fresh attention anchor"
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "069",
+      "cores": 5,
+      "variant": "unified-attention-calendar-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "expanded_then_one_attention_calendar_proposal",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than fresh attention anchor"
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "005",
+      "cores": 5,
+      "variant": "unified-attention-calendar-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "expanded_then_one_attention_calendar_proposal",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than fresh attention anchor"
+      },
+      "e0_call_limit": 2
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-general-gap-probe-20260925",
+  "stage_id": "three",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "a5dafdf94d0694132fb9ec7121f5fe1fe0d6ee3b",
+  "solver_module": "src.q3.expanded_solve",
+  "algorithm": {
+    "id": "q3-expanded-structure",
+    "name": "阶段与Attention守卫加一般DAG空隙插入择优",
+    "authors": [
+      "NikolaStarx",
+      "yuanzhifang30-sudo"
+    ],
+    "method": "Preserve fixed stage/attention routes; general fork/join gap insertion adapted from Fang a37eb931 competes against a freshly evaluated structural anchor. No history lookup, at most two E0 calls, zero parameter sweep.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "https://github.com/huaweibei123/huaweicup2026/blob/a37eb931a22fb7df7e0d00d193538ce5289ae045/src/q3_yuanzhifang/gap_list.py"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-gap-probe-20260925",
+  "budget": {
+    "max_e0_calls": 6,
+    "total_wall_seconds": 120,
+    "per_job_seconds": 30
+  },
+  "offline_costs": "Six static constructors checked adapter/upstream plan equality on three graphs; 119 software tests passed, one explicit E0 gate skipped. No model training or scored lookup. This limited probe is not full500 acceptance.",
+  "jobs": [
+    {
+      "case_id": "010",
+      "cores": 5,
+      "variant": "unified-general-gap-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "stage_then_attention_then_gap_vs_anchor_else_guarded",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than the fresh structural anchor"
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "044",
+      "cores": 5,
+      "variant": "unified-general-gap-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "stage_then_attention_then_gap_vs_anchor_else_guarded",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than the fresh structural anchor"
+      },
+      "e0_call_limit": 2
+    },
+    {
+      "case_id": "100",
+      "cores": 5,
+      "variant": "unified-general-gap-e0",
+      "solver_args": [],
+      "parameters": {
+        "structural_router": "stage_then_attention_then_gap_vs_anchor_else_guarded",
+        "candidate_limit": 2,
+        "selection": "strictly smaller official makespan than the fresh structural anchor"
+      },
+      "e0_call_limit": 2
+    }
+  ]
+}

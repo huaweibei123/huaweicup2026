@@ -1,0 +1,7 @@
+# P3 全100图松弛下界审计
+
+完整结论见REPORT.md；归档源文件和已读API快照在audit-snapshot.zip。本研究不构造计划、不作新评分。16:33 UTC历史组合五核均值3.771725；严格松弛上界6.140526。目标4.76未被排除，也未证明可达；乐观情况下至少改善18图。
+
+为避免重复复制既有大原件，ZIP不重复包含100份baseline result/run、冻结official代码，以及上一份gap快照。它们的原始读取哈希仍保存在baselines.json、identity.json与ORIGINAL_MANIFEST.json。baseline来源固定ba99b74b523f93a4002cd88970ec7164076d8008；上一份gap快照在033f3c24728284e681212927ba2cdf07f085ffb2的results/a/q3-nikolastarx/gap-audit-20260925/source-snapshot.zip。audit.py能从已授权含这些提交的checkout重新读取baseline并复算；没有重评分步骤。
+
+REPORT.md是原审计报告，其“本目录含baseline原件”描述原临时审计目录，不能理解为本精简ZIP也重复保存了它们。ORIGINAL_MANIFEST.json是原审计全229文件清单，不是本ZIP的成员清单；本发布清单见ARCHIVE.json。仅identity.json省略个人临时绝对路径，数值和源身份未变。

@@ -1,0 +1,46 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-stage-single-cut-20260925",
+  "stage_id": "one-051-k5",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "5fda469824c5b7c0caf4b56f53989a5afaa2a209",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-stage-single-cut",
+    "name": "原图归约阶段单迁移固定构造",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Guarded 12-lane, four-operation vector stage template; migrate lane2 after second original operation, collector core2; unchanged original ADD tree. One direct plan and one online E0.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "https://chatgpt.com/g/g-p-6ab2d820c86081918067a0c6d5eb1ab6-huaweicup/c/6ab53861-15b0-83e8-9b92-8b6920472582"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-macos-arm64-20260925",
+  "budget": {
+    "max_e0_calls": 1,
+    "total_wall_seconds": 180,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+  "jobs": [
+    {
+      "case_id": "051",
+      "cores": 5,
+      "variant": "single-cut-e0",
+      "solver_args": [
+        "--tree-method",
+        "stage-single-cut"
+      ],
+      "parameters": {
+        "tree_method": "stage-single-cut",
+        "candidate_limit": 1,
+        "selection": "one exact guarded construction; no online incumbent comparison"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}

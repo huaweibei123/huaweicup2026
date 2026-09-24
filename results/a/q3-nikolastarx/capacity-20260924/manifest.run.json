@@ -1,0 +1,241 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-fragment-direct-20260924",
+  "stage_id": "paired-sixcells",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-tree-direct",
+    "name": "归约树单候选直接构造",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Each variant independently constructs one guarded plan (balanced tree or fixed-granularity connected fragments with LPT core assignment and global DFS projection), or uses the structural fallback outside its guard, and performs exactly one online official P3 evaluation. Variant comparison is external research, not online best-of-two selection.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "45b29c7d8defe349c02cc58c87cb7bce1212de06",
+        "path": "src/q3/reduction_tree.py",
+        "entrypoint": "src.q3.reduction_tree.construct"
+      }
+    ]
+  },
+  "runtime_id": "q3-local-macos-arm64-20260924",
+  "budget": {
+    "max_e0_calls": 12,
+    "total_wall_seconds": 900,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "jobs": [
+    {
+      "case_id": "002",
+      "cores": 3,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "002",
+      "cores": 3,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "062",
+      "cores": 3,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "062",
+      "cores": 3,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "063",
+      "cores": 3,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "063",
+      "cores": 3,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}

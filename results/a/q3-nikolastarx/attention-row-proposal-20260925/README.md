@@ -1,0 +1,9 @@
+# Attention row：静态构造与审查
+
+REPORT.md和source-proposal.zip保存结构发现，review-snapshot.zip保存独立设计/源码审查；082-k4-static保存正式评分前的唯一四核静态候选，不是官方成绩。代码入口为src.q3.tree_solve --tree-method attention，尚未接入adaptive_solve。
+
+最终代码SHA-256 d02f0493386f1248533856447be98194bb09867eca55f55d18a186ad3f9d6964。独立审查基于fae4441e4da8ba3744033ff2ce75692e757d8054d203afcfdf6af28c14d6239a；root回读差异仅为两处复杂度说明文本（函数docstring和metadata），无调度行为变化。全Q3软件套件86项通过，包含6项attention测试、双堆与朴素ready扫描oracle、24→22的抽象M/V重排反例；新增评分0次。
+
+082四核静态：42个row，placement模型183616，固定归属后原op重排166318，独立增强FIFO L500也是166318。只说明该具体计划的计算/延迟下界，不预测官方Makespan。19/21个FFN diamond跨核，正式评估应检查其COPY等待与大张量流量。数学审查中的082/k5计划为另外一个未评分静态样本，不能混当本四核候选。
+
+已知复现边界：原child-075085.py可复现模块识别，但尚不包含后来补算到child JSON/MD中的work统计字段；不把该脚本说成所有派生统计的完整一键复现。082严格脚本包含工作统计。所有构造保留原算子、singleton提交；官方P3每核Task和COPY序列随分核重新派生。

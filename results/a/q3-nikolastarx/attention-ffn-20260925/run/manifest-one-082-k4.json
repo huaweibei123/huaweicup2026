@@ -1,0 +1,46 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-attention-ffn-20260925",
+  "stage_id": "one-082-k4",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "e3df1cdca0729a972b5408bc6bd2f9e8ffbc90f5",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-attention-rows-ffn",
+    "name": "Attention row与闭合FFN同核原算子重排",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Exact closed attention rows and nonoverlapping raw-port-closed original four-op M/V/V/M FFN co-location; quotient EFT placement followed by fixed-owner original-op ready scheduling. One direct plan, one online E0; no search, fusion or cloning.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/src/q3_yuanzhifang/dag_list.py"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-macos-arm64-20260925",
+  "budget": {
+    "max_e0_calls": 1,
+    "total_wall_seconds": 180,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No training or case-specific scored precomputation. Prior structural census, model invariants and software tests are development work and used zero E0. No new packages/native compilation.",
+  "jobs": [
+    {
+      "case_id": "082",
+      "cores": 4,
+      "variant": "attention-ffn-e0",
+      "solver_args": [
+        "--tree-method",
+        "attention-ffn"
+      ],
+      "parameters": {
+        "tree_method": "attention-ffn",
+        "candidate_limit": 1,
+        "selection": "one direct construction; no online incumbent comparison"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}

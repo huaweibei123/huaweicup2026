@@ -1,0 +1,27 @@
+这是 huaweicup 项目内一个新的 P3 数学专项。请用 Pro 深度研究一个具体难点：如何对加权归约森林联合构造分核与管线顺序，避免“负载均衡却把依赖串行化”，并控制跨核复制与片上存活量。不要重做三问大综述，也不要声称替我们运行了官方实验。
+
+当前真实自由度：问题3为只读 L2 Cache 场景；输入原始图 JSON、固定官方配置、核数1～5，提交仅 node_to_subgraph 与 core_schedules 两字段。我们暂研究每个原计算操作一个 singleton 子图，COPY 由官方重建；每核提交的是 singleton 优先序，官方生成 Task/逐 pipe 序并处理 L1/UB、COPY、带宽、spill、跨核500 cycles、只读 Cache。目标首先最小化官方 Makespan，其次额外搬运、按字节命中率；求解墙钟另计。不能自行提交任意起止时刻，也不能把 Q1 的 Task 顺序接口等同于这里。
+
+可读取的源码入口已同步至你有权限的 Vioano 镜像，固定提交 b84e3670452603af1f08169f4dfb5809df8cd31a：
+https://github.com/Vioano/huaweicup2026/blob/b84e3670452603af1f08169f4dfb5809df8cd31a/src/q3/fragment_tree.py
+https://github.com/Vioano/huaweicup2026/blob/b84e3670452603af1f08169f4dfb5809df8cd31a/src/q3/reduction_tree.py
+https://github.com/Vioano/huaweicup2026/blob/b84e3670452603af1f08169f4dfb5809df8cd31a/src/q3/construct.py
+https://github.com/Vioano/huaweicup2026/blob/b84e3670452603af1f08169f4dfb5809df8cd31a/data/raw/a/official/code/multicore_cut_evaluate_problem_3.py
+https://github.com/Vioano/huaweicup2026/blob/b84e3670452603af1f08169f4dfb5809df8cd31a/data/raw/a/official/code/schedule_step2.py
+https://github.com/Vioano/huaweicup2026/blob/b84e3670452603af1f08169f4dfb5809df8cd31a/data/raw/a/official/code/schedule_step3.py
+请先报告实际读到的文件及缺口。私有连接读不到时，明确承认，只研究下面自包含抽象，不以URL出现作为读到。下面最新数字是本地未修改E0实测，结果归档正在发布，不要求你复测。
+
+抽象：COPY 收缩后的计算图是有向归约森林，边从孩子到父亲，每节点出度≤1（入度不一定≤2）；节点有原操作时长 w_v 和 pipe p_v（主要 M/V），每核每 pipe 一槽。选 owner(v) 和每核可提交拓扑优先序。对给定方案，在原计算依赖上增加每核同 pipe 原操作 FIFO 相邻边；跨核原依赖保守加500释放延迟，得到增强DAG。它的加权最长路忽略COPY时长/容量/争用，是当前 singleton 输出族的官方 Makespan 下界；注意下界适用性也请审查，不能自动扩张到所有任意子图。
+
+已经发生的反例（正式给定图，非合成性能成绩）：case062/k5，原 balanced 构造把树反复二分为最多5个连通块，每核一块、全局DFS后序投影，官方673177。新 fragment 构造设 B=max(max_v w_v, ceil(W/(4k)))，沿后序以阈值贪心切多个连通片段，再按片段总工作量 LPT 放到核、仍投影同一全局DFS顺序。新方案计算负载更平衡，但官方1010340（退化约50%）。两者Cache命中0、spill0。无通信增强DAG最长路旧671532/新1005144，加500后旧672532/新1007644。新最长路按核跨1→3→4→1→4→2；树边与管线FIFO边交替串联多个本可并行子树。复制总字节仅增加64512，解释不了33.7万周期退化。
+
+6组完整独立对照中fragment只2组改善：002/k5 85129→67948、062/k3 1342199→1183248；其余002/k3、062/k5、063/k3、063/k5均退化。不能据局部改善泛化。静态精确连通≤k分块在002/063五核只产生4块，且最优最大块工作量与旧二分几乎相同；继续精确优化那个代理空间帮助小。
+
+另外，简单按全局DFS前缀总工作均分为k个连续区间，虽可保证核负载≤ceil(W/k)+maxw−1、跨核方向单调、最多分裂k−1棵原树，也可能完全串行。二叉单位节点反例：边0→2,1→2,2→4,3→4,5→6,4→7,6→7；DFS0..7，k2前四/后四，后核首4等前核末3，单pipe无通信也耗8，另分配可5。不要再把无回跳/负载均衡当成Makespan保证。裸节点级 earliest-finish 也危险：两单位叶→单位join，k2、远程500；两叶贪图各核结束1，最终join502，而全同核仅3。
+
+请集中回答：
+1. 找出一个有价值、条件明确的可解子类或近似/下界命题，把管线增强DAG的critical path与片段划分联结起来；给证明或最小反例、复杂度，而不是只列HEFT/MILP名称。
+2. 我们拟保留适当大小的连通片段，改为“片段商图就绪列表＋bottom-level优先＋根据已排前驱释放时刻与每核各pipe可用时间，直接选择预计完成最早的核；片段内部DFS，整个片段一次确定归属/顺序”。这比LPT忽略释放时刻具体修复了什么？仍有哪些可构造的严重失败？是否有更强而仍接近线性/多项式的构造，尤其针对大二叉归约树和多棵同构树？请给伪代码与只需少量可证伪实验的建议，不提海量试参或在线暴力搜索。
+3. 怎样把内存前沿/生命周期作为上述构造的显式约束或保守证书？输入叶子全部提前可能使LB漂亮却spill。请区分只在抽象内成立的数学证书与必须经官方Step2/3核验的判断；别用“零spill证书”名义偷偷假定全部张量是UB或每次必生成COPY_OUT。
+
+输出尽量聚焦到一个可实现的新构造及其可反驳条件；已有前缀均分/负载平衡命题即使正确也不作为本次核心答案。我们会继续本地实现与官方小样本验证，不等待你重写全套评估器。

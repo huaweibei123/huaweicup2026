@@ -1,0 +1,3403 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-fragment-direct-20260924",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "b84e3670452603af1f08169f4dfb5809df8cd31a",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-tree-direct",
+    "name": "归约树单候选直接构造",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Each variant independently constructs one guarded plan (balanced tree or fixed-granularity connected fragments with LPT core assignment and global DFS projection), or uses the structural fallback outside its guard, and performs exactly one online official P3 evaluation. Variant comparison is external research, not online best-of-two selection.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "45b29c7d8defe349c02cc58c87cb7bce1212de06",
+        "path": "src/q3/reduction_tree.py",
+        "entrypoint": "src.q3.reduction_tree.construct"
+      }
+    ]
+  },
+  "runtime_id": "q3-local-macos-arm64-20260924",
+  "budget": {
+    "max_e0_calls": 12,
+    "total_wall_seconds": 900,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "started_at": "2026-09-24T14:39:37.925305Z",
+  "status": "stage_complete",
+  "stages": [
+    {
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:37.988323Z",
+      "manifest": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/manifest-paired-sixcells.json",
+        "sha256": "9845c25fce2ae50981dfba793b25167cfbed0243146af275db4a9e438b24055f"
+      },
+      "source_input_sha256": {
+        "data/raw/a/official/code/contest_io.py": "d5936908e4c261c7003b78e783f30bd7d65cb38d6b53a269ea67f0103cac848e",
+        "data/raw/a/official/code/evaluation_validation.py": "103206b8c5c25e37de50cc3193de3989d7c1e01d4a11cc5f509dedd8f9be9a64",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py": "2095f188a6c24ce3899f156bef21d50dcd87cbd9368488046b1e77e2bf91af3f",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py": "0b39f84d5ec0a7fba9a4c92a598a9044b97ab79c71393824c1ba130ecfe6c464",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_3.py": "eab1504dead881f4b67c0f0498cbc2dbbd9039dc3c9d198c6af58773c127eeb0",
+        "data/raw/a/official/code/schedule_step1.py": "d8fe721ff3dbe036e34a20c00cce6430960860000a49eb467e63465f76b84034",
+        "data/raw/a/official/code/schedule_step2.py": "2836baac176f4e0bdd9eec59b8d9ce254e209e5f7a251e23837ab684312fa0c3",
+        "data/raw/a/official/code/schedule_step3.py": "50053db0436f1d166dd75436693ba3af49b5c339576beb6e7299477f6b69fc7a",
+        "data/raw/a/official/code/singlecore_evaluate.py": "446b753ee134ef1fec8e052356bb077a2602fbe95572ccd3dddd7928e894b77a",
+        "data/raw/a/official/code/stub_multicore_cut_and_schedule.py": "0a3a3b79b5173b466fc05fc8d33b72d11d90b4df78995435853d91c632a35892",
+        "data/raw/a/official/data/case_002.json": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "data/raw/a/official/data/case_062.json": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "data/raw/a/official/data/case_063.json": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "data/raw/a/official/data/config.txt": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "src/q3/__init__.py": "2cc8f5aef26ab2ee35c15cd531394a5baa2bf0b3189370807b1e2433e563a417",
+        "src/q3/board_export.py": "0e130adb1404a80a0d5a14f9ca00f259176030c0e811c55b6c64ced77be1792e",
+        "src/q3/capacity_tree.py": "7da01071b83125cf1adc7952667d2dff063013f41c1ce69d991cb9e4f1669ffd",
+        "src/q3/construct.py": "942450f2751eb5b0cf4817d392acdd6e4316e751c48ea8e84b509d4ce1e97d73",
+        "src/q3/experiment.py": "b1bddfbf32aad5bee36600c004568a696e2edef3e900735ae08c1dec37ce9226",
+        "src/q3/feedback_benchmark.py": "07a662b02f2fcf8fbe0e3342bc98ee8c00a7d87d93609ee0a93e6f123b0d6058",
+        "src/q3/feedback_report.py": "1efe25bc54de8b566361941f206f3bd5e2f28be18a3c660d436e575e9d724419",
+        "src/q3/fragment_tree.py": "e9912965676247351004b07f3df21ea0f244fcbab0c5ee76053e94efc14d2da6",
+        "src/q3/highgain_audit.py": "540dc2a0dc32646ec1a76796badd1ada36e955830af74a087eaa7afaebdcb71d",
+        "src/q3/online_check.py": "1c1eb9d048e6e62d5d9ba13cd809f7daea0755cf9c8ea6e7831f152dc27beab7",
+        "src/q3/oracle.py": "25662ff1323546a2fd3e95aed00761bc020cc1c2e4d94481b9d4fb38e4a80965",
+        "src/q3/reduction_tree.py": "28e78dfdd2713f7f5c269e2092ab63241e27b1c0b89ce518269d31bba40d2458",
+        "src/q3/report.py": "cf15da908d9cef4970166417e1a01eb6eabb3bf171e045e481cbbdfc55df9759",
+        "src/q3/safe_solve.py": "9423bda1ece151c18470c87bc7d9a46647b90d96220235dbaed1de470d3e4c86",
+        "src/q3/solve.py": "b911207bcbfbab23fa1924c0a4426c8340963c8c6e7b5879fadbe6047caaffdd",
+        "src/q3/tree_solve.py": "0394a856afbb8e9edb47e3f9b18ce83e643985bd83209d6f1aef9afa3e3a4a37",
+        "uv.lock": "7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4"
+      },
+      "status": "stage_complete",
+      "runner_argv": [
+        "python",
+        "-m",
+        "src.q3.feedback_benchmark",
+        "results/a/q3-nikolastarx/capacity-20260924/manifest.run.json",
+        "results/a/q3-nikolastarx/capacity-20260924/run"
+      ],
+      "finished_at": "2026-09-24T14:39:58.053064Z"
+    }
+  ],
+  "records": [
+    {
+      "case_id": "002",
+      "cores": 3,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1,
+      "job_key": "002-k3-balanced-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:38.024063Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/case_002_multicore_res.json",
+          "sha256": "b69da7e6518a8120ece8d5f118801d5c0d28b5825f5516b8489a1f46b7aba232"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/evidence/result.json.gz",
+          "sha256": "efd355becf9c52f3b4e8990b3676aa0f534b9484579db5b13ddb7943f1dbb486"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/evidence/receipt.json",
+          "sha256": "c2e67c1e306efba764987ab075554f207c34966ce0a98137e8f8d3d6406c7a44"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.15445820800960064,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_002.json",
+          "--cores",
+          "3",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/case_002_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/evidence",
+          "--tree-method",
+          "balanced"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "b69da7e6518a8120ece8d5f118801d5c0d28b5825f5516b8489a1f46b7aba232"
+      },
+      "makespan_cycles": 93527,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1224192,
+        "scheduled_copy_bytes": 1230336,
+        "added_copy_bytes": 6144,
+        "partition_added_copy_bytes": 6144,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 400,
+        "hit_bytes": 0,
+        "miss_bytes": 1225728,
+        "hits": 0,
+        "accesses": 400,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "balanced_reduction_tree",
+        "selected_strategy": "balanced_reduction_tree",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "balanced"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "balanced_reduction_tree",
+            "status": "ok",
+            "makespan": 93527,
+            "metadata": {
+              "strategy": "balanced_reduction_tree",
+              "cuts": [
+                [
+                  2194,
+                  2196
+                ],
+                [
+                  2192,
+                  2194
+                ]
+              ],
+              "block_work_cycles": [
+                88320,
+                89628,
+                97980
+              ],
+              "block_operations": [
+                576,
+                583,
+                639
+              ],
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "b69da7e6518a8120ece8d5f118801d5c0d28b5825f5516b8489a1f46b7aba232"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "efd355becf9c52f3b4e8990b3676aa0f534b9484579db5b13ddb7943f1dbb486"
+              }
+            }
+          }
+        ],
+        "makespan": 93527,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1230336,
+          "added_copy_bytes": 6144,
+          "partition_added_copy_bytes": 6144,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 400,
+          "hit_bytes": 0,
+          "miss_bytes": 1225728,
+          "hits": 0,
+          "accesses": 400,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "b69da7e6518a8120ece8d5f118801d5c0d28b5825f5516b8489a1f46b7aba232",
+        "result_sha256": "efd355becf9c52f3b4e8990b3676aa0f534b9484579db5b13ddb7943f1dbb486",
+        "read_index_seconds": 0.009100708004552871,
+        "construct_seconds": 0.010603709000861272,
+        "config_prepare_ledger_seconds": 0.0028464999923016876,
+        "evaluation_seconds": 0.09060704099829309,
+        "result_write_seconds": 0.01496854200377129,
+        "main_until_evidence_seconds": 0.1281264999997802,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-balanced-postorder-e0/evidence/evaluations.json",
+        "sha256": "d92680f55440cb246fc3f1e638cbff9ecd71228e6e86064cae341ccfaae47a56"
+      },
+      "finished_at": "2026-09-24T14:39:38.221078Z"
+    },
+    {
+      "case_id": "002",
+      "cores": 3,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1,
+      "job_key": "002-k3-fragment-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:38.256410Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/case_002_multicore_res.json",
+          "sha256": "ad4cce28404fbb6814976d3cca724d7554b2cb8e55f9a93a93aea3ac458c8c76"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/evidence/result.json.gz",
+          "sha256": "d8dd0799de6ca0351f9ad389ca0f73ea56c2907b3001291665533dcccdaee180"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/evidence/receipt.json",
+          "sha256": "a232998b8bff32c33db25723ae4118db6ae0b2ec4e5fc0ee2aa2013b70a0e05d"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.1570182499999646,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_002.json",
+          "--cores",
+          "3",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/case_002_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/evidence",
+          "--tree-method",
+          "fragment"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "ad4cce28404fbb6814976d3cca724d7554b2cb8e55f9a93a93aea3ac458c8c76"
+      },
+      "makespan_cycles": 119342,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1224192,
+        "scheduled_copy_bytes": 1254912,
+        "added_copy_bytes": 30720,
+        "partition_added_copy_bytes": 30720,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 408,
+        "hit_bytes": 0,
+        "miss_bytes": 1238016,
+        "hits": 0,
+        "accesses": 408,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "fragment_reduction_forest",
+        "selected_strategy": "fragment_reduction_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "fragment"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "fragment_reduction_forest",
+            "status": "ok",
+            "makespan": 119342,
+            "metadata": {
+              "strategy": "fragment_reduction_forest",
+              "fragment_threshold_cycles": 22994,
+              "fragment_work_cycles": [
+                22044,
+                22080,
+                22044,
+                22116,
+                12348,
+                20844,
+                22044,
+                22044,
+                22080,
+                22044,
+                22080,
+                22044,
+                22116
+              ],
+              "fragment_count": 13,
+              "fragments_by_core": [
+                [
+                  3,
+                  10,
+                  7,
+                  5,
+                  4
+                ],
+                [
+                  12,
+                  0,
+                  2,
+                  9
+                ],
+                [
+                  1,
+                  8,
+                  6,
+                  11
+                ]
+              ],
+              "core_work_cycles": [
+                99432,
+                88248,
+                88248
+              ],
+              "compute_load_upper_bound_cycles": 107305,
+              "cuts": [
+                [
+                  2156,
+                  2177
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2178,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2188,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ]
+              ],
+              "cross_core_compute_edges": [
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2178,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2188,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2193,
+                  2195
+                ]
+              ],
+              "weak_components": 1,
+              "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "ad4cce28404fbb6814976d3cca724d7554b2cb8e55f9a93a93aea3ac458c8c76"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "d8dd0799de6ca0351f9ad389ca0f73ea56c2907b3001291665533dcccdaee180"
+              }
+            }
+          }
+        ],
+        "makespan": 119342,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1254912,
+          "added_copy_bytes": 30720,
+          "partition_added_copy_bytes": 30720,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 408,
+          "hit_bytes": 0,
+          "miss_bytes": 1238016,
+          "hits": 0,
+          "accesses": 408,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "ad4cce28404fbb6814976d3cca724d7554b2cb8e55f9a93a93aea3ac458c8c76",
+        "result_sha256": "d8dd0799de6ca0351f9ad389ca0f73ea56c2907b3001291665533dcccdaee180",
+        "read_index_seconds": 0.008436874981271103,
+        "construct_seconds": 0.009271584014641121,
+        "config_prepare_ledger_seconds": 0.0013785829942207783,
+        "evaluation_seconds": 0.09939099999610335,
+        "result_write_seconds": 0.015407208004035056,
+        "main_until_evidence_seconds": 0.1338852499902714,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k3-fragment-postorder-e0/evidence/evaluations.json",
+        "sha256": "35d41ef301c84264e7cb4c9e6e2a0dbf70603d21d1dbf2207ef4c89f017ab0de"
+      },
+      "finished_at": "2026-09-24T14:39:38.457982Z"
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1,
+      "job_key": "002-k5-balanced-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:38.495358Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/case_002_multicore_res.json",
+          "sha256": "883a11af14a7a479508d2da59d35ceba6b7aabdd80a2becff15b07414c5eaf5d"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/evidence/result.json.gz",
+          "sha256": "50395b8dc812428d04d3c433c10a44bd35f84d923cf32dcec0e8198d4c474b59"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/evidence/receipt.json",
+          "sha256": "e144f534af3958aa2e98fee0a0645fbf7ecee6ea63fba1023b8f4ce0b77cd26e"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.15511004198924638,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_002.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/case_002_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/evidence",
+          "--tree-method",
+          "balanced"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "883a11af14a7a479508d2da59d35ceba6b7aabdd80a2becff15b07414c5eaf5d"
+      },
+      "makespan_cycles": 85129,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1224192,
+        "scheduled_copy_bytes": 1236480,
+        "added_copy_bytes": 12288,
+        "partition_added_copy_bytes": 12288,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 402,
+        "hit_bytes": 0,
+        "miss_bytes": 1228800,
+        "hits": 0,
+        "accesses": 402,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "balanced_reduction_tree",
+        "selected_strategy": "balanced_reduction_tree",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "balanced"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "balanced_reduction_tree",
+            "status": "ok",
+            "makespan": 85129,
+            "metadata": {
+              "strategy": "balanced_reduction_tree",
+              "cuts": [
+                [
+                  2194,
+                  2196
+                ],
+                [
+                  2192,
+                  2194
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2187,
+                  2192
+                ]
+              ],
+              "block_work_cycles": [
+                88320,
+                45468,
+                44160,
+                44124,
+                53856
+              ],
+              "block_operations": [
+                576,
+                295,
+                288,
+                287,
+                352
+              ],
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "883a11af14a7a479508d2da59d35ceba6b7aabdd80a2becff15b07414c5eaf5d"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "50395b8dc812428d04d3c433c10a44bd35f84d923cf32dcec0e8198d4c474b59"
+              }
+            }
+          }
+        ],
+        "makespan": 85129,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1236480,
+          "added_copy_bytes": 12288,
+          "partition_added_copy_bytes": 12288,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 402,
+          "hit_bytes": 0,
+          "miss_bytes": 1228800,
+          "hits": 0,
+          "accesses": 402,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "883a11af14a7a479508d2da59d35ceba6b7aabdd80a2becff15b07414c5eaf5d",
+        "result_sha256": "50395b8dc812428d04d3c433c10a44bd35f84d923cf32dcec0e8198d4c474b59",
+        "read_index_seconds": 0.008679332997417077,
+        "construct_seconds": 0.011662000004434958,
+        "config_prepare_ledger_seconds": 0.0014904589916113764,
+        "evaluation_seconds": 0.09217483300017193,
+        "result_write_seconds": 0.016614249994745478,
+        "main_until_evidence_seconds": 0.13062087498838082,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-balanced-postorder-e0/evidence/evaluations.json",
+        "sha256": "49bd6ccde775fd603da163d5b5f83a2b5a6b55e1d46027b0a308acb7c45ba63f"
+      },
+      "finished_at": "2026-09-24T14:39:38.697489Z"
+    },
+    {
+      "case_id": "002",
+      "cores": 5,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1,
+      "job_key": "002-k5-fragment-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:38.738051Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/case_002_multicore_res.json",
+          "sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence/result.json.gz",
+          "sha256": "ff41566a71b77bd3b99d56490a52bdf146ca78dbf699322725a99e33d3bdb80e"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence/receipt.json",
+          "sha256": "f8da121e7f06aefed784c56a5ec1c0ac819dca0ba1b6ba538c8da1ed23b92150"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.16398675000527874,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_002.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/case_002_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence",
+          "--tree-method",
+          "fragment"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60"
+      },
+      "makespan_cycles": 67948,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 1224192,
+        "scheduled_copy_bytes": 1291776,
+        "added_copy_bytes": 67584,
+        "partition_added_copy_bytes": 67584,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 420,
+        "hit_bytes": 0,
+        "miss_bytes": 1256448,
+        "hits": 0,
+        "accesses": 420,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "fragment_reduction_forest",
+        "selected_strategy": "fragment_reduction_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "fragment"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "fragment_reduction_forest",
+            "status": "ok",
+            "makespan": 67948,
+            "metadata": {
+              "strategy": "fragment_reduction_forest",
+              "fragment_threshold_cycles": 13797,
+              "fragment_work_cycles": [
+                11004,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11112,
+                12348,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11148,
+                11004,
+                11040,
+                11004,
+                11076,
+                11004,
+                11040,
+                11004,
+                11112,
+                9696
+              ],
+              "fragment_count": 25,
+              "fragments_by_core": [
+                [
+                  8,
+                  9,
+                  2,
+                  14,
+                  24
+                ],
+                [
+                  15,
+                  5,
+                  21,
+                  12,
+                  22
+                ],
+                [
+                  7,
+                  19,
+                  0,
+                  4,
+                  16
+                ],
+                [
+                  23,
+                  1,
+                  13,
+                  6,
+                  18
+                ],
+                [
+                  3,
+                  11,
+                  17,
+                  10,
+                  20
+                ]
+              ],
+              "core_work_cycles": [
+                55092,
+                55236,
+                55200,
+                55200,
+                55200
+              ],
+              "compute_load_upper_bound_cycles": 66223,
+              "cuts": [
+                [
+                  2148,
+                  2173
+                ],
+                [
+                  2150,
+                  2174
+                ],
+                [
+                  2152,
+                  2175
+                ],
+                [
+                  2154,
+                  2176
+                ],
+                [
+                  2156,
+                  2177
+                ],
+                [
+                  2158,
+                  2178
+                ],
+                [
+                  2160,
+                  2179
+                ],
+                [
+                  2162,
+                  2180
+                ],
+                [
+                  2164,
+                  2181
+                ],
+                [
+                  2166,
+                  2182
+                ],
+                [
+                  2168,
+                  2183
+                ],
+                [
+                  2170,
+                  2184
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2177,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2187,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ],
+                [
+                  2194,
+                  2196
+                ]
+              ],
+              "cross_core_compute_edges": [
+                [
+                  2148,
+                  2173
+                ],
+                [
+                  2150,
+                  2174
+                ],
+                [
+                  2152,
+                  2175
+                ],
+                [
+                  2154,
+                  2176
+                ],
+                [
+                  2160,
+                  2179
+                ],
+                [
+                  2162,
+                  2180
+                ],
+                [
+                  2164,
+                  2181
+                ],
+                [
+                  2166,
+                  2182
+                ],
+                [
+                  2168,
+                  2183
+                ],
+                [
+                  2170,
+                  2184
+                ],
+                [
+                  2173,
+                  2185
+                ],
+                [
+                  2175,
+                  2186
+                ],
+                [
+                  2177,
+                  2187
+                ],
+                [
+                  2179,
+                  2188
+                ],
+                [
+                  2181,
+                  2189
+                ],
+                [
+                  2183,
+                  2190
+                ],
+                [
+                  2185,
+                  2191
+                ],
+                [
+                  2187,
+                  2192
+                ],
+                [
+                  2189,
+                  2193
+                ],
+                [
+                  2191,
+                  2194
+                ],
+                [
+                  2193,
+                  2195
+                ],
+                [
+                  2194,
+                  2196
+                ]
+              ],
+              "weak_components": 1,
+              "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "ff41566a71b77bd3b99d56490a52bdf146ca78dbf699322725a99e33d3bdb80e"
+              }
+            }
+          }
+        ],
+        "makespan": 67948,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 1224192,
+          "scheduled_copy_bytes": 1291776,
+          "added_copy_bytes": 67584,
+          "partition_added_copy_bytes": 67584,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 420,
+          "hit_bytes": 0,
+          "miss_bytes": 1256448,
+          "hits": 0,
+          "accesses": 420,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "67c3b2a8a4fca25e820c57a12a9b7f3dd130ac430decfe9684de0021f98adf60",
+        "result_sha256": "ff41566a71b77bd3b99d56490a52bdf146ca78dbf699322725a99e33d3bdb80e",
+        "read_index_seconds": 0.008835832995828241,
+        "construct_seconds": 0.009813375014346093,
+        "config_prepare_ledger_seconds": 0.0028468749951571226,
+        "evaluation_seconds": 0.10157604201231152,
+        "result_write_seconds": 0.015429791004862636,
+        "main_until_evidence_seconds": 0.1385019160225056,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/002-k5-fragment-postorder-e0/evidence/evaluations.json",
+        "sha256": "610f58833345194c132068be5b842db617467a8a64c1eef516b2ca3628c35d8e"
+      },
+      "finished_at": "2026-09-24T14:39:38.952455Z"
+    },
+    {
+      "case_id": "062",
+      "cores": 3,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1,
+      "job_key": "062-k3-balanced-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:38.993817Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/case_062_multicore_res.json",
+          "sha256": "1dc785fa0d4095dbcd8f78e68c8b88a2fe28a42eec08af9cf302e1d02754f2e4"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/evidence/result.json.gz",
+          "sha256": "fab71fe32da768717a9aac5feac278121b6256476889629bf3e4e2a32094cc0c"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/evidence/receipt.json",
+          "sha256": "513c77da0bc54bc4465c05e9afa1bbcccfd96c8371383efd3777a962e8a05664"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 3.877716374990996,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_062.json",
+          "--cores",
+          "3",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/case_062_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/evidence",
+          "--tree-method",
+          "balanced"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "1dc785fa0d4095dbcd8f78e68c8b88a2fe28a42eec08af9cf302e1d02754f2e4"
+      },
+      "makespan_cycles": 1342199,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 13401600,
+        "scheduled_copy_bytes": 13407744,
+        "added_copy_bytes": 6144,
+        "partition_added_copy_bytes": 6144,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 4364,
+        "hit_bytes": 0,
+        "miss_bytes": 13403136,
+        "hits": 0,
+        "accesses": 4364,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "balanced_reduction_tree",
+        "selected_strategy": "balanced_reduction_tree",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "balanced"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "balanced_reduction_tree",
+            "status": "ok",
+            "makespan": 1342199,
+            "metadata": {
+              "strategy": "balanced_reduction_tree",
+              "cuts": [
+                [
+                  23996,
+                  23997
+                ],
+                [
+                  23991,
+                  23995
+                ]
+              ],
+              "block_work_cycles": [
+                706524,
+                890136,
+                1414428
+              ],
+              "block_operations": [
+                4607,
+                5806,
+                9223
+              ],
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "1dc785fa0d4095dbcd8f78e68c8b88a2fe28a42eec08af9cf302e1d02754f2e4"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "fab71fe32da768717a9aac5feac278121b6256476889629bf3e4e2a32094cc0c"
+              }
+            }
+          }
+        ],
+        "makespan": 1342199,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 13401600,
+          "scheduled_copy_bytes": 13407744,
+          "added_copy_bytes": 6144,
+          "partition_added_copy_bytes": 6144,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 4364,
+          "hit_bytes": 0,
+          "miss_bytes": 13403136,
+          "hits": 0,
+          "accesses": 4364,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "1dc785fa0d4095dbcd8f78e68c8b88a2fe28a42eec08af9cf302e1d02754f2e4",
+        "result_sha256": "fab71fe32da768717a9aac5feac278121b6256476889629bf3e4e2a32094cc0c",
+        "read_index_seconds": 0.11933783401036635,
+        "construct_seconds": 0.217457499995362,
+        "config_prepare_ledger_seconds": 0.003852666006423533,
+        "evaluation_seconds": 3.3332523339777254,
+        "result_write_seconds": 0.16715270801796578,
+        "main_until_evidence_seconds": 3.841053042007843,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-balanced-postorder-e0/evidence/evaluations.json",
+        "sha256": "f02c919bc04292b73799c96931eedc972406053429b268bfc6aa54c473fec0cc"
+      },
+      "finished_at": "2026-09-24T14:39:42.975110Z"
+    },
+    {
+      "case_id": "062",
+      "cores": 3,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1,
+      "job_key": "062-k3-fragment-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:43.011390Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/case_062_multicore_res.json",
+          "sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence/result.json.gz",
+          "sha256": "65e78e26c93483bf36bcfe58994b8b16457974656fa43dca6954ebc0d6fcd7bb"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence/receipt.json",
+          "sha256": "8ab774664b74857150ec768ff62e565f46d88f151790c7dbd63eab0cebda5ec1"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 3.65259183300077,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_062.json",
+          "--cores",
+          "3",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/case_062_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence",
+          "--tree-method",
+          "fragment"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878"
+      },
+      "makespan_cycles": 1183248,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 13401600,
+        "scheduled_copy_bytes": 13435392,
+        "added_copy_bytes": 33792,
+        "partition_added_copy_bytes": 33792,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 4373,
+        "hit_bytes": 0,
+        "miss_bytes": 13416960,
+        "hits": 0,
+        "accesses": 4373,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "fragment_reduction_forest",
+        "selected_strategy": "fragment_reduction_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "fragment"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "fragment_reduction_forest",
+            "status": "ok",
+            "makespan": 1183248,
+            "metadata": {
+              "strategy": "fragment_reduction_forest",
+              "fragment_threshold_cycles": 250924,
+              "fragment_work_cycles": [
+                176604,
+                176640,
+                176604,
+                176676,
+                176604,
+                176640,
+                176604,
+                176712,
+                177948,
+                176640,
+                176604,
+                176676,
+                176604,
+                176640,
+                176604,
+                176784,
+                183504
+              ],
+              "fragment_count": 17,
+              "fragments_by_core": [
+                [
+                  16,
+                  11,
+                  9,
+                  2,
+                  10
+                ],
+                [
+                  8,
+                  3,
+                  5,
+                  0,
+                  6,
+                  14
+                ],
+                [
+                  15,
+                  7,
+                  1,
+                  13,
+                  4,
+                  12
+                ]
+              ],
+              "core_work_cycles": [
+                890028,
+                1061076,
+                1059984
+              ],
+              "compute_load_upper_bound_cycles": 1170978,
+              "cuts": [
+                [
+                  23965,
+                  23982
+                ],
+                [
+                  23967,
+                  23983
+                ],
+                [
+                  23969,
+                  23984
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23979,
+                  23989
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23986,
+                  23993
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ],
+                [
+                  23990,
+                  23998
+                ]
+              ],
+              "cross_core_compute_edges": [
+                [
+                  23965,
+                  23982
+                ],
+                [
+                  23967,
+                  23983
+                ],
+                [
+                  23969,
+                  23984
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23979,
+                  23989
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23990,
+                  23998
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ]
+              ],
+              "weak_components": 1,
+              "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "65e78e26c93483bf36bcfe58994b8b16457974656fa43dca6954ebc0d6fcd7bb"
+              }
+            }
+          }
+        ],
+        "makespan": 1183248,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 13401600,
+          "scheduled_copy_bytes": 13435392,
+          "added_copy_bytes": 33792,
+          "partition_added_copy_bytes": 33792,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 4373,
+          "hit_bytes": 0,
+          "miss_bytes": 13416960,
+          "hits": 0,
+          "accesses": 4373,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "df990b2c79944a06543dd61adcb89d07cef792990369d1079d30a9ac4291d878",
+        "result_sha256": "65e78e26c93483bf36bcfe58994b8b16457974656fa43dca6954ebc0d6fcd7bb",
+        "read_index_seconds": 0.11122095899190754,
+        "construct_seconds": 0.19258341600652784,
+        "config_prepare_ledger_seconds": 0.0027950420044362545,
+        "evaluation_seconds": 3.1320297500060406,
+        "result_write_seconds": 0.17812987498473376,
+        "main_until_evidence_seconds": 3.616759041993646,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k3-fragment-postorder-e0/evidence/evaluations.json",
+        "sha256": "40bb8f63eb216b4872d58891bd572b7e7a7521bb874e16a2381b1c60556ea931"
+      },
+      "finished_at": "2026-09-24T14:39:46.770530Z"
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1,
+      "job_key": "062-k5-balanced-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:46.813084Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/case_062_multicore_res.json",
+          "sha256": "974c007b39877e5f367d0fdd607a107bc52392abae296ced0fea49488c8c44f4"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/evidence/result.json.gz",
+          "sha256": "587cb5cbb31eb93c9139b9aa13672f8d2d4b5d091971de208c701d7e581c0f80"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/evidence/receipt.json",
+          "sha256": "20eda36ed5ad6bb77f496a36735ba41021afe2ee4bee6ae61d5200ae5a1d8bb6"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 3.138416917005088,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_062.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/case_062_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/evidence",
+          "--tree-method",
+          "balanced"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "974c007b39877e5f367d0fdd607a107bc52392abae296ced0fea49488c8c44f4"
+      },
+      "makespan_cycles": 673177,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 13401600,
+        "scheduled_copy_bytes": 13413888,
+        "added_copy_bytes": 12288,
+        "partition_added_copy_bytes": 12288,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 4366,
+        "hit_bytes": 0,
+        "miss_bytes": 13406208,
+        "hits": 0,
+        "accesses": 4366,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "balanced_reduction_tree",
+        "selected_strategy": "balanced_reduction_tree",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "balanced"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "balanced_reduction_tree",
+            "status": "ok",
+            "makespan": 673177,
+            "metadata": {
+              "strategy": "balanced_reduction_tree",
+              "cuts": [
+                [
+                  23996,
+                  23997
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23984,
+                  23992
+                ]
+              ],
+              "block_work_cycles": [
+                706524,
+                353244,
+                536892,
+                707868,
+                706560
+              ],
+              "block_operations": [
+                4607,
+                2303,
+                3503,
+                4615,
+                4608
+              ],
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "974c007b39877e5f367d0fdd607a107bc52392abae296ced0fea49488c8c44f4"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "587cb5cbb31eb93c9139b9aa13672f8d2d4b5d091971de208c701d7e581c0f80"
+              }
+            }
+          }
+        ],
+        "makespan": 673177,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 13401600,
+          "scheduled_copy_bytes": 13413888,
+          "added_copy_bytes": 12288,
+          "partition_added_copy_bytes": 12288,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 4366,
+          "hit_bytes": 0,
+          "miss_bytes": 13406208,
+          "hits": 0,
+          "accesses": 4366,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "974c007b39877e5f367d0fdd607a107bc52392abae296ced0fea49488c8c44f4",
+        "result_sha256": "587cb5cbb31eb93c9139b9aa13672f8d2d4b5d091971de208c701d7e581c0f80",
+        "read_index_seconds": 0.13055845798226073,
+        "construct_seconds": 0.1996466669952497,
+        "config_prepare_ledger_seconds": 0.00292979201185517,
+        "evaluation_seconds": 2.5798145000007935,
+        "result_write_seconds": 0.18460920799407177,
+        "main_until_evidence_seconds": 3.097558624984231,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-balanced-postorder-e0/evidence/evaluations.json",
+        "sha256": "2b574b35c8d59689935bb080331a62480c47e317c8142b64e6beabbf2e7b462d"
+      },
+      "finished_at": "2026-09-24T14:39:50.079755Z"
+    },
+    {
+      "case_id": "062",
+      "cores": 5,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1,
+      "job_key": "062-k5-fragment-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:50.126601Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/case_062_multicore_res.json",
+          "sha256": "792b623f2ab0d4be7c4720ce7078b0e0db8b630f97e9a76d2e328828a34e60cd"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/evidence/result.json.gz",
+          "sha256": "03435cc4d7fc48912415aee549a9b5dc7662d8f1a2bc7c0327238fbbff418121"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/evidence/receipt.json",
+          "sha256": "1406795614298d308a45c116267c58bab6914bfb01180c3e956a0363f0aa0721"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 3.6447037080070004,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_062.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/case_062_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/evidence",
+          "--tree-method",
+          "fragment"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "792b623f2ab0d4be7c4720ce7078b0e0db8b630f97e9a76d2e328828a34e60cd"
+      },
+      "makespan_cycles": 1010340,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 13401600,
+        "scheduled_copy_bytes": 13478400,
+        "added_copy_bytes": 76800,
+        "partition_added_copy_bytes": 76800,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 4387,
+        "hit_bytes": 0,
+        "miss_bytes": 13438464,
+        "hits": 0,
+        "accesses": 4387,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "fragment_reduction_forest",
+        "selected_strategy": "fragment_reduction_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "fragment"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "fragment_reduction_forest",
+            "status": "ok",
+            "makespan": 1010340,
+            "metadata": {
+              "strategy": "fragment_reduction_forest",
+              "fragment_threshold_cycles": 150555,
+              "fragment_work_cycles": [
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88428,
+                89628,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                88284,
+                88320,
+                88284,
+                88500,
+                88284,
+                95220
+              ],
+              "fragment_count": 34,
+              "fragments_by_core": [
+                [
+                  33,
+                  27,
+                  17,
+                  2,
+                  12,
+                  24
+                ],
+                [
+                  16,
+                  19,
+                  13,
+                  0,
+                  10,
+                  22,
+                  32
+                ],
+                [
+                  31,
+                  11,
+                  9,
+                  29,
+                  8,
+                  20,
+                  30
+                ],
+                [
+                  15,
+                  3,
+                  1,
+                  21,
+                  4,
+                  14,
+                  26
+                ],
+                [
+                  7,
+                  23,
+                  5,
+                  25,
+                  6,
+                  18,
+                  28
+                ]
+              ],
+              "core_work_cycles": [
+                536748,
+                619440,
+                618348,
+                618276,
+                618276
+              ],
+              "compute_load_upper_bound_cycles": 722661,
+              "cuts": [
+                [
+                  23931,
+                  23965
+                ],
+                [
+                  23933,
+                  23966
+                ],
+                [
+                  23935,
+                  23967
+                ],
+                [
+                  23937,
+                  23968
+                ],
+                [
+                  23939,
+                  23969
+                ],
+                [
+                  23941,
+                  23970
+                ],
+                [
+                  23943,
+                  23971
+                ],
+                [
+                  23945,
+                  23972
+                ],
+                [
+                  23947,
+                  23973
+                ],
+                [
+                  23949,
+                  23974
+                ],
+                [
+                  23951,
+                  23975
+                ],
+                [
+                  23953,
+                  23976
+                ],
+                [
+                  23955,
+                  23977
+                ],
+                [
+                  23957,
+                  23978
+                ],
+                [
+                  23959,
+                  23979
+                ],
+                [
+                  23961,
+                  23980
+                ],
+                [
+                  23963,
+                  23981
+                ],
+                [
+                  23965,
+                  23982
+                ],
+                [
+                  23967,
+                  23983
+                ],
+                [
+                  23969,
+                  23984
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23979,
+                  23989
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23986,
+                  23993
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ],
+                [
+                  23990,
+                  23998
+                ]
+              ],
+              "cross_core_compute_edges": [
+                [
+                  23931,
+                  23965
+                ],
+                [
+                  23933,
+                  23966
+                ],
+                [
+                  23935,
+                  23967
+                ],
+                [
+                  23941,
+                  23970
+                ],
+                [
+                  23943,
+                  23971
+                ],
+                [
+                  23947,
+                  23973
+                ],
+                [
+                  23949,
+                  23974
+                ],
+                [
+                  23951,
+                  23975
+                ],
+                [
+                  23953,
+                  23976
+                ],
+                [
+                  23955,
+                  23977
+                ],
+                [
+                  23957,
+                  23978
+                ],
+                [
+                  23959,
+                  23979
+                ],
+                [
+                  23963,
+                  23981
+                ],
+                [
+                  23971,
+                  23985
+                ],
+                [
+                  23973,
+                  23986
+                ],
+                [
+                  23975,
+                  23987
+                ],
+                [
+                  23977,
+                  23988
+                ],
+                [
+                  23982,
+                  23991
+                ],
+                [
+                  23984,
+                  23992
+                ],
+                [
+                  23986,
+                  23993
+                ],
+                [
+                  23988,
+                  23994
+                ],
+                [
+                  23990,
+                  23998
+                ],
+                [
+                  23991,
+                  23995
+                ],
+                [
+                  23993,
+                  23996
+                ],
+                [
+                  23995,
+                  23997
+                ]
+              ],
+              "weak_components": 1,
+              "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "792b623f2ab0d4be7c4720ce7078b0e0db8b630f97e9a76d2e328828a34e60cd"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "03435cc4d7fc48912415aee549a9b5dc7662d8f1a2bc7c0327238fbbff418121"
+              }
+            }
+          }
+        ],
+        "makespan": 1010340,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 13401600,
+          "scheduled_copy_bytes": 13478400,
+          "added_copy_bytes": 76800,
+          "partition_added_copy_bytes": 76800,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 4387,
+          "hit_bytes": 0,
+          "miss_bytes": 13438464,
+          "hits": 0,
+          "accesses": 4387,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "792b623f2ab0d4be7c4720ce7078b0e0db8b630f97e9a76d2e328828a34e60cd",
+        "result_sha256": "03435cc4d7fc48912415aee549a9b5dc7662d8f1a2bc7c0327238fbbff418121",
+        "read_index_seconds": 0.1362519579997752,
+        "construct_seconds": 0.22609474998898804,
+        "config_prepare_ledger_seconds": 0.0034315420198254287,
+        "evaluation_seconds": 3.0591276669874787,
+        "result_write_seconds": 0.17987733299378306,
+        "main_until_evidence_seconds": 3.6047832499898504,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/062-k5-fragment-postorder-e0/evidence/evaluations.json",
+        "sha256": "66297d14cd6dac8510295a3afcf442eaa49d220611e7d40bc4871cddc7cf7da7"
+      },
+      "finished_at": "2026-09-24T14:39:53.887105Z"
+    },
+    {
+      "case_id": "063",
+      "cores": 3,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1,
+      "job_key": "063-k3-balanced-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:53.925772Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/case_063_multicore_res.json",
+          "sha256": "2921c98216353b465f1e95a1231dcb489489f562283a755b3e00a6ff8d97ca6a"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/evidence/result.json.gz",
+          "sha256": "650360720b9f183290513140a15d026808e2705d49e8bc29ae74f1198192fd1d"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/evidence/receipt.json",
+          "sha256": "7cd512528f3a150c5071b09665ee76098ae0209e5759bb53f70d8e75d8e54e3a"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 1.1032616249867715,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_063.json",
+          "--cores",
+          "3",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/case_063_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/evidence",
+          "--tree-method",
+          "balanced"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "2921c98216353b465f1e95a1231dcb489489f562283a755b3e00a6ff8d97ca6a"
+      },
+      "makespan_cycles": 399671,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 5021184,
+        "scheduled_copy_bytes": 5027328,
+        "added_copy_bytes": 6144,
+        "partition_added_copy_bytes": 6144,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 1636,
+        "hit_bytes": 0,
+        "miss_bytes": 5022720,
+        "hits": 0,
+        "accesses": 1636,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "balanced_reduction_tree",
+        "selected_strategy": "balanced_reduction_tree",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "balanced"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "balanced_reduction_tree",
+            "status": "ok",
+            "makespan": 399671,
+            "metadata": {
+              "strategy": "balanced_reduction_tree",
+              "cuts": [
+                [
+                  8992,
+                  8994
+                ],
+                [
+                  8989,
+                  8992
+                ]
+              ],
+              "block_work_cycles": [
+                354588,
+                353280,
+                420900
+              ],
+              "block_operations": [
+                2311,
+                2304,
+                2745
+              ],
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "2921c98216353b465f1e95a1231dcb489489f562283a755b3e00a6ff8d97ca6a"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "650360720b9f183290513140a15d026808e2705d49e8bc29ae74f1198192fd1d"
+              }
+            }
+          }
+        ],
+        "makespan": 399671,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 5021184,
+          "scheduled_copy_bytes": 5027328,
+          "added_copy_bytes": 6144,
+          "partition_added_copy_bytes": 6144,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 1636,
+          "hit_bytes": 0,
+          "miss_bytes": 5022720,
+          "hits": 0,
+          "accesses": 1636,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "2921c98216353b465f1e95a1231dcb489489f562283a755b3e00a6ff8d97ca6a",
+        "result_sha256": "650360720b9f183290513140a15d026808e2705d49e8bc29ae74f1198192fd1d",
+        "read_index_seconds": 0.039733750018058345,
+        "construct_seconds": 0.05986970799858682,
+        "config_prepare_ledger_seconds": 0.0018443749868310988,
+        "evaluation_seconds": 0.8996983749966603,
+        "result_write_seconds": 0.06791141701978631,
+        "main_until_evidence_seconds": 1.0690576250199229,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-balanced-postorder-e0/evidence/evaluations.json",
+        "sha256": "3557bdf8bd4b24dd4950717e6602d41cde9d2816044d0b450c0f51fa0124ef64"
+      },
+      "finished_at": "2026-09-24T14:39:55.111777Z"
+    },
+    {
+      "case_id": "063",
+      "cores": 3,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1,
+      "job_key": "063-k3-fragment-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:55.157226Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/case_063_multicore_res.json",
+          "sha256": "0f3b6bb9762887dd4db46684bc6f584a850747a498e5114bbf5a9444d84f4632"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/evidence/result.json.gz",
+          "sha256": "75c61f022a93a9a61c5fee9e9b1851e6bab965c6114399b6fa96d1b3bdd8540d"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/evidence/receipt.json",
+          "sha256": "bae3cb9d20d5f00bde98dd7b6eb6cc1af422ee8f1f8d650e4233775828be866a"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.9674210000084713,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_063.json",
+          "--cores",
+          "3",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/case_063_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/evidence",
+          "--tree-method",
+          "fragment"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "0f3b6bb9762887dd4db46684bc6f584a850747a498e5114bbf5a9444d84f4632"
+      },
+      "makespan_cycles": 422182,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 5021184,
+        "scheduled_copy_bytes": 5048832,
+        "added_copy_bytes": 27648,
+        "partition_added_copy_bytes": 27648,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 1643,
+        "hit_bytes": 0,
+        "miss_bytes": 5033472,
+        "hits": 0,
+        "accesses": 1643,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "fragment_reduction_forest",
+        "selected_strategy": "fragment_reduction_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "fragment"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "fragment_reduction_forest",
+            "status": "ok",
+            "makespan": 422182,
+            "metadata": {
+              "strategy": "fragment_reduction_forest",
+              "fragment_threshold_cycles": 94064,
+              "fragment_work_cycles": [
+                88284,
+                88320,
+                89628,
+                88356,
+                88284,
+                88320,
+                88284,
+                88392,
+                88284,
+                88320,
+                88284,
+                88356,
+                67656
+              ],
+              "fragment_count": 13,
+              "fragments_by_core": [
+                [
+                  2,
+                  5,
+                  4,
+                  10
+                ],
+                [
+                  7,
+                  1,
+                  9,
+                  8
+                ],
+                [
+                  3,
+                  11,
+                  0,
+                  6,
+                  12
+                ]
+              ],
+              "core_work_cycles": [
+                354516,
+                353316,
+                420936
+              ],
+              "compute_load_upper_bound_cycles": 438965,
+              "cuts": [
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8978,
+                  8987
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "cross_core_compute_edges": [
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "weak_components": 1,
+              "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "0f3b6bb9762887dd4db46684bc6f584a850747a498e5114bbf5a9444d84f4632"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "75c61f022a93a9a61c5fee9e9b1851e6bab965c6114399b6fa96d1b3bdd8540d"
+              }
+            }
+          }
+        ],
+        "makespan": 422182,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 5021184,
+          "scheduled_copy_bytes": 5048832,
+          "added_copy_bytes": 27648,
+          "partition_added_copy_bytes": 27648,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 1643,
+          "hit_bytes": 0,
+          "miss_bytes": 5033472,
+          "hits": 0,
+          "accesses": 1643,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "0f3b6bb9762887dd4db46684bc6f584a850747a498e5114bbf5a9444d84f4632",
+        "result_sha256": "75c61f022a93a9a61c5fee9e9b1851e6bab965c6114399b6fa96d1b3bdd8540d",
+        "read_index_seconds": 0.05891762499231845,
+        "construct_seconds": 0.06372379200183786,
+        "config_prepare_ledger_seconds": 0.002560791006544605,
+        "evaluation_seconds": 0.7424038749886677,
+        "result_write_seconds": 0.06709829199826345,
+        "main_until_evidence_seconds": 0.934704374987632,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k3-fragment-postorder-e0/evidence/evaluations.json",
+        "sha256": "3a1efe9d2b95588e5fb1790216130c0e1162216071a9440db93889b6e79292d3"
+      },
+      "finished_at": "2026-09-24T14:39:56.197771Z"
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "balanced-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "balanced"
+      ],
+      "parameters": {
+        "tree_method": "balanced",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant"
+      },
+      "e0_call_limit": 1,
+      "job_key": "063-k5-balanced-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:56.240968Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/case_063_multicore_res.json",
+          "sha256": "b7bcc997937abb44ddbf7d778b196576c7609182ba7f1cb043cd31e622cdd894"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/evidence/result.json.gz",
+          "sha256": "a267c948bde810589f633d945b3b46e82842651fb8e4b01bdf0ff17861020537"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/evidence/receipt.json",
+          "sha256": "44c3eedb39a22d851c9b27cf0bcac39be95dbf1896f97ccd0476bf9710f7e1ef"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.8199006250069942,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_063.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/case_063_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/evidence",
+          "--tree-method",
+          "balanced"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "b7bcc997937abb44ddbf7d778b196576c7609182ba7f1cb043cd31e622cdd894"
+      },
+      "makespan_cycles": 336337,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 5021184,
+        "scheduled_copy_bytes": 5033472,
+        "added_copy_bytes": 12288,
+        "partition_added_copy_bytes": 12288,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 1638,
+        "hit_bytes": 0,
+        "miss_bytes": 5025792,
+        "hits": 0,
+        "accesses": 1638,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "balanced_reduction_tree",
+        "selected_strategy": "balanced_reduction_tree",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "balanced"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "balanced_reduction_tree",
+            "status": "ok",
+            "makespan": 336337,
+            "metadata": {
+              "strategy": "balanced_reduction_tree",
+              "cuts": [
+                [
+                  8992,
+                  8994
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8984,
+                  8989
+                ]
+              ],
+              "block_work_cycles": [
+                176640,
+                177948,
+                353280,
+                176604,
+                244296
+              ],
+              "block_operations": [
+                1152,
+                1159,
+                2304,
+                1151,
+                1594
+              ],
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "b7bcc997937abb44ddbf7d778b196576c7609182ba7f1cb043cd31e622cdd894"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "a267c948bde810589f633d945b3b46e82842651fb8e4b01bdf0ff17861020537"
+              }
+            }
+          }
+        ],
+        "makespan": 336337,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 5021184,
+          "scheduled_copy_bytes": 5033472,
+          "added_copy_bytes": 12288,
+          "partition_added_copy_bytes": 12288,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 1638,
+          "hit_bytes": 0,
+          "miss_bytes": 5025792,
+          "hits": 0,
+          "accesses": 1638,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "b7bcc997937abb44ddbf7d778b196576c7609182ba7f1cb043cd31e622cdd894",
+        "result_sha256": "a267c948bde810589f633d945b3b46e82842651fb8e4b01bdf0ff17861020537",
+        "read_index_seconds": 0.03759312501642853,
+        "construct_seconds": 0.06425633298931643,
+        "config_prepare_ledger_seconds": 0.0018770419992506504,
+        "evaluation_seconds": 0.6209849170118105,
+        "result_write_seconds": 0.06857154099270701,
+        "main_until_evidence_seconds": 0.7932829580095131,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-balanced-postorder-e0/evidence/evaluations.json",
+        "sha256": "9b8854464f819b28e9cc724ef1f033e5e72c3820149061950b86edcd4ce66b6f"
+      },
+      "finished_at": "2026-09-24T14:39:57.130171Z"
+    },
+    {
+      "case_id": "063",
+      "cores": 5,
+      "variant": "fragment-postorder-e0",
+      "solver_args": [
+        "--tree-method",
+        "fragment"
+      ],
+      "parameters": {
+        "tree_method": "fragment",
+        "candidate_limit": 1,
+        "selection": "single direct construction; no online comparison with other variant",
+        "fragment_granularity_denominator": 4,
+        "fragment_threshold": "max(max_node_compute_work, ceil(total_compute_work/(4*cores)))",
+        "core_assignment": "LPT by fragment total compute work",
+        "order": "global DFS postorder projected onto each core"
+      },
+      "e0_call_limit": 1,
+      "job_key": "063-k5-fragment-postorder-e0",
+      "stage_id": "paired-sixcells",
+      "started_at": "2026-09-24T14:39:57.174168Z",
+      "status": "ok",
+      "calls": {
+        "solver": 1,
+        "E0": 1,
+        "E1": 0,
+        "E2": 0
+      },
+      "e0_reserved": 1,
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/case_063_multicore_res.json",
+          "sha256": "b1ce39d151401295bc0baa52d72525429b13bf588b0086145b6c4c1cc1a5655f"
+        },
+        "result": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/evidence/result.json.gz",
+          "sha256": "cdc5a9484268c88bcae1555270332cf351f738b00d0f787f771806eb8281e393"
+        },
+        "trace": {
+          "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/evidence/receipt.json",
+          "sha256": "6149761a7e85dc6a800961f0992d4e1abce361db5bb9a21055e93d9e37f51703"
+        }
+      },
+      "run_path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/run.json",
+      "failure": null,
+      "solver_process": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 0.8115932500222698,
+        "argv": [
+          "python",
+          "-B",
+          "-m",
+          "src.q3.tree_solve",
+          "data/raw/a/official/data/case_063.json",
+          "--cores",
+          "5",
+          "-o",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/case_063_multicore_res.json",
+          "--evidence",
+          "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/evidence",
+          "--tree-method",
+          "fragment"
+        ],
+        "log_derivation": "stdout/stderr preserve bytes except repository and interpreter absolute paths replaced by markers"
+      },
+      "identity": {
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "b1ce39d151401295bc0baa52d72525429b13bf588b0086145b6c4c1cc1a5655f"
+      },
+      "makespan_cycles": 340898,
+      "data_movement_bytes": {
+        "original_graph_copy_bytes": 5021184,
+        "scheduled_copy_bytes": 5091840,
+        "added_copy_bytes": 70656,
+        "partition_added_copy_bytes": 70656,
+        "spill_added_copy_bytes": 0
+      },
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 1657,
+        "hit_bytes": 0,
+        "miss_bytes": 5054976,
+        "hits": 0,
+        "accesses": 1657,
+        "hit_rate": 0.0
+      },
+      "solver_receipt": {
+        "strategy": "fragment_reduction_forest",
+        "selected_strategy": "fragment_reduction_forest",
+        "official_e0_calls": 1,
+        "candidate_limit": 1,
+        "seed_selection": {
+          "rule": "guarded_direct_tree",
+          "method": "fragment"
+        },
+        "candidates": [
+          {
+            "name": "seed",
+            "strategy": "fragment_reduction_forest",
+            "status": "ok",
+            "makespan": 340898,
+            "metadata": {
+              "strategy": "fragment_reduction_forest",
+              "fragment_threshold_cycles": 56439,
+              "fragment_work_cycles": [
+                44124,
+                44160,
+                44124,
+                44196,
+                44160,
+                45468,
+                44124,
+                44232,
+                44124,
+                44160,
+                44124,
+                44196,
+                44124,
+                44160,
+                44124,
+                44268,
+                44124,
+                44160,
+                44124,
+                44196,
+                44124,
+                44160,
+                44124,
+                44232,
+                44124,
+                23532
+              ],
+              "fragment_count": 26,
+              "fragments_by_core": [
+                [
+                  5,
+                  9,
+                  2,
+                  14,
+                  24
+                ],
+                [
+                  15,
+                  4,
+                  21,
+                  12,
+                  22
+                ],
+                [
+                  7,
+                  19,
+                  0,
+                  6,
+                  16,
+                  25
+                ],
+                [
+                  23,
+                  1,
+                  13,
+                  8,
+                  18
+                ],
+                [
+                  3,
+                  11,
+                  17,
+                  10,
+                  20
+                ]
+              ],
+              "core_work_cycles": [
+                222000,
+                220836,
+                244332,
+                220800,
+                220800
+              ],
+              "compute_load_upper_bound_cycles": 270904,
+              "cuts": [
+                [
+                  8944,
+                  8970
+                ],
+                [
+                  8946,
+                  8971
+                ],
+                [
+                  8949,
+                  8972
+                ],
+                [
+                  8950,
+                  8973
+                ],
+                [
+                  8952,
+                  8974
+                ],
+                [
+                  8954,
+                  8975
+                ],
+                [
+                  8956,
+                  8976
+                ],
+                [
+                  8958,
+                  8977
+                ],
+                [
+                  8960,
+                  8978
+                ],
+                [
+                  8962,
+                  8979
+                ],
+                [
+                  8964,
+                  8980
+                ],
+                [
+                  8966,
+                  8981
+                ],
+                [
+                  8968,
+                  8982
+                ],
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8978,
+                  8987
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "cross_core_compute_edges": [
+                [
+                  8944,
+                  8970
+                ],
+                [
+                  8946,
+                  8971
+                ],
+                [
+                  8949,
+                  8972
+                ],
+                [
+                  8952,
+                  8974
+                ],
+                [
+                  8956,
+                  8976
+                ],
+                [
+                  8958,
+                  8977
+                ],
+                [
+                  8960,
+                  8978
+                ],
+                [
+                  8962,
+                  8979
+                ],
+                [
+                  8964,
+                  8980
+                ],
+                [
+                  8966,
+                  8981
+                ],
+                [
+                  8968,
+                  8982
+                ],
+                [
+                  8970,
+                  8983
+                ],
+                [
+                  8972,
+                  8984
+                ],
+                [
+                  8974,
+                  8985
+                ],
+                [
+                  8976,
+                  8986
+                ],
+                [
+                  8978,
+                  8987
+                ],
+                [
+                  8980,
+                  8988
+                ],
+                [
+                  8983,
+                  8989
+                ],
+                [
+                  8985,
+                  8990
+                ],
+                [
+                  8987,
+                  8991
+                ],
+                [
+                  8989,
+                  8992
+                ],
+                [
+                  8991,
+                  8993
+                ],
+                [
+                  8992,
+                  8994
+                ]
+              ],
+              "weak_components": 1,
+              "granularity_rule": "max(max_node_cycles, ceil(total_compute_cycles / (4 * cores)))",
+              "order": "original-op-id depth-first postorder"
+            },
+            "artifacts": {
+              "plan": {
+                "path": "seed/plan.json",
+                "sha256": "b1ce39d151401295bc0baa52d72525429b13bf588b0086145b6c4c1cc1a5655f"
+              },
+              "result": {
+                "path": "seed/result.json.gz",
+                "sha256": "cdc5a9484268c88bcae1555270332cf351f738b00d0f787f771806eb8281e393"
+              }
+            }
+          }
+        ],
+        "makespan": 340898,
+        "data_movement_bytes": {
+          "original_graph_copy_bytes": 5021184,
+          "scheduled_copy_bytes": 5091840,
+          "added_copy_bytes": 70656,
+          "partition_added_copy_bytes": 70656,
+          "spill_added_copy_bytes": 0
+        },
+        "cache_stats": {
+          "copy_in_hits": 0,
+          "copy_in_misses": 1657,
+          "hit_bytes": 0,
+          "miss_bytes": 5054976,
+          "hits": 0,
+          "accesses": 1657,
+          "hit_rate": 0.0
+        },
+        "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "plan_sha256": "b1ce39d151401295bc0baa52d72525429b13bf588b0086145b6c4c1cc1a5655f",
+        "result_sha256": "cdc5a9484268c88bcae1555270332cf351f738b00d0f787f771806eb8281e393",
+        "read_index_seconds": 0.05153962501208298,
+        "construct_seconds": 0.04701087498688139,
+        "config_prepare_ledger_seconds": 0.002783333999104798,
+        "evaluation_seconds": 0.6121574580029119,
+        "result_write_seconds": 0.06738604200654663,
+        "main_until_evidence_seconds": 0.7808773340075277,
+        "timing_note": "Disjoint main-phase timers exclude startup and final receipt/publication; outer process wall is authoritative. One candidate only; no online comparison or non-regression guarantee."
+      },
+      "evaluation_ledger": {
+        "path": "results/a/q3-nikolastarx/capacity-20260924/run/cells/063-k5-fragment-postorder-e0/evidence/evaluations.json",
+        "sha256": "f49dbc513bc0c4fea71b4f538dd13584ba5df7e8fcbb33e9b29ae988d92de884"
+      },
+      "finished_at": "2026-09-24T14:39:58.051272Z"
+    }
+  ],
+  "e0_budget_used": 12,
+  "environment": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "cpu": "Apple M5 Pro",
+    "gpu": "none used (CPU-only solver)",
+    "ram_bytes": 51539607552,
+    "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+    "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+    "threads": null,
+    "workers": 1,
+    "peak_rss_bytes": null
+  },
+  "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "finished_at": "2026-09-24T14:39:58.053064Z",
+  "elapsed_wall_seconds": 20.12776517868042
+}

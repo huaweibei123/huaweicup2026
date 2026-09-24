@@ -1,0 +1,45 @@
+{
+  "schema": "q3-feedback-benchmark-v1",
+  "run_id": "q3-stage-direct-20260924",
+  "stage_id": "first-051",
+  "producer_session": "nikolastarx/s-3172f7b01b604cfb90aefd6396bd87bc",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+  "solver_commit": "b525f9116fa8ce203b5aee3b4206f69768445b36",
+  "solver_module": "src.q3.tree_solve",
+  "algorithm": {
+    "id": "q3-stage-direct",
+    "name": "固定通道归属与原树阶段归约",
+    "authors": [
+      "NikolaStarx"
+    ],
+    "method": "Recognize exact tensor-port repeated homogeneous lane chains, unchanged binary scalar reduction, and scalar broadcast. Keep immutable-input lane ownership fixed, keep pure subtree ADDs local, gather mixed ADDs on a fixed collector. Emit original lane chains then pure then mixed ADDs. One direct candidate and one online E0; no historical oracle or parameter search.",
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/issues/51"
+    ],
+    "upstream": []
+  },
+  "runtime_id": "q3-local-macos-arm64-20260924",
+  "budget": {
+    "max_e0_calls": 3,
+    "total_wall_seconds": 600,
+    "per_job_seconds": 90
+  },
+  "offline_costs": "No offline training or graph-specific evaluation precomputation. Development and pure mathematical proxy validation are separate from solver wall and invoke no E0; no new dependency or native compilation.",
+  "jobs": [
+    {
+      "case_id": "051",
+      "cores": 4,
+      "variant": "stage-e0",
+      "solver_args": [
+        "--tree-method",
+        "stage"
+      ],
+      "parameters": {
+        "tree_method": "stage",
+        "candidate_limit": 1,
+        "selection": "one direct construction; no online comparison"
+      },
+      "e0_call_limit": 1
+    }
+  ]
+}
