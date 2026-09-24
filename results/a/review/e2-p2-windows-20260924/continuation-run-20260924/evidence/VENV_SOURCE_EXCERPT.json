@@ -1,0 +1,95 @@
+{
+  "path_description": "bundled CPython Lib/venv/__init__.py",
+  "source_sha256": "976ba2fbc7b22cd2ed315d679aef096d8ddadebbc65492cf892ff29e41860c58",
+  "lines": [
+    {
+      "line": 280,
+      "text": "                    logger.warning('Unable to symlink %r to %r', src, dst)"
+    },
+    {
+      "line": 281,
+      "text": ""
+    },
+    {
+      "line": 282,
+      "text": "            # On Windows, we rewrite symlinks to our base python.exe into"
+    },
+    {
+      "line": 283,
+      "text": "            # copies of venvlauncher.exe"
+    },
+    {
+      "line": 284,
+      "text": "            basename, ext = os.path.splitext(os.path.basename(src))"
+    },
+    {
+      "line": 285,
+      "text": "            srcfn = os.path.join(os.path.dirname(__file__),"
+    },
+    {
+      "line": 286,
+      "text": "                                 \"scripts\","
+    },
+    {
+      "line": 287,
+      "text": "                                 \"nt\","
+    },
+    {
+      "line": 288,
+      "text": "                                 basename + ext)"
+    },
+    {
+      "line": 289,
+      "text": "            # Builds or venv's from builds need to remap source file"
+    },
+    {
+      "line": 290,
+      "text": "            # locations, as we do not put them into Lib/venv/scripts"
+    },
+    {
+      "line": 291,
+      "text": "            if sysconfig.is_python_build() or not os.path.isfile(srcfn):"
+    },
+    {
+      "line": 292,
+      "text": "                if basename.endswith('_d'):"
+    },
+    {
+      "line": 293,
+      "text": "                    ext = '_d' + ext"
+    },
+    {
+      "line": 294,
+      "text": "                    basename = basename[:-2]"
+    },
+    {
+      "line": 295,
+      "text": "                if basename == 'python':"
+    },
+    {
+      "line": 296,
+      "text": "                    basename = 'venvlauncher'"
+    },
+    {
+      "line": 297,
+      "text": "                elif basename == 'pythonw':"
+    },
+    {
+      "line": 298,
+      "text": "                    basename = 'venvwlauncher'"
+    },
+    {
+      "line": 299,
+      "text": "                src = os.path.join(os.path.dirname(src), basename + ext)"
+    },
+    {
+      "line": 300,
+      "text": "            else:"
+    },
+    {
+      "line": 301,
+      "text": "                src = srcfn"
+    }
+  ],
+  "method": "read source bytes only; no import or process probe"
+}
