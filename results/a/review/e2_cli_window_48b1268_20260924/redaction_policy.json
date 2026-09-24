@@ -1,0 +1,65 @@
+{
+  "method": "Explicit UTF-8 byte sequence replacement only; no line removal, JSON reformatting or newline normalization in copied evidence. Changed files are derivatives, not original bytes.",
+  "cleartext_mapping": "Retained in separate private delivery area; never committed",
+  "rules": [
+    {
+      "category": "private_control_path",
+      "original_value_sha256": "93513c1aa815d0c517b8f5555ee489f7300ff3775b28c2ab5d1097885f20008a",
+      "replacement": "<PRIVATE_CONTROL>"
+    },
+    {
+      "category": "private_run_path",
+      "original_value_sha256": "9fccb8637a64f33ba3d8588530a94bb09a1e6d71f1aac54543af2c6e59165013",
+      "replacement": "<PRIVATE_RUN>"
+    },
+    {
+      "category": "workspace_path",
+      "original_value_sha256": "fbbdf776e07e022008ff6549fc7301cf5248ca03211d03b478ec9279225b1f5e",
+      "replacement": "<WORKTREE>"
+    },
+    {
+      "category": "user_profile",
+      "original_value_sha256": "1f0c4556cfe44a660dff6b308390f0292e1367d0a9fe174125cf274cf42af063",
+      "replacement": "<USERPROFILE>"
+    },
+    {
+      "category": "outer_nonce",
+      "original_value_sha256": "18d786caf2e63baa18728e3f04364b37f056eddab582ea15110abba63a09af46",
+      "replacement": "<OUTER_NONCE>"
+    },
+    {
+      "category": "root_job_name",
+      "original_value_sha256": "053214a884ee1eee93fb0d202aab3a7641bd8104b1829a9f6c55c30157bdd157",
+      "replacement": "<ROOT_JOB_NAME>"
+    },
+    {
+      "category": "transcript_username",
+      "original_value_sha256": "8e09e7393087063e35be7f23885efc37d99406c3f984db5f6b4dc10c073cef2e",
+      "replacement": "Username: <USER>"
+    },
+    {
+      "category": "transcript_runas",
+      "original_value_sha256": "5a9af78653285524adb31cf7744e6a3ca59cb0c345b8a0e9fbf7ff644a762e42",
+      "replacement": "RunAs User: <USER>"
+    },
+    {
+      "category": "transcript_machine",
+      "original_value_sha256": "08e1174a32d7d726448879b47fdd325f5e0c638721211a0c00e5a09d4dd80ce0",
+      "replacement": "Machine: <MACHINE> "
+    }
+  ],
+  "omitted_original_files": [],
+  "source_vs_delivery_metadata": "13 control/run source files frozen and all copied; private processing metadata lives in separate delivery area.",
+  "replacement_order": "Generate raw UTF-8 token and successive JSON string-content encodings at escape levels0..4; de-duplicate equal variants per category; sort descending by byte length; replace exact occurrences without parsing/reserializing evidence. Nested tool output needed level2 (four backslashes). Per-file levels/counts are in manifest.",
+  "nested_JSON_scan": "Verification only: parse public JSON, recursively decode string values that are valid JSON, and scan all values and raw escape-level variants for recorded private tokens. Never regenerate evidence bytes through JSON serialization.",
+  "correction_history": {
+    "affected_previous_commits": [
+      "e3bf41638b8c790776d6f7f483d2e697126da382",
+      "7ceb2372937075af4354da774820553f8bce003b"
+    ],
+    "affected_file": "evidence/control/entry-tool-result.json",
+    "omission": "Temporary root Job identifier survived in twice-escaped nested JSON; nonce already redacted.",
+    "fix": "Additional root_job_name replacement at escape level2; derivative hash/size and manifest updated; original unchanged.",
+    "history_limit": "Earlier Git objects retain the temporary local identifier. Append-only correction does not erase history. The Job identifier is not a credential/token."
+  }
+}

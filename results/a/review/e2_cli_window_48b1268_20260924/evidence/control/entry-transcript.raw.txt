@@ -1,0 +1,51 @@
+**********************
+PowerShell transcript start
+Start time: 20260924115548
+Username: <USER>
+RunAs User: <USER>
+Configuration Name: 
+Machine: <MACHINE> (Microsoft Windows NT 10.0.26200.0)
+Host Application: <USERPROFILE>\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$e2HostControl=Join-Path $env:LOCALAPPDATA 'CodexEvidence/e2-cli-window-48b1268-20260924-control'; $e2HostExpectedRun=Join-Path $env:LOCALAPPDATA 'CodexEvidence/e2-cli-window-48b1268-20260924'; $e2HostError=$null; Start-Transcript -Path (Join-Path $e2HostControl 'entry-transcript.raw.txt') -NoClobber | Out-Null; [IO.File]::WriteAllText((Join-Path $e2HostControl 'entry-invocation.json'),'{"entry_invocations":1,"entry":"research/a/review/e2_cli_fix_validation_20260924/launch_once.ps1","evidence_name":"e2-cli-window-48b1268-20260924","same_PowerShell_host":true}',[Text.UTF8Encoding]::new($false)); try { . ./research/a/review/e2_cli_fix_validation_20260924/launch_once.ps1 -ApprovalPath (Join-Path $e2HostControl 'approved-once.json') -EvidenceName 'e2-cli-window-48b1268-20260924' } catch { $e2HostError=($_ | Out-String); throw } finally { $e2HostEndQpc=[Diagnostics.Stopwatch]::GetTimestamp(); $e2HostReceipt=[ordered]@{entry_invocations=1;driver_t0_utc=$e2T0Utc;driver_t0_qpc=$e2T0Qpc;qpc_frequency=$e2Frequency;host_end_utc=[DateTimeOffset]::UtcNow.ToString('o');host_end_qpc=$e2HostEndQpc;elapsed_seconds=if($e2Frequency){($e2HostEndQpc-$e2T0Qpc)/$e2Frequency}else{$null};host_error=$e2HostError;run_directory_exists=(Test-Path -LiteralPath $e2HostExpectedRun);outer_record_exists=(Test-Path -LiteralPath (Join-Path $e2HostExpectedRun 'outer.json'));controller_handle_created=($null -ne $e2Process -and $e2Process -ne [IntPtr]::Zero);root_job_handle_created=($null -ne $e2Job -and $e2Job -ne [IntPtr]::Zero)}; [IO.File]::WriteAllText((Join-Path $e2HostControl 'entry-host-receipt.json'),($e2HostReceipt | ConvertTo-Json -Depth 12),[Text.UTF8Encoding]::new($false)); Stop-Transcript | Out-Null }
+Process ID: 41612
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+PS>TerminatingError(): "Create suspended controller failed: 203"
+{
+  "schema": "e2-cli-fixed-driver-v1",
+  "outer_t0_utc": "2026-09-24T03:55:48.8614204+00:00",
+  "outer_t0_qpc": 319618095358,
+  "qpc_frequency": 10000000,
+  "driver_commit": "48b12684d1273515f34ddcb2c347690cffea566f",
+  "driver_bundle_sha256": "afbaa8d7b13e735f35702caf70e382310550989bcc5f027a0762c12cd51534ef",
+  "control_launch_requests": 1,
+  "root_job_active_limit": 17,
+  "root_job_commit_limit_bytes": 2415919104,
+  "controller_private_budget_bytes": 268435456,
+  "forced_outer_cleanup": true,
+  "outer_nonce": "<OUTER_NONCE>",
+  "preparation_external_process_requests": 0,
+  "fixed_workspace_files": 698,
+  "git_index_sha256": "8171b596168e3edf83305b75135eb7b14a3315ea50eca1361f5e59005a8d6f31",
+  "status": "stopped",
+  "close_errors": [],
+  "root_job_name": "<ROOT_JOB_NAME>",
+  "error": "Create suspended controller failed: 203",
+  "root_terminate_success": true,
+  "controller_exit_observations": [],
+  "end_utc": "2026-09-24T03:55:53.5890635+00:00",
+  "end_qpc": 319665334670,
+  "wall_seconds": 4.7239312
+}
+**********************
+PowerShell transcript end
+End time: 20260924115553
+**********************
