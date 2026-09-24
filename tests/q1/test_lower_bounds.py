@@ -19,6 +19,21 @@ def graph(ops, tensors=(), edges=()):
 
 
 class LowerBoundTests(unittest.TestCase):
+    def test_strict_resource_subset_tightens_general_graph_bound(self):
+        # Two M100 jobs lie between shared V100 prefix/tail. An unrelated M1
+        # lowers the whole-resource minimum release/tail to zero. The subset
+        # still needs 100 + 200 + 100 on one M slot, above the 300-cycle CP.
+        g = graph([op(1, "V", 100), op(2, "M", 100), op(3, "M", 100),
+                   op(4, "V", 100), op(5, "M", 1)],
+                  edges=[(1, 2), (1, 3), (2, 4), (3, 4)])
+        r = lower_bounds(g, 1, 60)
+        self.assertEqual(r["base_lower_bound_cycles"], 300)
+        self.assertEqual(r["pipe_resources"]["PIPE_M"]["release_load_tail_bound_cycles"], 201)
+        self.assertEqual(r["lower_bound_cycles"], 400)
+        cert = r["pipe_resources"]["PIPE_M"]["resource_window"]
+        self.assertEqual((cert["selected_count"], cert["selected_work"]), (2, 200))
+        self.assertEqual(lower_bounds(g, 2, 60)["lower_bound_cycles"], 300)
+
     def test_zero_cycles_still_occupy_one_cycle(self):
         r = lower_bounds(graph([op(1, "M", 0), op(2, "V", 0)]), 5, 60)
         self.assertEqual(r["compute_critical_path_cycles"], 1)
@@ -46,7 +61,11 @@ class LowerBoundTests(unittest.TestCase):
         self.assertEqual(r["relaxed_critical_path_cycles"], 12)
         self.assertEqual(r["base_lower_bound_cycles"], 20)
         self.assertEqual(r["lower_bound_cycles"], 22)
-        self.assertEqual(lower_bounds(g, 2, 60)["lower_bound_cycles"], 12)
+        parallel = lower_bounds(g, 2, 60)
+        # Both mandatory output writes release no earlier than cycle 11 and
+        # still share one DDR service slot: 11 + 2, tighter than the old CP12.
+        self.assertEqual(parallel["ddr_resource"]["resource_window"]["r_threshold"], 11)
+        self.assertEqual(parallel["lower_bound_cycles"], 13)
         self.assertEqual(g, before)
 
     def test_ddr_global_capacity_and_per_copy_rounding(self):

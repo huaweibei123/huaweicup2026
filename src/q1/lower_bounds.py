@@ -18,8 +18,10 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 OFFICIAL = ROOT / "data/raw/a/official/code"
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(OFFICIAL))
 from evaluation_validation import PIPES, read_bandwidth_config, validate_graph  # noqa: E402
+from src.q1.resource_windows import resource_window_bound, verify_resource_window  # noqa: E402
 
 
 def _ceil_div(a: int, b: int) -> int:
@@ -32,11 +34,15 @@ def _resource_bounds(jobs: list[tuple[int, int, int]], capacity: int) -> dict:
     release = min((r for r, _, _ in jobs), default=0)
     tail = min((q for _, _, q in jobs), default=0)
     load_bound = _ceil_div(work, capacity)
+    window = resource_window_bound(jobs, capacity)
+    if not verify_resource_window(jobs, capacity, window):
+        raise AssertionError("Resource window witness failed independent linear verification")
     return {
         "job_count": len(jobs), "capacity": capacity, "work_cycles": work,
         "minimum_release_cycles": release, "minimum_tail_cycles": tail,
         "load_bound_cycles": load_bound,
         "release_load_tail_bound_cycles": release + load_bound + tail,
+        "resource_window": window,
     }
 
 
@@ -137,7 +143,9 @@ def lower_bounds(graph: dict, cores: int, bandwidth: int) -> dict:
     pipe_bound = max(x["load_bound_cycles"] for x in pipe_resources.values())
     base = max(pipe_bound, augmented_cp, ddr_resource["load_bound_cycles"])
     strengthened = max(base, ddr_resource["release_load_tail_bound_cycles"],
-                       *(x["release_load_tail_bound_cycles"] for x in pipe_resources.values()))
+                       *(x["release_load_tail_bound_cycles"] for x in pipe_resources.values()),
+                       ddr_resource["resource_window"]["bound"],
+                       *(x["resource_window"]["bound"] for x in pipe_resources.values()))
     return {
         "cores": cores, "ddr_bandwidth_bytes_per_cycle": bandwidth,
         "pipe_slots_per_core": 1, "compute_ops": len(eligible),
@@ -172,6 +180,7 @@ def _identity(config: Path) -> dict:
     return {
         "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         "implementation_sha256": _sha(Path(__file__).read_bytes()),
+        "resource_windows_sha256": _sha((ROOT / "src/q1/resource_windows.py").read_bytes()),
         "uv_lock_sha256": _sha((ROOT / "uv.lock").read_bytes()),
         "config_sha256": _sha(config.read_bytes()),
         "official_source_sha256": {name: _sha((OFFICIAL / name).read_bytes()) for name in relevant},
