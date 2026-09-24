@@ -184,7 +184,7 @@ class RoutingTests(PlanContract):
                     unified, name, return_value=(plan, {"synthetic_constructor": name})))
             candidates, diagnostics = unified.generate_candidates(g, cores)
         self.assertLessEqual(len(candidates), 4)
-        self.assertEqual(unified.MAX_DISTINCT_CANDIDATES, 4)
+        self.assertEqual(unified.MAX_DISTINCT_CANDIDATES, 5)
         return candidates, diagnostics, mocks
 
     def test_large_private_input_union_activates_shared_route(self):

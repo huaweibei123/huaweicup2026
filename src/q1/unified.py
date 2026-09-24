@@ -20,12 +20,13 @@ from src.q1.heavy_suffix import construct as heavy
 from src.q1.component_overload import construct as overload
 from src.q1.shared_input_budget import construct as shared_input, _view, _size
 from src.q1.fork_frontier import construct as fork_frontier
+from src.q1.capacity_return import construct as capacity_return
 from stub_multicore_cut_and_schedule import _build_op_adjacency, _contract_excluded_copy_nodes
 
 CONFIG = ROOT / 'data/raw/a/official/data/config.txt'
 E1_SOURCE = '5bfe53a29c1ba05167239f51ea937e602f7f85b4'
 ALGORITHM_ID = 'q1-unified-structural-guard'
-MAX_DISTINCT_CANDIDATES = 4
+MAX_DISTINCT_CANDIDATES = 5
 
 
 def event(emit, event_type, **fields):
@@ -107,6 +108,17 @@ def generate_candidates(graph, cores, emit=None):
             features['additional_route'] = 'fork-frontier'
         else:
             features['additional_route'] = 'none'
+    # Necessary cheap shape check only; the candidate's strict recognizer then
+    # checks private homogeneous M -> V+ -> M chains and conservative capacity.
+    # Failed applicability retains the existing candidates. No graph IDs or
+    # recorded case results participate in this route.
+    compute_pipes = [op['pipe'] for op in view['ops'].values()]
+    if (set(compute_pipes) == {'PIPE_M', 'PIPE_V'}
+            and compute_pipes.count('PIPE_M') == 2 * len(view['components'])):
+        add('capacity-return', lambda: capacity_return(graph, cores))
+        features['return_route'] = 'strict-private-chain-check'
+    else:
+        features['return_route'] = 'inapplicable-compute-shape'
     if len(candidates) > MAX_DISTINCT_CANDIDATES:
         raise AssertionError('Structural candidate bound exceeded')
     return candidates, dict(features=features, duplicates=duplicates,
@@ -154,11 +166,11 @@ def solve(graph, cores, emit=None):
         # Local compilation and global DDR/FIFO/gates are charged online.
         with P1BatchEvaluator(graph, workers=1, cache_bytes=16 << 20,
                               timeout_seconds=60, startup_timeout_seconds=10,
-                              max_tasks_per_worker=4) as evaluator:
+                              max_tasks_per_worker=MAX_DISTINCT_CANDIDATES) as evaluator:
             def score(plan):
                 return next(evaluator.evaluate_batch([plan], full=False, **config))
             selected, records, reason = choose(candidates, score, emit=emit)
-    diagnostics.update(algorithm_id=ALGORITHM_ID, variant='structural-four-plan-guard-v1',
+    diagnostics.update(algorithm_id=ALGORITHM_ID, variant='structural-five-plan-return-v2',
                        selected=selected['name'], stop_reason=reason,
                        candidates=[{k:v for k,v in c.items() if k != 'plan'} for c in candidates],
                        online_scores=records, online_score_attempts=len(records),
