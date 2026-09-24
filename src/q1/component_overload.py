@@ -43,7 +43,7 @@ def _pack(packets, ops, cores):
     return [b for b in bins if b]
 
 
-def _place(tasks, successors, ops, cores, same_wait, cross_wait):
+def _place(tasks, successors, ops, cores, same_wait, cross_wait, *, ready_priority_overrides=None):
     """Assign a fixed acyclic quotient in topological order; no real simulation."""
     mapping = {u: t for t, nodes in enumerate(tasks) for u in nodes}
     pred = [set() for _ in tasks]
@@ -76,8 +76,17 @@ def _place(tasks, successors, ops, cores, same_wait, cross_wait):
     tail = weights.copy()
     for t in reversed(order):
         tail[t] += max((tail[v] for v in succ[t]), default=0)
+    priorities = tail.copy()
+    for t, priority in (ready_priority_overrides or {}).items():
+        if type(t) is not int or not 0 <= t < len(tasks):
+            raise ValueError("Ready priority override requires a valid Task ID")
+        if pred[t] or succ[t]:
+            raise ValueError("Ready priority override requires an independent Task")
+        if type(priority) is not int or not 1 <= priority <= weights[t]:
+            raise ValueError("Ready priority must be positive and no larger than Task work")
+        priorities[t] = priority
     degree = list(map(len, pred))
-    ready = [(-tail[t], t) for t, d in enumerate(degree) if not d]
+    ready = [(-priorities[t], t) for t, d in enumerate(degree) if not d]
     heapq.heapify(ready)
     schedules, ends = [[] for _ in range(cores)], [0] * cores
     task_core, finishes, starts = {}, {}, {}
@@ -98,24 +107,34 @@ def _place(tasks, successors, ops, cores, same_wait, cross_wait):
         for v in sorted(succ[t]):
             degree[v] -= 1
             if not degree[v]:
-                heapq.heappush(ready, (-tail[v], v))
+                heapq.heappush(ready, (-priorities[v], v))
     # Every dependency and every appended core-order edge follows this one
     # topological placement rank, so the augmented Task graph stays acyclic.
     rank = {t: i for i, t in enumerate(placement_order)}
     assert all(rank[t] < rank[v] for t in range(len(tasks)) for v in succ[t])
     plan = {"node_to_subgraph": {u: mapping[u] for u in ops}, "core_schedules": schedules}
-    return plan, dict(placement_order=placement_order, tasks_before_soft_chunks=len(tasks),
-                     compute_gate_proxy_finish=max(ends),
-                     task_compute_weight=weights,
-                     task_start_proxy=[starts[t] for t in range(len(tasks))],
-                     task_finish_proxy=[finishes[t] for t in range(len(tasks))])
+    info = dict(placement_order=placement_order, tasks_before_soft_chunks=len(tasks),
+                compute_gate_proxy_finish=max(ends),
+                task_compute_weight=weights,
+                task_start_proxy=[starts[t] for t in range(len(tasks))],
+                task_finish_proxy=[finishes[t] for t in range(len(tasks))])
+    if ready_priority_overrides is not None:
+        info.update(task_data_tail=tail, task_ready_priority=priorities,
+                    retained_priority_overrides=dict(ready_priority_overrides))
+    return plan, info
 
 
-def construct(graph, cores, *, max_rounds=64, max_sinks=64):
+def construct(graph, cores, *, max_rounds=64, max_sinks=64, retained_component_priority=False):
+    if type(retained_component_priority) is not bool:
+        raise ValueError("retained_component_priority must be boolean")
     fallback, base = fallback_construct(graph, cores, max_rounds=max_rounds, max_sinks=max_sinks)
     info = dict(algorithm_id="q1-component-overload-list", variant="any-pipe-overload-quotient-ready-list",
                 max_rounds=max_rounds, max_sinks=max_sinks, base=base, selected="heavy-suffix-fallback",
                 scope="Direct structural proposal; proxy times omit DDR, FIFO and capacity")
+    if retained_component_priority:
+        info.update(algorithm_id="q1-component-overload-retained-priority",
+                    variant="retained-largest-component-ready-priority",
+                    priority_policy="Retained ready key uses largest component; EFT keeps complete Task work")
     if cores == 1:
         return fallback, info
     ops = {o["id"]: o for o in graph["ops"] if o["op"] not in {"COPY_IN", "COPY_OUT"}}
@@ -170,11 +189,18 @@ def construct(graph, cores, *, max_rounds=64, max_sinks=64):
         return fallback, info
     # Independent retained components are ready from the start. They are not
     # appended to a global last wave, nor split just to manufacture parallelism.
-    tasks.extend(_pack(retained, ops, cores))
+    retained_tasks = _pack(retained, ops, cores)
+    priority_overrides = None
+    if retained_component_priority:
+        component_work = {u: max(work.values()) for nodes, work in components for u in nodes}
+        priority_overrides = {len(tasks) + i: max(component_work[u] for u in nodes)
+                              for i, nodes in enumerate(retained_tasks)}
+    tasks.extend(retained_tasks)
     settings = read_required_settings(ROOT / "data/raw/a/official/data/config.txt", "multicore_scene_a",
                                       ("task_same_core_wait_cycles", "task_cross_core_wait_cycles"))
     proposal, placement = _place(tasks, succ, ops, cores,
-                                settings["task_same_core_wait_cycles"], settings["task_cross_core_wait_cycles"])
+                                settings["task_same_core_wait_cycles"], settings["task_cross_core_wait_cycles"],
+                                ready_priority_overrides=priority_overrides)
     result, chunks = split_large_tasks(graph, proposal)
     validate_task_order(derive_multicore_plan(graph, result))
     info.update(selected="overload-list", total_pipe_work=dict(total), components=len(components),
@@ -189,10 +215,13 @@ def main():
     p.add_argument("--cores", type=int, required=True)
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--diagnostics", type=Path)
+    p.add_argument("--retained-component-priority", action="store_true",
+                   help="Use largest retained component only for ready priority; keep full Task duration")
     a = p.parse_args()
     if a.output.exists() or (a.diagnostics and a.diagnostics.exists()):
         raise FileExistsError("Refuse to overwrite experiment artifacts")
-    plan, info = construct(json.loads(a.graph.read_text()), a.cores)
+    plan, info = construct(json.loads(a.graph.read_text()), a.cores,
+                           retained_component_priority=a.retained_component_priority)
     a.output.parent.mkdir(parents=True, exist_ok=True)
     with a.output.open("x") as f:
         json.dump(plan, f, separators=(",", ":")); f.write("\n")
