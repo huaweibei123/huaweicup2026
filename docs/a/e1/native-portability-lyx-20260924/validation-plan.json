@@ -1,0 +1,80 @@
+{
+  "task": "a-e1-native-portability-lyx",
+  "execution_authorized": false,
+  "implementation_base": "03f02e79de4b4bd6f55241385664b154f4332454",
+  "implementation_head": "Pin the final PR commit before any execution approval",
+  "current_phase": {
+    "allowed": ["text", "AST", "JSON", "diff", "hash"],
+    "target_imports": 0,
+    "target_runs": 0,
+    "builds": 0,
+    "E0": 0,
+    "E1": 0,
+    "E2": 0,
+    "workers": 0,
+    "tests_run": 0
+  },
+  "next_phase_proposal": {
+    "name": "one-shot routing and tiny E1 regression, no native artifact",
+    "approved": false,
+    "entry": "python -B -m unittest discover -f -s tests/eval_exact -p test_native_portability.py",
+    "required_interpreter": "project Python >=3.12,<3.13; exact executable/dependencies must be pinned and reviewed",
+    "input": "tracked three-operation synthetic graph/plan in the named test file; no official case pool",
+    "logical_program_starts_max": 1,
+    "spawned_workers_max": 0,
+    "compiler_invocations_max": 0,
+    "real_replay_backend_loads_max": 0,
+    "runtime_extension_loading": "Python/NumPy may load their runtime extensions during imports; zero applies only to the replay backend artifact",
+    "complete_E0_entries_reserved": 1,
+    "complete_E1_entries_reserved": 4,
+    "native_function_calls": "only Python mock functions over synthetic buffers; no native machine code",
+    "other_costs": "imports, official source verification, several local preparations and rejected-input checks; reserve CPU/wall/memory, not free work",
+    "wall_seconds_from_external_start": {
+      "test_and_import_cutoff": 120,
+      "cleanup_deadline": 130,
+      "evidence_publish_goal": 420,
+      "final_head_readback_goal": 540,
+      "hard_delivery_deadline": 600
+    },
+    "aggregate_process_memory_limit_mib_proposed": 512,
+    "actual_OS_process_count": null,
+    "observed_peak_RSS": null,
+    "preconditions": [
+      "Approve the exact script/input/commit and independent new budget; this proposal itself is not approval",
+      "Resolve the exact Python launcher and its actual process tree; one logical entry is not a proven OS-process count",
+      "Provide reviewed external timeout/memory/cleanup enforcement; this PR does not implement a supervisor",
+      "Retain missing dependencies as a preflight failure; do not install or rebuild implicitly",
+      "Fail fast, no rerun or refunds after unknown outcomes; preserve all raw failure evidence"
+    ],
+    "success_scope": "routing, manifest checks, synthetic bridge marshaling and tiny complete E1 regression only; no Windows native ABI, native arithmetic, complete E1 release or performance acceptance"
+  },
+  "subsequent_real_native_matrix_not_authorized": {
+    "requires": [
+      "A separately reviewed artifact/build record pinned to the exact kernel source, adapter, compiler flags, OS/architecture, Python/NumPy, dependency identities and binary SHA-256",
+      "Windows replay export and calling convention review, real ABI probe and external crash/timeout policy",
+      "A new explicit execution card and budget; no reuse of the old 9-plan/64-candidate or sealed pools"
+    ],
+    "minimal_cases_per_platform": [
+      "one three-operation valid plan: native score versus one E0 reference",
+      "one legal fractional-wait plan: explicit unsupported fallback versus one E0 reference",
+      "one full result through inherited E1: typed full-object equality with the valid E0 reference",
+      "one invalid plan: official rejection before native load, no success reclassification"
+    ],
+    "provisional_budget_per_platform": {
+      "E0_entries_max": 2,
+      "E1_entries_reserved_max": 4,
+      "native_score_requests_max": 2,
+      "logical_python_starts_max": 1,
+      "builds_in_validation_window": 0,
+      "workers": 0,
+      "evaluation_wall_seconds_max": 120,
+      "aggregate_memory_mib_proposed": 512
+    },
+    "platform_status": {
+      "Windows": "not run; no reviewed DLL or measured ABI",
+      "macOS": "not run by this session; prototype author's historical results are separate",
+      "Linux": "not run"
+    },
+    "notes": "Separate platform windows; no automatic retry, full E1 fallback must remain reserved, startup/cleanup/publication and actual process enforcement require a fixed driver before approval. These budgets do not authorize compilation or experiments."
+  }
+}
