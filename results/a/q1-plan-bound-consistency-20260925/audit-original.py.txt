@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+"""Verify fixed-plan lower bound on existing selected full500 artifacts."""
+import gzip, hashlib, importlib, json, signal, sys, time, zipfile, subprocess
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE_COMMIT = "f77744fb07b9c854c5cd3f8a80432aacc056849a"
+DATA_COMMIT = "a765899917cbb068c84aeedcf6aca174443f435f"
+FEED = ROOT / "results/a/q1-unified-full500-20260925-s59/20260924T1810Z-s59ee/board-feed-500.json"
+ARCHIVE = ROOT / "data/raw/a/official-cases.zip"
+WORKTREE = ROOT / ".worktrees/q1-overload-list-20260925"
+
+def sha(b): return hashlib.sha256(b).hexdigest()
+def git_bytes(commit, path): return subprocess.check_output(["git","show",f"{commit}:{path}"],cwd=WORKTREE)
+def timeout(_sig, _frame): raise TimeoutError("60-second audit time limit")
+
+def main():
+    feed_bytes=FEED.read_bytes(); feed=json.loads(feed_bytes); cfg=git_bytes(DATA_COMMIT,"data/raw/a/official/data/config.txt")
+    archive=git_bytes(DATA_COMMIT,"data/raw/a/official-cases.zip")
+    source=git_bytes(SOURCE_COMMIT,"src/q1/plan_lower_bound.py")
+    if sha(archive)!=sha(ARCHIVE.read_bytes()): raise ValueError("working input archive differs from fixed data commit")
+    if source!=(WORKTREE/"src/q1/plan_lower_bound.py").read_bytes(): raise ValueError("source checkout differs from fixed commit")
+    config_text=cfg.decode(); vals={}
+    section=""
+    for line in config_text.splitlines():
+        line=line.strip()
+        if line.startswith("["): section=line.strip("[]")
+        elif line and not line.startswith("#"):
+            k,_,v=line.partition(" "); vals[(section,k)]=int(v)
+    bandwidth=vals[("bandwidth","bandwidth")]; same=vals[("multicore_scene_a","task_same_core_wait_cycles")]; cross=vals[("multicore_scene_a","task_cross_core_wait_cycles")]
+    sys.path[:0]=[str(WORKTREE/"src/q1"),str(WORKTREE/"data/raw/a/official/code")]
+    fn=importlib.import_module("plan_lower_bound").plan_lower_bound
+    records=feed["records"]; cases={}; out=[]; started=time.monotonic(); signal.signal(signal.SIGALRM,timeout); signal.alarm(60)
+    z=zipfile.ZipFile(ARCHIVE); timed_out=False
+    try:
+      try:
+       for r in records:
+         key=(r["case_id"],r["cores"]); case=r["case_id"]
+         member=f"data/case_{case}.json"
+         if case not in cases:
+             gb=z.read(member); gh=sha(gb)
+             if gh!=r["identity"]["graph_sha256"]: raise ValueError(f"graph hash mismatch {case}")
+             cases[case]=json.loads(gb)
+         p=ROOT/r["artifacts"]["plan"]["path"]; rp=ROOT/r["artifacts"]["result"]["path"]
+         pb=p.read_bytes(); rb=rp.read_bytes()
+         if sha(pb)!=r["artifacts"]["plan"]["sha256"] or sha(pb)!=r["identity"]["plan_sha256"]: raise ValueError(f"plan hash mismatch {key}")
+         if sha(rb)!=r["artifacts"]["result"]["sha256"]: raise ValueError(f"result hash mismatch {key}")
+         result=json.loads(gzip.decompress(rb)); bound=fn(cases[case],json.loads(pb),bandwidth,same,cross); M=result["makespan"]
+         out.append({"case_id":case,"cores":r["cores"],"bound":bound["bound"],"M":M,"ratio":bound["bound"]/M if M else None,"L_gt_M":bound["bound"]>M,"graph_sha256":gh,"plan_sha256":sha(pb),"result_gzip_sha256":sha(rb)})
+      except TimeoutError:
+       timed_out=True
+    finally: signal.alarm(0); z.close()
+    elapsed=time.monotonic()-started; groups={}
+    for x in out: groups.setdefault(str(x["cores"]),[]).append(x["ratio"])
+    payload={"source_commit":SOURCE_COMMIT,"source_sha256":sha(source),"data_commit":DATA_COMMIT,"config_sha256":sha(cfg),"input_archive_sha256":sha(archive),"feed_sha256":sha(feed_bytes),"timed_out":timed_out,"calls":{"static_bound":len(out),"solver":0,"evaluator_E0":0,"E1":0,"E2":0},"completed":len(out),"counterexamples_L_gt_M":[{k:x[k] for k in ("case_id","cores","bound","M")} for x in out if x["L_gt_M"]],"ratios_by_cores":{k:{"n":len(v),"mean":sum(v)/len(v),"min":min(v),"max":max(v)} for k,v in groups.items()},"static_wall_seconds":elapsed,"static_wall_seconds_per_call":elapsed/len(out) if out else None,"limitations":"Fixed-plan consistency check only; does not prove theorem or demonstrate pruning benefit.","records":out}
+    target=ROOT/"output/p1-unified-control/plan-bound-v1-audit.json"; target.write_text(json.dumps(payload,indent=2)+"\n")
+    print(json.dumps(payload,separators=(",",":")))
+if __name__=="__main__": main()
