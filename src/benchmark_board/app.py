@@ -183,7 +183,10 @@ def main():
                     # Keep retries visible and preserve batch idempotency if a
                     # filesystem/database interruption occurs after admission.
                     traceback.print_exc()
-                time.sleep(2 if args.sync_inbox else max(5,args.sync_interval))
+                # A completed request.json is already authenticated and local.
+                # Keep the final receive hop below a second; remote polling and
+                # artifact verification remain the sync transport's responsibility.
+                time.sleep(.25 if args.sync_inbox else max(5,args.sync_interval))
         threading.Thread(target=worker,daemon=True).start()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(ledger,args.sync_status));server.daemon_threads=True
     args.state.mkdir(parents=True,exist_ok=True)
