@@ -1,0 +1,106 @@
+{
+  "schema": "e2-cli-fixed-driver-v1",
+  "status": "static_revision_pending_coordinator_review_not_execution_approved",
+  "plan_commit": "53c151ecaef2636bcf0eb1946c112f19f8cec739",
+  "production_commit": "a21f7ef7111933d309f3d616b9a3f2e7e861129d",
+  "gate_source_commit": "569c65f2673d6fc2a99507f151ca04b814e1dc68",
+  "gate_sha256": "e5af8da2e6cc4288d7066769bb246c68f51da8bc3c2d6da2f4acc45698c88621",
+  "approved": false,
+  "execution_enabled": false,
+  "limits": {
+    "cases": 15,
+    "potential_e0": 8,
+    "pool_workers": 0,
+    "formal_cases": 0,
+    "debug_evaluations": 0,
+    "parent_launches": 1,
+    "logical_create_requests_including_failed_attempt": 43,
+    "active_process_cap_per_job": 14,
+    "job_commit_memory_bytes": 2147483648,
+    "process_commit_memory_bytes": 536870912,
+    "controller_memory_budget_bytes": 268435456,
+    "minimum_available_physical_memory_bytes": 3221225472,
+    "preparation_cutoff_seconds": 90,
+    "case_work_seconds": 35,
+    "case_normal_close_seconds": 3,
+    "evaluation_cutoff_seconds": 660,
+    "cleanup_cutoff_seconds": 670,
+    "cleanup_reserve_seconds": 10,
+    "evidence_publication_target_seconds": 1200,
+    "final_receipt_target_seconds": 1500,
+    "whole_window_hard_seconds": 1800,
+    "controller_OS_cumulative_policy": 3,
+    "case_OS_cumulative_policy_sum": 123,
+    "whole_window_OS_cumulative_policy": 126,
+    "preparation_external_process_requests": 0
+  },
+  "execution_blockers": [],
+  "outer_policy": {
+    "owner": "PowerShell host",
+    "controller_assigned_before_resume": true,
+    "active_process_limit": 17,
+    "JobMemoryLimit": 2415919104,
+    "controller_private_monitor_bytes": 268435456,
+    "additional_OS_processes": 0,
+    "interop": "Reflection.Emit declarations; no compiler child process; not invoked during preparation"
+  },
+  "controlled_environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONIOENCODING": "utf-8:strict",
+    "PYTHONUTF8": "1",
+    "E2_SENTINEL": "environment sentinel in fixed case request; private"
+  },
+  "counters_are_reservations_not_measured_entries": true,
+  "bounded_launch_policy": {
+    "suspended_launcher_creation_seconds": 5,
+    "failed_launch_and_controller_cleanup_share_seconds": 10,
+    "inner_gate_primitive_unchanged": true
+  },
+  "runtime_review_closed": false,
+  "revision_authority": "https://github.com/huaweibei123/huaweicup2026/issues/15#issuecomment-5806846650",
+  "aggregate_policy": {
+    "supersedes": "Only this driver: replaces the old per-logical-chain <=3 assumption in the immutable 53c151e plan. Numeric case ceilings retained as direct policies, not topology or measured usage.",
+    "case_cumulative_limits": {
+      "F0": 9,
+      "F1": 9,
+      "F2": 9,
+      "F7": 9,
+      "F255": 9,
+      "F-startfail": 6,
+      "F-cancel": 12,
+      "P2-valid-direct": 6,
+      "P2-valid-adapter": 9,
+      "P2-invalid-direct": 6,
+      "P2-invalid-adapter": 9,
+      "P3-valid-direct": 6,
+      "P3-valid-adapter": 9,
+      "P3-invalid-direct": 6,
+      "P3-invalid-adapter": 9
+    },
+    "case_sum": 123,
+    "controller_independent_limit": 3,
+    "whole_window_limit": 126,
+    "whole_window_reconciliation": "root TotalProcesses == controller admitted count + sum(case TotalProcesses); require complete accounting, ActiveProcesses=0 and held identities signaled",
+    "internal_edges": "Unknown or unbound parent observations remain unknown; no per-chain attribution claim",
+    "observation_failure": "Stop subsequent cases; bounded cleanup; no retries or cap increase",
+    "exact_peak_active": null
+  },
+  "static_dispositions": {
+    "R1": "implemented; pending independent static review; never runtime verified",
+    "R2": "implemented; pending independent static review; never runtime verified",
+    "B1": "implemented; pending independent static review; never runtime verified",
+    "R3": "implemented; pending independent static review; never runtime verified"
+  },
+  "approval_boundary": "Empty known-static-blocker list is not runtime approval. External approval must bind final commit, manifest, index and static-check hashes, and explicitly close review; all template switches remain false.",
+  "encoding_policy": {
+    "isolated_controller_bootstrap_seam": [
+      "-I",
+      "-B",
+      "-X",
+      "utf8"
+    ],
+    "isolated_environment_note": "-I ignores PYTHON* settings; explicit flags supply UTF-8/no-bytecode behavior",
+    "nonisolated_real_cli_and_fake_target": "inherit controlled PYTHONUTF8/PYTHONIOENCODING/PYTHONDONTWRITEBYTECODE; production CLI untouched"
+  },
+  "workspace_identity_policy": "After common T0: direct HEAD/ref read, separately approved index SHA256, complete tracked workspace bytes except separately pinned sources/STATIC_CHECKS, and scoped immediate namespace inventories. No runtime Git child; no generic git-status equivalence claim outside recorded scope."
+}
