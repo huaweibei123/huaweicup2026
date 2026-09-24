@@ -1,0 +1,184 @@
+{
+  "bandwidth_bytes_per_cycle": 60,
+  "capacity_bytes": {
+    "L1": 524288,
+    "UB": 131072
+  },
+  "cross_core_copy_delay_cycles": 500,
+  "cross_core_transfers": [
+    {
+      "copy_in_end": 503,
+      "copy_in_release": 502,
+      "copy_in_start": 502,
+      "copy_out_end": 2,
+      "size": 17,
+      "source_copy_out_id": 6,
+      "source_core": 0,
+      "target_copy_in_id": 7,
+      "target_core": 1,
+      "tensor_id": 4,
+      "transfer_id": 0
+    }
+  ],
+  "cross_task_traffic": 17,
+  "data_movement_bytes": {
+    "added_copy_bytes": 34,
+    "original_graph_copy_bytes": 0,
+    "partition_added_copy_bytes": 34,
+    "scheduled_copy_bytes": 34,
+    "spill_added_copy_bytes": 0
+  },
+  "makespan": 506,
+  "memory_peak_by_core": {
+    "0": {
+      "L1": 0,
+      "UB": 17
+    },
+    "1": {
+      "L1": 0,
+      "UB": 17
+    }
+  },
+  "num_cores": 2,
+  "per_core_timeline": [
+    {
+      "core_id": 0,
+      "ops": [
+        {
+          "duration": 1,
+          "end": 1,
+          "op": "CONV",
+          "op_id": 1,
+          "pipe": "PIPE_M",
+          "start": 0,
+          "subgraph_id": 0,
+          "task_id": 0
+        },
+        {
+          "duration": 1,
+          "end": 2,
+          "op": "COPY_OUT",
+          "op_id": 6,
+          "pipe": "PIPE_MTE3",
+          "start": 1,
+          "subgraph_id": 0,
+          "task_id": 0
+        }
+      ],
+      "subgraphs": [
+        {
+          "duration": 2,
+          "end": 2,
+          "start": 0,
+          "subgraph_id": 0
+        }
+      ],
+      "tasks": [
+        {
+          "duration": 2,
+          "end": 2,
+          "start": 0,
+          "subgraph_ids": [
+            0
+          ],
+          "task_id": 0
+        }
+      ]
+    },
+    {
+      "core_id": 1,
+      "ops": [
+        {
+          "duration": 2,
+          "end": 2,
+          "op": "CONV",
+          "op_id": 2,
+          "pipe": "PIPE_M",
+          "start": 0,
+          "subgraph_id": 1,
+          "task_id": 1
+        },
+        {
+          "duration": 1,
+          "end": 503,
+          "op": "COPY_IN",
+          "op_id": 7,
+          "pipe": "PIPE_MTE2",
+          "start": 502,
+          "subgraph_id": 2,
+          "task_id": 1
+        },
+        {
+          "duration": 3,
+          "end": 506,
+          "op": "CONV",
+          "op_id": 3,
+          "pipe": "PIPE_M",
+          "start": 503,
+          "subgraph_id": 2,
+          "task_id": 1
+        }
+      ],
+      "subgraphs": [
+        {
+          "duration": 2,
+          "end": 2,
+          "start": 0,
+          "subgraph_id": 1
+        },
+        {
+          "duration": 4,
+          "end": 506,
+          "start": 502,
+          "subgraph_id": 2
+        }
+      ],
+      "tasks": [
+        {
+          "duration": 506,
+          "end": 506,
+          "start": 0,
+          "subgraph_ids": [
+            1,
+            2
+          ],
+          "task_id": 1
+        }
+      ]
+    }
+  ],
+  "scene": "B",
+  "step3_by_core": {
+    "0": {
+      "local_makespan": 2,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_M": 1,
+        "PIPE_MTE2": 0,
+        "PIPE_MTE3": 1,
+        "PIPE_V": 0
+      }
+    },
+    "1": {
+      "local_makespan": 5,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_M": 2,
+        "PIPE_MTE2": 1,
+        "PIPE_MTE3": 0,
+        "PIPE_V": 0
+      }
+    }
+  },
+  "task_count": 2,
+  "task_dependencies": [
+    {
+      "size": 17,
+      "source_copy_out_id": 6,
+      "source_core": 0,
+      "target_copy_in_id": 7,
+      "target_core": 1,
+      "tensor_id": 4
+    }
+  ]
+}

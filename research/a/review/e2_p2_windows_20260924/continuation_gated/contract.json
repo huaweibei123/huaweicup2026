@@ -1,0 +1,143 @@
+{
+  "schema": "p2-windows-gated-continuation-v2",
+  "status": "implementation_static_review_only_no_execution_approval",
+  "previous_delivery": "213182ca5609987150483441abd691346a249291",
+  "production": "997813c7c83d4d18a0a8e2a19b5be37b90223e01",
+  "prior_files_sha256": {
+    "results/a/review/e2-p2-windows-20260924/evidence/IDENTITY.json": "c5f0cdf17c1441cfead48813184b2b440250566ce64865f4e6ad88e62484c478",
+    "results/a/review/e2-p2-windows-20260924/evidence/inputs.json": "470f9f5147eecfc80f5cc2cf5a5840986d0cc91dbe8a92b5d4e2ddb9d4dd6ffd",
+    "results/a/review/e2-p2-windows-20260924/evidence/A-R.truth.json": "c1bf1997b1deafd34e05ceb65f9b1ed27e490703b61f974077c1211b33289ea1",
+    "results/a/review/e2-p2-windows-20260924/evidence/B.child.json": "ff1cc742f5d77b92d575e5759c98152c3b41b3a442530e3453a48c8932c78925",
+    "results/a/review/e2-p2-windows-20260924/evidence/abi.json": "d5a3c207b3558ec9eb8913a694627effe6c8529e98cb26199164ed6baaf113a3",
+    "results/a/review/e2-p2-windows-20260924/evidence/SOURCE_SNAPSHOT.json": "7e3761714238546689727e2cb1f32ed262abb7d65de688c7404c56ab71b08ef1"
+  },
+  "caps": {
+    "record": 12,
+    "fixed_e0": 5,
+    "possible_e0": 17,
+    "debug": 0,
+    "formal_e0": 0,
+    "wall_seconds": 900,
+    "evaluation_cutoff": 300,
+    "preparation_cutoff": 90,
+    "stage_seconds": 120,
+    "C_full_stage_seconds": 30,
+    "preflight_stage_seconds": 30,
+    "cleanup_seconds": 10,
+    "stage_launch_requests": 8,
+    "cli_launch_requests": 5,
+    "adapter_execv_requests": 2,
+    "pool_worker_launch_requests_upper": 12,
+    "python_launch_requests_upper_including_parent": 28,
+    "max_active_processes_per_job": 12,
+    "evidence_publication_target_seconds": 600,
+    "final_receipt_readback_target_seconds": 750
+  },
+  "stages": {
+    "preflight": [
+      0,
+      0
+    ],
+    "C_full": [
+      1,
+      1
+    ],
+    "D_order": [
+      4,
+      0
+    ],
+    "D_timeout": [
+      2,
+      0
+    ],
+    "D_rss": [
+      2,
+      0
+    ],
+    "E_search": [
+      3,
+      0
+    ],
+    "E_full_valid": [
+      0,
+      2
+    ],
+    "E_full_invalid": [
+      0,
+      2
+    ]
+  },
+  "no_new_tests_or_compilation_performed": true,
+  "venv_launcher_sha256": "81bac8328c3df7c80a0915ea0baf01996355ebcc00ab6f8dbfefb4e60935e2bc",
+  "helper": {
+    "as_run_control_head": "569c65f2673d6fc2a99507f151ca04b814e1dc68",
+    "path": "../gate_repair/gate_helper.py",
+    "sha256": "e5af8da2e6cc4288d7066769bb246c68f51da8bc3c2d6da2f4acc45698c88621",
+    "control_result_head": "556b2104176a4f37a76d5dab85fe8a4406c0ee3f",
+    "control_timing_audit_head": "213182ca5609987150483441abd691346a249291",
+    "integration_difference": "Job active-process cap explicitly raised from 4 to 12 before payload launch; control_runner is not imported."
+  },
+  "payload_origin": {
+    "head": "bf9be734426262839eba744e4172f2b0972e5047",
+    "driver_sha256": "de2eab3d229826a67d5553f735f3b88ef63f09f1519af45309b39acaae0f61eb",
+    "changes": "old PID gate removed; function child renamed run_stage, reached only after new handshake; CLI receives -B; comparison/matrix bodies retained"
+  },
+  "launch_bounds": {
+    "parent_python": 1,
+    "stage_CreateProcessW": 8,
+    "nested_CLI": 5,
+    "pool_workers_expected_if_all_routes_match": 10,
+    "pool_worker_creation_upper_one_per_record": 12,
+    "total_python_launch_requests_upper": 28,
+    "maximum_concurrent_job_processes": 12,
+    "actual_OS_process_count": "record Job accounting; Python/venv launch requests are not identical to actual OS processes",
+    "preparation_git_commands": "at most 4 Git CLI metadata processes, separately from Python launch requests",
+    "adapter_execv_requests": 2,
+    "total_python_launch_requests_typical_if_routes_match": 26,
+    "parallel_python_layers": {
+      "D_order": [
+        "stage",
+        "worker0",
+        "worker1"
+      ],
+      "E_search": [
+        "stage",
+        "search_CLI",
+        "worker"
+      ],
+      "E_full_adapter": [
+        "stage",
+        "adapter_CLI",
+        "official_exec_target"
+      ]
+    },
+    "active_process_limit_reason": "If each simultaneous program request occupies up to observed control count3, predicted peak9; cap12 leaves3 headroom. This is capacity estimate only, not a proven OS bound. Actual worker/exec/console process count unknown; failure stops without raising cap."
+  },
+  "publication": {
+    "evidence_target_seconds": 600,
+    "final_receipt_target_seconds": 750,
+    "hard_outer_seconds": 900,
+    "tail_after_evaluation_cutoff_seconds": 600,
+    "last_150_seconds": "readback and final receipt only, no code/runtime/evaluation work; avoid self-referential receipt commit loop",
+    "overrun_rule": "preserve actual clocks and mark full-delivery failure separately; no retry/window reset"
+  },
+  "stdlib_sha256": {
+    "Lib/multiprocessing/popen_spawn_win32.py": "6ef8efd9cd4e99c64a6778f7ad0957e924de9eb4aa167337ed121a2621b1ffaa"
+  },
+  "route_cost_audit": {
+    "commit": "09eef20b2285fadb88b2a6e2cad9b4bd9c389d88",
+    "input_commit": "603b0741e21c449d3db652ebd67c94f2dc014cc9",
+    "files": [
+      "docs/a/e2/audit-lyx-20260924/ROUTE_COST_MATRIX.md",
+      "docs/a/e2/audit-lyx-20260924/route-costs.json"
+    ],
+    "author_login": "lyx0217",
+    "author_id": 323482921,
+    "read_scope": "Both files and actual delivery comment; local pool and _full_cli source read",
+    "driver_total_not_proved_by_audit": true,
+    "full_E0_max_per_P2_record": 1,
+    "unknown_after_dispatch_retains_reservation": true,
+    "chunk_results_may_execute_before_first_yield": true,
+    "route_counter_not_body_entry_proof": true
+  }
+}

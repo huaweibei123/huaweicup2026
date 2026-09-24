@@ -1,0 +1,213 @@
+{
+  "kind": "static_only_no_new_runtime",
+  "new_modules_imported": false,
+  "powershell_executed": false,
+  "new_T0": false,
+  "new_control_launches": 0,
+  "E0": 0,
+  "E1": 0,
+  "E2": 0,
+  "BC_DLL_loads": 0,
+  "debug": 0,
+  "native_or_bytecode_compilation": false,
+  "source_bundle": {
+    "files": {
+      "gate_runtime.py": "f9d6b11bab45ebfc8e1e5144295c19802854463057ea26a5064bf975acb6d3dc",
+      "run_gated_continuation.py": "959ec0a5af23831f228647f9452200c07678a540de1e0ee141f1d904c5841ab9",
+      "payload.py": "2fcf584783cf36bb7b086f93db0c1b3565d3bbda2bfffc0896a122a182456259",
+      "launch_once.ps1": "8066dcd523724c443e8e6a87244da2340fb739569f2be5f65618a822da158190",
+      "contract.json": "5c40cd9197496f4bcd03386af867d445fb6df6ea7499e6c7fde3860751a1e315",
+      "../gate_repair/gate_helper.py": "e5af8da2e6cc4288d7066769bb246c68f51da8bc3c2d6da2f4acc45698c88621"
+    },
+    "sha256": "d1c404073b8742d6441ac09e9856193a05aa71885f4d3d0ea5b54ff83d0e2e73"
+  },
+  "caps": {
+    "record": 12,
+    "fixed_e0": 5,
+    "possible_e0": 17,
+    "debug": 0,
+    "formal_e0": 0,
+    "wall_seconds": 900,
+    "evaluation_cutoff": 300,
+    "preparation_cutoff": 90,
+    "stage_seconds": 120,
+    "C_full_stage_seconds": 30,
+    "preflight_stage_seconds": 30,
+    "cleanup_seconds": 10,
+    "stage_launch_requests": 8,
+    "cli_launch_requests": 5,
+    "adapter_execv_requests": 2,
+    "pool_worker_launch_requests_upper": 12,
+    "python_launch_requests_upper_including_parent": 28,
+    "max_active_processes_per_job": 12,
+    "evidence_publication_target_seconds": 600,
+    "final_receipt_readback_target_seconds": 750
+  },
+  "stages": {
+    "preflight": [
+      0,
+      0
+    ],
+    "C_full": [
+      1,
+      1
+    ],
+    "D_order": [
+      4,
+      0
+    ],
+    "D_timeout": [
+      2,
+      0
+    ],
+    "D_rss": [
+      2,
+      0
+    ],
+    "E_search": [
+      3,
+      0
+    ],
+    "E_full_valid": [
+      0,
+      2
+    ],
+    "E_full_invalid": [
+      0,
+      2
+    ]
+  },
+  "copied_functions_ast_equal": [
+    "typed",
+    "canonical",
+    "preserve_object",
+    "frozen_inputs"
+  ],
+  "payload_body_ast_equal_except": [
+    "old PID/approval gate prefix removed and function renamed run_stage",
+    "nested CLI argv adds -B"
+  ],
+  "python": {
+    "gate_runtime.py": {
+      "ast_parse_ok": true,
+      "lines": 104,
+      "imports": [
+        "import ctypes as ct",
+        "from datetime import datetime, timezone",
+        "import hashlib",
+        "import json",
+        "from pathlib import Path",
+        "import sys",
+        "import time",
+        "from gate_helper import WinAPI, ExtendedLimit, close_all, save"
+      ],
+      "entry_call_sites": [
+        {
+          "line": 102,
+          "call": "api().k.SetInformationJobObject"
+        }
+      ]
+    },
+    "payload.py": {
+      "ast_parse_ok": true,
+      "lines": 331,
+      "imports": [
+        "from contextlib import contextmanager",
+        "import importlib.metadata",
+        "import json",
+        "import math",
+        "import os",
+        "from pathlib import Path",
+        "import pickle",
+        "import subprocess",
+        "import sys",
+        "import time",
+        "from gate_runtime import ROOT, CAPS, STAGES, elapsed, remaining, require, save, read, sha",
+        "from research.a.e2_search import E2BatchEvaluator, read_config, _native_b",
+        "from research.a.e2_search._official_b import load_bundle"
+      ],
+      "entry_call_sites": [
+        {
+          "line": 87,
+          "call": "_native_b.get_lib"
+        },
+        {
+          "line": 139,
+          "call": "instance.evaluate_batch"
+        },
+        {
+          "line": 179,
+          "call": "subprocess.run"
+        },
+        {
+          "line": 189,
+          "call": "oracle.evaluate_scene_b"
+        }
+      ]
+    },
+    "run_gated_continuation.py": {
+      "ast_parse_ok": true,
+      "lines": 256,
+      "imports": [
+        "import argparse",
+        "from datetime import datetime, timezone",
+        "import hmac",
+        "import os",
+        "from pathlib import Path",
+        "import secrets",
+        "import subprocess",
+        "import sys",
+        "import time",
+        "import traceback",
+        "from gate_runtime import ROOT, CAPS, STAGES, SCHEMA, api, bundle, close_all, configure_payload_job, elapsed, read, remaining, require, save, sha, stage_seconds, wait_for",
+        "from payload import run_stage",
+        "from payload import frozen_inputs"
+      ],
+      "entry_call_sites": [
+        {
+          "line": 21,
+          "call": "subprocess.check_output"
+        },
+        {
+          "line": 44,
+          "call": "api().exact_membership"
+        },
+        {
+          "line": 99,
+          "call": "api().launch_assigned"
+        }
+      ]
+    }
+  },
+  "powershell_parse_errors": 0,
+  "powershell_start_process_call_sites": 1,
+  "helper_import_source": "fixed sibling gate_helper.py only; does not import control_runner",
+  "new_integration_api": "SetInformationJobObject for active limit12 plus preserved kill-on-close",
+  "old_control_actual_gate_result": "4 functional passes; full delivery308.1841277s exceeds300s",
+  "new_runtime_verified": false,
+  "route_cost_audit": {
+    "commit": "09eef20b2285fadb88b2a6e2cad9b4bd9c389d88",
+    "input_commit": "603b0741e21c449d3db652ebd67c94f2dc014cc9",
+    "files": [
+      "docs/a/e2/audit-lyx-20260924/ROUTE_COST_MATRIX.md",
+      "docs/a/e2/audit-lyx-20260924/route-costs.json"
+    ],
+    "author_login": "lyx0217",
+    "author_id": 323482921,
+    "read_scope": "Both files and actual delivery comment; local pool and _full_cli source read",
+    "driver_total_not_proved_by_audit": true,
+    "full_E0_max_per_P2_record": 1,
+    "unknown_after_dispatch_retains_reservation": true,
+    "chunk_results_may_execute_before_first_yield": true,
+    "route_counter_not_body_entry_proof": true
+  },
+  "stdlib_sha256": {
+    "Lib/multiprocessing/popen_spawn_win32.py": "6ef8efd9cd4e99c64a6778f7ad0957e924de9eb4aa167337ed121a2621b1ffaa"
+  },
+  "file_hygiene": {
+    "dot_clean": "not available on this Windows host",
+    "new_directory_only_scan": true,
+    "metadata_residuals": [],
+    "personal_absolute_paths_or_credentials": false
+  }
+}
