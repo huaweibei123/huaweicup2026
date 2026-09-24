@@ -1,0 +1,176 @@
+{
+  "case_id": "017",
+  "cores": 5,
+  "started_at": "2026-09-24T15:01:57.682Z",
+  "finished_at": "2026-09-24T15:01:58.048Z",
+  "graph_sha256": "282c5840d8e8581fb7827a6d4c996f90384bdfe566ffa665574721568b9dc85c",
+  "status": "ok",
+  "failure": null,
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/case_017_multicore_res.json",
+      "sha256": "4ed64c456c0dfa52b75aecec470ac7381803bee4cda0a861324222a5b116b104"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/diagnostics.json",
+      "sha256": "bbb3fdc207efe8d8f4ef6dfb8f90525f1da36cb81b6875d715d55ecc28d85a18"
+    },
+    "result": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/result.json.gz",
+      "sha256": "8e426739e7775416374bc734a9c1c60f5c5eb65b1d05cbef578b1a2be8d30b06"
+    },
+    "trace": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/trace.json.gz",
+      "sha256": "083c48cc8d24eecdbc6ffe4a42812183a9784d0d4c39acd6bab36c7ff56e4b86"
+    },
+    "log": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/official.log",
+      "sha256": "73efd0d4e9856e96b349a944557171db08d4dabd139ef128954bc6598673ec0a"
+    }
+  },
+  "makespan_cycles": 35496,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "src/q1/bounded_tasks.py",
+      "<verified-inputs>/case_017.json",
+      "--output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/case_017_multicore_res.json",
+      "--cores",
+      "5",
+      "--packet-factor",
+      "4",
+      "--trigger-ops",
+      "4096",
+      "--chunk-ops",
+      "1024",
+      "--diagnostics",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T15:01:57.682Z",
+    "finished_at": "2026-09-24T15:01:57.756Z",
+    "wall_seconds": 0.07364424999104813,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/solver.stdout.txt",
+      "sha256": "85159cd83f42d3865e361636c3c62da76316ac19e410259d6f5813f7e33fb4d6"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "diagnostics": {
+    "algorithm_id": "q1-bounded-component-tasks",
+    "variant": "frontier-then-independent-chunks",
+    "base": {
+      "algorithm_id": "q1-tree-frontier-pack",
+      "variant": "threshold-antichain-tail",
+      "packet_factor": 4,
+      "base": {
+        "algorithm_id": "q1-component-pack",
+        "variant": "pipe-lpt-one-task-per-core",
+        "compute_ops": 1373,
+        "components": 60,
+        "largest_component_ops": 162,
+        "tasks": 5,
+        "core_compute_ops": [
+          310,
+          384,
+          138,
+          275,
+          266
+        ],
+        "compute_pipe_work_by_core": [
+          {
+            "PIPE_M": 22196,
+            "PIPE_V": 15390
+          },
+          {
+            "PIPE_M": 22068,
+            "PIPE_V": 15746
+          },
+          {
+            "PIPE_M": 22068,
+            "PIPE_V": 9007
+          },
+          {
+            "PIPE_M": 22188,
+            "PIPE_V": 12819
+          },
+          {
+            "PIPE_M": 22080,
+            "PIPE_V": 14240
+          }
+        ],
+        "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+      },
+      "selected": "component-pack",
+      "scope": "Structural proof only; E0 required",
+      "reason": "enough independent components or one core"
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [],
+      "oversize_indivisible_components": [],
+      "tasks_before": 5,
+      "tasks_after": 5
+    },
+    "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+  },
+  "plan_sha256": "4ed64c456c0dfa52b75aecec470ac7381803bee4cda0a861324222a5b116b104",
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_017.json",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/case_017_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/result.json",
+      "--trace-output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/trace.json",
+      "--log-output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T15:01:57.757Z",
+    "finished_at": "2026-09-24T15:01:58.040Z",
+    "wall_seconds": 0.2822001670137979,
+    "timeout_seconds": 60,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/E0.stdout.txt",
+      "sha256": "92ae88de11351553ab58cbd046806499a2d5ddcd1c9c8e9f18c19a9619d81eee"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/017/k5/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 643862,
+    "scheduled_copy_bytes": 984854,
+    "added_copy_bytes": 340992,
+    "partition_added_copy_bytes": 340992,
+    "spill_added_copy_bytes": 0
+  }
+}

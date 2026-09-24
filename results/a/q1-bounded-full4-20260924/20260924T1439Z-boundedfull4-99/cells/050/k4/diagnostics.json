@@ -1,0 +1,54 @@
+{
+  "algorithm_id": "q1-bounded-component-tasks",
+  "variant": "frontier-then-independent-chunks",
+  "base": {
+    "algorithm_id": "q1-tree-frontier-pack",
+    "variant": "threshold-antichain-tail",
+    "packet_factor": 4,
+    "base": {
+      "algorithm_id": "q1-component-pack",
+      "variant": "pipe-lpt-one-task-per-core",
+      "compute_ops": 4555,
+      "components": 23,
+      "largest_component_ops": 4011,
+      "tasks": 4,
+      "core_compute_ops": [
+        4011,
+        201,
+        174,
+        169
+      ],
+      "compute_pipe_work_by_core": [
+        {
+          "PIPE_M": 45392,
+          "PIPE_V": 95739
+        },
+        {
+          "PIPE_M": 2928,
+          "PIPE_V": 12527
+        },
+        {
+          "PIPE_M": 1752,
+          "PIPE_V": 12616
+        },
+        {
+          "PIPE_M": 1896,
+          "PIPE_V": 12529
+        }
+      ],
+      "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+    },
+    "selected": "component-pack",
+    "scope": "Structural proof only; E0 required",
+    "reason": "enough independent components or one core"
+  },
+  "chunks": {
+    "trigger_ops": 4096,
+    "chunk_ops": 1024,
+    "split_tasks": [],
+    "oversize_indivisible_components": [],
+    "tasks_before": 4,
+    "tasks_after": 4
+  },
+  "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+}

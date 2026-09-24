@@ -1,0 +1,152 @@
+{
+  "algorithm_id": "q1-bounded-component-tasks",
+  "variant": "frontier-then-independent-chunks",
+  "base": {
+    "algorithm_id": "q1-tree-frontier-pack",
+    "variant": "threshold-antichain-tail",
+    "packet_factor": 4,
+    "base": {
+      "algorithm_id": "q1-component-pack",
+      "variant": "pipe-lpt-one-task-per-core",
+      "compute_ops": 29666,
+      "components": 476,
+      "largest_component_ops": 6140,
+      "tasks": 5,
+      "core_compute_ops": [
+        10758,
+        4687,
+        4769,
+        4765,
+        4687
+      ],
+      "compute_pipe_work_by_core": [
+        {
+          "PIPE_M": 4580038,
+          "PIPE_V": 448581
+        },
+        {
+          "PIPE_M": 4595860,
+          "PIPE_V": 315362
+        },
+        {
+          "PIPE_M": 4578168,
+          "PIPE_V": 314473
+        },
+        {
+          "PIPE_M": 4578168,
+          "PIPE_V": 314421
+        },
+        {
+          "PIPE_M": 4595860,
+          "PIPE_V": 315362
+        }
+      ],
+      "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+    },
+    "selected": "component-pack",
+    "scope": "Structural proof only; E0 required",
+    "reason": "enough independent components or one core"
+  },
+  "chunks": {
+    "trigger_ops": 4096,
+    "chunk_ops": 1024,
+    "split_tasks": [
+      {
+        "original_task": 0,
+        "new_tasks": [
+          0,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "chunk_compute_ops": [
+          6140,
+          988,
+          986,
+          999,
+          987,
+          658
+        ]
+      },
+      {
+        "original_task": 1,
+        "new_tasks": [
+          1,
+          10,
+          11,
+          12,
+          13
+        ],
+        "chunk_compute_ops": [
+          1008,
+          987,
+          1000,
+          987,
+          705
+        ]
+      },
+      {
+        "original_task": 2,
+        "new_tasks": [
+          2,
+          14,
+          15,
+          16,
+          17
+        ],
+        "chunk_compute_ops": [
+          988,
+          989,
+          1006,
+          987,
+          799
+        ]
+      },
+      {
+        "original_task": 3,
+        "new_tasks": [
+          3,
+          18,
+          19,
+          20,
+          21
+        ],
+        "chunk_compute_ops": [
+          982,
+          991,
+          1006,
+          987,
+          799
+        ]
+      },
+      {
+        "original_task": 4,
+        "new_tasks": [
+          4,
+          22,
+          23,
+          24,
+          25
+        ],
+        "chunk_compute_ops": [
+          1008,
+          987,
+          1000,
+          987,
+          705
+        ]
+      }
+    ],
+    "oversize_indivisible_components": [
+      {
+        "task": 0,
+        "ops": 6140
+      }
+    ],
+    "tasks_before": 5,
+    "tasks_after": 26
+  },
+  "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+}

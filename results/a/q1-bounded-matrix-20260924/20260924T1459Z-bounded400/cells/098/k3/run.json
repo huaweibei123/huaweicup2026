@@ -1,0 +1,165 @@
+{
+  "case_id": "098",
+  "cores": 3,
+  "started_at": "2026-09-24T15:15:57.721Z",
+  "finished_at": "2026-09-24T15:15:58.072Z",
+  "graph_sha256": "8cc92ed83866234532487abacb106e0298a00cf309ef75fa12e413bfb17d58f8",
+  "status": "ok",
+  "failure": null,
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/case_098_multicore_res.json",
+      "sha256": "0a01103b4cb2f401b9460039834e7ae84554d48b16be0de9ce457eebb0c2cc5c"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/diagnostics.json",
+      "sha256": "89168da46013dc0dc447efa03b8c570c79d8847ab02b35798c571221b248d5fa"
+    },
+    "result": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/result.json.gz",
+      "sha256": "19836df87b7062f73d2a8fa39a372216105d8133ce4663271507200603b14c45"
+    },
+    "trace": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/trace.json.gz",
+      "sha256": "ff396ffcf2e2ca70a1987a8a42e71d6ddcb582035c403021db4bcca01370c89c"
+    },
+    "log": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/official.log",
+      "sha256": "2506fad85637256a95f2d778acac0d6a68900954ab36e86bbbda8ababc4563c6"
+    }
+  },
+  "makespan_cycles": 89825,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "src/q1/bounded_tasks.py",
+      "<verified-inputs>/case_098.json",
+      "--output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/case_098_multicore_res.json",
+      "--cores",
+      "3",
+      "--packet-factor",
+      "4",
+      "--trigger-ops",
+      "4096",
+      "--chunk-ops",
+      "1024",
+      "--diagnostics",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T15:15:57.721Z",
+    "finished_at": "2026-09-24T15:15:57.804Z",
+    "wall_seconds": 0.08234487500158139,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/solver.stdout.txt",
+      "sha256": "ec24ee58fb5a6582c598aab8bf50313366424d4d8f351a8ab9909e842af776bf"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "diagnostics": {
+    "algorithm_id": "q1-bounded-component-tasks",
+    "variant": "frontier-then-independent-chunks",
+    "base": {
+      "algorithm_id": "q1-tree-frontier-pack",
+      "variant": "threshold-antichain-tail",
+      "packet_factor": 4,
+      "base": {
+        "algorithm_id": "q1-component-pack",
+        "variant": "pipe-lpt-one-task-per-core",
+        "compute_ops": 1365,
+        "components": 27,
+        "largest_component_ops": 389,
+        "tasks": 3,
+        "core_compute_ops": [
+          389,
+          470,
+          506
+        ],
+        "compute_pipe_work_by_core": [
+          {
+            "PIPE_V": 89207
+          },
+          {
+            "PIPE_M": 8288,
+            "PIPE_V": 36855
+          },
+          {
+            "PIPE_M": 9008,
+            "PIPE_V": 36639
+          }
+        ],
+        "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+      },
+      "selected": "component-pack",
+      "scope": "Structural proof only; E0 required",
+      "reason": "enough independent components or one core"
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [],
+      "oversize_indivisible_components": [],
+      "tasks_before": 3,
+      "tasks_after": 3
+    },
+    "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+  },
+  "plan_sha256": "0a01103b4cb2f401b9460039834e7ae84554d48b16be0de9ce457eebb0c2cc5c",
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_098.json",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/case_098_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/result.json",
+      "--trace-output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/trace.json",
+      "--log-output",
+      "./results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T15:15:57.805Z",
+    "finished_at": "2026-09-24T15:15:58.064Z",
+    "wall_seconds": 0.25879845800227486,
+    "timeout_seconds": 60,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/E0.stdout.txt",
+      "sha256": "45cf4494938eb36afcd90de4b6d50b2f6579127b5d77a5145a5ac4f6f87d13bf"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/098/k3/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 697994,
+    "scheduled_copy_bytes": 697994,
+    "added_copy_bytes": 0,
+    "partition_added_copy_bytes": 0,
+    "spill_added_copy_bytes": 0
+  }
+}

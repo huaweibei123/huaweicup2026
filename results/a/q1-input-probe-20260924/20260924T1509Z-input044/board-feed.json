@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "nikolastarx-20260924T1509Z-input044-P1-044-k4-r0",
+      "revision": 1,
+      "run_id": "20260924T1509Z-input044",
+      "algorithm_id": "q1-external-input-windows",
+      "algorithm_name": "P1 external-input depth windows",
+      "variant": "component-core-depth-windows",
+      "solver_commit": "d438d380326d9cfa3d38097f5ab60d35aa6e5df4",
+      "parameters": {
+        "cores": 4,
+        "input_budget_bytes": 262144,
+        "activation_bytes": 524288,
+        "max_phases": 32,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "batch_timeout_seconds": 120,
+        "selected": "input-windows",
+        "constructor_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "candidate_limit": 1,
+        "workers": 1,
+        "stop_policy": "stop batch on unexpected failure; no retries",
+        "scoring_backend": "none; external E0 only"
+      },
+      "problem": "P1",
+      "case_id": "044",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 76519,
+        "solver_wall_seconds": 0.07729091600049287,
+        "evaluation_wall_seconds": 0.17890791600802913,
+        "ddr_bytes": 3887744,
+        "extra_ddr_bytes": 2912288,
+        "spill_bytes": 0
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "d438d380326d9cfa3d38097f5ab60d35aa6e5df4",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "8234598804c503e0a7479d9ecd30025fa0779b636eb60f9ad5a1fcfc1cff3302"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-input-probe-20260924/20260924T1509Z-input044/cells/044/k4/case_044_multicore_res.json",
+          "sha256": "8234598804c503e0a7479d9ecd30025fa0779b636eb60f9ad5a1fcfc1cff3302"
+        },
+        "result": {
+          "path": "results/a/q1-input-probe-20260924/20260924T1509Z-input044/cells/044/k4/result.json.gz",
+          "sha256": "80a0cd416a31aaa0889b32a887c69e4ce77cbb59e006fc5e0a9f86d510f878ee"
+        },
+        "trace": {
+          "path": "results/a/q1-input-probe-20260924/20260924T1509Z-input044/cells/044/k4/trace.json.gz",
+          "sha256": "811e4a40f175c794f3c54c54fe53751d51d5b067cb97a794bd48e65a77fdc5ab"
+        },
+        "log": {
+          "path": "results/a/q1-input-probe-20260924/20260924T1509Z-input044/cells/044/k4/official.log",
+          "sha256": "16ea8c42374b9a582aa0d75dca774634ffaf90c8dee96495b922bb5abc9a2138"
+        },
+        "run": {
+          "path": "results/a/q1-input-probe-20260924/20260924T1509Z-input044/cells/044/k4/run.json",
+          "sha256": "33b615acc831ed2f77def47e743204894050fd5e03f14b2edaae51f62a0f1ac2"
+        }
+      },
+      "runtime_id": "nikolastarx-m5pro-macos-py312-20260924",
+      "observed_at": "2026-09-24T15:07:00.215Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall; includes process wait completion detection",
+        "utc": "ISO UTC Z; duration from monotonic perf_counter"
+      },
+      "provenance": {
+        "producer_session": "nikolastarx/s-6607cb2735304751b36662035723372b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d438d380326d9cfa3d38097f5ab60d35aa6e5df4",
+            "path": "src/q1/input_windows.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Use bounded04 core assignment; greedily cut at complete DAG depths when the external-input union exceeds262144 bytes, activated above524288 bytes; max32 phases; no scoring or search",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d438d380326d9cfa3d38097f5ab60d35aa6e5df4/docs/a/Q1_INPUT_WINDOWS.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d438d380326d9cfa3d38097f5ab60d35aa6e5df4",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "8ec63555b60ebae8a71b1f2e9ec302e459548495",
+            "path": "src/q1_benchmarks/input_probe_e0.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/input_probe_e0.py",
+            "run",
+            "20260924T1509Z-input044"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "macOS-27.0-arm64-arm-64bit",
+          "cpu": "Apple M5 Pro",
+          "gpu": "none (no accelerator used)",
+          "ram_bytes": 51539607552,
+          "python": "3.12.13 (main, May 10 2026, 19:20:41) [Clang 22.1.3 ]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked before batch",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:06:59.948Z",
+          "finished_at": "2026-09-24T15:07:00.215Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh interpreter launch through graph read, construction, validation, plan and diagnostics publication, process exit; OS file cache not flushed",
+          "evaluation_scope": "Independent official P1 CLI launch through complete result/trace/log publication and exit; gzip/export outside solver and E0 walls",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked and exact ZIP-byte materialization before cells; no training, search, or case-specific algorithm precompute. Shared input preparation 0.001382290996843949 seconds; compression/export excluded and separately identifiable.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.threads": "Thread count was not sampled; OMP/BLAS/MKL thread environment set to 1",
+          "provenance.environment.peak_rss_bytes": "This small batch did not sample peak RSS",
+          "provenance.measurement.seed": "Deterministic construction has no RNG or seed"
+        }
+      },
+      "notes": [
+        "One predeclared input-window mechanism test on044k4; no online search or full-100 validation; bounded04 called once inside the solver process and included in wall time.",
+        "One worker, dispatch only after parent resource window; shared host with independent batches, no exclusive-host reservation or controlled timing claim.",
+        "Fresh process timing; OS file cache not flushed. Historical fixed64 used different concurrency and measurement polling, so wall times are descriptive, not controlled speedup.",
+        "Baseline exact compressed original reused from 6664a63adc3464d28d1f835d907cdeaea23e6b35; no baseline evaluation executed."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815486806",
+      "baseline": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-input-probe-20260924/20260924T1509Z-input044/references/singlecore-044.json.gz",
+          "sha256": "73f1d15fdea4f706b22099d2339a0e74a76c4114a68672077a98a8e15faa913c"
+        }
+      }
+    }
+  ]
+}

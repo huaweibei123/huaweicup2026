@@ -1,0 +1,91 @@
+{
+  "algorithm_id": "q1-bounded-component-tasks",
+  "variant": "frontier-then-independent-chunks",
+  "base": {
+    "algorithm_id": "q1-tree-frontier-pack",
+    "variant": "threshold-antichain-tail",
+    "packet_factor": 4,
+    "base": {
+      "algorithm_id": "q1-component-pack",
+      "variant": "pipe-lpt-one-task-per-core",
+      "compute_ops": 27556,
+      "components": 196,
+      "largest_component_ops": 12693,
+      "tasks": 5,
+      "core_compute_ops": [
+        8792,
+        13402,
+        1792,
+        1785,
+        1785
+      ],
+      "compute_pipe_work_by_core": [
+        {
+          "PIPE_M": 713460,
+          "PIPE_V": 364018
+        },
+        {
+          "PIPE_M": 711720,
+          "PIPE_V": 305345
+        },
+        {
+          "PIPE_M": 722700,
+          "PIPE_V": 71201
+        },
+        {
+          "PIPE_M": 722700,
+          "PIPE_V": 71110
+        },
+        {
+          "PIPE_M": 722700,
+          "PIPE_V": 71110
+        }
+      ],
+      "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+    },
+    "selected": "component-pack",
+    "scope": "Structural proof only; E0 required",
+    "reason": "enough independent components or one core"
+  },
+  "chunks": {
+    "trigger_ops": 4096,
+    "chunk_ops": 1024,
+    "split_tasks": [
+      {
+        "original_task": 0,
+        "new_tasks": [
+          0,
+          5
+        ],
+        "chunk_compute_ops": [
+          8389,
+          403
+        ]
+      },
+      {
+        "original_task": 1,
+        "new_tasks": [
+          1,
+          6
+        ],
+        "chunk_compute_ops": [
+          12693,
+          709
+        ]
+      }
+    ],
+    "oversize_indivisible_components": [
+      {
+        "task": 0,
+        "ops": 8389
+      },
+      {
+        "task": 1,
+        "ops": 12693
+      }
+    ],
+    "tasks_before": 5,
+    "tasks_after": 7
+  },
+  "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+}

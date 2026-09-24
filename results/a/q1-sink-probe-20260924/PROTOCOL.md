@@ -1,0 +1,12 @@
+# P1 sink-peel two-cell mechanism probe
+
+1. **Goal:** determine whether the fixed coarse sink-exclusive suffix construction improves actual unmodified E0 Makespan on cases048 and071, four cores. Fewer Tasks/waves is not an acceptance criterion by itself.
+2. **Input:** exact frozen official ZIP graph bytes and config/source-manifest; solver `src/q1/sink_peel.py` at `d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2`. Base bounded04 is `05f8fa0f7e52f5914f14815f6bdbcb851b631556`. Parameters max_rounds=64/max_sinks=64; inherited factor4/trigger4096/chunk1024 unchanged.
+3. **Output:** complete plan, result, trace, official log, solver/E0 stdout/stderr, run/batch receipts, board-submission-v1 feed/precheck and comparative report in a unique run directory. Gzip is byte-preserving. Reuse fixed64/official singlecore and bounded04 existing results; no baseline rerun.
+4. **Limits:** one worker, at most2 new complete solver calls plus2 external E0 calls; solver30s/E060s, total180s. No retry/E1/E2/Colab. Each sink-peel call includes its one bounded04 fallback construction in the same timed process; it is not hidden offline work. Stop after first failure, confirm process group cleanup, retain second cell as not_run. Parent explicitly withheld dispatch pending a safe resource window so this probe cannot trip the concurrent400-cell batch guard. Check free+inactive+speculative memory proxy >=4GiB immediately before dispatch. Shared host, no exclusive-host timing claim.
+5. **Checks:** frozen source/input/config identities, exact two-key plans, positive numeric official Makespan, board artifact hashes and protocol eligibility. Compare against bounded04 and fixed64, preserve regressions. Fang's362034/43499 are separately attributed reports; not locally rerun or used as official singlecore denominators.
+6. **Deadline:** this bounded child task ends after the authorized2-cell run and evidence export; no autonomous extra cases/parameters. Wait for parent's resource-window message before run. Deliver fixed local commits to parent; no external messages, push, PR or central ledger mutation.
+
+Setup checks: `uv sync --locked`; AST parsing; `sink_peel_cli.py --help` imports the solver but does not invoke construct. No benchmark construction or E0 occurs during setup.
+
+Runner provenance: adapted from `src/q1_benchmarks/bounded_probe_e0.py` at `4d374dc25b5698491ddbb92837789a23a4ad3102`. CLI wrapper adds argparse/file I/O only; solver source is unchanged. The CLI and runner are frozen together before dispatch.

@@ -1,0 +1,179 @@
+{
+  "case_id": "062",
+  "cores": 1,
+  "status": "ok",
+  "started_at": "2026-09-24T15:23:34.647Z",
+  "finished_at": "2026-09-24T15:24:17.634Z",
+  "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+  "makespan_cycles": 2854809,
+  "failure": null,
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/case_062_multicore_res.json",
+      "sha256": "a4a16fe2139b6f7860eb1402e9d157dcca82e8bb8161a59918d37dcebb7adb22"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/diagnostics.json",
+      "sha256": "fd407e65d37982056fa1698eae08b4240b90853dbb56799a3ab7770a63f84ac9"
+    },
+    "result": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/result.json.gz",
+      "sha256": "59c7a33c494c0025a08b3e0c581fc80cd104e7f1df3fcbfa76f704f598af156d"
+    },
+    "trace": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/trace.json.gz",
+      "sha256": "36413609230184ff00849c66d3e98cf96063df13edc98e4721664792a1f962e8"
+    },
+    "log": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/official.log",
+      "sha256": "fb804d088b7c7ccaba634fec3bf0d7ae8780f649609499c0531a458c6d32d410"
+    }
+  },
+  "prior_attempt": {
+    "case_id": "062",
+    "cores": 1,
+    "old_plan_sha256": "a4a16fe2139b6f7860eb1402e9d157dcca82e8bb8161a59918d37dcebb7adb22",
+    "old_run_path": "results/a/q1-bounded-matrix-20260924/20260924T1459Z-bounded400/cells/062/k1/run.json",
+    "old_attempt_id": "nikolastarx-20260924T1459Z-bounded400-P1-062-k1-r0"
+  },
+  "plan_bytes_equal": true,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "src/q1/bounded_tasks.py",
+      "<verified-inputs>/case_062.json",
+      "--output",
+      "./results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/case_062_multicore_res.json",
+      "--cores",
+      "1",
+      "--packet-factor",
+      "4",
+      "--trigger-ops",
+      "4096",
+      "--chunk-ops",
+      "1024",
+      "--diagnostics",
+      "./results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T15:23:34.647Z",
+    "finished_at": "2026-09-24T15:23:35.084Z",
+    "wall_seconds": 0.437258624995593,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/solver.stdout.txt",
+      "sha256": "a3fd4f0a363d7ea93547e1b9dd3459075a0e730bae25c63ceedafda9c499a567"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "plan_sha256": "a4a16fe2139b6f7860eb1402e9d157dcca82e8bb8161a59918d37dcebb7adb22",
+  "diagnostics": {
+    "algorithm_id": "q1-bounded-component-tasks",
+    "variant": "frontier-then-independent-chunks",
+    "base": {
+      "algorithm_id": "q1-tree-frontier-pack",
+      "variant": "threshold-antichain-tail",
+      "packet_factor": 4,
+      "base": {
+        "algorithm_id": "q1-component-pack",
+        "variant": "pipe-lpt-one-task-per-core",
+        "compute_ops": 19636,
+        "components": 1,
+        "largest_component_ops": 19636,
+        "tasks": 1,
+        "core_compute_ops": [
+          19636
+        ],
+        "compute_pipe_work_by_core": [
+          {
+            "PIPE_M": 2618400,
+            "PIPE_V": 392688
+          }
+        ],
+        "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+      },
+      "selected": "component-pack",
+      "scope": "Structural proof only; E0 required",
+      "reason": "enough independent components or one core"
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [
+        {
+          "original_task": 0,
+          "new_tasks": [
+            0
+          ],
+          "chunk_compute_ops": [
+            19636
+          ]
+        }
+      ],
+      "oversize_indivisible_components": [
+        {
+          "task": 0,
+          "ops": 19636
+        }
+      ],
+      "tasks_before": 1,
+      "tasks_after": 1
+    },
+    "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+  },
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_062.json",
+      "./results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/case_062_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/result.json",
+      "--trace-output",
+      "./results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/trace.json",
+      "--log-output",
+      "./results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T15:23:35.086Z",
+    "finished_at": "2026-09-24T15:24:17.563Z",
+    "wall_seconds": 42.475883917009924,
+    "timeout_seconds": 180,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/E0.stdout.txt",
+      "sha256": "fae8d6ca3a410b595e4228d19a83e5f84f1c86a431640c9af002c24a4344cba7"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-timeout-20260924/20260924T1524Z-timeout4/cells/062/k1/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 13401600,
+    "scheduled_copy_bytes": 13401600,
+    "added_copy_bytes": 0,
+    "partition_added_copy_bytes": 0,
+    "spill_added_copy_bytes": 0
+  }
+}

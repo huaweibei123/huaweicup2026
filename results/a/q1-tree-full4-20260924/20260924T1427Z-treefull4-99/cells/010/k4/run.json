@@ -1,0 +1,153 @@
+{
+  "case_id": "010",
+  "cores": 4,
+  "status": "ok",
+  "started_at": "2026-09-24T14:25:31.720Z",
+  "finished_at": "2026-09-24T14:25:31.899Z",
+  "graph_sha256": "fd0b07588473d8b2ce05fab4798808cbc7f60cf1638e05608adc3d62061b8775",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "failure": null,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/case_010_multicore_res.json",
+      "sha256": "001debfbf2a0ca1db3479ec31818e59427db6a55a3a1e5b1941cf618cec3c71d"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/diagnostics.json",
+      "sha256": "57f1652946efbaf299f2ccb1f84fa260eba0c07fb6475d356dc1b57244e962b1"
+    },
+    "result": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/result.json.gz",
+      "sha256": "b05ce3a98ecd9affade88a7cf3b9b3d142220d9582834b05ce70a5f8da39ad94"
+    },
+    "trace": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/trace.json.gz",
+      "sha256": "f1af8cce9a0b11ddcf41850336506b0e087f8e25966b9646ba751a8097266690"
+    },
+    "log": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/official.log",
+      "sha256": "55fee307a836f7fbacc6d44aff7f5de271f38e8505dd6be3535090a742d70678"
+    }
+  },
+  "makespan_cycles": 29856,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python3",
+      "-B",
+      "src/q1/tree_frontier.py",
+      "<verified-inputs>/case_010.json",
+      "--output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/case_010_multicore_res.json",
+      "--cores",
+      "4",
+      "--packet-factor",
+      "4",
+      "--diagnostics",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T14:25:31.720Z",
+    "finished_at": "2026-09-24T14:25:31.762Z",
+    "wall_seconds": 0.04124541700002737,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/solver.stdout.txt",
+      "sha256": "eb5bdc492afc35ea0d4eceefc6f7752c077d13b02ba7cf9d9cb7c542b113bbfc"
+    },
+    "stderr": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "diagnostics": {
+    "algorithm_id": "q1-tree-frontier-pack",
+    "variant": "threshold-antichain-tail",
+    "packet_factor": 4,
+    "base": {
+      "algorithm_id": "q1-component-pack",
+      "variant": "pipe-lpt-one-task-per-core",
+      "compute_ops": 667,
+      "components": 36,
+      "largest_component_ops": 133,
+      "tasks": 4,
+      "core_compute_ops": [
+        133,
+        284,
+        128,
+        122
+      ],
+      "compute_pipe_work_by_core": [
+        {
+          "PIPE_V": 28759
+        },
+        {
+          "PIPE_M": 15048,
+          "PIPE_V": 11320
+        },
+        {
+          "PIPE_M": 14700,
+          "PIPE_V": 7786
+        },
+        {
+          "PIPE_M": 14862,
+          "PIPE_V": 7631
+        }
+      ],
+      "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+    },
+    "selected": "component-pack",
+    "scope": "Structural proof only; E0 required",
+    "reason": "enough independent components or one core"
+  },
+  "plan_sha256": "001debfbf2a0ca1db3479ec31818e59427db6a55a3a1e5b1941cf618cec3c71d",
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python3",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_010.json",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/case_010_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/result.json",
+      "--trace-output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/trace.json",
+      "--log-output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T14:25:31.762Z",
+    "finished_at": "2026-09-24T14:25:31.894Z",
+    "wall_seconds": 0.1315872919803951,
+    "timeout_seconds": 60,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/E0.stdout.txt",
+      "sha256": "152eafd852ad23b6f4a2c36b3b2ae088db7101311da1816a5f369bf5afa53f4c"
+    },
+    "stderr": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/010/k4/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 384150,
+    "scheduled_copy_bytes": 480918,
+    "added_copy_bytes": 96768,
+    "partition_added_copy_bytes": 96768,
+    "spill_added_copy_bytes": 0
+  }
+}

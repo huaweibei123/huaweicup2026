@@ -1,0 +1,154 @@
+{
+  "case_id": "003",
+  "cores": 4,
+  "status": "ok",
+  "started_at": "2026-09-24T14:25:13.535Z",
+  "finished_at": "2026-09-24T14:25:26.791Z",
+  "graph_sha256": "2c80acfd37edcf811ce76b7e7b1f7194c706bd4d4aa6449e6a19e9eac1028ced",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "failure": null,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/case_003_multicore_res.json",
+      "sha256": "c1dc08498e3b937ebea1c5c2e249dd24476b25afb3ca57b588564437c4bdee74"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/diagnostics.json",
+      "sha256": "44abdd9a221e4b9f48f62caa7ea9190ab5ec912e32d32ed848aea2f932226043"
+    },
+    "result": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/result.json.gz",
+      "sha256": "c18f228a0ade70f91851f178ef6c3bd64b052f02f399514468f1a2c77b915c50"
+    },
+    "trace": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/trace.json.gz",
+      "sha256": "bd807675bcdf8eaf13247fb9e4ed729817b08076810823577c246abf481576e2"
+    },
+    "log": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/official.log",
+      "sha256": "691cfea4f6a2b46e0a5027ce950896d170b3470d680567a04b3e0d2598e62c63"
+    }
+  },
+  "makespan_cycles": 539155,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python3",
+      "-B",
+      "src/q1/tree_frontier.py",
+      "<verified-inputs>/case_003.json",
+      "--output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/case_003_multicore_res.json",
+      "--cores",
+      "4",
+      "--packet-factor",
+      "4",
+      "--diagnostics",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T14:25:13.535Z",
+    "finished_at": "2026-09-24T14:25:13.667Z",
+    "wall_seconds": 0.13148970899055712,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/solver.stdout.txt",
+      "sha256": "a8551bfdd8b9e82b44492007f4486468421d668f52e10ee8d6e531e2089ec745"
+    },
+    "stderr": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "diagnostics": {
+    "algorithm_id": "q1-tree-frontier-pack",
+    "variant": "threshold-antichain-tail",
+    "packet_factor": 4,
+    "base": {
+      "algorithm_id": "q1-component-pack",
+      "variant": "pipe-lpt-one-task-per-core",
+      "compute_ops": 13455,
+      "components": 10,
+      "largest_component_ops": 13194,
+      "tasks": 4,
+      "core_compute_ops": [
+        13194,
+        30,
+        197,
+        34
+      ],
+      "compute_pipe_work_by_core": [
+        {
+          "PIPE_M": 383172,
+          "PIPE_V": 304201
+        },
+        {
+          "PIPE_M": 18540,
+          "PIPE_V": 3525
+        },
+        {
+          "PIPE_M": 18540,
+          "PIPE_V": 13886
+        },
+        {
+          "PIPE_M": 18540,
+          "PIPE_V": 3577
+        }
+      ],
+      "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+    },
+    "selected": "component-pack",
+    "scope": "Structural proof only; E0 required",
+    "reason": "enough independent components or one core"
+  },
+  "plan_sha256": "c1dc08498e3b937ebea1c5c2e249dd24476b25afb3ca57b588564437c4bdee74",
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python3",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_003.json",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/case_003_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/result.json",
+      "--trace-output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/trace.json",
+      "--log-output",
+      "./results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T14:25:13.669Z",
+    "finished_at": "2026-09-24T14:25:26.756Z",
+    "wall_seconds": 13.086659458000213,
+    "timeout_seconds": 60,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/E0.stdout.txt",
+      "sha256": "1e2ebe0d4a77f0417e15f13073505c59b495ff7b36a2b05051c1e03aa2f92fdb"
+    },
+    "stderr": {
+      "path": "results/a/q1-tree-full4-20260924/20260924T1427Z-treefull4-99/cells/003/k4/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 1284264,
+    "scheduled_copy_bytes": 1579176,
+    "added_copy_bytes": 294912,
+    "partition_added_copy_bytes": 294912,
+    "spill_added_copy_bytes": 0
+  }
+}
