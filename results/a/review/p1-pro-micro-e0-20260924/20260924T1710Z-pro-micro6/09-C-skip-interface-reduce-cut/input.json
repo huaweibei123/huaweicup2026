@@ -1,0 +1,131 @@
+{
+  "ops": [
+    {
+      "id": 1,
+      "op": "COPY_IN",
+      "pipe": "PIPE_MTE2",
+      "cycles": 1
+    },
+    {
+      "id": 2,
+      "op": "MATMUL",
+      "pipe": "PIPE_M",
+      "cycles": 1000
+    },
+    {
+      "id": 3,
+      "op": "REDUCE",
+      "pipe": "PIPE_V",
+      "cycles": 750
+    },
+    {
+      "id": 4,
+      "op": "NORMALIZE",
+      "pipe": "PIPE_V",
+      "cycles": 750
+    },
+    {
+      "id": 5,
+      "op": "MATMUL",
+      "pipe": "PIPE_M",
+      "cycles": 1000
+    },
+    {
+      "id": 6,
+      "op": "COPY_OUT",
+      "pipe": "PIPE_MTE3",
+      "cycles": 1
+    }
+  ],
+  "tensors": [
+    {
+      "id": 10001,
+      "pos": "DDR",
+      "size": 60
+    },
+    {
+      "id": 10002,
+      "pos": "UB",
+      "size": 60
+    },
+    {
+      "id": 10003,
+      "pos": "UB",
+      "size": 30000
+    },
+    {
+      "id": 10004,
+      "pos": "UB",
+      "size": 60
+    },
+    {
+      "id": 10005,
+      "pos": "UB",
+      "size": 60
+    },
+    {
+      "id": 10006,
+      "pos": "UB",
+      "size": 60
+    },
+    {
+      "id": 10007,
+      "pos": "DDR",
+      "size": 60
+    }
+  ],
+  "edges": [
+    {
+      "source": 10001,
+      "target": 1
+    },
+    {
+      "source": 1,
+      "target": 10002
+    },
+    {
+      "source": 10002,
+      "target": 2
+    },
+    {
+      "source": 2,
+      "target": 10003
+    },
+    {
+      "source": 10003,
+      "target": 3
+    },
+    {
+      "source": 3,
+      "target": 10004
+    },
+    {
+      "source": 10003,
+      "target": 4
+    },
+    {
+      "source": 10004,
+      "target": 4
+    },
+    {
+      "source": 4,
+      "target": 10005
+    },
+    {
+      "source": 10005,
+      "target": 5
+    },
+    {
+      "source": 5,
+      "target": 10006
+    },
+    {
+      "source": 10006,
+      "target": 6
+    },
+    {
+      "source": 6,
+      "target": 10007
+    }
+  ]
+}

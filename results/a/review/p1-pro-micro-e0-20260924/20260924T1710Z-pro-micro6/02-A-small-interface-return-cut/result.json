@@ -1,0 +1,384 @@
+{
+  "scene": "A",
+  "makespan": 6207,
+  "num_cores": 1,
+  "bandwidth_bytes_per_cycle": 60,
+  "capacity_bytes": {
+    "L1": 524288,
+    "UB": 131072
+  },
+  "memory_peak_by_core": {
+    "0": {
+      "L1": 0,
+      "UB": 240
+    }
+  },
+  "step3_by_task": {
+    "0": {
+      "local_makespan": 2502,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 1,
+        "PIPE_MTE3": 1,
+        "PIPE_M": 1,
+        "PIPE_V": 1
+      }
+    },
+    "1": {
+      "local_makespan": 2503,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 2,
+        "PIPE_MTE3": 2,
+        "PIPE_M": 2,
+        "PIPE_V": 1
+      }
+    },
+    "2": {
+      "local_makespan": 1002,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 1,
+        "PIPE_MTE3": 1,
+        "PIPE_M": 1,
+        "PIPE_V": 0
+      }
+    }
+  },
+  "task_cross_core_wait_cycles": 1000,
+  "task_same_core_wait_cycles": 100,
+  "cross_task_traffic": 120,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 240,
+    "scheduled_copy_bytes": 480,
+    "added_copy_bytes": 240,
+    "partition_added_copy_bytes": 240,
+    "spill_added_copy_bytes": 0
+  },
+  "task_dependencies": [
+    {
+      "source": 0,
+      "target": 1
+    },
+    {
+      "source": 1,
+      "target": 2
+    }
+  ],
+  "per_core_timeline": [
+    {
+      "core_id": 0,
+      "tasks": [
+        {
+          "task_id": 0,
+          "subgraph_id": 0,
+          "start": 0,
+          "end": 2502,
+          "duration": 2502
+        },
+        {
+          "task_id": 1,
+          "subgraph_id": 1,
+          "start": 2602,
+          "end": 5105,
+          "duration": 2503
+        },
+        {
+          "task_id": 2,
+          "subgraph_id": 2,
+          "start": 5205,
+          "end": 6207,
+          "duration": 1002
+        }
+      ],
+      "subgraphs": [
+        {
+          "subgraph_id": 0,
+          "start": 0,
+          "end": 2502,
+          "duration": 2502
+        },
+        {
+          "subgraph_id": 1,
+          "start": 2602,
+          "end": 5105,
+          "duration": 2503
+        },
+        {
+          "subgraph_id": 2,
+          "start": 5205,
+          "end": 6207,
+          "duration": 1002
+        }
+      ],
+      "ops": [
+        {
+          "task_id": 0,
+          "op_id": 11,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "start": 0,
+          "end": 1,
+          "duration": 1
+        },
+        {
+          "task_id": 0,
+          "op_id": 2,
+          "op": "MATMUL",
+          "pipe": "PIPE_M",
+          "start": 1,
+          "end": 1001,
+          "duration": 1000
+        },
+        {
+          "task_id": 0,
+          "op_id": 3,
+          "op": "VECTOR",
+          "pipe": "PIPE_V",
+          "start": 1001,
+          "end": 2501,
+          "duration": 1500
+        },
+        {
+          "task_id": 0,
+          "op_id": 12,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "start": 2501,
+          "end": 2502,
+          "duration": 1
+        },
+        {
+          "task_id": 1,
+          "op_id": 15,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "start": 2602,
+          "end": 2603,
+          "duration": 1
+        },
+        {
+          "task_id": 1,
+          "op_id": 7,
+          "op": "MATMUL",
+          "pipe": "PIPE_M",
+          "start": 2603,
+          "end": 3603,
+          "duration": 1000
+        },
+        {
+          "task_id": 1,
+          "op_id": 13,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "start": 2603,
+          "end": 2604,
+          "duration": 1
+        },
+        {
+          "task_id": 1,
+          "op_id": 4,
+          "op": "MATMUL",
+          "pipe": "PIPE_M",
+          "start": 3603,
+          "end": 4603,
+          "duration": 1000
+        },
+        {
+          "task_id": 1,
+          "op_id": 8,
+          "op": "VECTOR",
+          "pipe": "PIPE_V",
+          "start": 3603,
+          "end": 5103,
+          "duration": 1500
+        },
+        {
+          "task_id": 1,
+          "op_id": 16,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "start": 5103,
+          "end": 5104,
+          "duration": 1
+        },
+        {
+          "task_id": 1,
+          "op_id": 14,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "start": 5104,
+          "end": 5105,
+          "duration": 1
+        },
+        {
+          "task_id": 2,
+          "op_id": 17,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "start": 5205,
+          "end": 5206,
+          "duration": 1
+        },
+        {
+          "task_id": 2,
+          "op_id": 9,
+          "op": "MATMUL",
+          "pipe": "PIPE_M",
+          "start": 5206,
+          "end": 6206,
+          "duration": 1000
+        },
+        {
+          "task_id": 2,
+          "op_id": 18,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "start": 6206,
+          "end": 6207,
+          "duration": 1
+        }
+      ]
+    }
+  ],
+  "ddr_contention_log": [
+    {
+      "time": 0,
+      "issued": {
+        "task_id": 0,
+        "op_id": 11,
+        "core_id": 0,
+        "pipe": "PIPE_MTE2"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 0,
+          "op_id": 11,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "time": 2501,
+      "issued": {
+        "task_id": 0,
+        "op_id": 12,
+        "core_id": 0,
+        "pipe": "PIPE_MTE3"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 0,
+          "op_id": 12,
+          "end": 2502
+        }
+      ]
+    },
+    {
+      "time": 2602,
+      "issued": {
+        "task_id": 1,
+        "op_id": 15,
+        "core_id": 0,
+        "pipe": "PIPE_MTE2"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 1,
+          "op_id": 15,
+          "end": 2603
+        }
+      ]
+    },
+    {
+      "time": 2603,
+      "issued": {
+        "task_id": 1,
+        "op_id": 13,
+        "core_id": 0,
+        "pipe": "PIPE_MTE2"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 1,
+          "op_id": 13,
+          "end": 2604
+        }
+      ]
+    },
+    {
+      "time": 5103,
+      "issued": {
+        "task_id": 1,
+        "op_id": 16,
+        "core_id": 0,
+        "pipe": "PIPE_MTE3"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 1,
+          "op_id": 16,
+          "end": 5104
+        }
+      ]
+    },
+    {
+      "time": 5104,
+      "issued": {
+        "task_id": 1,
+        "op_id": 14,
+        "core_id": 0,
+        "pipe": "PIPE_MTE3"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 1,
+          "op_id": 14,
+          "end": 5105
+        }
+      ]
+    },
+    {
+      "time": 5205,
+      "issued": {
+        "task_id": 2,
+        "op_id": 17,
+        "core_id": 0,
+        "pipe": "PIPE_MTE2"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 2,
+          "op_id": 17,
+          "end": 5206
+        }
+      ]
+    },
+    {
+      "time": 6206,
+      "issued": {
+        "task_id": 2,
+        "op_id": 18,
+        "core_id": 0,
+        "pipe": "PIPE_MTE3"
+      },
+      "active_count": 1,
+      "projected_ends": [
+        {
+          "task_id": 2,
+          "op_id": 18,
+          "end": 6207
+        }
+      ]
+    }
+  ],
+  "input_graph": "input.json",
+  "input_plan": "plan.json"
+}
