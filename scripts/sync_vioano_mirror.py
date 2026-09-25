@@ -1,4 +1,4 @@
-"""Verify or fast-forward the private Vioano research mirror; never delete refs."""
+"""Verify or fast-forward the public Vioano research mirror; never delete refs."""
 
 import argparse
 import datetime
@@ -10,6 +10,16 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = "huaweibei123/huaweicup2026"
 TARGET = "Vioano/huaweicup2026"
+# Signed sync channels and submission/delivery refs are transport state, not
+# research material. Their frequent updates must not starve or inflate the mirror.
+EXCLUDED_SOURCE_REFS = {"refs/heads/benchmark-fast-v1",
+                        "refs/heads/benchmark-sync-v1"}
+EXCLUDED_SOURCE_PREFIXES = ("refs/heads/benchmark-submissions/",
+                            "refs/heads/benchmark-delivery/")
+
+
+def excluded_transport(ref):
+    return ref in EXCLUDED_SOURCE_REFS or ref.startswith(EXCLUDED_SOURCE_PREFIXES)
 
 
 def run(argv, env=None):
@@ -67,13 +77,20 @@ def main():
             if run(["git", "remote", "get-url", name]).strip() != f"https://github.com/{expected}.git":
                 raise RuntimeError(f"Unexpected {name} remote; review configuration first")
         metadata = json.loads(run(["gh", "api", f"repos/{TARGET}"], target_env))
-        if metadata["full_name"] != TARGET or not metadata["private"] or metadata["archived"]:
-            raise RuntimeError("Target must be the active private Vioano research mirror")
+        if metadata["full_name"] != TARGET or metadata["private"] or metadata.get("visibility") != "public" or metadata["archived"]:
+            raise RuntimeError("Target must be the active public Vioano research mirror")
 
         git(["fetch", "--no-tags", "origin",
              "refs/heads/*:refs/remotes/origin/*",
+             "^refs/heads/benchmark-fast-v1",
+             "^refs/heads/benchmark-sync-v1",
+             "^refs/heads/benchmark-submissions/*",
+             "^refs/heads/benchmark-delivery/*",
              "refs/tags/*:refs/mirror-source-tags/*"], source_env)
-        source = refs("origin", source_env)
+        source_all = refs("origin", source_env)
+        excluded = sorted(ref for ref in source_all if excluded_transport(ref))
+        source = {ref: sha for ref, sha in source_all.items()
+                  if not excluded_transport(ref)}
         before = refs("vioano", target_env)
         refspecs = []
         for ref, sha in sorted(source.items()):
@@ -99,8 +116,10 @@ def main():
             raise RuntimeError("Post-push refs did not match; inspect before retrying")
         receipt = {
             "observed_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            "source": SOURCE, "target": TARGET, "target_private": True,
+            "source": SOURCE, "target": TARGET, "target_private": metadata["private"],
+            "target_visibility": metadata["visibility"],
             "push_requested": args.push, "all_source_refs_match": matched,
+            "excluded_transport_refs": excluded,
             "changed_refs": changed,
             "extra_target_refs_preserved": sorted(set(after) - set(source)),
             "source_snapshot": source, "target_snapshot": after,

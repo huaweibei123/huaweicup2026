@@ -6,6 +6,7 @@ The E2 process is isolated so its ``src.eval_exact`` cannot alias our ``src``.
 from __future__ import annotations
 
 import argparse
+import ctypes
 from datetime import datetime, timezone
 import hashlib
 import io
@@ -15,7 +16,9 @@ import os
 from pathlib import Path
 import platform
 import subprocess
+import struct
 import sys
+import sysconfig
 import tarfile
 import time
 
@@ -28,6 +31,7 @@ from multicore_cut_evaluate_problem_2 import read_scene_b_config
 E2_COMMIT = '603b0741e21c449d3db652ebd67c94f2dc014cc9'
 E2_BINARY_SHA256 = '0f765b7b1229ea221881ff8e017ba7d37b64461eded6afb7f48e9cf61bfd4e94'
 MANIFEST = ROOT / 'results/a/q2-nikolastarx/e2-plan-pairs-20260925/manifest.json'
+E2_SOURCE_MANIFEST_SHA256 = '9ee379269c0c4f25b64f9d0aeaf1e397e85e48c2103b08637db356d3c9595387'
 
 
 def _sha(raw):
@@ -42,33 +46,111 @@ def _save(path, value):
     tmp.replace(path)
 
 
-def check_e2_source(e2_root):
+def _linux_binding_info(root):
+    """Check Python struct layout without asking the binding to load its library."""
+    code = '''import ctypes,json,numpy
+from research.a.e2_search import _native_b as n
+print(json.dumps({'numpy':numpy.__version__,'input_bytes':ctypes.sizeof(n.InputB),
+'output_bytes':ctypes.sizeof(n.OutputB),
+'input_offsets':{k:getattr(n.InputB,k).offset for k,_ in n.InputB._fields_},
+'output_offsets':{k:getattr(n.OutputB,k).offset for k,_ in n.OutputB._fields_}}))
+'''
+    env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1')
+    env.pop('PYTHONPATH', None)
+    result = subprocess.run([sys.executable, '-B', '-c', code], cwd=root,
+                            env=env, text=True, capture_output=True, check=True, timeout=10)
+    return json.loads(result.stdout)
+
+
+def check_e2_source(e2_root, *, linux_build_receipt=None,
+                    linux_build_receipt_sha256=None, linux_binary_sha256=None):
     """Check the copied E2 source and native library against the pinned manifest."""
-    doc = json.loads(MANIFEST.read_text())
+    linux_args = (linux_build_receipt, linux_build_receipt_sha256, linux_binary_sha256)
+    if any(value is not None for value in linux_args) and not all(value is not None for value in linux_args):
+        raise ValueError('Linux receipt path, receipt SHA and binary SHA must be supplied together')
+    linux = all(value is not None for value in linux_args)
+    manifest_raw = MANIFEST.read_bytes()
+    doc = json.loads(manifest_raw)
     if doc['e2_commit'] != E2_COMMIT:
         raise ValueError('E2 manifest commit mismatch')
-    if platform.system() != 'Darwin' or platform.machine() != 'arm64':
+    if linux:
+        if _sha(manifest_raw) != E2_SOURCE_MANIFEST_SHA256 or len(doc['e2_sources']) != 50:
+            raise ValueError('fixed Linux E2 source manifest mismatch')
+        if (platform.system() != 'Linux' or platform.machine().lower() not in ('x86_64', 'amd64')
+                or sys.byteorder != 'little' or ctypes.sizeof(ctypes.c_void_p) != 8):
+            raise ValueError('Linux E2 requires x86_64, little-endian, 64-bit Python')
+        for label, value in (('receipt', linux_build_receipt_sha256), ('binary', linux_binary_sha256)):
+            if not isinstance(value, str) or len(value) != 64 or any(c not in '0123456789abcdef' for c in value):
+                raise ValueError('invalid expected Linux ' + label + ' SHA-256')
+    elif platform.system() != 'Darwin' or platform.machine() != 'arm64':
         raise ValueError('verified native binary is for macOS arm64 only')
     e2_root = Path(e2_root).resolve(strict=True)
+    if linux:
+        receipt_path = Path(linux_build_receipt).resolve(strict=True)
+        if receipt_path == e2_root or e2_root in receipt_path.parents:
+            raise ValueError('Linux receipt must remain outside exact E2 capsule')
+        receipt_raw = receipt_path.read_bytes()
+        if _sha(receipt_raw) != linux_build_receipt_sha256:
+            raise ValueError('Linux receipt differs from expected SHA-256')
+        receipt = json.loads(receipt_raw)
     approved = set(doc['e2_sources']) | {doc['binary']['path']}
     actual = {path.relative_to(e2_root).as_posix()
               for path in e2_root.rglob('*') if path.is_file()}
     if actual != approved:
         raise ValueError('unexpected or missing files in isolated E2 export')
-    # One Git process keeps source verification affordable in an online solver.
-    # Read tar members in memory, never extract paths into the worktree.
-    archive = subprocess.check_output(
-        ['git', 'archive', E2_COMMIT, '--', *doc['e2_sources']], cwd=ROOT)
-    with tarfile.open(fileobj=io.BytesIO(archive)) as frozen:
+    if linux:
         for name, digest in doc['e2_sources'].items():
-            raw = (e2_root / name).read_bytes()
-            member = frozen.extractfile(name)
-            if member is None or _sha(raw) != digest or raw != member.read():
-                raise ValueError('E2 source drift: ' + name)
+            path = e2_root / name
+            if not path.resolve(strict=True).is_relative_to(e2_root) or _sha(path.read_bytes()) != digest:
+                raise ValueError('Linux E2 source drift: ' + name)
+    else:
+        # One Git process keeps source verification affordable in an online solver.
+        # Read tar members in memory, never extract paths into the worktree.
+        archive = subprocess.check_output(
+            ['git', 'archive', E2_COMMIT, '--', *doc['e2_sources']], cwd=ROOT)
+        with tarfile.open(fileobj=io.BytesIO(archive)) as frozen:
+            for name, digest in doc['e2_sources'].items():
+                raw = (e2_root / name).read_bytes()
+                member = frozen.extractfile(name)
+                if member is None or _sha(raw) != digest or raw != member.read():
+                    raise ValueError('E2 source drift: ' + name)
     binary = doc['binary']
-    if binary['sha256'] != E2_BINARY_SHA256 or _sha((e2_root / binary['path']).read_bytes()) != E2_BINARY_SHA256:
+    native_path = e2_root / binary['path']
+    if linux:
+        if not native_path.resolve(strict=True).is_relative_to(e2_root):
+            raise ValueError('Linux E2 binary path escapes capsule')
+        native_raw = native_path.read_bytes()
+        if (_sha(native_raw) != linux_binary_sha256 or len(native_raw) < 64
+                or native_raw[:6] != b'\x7fELF\x02\x01'
+                or struct.unpack_from('<H', native_raw, 18)[0] != 62):
+            raise ValueError('Linux E2 binary SHA or ELF64 x86_64 header mismatch')
+        runtime = receipt.get('runtime', {})
+        expected_runtime = {'platform': platform.platform(), 'machine': platform.machine(),
+                            'libc': list(platform.libc_ver()), 'python': sys.version,
+                            'python_abi': sysconfig.get_config_var('SOABI'),
+                            'pointer_bytes': ctypes.sizeof(ctypes.c_void_p),
+                            'byteorder': sys.byteorder}
+        info = receipt.get('binary', {})
+        if (receipt.get('schema') != 'e2-linux-native-v1'
+                or receipt.get('e2_commit') != E2_COMMIT
+                or receipt.get('source_manifest_sha256') != E2_SOURCE_MANIFEST_SHA256
+                or receipt.get('source_sha256') != doc['e2_sources']
+                or info != {'path': binary['path'], 'sha256': linux_binary_sha256,
+                            'bytes': len(native_raw), 'format': 'ELF64 little-endian x86_64',
+                            'replay_bc_abi': 1}
+                or runtime != expected_runtime):
+            raise ValueError('Linux receipt source, binary or runtime mismatch')
+        bindings = _linux_binding_info(e2_root)
+        if (bindings != receipt.get('bindings') or bindings.get('input_bytes') != 160
+                or bindings.get('output_bytes') != 64):
+            raise ValueError('Linux E2 Python binding ABI mismatch')
+        return {'commit': E2_COMMIT, 'manifest_sha256': _sha(manifest_raw),
+                'native_binary_sha256': linux_binary_sha256,
+                'linux_build_receipt_sha256': linux_build_receipt_sha256,
+                'platform': 'Linux x86_64', 'root': str(e2_root)}
+    if binary['sha256'] != E2_BINARY_SHA256 or _sha(native_path.read_bytes()) != E2_BINARY_SHA256:
         raise ValueError('E2 native binary drift')
-    return {'commit': E2_COMMIT, 'manifest_sha256': _sha(MANIFEST.read_bytes()),
+    return {'commit': E2_COMMIT, 'manifest_sha256': _sha(manifest_raw),
             'native_binary_sha256': binary['sha256'], 'root': str(e2_root)}
 
 
@@ -104,14 +186,17 @@ def native_e2(e2_root, graph, config_path, plan, timeout):
     return json.loads(completed.stdout)
 
 
-def score_adapter(evaluator, ledger, ledger_path, *, prepare=None, remaining_wall=None):
+def score_adapter(evaluator, ledger, ledger_path, *, prepare=None, remaining_wall=None,
+                  max_requests=2):
     """Reserve and persist a request before crossing the evaluator boundary."""
+    if max_requests not in (2, 3, 4):
+        raise ValueError('only fixed two-, three-, or four-request routes are supported')
     def oracle(plan):
         calls = ledger['calls']
         if ledger['request_in_flight']:
             raise RuntimeError('uncertain E2 request blocks further scoring')
-        if calls['E2_api_attempted'] >= 2:
-            raise RuntimeError('two-request E2 cap reached')
+        if calls['E2_api_attempted'] >= max_requests:
+            raise RuntimeError(f'{max_requests}-request E2 cap reached')
         if prepare is not None:
             prepare()
         if remaining_wall is not None and remaining_wall() <= 0:
@@ -163,7 +248,7 @@ def build_guarded(graph, cores, config, oracle):
         component_builder=guarded_component.make_component_builder(oracle))
 
 
-def main(argv=None, *, constructor=build_guarded):
+def main(argv=None, *, constructor=build_guarded, oracle_request_limit=2):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('graph', type=Path)
     parser.add_argument('--config', type=Path, default=ROOT/'data/raw/a/official/data/config.txt')
@@ -171,8 +256,15 @@ def main(argv=None, *, constructor=build_guarded):
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--evidence', type=Path, required=True)
     parser.add_argument('--e2-root', type=Path, required=True)
+    parser.add_argument('--linux-build-receipt', type=Path)
+    parser.add_argument('--linux-build-receipt-sha256')
+    parser.add_argument('--linux-binary-sha256')
     parser.add_argument('--wall', type=float, default=240)
     args = parser.parse_args(argv)
+    linux_args = (args.linux_build_receipt, args.linux_build_receipt_sha256,
+                  args.linux_binary_sha256)
+    if any(value is not None for value in linux_args) and not all(value is not None for value in linux_args):
+        parser.error('all three Linux receipt and binary options must be supplied together')
     started = time.perf_counter()
     args.evidence.mkdir(parents=True, exist_ok=False)
     ledger_path = args.evidence/'solver.json'
@@ -208,7 +300,10 @@ def main(argv=None, *, constructor=build_guarded):
                 raise TimeoutError('no wall time remains for E2 source check')
             prepared_at = time.perf_counter()
             try:
-                source = check_e2_source(args.e2_root)
+                source = check_e2_source(
+                    args.e2_root, linux_build_receipt=args.linux_build_receipt,
+                    linux_build_receipt_sha256=args.linux_build_receipt_sha256,
+                    linux_binary_sha256=args.linux_binary_sha256)
             finally:
                 ledger['source_check_wall_seconds'] = time.perf_counter()-prepared_at
                 _save(ledger_path, ledger)
@@ -219,7 +314,11 @@ def main(argv=None, *, constructor=build_guarded):
                              remaining())
         plan, detail = constructor(graph, args.cores, config,
                                    score_adapter(evaluate, ledger, ledger_path,
-                                                 prepare=prepare, remaining_wall=remaining))
+                                                 prepare=prepare, remaining_wall=remaining,
+                                                 max_requests=oracle_request_limit))
+        if (isinstance(detail, dict) and detail.get('score_evidence') == 'unknown') or ledger['request_in_flight']:
+            ledger['detail'] = detail
+            raise RuntimeError('unknown score evidence or E2 request in flight; refusing plan output')
         if set(plan) != {'node_to_subgraph', 'core_schedules'}:
             raise ValueError('plan must have exactly the two submission keys')
         if len(plan['core_schedules']) != args.cores:

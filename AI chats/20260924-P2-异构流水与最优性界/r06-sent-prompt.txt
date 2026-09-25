@@ -1,0 +1,25 @@
+P2 r06：请用 6 Pro 研究一个新且具体的构造瓶颈：独立同构 jobs 共享输入时，如何在输入复制、容量和有限任务流水之间做有根据的分解。请先判断方向是否值得做，不维护我们已写的原型；不再写通用优化综述，不自行跑全量评分。
+
+现状：同一冻结求解器全100图×K1–5已由E0复核，均值1.206/2.317/3.236/3.971/4.550，仅略高于参考队伍。r05已经移植；003/K2一次构造因共同代理时间230838→241374而退回seed，尽管预Step2字节约降18%。这是代理保护拒绝，不是官方失败证明，也不否定r05全域。当前主要另研究下列重复job结构。
+
+固定材料均已确认同步Vioano，SHA 9404635dea70aa532894506c21d383f22ea6ca81：
+https://github.com/Vioano/huaweicup2026/blob/9404635dea70aa532894506c21d383f22ea6ca81/src/q2_nikolastarx/template_capacity_pipeline.py
+https://github.com/Vioano/huaweicup2026/blob/9404635dea70aa532894506c21d383f22ea6ca81/src/q2_nikolastarx/template_finite_job_pipeline.py
+https://github.com/Vioano/huaweicup2026/blob/9404635dea70aa532894506c21d383f22ea6ca81/docs/a/q2-nikolastarx/TEMPLATE_FINITE_JOB_PIPELINE.md
+https://github.com/Vioano/huaweicup2026/blob/9404635dea70aa532894506c21d383f22ea6ca81/results/a/q2-nikolastarx/template-capacity-pilot-20260925/trace-diagnosis.json
+同提交shared_input_wave.py含严格识别器；data/raw/a/official/code/下P2、Step2/3和data/raw/a/official/data/config.txt仍为官方语义入口。请报告实际读取的文件和缺件，不能把派生统计当重新运行。
+
+真实提交仍仅node_to_subgraph/core_schedules，P2每核合为一个Task，不允许提交时间、修改图或额外同步。COPY由官方按实际核连接生成；Step2/3和共享DDR/credit影响执行。预Step2字节精确式仍沿用r04；zero spill不等于快。
+
+结构域：J个无相互计算依赖的同构job，模板长S，若干外部只读tensor由所有job在同一模板位置读取；每tensor至多一个producer，无alias/直接op边，singleton提交。把模板连续区间分给不同核，每核按job-major执行。每段的容量充分条件为“段内所有共享输入字节S_p + 单job私有tensor闭区间峰值P_p ≤ C_p”；J≥3时中间job上该峰值精确。新incarnation等仍由官方处理，独立证书最终复核。
+
+已做三份官方机制实验（不是新全量成绩）：044/J11，整job种子M43795，容量流水40862；046/J8，77846→89121；078/J8，477473→1080537；全zero spill。原DP最小化各Pipe归一工作份额，078形成M忙时[792000,124992,124992,124992,870912]，单核工作下界已大于原方案M，排序无法救回。046瓶颈还含启动/排空。
+
+我们刚写了独立、尚未跑真实图的新DP：d_r=max_p该段绝对计算周期，理想单服务器串行stage模型的F=Σd_r+(J−1)max d_r+(k−1)δ。保持(sum,max)精确标签DP并在k≤K中选优，容量仍S+P。小规模独立递推/穷举通过。但F遗漏COPY、共享DDR和credit，明确不是官方M界。对旧044/046/078三计划F分别26104/79144/1018784，仅事后方向一致。
+
+核心问题：单一全job流水可能为共享输入容量牺牲严重计算平衡；整job分配又复制输入。一个候选是把核分成若干组、job分给组，每组内部再做模板阶段流水，共享输入只在组间复制；组规模/任务数/切点由结构DP决定，而不是枚举全部分核或扫参数。请反驳或选择这条方向：
+1. 给出一个小反例或条件，说明何时这种分组能严格扩展whole-job与全job单流水的有效域；容量证书和字节计数如何组合，哪些credit/输入输出边界不能省略。
+2. 只选择一个现在值得实现的构造，明确变量、目标、DP/分解或有理据近似、复杂度和确定停止条件。能否得到可检查的负载/通信必要界，用来在准备E2前安全排除不可能改善者？不能把最小化下界当最优可行调度，不用任意字节/周期惩罚系数；如F方向本身不可靠，提出更合适的模型而非硬修。
+3. 给出一个最小官方证伪实验及结构外推族。允许几十秒有用组合计算，但不是耗满5–10分钟；最终只认同一算法全量，不按编号特判、不拼历史赢家。指出这条专用结构若覆盖太窄，是否应优先回到r05的代理误拒绝验证，并说明可改变行动的判据。
+
+另：E2新计划准备29–41s、native replay仅毫秒，我们正在独立profiling；不把改善模拟内核速度冒充求解器提速，也不假设跨计划prepared复用接口存在。本轮请聚焦上述数学构造，不开发评价器。

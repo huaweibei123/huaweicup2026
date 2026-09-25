@@ -1,0 +1,1364 @@
+{
+  "pilot_commit": "a6b09dcebf26c5ac28bcb4378dec8dbf06b0c075",
+  "manifest_sha256": "7af8890338b120e6b179fe96fbaacf746b2ab7ad34a1f2dabe2945afdd29f597",
+  "structural_method": "DAGIndex.__init__ + gap_candidate._chain_dag only; no DAGIndex.build and no gap_candidate.build. Fork/join region scan is bounded to <=32 chain steps per branch/fork.",
+  "diamond_definition": "A 2-successor chain fork; each branch follows unique serial chains until first common join; join has exactly the two branch tails as predecessors; branch interiors have no external in/out edges. Fork inputs and join outputs are allowed as region boundary.",
+  "byte_definition": "Internal tensor payload is each tensor size once when every eligible producer and consumer is in region. Current internal cross-tensor/direct bytes use exact COPY count by current selected core assignment; all-core co-location would remove these internal cuts only, without any M/legality guarantee.",
+  "graphs": [
+    {
+      "case": "003",
+      "cores": 2,
+      "graph_sha256": "2c80acfd37edcf811ce76b7e7b1f7194c706bd4d4aa6449e6a19e9eac1028ced",
+      "selected_plan_sha256": "f4cf0b78c41bced2d8f8e76231083e2194c9e7ebef12499a53ec3d06ec59d24a",
+      "selected_result_gzip_sha256": "fd3480311b0104beb3dbe6a5eee6128ae14019fec2817b3482cecefc8002f975",
+      "selected_cores_assignment_from_archived_pilot": true,
+      "eligible_ops": 13455,
+      "pipe_duration_totals": {
+        "PIPE_MTE2": 0,
+        "PIPE_MTE3": 0,
+        "PIPE_M": 438792,
+        "PIPE_V": 325189
+      },
+      "contracted_dag": {
+        "fork_ops": 3640,
+        "fork_outdegree_histogram": {
+          "2": 3034,
+          "3": 99,
+          "6": 54,
+          "7": 3,
+          "8": 18,
+          "9": 432
+        },
+        "join_ops": 7166,
+        "join_indegree_histogram": {
+          "2": 7166
+        },
+        "fork_chains": 3640,
+        "fork_chain_outdegree_histogram": {
+          "2": 3034,
+          "3": 99,
+          "6": 54,
+          "7": 3,
+          "8": 18,
+          "9": 432
+        },
+        "join_chains": 7166,
+        "join_chain_indegree_histogram": {
+          "2": 7166
+        }
+      },
+      "serial_chains": {
+        "count": 9903,
+        "op_count_histogram": {
+          "1": 6683,
+          "2": 3064,
+          "3": 7,
+          "4": 137,
+          "5": 6,
+          "6": 1,
+          "7": 2,
+          "8": 2,
+          "9": 1
+        },
+        "max_ops": 9,
+        "max_duration": 2354,
+        "wholly_one_core": 9903,
+        "split_across_cores": 0,
+        "occupied_cores_histogram": {
+          "1": 9903
+        }
+      },
+      "internal_tensors": {
+        "count": 13438,
+        "payload_bytes": 7785284,
+        "consumer_op_count_total": 20540,
+        "consumer_count_histogram": {
+          "1": 9798,
+          "2": 3034,
+          "3": 99,
+          "6": 54,
+          "7": 3,
+          "8": 18,
+          "9": 432
+        },
+        "mean_size_bytes": 579.3484149426998,
+        "max_size_bytes": 8192
+      },
+      "fork_join_regions": {
+        "strict_region_count": 172,
+        "scanned_chain_steps": 7644,
+        "per_fork_scan_cap": 32,
+        "cap_hits": 0,
+        "covered_ops_union": 903,
+        "covered_ops_fraction": 0.06711259754738015,
+        "covered_internal_tensor_count_union": 785,
+        "covered_internal_tensor_payload_bytes_union": 1391008,
+        "current_internal_cross_tensor_copy_bytes_union": 959232,
+        "current_internal_cross_direct_copy_bytes_union": 0,
+        "regions": [
+          {
+            "fork_chain": 6,
+            "join_chain": 8,
+            "branch_chains": [
+              [
+                7
+              ],
+              []
+            ],
+            "chain_ids": [
+              6,
+              7,
+              8
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 12,
+            "join_chain": 14,
+            "branch_chains": [
+              [
+                13
+              ],
+              []
+            ],
+            "chain_ids": [
+              12,
+              13,
+              14
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 18,
+            "join_chain": 20,
+            "branch_chains": [
+              [
+                19
+              ],
+              []
+            ],
+            "chain_ids": [
+              18,
+              19,
+              20
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 24,
+            "join_chain": 26,
+            "branch_chains": [
+              [
+                25
+              ],
+              []
+            ],
+            "chain_ids": [
+              24,
+              25,
+              26
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 30,
+            "join_chain": 32,
+            "branch_chains": [
+              [
+                31
+              ],
+              []
+            ],
+            "chain_ids": [
+              30,
+              31,
+              32
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0,
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 4096,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 36,
+            "join_chain": 38,
+            "branch_chains": [
+              [
+                37
+              ],
+              []
+            ],
+            "chain_ids": [
+              36,
+              37,
+              38
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0,
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 4096,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 42,
+            "join_chain": 44,
+            "branch_chains": [
+              [
+                43
+              ],
+              []
+            ],
+            "chain_ids": [
+              42,
+              43,
+              44
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0,
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 4096,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 48,
+            "join_chain": 50,
+            "branch_chains": [
+              [
+                49
+              ],
+              []
+            ],
+            "chain_ids": [
+              48,
+              49,
+              50
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0,
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 4096,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 54,
+            "join_chain": 56,
+            "branch_chains": [
+              [
+                55
+              ],
+              []
+            ],
+            "chain_ids": [
+              54,
+              55,
+              56
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0,
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 343
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4224,
+            "current_internal_cross_tensor_copy_bytes": 4096,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 1521,
+            "join_chain": 1523,
+            "branch_chains": [
+              [
+                1522
+              ],
+              []
+            ],
+            "chain_ids": [
+              1521,
+              1522,
+              1523
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 1036,
+              "PIPE_V": 299
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 6240,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 1523,
+            "join_chain": 1525,
+            "branch_chains": [
+              [
+                1524
+              ],
+              []
+            ],
+            "chain_ids": [
+              1523,
+              1524,
+              1525
+            ],
+            "eligible_ops": 5,
+            "current_cores": [
+              0,
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 2072,
+              "PIPE_V": 612
+            },
+            "internal_tensor_count": 4,
+            "internal_tensor_payload_bytes": 14336,
+            "current_internal_cross_tensor_copy_bytes": 16384,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 1532,
+            "join_chain": 1534,
+            "branch_chains": [
+              [
+                1533
+              ],
+              []
+            ],
+            "chain_ids": [
+              1532,
+              1533,
+              1534
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 1036,
+              "PIPE_V": 299
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 6240,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          }
+        ],
+        "multi_pipe_regions": 118,
+        "region_count_truncated_to_12": true
+      },
+      "selected_plan_chain_core_assignment": {
+        "chain_count": 9903,
+        "split_chain_count": 0,
+        "region_count_spanning_multiple_cores": 72
+      },
+      "gap_chain_guard": {
+        "status": "available",
+        "chain_count": 9903,
+        "uses_static_dag_only": true
+      }
+    },
+    {
+      "case": "005",
+      "cores": 3,
+      "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+      "selected_plan_sha256": "06da4bb75b626bd1a2fcbf3987b39485e82834407af758d8e93b4d33d8509ed3",
+      "selected_result_gzip_sha256": "f7bdf4e1ffa903ee7140e1938b0e8709b184e3c810c24920c03fb67218e3d4c2",
+      "selected_cores_assignment_from_archived_pilot": true,
+      "eligible_ops": 4113,
+      "pipe_duration_totals": {
+        "PIPE_MTE2": 0,
+        "PIPE_MTE3": 0,
+        "PIPE_M": 63882,
+        "PIPE_V": 60930
+      },
+      "contracted_dag": {
+        "fork_ops": 1166,
+        "fork_outdegree_histogram": {
+          "2": 933,
+          "3": 35,
+          "5": 9,
+          "6": 21,
+          "7": 168
+        },
+        "join_ops": 2170,
+        "join_indegree_histogram": {
+          "2": 2170
+        },
+        "fork_chains": 1166,
+        "fork_chain_outdegree_histogram": {
+          "2": 933,
+          "3": 35,
+          "5": 9,
+          "6": 21,
+          "7": 168
+        },
+        "join_chains": 2170,
+        "join_chain_indegree_histogram": {
+          "2": 2170
+        }
+      },
+      "serial_chains": {
+        "count": 3049,
+        "op_count_histogram": {
+          "1": 2069,
+          "2": 938,
+          "4": 42
+        },
+        "max_ops": 4,
+        "max_duration": 516,
+        "wholly_one_core": 3049,
+        "split_across_cores": 0,
+        "occupied_cores_histogram": {
+          "1": 3049
+        }
+      },
+      "internal_tensors": {
+        "count": 4106,
+        "payload_bytes": 2884032,
+        "consumer_op_count_total": 6258,
+        "consumer_count_histogram": {
+          "1": 2940,
+          "2": 933,
+          "3": 35,
+          "5": 9,
+          "6": 21,
+          "7": 168
+        },
+        "mean_size_bytes": 702.3945445689235,
+        "max_size_bytes": 4608
+      },
+      "fork_join_regions": {
+        "strict_region_count": 63,
+        "scanned_chain_steps": 2355,
+        "per_fork_scan_cap": 32,
+        "cap_hits": 0,
+        "covered_ops_union": 343,
+        "covered_ops_fraction": 0.08339411621687333,
+        "covered_internal_tensor_count_union": 301,
+        "covered_internal_tensor_payload_bytes_union": 487312,
+        "current_internal_cross_tensor_copy_bytes_union": 136768,
+        "current_internal_cross_direct_copy_bytes_union": 0,
+        "regions": [
+          {
+            "fork_chain": 6,
+            "join_chain": 8,
+            "branch_chains": [
+              [
+                7
+              ],
+              []
+            ],
+            "chain_ids": [
+              6,
+              7,
+              8
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4800,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 12,
+            "join_chain": 14,
+            "branch_chains": [
+              [
+                13
+              ],
+              []
+            ],
+            "chain_ids": [
+              12,
+              13,
+              14
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4800,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 18,
+            "join_chain": 20,
+            "branch_chains": [
+              [
+                19
+              ],
+              []
+            ],
+            "chain_ids": [
+              18,
+              19,
+              20
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4800,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 24,
+            "join_chain": 26,
+            "branch_chains": [
+              [
+                25
+              ],
+              []
+            ],
+            "chain_ids": [
+              24,
+              25,
+              26
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4800,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 30,
+            "join_chain": 32,
+            "branch_chains": [
+              [
+                31
+              ],
+              []
+            ],
+            "chain_ids": [
+              30,
+              31,
+              32
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 4800,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 36,
+            "join_chain": 38,
+            "branch_chains": [
+              [
+                37
+              ],
+              []
+            ],
+            "chain_ids": [
+              36,
+              37,
+              38
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 140
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 3200,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 42,
+            "join_chain": 44,
+            "branch_chains": [
+              [
+                43
+              ],
+              []
+            ],
+            "chain_ids": [
+              42,
+              43,
+              44
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 140
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 3200,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 934,
+            "join_chain": 936,
+            "branch_chains": [
+              [
+                935
+              ],
+              []
+            ],
+            "chain_ids": [
+              934,
+              935,
+              936
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 438,
+              "PIPE_V": 165
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 7056,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 936,
+            "join_chain": 938,
+            "branch_chains": [
+              [
+                937
+              ],
+              []
+            ],
+            "chain_ids": [
+              936,
+              937,
+              938
+            ],
+            "eligible_ops": 5,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 876,
+              "PIPE_V": 342
+            },
+            "internal_tensor_count": 4,
+            "internal_tensor_payload_bytes": 16128,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 945,
+            "join_chain": 947,
+            "branch_chains": [
+              [
+                946
+              ],
+              []
+            ],
+            "chain_ids": [
+              945,
+              946,
+              947
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 438,
+              "PIPE_V": 165
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 7056,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 947,
+            "join_chain": 949,
+            "branch_chains": [
+              [
+                948
+              ],
+              []
+            ],
+            "chain_ids": [
+              947,
+              948,
+              949
+            ],
+            "eligible_ops": 5,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 876,
+              "PIPE_V": 342
+            },
+            "internal_tensor_count": 4,
+            "internal_tensor_payload_bytes": 16128,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 956,
+            "join_chain": 958,
+            "branch_chains": [
+              [
+                957
+              ],
+              []
+            ],
+            "chain_ids": [
+              956,
+              957,
+              958
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 438,
+              "PIPE_V": 165
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 7056,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          }
+        ],
+        "multi_pipe_regions": 42,
+        "region_count_truncated_to_12": true
+      },
+      "selected_plan_chain_core_assignment": {
+        "chain_count": 3049,
+        "split_chain_count": 0,
+        "region_count_spanning_multiple_cores": 12
+      },
+      "gap_chain_guard": {
+        "status": "available",
+        "chain_count": 3049,
+        "uses_static_dag_only": true
+      }
+    },
+    {
+      "case": "056",
+      "cores": 5,
+      "graph_sha256": "fda213426382a3810afd172eadc10b9221330b906888537cb13b16369be3369d",
+      "selected_plan_sha256": "ae83fd8bc8b3fed7447c53962d36be0c1c4f7ef46cde698d9fcf23d42a1b4aa2",
+      "selected_result_gzip_sha256": "7b08d04204942e4b0b0636654b6a713f3e360da7e19574419bcd8c18b80a456b",
+      "selected_cores_assignment_from_archived_pilot": true,
+      "eligible_ops": 7678,
+      "pipe_duration_totals": {
+        "PIPE_MTE2": 0,
+        "PIPE_MTE3": 0,
+        "PIPE_M": 131016,
+        "PIPE_V": 245953
+      },
+      "contracted_dag": {
+        "fork_ops": 2069,
+        "fork_outdegree_histogram": {
+          "2": 1660,
+          "3": 171,
+          "6": 20,
+          "7": 2,
+          "9": 216
+        },
+        "join_ops": 3894,
+        "join_indegree_histogram": {
+          "2": 3894
+        },
+        "fork_chains": 2069,
+        "fork_chain_outdegree_histogram": {
+          "2": 1660,
+          "3": 171,
+          "6": 20,
+          "7": 2,
+          "9": 216
+        },
+        "join_chains": 3894,
+        "join_chain_indegree_histogram": {
+          "2": 3894
+        }
+      },
+      "serial_chains": {
+        "count": 5540,
+        "op_count_histogram": {
+          "1": 3745,
+          "2": 1642,
+          "3": 6,
+          "4": 130,
+          "5": 4,
+          "6": 5,
+          "7": 3,
+          "8": 5
+        },
+        "max_ops": 8,
+        "max_duration": 548,
+        "wholly_one_core": 5540,
+        "split_across_cores": 0,
+        "occupied_cores_histogram": {
+          "1": 5540
+        }
+      },
+      "internal_tensors": {
+        "count": 7641,
+        "payload_bytes": 5217136,
+        "consumer_op_count_total": 11483,
+        "consumer_count_histogram": {
+          "1": 5572,
+          "2": 1660,
+          "3": 171,
+          "6": 20,
+          "7": 2,
+          "9": 216
+        },
+        "mean_size_bytes": 682.781834838372,
+        "max_size_bytes": 4096
+      },
+      "fork_join_regions": {
+        "strict_region_count": 202,
+        "scanned_chain_steps": 4224,
+        "per_fork_scan_cap": 32,
+        "cap_hits": 0,
+        "covered_ops_union": 1092,
+        "covered_ops_fraction": 0.14222453764001042,
+        "covered_internal_tensor_count_union": 964,
+        "covered_internal_tensor_payload_bytes_union": 669798,
+        "current_internal_cross_tensor_copy_bytes_union": 138912,
+        "current_internal_cross_direct_copy_bytes_union": 0,
+        "regions": [
+          {
+            "fork_chain": 6,
+            "join_chain": 8,
+            "branch_chains": [
+              [
+                7
+              ],
+              []
+            ],
+            "chain_ids": [
+              6,
+              7,
+              8
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 217
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 2304,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 12,
+            "join_chain": 14,
+            "branch_chains": [
+              [
+                13
+              ],
+              []
+            ],
+            "chain_ids": [
+              12,
+              13,
+              14
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 217
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 2304,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 18,
+            "join_chain": 20,
+            "branch_chains": [
+              [
+                19
+              ],
+              []
+            ],
+            "chain_ids": [
+              18,
+              19,
+              20
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 217
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 2304,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 24,
+            "join_chain": 26,
+            "branch_chains": [
+              [
+                25
+              ],
+              []
+            ],
+            "chain_ids": [
+              24,
+              25,
+              26
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              3
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 217
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 2304,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 30,
+            "join_chain": 32,
+            "branch_chains": [
+              [
+                31
+              ],
+              []
+            ],
+            "chain_ids": [
+              30,
+              31,
+              32
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              4
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 217
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 2304,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 36,
+            "join_chain": 38,
+            "branch_chains": [
+              [
+                37
+              ],
+              []
+            ],
+            "chain_ids": [
+              36,
+              37,
+              38
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              0
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 217
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 2304,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 42,
+            "join_chain": 44,
+            "branch_chains": [
+              [
+                43
+              ],
+              []
+            ],
+            "chain_ids": [
+              42,
+              43,
+              44
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              1
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 151
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 1152,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 48,
+            "join_chain": 50,
+            "branch_chains": [
+              [
+                49
+              ],
+              []
+            ],
+            "chain_ids": [
+              48,
+              49,
+              50
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              2
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 151
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 1152,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 54,
+            "join_chain": 56,
+            "branch_chains": [
+              [
+                55
+              ],
+              []
+            ],
+            "chain_ids": [
+              54,
+              55,
+              56
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              3
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 0,
+              "PIPE_V": 151
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 1152,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 792,
+            "join_chain": 794,
+            "branch_chains": [
+              [
+                793
+              ],
+              []
+            ],
+            "chain_ids": [
+              792,
+              793,
+              794
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              3
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 140,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 3264,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 794,
+            "join_chain": 796,
+            "branch_chains": [
+              [
+                795
+              ],
+              []
+            ],
+            "chain_ids": [
+              794,
+              795,
+              796
+            ],
+            "eligible_ops": 5,
+            "current_cores": [
+              3
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 280,
+              "PIPE_V": 324
+            },
+            "internal_tensor_count": 4,
+            "internal_tensor_payload_bytes": 7168,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          },
+          {
+            "fork_chain": 802,
+            "join_chain": 804,
+            "branch_chains": [
+              [
+                803
+              ],
+              []
+            ],
+            "chain_ids": [
+              802,
+              803,
+              804
+            ],
+            "eligible_ops": 7,
+            "current_cores": [
+              4
+            ],
+            "pipe_work": {
+              "PIPE_MTE2": 0,
+              "PIPE_MTE3": 0,
+              "PIPE_M": 140,
+              "PIPE_V": 189
+            },
+            "internal_tensor_count": 6,
+            "internal_tensor_payload_bytes": 3264,
+            "current_internal_cross_tensor_copy_bytes": 0,
+            "current_internal_cross_direct_copy_bytes": 0
+          }
+        ],
+        "multi_pipe_regions": 148,
+        "region_count_truncated_to_12": true
+      },
+      "selected_plan_chain_core_assignment": {
+        "chain_count": 5540,
+        "split_chain_count": 0,
+        "region_count_spanning_multiple_cores": 42
+      },
+      "gap_chain_guard": {
+        "status": "available",
+        "chain_count": 5540,
+        "uses_static_dag_only": true
+      }
+    }
+  ]
+}

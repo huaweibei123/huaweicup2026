@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/Users/nikolastar/.codex/worktrees/q2-hypergraph-s8ee/huaweicup2026/results/a/q2-nikolastarx/hyperretime-pilot-20260925/pilot.py", line 300, in <module>
+    main()
+    ~~~~^^
+  File "/Users/nikolastar/.codex/worktrees/q2-hypergraph-s8ee/huaweicup2026/results/a/q2-nikolastarx/hyperretime-pilot-20260925/pilot.py", line 202, in main
+    worker(args)
+    ~~~~~~^^^^^^
+  File "/Users/nikolastar/.codex/worktrees/q2-hypergraph-s8ee/huaweicup2026/results/a/q2-nikolastarx/hyperretime-pilot-20260925/pilot.py", line 159, in worker
+    score = oracle(selected)
+  File "/Users/nikolastar/.codex/worktrees/q2-hypergraph-s8ee/huaweicup2026/src/q2_nikolastarx/adaptive_guarded.py", line 130, in oracle
+    record = evaluator(plan)
+  File "/Users/nikolastar/.codex/worktrees/q2-hypergraph-s8ee/huaweicup2026/results/a/q2-nikolastarx/hyperretime-pilot-20260925/pilot.py", line 156, in <lambda>
+    lambda p: native_e2(args.e2_root, graph, config_path, p,
+              ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        timeout=max(0.001, 60 - (time.perf_counter() - started))),
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nikolastar/.codex/worktrees/q2-hypergraph-s8ee/huaweicup2026/src/q2_nikolastarx/adaptive_guarded.py", line 100, in native_e2
+    completed = subprocess.run(
+        [sys.executable, '-B', '-c', _E2_WORKER, str(e2_root)],
+        input=json.dumps(payload, allow_nan=False), text=True, capture_output=True,
+        cwd=e2_root, env=env, timeout=timeout, check=True)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.5/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/opt/homebrew/opt/python@3.14/bin/python3.14', '-B', '-c', 'import json, pathlib, sys\nroot = pathlib.Path(sys.argv[1]).resolve()\nsys.path.insert(0, str(root))\nfrom research.a.e2_search import SceneBEvaluator, read_config\nimport research.a.e2_search.scene_b as scene_b\nimport src.eval_exact._official as official\nfor module in (scene_b, official):\n    if not pathlib.Path(module.__file__).resolve().is_relative_to(root):\n        raise RuntimeError("foreign evaluator import")\npayload = json.load(sys.stdin)\ncfg = read_config(payload["config"], problem=2)\nrecord = SceneBEvaluator(payload["graph"], problem=2).evaluate_record(\n    payload["plan"], full=False, **cfg)\nprint(json.dumps(record, allow_nan=False))\n', '/Users/nikolastar/.codex/worktrees/q2-feedback-s8ee/huaweicup2026/output/q2-e2-paircheck-603b-s8ee']' returned non-zero exit status 1.

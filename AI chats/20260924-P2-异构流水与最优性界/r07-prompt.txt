@@ -1,0 +1,21 @@
+P2 r07：请用 6 Pro 深入研究一个新数学子问题：保持每核每条计算 Pipe 的顺序不变，只优化不同 Pipe 的优先级穿插，能否有效降低容量压力/spill？请审计方向及证明，不再泛泛推荐更多搜索，不自行运行官方全量评分。
+
+最新固定材料已同步 Vioano，提交 fcea8024c38700d602f44f8390d0230d875a9739：
+https://github.com/Vioano/huaweicup2026/blob/fcea8024c38700d602f44f8390d0230d875a9739/docs/a/q2-nikolastarx/PIPE_INTERLEAVE_PROBLEM.md
+https://github.com/Vioano/huaweicup2026/blob/fcea8024c38700d602f44f8390d0230d875a9739/src/q2_nikolastarx/pipe_interleave_memory.py
+https://github.com/Vioano/huaweicup2026/blob/fcea8024c38700d602f44f8390d0230d875a9739/src/q2_nikolastarx/zero_spill_intervals.py
+https://github.com/Vioano/huaweicup2026/blob/fcea8024c38700d602f44f8390d0230d875a9739/results/a/q2-nikolastarx/ddr-regression-mechanisms-20260925/report.json
+同提交的官方P2、Step2/3、candidate_ddr.py和fifo_bound.py仍可补读。请报告实际读到的文件与缺件；不要把我们提供的实测当作你重新运行。
+
+事实更新：r05被代理拒绝的003/K2旧候选已用官方E0配对，M248166→254508（变差2.56%），尽管spill前COPY6351422→5207554且两者spill0；当前最好同格M245150。这一例不是代理误拒绝，不代表代理普遍安全。从当前选中seed改用singleton包再构造一次，静态字节4262874→4216154（仅1.10%），新固定FIFO必要界240663，最多剩1.83%主指标收益，新M/spill未测。r06专用结构覆盖9图，必要界给其K5全100均值最多+0.156，非收益预测，所以不继续把主要精力放在那里。
+完整固定c665算法虽比上一完整版本更快，但额外DDR全500总量+36.66%；199格M下降DDR上升，55格双降。072/K5、014/K2两格的新跨核内部tensor COPY分别从0增至65.41MB和52.04MB，共享输入复制反而略降，同时spill也增加。这支持先研究固定现有计算分配如何减少spill，但不证明这个方向最终能超越重新分核。
+
+我们已实现轻量启发式（仅4项合成检查，未测正式图）：冻结owner和每核每Pipe的非COPY FIFO，将原依赖加这些FIFO后做全局拓扑序，ready最多K×Pipe数；按当步先分配后释放容量超额、净释放字节排序，用增量tensor touch计数构造新穿插。它保持mandatory COPY字节与compute-FIFO必要界，但不固定COPY FIFO或credit，不声称官方M不增。
+
+请集中解决：
+1. 审计这种自由度是否确实存在且值得用；在P2官方容量/credit中哪些不变量成立、哪些不成立？给一个机制反例或充分条件，防止把“计算FIFO相同”错误扩大为官方M相同。
+2. 一个核有固定M/V两链，状态(i,j)为已执行前缀。每tensor两链首末触碰a_M,a_V,b_M,b_V，缺失首为∞、末为0。前缀执行后驻留：
+L_p(i,j)=Σ s_t[1−1(i<a_M且j<a_V)−1(i≥b_M且j≥b_V)]。
+转移峰还要加本次首次触碰tensor及直接边瞬时UB，然后末用释放。请证明/反驳此模型；顶点L的混合二阶差分似非正（Monge），能否据此得到显著优于O(mn)的精确无spill可行性/最小容量峰算法？尤其两池和转移峰会否破坏可用性质。不能仅因Monge就宣称贪心或线性；若只能O(mn)，给可落地的受限DP及准确的最优性范围/停止界，不扫描任意窗口来冒充结构求解。
+3. 多核不能随便独立重排。若逐核优化、冻结其他核完整优先序，能否把经过其他核的依赖投影成M/V前缀下界，安全嵌入上述DP？请给充分条件、环的处理和复杂度；或明确为什么应放弃这个域回到分核。
+4. 只选一个下一步可实现构造与一个最小证伪实验。无需维护我提出的Monge/DP；若它覆盖不足或解决不了主要收益，直接指出更值得做的数学结构及依据。最终仍是单一固定算法全100×1–5核，M首要、额外DDR次要、端到端耗时单列，不拼历史赢家，也不把模型峰下降当成官方spill/M改善。

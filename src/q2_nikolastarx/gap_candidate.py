@@ -80,8 +80,8 @@ def _chain_dag(index, bandwidth, cross_delay):
     return chains, pred, succ, delay, order
 
 
-def build(graph, cores, config):
-    """Return one singleton plan; reject graphs outside Fang's structural guard."""
+def _build_with_witness(graph, cores, config):
+    """Construct one singleton plan and its fixed static-calendar witness."""
     bandwidth = config['bandwidth']
     cross_delay = config['cross_core_copy_delay_cycles']
     if (type(cores) is not int or not 1 <= cores <= 5
@@ -163,8 +163,21 @@ def build(graph, cores, config):
         [mapping[str(u)] for u in sorted(sequence, key=lambda u: (starts[u], mapping[str(u)]))]
         for sequence in schedules]}
     derive_multicore_plan(graph, plan)
-    return plan, {'selected': 'join_gap_candidate', 'chains': len(chains), 'paired_joins': paired,
+    meta = {'selected': 'join_gap_candidate', 'chains': len(chains), 'paired_joins': paired,
                   'operations_inserted_before_tail': inserted, 'arithmetic_placement_choices': choices,
                   'choice_bound': len(chains) * cores * cores,
                   'modeled_compute_finish': max(finish.values(), default=0), 'online_E0_calls': 0,
                   'scope': 'Static communication/compute calendar; no capacity, COPY contention, or optimality claim.'}
+    witness = {'chains': chains, 'placement': placement, 'starts': starts,
+               'delays': delay, 'mapping': mapping}
+    return plan, meta, witness
+
+
+def build_with_witness(graph, cores, config):
+    return _build_with_witness(graph, cores, config)
+
+
+def build(graph, cores, config):
+    """Preserve the original two-value candidate API and behavior."""
+    plan, meta, _ = _build_with_witness(graph, cores, config)
+    return plan, meta

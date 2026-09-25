@@ -1,0 +1,22 @@
+{
+  "status": "running",
+  "request_in_flight": true,
+  "possible_E0_fallback_calls": 1,
+  "calls": {
+    "E0": 1,
+    "E1": 0,
+    "E2": 1,
+    "E2_api_attempted": 1,
+    "native_returns": 0,
+    "E0_fallback": 0
+  },
+  "attempts": [
+    {
+      "plan_sha256": "3cec0a6bb29e93af11be8eeef5619670b29fe22b9d27054eeb96a7428a43fb1d",
+      "started_at": "2026-09-24T22:39:38.838951+00:00",
+      "status": "uncertain_exception",
+      "error": "CalledProcessError(1, ['/opt/homebrew/opt/python@3.14/bin/python3.14', '-B', '-c', 'import json, pathlib, sys\\nroot = pathlib.Path(sys.argv[1]).resolve()\\nsys.path.insert(0, str(root))\\nfrom research.a.e2_search import SceneBEvaluator, read_config\\nimport research.a.e2_search.scene_b as scene_b\\nimport src.eval_exact._official as official\\nfor module in (scene_b, official):\\n    if not pathlib.Path(module.__file__).resolve().is_relative_to(root):\\n        raise RuntimeError(\"foreign evaluator import\")\\npayload = json.load(sys.stdin)\\ncfg = read_config(payload[\"config\"], problem=2)\\nrecord = SceneBEvaluator(payload[\"graph\"], problem=2).evaluate_record(\\n    payload[\"plan\"], full=False, **cfg)\\nprint(json.dumps(record, allow_nan=False))\\n', '/Users/nikolastar/.codex/worktrees/q2-feedback-s8ee/huaweicup2026/output/q2-e2-paircheck-603b-s8ee'])",
+      "wall_seconds": 0.06092570902546868
+    }
+  ]
+}

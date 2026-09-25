@@ -1,0 +1,143 @@
+{
+  "M_old": 11962,
+  "M_new": 11959,
+  "input_tensors": [
+    {
+      "id": 1000000494,
+      "pos": "UB",
+      "size": 768
+    },
+    {
+      "id": 1000000483,
+      "pos": "UB",
+      "size": 32
+    }
+  ],
+  "input_producers": [
+    {
+      "id": 448,
+      "op": "ADD",
+      "pipe": "PIPE_V",
+      "cycles": 7
+    },
+    {
+      "id": 459,
+      "op": "ADD",
+      "pipe": "PIPE_V",
+      "cycles": 12
+    }
+  ],
+  "moved_op": {
+    "id": 460,
+    "op": "DIV",
+    "pipe": "PIPE_V",
+    "cycles": 30
+  },
+  "output_tensors": [
+    {
+      "id": 1000000495,
+      "pos": "UB",
+      "size": 768
+    }
+  ],
+  "old_new_compute_timing": {
+    "old": [
+      {
+        "core": 1,
+        "task_id": 1,
+        "op_id": 460,
+        "op": "DIV",
+        "subgraph_id": 423,
+        "pipe": "PIPE_V",
+        "start": 10821,
+        "end": 10851,
+        "duration": 30
+      },
+      {
+        "core": 2,
+        "task_id": 2,
+        "op_id": 448,
+        "op": "ADD",
+        "subgraph_id": 411,
+        "pipe": "PIPE_V",
+        "start": 9339,
+        "end": 9346,
+        "duration": 7
+      },
+      {
+        "core": 2,
+        "task_id": 2,
+        "op_id": 459,
+        "op": "ADD",
+        "subgraph_id": 422,
+        "pipe": "PIPE_V",
+        "start": 10283,
+        "end": 10295,
+        "duration": 12
+      }
+    ],
+    "new": [
+      {
+        "core": 2,
+        "task_id": 2,
+        "op_id": 448,
+        "op": "ADD",
+        "subgraph_id": 411,
+        "pipe": "PIPE_V",
+        "start": 9347,
+        "end": 9354,
+        "duration": 7
+      },
+      {
+        "core": 2,
+        "task_id": 2,
+        "op_id": 459,
+        "op": "ADD",
+        "subgraph_id": 422,
+        "pipe": "PIPE_V",
+        "start": 10289,
+        "end": 10301,
+        "duration": 12
+      },
+      {
+        "core": 2,
+        "task_id": 2,
+        "op_id": 460,
+        "op": "DIV",
+        "subgraph_id": 423,
+        "pipe": "PIPE_V",
+        "start": 10301,
+        "end": 10331,
+        "duration": 30
+      }
+    ]
+  },
+  "removed_links": [
+    {
+      "tensor_id": 1000000494,
+      "size": 768,
+      "source_core": 2,
+      "target_core": 1,
+      "source_copy_out_id": 1000001528,
+      "target_copy_in_id": 1000001529
+    },
+    {
+      "tensor_id": 1000000483,
+      "size": 32,
+      "source_core": 2,
+      "target_core": 1,
+      "source_copy_out_id": 1000001519,
+      "target_copy_in_id": 1000001520
+    }
+  ],
+  "added_links": [
+    {
+      "tensor_id": 1000000495,
+      "size": 768,
+      "source_core": 2,
+      "target_core": 1,
+      "source_copy_out_id": 1000001525,
+      "target_copy_in_id": 1000001526
+    }
+  ]
+}

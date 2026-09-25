@@ -6,10 +6,10 @@
 
 | 用途 | 当前方式 |
 | --- | --- |
-| 共享源码、材料与历史 | 私有组织仓库、Git 分支/worktree、正常 fetch/push；不使用 LFS 计费存储 |
+| 共享源码、材料与历史 | 公开组织仓库（2026-09-24用户调整）、Git 分支/worktree、正常 fetch/push；不使用 LFS 计费存储 |
 | 任务、通信与审查 | Issues、team-mailbox、PR 和普通代码审查；PR 不按数量收费 |
 | 权威图谱 | 本机 Atlas 与既有签名 Git 同步，无需 Actions |
-| Pro 材料镜像 | 既有本机脚本同步 Vioano 私有副本，两仓库都关闭 Actions |
+| Pro 材料镜像 | 既有本机脚本同步 Vioano 公开副本（2026-09-24用户要求），两仓库都关闭 Actions |
 | 自动测试 | 按范围在已经授权的本机或队友电脑运行，提交真实证据；不启动云端 runner |
 | 上线调度 | 当前 Codex 会话 heartbeat，默认 30 分钟；使用既有 Codex 额度，不是 GitHub 免费计算资源 |
 
