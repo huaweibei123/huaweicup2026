@@ -1,0 +1,9 @@
+# Bounded official E0 pilot runner plan
+
+This is an execution plan, not authorization to execute. The runner is locked to the saved R7 candidate for official case 044 at K=5. It consumes the exact `plan.json` SHA-256 `8eecfa3411b660b7cbffc8951ee7129df2ebb49745128243bbd6e1a3f9b90716` and the graph extracted from `data/raw/a/official-cases.zip` with SHA-256 `9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e`. Official config, evaluator, source set, supervised-process helper and archive are checked against `docs/a/source-manifest.json` and fixed hashes before dispatch.
+
+Use locked Python 3.12 through `uv run --locked python -B -m src.q1_benchmarks.p1_r7_one_e0 --preflight` for admission. Preflight checks hashes and schema and reports zero solver, standalone Task compilation, E0, E1 and E2 calls. It performs no scoring. If a coordinator separately admits the cell, execute exactly one new run ID with `uv run --locked python -B -m src.q1_benchmarks.p1_r7_one_e0 --execute --run-id <unique-id>`.
+
+The execute cap is one worker, at most one E0, 120 seconds per E0, 300 seconds total, zero retries, and stop on the first failure, timeout or source drift. There is no solver call and no standalone Task compilation. Official E0 internally compiles Task; that work is part of the single E0 call. E1/E2 are disabled. Exact graph, candidate, official result, trace, official log, stdout, stderr, per-attempt record, batch record, and hashes stay in a new `runs/<id>/044-k5/` directory; an existing run ID is rejected.
+
+This pilot can establish one official Makespan and reported movement figure for this frozen plan and input. It cannot establish general R7 benefit, a full 100-graph result, solver runtime, or a scientific acceptance. It is prepared only; no evaluator command has been run.
