@@ -169,7 +169,7 @@ class E2BatchEvaluator:
     def _failure(self, index, status, error_type, message, seconds, pid):
         return dict(index=index, status=status, error_type=error_type, message=message,
                     wall_seconds=seconds, worker_pid=pid, cache=None,
-                    problem=self.problem, engine=f'p{self.problem}-e2-native-search-v1', official_code_hash=OFFICIAL_CODE_HASH)
+                    problem=self.problem, engine=f'p{self.problem}-e2-native-search-v1-rank-index', official_code_hash=OFFICIAL_CODE_HASH)
 
     def evaluate_batch(self, plans, *, full=False, **config):
         """Yield at most one worker-sized chunk in order; never retain all results.

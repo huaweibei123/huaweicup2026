@@ -41,16 +41,19 @@ class SceneBEvaluator(E2Evaluator):
         if type(native_enabled) is not bool:
             raise ValueError('native_enabled must be boolean')
         self.problem = problem
-        self.version = f'p{problem}-e2-native-search-v1'
+        self.version = f'p{problem}-e2-native-search-v1-rank-index'
         self._runtime, self._support = load_bundle(problem)
         self._fast_runtime, self._fast_support = load_bundle(problem)
         from ._local_b import install
+        from ._rank_b import install as install_rank
         self._local_error = None
         try:
             self.local_optimization = install(self._fast_support)
+            self.rank_optimization = install_rank(self._fast_runtime)
         except Exception as error:
             self._local_error = str(error)
             self.local_optimization = None
+            self.rank_optimization = None
         self._graph = deepcopy(graph)
         self._lock, self._entries = threading.RLock(), OrderedDict()
         self._limit, self._max_entries = cache_bytes, max_cache_entries
