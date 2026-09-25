@@ -1,0 +1,108 @@
+{
+ "audit_scope": "只读核对 247c6d8c(400条) 与 703fed(502条) 两份 feed 的 attempt 映射与计数；0 solver/E0 调用",
+ "old_feed": {
+  "commit": "247c6d8cab3be929ebea98bbba33543a7b2c3c76",
+  "sha256": "04c312e613c8708dcb2490a0de81aabe20c02b1381498bc37aa6e0baddccbf96",
+  "path": "results/a/board-feed-farmer/20260924/board-feed-20260924T132554Z-farmer-p1-v3.json",
+  "records": 400,
+  "status": {
+   "ok": 388,
+   "timeout": 12
+  },
+  "attempt_id_scheme": "farmeruncle123-P1-<case>-k<N>-seed0-repeat0-v3（无分母行、无 v2arch 区分）"
+ },
+ "new_feed": {
+  "commit": "703fed17ddcfd2a60a96f8ce0acda0cb9ac89143",
+  "sha256": "638c565a5635acc3ddca69d7b7b557ed3892b295318c484d0d0c2d7e91ba4572",
+  "path": "results/a/p123-report-farmer/board-feed-20260924T135603Z-farmer-q1-v3.json",
+  "records": 502,
+  "status": {
+   "ok": 474,
+   "failed": 11,
+   "timeout": 17
+  },
+  "attempt_id_scheme": "farmeruncle123-farmer-q1-v3-20260924-P1-<case>-k<N>-seed0-repeat0[-v2arch] + 100 条 official-singlecore 分母行"
+ },
+ "mapping_verdict": [
+  "old ok 388/388 全部被新 feed 覆盖（0 old-only）",
+  "390 对 ok 格配平：makespan 0 不符；plan_sha256 390/390 相同（同确定性协议同种子 → 同候选字节）",
+  "关系判定：001-016/057-067/090-100（v2 唯一执行）= 同一执行实例；017-037/038-056/068-089 = v3 重跑 + v2 存档并存（两份 attempt 均真实、成本各自成立）；089/k2/k3 为 v2 与 v3 并存特例"
+ ],
+ "authoritative_counts_502": {
+  "eligible(ok, 原件齐全)": 469,
+  "ok 但 result 压缩超 64MiB（014/k2-k4、091/k4-k5）": 5,
+  "failed（no-best）": 11,
+  "timeout": 17,
+  "合计": 502
+ },
+ "33_vs_23_解释": {
+  "权威口径": "33 = 28(11 failed + 17 timeout 未成功) + 5(result.gz 超 64MiB)",
+  "16+7=23 来源": "16:45 容量回执（5818300926）正文误引；无预检文件支持 16/7 口径",
+  "预检历史": [
+   {
+    "file": "board-precheck-20260924T133711Z.txt",
+    "valid": true,
+    "records": 502,
+    "eligible": 0,
+    "reasons": {
+     "评价器固定版本/入口缺失": 391,
+     "artifact hash missin": 83,
+     "未成功的尝试不参与最优选择": 28
+    }
+   },
+   {
+    "file": "board-precheck-20260924T133833Z.txt",
+    "valid": true,
+    "records": 502,
+    "eligible": 0,
+    "reasons": {
+     "[WinError 3] 系统找不到指定": 391,
+     "artifact hash missin": 83,
+     "未成功的尝试不参与最优选择": 28
+    }
+   },
+   {
+    "file": "board-precheck-20260924T134139Z.txt",
+    "valid": true,
+    "records": 502,
+    "eligible": 386,
+    "reasons": {
+     "artifact hash missin": 83,
+     "artifact too large": 5,
+     "未成功的尝试不参与最优选择": 28
+    }
+   },
+   {
+    "file": "board-precheck-20260924T134640Z.txt",
+    "valid": true,
+    "records": 502,
+    "eligible": 469,
+    "reasons": {
+     "artifact too large": 5,
+     "未成功的尝试不参与最优选择": 28
+    }
+   },
+   {
+    "file": "board-precheck-20260924T135603Z.txt",
+    "valid": true,
+    "records": 502,
+    "eligible": 469,
+    "reasons": {
+     "artifact too large": 5,
+     "未成功的尝试不参与最优选择": 28
+    }
+   }
+  ]
+ },
+ "precheck_commands": [
+  "旧 feed（247c6d8c）：python src/benchmark_board/protocol.py <feed> --submission（协议 3b3afdcb）→ 中央已收 400 条、eligible 12",
+  "新 feed（703fed）：python src/benchmark_board/protocol.py <feed> --submission → valid/502/469；提交内模式 --repo . --commit 703fed17 亦 valid/502/469（另一 session 运行）"
+ ],
+ "files": [
+  "attempt-mapping.csv",
+  "reusable-originals.csv",
+  "status-eligible-counts.csv",
+  "precheck-135603Z.json",
+  "audit-summary.json"
+ ]
+}

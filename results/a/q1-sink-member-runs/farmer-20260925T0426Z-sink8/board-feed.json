@@ -1,0 +1,1550 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-005-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "005",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 42167,
+        "solver_wall_seconds": 0.593738099996699,
+        "evaluation_wall_seconds": 1.2262377000006381,
+        "ddr_bytes": 1483664,
+        "extra_ddr_bytes": 1150250,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:35.582Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "245e056e5890ab727ccec586c666323aba47a0def7a3678f76ff7155907583db"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/005/k4/case_005_multicore_res.json",
+          "sha256": "245e056e5890ab727ccec586c666323aba47a0def7a3678f76ff7155907583db"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/005/k4/result.json.gz",
+          "sha256": "cdd4f5bd8486252a57dd75b9434cf0252ca885bca2c5c4092925efead4643a39"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/005/k4/trace.json.gz",
+          "sha256": "82e4e1d3654998a105133e3b40117386f84807ebd1ceecd21682ef8ea2950755"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/005/k4/official.log",
+          "sha256": "a4c69e43bc001c094f8e15b1bae76d29bd4c177917ae7685979ffe1c951eaa48"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/005/k4/run.json",
+          "sha256": "c9c1fcd44490929eb2c7a9eda5335ff5ea37ac5e68c475a66cf38ce6f7a49e98"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-005.json.gz",
+          "sha256": "3efb00f0d7750733b54df72ce2acde81b6bbc510d92771f6414ff985864340a4"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:33.468Z",
+          "finished_at": "2026-09-25T04:26:35.582Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-047-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "047",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 123184,
+        "solver_wall_seconds": 1.1542249000049196,
+        "evaluation_wall_seconds": 3.5886139000067487,
+        "ddr_bytes": 1954488,
+        "extra_ddr_bytes": 1490546,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:40.694Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "7c6328650b8e50e4d15a0ddf1ad0715a40d64d51f3c86c2c3b9c22e4cbb6a83f",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "704d441386efe4af0bad15a667396b88982cefc2c35018d2b2499d00c53fcda9"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/047/k4/case_047_multicore_res.json",
+          "sha256": "704d441386efe4af0bad15a667396b88982cefc2c35018d2b2499d00c53fcda9"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/047/k4/result.json.gz",
+          "sha256": "db45253e323a59d8d6c63fffe5d320c4d505f57e14dd16a1963f03aa253a329d"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/047/k4/trace.json.gz",
+          "sha256": "827f4265856f92353f1c5959c5c45dbee867b2da8df382687a0b6b57dd579b67"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/047/k4/official.log",
+          "sha256": "d7197b931d3d2f1eba6c77b0244d47c357940215dc892671ccc6ba26dfe5467c"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/047/k4/run.json",
+          "sha256": "940416c13b88ea13de83bbcd209f34a560db2f66565d9a70f60f2df4a2e7b88e"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "7c6328650b8e50e4d15a0ddf1ad0715a40d64d51f3c86c2c3b9c22e4cbb6a83f",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-047.json.gz",
+          "sha256": "570a60d5927e1e07c82e7d77157af33eee1296a339ccaa2d2bba19bd60a4b310"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:35.584Z",
+          "finished_at": "2026-09-25T04:26:40.694Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-064-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "064",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 12982,
+        "solver_wall_seconds": 0.48756190000858624,
+        "evaluation_wall_seconds": 0.6502062000072328,
+        "ddr_bytes": 144688,
+        "extra_ddr_bytes": 107274,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:41.967Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "871f65b73fc1da6a48501998fbfde6684fc78e5dd022ddc68085d1384d2e2280",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "5ada1e7d3790f6bac53d0dfde756a8d138aa39972b443628f7888600d4f09dd9"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/064/k4/case_064_multicore_res.json",
+          "sha256": "5ada1e7d3790f6bac53d0dfde756a8d138aa39972b443628f7888600d4f09dd9"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/064/k4/result.json.gz",
+          "sha256": "ba1d8f9aee32958b4a51ac25adb8648c33a4b05bc1a27cc26f838277f4401f43"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/064/k4/trace.json.gz",
+          "sha256": "2e1361f9d1581b21a62f2b42d8deaf95777778abd3a653af44e163fa9becfcf5"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/064/k4/official.log",
+          "sha256": "d69f777d2aee7f418555be8b8e7ae8f997e73909b216d1b8362439855dcec91d"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/064/k4/run.json",
+          "sha256": "6af65ba3d8068b31ccdc0eb6f103a7ab99ba37ef2481128104f0f299f3005a9f"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "871f65b73fc1da6a48501998fbfde6684fc78e5dd022ddc68085d1384d2e2280",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-064.json.gz",
+          "sha256": "2425bbefc1b6c20c04c35fcac843129bdb691bbf5b00765b33d435ebe554f35b"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:40.697Z",
+          "finished_at": "2026-09-25T04:26:41.967Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-069-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "069",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 13107,
+        "solver_wall_seconds": 0.4686920999956783,
+        "evaluation_wall_seconds": 0.6305925000051502,
+        "ddr_bytes": 442208,
+        "extra_ddr_bytes": 316154,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:43.284Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "d91049f81af7682f792840714549e7bf7fa9d6a1adcbf827b74dc605d199ce52"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/069/k4/case_069_multicore_res.json",
+          "sha256": "d91049f81af7682f792840714549e7bf7fa9d6a1adcbf827b74dc605d199ce52"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/069/k4/result.json.gz",
+          "sha256": "90675640e203e88a78b0f5860945fb06807b1774eae234dd0c83cd12f6a03069"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/069/k4/trace.json.gz",
+          "sha256": "6e2a2678b256dc6c1ba41d7f8d6c6b40a448728c9d3682dbb0c807f315f9b25b"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/069/k4/official.log",
+          "sha256": "1ef2e98c364d62705696bfebae27b9454646358ae02ffe167a0d00fa860d3061"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/069/k4/run.json",
+          "sha256": "a7b603ce70ea6dca136306d3bb12484135ab747cda3dfec4b29bcf3e1c5f00bf"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-069.json.gz",
+          "sha256": "a255f440c21f43b045890a66c405288df6705a6b1eafaea6b26ecada92ebc147"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:41.969Z",
+          "finished_at": "2026-09-25T04:26:43.284Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-075-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "075",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 464500,
+        "solver_wall_seconds": 0.8314530000061495,
+        "evaluation_wall_seconds": 1.7201457000046503,
+        "ddr_bytes": 6288504,
+        "extra_ddr_bytes": 4451314,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:46.098Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "5c24beddea6d09e1df3c8f8843d3593b90affb117ba38450fa9bea8a8db3351c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "57e33bb9e970427d54e1d945f660b12a1e45aa7a87baae28ff02ed3bb3bcd02d"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/075/k4/case_075_multicore_res.json",
+          "sha256": "57e33bb9e970427d54e1d945f660b12a1e45aa7a87baae28ff02ed3bb3bcd02d"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/075/k4/result.json.gz",
+          "sha256": "c15bb4577bb63948b2725f5f80bdccd361a990edeb3b7acc8601f211fb3a7699"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/075/k4/trace.json.gz",
+          "sha256": "6fd5c2e69866cffec5a71709a1b62195fb33421803466400d52458b0ec2c6f44"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/075/k4/official.log",
+          "sha256": "e130f15728b6194cffd33a4a51318750f5056fad85a361cd015e503c020dbbbb"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/075/k4/run.json",
+          "sha256": "3ca4ad44a59e1636e9f69f9f4b745b3e35c4cd1423ad9be07e2f01f9c54cc347"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "5c24beddea6d09e1df3c8f8843d3593b90affb117ba38450fa9bea8a8db3351c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-075.json.gz",
+          "sha256": "58784813755a0a2007d093a0fa270c41a2809c64aa0edd6f81ec07592e1017d5"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:43.286Z",
+          "finished_at": "2026-09-25T04:26:46.098Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-082-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "082",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 232100,
+        "solver_wall_seconds": 0.6526041000033729,
+        "evaluation_wall_seconds": 1.1222315000050003,
+        "ddr_bytes": 2300240,
+        "extra_ddr_bytes": 1708234,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:48.047Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "0d12fa1484aa83da9fc10868aeacd28d67a9e1d2bcee785a7faae18e8fabd916"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/082/k4/case_082_multicore_res.json",
+          "sha256": "0d12fa1484aa83da9fc10868aeacd28d67a9e1d2bcee785a7faae18e8fabd916"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/082/k4/result.json.gz",
+          "sha256": "9975bdfdeb9a994568420900bd63e1b0c13c3b60403cb3930442a63faae8e8b6"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/082/k4/trace.json.gz",
+          "sha256": "96b00bb97f29c73eb012d3743c4cbf4d00454a0f778f3e33f0fe9582f4d0b35c"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/082/k4/official.log",
+          "sha256": "760e85e7867c87bcccaa9d194423fca31b79ea0ac279bf20cf3ca3ab6e40744e"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/082/k4/run.json",
+          "sha256": "be96c4c69e61bbfb52565ff0da4f1e5277d55ff2250df55e8bc55f4ae159f94f"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-082.json.gz",
+          "sha256": "b151858b2a5713d3dc763f6369a3736b1912e677806f26c42da56c90e19946c6"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:46.100Z",
+          "finished_at": "2026-09-25T04:26:48.047Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-085-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "085",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 900325,
+        "solver_wall_seconds": 1.5446576999966055,
+        "evaluation_wall_seconds": 4.421106300011161,
+        "ddr_bytes": 8037088,
+        "extra_ddr_bytes": 6347354,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:54.334Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "b63169e9cd0f21dc2da6617e7138472e95937465c703b7e4bf4dbc80125ed4f6",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "63329ec68179be78f30fde652503eaa08c3f401a13545fe87d468aaac46bc27a"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/085/k4/case_085_multicore_res.json",
+          "sha256": "63329ec68179be78f30fde652503eaa08c3f401a13545fe87d468aaac46bc27a"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/085/k4/result.json.gz",
+          "sha256": "96fa778702fe3b6708007e6ccdf7d2d5bfdb2d5e3ba30311e4b5673aab137846"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/085/k4/trace.json.gz",
+          "sha256": "2332a04737d2f8ac6f44d75a1eae86c5222d0b4f3afa6a49b02298564beb9f01"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/085/k4/official.log",
+          "sha256": "f1c3b3775651732343c234b112cd4b8524137fca8b5935f31e8539f2003267f5"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/085/k4/run.json",
+          "sha256": "012192f4c07aa4f460c25ccb8052128deac48efeabc29b0c8f797c47d6f6a673"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "b63169e9cd0f21dc2da6617e7138472e95937465c703b7e4bf4dbc80125ed4f6",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-085.json.gz",
+          "sha256": "c5fc551ed610a15089f26c0b153a5d765edf926c87de21a0bd79b9e767640ed6"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:48.049Z",
+          "finished_at": "2026-09-25T04:26:54.334Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    },
+    {
+      "attempt_id": "farmeruncle123-farmer-20260925T0426Z-sink8-P1-086-k4-r0",
+      "revision": 1,
+      "run_id": "farmer-20260925T0426Z-sink8",
+      "algorithm_id": "q1-sink-peel",
+      "algorithm_name": "P1 sink-exclusive suffix waves",
+      "variant": "exclusive-suffix-waves",
+      "solver_commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+      "parameters": {
+        "cores": 4,
+        "max_rounds": 64,
+        "max_sinks": 64,
+        "base_packet_factor": 4,
+        "base_trigger_ops": 4096,
+        "base_chunk_ops": 1024,
+        "workers": 1,
+        "candidate_limit": 1,
+        "solver_timeout_seconds": 30,
+        "evaluation_timeout_seconds": 60,
+        "batch_timeout_seconds": 600,
+        "stop_policy": "Stop at first failed/timeout cell, supervisor error or source mismatch; preserve all remaining rows as not_run; zero retry",
+        "scoring_backend": "none online; independent official E0 only"
+      },
+      "problem": "P1",
+      "case_id": "086",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 43378,
+        "solver_wall_seconds": 0.7190277000045171,
+        "evaluation_wall_seconds": 1.51142749999417,
+        "ddr_bytes": 1527440,
+        "extra_ddr_bytes": 1189418,
+        "spill_bytes": 0
+      },
+      "runtime_id": "farmer-windows-py31214",
+      "observed_at": "2026-09-25T04:26:56.753Z",
+      "evaluator": {
+        "route": "E0",
+        "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+        "entrypoint": "multicore_cut_evaluate_problem_1.py -> contest_io.run_problem_cli(1)"
+      },
+      "identity": {
+        "graph_sha256": "ef91fda2692fd0add63db3c7f677e4e03c8d115d97db3cb959cffc62fff2434a",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "6b3c1506e74ddcdd3ed2f57a16f5ea92a610452eae6667f20de95272b5f105a2"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/086/k4/case_086_multicore_res.json",
+          "sha256": "6b3c1506e74ddcdd3ed2f57a16f5ea92a610452eae6667f20de95272b5f105a2"
+        },
+        "result": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/086/k4/result.json.gz",
+          "sha256": "3078040ac48b270932e187f7a3661019098414f65f0940fef1caabb37dd9540c"
+        },
+        "trace": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/086/k4/trace.json.gz",
+          "sha256": "e0cd22bf264cd42fcbf3c83ad62a5601ca17dc685460149c539c0916a3349ab1"
+        },
+        "log": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/086/k4/official.log",
+          "sha256": "56c0aca1ed9b8b276fb50fdbf15d75cd14ce73d0e661faec136fa8bfae5ef19a"
+        },
+        "run": {
+          "path": "results/a/q1-sink-member-runs/farmer-20260925T0426Z-sink8/cells/086/k4/run.json",
+          "sha256": "f9e7de9858312e804257830e51867072f51c2e82cb4107c4c5c1488529934b5f"
+        }
+      },
+      "baseline": {
+        "graph_sha256": "ef91fda2692fd0add63db3c7f677e4e03c8d115d97db3cb959cffc62fff2434a",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/a/q1-sink-member-package-20260924/references/singlecore-086.json.gz",
+          "sha256": "df014e5a1560b5c843a028dc500d61dba54caa34b05521dbc7fdb15013e6a832"
+        }
+      },
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "perf_counter outer subprocess wall, includes process completion detection",
+        "utc": "ISO UTC Z; durations from monotonic clocks"
+      },
+      "provenance": {
+        "producer_session": "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/98",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+            "path": "src/q1/sink_peel.py",
+            "entrypoint": "construct"
+          },
+          "authors": [
+            "NikolaStarx"
+          ],
+          "method": "Bounded04 fallback, recursively peel sink-exclusive suffix packets, reverse waves, per-wave pipe-work packing; no online scoring",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2/docs/a/Q1_SINK_PEEL.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "d89a6cbf1e292f2abc36b4fef89590d16ccb1ab2",
+              "path": "src/q1/bounded_tasks.py",
+              "entrypoint": "construct"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+              "path": "src/q1_benchmarks/sink_peel_cli.py",
+              "entrypoint": "main"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "path": "src/q1_benchmarks/sink_member_batch.py",
+            "entrypoint": "run"
+          },
+          "argv": [
+            "python",
+            "-B",
+            "src/q1_benchmarks/sink_member_batch.py",
+            "run",
+            "--run-id",
+            "farmer-20260925T0426Z-sink8",
+            "--expected-runner-commit",
+            "4e6a5b5e6318af460005ce333952884d230e8bf6",
+            "--producer-session",
+            "farmeruncle123/s-e7e5e4b76974459f9f6757cfdc31a84a",
+            "--runtime-id",
+            "farmer-windows-py31214",
+            "--execute-authorized",
+            "--concurrency-context",
+            "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+          "gpu": "none (not used)",
+          "ram_bytes": 16962281472,
+          "python": "3.12.14 (main, Sep  1 2026, 14:17:39) [MSC v.1944 64 bit (AMD64)]",
+          "dependencies": "uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; uv sync --locked required",
+          "threads": null,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-25T04:26:54.336Z",
+          "finished_at": "2026-09-25T04:26:56.753Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Fresh Python process through graph reading, bounded fallback, sink construction, structural validation and plan/diagnostics writes and exit; OS file cache not flushed",
+          "evaluation_scope": "Independent frozen E0 process through complete result/trace/log writes and exit; gzip/export excluded",
+          "budget": {
+            "wall_seconds": 30,
+            "candidate_limit": 1,
+            "stop_reason": "direct candidate complete"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "uv sync --locked before run; no training or case-specific precompute; batch byte verification and ZIP preparation outside per-cell wall, included in batch wall. ZIP extraction seconds=0.04923629999393597",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.measurement.seed": "Deterministic construction does not use RNG",
+          "provenance.environment.threads": "Not sampled; BLAS/OMP/MKL environment set to1",
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not measured"
+        }
+      },
+      "notes": [
+        "Predeclared eight-case development batch, not full100. Only005/047/064/069/075/082/085/086 k4;048/071 are reference-only, not re-evaluated.",
+        "owner-approved window: 7.45GiB free at T0 (mem-obs3.txt); only other load = WorkBuddy app; 1 worker sequential",
+        "Fresh process; OS cache not flushed; runtime comparisons across different machines are descriptive only.",
+        "Baseline and bounded04 originals reused; no baseline rerun. Direct-child timeout cleanup does not supervise arbitrary descendant trees."
+      ]
+    }
+  ]
+}
