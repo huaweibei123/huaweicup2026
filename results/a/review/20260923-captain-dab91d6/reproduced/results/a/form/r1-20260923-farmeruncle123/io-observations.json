@@ -1,0 +1,65 @@
+{
+  "generator": "src/adversarial/verify_io_r1.py",
+  "official_entry": "code/multicore_cut_evaluate_problem_1.py (CLI)",
+  "workdir": "系统临时目录（未写入任何只读官方材料路径）",
+  "observations": [
+    {
+      "case": "A) all defaults (no --config, no -o, no plan positional)",
+      "argv": [
+        "case_001.json"
+      ],
+      "returncode": 0,
+      "stdout_head": [
+        "data movement: scheduled_copy_bytes=1639552, physical_ddr_bytes=1639552",
+        "OK: problem 1 makespan=233110; result=case_001_problem_1_res.json"
+      ],
+      "stderr_head": [],
+      "files_after": [
+        "case_001.json",
+        "case_001_multicore_res.json",
+        "case_001_problem_1_log.txt",
+        "case_001_problem_1_res.json",
+        "case_001_problem_1_trace.json",
+        "config.txt"
+      ],
+      "expected_default_output": "case_001_problem_1_res.json",
+      "expected_default_trace": "case_001_problem_1_trace.json",
+      "expected_default_log": "case_001_problem_1_log.txt",
+      "output_present": true,
+      "trace_present": true,
+      "log_present": true
+    },
+    {
+      "case": "B) missing config.txt next to the graph",
+      "argv": [
+        "case_001.json"
+      ],
+      "returncode": 1,
+      "stderr_first_line": "[EVALUATION ERROR] configuration file not found: config.txt (defaults to <graph dir>/config.txt; pass --config to choose another file)",
+      "stderr_contains_error_prefix": true,
+      "stderr_contains_config_message": true,
+      "exposes_traceback": false,
+      "files_after": [
+        "case_001.json",
+        "case_001_multicore_res.json"
+      ],
+      "result_written": false
+    },
+    {
+      "case": "C) explicit -o",
+      "argv": [
+        "case_001.json",
+        "-o",
+        "my_result.json"
+      ],
+      "returncode": 0,
+      "target_written": true,
+      "default_name_absent": true
+    }
+  ],
+  "limitations": [
+    "只跑了问题 1 的 CLI；问题 2/3 的默认命名未单独验证。",
+    "问题 1 的默认输出/trace/log 命名规则由源码 _common_paths 判定，本探针只抽样验证。",
+    "未构造 --trace-output / --log-output 显式传参的运行。"
+  ]
+}

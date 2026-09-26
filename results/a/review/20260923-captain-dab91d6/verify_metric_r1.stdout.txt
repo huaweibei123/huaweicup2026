@@ -1,0 +1,17 @@
+  chain, no original COPY_OUT, 1 core
+     orig=64 sched=128 added=64 part=64 spill=0 cross=0
+     identities: ALL HOLD
+  chain, WITH original COPY_OUT, 1 core
+     orig=128 sched=128 added=0 part=0 spill=0 cross=0
+     identities: ALL HOLD
+  chain split across 2 cores
+     orig=128 sched=256 added=128 part=128 spill=0 cross=64
+     identities: ALL HOLD
+  shared consumer across 2 cores (cross-task traffic)
+     orig=64 sched=320 added=256 part=256 spill=0 cross=64
+     identities: ALL HOLD
+  spill case: UB capacity 191 forces >=1 spill
+     orig=64 sched=320 added=256 part=128 spill=128 cross=0
+     identities: ALL HOLD
+ALL IDENTITIES HOLD ACROSS ALL CASES: True | spill cases: 1
+evidence: results/a/form/r1-20260923-farmeruncle123/metric-observations.json

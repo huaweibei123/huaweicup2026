@@ -1,0 +1,11 @@
+  UB capacity == 1 tensor (forces reuse): RAISED Step2SchedulingError: [STEP2 ERROR] no spill victim: step=2 op=5 type=UB alloc_resid=128 capacity=64
+  UB capacity == 2 tensors
+     seq=[1, 2, 5, 3, 4] n_mem_deps=2 peak={'L1': 64, 'UB': 128}
+       dep 5 -> 3 kind=WAR reused=64 prev_tensors=[102] pos=['UB']
+       dep 5 -> 4 kind=WAW reused=64 prev_tensors=[106] pos=['UB']
+     MEMORY_REUSE edges: [(5, 3), (5, 4)]
+  UB capacity large (VIRGIN credits only)
+     seq=[1, 2, 5, 3, 4] n_mem_deps=0 peak={'L1': 64, 'UB': 128}
+     MEMORY_REUSE edges: []
+reuse observed: True | cases with 0 mem-dep: 1
+evidence: results/a/form/r1-20260923-farmeruncle123/local2-observations.json

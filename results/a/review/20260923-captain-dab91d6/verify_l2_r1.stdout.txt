@@ -1,0 +1,13 @@
+  3 cores, one tensor consumed by two cores, cache big enough
+     makespan=558 hits=1 misses=2 hit_bytes=600 miss_bytes=1200 hit_rate=0.3333333333333333
+     memory_paths={'DDR': 6, 'CACHE_READ': 1}
+  same graph, cache capacity smaller than one tensor
+     makespan=564 hits=0 misses=3 hit_bytes=0 miss_bytes=1800 hit_rate=0.0
+     memory_paths={'DDR': 7}
+  same graph + a long preceding op on core 2
+     makespan=558 hits=1 misses=2 hit_bytes=600 miss_bytes=1200 hit_rate=0.3333333333333333
+     memory_paths={'DDR': 6, 'CACHE_READ': 1}
+  unequal tensor sizes: 60 vs 600 bytes
+     makespan=549 hits=1 misses=2 hit_bytes=600 miss_bytes=660 hit_rate=0.47619047619047616
+     memory_paths={'DDR': 6, 'CACHE_READ': 1}
+evidence: results/a/form/r1-20260923-farmeruncle123/l2-observations.json

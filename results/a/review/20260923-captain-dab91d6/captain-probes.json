@@ -1,0 +1,1038 @@
+{
+  "reviewed_commit": "dab91d612bd26183e12d30848b13d5fb14e071c7",
+  "seed": null,
+  "config": {
+    "bandwidth": 60,
+    "capacity": {
+      "L1": 524288,
+      "UB": 131072
+    },
+    "cross_core_wait": 1000,
+    "same_core_wait": 100
+  },
+  "unit_records": [
+    {
+      "case": "all_singletons",
+      "domain": "crafted validator view (unit-level)",
+      "view": {
+        "core_orders": {
+          "0": [
+            0
+          ],
+          "1": [
+            1
+          ]
+        },
+        "dependency_pairs": [
+          [
+            0,
+            1
+          ]
+        ],
+        "subgraph_ids": [
+          0,
+          1
+        ]
+      },
+      "documented_early_return_any_le1": true,
+      "source_early_return_all_le1": true,
+      "outcome": "accepted",
+      "error": null
+    },
+    {
+      "case": "reversed_order_plus_empty_core",
+      "domain": "crafted validator view (unit-level)",
+      "view": {
+        "core_orders": {
+          "0": [
+            1,
+            0
+          ],
+          "1": []
+        },
+        "dependency_pairs": [
+          [
+            0,
+            1
+          ]
+        ],
+        "subgraph_ids": [
+          0,
+          1
+        ]
+      },
+      "documented_early_return_any_le1": true,
+      "source_early_return_all_le1": false,
+      "outcome": "rejected",
+      "error": "EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task order]-> 0"
+    },
+    {
+      "case": "reversed_order_plus_singleton",
+      "domain": "crafted validator view (unit-level)",
+      "view": {
+        "core_orders": {
+          "0": [
+            1,
+            0
+          ],
+          "1": [
+            2
+          ]
+        },
+        "dependency_pairs": [
+          [
+            0,
+            1
+          ]
+        ],
+        "subgraph_ids": [
+          0,
+          1,
+          2
+        ]
+      },
+      "documented_early_return_any_le1": true,
+      "source_early_return_all_le1": false,
+      "outcome": "rejected",
+      "error": "EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task order]-> 0"
+    },
+    {
+      "case": "forward_order_plus_empty_core",
+      "domain": "crafted validator view (unit-level)",
+      "view": {
+        "core_orders": {
+          "0": [
+            0,
+            1
+          ],
+          "1": []
+        },
+        "dependency_pairs": [
+          [
+            0,
+            1
+          ]
+        ],
+        "subgraph_ids": [
+          0,
+          1
+        ]
+      },
+      "documented_early_return_any_le1": true,
+      "source_early_return_all_le1": false,
+      "outcome": "accepted",
+      "error": null
+    }
+  ],
+  "timing_records": [
+    {
+      "family": "two_independent_chains",
+      "variant": "two_tasks_one_active_core",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 2,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 3,
+            "op": "COPY_OUT",
+            "pipe": "PIPE_MTE3",
+            "cycles": 0
+          },
+          {
+            "id": 11,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 12,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 13,
+            "op": "COPY_OUT",
+            "pipe": "PIPE_MTE3",
+            "cycles": 0
+          }
+        ],
+        "tensors": [
+          {
+            "id": 100,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 101,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 102,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 200,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 201,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 202,
+            "pos": "DDR",
+            "size": 600
+          }
+        ],
+        "edges": [
+          {
+            "source": 100,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 101
+          },
+          {
+            "source": 101,
+            "target": 2
+          },
+          {
+            "source": 2,
+            "target": 102
+          },
+          {
+            "source": 102,
+            "target": 3
+          },
+          {
+            "source": 200,
+            "target": 11
+          },
+          {
+            "source": 11,
+            "target": 201
+          },
+          {
+            "source": 201,
+            "target": 12
+          },
+          {
+            "source": 12,
+            "target": 202
+          },
+          {
+            "source": 202,
+            "target": 13
+          }
+        ]
+      },
+      "graph_sha256": "fba37927cee7f9f56c8804f3124e8a873a2522039eea5a55ec44d331e8f91b52",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "12": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "partition_sha256": "2e77ca772ebe0507e9730a3a96c4cb6f858e34eb57852bd790a6282e806173df",
+      "makespan": 148,
+      "num_cores": 2,
+      "ddr_contention_log": [
+        {
+          "time": 0,
+          "issued": {
+            "task_id": 0,
+            "op_id": 14,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 14,
+              "end": 10
+            }
+          ]
+        },
+        {
+          "time": 14,
+          "issued": {
+            "task_id": 0,
+            "op_id": 15,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 15,
+              "end": 24
+            }
+          ]
+        },
+        {
+          "time": 124,
+          "issued": {
+            "task_id": 1,
+            "op_id": 16,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 16,
+              "end": 134
+            }
+          ]
+        },
+        {
+          "time": 138,
+          "issued": {
+            "task_id": 1,
+            "op_id": 17,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 17,
+              "end": 148
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "two_independent_chains",
+      "variant": "two_tasks_two_active_cores",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 2,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 3,
+            "op": "COPY_OUT",
+            "pipe": "PIPE_MTE3",
+            "cycles": 0
+          },
+          {
+            "id": 11,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 12,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 13,
+            "op": "COPY_OUT",
+            "pipe": "PIPE_MTE3",
+            "cycles": 0
+          }
+        ],
+        "tensors": [
+          {
+            "id": 100,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 101,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 102,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 200,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 201,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 202,
+            "pos": "DDR",
+            "size": 600
+          }
+        ],
+        "edges": [
+          {
+            "source": 100,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 101
+          },
+          {
+            "source": 101,
+            "target": 2
+          },
+          {
+            "source": 2,
+            "target": 102
+          },
+          {
+            "source": 102,
+            "target": 3
+          },
+          {
+            "source": 200,
+            "target": 11
+          },
+          {
+            "source": 11,
+            "target": 201
+          },
+          {
+            "source": 201,
+            "target": 12
+          },
+          {
+            "source": 12,
+            "target": 202
+          },
+          {
+            "source": 202,
+            "target": 13
+          }
+        ]
+      },
+      "graph_sha256": "fba37927cee7f9f56c8804f3124e8a873a2522039eea5a55ec44d331e8f91b52",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "12": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "partition_sha256": "2e77ca772ebe0507e9730a3a96c4cb6f858e34eb57852bd790a6282e806173df",
+      "makespan": 44,
+      "num_cores": 2,
+      "ddr_contention_log": [
+        {
+          "time": 0,
+          "issued": {
+            "task_id": 0,
+            "op_id": 14,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 14,
+              "end": 10
+            }
+          ]
+        },
+        {
+          "time": 0,
+          "issued": {
+            "task_id": 1,
+            "op_id": 16,
+            "core_id": 1,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 2,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 14,
+              "end": 20
+            },
+            {
+              "task_id": 1,
+              "op_id": 16,
+              "end": 20
+            }
+          ]
+        },
+        {
+          "time": 24,
+          "issued": {
+            "task_id": 0,
+            "op_id": 15,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 15,
+              "end": 34
+            }
+          ]
+        },
+        {
+          "time": 24,
+          "issued": {
+            "task_id": 1,
+            "op_id": 17,
+            "core_id": 1,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 2,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 15,
+              "end": 44
+            },
+            {
+              "task_id": 1,
+              "op_id": 17,
+              "end": 44
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "dependent_pair",
+      "variant": "one_core",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 2,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 3,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          }
+        ],
+        "tensors": [
+          {
+            "id": 100,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 101,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 102,
+            "pos": "UB",
+            "size": 600
+          },
+          {
+            "id": 103,
+            "pos": "UB",
+            "size": 600
+          }
+        ],
+        "edges": [
+          {
+            "source": 100,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 101
+          },
+          {
+            "source": 101,
+            "target": 2
+          },
+          {
+            "source": 2,
+            "target": 102
+          },
+          {
+            "source": 102,
+            "target": 3
+          },
+          {
+            "source": 3,
+            "target": 103
+          }
+        ]
+      },
+      "graph_sha256": "b55bf7ec4fb2fde28f9892693c06903c2c89264ca6fdebeae50f06683ebd9473",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "partition_sha256": "4b8a08eb80cd79f40404a251b5d328115b7bc521356b500cce6d8dd08fbf7f23",
+      "makespan": 148,
+      "num_cores": 1,
+      "ddr_contention_log": [
+        {
+          "time": 0,
+          "issued": {
+            "task_id": 0,
+            "op_id": 4,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 4,
+              "end": 10
+            }
+          ]
+        },
+        {
+          "time": 14,
+          "issued": {
+            "task_id": 0,
+            "op_id": 5,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 5,
+              "end": 24
+            }
+          ]
+        },
+        {
+          "time": 124,
+          "issued": {
+            "task_id": 1,
+            "op_id": 6,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 6,
+              "end": 134
+            }
+          ]
+        },
+        {
+          "time": 138,
+          "issued": {
+            "task_id": 1,
+            "op_id": 7,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 7,
+              "end": 148
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "dependent_pair",
+      "variant": "same_assignment_extra_idle_core",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 2,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 3,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          }
+        ],
+        "tensors": [
+          {
+            "id": 100,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 101,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 102,
+            "pos": "UB",
+            "size": 600
+          },
+          {
+            "id": 103,
+            "pos": "UB",
+            "size": 600
+          }
+        ],
+        "edges": [
+          {
+            "source": 100,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 101
+          },
+          {
+            "source": 101,
+            "target": 2
+          },
+          {
+            "source": 2,
+            "target": 102
+          },
+          {
+            "source": 102,
+            "target": 3
+          },
+          {
+            "source": 3,
+            "target": 103
+          }
+        ]
+      },
+      "graph_sha256": "b55bf7ec4fb2fde28f9892693c06903c2c89264ca6fdebeae50f06683ebd9473",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "partition_sha256": "4b8a08eb80cd79f40404a251b5d328115b7bc521356b500cce6d8dd08fbf7f23",
+      "makespan": 148,
+      "num_cores": 2,
+      "ddr_contention_log": [
+        {
+          "time": 0,
+          "issued": {
+            "task_id": 0,
+            "op_id": 4,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 4,
+              "end": 10
+            }
+          ]
+        },
+        {
+          "time": 14,
+          "issued": {
+            "task_id": 0,
+            "op_id": 5,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 5,
+              "end": 24
+            }
+          ]
+        },
+        {
+          "time": 124,
+          "issued": {
+            "task_id": 1,
+            "op_id": 6,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 6,
+              "end": 134
+            }
+          ]
+        },
+        {
+          "time": 138,
+          "issued": {
+            "task_id": 1,
+            "op_id": 7,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 7,
+              "end": 148
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "family": "dependent_pair",
+      "variant": "different_assignment_two_active_cores",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "COPY_IN",
+            "pipe": "PIPE_MTE2",
+            "cycles": 0
+          },
+          {
+            "id": 2,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          },
+          {
+            "id": 3,
+            "op": "VADD",
+            "pipe": "PIPE_V",
+            "cycles": 4
+          }
+        ],
+        "tensors": [
+          {
+            "id": 100,
+            "pos": "DDR",
+            "size": 600
+          },
+          {
+            "id": 101,
+            "pos": "L1",
+            "size": 600
+          },
+          {
+            "id": 102,
+            "pos": "UB",
+            "size": 600
+          },
+          {
+            "id": 103,
+            "pos": "UB",
+            "size": 600
+          }
+        ],
+        "edges": [
+          {
+            "source": 100,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 101
+          },
+          {
+            "source": 101,
+            "target": 2
+          },
+          {
+            "source": 2,
+            "target": 102
+          },
+          {
+            "source": 102,
+            "target": 3
+          },
+          {
+            "source": 3,
+            "target": 103
+          }
+        ]
+      },
+      "graph_sha256": "b55bf7ec4fb2fde28f9892693c06903c2c89264ca6fdebeae50f06683ebd9473",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "partition_sha256": "4b8a08eb80cd79f40404a251b5d328115b7bc521356b500cce6d8dd08fbf7f23",
+      "makespan": 1048,
+      "num_cores": 2,
+      "ddr_contention_log": [
+        {
+          "time": 0,
+          "issued": {
+            "task_id": 0,
+            "op_id": 4,
+            "core_id": 0,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 4,
+              "end": 10
+            }
+          ]
+        },
+        {
+          "time": 14,
+          "issued": {
+            "task_id": 0,
+            "op_id": 5,
+            "core_id": 0,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 0,
+              "op_id": 5,
+              "end": 24
+            }
+          ]
+        },
+        {
+          "time": 1024,
+          "issued": {
+            "task_id": 1,
+            "op_id": 6,
+            "core_id": 1,
+            "pipe": "PIPE_MTE2"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 6,
+              "end": 1034
+            }
+          ]
+        },
+        {
+          "time": 1038,
+          "issued": {
+            "task_id": 1,
+            "op_id": 7,
+            "core_id": 1,
+            "pipe": "PIPE_MTE3"
+          },
+          "active_count": 1,
+          "projected_ends": [
+            {
+              "task_id": 1,
+              "op_id": 7,
+              "end": 1048
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No E1/E2 candidate was available. These checks do not validate a fast evaluator.",
+    "Unit validator mismatch is a FORM text quantifier error; public entry may reject earlier.",
+    "Timing controls concern chosen plans, not the optimal achievable makespan as core budget grows."
+  ]
+}

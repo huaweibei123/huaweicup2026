@@ -1,0 +1,316 @@
+{
+  "run_id": "r1-20260923-farmeruncle123",
+  "bin": "first batch of development counterexamples",
+  "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "bandwidth": 60,
+  "capacity": {
+    "L1": 524288,
+    "UB": 131072
+  },
+  "seed": null,
+  "covered_groups": [
+    "合法性/组合环",
+    "搬运统计",
+    "取整/同刻事件（仅边界 COPY 取整）"
+  ],
+  "not_covered_groups": [
+    "Step3 固定 FIFO 与内存复用",
+    "spill/容量临界",
+    "L2 同时 miss/FIFO"
+  ],
+  "note": "Not covered groups are listed as gaps, not as passes. No E0 call, no makespan, no quality claim.",
+  "observations": [
+    {
+      "sample_id": "S-PLAN-QUOTIENT-CYCLE",
+      "outcome": "rejected",
+      "error": "MulticoreCutError: contracted subgraph graph contains a cycle"
+    },
+    {
+      "sample_id": "S-PLAN-EMPTY-CORE",
+      "outcome": "accepted",
+      "num_cores": 4,
+      "subgraph_ids": [
+        0,
+        1,
+        2
+      ],
+      "dependency_pairs": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "sample_id": "S-PLAN-ID-LEADING-ZERO",
+      "outcome": "rejected",
+      "error": "MulticoreCutError: node_to_subgraph contains duplicate integer op ids"
+    },
+    {
+      "sample_id": "S-PLAN-COPY-IN-ASSIGNED",
+      "outcome": "rejected",
+      "error": "MulticoreCutError: node_to_subgraph must exactly cover non-COPY ops; missing=[] extra=[1, 4]"
+    },
+    {
+      "sample_id": "S-TASK-SHARED-1REMOTE",
+      "outcome": "accepted",
+      "cross_task_traffic": 64,
+      "traffic": {
+        "original_graph_copy_bytes": 128,
+        "scheduled_copy_bytes": 320,
+        "added_copy_bytes": 192,
+        "partition_added_copy_bytes": 192,
+        "spill_added_copy_bytes": 0
+      },
+      "generated_copy_cycles": {
+        "0": {
+          "6": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "7": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        },
+        "1": {
+          "8": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "9": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          },
+          "10": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        }
+      },
+      "rewritten_pos": {
+        "0": {},
+        "1": {}
+      }
+    },
+    {
+      "sample_id": "S-TASK-SHARED-2REMOTE",
+      "outcome": "accepted",
+      "cross_task_traffic": 128,
+      "traffic": {
+        "original_graph_copy_bytes": 128,
+        "scheduled_copy_bytes": 384,
+        "added_copy_bytes": 256,
+        "partition_added_copy_bytes": 256,
+        "spill_added_copy_bytes": 0
+      },
+      "generated_copy_cycles": {
+        "0": {
+          "6": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "7": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        },
+        "1": {
+          "8": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "9": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        },
+        "2": {
+          "10": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "11": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        }
+      },
+      "rewritten_pos": {
+        "0": {},
+        "1": {},
+        "2": {}
+      }
+    },
+    {
+      "sample_id": "S-TASK-COPYOUT-BOUNDARY",
+      "outcome": "accepted",
+      "cross_task_traffic": 0,
+      "traffic": {
+        "original_graph_copy_bytes": 192,
+        "scheduled_copy_bytes": 256,
+        "added_copy_bytes": 64,
+        "partition_added_copy_bytes": 64,
+        "spill_added_copy_bytes": 0
+      },
+      "generated_copy_cycles": {
+        "0": {
+          "7": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "8": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          },
+          "9": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          },
+          "10": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        }
+      },
+      "rewritten_pos": {
+        "0": {}
+      }
+    },
+    {
+      "sample_id": "S-TASK-DDR-REWRITE",
+      "outcome": "accepted",
+      "cross_task_traffic": 0,
+      "traffic": {
+        "original_graph_copy_bytes": 128,
+        "scheduled_copy_bytes": 192,
+        "added_copy_bytes": 64,
+        "partition_added_copy_bytes": 64,
+        "spill_added_copy_bytes": 0
+      },
+      "generated_copy_cycles": {
+        "0": {
+          "6": {
+            "op": "COPY_IN",
+            "cycles": 2
+          },
+          "7": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          },
+          "8": {
+            "op": "COPY_OUT",
+            "cycles": 2
+          }
+        }
+      },
+      "rewritten_pos": {
+        "0": {
+          "105": "UB"
+        }
+      }
+    },
+    {
+      "sample_id": "S-ROUND-SIZE-1",
+      "outcome": "accepted",
+      "cross_task_traffic": 2,
+      "traffic": {
+        "original_graph_copy_bytes": 2,
+        "scheduled_copy_bytes": 6,
+        "added_copy_bytes": 4,
+        "partition_added_copy_bytes": 4,
+        "spill_added_copy_bytes": 0
+      },
+      "generated_copy_cycles": {
+        "0": {
+          "6": {
+            "op": "COPY_IN",
+            "cycles": 1
+          },
+          "7": {
+            "op": "COPY_OUT",
+            "cycles": 1
+          }
+        },
+        "1": {
+          "8": {
+            "op": "COPY_IN",
+            "cycles": 1
+          },
+          "9": {
+            "op": "COPY_OUT",
+            "cycles": 1
+          }
+        },
+        "2": {
+          "10": {
+            "op": "COPY_IN",
+            "cycles": 1
+          },
+          "11": {
+            "op": "COPY_OUT",
+            "cycles": 1
+          }
+        }
+      },
+      "rewritten_pos": {
+        "0": {},
+        "1": {},
+        "2": {}
+      }
+    },
+    {
+      "sample_id": "S-ROUND-SIZE-0",
+      "outcome": "accepted",
+      "cross_task_traffic": 0,
+      "traffic": {
+        "original_graph_copy_bytes": 0,
+        "scheduled_copy_bytes": 0,
+        "added_copy_bytes": 0,
+        "partition_added_copy_bytes": 0,
+        "spill_added_copy_bytes": 0
+      },
+      "generated_copy_cycles": {
+        "0": {
+          "6": {
+            "op": "COPY_IN",
+            "cycles": 1
+          },
+          "7": {
+            "op": "COPY_OUT",
+            "cycles": 1
+          }
+        },
+        "1": {
+          "8": {
+            "op": "COPY_IN",
+            "cycles": 1
+          },
+          "9": {
+            "op": "COPY_OUT",
+            "cycles": 1
+          }
+        },
+        "2": {
+          "10": {
+            "op": "COPY_IN",
+            "cycles": 1
+          },
+          "11": {
+            "op": "COPY_OUT",
+            "cycles": 1
+          }
+        }
+      },
+      "rewritten_pos": {
+        "0": {},
+        "1": {},
+        "2": {}
+      }
+    }
+  ]
+}

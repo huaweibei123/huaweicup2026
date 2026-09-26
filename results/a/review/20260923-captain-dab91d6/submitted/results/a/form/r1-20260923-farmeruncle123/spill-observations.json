@@ -1,0 +1,77 @@
+{
+  "run_id": "r1-20260923-farmeruncle123",
+  "scope": "F-LOCAL gap probe: Step2 spill vs per-position capacity",
+  "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "seed": null,
+  "task_local_graph": {
+    "n_ops": 12,
+    "n_tensors": 13
+  },
+  "ub_tensor_count": 8,
+  "ub_bytes_total": 512,
+  "seq_len": 12,
+  "note": "Counts and victim ids only. A capacity below the peak live set that has no idle tensor at the triggering step raises Step2SchedulingError instead of spilling - that is an observed behaviour, not a claimed defect.",
+  "records": [
+    {
+      "capacity_ub": 131072,
+      "outcome": "completed",
+      "n_spills": 0,
+      "victims": [],
+      "spilled_sizes": [],
+      "reload_copies_data": [],
+      "n_new_ops": 0
+    },
+    {
+      "capacity_ub": 512,
+      "outcome": "completed",
+      "n_spills": 0,
+      "victims": [],
+      "spilled_sizes": [],
+      "reload_copies_data": [],
+      "n_new_ops": 0
+    },
+    {
+      "capacity_ub": 448,
+      "outcome": "completed",
+      "n_spills": 0,
+      "victims": [],
+      "spilled_sizes": [],
+      "reload_copies_data": [],
+      "n_new_ops": 0
+    },
+    {
+      "capacity_ub": 384,
+      "outcome": "completed",
+      "n_spills": 0,
+      "victims": [],
+      "spilled_sizes": [],
+      "reload_copies_data": [],
+      "n_new_ops": 0
+    },
+    {
+      "capacity_ub": 320,
+      "outcome": "completed",
+      "n_spills": 0,
+      "victims": [],
+      "spilled_sizes": [],
+      "reload_copies_data": [],
+      "n_new_ops": 0
+    },
+    {
+      "capacity_ub": 256,
+      "outcome": "completed",
+      "n_spills": 0,
+      "victims": [],
+      "spilled_sizes": [],
+      "reload_copies_data": [],
+      "n_new_ops": 0
+    },
+    {
+      "capacity_ub": 192,
+      "outcome": "raised",
+      "error": "Step2SchedulingError: [STEP2 ERROR] no spill victim: step=6 op=8 type=UB alloc_resid=256 capacity=192 current_tids=[104, 105, 106, 109] active(tid,size,next_use)=[(104, 64, 8), (105, 64, 6), (106, 64, 6), (109, 64, 7)]"
+    }
+  ],
+  "group_status": "PARTIAL - mechanism identified, no successful run with >=1 spill achieved in this batch",
+  "open_question": "本批 3 种拓扑均未取得含 >=1 spill 的成功运行：容量 >= 峰值存活集则完成且 0 spill；容量低于峰值且触发 step 不存在『本 step 未被消费』的存活 tensor 时，step2 抛 Step2SchedulingError: no spill victim。要出现真实 spill，必须同时满足『超容量』与『该 step 存在空闲存活 tensor』两条。仍属未覆盖，不得当作通过。"
+}

@@ -1,0 +1,66 @@
+{
+  "verifier": "src/adversarial/verify_ranking_fixture.py",
+  "fixture": "tests/adversarial/ranking-inversion-pair.json",
+  "official_entry": "multicore_cut_evaluate_problem_1.evaluate_scene_a",
+  "results": {
+    "a": {
+      "label": "dependency crosses cores",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "claimed_makespan": 1052,
+      "observed_makespan": 1052,
+      "observed_cross_task_traffic": 256,
+      "observed_added_copy_bytes": 768,
+      "observed_partition_added_copy_bytes": 768,
+      "matches_claim": true
+    },
+    "b": {
+      "label": "dependency kept on one core",
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "claimed_makespan": 152,
+      "observed_makespan": 152,
+      "observed_cross_task_traffic": 256,
+      "observed_added_copy_bytes": 768,
+      "observed_partition_added_copy_bytes": 768,
+      "matches_claim": true
+    }
+  },
+  "metrics_identical_between_a_and_b": true,
+  "metrics_match_fixture": true,
+  "observed_delta_makespan": 900,
+  "claimed_delta_makespan": 900,
+  "delta_matches_claim": true,
+  "all_claims_verified": true,
+  "limitations": [
+    "微型构造图，不代表正式用例。",
+    "未使用 E1/E2 代价模型；真值只来自官方入口。"
+  ]
+}

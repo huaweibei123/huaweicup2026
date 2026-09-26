@@ -1,0 +1,19 @@
+  A) same graph-input tensor consumed by two cores, ample cache
+     hits=0 misses=2 hit_rate=0.0 makespan=44
+     events_by_time={'0': ['miss', 'miss'], '20': ['insert']}
+     simultaneous_miss_times=[0]
+     evictions=[]
+     final_entries=[{'tensor_id': 200, 'size_bytes': 600}]
+  B) same, but cache smaller than one tensor (SIZE-1)
+     hits=0 misses=2 hit_rate=0.0 makespan=44
+     events_by_time={'0': ['miss', 'miss']}
+     simultaneous_miss_times=[0]
+     evictions=[]
+     final_entries=[]
+  C) two DISTINCT graph-input tensors, cache holds only one tensor
+     hits=0 misses=2 hit_rate=0.0 makespan=44
+     events_by_time={'0': ['miss', 'miss'], '20': ['insert', 'insert']}
+     simultaneous_miss_times=[0]
+     evictions=[(20, 210, [200])]
+     final_entries=[{'tensor_id': 210, 'size_bytes': 600}]
+evidence: results/a/form/r1-20260923-farmeruncle123/l2b-observations.json

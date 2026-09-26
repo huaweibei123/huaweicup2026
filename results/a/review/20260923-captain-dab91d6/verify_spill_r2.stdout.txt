@@ -1,0 +1,30 @@
+seq: [1, 2, 3, 4, 5, 6, 7, 8, 9] | UB tensors: 8 total bytes: 512
+  capUB=131072  spills=0   overflow=[]
+        seq_ext=[1, 2, 3, 4, 5, 6, 7, 8, 9]
+        new_ops=[]
+        renamed=[]
+        cache_keys=None
+  capUB=256     spills=0   overflow=[]
+        seq_ext=[1, 2, 3, 4, 5, 6, 7, 8, 9]
+        new_ops=[]
+        renamed=[]
+        cache_keys=None
+  capUB=192     spills=0   overflow=[]
+        seq_ext=[1, 2, 3, 4, 5, 6, 7, 8, 9]
+        new_ops=[]
+        renamed=[]
+        cache_keys=None
+  capUB=191     spills=1   overflow=[{'step': 3, 'type': 'UB', 'resid': 192, 'capacity': 191}]
+        victim tid=102 size=64 prev_use_step=2 next_use_step=8 prev_use_op=3 next_use_op=9 to_tid=113 v1 copies_data=True
+        seq_ext=[1, 2, 3, 110, 4, 5, 6, 7, 8, 111, 9]
+        new_ops=[(110, 'COPY_OUT'), (111, 'COPY_IN')]
+        renamed=[(113, 102, 1)]
+        cache_keys={'102': {'pos': 'UB', 'size': 64, 'logical_tid': None, 'cache_key_if_copy_in_out_tid': 102}, '113': {'pos': 'UB', 'size': 64, 'logical_tid': 102, 'cache_key_if_copy_in_out_tid': 102}}
+  capUB=128     spills=1   overflow=[{'step': 3, 'type': 'UB', 'resid': 192, 'capacity': 128}]
+        victim tid=102 size=64 prev_use_step=2 next_use_step=8 prev_use_op=3 next_use_op=9 to_tid=113 v1 copies_data=True
+        seq_ext=[1, 2, 3, 110, 4, 5, 6, 7, 8, 111, 9]
+        new_ops=[(110, 'COPY_OUT'), (111, 'COPY_IN')]
+        renamed=[(113, 102, 1)]
+        cache_keys={'102': {'pos': 'UB', 'size': 64, 'logical_tid': None, 'cache_key_if_copy_in_out_tid': 102}, '113': {'pos': 'UB', 'size': 64, 'logical_tid': 102, 'cache_key_if_copy_in_out_tid': 102}}
+  capUB=64      RAISED Step2SchedulingError: [STEP2 ERROR] no spill victim: step=2 op=3 type=UB alloc_resid=128 capacity=64 current_t
+evidence: results/a/form/r1-20260923-farmeruncle123/spill2-observations.json

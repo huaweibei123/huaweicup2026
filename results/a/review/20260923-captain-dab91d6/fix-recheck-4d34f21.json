@@ -1,0 +1,90 @@
+{
+  "candidate_commit": "4d34f21fc113e456ee0fe7ef1dae9ee5a56319c5",
+  "reviewed_at_utc": "2026-09-23T10:00:34.167937+00:00",
+  "runs": [
+    {
+      "script": "src/adversarial/verify_fexec_r2.py",
+      "exit_code": 0,
+      "report": "results/a/form/r1-20260923-farmeruncle123/fexec2-observations.json",
+      "byte_equal_to_submitted": true,
+      "sha256": "f34c5fdbf6b414e16d6a23dcefd28e78e5f9f16772c720ffd6bf4f06d6cd4deb",
+      "stdout": "  A) core0=[1,0] (len 2), core1=[] (len 0); dependency 0->1\n     -> rejected | EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task orde\n  B) core0=[1,0] (len 2), core1=[2] (len 1, independent); dependency 0->1\n     -> rejected | EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task orde\n  C) control: core0=[0,1] (forward), core1=[]; dependency 0->1\n     -> accepted\n  D) control: core0=[0], core1=[1]; dependency 0->1\n     -> accepted\n  E) control: single core, one subgraph\n     -> accepted\n  F) core0=[1,0] only (no other core); dependency 0->1\n     -> rejected | EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task orde\nevidence: results/a/form/r1-20260923-farmeruncle123/fexec2-observations.json\n",
+      "stderr": ""
+    },
+    {
+      "script": "src/adversarial/verify_cores_r1.py",
+      "exit_code": 0,
+      "report": "results/a/form/r1-20260923-farmeruncle123/cores-observations.json",
+      "byte_equal_to_submitted": true,
+      "sha256": "f65daf8344ea92f781b6a1e972d4049c8388caca7d1d0331d0a022095f1dfa08",
+      "stdout": "  independent chains | core_schedules=[[0,1],[]]: makespan=148 num_cores=2\n  independent chains | core_schedules=[[0],[1]]: makespan=44 num_cores=2\n  dependent segments | core_schedules=[[0,1]]  (1 core): makespan=148 num_cores=1\n  dependent segments | core_schedules=[[0,1],[]]  (add EMPTY core): makespan=148 num_cores=2\n  dependent segments | core_schedules=[[0],[1]]  (split across 2 cores): makespan=1048 num_cores=2\n  bandwidth contention: ONE chain on 1 core (half the workload): makespan=24 num_cores=1\n  bandwidth contention: TWO chains on 2 cores: makespan=44 num_cores=2\nevidence: results/a/form/r1-20260923-farmeruncle123/cores-observations.json\n",
+      "stderr": ""
+    }
+  ],
+  "changed_rule_ids": [
+    "F-EXEC-001",
+    "F-RESOURCE-001"
+  ],
+  "quantifier_truth_table": [
+    {
+      "case": "A) core0=[1,0] (len 2), core1=[] (len 0); dependency 0->1",
+      "lengths": [
+        2,
+        0
+      ],
+      "correct_all_le1": false,
+      "wrong_any_le1": true,
+      "discriminates_quantifiers": true
+    },
+    {
+      "case": "B) core0=[1,0] (len 2), core1=[2] (len 1, independent); dependency 0->1",
+      "lengths": [
+        2,
+        1
+      ],
+      "correct_all_le1": false,
+      "wrong_any_le1": true,
+      "discriminates_quantifiers": true
+    },
+    {
+      "case": "C) control: core0=[0,1] (forward), core1=[]; dependency 0->1",
+      "lengths": [
+        2,
+        0
+      ],
+      "correct_all_le1": false,
+      "wrong_any_le1": true,
+      "discriminates_quantifiers": true
+    },
+    {
+      "case": "D) control: core0=[0], core1=[1]; dependency 0->1",
+      "lengths": [
+        1,
+        1
+      ],
+      "correct_all_le1": true,
+      "wrong_any_le1": true,
+      "discriminates_quantifiers": false
+    },
+    {
+      "case": "E) control: single core, one subgraph",
+      "lengths": [
+        1
+      ],
+      "correct_all_le1": true,
+      "wrong_any_le1": true,
+      "discriminates_quantifiers": false
+    },
+    {
+      "case": "F) core0=[1,0] only (no other core); dependency 0->1",
+      "lengths": [
+        2
+      ],
+      "correct_all_le1": false,
+      "wrong_any_le1": false,
+      "discriminates_quantifiers": false
+    }
+  ],
+  "finding": "R1的核心谓词与R2同图对照修正已复现；verify_fexec_r2.py 的F用例备注仍错：只有一个长度2的核时any(len<=1)=False，错误量词也不会提前return。该例只是逆序拒绝对照，不是区分两量词的反例。",
+  "acceptance": "Targeted fixes mostly confirmed; one new explanatory error remains; not full FORM acceptance."
+}

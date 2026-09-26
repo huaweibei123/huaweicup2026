@@ -1,0 +1,202 @@
+{
+  "generator": "src/adversarial/verify_local2_r1.py",
+  "official_entries": [
+    "schedule_step3.step3_simulation",
+    "schedule_step2._build_extended_graph"
+  ],
+  "mechanism_from_source": {
+    "add_free_credit": "sources = consumers if consumers else producers; kind = 'WAR' if consumers else 'WAW'",
+    "virgin_credit": "{'kind': 'VIRGIN', 'sources': ()} —— 初始未用容量",
+    "consume_free_credit": "FIFO 取 credits[0]；对每个 source_op != producer_op 记 (source_op -> producer_op) 依赖",
+    "materialization": "memory_dependencies -> execution_graph 边，带 dependency='MEMORY_REUSE'；已存在的边不重复添加"
+  },
+  "cases": [
+    {
+      "case": "UB capacity == 1 tensor (forces reuse)",
+      "capacity": {
+        "L1": 524288,
+        "UB": 64
+      },
+      "seq": [
+        1,
+        2,
+        5,
+        3,
+        4
+      ],
+      "outcome": "raised",
+      "error": "Step2SchedulingError: [STEP2 ERROR] no spill victim: step=2 op=5 type=UB alloc_resid=128 capacity=64 current_tids=[102, 106] active(tid,size,next_use)=[(102, 64, 2), (106, 64, None)]"
+    },
+    {
+      "case": "UB capacity == 2 tensors",
+      "capacity": {
+        "L1": 524288,
+        "UB": 128
+      },
+      "seq": [
+        1,
+        2,
+        5,
+        3,
+        4
+      ],
+      "outcome": "ok",
+      "memory_dependencies": [
+        {
+          "source": 5,
+          "target": 3,
+          "kind": "WAR",
+          "positions": [
+            "UB"
+          ],
+          "reused_bytes": 64,
+          "previous_tensor_ids": [
+            102
+          ]
+        },
+        {
+          "source": 5,
+          "target": 4,
+          "kind": "WAW",
+          "positions": [
+            "UB"
+          ],
+          "reused_bytes": 64,
+          "previous_tensor_ids": [
+            106
+          ]
+        }
+      ],
+      "n_memory_dependencies": 2,
+      "memory_peak": {
+        "L1": 64,
+        "UB": 128
+      },
+      "makespan_local": 18,
+      "memory_reuse_edges": [
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "real_data_edges": [
+        [
+          1,
+          101
+        ],
+        [
+          2,
+          102
+        ],
+        [
+          3,
+          103
+        ],
+        [
+          4,
+          104
+        ],
+        [
+          5,
+          106
+        ],
+        [
+          100,
+          1
+        ],
+        [
+          101,
+          2
+        ],
+        [
+          101,
+          3
+        ],
+        [
+          101,
+          4
+        ],
+        [
+          102,
+          5
+        ]
+      ]
+    },
+    {
+      "case": "UB capacity large (VIRGIN credits only)",
+      "capacity": {
+        "L1": 524288,
+        "UB": 131072
+      },
+      "seq": [
+        1,
+        2,
+        5,
+        3,
+        4
+      ],
+      "outcome": "ok",
+      "memory_dependencies": [],
+      "n_memory_dependencies": 0,
+      "memory_peak": {
+        "L1": 64,
+        "UB": 128
+      },
+      "makespan_local": 18,
+      "memory_reuse_edges": [],
+      "real_data_edges": [
+        [
+          1,
+          101
+        ],
+        [
+          2,
+          102
+        ],
+        [
+          3,
+          103
+        ],
+        [
+          4,
+          104
+        ],
+        [
+          5,
+          106
+        ],
+        [
+          100,
+          1
+        ],
+        [
+          101,
+          2
+        ],
+        [
+          101,
+          3
+        ],
+        [
+          101,
+          4
+        ],
+        [
+          102,
+          5
+        ]
+      ]
+    }
+  ],
+  "reuse_observed": true,
+  "cases_without_memory_dependency": 1,
+  "limitations": [
+    "微型构造图；未覆盖额度被拆分/合并的复杂情形。",
+    "未核对 memory_peak 的取值口径是否与题面一致。",
+    "未覆盖跨多类型（L1 与 UB 同时）复用的交互。"
+  ]
+}

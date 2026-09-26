@@ -1,0 +1,11 @@
+unit: all cores have <=1 subgraph -> early return              accepted
+unit: dependency cycle only (no core-order edge involved)      rejected  EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[subgraph dependency]-> 2; 2 -[subgraph dependency]-> 0
+unit: core-order edge alone induces the cycle                  rejected  EvaluationValidationError: task schedule: dependency cycle; 0 -[subgraph dependency]-> 1; 1 -[core 0 task order]-> 0
+real tasks: cross_links empty -> early return                  accepted
+real tasks: validate_task_order on the real view               accepted
+real tasks: generated ids and pipes (context)                  observed
+real tasks: forward cross-core COPY link                       accepted
+real tasks: reversed link (intentional misuse of ids)          accepted
+real tasks: two opposite cross-core links (cycle)              rejected  EvaluationValidationError: global execution (core, op): dependency cycle; (0, 2) -[local data/memory dependency]-> (0, 7); (0, 7) -[cross-core COPY]-> (1, 8); (1, 8) -[local data/memory dependency]-> (1, 3); (1, 3) -[local data/memory dependency]-> (1, 9); (1, 9) -[cross-core COPY]-> (0, 6); (0, 6) -[local data/memory dependency]-> (0, 2)
+
+written: <PROJECT_ROOT>/results/a/form/r1-20260923-farmeruncle123/fexec-observations.json

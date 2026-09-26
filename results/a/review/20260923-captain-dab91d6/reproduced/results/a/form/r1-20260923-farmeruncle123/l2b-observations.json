@@ -1,0 +1,225 @@
+{
+  "generator": "src/adversarial/verify_l2_r2.py",
+  "official_entry": "multicore_cut_evaluate_problem_3.evaluate_problem_3",
+  "construction_note": "用**图输入** tensor 避免源核 COPY_OUT 串行造成的错开，从而能观察到同刻同时 miss",
+  "constants": {
+    "bandwidth": 60,
+    "cross_core_copy_delay_cycles": 500,
+    "cache_capacity_bytes": 1048576,
+    "cache_bandwidth_bytes_per_cycle": 250,
+    "tensor_size_bytes": 600
+  },
+  "cases": [
+    {
+      "case": "A) same graph-input tensor consumed by two cores, ample cache",
+      "note": "预期：两个 COPY_IN 在 t=0 同时发起 → 同刻两次 miss，且只发生一次 insert",
+      "cache_capacity_bytes": 1048576,
+      "outcome": "ok",
+      "makespan": 44,
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 2,
+        "hit_bytes": 0,
+        "miss_bytes": 1200,
+        "accesses": 2,
+        "hits": 0,
+        "hit_rate": 0.0
+      },
+      "cache_events": [
+        {
+          "time": 0,
+          "event": "miss",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "core_id": 0,
+          "op_id": 205,
+          "op": "COPY_IN"
+        },
+        {
+          "time": 0,
+          "event": "miss",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "core_id": 1,
+          "op_id": 207,
+          "op": "COPY_IN"
+        },
+        {
+          "time": 20,
+          "event": "insert",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "used_bytes": 600,
+          "evicted_tensor_ids": [],
+          "core_id": 0,
+          "op_id": 205
+        }
+      ],
+      "events_by_time": {
+        "0": [
+          "miss",
+          "miss"
+        ],
+        "20": [
+          "insert"
+        ]
+      },
+      "simultaneous_miss_times": [
+        0
+      ],
+      "evictions": [],
+      "cache_final_entries": [
+        {
+          "tensor_id": 200,
+          "size_bytes": 600
+        }
+      ],
+      "cache_used_bytes_final": 600
+    },
+    {
+      "case": "B) same, but cache smaller than one tensor (SIZE-1)",
+      "note": "预期：size > cache_capacity_bytes → 从不 insert；两次均 miss",
+      "cache_capacity_bytes": 599,
+      "outcome": "ok",
+      "makespan": 44,
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 2,
+        "hit_bytes": 0,
+        "miss_bytes": 1200,
+        "accesses": 2,
+        "hits": 0,
+        "hit_rate": 0.0
+      },
+      "cache_events": [
+        {
+          "time": 0,
+          "event": "miss",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "core_id": 0,
+          "op_id": 205,
+          "op": "COPY_IN"
+        },
+        {
+          "time": 0,
+          "event": "miss",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "core_id": 1,
+          "op_id": 207,
+          "op": "COPY_IN"
+        }
+      ],
+      "events_by_time": {
+        "0": [
+          "miss",
+          "miss"
+        ]
+      },
+      "simultaneous_miss_times": [
+        0
+      ],
+      "evictions": [],
+      "cache_final_entries": [],
+      "cache_used_bytes_final": 0
+    },
+    {
+      "case": "C) two DISTINCT graph-input tensors, cache holds only one tensor",
+      "note": "预期：第二个 insert 需要淘汰第一个 → evicted_tensor_ids 非空",
+      "cache_capacity_bytes": 600,
+      "outcome": "ok",
+      "makespan": 44,
+      "cache_stats": {
+        "copy_in_hits": 0,
+        "copy_in_misses": 2,
+        "hit_bytes": 0,
+        "miss_bytes": 1200,
+        "accesses": 2,
+        "hits": 0,
+        "hit_rate": 0.0
+      },
+      "cache_events": [
+        {
+          "time": 0,
+          "event": "miss",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "core_id": 0,
+          "op_id": 212,
+          "op": "COPY_IN"
+        },
+        {
+          "time": 0,
+          "event": "miss",
+          "tensor_id": 210,
+          "size_bytes": 600,
+          "core_id": 1,
+          "op_id": 218,
+          "op": "COPY_IN"
+        },
+        {
+          "time": 20,
+          "event": "insert",
+          "tensor_id": 200,
+          "size_bytes": 600,
+          "used_bytes": 600,
+          "evicted_tensor_ids": [],
+          "core_id": 0,
+          "op_id": 212
+        },
+        {
+          "time": 20,
+          "event": "insert",
+          "tensor_id": 210,
+          "size_bytes": 600,
+          "used_bytes": 600,
+          "evicted_tensor_ids": [
+            200
+          ],
+          "core_id": 1,
+          "op_id": 218
+        }
+      ],
+      "events_by_time": {
+        "0": [
+          "miss",
+          "miss"
+        ],
+        "20": [
+          "insert",
+          "insert"
+        ]
+      },
+      "simultaneous_miss_times": [
+        0
+      ],
+      "evictions": [
+        {
+          "time": 20,
+          "event": "insert",
+          "tensor_id": 210,
+          "size_bytes": 600,
+          "used_bytes": 600,
+          "evicted_tensor_ids": [
+            200
+          ],
+          "core_id": 1,
+          "op_id": 218
+        }
+      ],
+      "cache_final_entries": [
+        {
+          "tensor_id": 210,
+          "size_bytes": 600
+        }
+      ],
+      "cache_used_bytes_final": 600
+    }
+  ],
+  "limitations": [
+    "微型构造图，不代表官方 case 规模。",
+    "未测 >=3 个并发命中时 CACHE_READ 池的分段换算。",
+    "未覆盖 spill/rename 产生的 logical_tid 命中路径（需问题 3 内同时发生 spill）。"
+  ]
+}

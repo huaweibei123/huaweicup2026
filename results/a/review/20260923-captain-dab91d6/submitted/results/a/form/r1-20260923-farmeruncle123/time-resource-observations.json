@@ -1,0 +1,173 @@
+{
+  "generator": "src/adversarial/verify_time_r1.py",
+  "official_entry": "multicore_cut_evaluate_problem_1.evaluate_scene_a",
+  "config_source": "data/raw/a/official/data/config.txt（冻结值，未修改）",
+  "constants": {
+    "bandwidth": 60,
+    "capacity": {
+      "L1": 524288,
+      "UB": 131072
+    },
+    "cross_core_wait_cycles": 1000,
+    "same_core_wait_cycles": 100,
+    "tensor_size_bytes": 600
+  },
+  "observations": [
+    {
+      "case": "baseline: one chain, core 1 idle",
+      "note": "只有一条 DDR 请求链在跑，DDR 独占",
+      "outcome": "ok",
+      "makespan": 24,
+      "num_cores": 1,
+      "ddr_contention_entries": 2,
+      "max_active_count": 1,
+      "projected_end_history": {
+        "0:4": [
+          {
+            "at": 0,
+            "end": 10
+          }
+        ],
+        "0:5": [
+          {
+            "at": 14,
+            "end": 24
+          }
+        ]
+      },
+      "task_end": null,
+      "op_end": null
+    },
+    {
+      "case": "contended: two independent chains on two cores",
+      "note": "两条互不依赖的链分到两个核，COPY 可在同一时刻并发占用 DDR",
+      "outcome": "ok",
+      "makespan": 44,
+      "num_cores": 2,
+      "ddr_contention_entries": 4,
+      "max_active_count": 2,
+      "projected_end_history": {
+        "0:14": [
+          {
+            "at": 0,
+            "end": 10
+          },
+          {
+            "at": 0,
+            "end": 20
+          }
+        ],
+        "1:16": [
+          {
+            "at": 0,
+            "end": 20
+          }
+        ],
+        "0:15": [
+          {
+            "at": 24,
+            "end": 34
+          },
+          {
+            "at": 24,
+            "end": 44
+          }
+        ],
+        "1:17": [
+          {
+            "at": 24,
+            "end": 44
+          }
+        ]
+      },
+      "task_end": null,
+      "op_end": null
+    },
+    {
+      "case": "dependent pair on the SAME core",
+      "note": "生产者与消费者同核：预期只加 task_same_core_wait_cycles=100",
+      "outcome": "ok",
+      "makespan": 148,
+      "num_cores": 1,
+      "ddr_contention_entries": 4,
+      "max_active_count": 1,
+      "projected_end_history": {
+        "0:4": [
+          {
+            "at": 0,
+            "end": 10
+          }
+        ],
+        "0:5": [
+          {
+            "at": 14,
+            "end": 24
+          }
+        ],
+        "1:6": [
+          {
+            "at": 124,
+            "end": 134
+          }
+        ],
+        "1:7": [
+          {
+            "at": 138,
+            "end": 148
+          }
+        ]
+      },
+      "task_end": null,
+      "op_end": null
+    },
+    {
+      "case": "dependent pair on DIFFERENT cores",
+      "note": "生产者与消费者异核：预期加 task_cross_core_wait_cycles=1000",
+      "outcome": "ok",
+      "makespan": 1048,
+      "num_cores": 2,
+      "ddr_contention_entries": 4,
+      "max_active_count": 1,
+      "projected_end_history": {
+        "0:4": [
+          {
+            "at": 0,
+            "end": 10
+          }
+        ],
+        "0:5": [
+          {
+            "at": 14,
+            "end": 24
+          }
+        ],
+        "1:6": [
+          {
+            "at": 1024,
+            "end": 1034
+          }
+        ],
+        "1:7": [
+          {
+            "at": 1038,
+            "end": 1048
+          }
+        ]
+      },
+      "task_end": null,
+      "op_end": null
+    },
+    {
+      "case": "bandwidth sharing comparison",
+      "outcome": "ok",
+      "single_chain_makespan": 24,
+      "two_chain_makespan": 44,
+      "note": "两条独立链并行时，每条链自身的 DDR 请求会被平分带宽；若总时间没有随核数下降，说明 DDR 是共享瓶颈"
+    }
+  ],
+  "limitations": [
+    "构造图为微型图，每条链 3 个算子，不代表官方 case 的规模。",
+    "未测 Problem 2/3 的 L2 与 cross_core_copy_delay_cycles。",
+    "makespan 数值只对应当前构造与配置，不可外推到正式用例。"
+  ]
+}

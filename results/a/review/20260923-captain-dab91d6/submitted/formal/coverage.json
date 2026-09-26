@@ -1,0 +1,293 @@
+{
+  "run_id": "r1-20260923-farmeruncle123",
+  "produced_by": "src/adversarial/build_coverage.py",
+  "rules_source": "formal/rules.jsonl",
+  "rule_counts": {
+    "total": 38,
+    "by_scope": {
+      "F-EXEC": 3,
+      "F-IO": 4,
+      "F-LOCAL": 6,
+      "F-METRIC": 4,
+      "F-PLAN": 6,
+      "F-RESOURCE": 7,
+      "F-TASK": 6,
+      "F-TIME": 2
+    },
+    "by_status": {
+      "draft-sourced": 2,
+      "verified-by-probe": 36
+    }
+  },
+  "rule_ids": [
+    "F-EXEC-001",
+    "F-EXEC-002",
+    "F-EXEC-003",
+    "F-IO-001",
+    "F-IO-002",
+    "F-IO-003",
+    "F-IO-004",
+    "F-LOCAL-001",
+    "F-LOCAL-002",
+    "F-LOCAL-003",
+    "F-LOCAL-004",
+    "F-LOCAL-005",
+    "F-LOCAL-006",
+    "F-METRIC-001",
+    "F-METRIC-002",
+    "F-METRIC-003",
+    "F-METRIC-004",
+    "F-PLAN-001",
+    "F-PLAN-002",
+    "F-PLAN-003",
+    "F-PLAN-004",
+    "F-PLAN-005",
+    "F-PLAN-006",
+    "F-RESOURCE-001",
+    "F-RESOURCE-002",
+    "F-RESOURCE-003",
+    "F-RESOURCE-004",
+    "F-RESOURCE-005",
+    "F-RESOURCE-006",
+    "F-RESOURCE-007",
+    "F-TASK-001",
+    "F-TASK-002",
+    "F-TASK-003",
+    "F-TASK-004",
+    "F-TASK-005",
+    "F-TASK-006",
+    "F-TIME-001",
+    "F-TIME-002"
+  ],
+  "mechanism_groups": [
+    {
+      "group": "合法性/组合环",
+      "status": "covered",
+      "positive_evidence": [
+        "F-PLAN-004",
+        "F-PLAN-005",
+        "F-EXEC-001",
+        "S-ROUND-QUOTIENT-CYCLE"
+      ],
+      "boundary_evidence": [
+        "S-PLAN-EMPTY-CORE",
+        "S-PLAN-ID-LITERAL"
+      ],
+      "counterexample_evidence": [
+        "tests/adversarial/fplan-005-quotient-cycle.json"
+      ],
+      "note": "F-PLAN-005 曾被我误判为不可达分支，经队长反例纠正后由探针复现；纠正记录保留在规则卡的 correction 字段。"
+    },
+    {
+      "group": "搬运统计",
+      "status": "covered",
+      "positive_evidence": [
+        "F-TASK-003",
+        "F-RESOURCE-002",
+        "F-TASK-006",
+        "F-METRIC-001",
+        "S-TASK-COPYOUT-BOUNDARY"
+      ],
+      "boundary_evidence": [
+        "size=0 与 size=1 的边界 COPY 都只占 1 cycle（S-ROUND-BOUNDARY-COPY）",
+        "原图已含 COPY_OUT 时 added_copy_bytes=0（切图未新增搬运）"
+      ],
+      "counterexample_evidence": [
+        "搬运统计逐字节相同但 makespan 差 900（F-METRIC-004 / ranking-inversion-pair.json）",
+        "把『切图一定增加搬运』当默认会误报（added 是差值不是总量）"
+      ],
+      "note": "已实测：原图 COPY 字节是独立基线（128→192）；跨 Task 流量按远端消费 Task 数累加；COPY 时长下界取整；spill 搬运 = size*(1+int(copies_data))（64→128）。**5 个字段的 4 组恒等式在 5 个构造用例上全部成立**（含含原图 COPY_OUT、跨核、强制 spill 三种情形）。**未覆盖**：每个字段定义与题面口径的一致性；问题 2/3 的对应统计字段（transfers、memory_peak 等）。"
+    },
+    {
+      "group": "取整/同刻事件",
+      "status": "covered",
+      "positive_evidence": [
+        "S-ROUND-BOUNDARY-COPY",
+        "F-EXEC-003",
+        "F-RESOURCE-001"
+      ],
+      "boundary_evidence": [
+        "S-ROUND-BOUNDARY-COPY"
+      ],
+      "counterexample_evidence": [],
+      "note": "取整：size=0 与 size=1 的边界 COPY 都只占 1 cycle（max(1, ceil(size/bandwidth))）。同刻事件：实测同一 t 上 `miss` 完成引发的 `insert` 先于同刻另一次访问生效（t=534 先 insert 后 hit，见 F-EXEC-003），这是本组唯一决定命中与否的变量。**未穷举**同刻的 retire/issue 其它组合顺序。"
+    },
+    {
+      "group": "spill/容量临界",
+      "status": "covered",
+      "positive_evidence": [
+        "F-LOCAL-004",
+        "F-LOCAL-005",
+        "F-TASK-006"
+      ],
+      "boundary_evidence": [
+        "容量 192 = 峰值驻留 → 0 次 spill（触发条件为严格大于）",
+        "容量 191 → 1 次 spill，victim 与插入位置见 spill2-observations.json"
+      ],
+      "counterexample_evidence": [
+        "victim 候选必须排除当前 op 使用的 tensor：3 次失败构造的错误串中 current_tids 与 active 完全相同"
+      ],
+      "note": "已取得成功运行：容量 191 触发 1 次 spill，victim=L(t102)，seq_ext=[1,2,3,110,4,5,6,7,8,111,9]，SPILL_OUT 锚在 op3 之后、SPILL_IN 锚在 op9 之前；victim 被重命名到携带 logical_tid=102 的 113。**未覆盖**：同一 step 的多轮 while、L1 与 UB 同时触发、多次 spill 的 version 递增链、next_use 并列时的稳定排序。"
+    },
+    {
+      "group": "Step3 固定 FIFO 与内存复用",
+      "status": "covered",
+      "positive_evidence": [
+        "F-LOCAL-001",
+        "F-LOCAL-002",
+        "F-LOCAL-003",
+        "F-LOCAL-004",
+        "F-LOCAL-005",
+        "F-LOCAL-006"
+      ],
+      "boundary_evidence": [
+        "容量充裕时 0 条内存依赖（全部来自 VIRGIN 额度，sources 为空）",
+        "容量 = 2 个 tensor 时出现 WAR + WAW 各一条"
+      ],
+      "counterexample_evidence": [
+        "内存复用不只记账：它会生成新的 op→op 依赖边（(5,3) 与 (5,4) 都不是原图数据边）",
+        "忽略 WAW 会漏掉死输出的复用约束"
+      ],
+      "note": "排序：Step1 是确定性多源反向 DFS，key=(¬is_copy_in, depth, -id)；同深度时较小 id 先输出、COPY 分支反而最后输出；PIPE_SLOTS=1，同 Pipe 串行。spill：victim 选择与 SPILL_OUT/IN 插入位置已实测。内存复用：虚拟额度模型（WAR/WAW/VIRGIN）+ 物化为 MEMORY_REUSE 边已实测。**未覆盖**：容量=1 个 tensor 的情形在本图下被 Step2 的 spill 检查提前拦下；额度的拆分/合并复杂情形、L1 与 UB 同时复用的交互、memory_peak 口径。"
+    },
+    {
+      "group": "L2 同时 miss/FIFO",
+      "status": "covered",
+      "positive_evidence": [
+        "F-RESOURCE-003",
+        "F-RESOURCE-004",
+        "F-RESOURCE-005",
+        "F-RESOURCE-006",
+        "F-RESOURCE-007",
+        "F-METRIC-003",
+        "F-EXEC-003",
+        "F-TASK-005"
+      ],
+      "boundary_evidence": [
+        "容量 < 单条 tensor → 完全不 insert、final_entries 为空",
+        "两个不同 key、容量只够一条 → 淘汰最旧（evicted_tensor_ids=[200]）"
+      ],
+      "counterexample_evidence": [
+        "把命中仍计入 DDR 带宽；把 Cache 当 LRU；把『超容量』与『超单条大小』混为一谈",
+        "把同刻两次访问实现成第二次能看到第一次的插入（会凭空产生 hit）"
+      ],
+      "note": "**同时 miss 已实测**：用**图输入** tensor 构造（这类 tensor 无生产者，各消费核各自生成 COPY_IN，没有源核 COPY_OUT 把消费者错开），实测 events_by_time = {'0': ['miss','miss'], '20': ['insert']}——同刻两次 miss、仅一次 insert（同 key 幂等）。**淘汰路径已实测**：容量只够一条时插入新 key 淘汰最旧（evicted=[200]）。另已实测：只有 COPY_IN 查 Cache；命中走独立 CACHE_READ 池（250）不占 DDR（60）；hit_rate 按字节加权（0.476 vs 0.333）；同刻 insert 先于同刻访问生效。**未覆盖**：>=3 个并发命中时 CACHE_READ 池的分段换算；spill/rename 的 logical_tid 命中路径（需问题 3 内同时发生 spill）；一次插入淘汰多个条目。"
+    }
+  ],
+  "group_summary": {
+    "covered": 6
+  },
+  "spec_amendment": {
+    "file": "docs/a/EVALUATOR_AMENDMENT_20260923.md",
+    "commit": "ad1a2c57fd420af4fe327c4e8bcec6c3de4bc5cb",
+    "sha256": "f6b836d4289889da7295d88bd9f14525b14ed6ff2819c611bdab5220fad386d9",
+    "covered_clauses": {
+      "§1 公开输入输出以冻结官方接口为准": [
+        "F-IO-001",
+        "F-IO-002",
+        "F-IO-003",
+        "F-IO-004"
+      ],
+      "§1 未生成字段不得补齐 / 不得伪造诊断": [
+        "F-METRIC-002"
+      ]
+    },
+    "not_in_scope": "补充规范主体针对 a-r1-fast-eval 的 E1/E2 门槛；我的 FORM/对抗任务范围不扩大，故 §2/§3/§4 的数值门槛与并行探索条款不转为我的规则卡。"
+  },
+  "e2_ranking_adversarial": {
+    "generator": "src/adversarial/build_ranking_adversarial.py",
+    "verifier": "src/adversarial/verify_ranking_fixture.py",
+    "fixture": "tests/adversarial/ranking-inversion-pair.json",
+    "requirement": "任务卡第 5 节：对 E2 除数值差异外，能生成同图同问题同核数的候选组，寻找预测排序与官方优劣相反的案例",
+    "scope": "1 张微型图（6 算子）× 2 核 × 问题 1；30 个方案中 16 个合法、14 个因商图成环被拒",
+    "官方 makespan 区间": "42 .. 1057",
+    "inverted_pairs_by_predictor": {
+      "added_copy_bytes": 22,
+      "cross_task_traffic": 26,
+      "partition_added_copy_bytes": 22,
+      "max_subgraphs_per_core": 72,
+      "num_nonempty_cores": 20
+    },
+    "cleanest_case": "切图相同、搬运统计逐字节相同（cross_task_traffic=256、added_copy_bytes=768），仅核心归属不同 → makespan 1052 vs 152，差 900 = 1000 − 100。复验输出 ALL CLAIMS VERIFIED: True",
+    "not_claimed": "不声称任何具体 E2 实现会犯此错；『预测器』是我自选的粗糙口径。真值只用官方 evaluate_scene_a，未使用任何 E1/E2 内部代价模型。",
+    "uncovered": [
+      "问题 2/3",
+      "核数 > 2",
+      "Cache 命中率等分层指标的排序对抗",
+      "正式用例"
+    ]
+  },
+  "source_material_alignment": {
+    "material": "AI chats/讲解A题调度.md（第 4219–4611 行，形式化任务定义与 E1/E2 验收）",
+    "eight_modules_mapping": {
+      "输入与配置": "F-IO",
+      "切图与调度合法性": "F-PLAN",
+      "Task 构造": "F-TASK",
+      "核内展开": "F-LOCAL",
+      "全局可执行性": "F-EXEC",
+      "时间与同步": "F-TIME",
+      "共享资源": "F-RESOURCE",
+      "输出指标": "F-METRIC"
+    },
+    "five_deliverables": [
+      "formal/SPEC.md",
+      "formal/rules.jsonl",
+      "formal/coverage.json",
+      "formal/ambiguities.md",
+      "formal/change_impact.md"
+    ],
+    "three_priority_details": {
+      "基础切图校验通过 != 最终可执行": [
+        "F-PLAN-005",
+        "F-EXEC-001"
+      ],
+      "Step3 输出固定 Pipe 顺序与内存复用依赖": [
+        "F-LOCAL-003",
+        "F-LOCAL-005",
+        "F-LOCAL-006"
+      ],
+      "问题三搬运统计不得自行重定义": "本批未改动该字段定义；F-METRIC 系列只描述官方口径。该条作为**约束**被遵守，未作为可改动项"
+    },
+    "independently_reproduced_anchor": {
+      "material_claim": "共享输入小图在问题三中得到两个 COPY_IN 都 miss，而不是一个 miss、一个 hit，因为两次查询都发生在数据进入 L2 之前",
+      "material_location": "讲解A题调度.md 第 4510 行",
+      "our_reproduction": "F-RESOURCE-006：events_by_time={'0':['miss','miss'],'20':['insert']}——同刻两次 miss、仅一次 insert",
+      "mechanism_agrees": true,
+      "caveat": "材料提到的『两个人工小图和六份原版输出』锚点**不在本批冻结材料内**（data/raw/a/official/ 只含 100 个 case_*.json、config.txt 与 10 个源码文件），因此无法直接复跑那两个锚点，只能以自构造图独立复现同一现象"
+    },
+    "explicit_uncovered_from_material": "第 4296–4298 行要求回答「队首操作等待跨核输入时，后面的操作能否越过它」——本批未构造该探针"
+  },
+  "dev_samples": {
+    "count": 10,
+    "covered_groups": [
+      "合法性/组合环",
+      "搬运统计",
+      "取整/同刻事件（仅边界 COPY 取整）"
+    ],
+    "not_covered_groups": [
+      "Step3 固定 FIFO 与内存复用",
+      "spill/容量临界",
+      "L2 同时 miss/FIFO"
+    ],
+    "file": "tests/adversarial/dev-samples.jsonl",
+    "observations": "results/a/form/r1-20260923-farmeruncle123/dev-samples-observations.json"
+  },
+  "evidence_files": [
+    "results/a/form/r1-20260923-farmeruncle123/fplan-observations.json",
+    "results/a/form/r1-20260923-farmeruncle123/fplan-005-observation.json",
+    "results/a/form/r1-20260923-farmeruncle123/ftask-observations.json",
+    "results/a/form/r1-20260923-farmeruncle123/ftask-order-observations.json",
+    "results/a/form/r1-20260923-farmeruncle123/fexec-observations.json",
+    "results/a/form/r1-20260923-farmeruncle123/spill-observations.json",
+    "results/a/form/r1-20260923-farmeruncle123/dev-samples-observations.json",
+    "results/a/form/r1-20260923-farmeruncle123/time-resource-observations.json"
+  ],
+  "ordering_note": "status 取值：covered=已交正例与边界；partial=部分覆盖且有明确缺口；gap-with-mechanism=机制已定位但未取得成功运行；gap=未开始。任何 gap 都不得当作通过。",
+  "limitations": [
+    "所有实测均在微型构造图（6–9 算子）上完成，规模远小于官方 100 个 case，结论不可外推到正式用例。",
+    "本批未计算任何正式 case 的 makespan，未做跨方案优劣比较。",
+    "六个机制组 `covered` 仅表示任务卡所列的代表性正例与边界/反例已交，**不表示**下列子项也已完成。",
+    "**未覆盖**：Pipe 队首阻塞时能否被越过（来源材料第 4296–4298 行明确要求）；spill/rename 的 logical_tid 命中行为；>=3 并发命中的 CACHE_READ 池换算；spill 多轮 while、L1+UB 同时触发、并列 next_use 的稳定排序；一次插入淘汰多个条目；问题 2/3 统计字段口径；Step3 额度拆分合并与容量=1 tensor 的复用；交换核心/重编号/增 Cache 三类变换（未构造任何正例或反例）。",
+    "`paper/sections/a-formal.md` §7.3 记录了未读完的材料范围与由此产生的待办。"
+  ]
+}

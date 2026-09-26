@@ -1,0 +1,157 @@
+{
+  "generator": "src/adversarial/verify_metric_r1.py",
+  "official_entry": "multicore_cut_evaluate_problem_1.evaluate_scene_a",
+  "identities_checked": [
+    "added_copy_bytes == partition_added_copy_bytes + spill_added_copy_bytes",
+    "added_copy_bytes == scheduled_copy_bytes - original_graph_copy_bytes",
+    "scheduled_copy_bytes >= original_graph_copy_bytes + partition_added_copy_bytes",
+    "partition_added_copy_bytes == scheduled_copy_bytes - original_graph_copy_bytes - spill_added_copy_bytes"
+  ],
+  "cases": [
+    {
+      "case": "chain, no original COPY_OUT, 1 core",
+      "capacity": {
+        "L1": 524288,
+        "UB": 131072
+      },
+      "outcome": "ok",
+      "makespan": 12,
+      "traffic": {
+        "original_graph_copy_bytes": 64,
+        "scheduled_copy_bytes": 128,
+        "added_copy_bytes": 64,
+        "partition_added_copy_bytes": 64,
+        "spill_added_copy_bytes": 0
+      },
+      "cross_task_traffic": 0,
+      "identities": {
+        "I1 added == partition_added + spill_added": true,
+        "I2 added == scheduled - original": true,
+        "I3 scheduled >= original + partition_added": true,
+        "I4 partition_added == scheduled - original - spill_added": true
+      },
+      "numeric": {
+        "added-minus-(partition+spill)": 0,
+        "added-minus-(scheduled-original)": 0
+      }
+    },
+    {
+      "case": "chain, WITH original COPY_OUT, 1 core",
+      "capacity": {
+        "L1": 524288,
+        "UB": 131072
+      },
+      "outcome": "ok",
+      "makespan": 12,
+      "traffic": {
+        "original_graph_copy_bytes": 128,
+        "scheduled_copy_bytes": 128,
+        "added_copy_bytes": 0,
+        "partition_added_copy_bytes": 0,
+        "spill_added_copy_bytes": 0
+      },
+      "cross_task_traffic": 0,
+      "identities": {
+        "I1 added == partition_added + spill_added": true,
+        "I2 added == scheduled - original": true,
+        "I3 scheduled >= original + partition_added": true,
+        "I4 partition_added == scheduled - original - spill_added": true
+      },
+      "numeric": {
+        "added-minus-(partition+spill)": 0,
+        "added-minus-(scheduled-original)": 0
+      }
+    },
+    {
+      "case": "chain split across 2 cores",
+      "capacity": {
+        "L1": 524288,
+        "UB": 131072
+      },
+      "outcome": "ok",
+      "makespan": 1016,
+      "traffic": {
+        "original_graph_copy_bytes": 128,
+        "scheduled_copy_bytes": 256,
+        "added_copy_bytes": 128,
+        "partition_added_copy_bytes": 128,
+        "spill_added_copy_bytes": 0
+      },
+      "cross_task_traffic": 64,
+      "identities": {
+        "I1 added == partition_added + spill_added": true,
+        "I2 added == scheduled - original": true,
+        "I3 scheduled >= original + partition_added": true,
+        "I4 partition_added == scheduled - original - spill_added": true
+      },
+      "numeric": {
+        "added-minus-(partition+spill)": 0,
+        "added-minus-(scheduled-original)": 0
+      }
+    },
+    {
+      "case": "shared consumer across 2 cores (cross-task traffic)",
+      "capacity": {
+        "L1": 524288,
+        "UB": 131072
+      },
+      "outcome": "ok",
+      "makespan": 1020,
+      "traffic": {
+        "original_graph_copy_bytes": 64,
+        "scheduled_copy_bytes": 320,
+        "added_copy_bytes": 256,
+        "partition_added_copy_bytes": 256,
+        "spill_added_copy_bytes": 0
+      },
+      "cross_task_traffic": 64,
+      "identities": {
+        "I1 added == partition_added + spill_added": true,
+        "I2 added == scheduled - original": true,
+        "I3 scheduled >= original + partition_added": true,
+        "I4 partition_added == scheduled - original - spill_added": true
+      },
+      "numeric": {
+        "added-minus-(partition+spill)": 0,
+        "added-minus-(scheduled-original)": 0
+      }
+    },
+    {
+      "case": "spill case: UB capacity 191 forces >=1 spill",
+      "capacity": {
+        "L1": 524288,
+        "UB": 191
+      },
+      "outcome": "ok",
+      "makespan": 40,
+      "traffic": {
+        "original_graph_copy_bytes": 64,
+        "scheduled_copy_bytes": 320,
+        "added_copy_bytes": 256,
+        "partition_added_copy_bytes": 128,
+        "spill_added_copy_bytes": 128
+      },
+      "cross_task_traffic": 0,
+      "identities": {
+        "I1 added == partition_added + spill_added": true,
+        "I2 added == scheduled - original": true,
+        "I3 scheduled >= original + partition_added": true,
+        "I4 partition_added == scheduled - original - spill_added": true
+      },
+      "numeric": {
+        "added-minus-(partition+spill)": 0,
+        "added-minus-(scheduled-original)": 0
+      }
+    }
+  ],
+  "all_identities_hold": true,
+  "cases_with_spill": 1,
+  "spill_added_values": [
+    128
+  ],
+  "limitations": [
+    "微型构造图，不代表正式用例规模。",
+    "只核对 5 个字段之间的代数关系，不核对每个字段的定义是否与题面一致。",
+    "未覆盖问题 2/3 的对应统计字段。"
+  ]
+}

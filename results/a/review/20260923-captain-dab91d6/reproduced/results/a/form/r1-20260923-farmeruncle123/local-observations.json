@@ -1,0 +1,124 @@
+{
+  "generator": "src/adversarial/verify_local_r1.py",
+  "official_entries": [
+    "schedule_step1.step1_schedule",
+    "schedule_step3.PIPES / PIPE_SLOTS"
+  ],
+  "pipe_constants": {
+    "PIPES": [
+      "PIPE_MTE2",
+      "PIPE_MTE3",
+      "PIPE_M",
+      "PIPE_V"
+    ],
+    "PIPE_SLOTS": 1
+  },
+  "observations": [
+    {
+      "case": "two independent chains, identical structure, ids 1-3 vs 11-13",
+      "graph_ops": [
+        1,
+        2,
+        3,
+        11,
+        12,
+        13
+      ],
+      "seq": [
+        1,
+        2,
+        3,
+        11,
+        12,
+        13
+      ],
+      "note": "两条链结构完全相同，只有 id 不同；用于观察 sink 侧起始顺序",
+      "first_emitted": 1
+    },
+    {
+      "case": "one COPY_IN forks into op2 and op5 (equal depth, ids 2 vs 5)",
+      "graph_ops": [
+        1,
+        2,
+        5,
+        4,
+        6
+      ],
+      "seq": [
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "position_of_op2": 1,
+      "position_of_op5": 3,
+      "smaller_id_emitted_first": true
+    },
+    {
+      "case": "JOIN op7 with two CONV preds op2 and op5 (equal depth)",
+      "graph_ops": [
+        1,
+        2,
+        5,
+        7,
+        8
+      ],
+      "seq": [
+        1,
+        2,
+        5,
+        7,
+        8
+      ],
+      "position_of_op2": 1,
+      "position_of_op5": 2,
+      "smaller_id_emitted_first": true
+    },
+    {
+      "case": "JOIN op7 with preds op1(COPY_IN) and op2(CONV), equal depth, no ancestor relation",
+      "graph_ops": [
+        1,
+        2,
+        7,
+        8
+      ],
+      "seq": [
+        2,
+        1,
+        7,
+        8
+      ],
+      "position_of_conv2": 0,
+      "position_of_copyin1": 1,
+      "copy_in_emitted_first": false
+    },
+    {
+      "case": "two equal-depth sinks: op3(COPY_OUT) vs op13(CONV)",
+      "graph_ops": [
+        1,
+        2,
+        3,
+        11,
+        12,
+        13
+      ],
+      "seq": [
+        11,
+        12,
+        13,
+        1,
+        2,
+        3
+      ],
+      "position_of_copy_out_sink": 5,
+      "position_of_conv_sink": 2,
+      "copy_out_sink_branch_emitted_first": false
+    }
+  ],
+  "limitations": [
+    "只覆盖微型构造图；未在正式 case 上比较 Step1 序列。",
+    "未验证 Step3 内存依赖与 spill 对最终序列的影响。",
+    "未验证 Step2 spill 插入后序列的变化（属另一组缺口）。"
+  ]
+}

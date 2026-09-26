@@ -1,0 +1,337 @@
+{
+  "generator": "src/adversarial/verify_spill_r2.py",
+  "purpose": "取得含 >=1 spill 的成功运行。关键构造：长寿命 L 必须(a) 在触发 step 之前已产出、(b) 在触发 step 有 future use、(c) **不被触发 step 的 op 使用**；且链尾不能同时消费 L 与上一环",
+  "victim_selection_rule": "trigger_one_spill 取 type_active 中 next_use 非 None 的项，再排除 current_step_tids，最后按 -next_use 排序取第一个（Belady：换出最远未来才用到的）",
+  "v1_failure_note": "seq=[1,2,4,3,5]：op3 排在 op4 之后，op4 时 active 只有 [102,104]",
+  "v2_failure_note": "seq=[1,2,4,6,3,5]：触发点是 op6，active 三项全被 op6 使用",
+  "v3_failure_note": "L 的末次使用与链尾 op8 重合，该步 active 与 current 完全相同",
+  "graph_ops": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "seq": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "ub_tensor_count": 8,
+  "ub_bytes_total": 512,
+  "records": [
+    {
+      "capacity_ub": 131072,
+      "capacity": {
+        "L1": 524288,
+        "UB": 131072
+      },
+      "outcome": "completed",
+      "n_spills": 0,
+      "spill_records": [],
+      "overflow_log": [],
+      "seq_ext": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "new_tensors": [],
+      "new_ops": [],
+      "n_rename_records": 0,
+      "_has_rename_records_key": false
+    },
+    {
+      "capacity_ub": 256,
+      "capacity": {
+        "L1": 524288,
+        "UB": 256
+      },
+      "outcome": "completed",
+      "n_spills": 0,
+      "spill_records": [],
+      "overflow_log": [],
+      "seq_ext": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "new_tensors": [],
+      "new_ops": [],
+      "n_rename_records": 0,
+      "_has_rename_records_key": false
+    },
+    {
+      "capacity_ub": 192,
+      "capacity": {
+        "L1": 524288,
+        "UB": 192
+      },
+      "outcome": "completed",
+      "n_spills": 0,
+      "spill_records": [],
+      "overflow_log": [],
+      "seq_ext": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "new_tensors": [],
+      "new_ops": [],
+      "n_rename_records": 0,
+      "_has_rename_records_key": false
+    },
+    {
+      "capacity_ub": 191,
+      "capacity": {
+        "L1": 524288,
+        "UB": 191
+      },
+      "outcome": "completed",
+      "n_spills": 1,
+      "spill_records": [
+        {
+          "spill_out_id": 110,
+          "spill_in_id": 111,
+          "swap_tid": 112,
+          "backing_tid": 112,
+          "backing_source": "new_spill_out",
+          "spill_out_copies_data": true,
+          "tid": 102,
+          "logical_tid": 102,
+          "from_tid": 102,
+          "to_tid": 113,
+          "version": 1,
+          "pos": "UB",
+          "size": 64,
+          "prev_use_op": 3,
+          "next_use_op": 9,
+          "prev_use_step": 2,
+          "next_use_step": 8
+        }
+      ],
+      "overflow_log": [
+        {
+          "step": 3,
+          "type": "UB",
+          "resid": 192,
+          "capacity": 191
+        }
+      ],
+      "seq_ext": [
+        1,
+        2,
+        3,
+        110,
+        4,
+        5,
+        6,
+        7,
+        8,
+        111,
+        9
+      ],
+      "new_tensors": [
+        {
+          "id": 112,
+          "pos": "DDR",
+          "size": 64
+        },
+        {
+          "id": 113,
+          "logical_tid": 102,
+          "version": 1,
+          "pos": "UB",
+          "size": 64
+        }
+      ],
+      "new_ops": [
+        {
+          "id": 110,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "cycles": 1,
+          "transfer_bytes": 64,
+          "spill_logical_tid": 102
+        },
+        {
+          "id": 111,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "cycles": 1,
+          "transfer_bytes": 64,
+          "spill_logical_tid": 102
+        }
+      ],
+      "n_rename_records": 0,
+      "_has_rename_records_key": false,
+      "renamed_tensors": [
+        {
+          "id": 113,
+          "logical_tid": 102,
+          "version": 1,
+          "pos": "UB",
+          "size": 64
+        }
+      ],
+      "victim_and_renamed_cache_keys": {
+        "102": {
+          "pos": "UB",
+          "size": 64,
+          "logical_tid": null,
+          "cache_key_if_copy_in_out_tid": 102
+        },
+        "113": {
+          "pos": "UB",
+          "size": 64,
+          "logical_tid": 102,
+          "cache_key_if_copy_in_out_tid": 102
+        }
+      }
+    },
+    {
+      "capacity_ub": 128,
+      "capacity": {
+        "L1": 524288,
+        "UB": 128
+      },
+      "outcome": "completed",
+      "n_spills": 1,
+      "spill_records": [
+        {
+          "spill_out_id": 110,
+          "spill_in_id": 111,
+          "swap_tid": 112,
+          "backing_tid": 112,
+          "backing_source": "new_spill_out",
+          "spill_out_copies_data": true,
+          "tid": 102,
+          "logical_tid": 102,
+          "from_tid": 102,
+          "to_tid": 113,
+          "version": 1,
+          "pos": "UB",
+          "size": 64,
+          "prev_use_op": 3,
+          "next_use_op": 9,
+          "prev_use_step": 2,
+          "next_use_step": 8
+        }
+      ],
+      "overflow_log": [
+        {
+          "step": 3,
+          "type": "UB",
+          "resid": 192,
+          "capacity": 128
+        }
+      ],
+      "seq_ext": [
+        1,
+        2,
+        3,
+        110,
+        4,
+        5,
+        6,
+        7,
+        8,
+        111,
+        9
+      ],
+      "new_tensors": [
+        {
+          "id": 112,
+          "pos": "DDR",
+          "size": 64
+        },
+        {
+          "id": 113,
+          "logical_tid": 102,
+          "version": 1,
+          "pos": "UB",
+          "size": 64
+        }
+      ],
+      "new_ops": [
+        {
+          "id": 110,
+          "op": "COPY_OUT",
+          "pipe": "PIPE_MTE3",
+          "cycles": 1,
+          "transfer_bytes": 64,
+          "spill_logical_tid": 102
+        },
+        {
+          "id": 111,
+          "op": "COPY_IN",
+          "pipe": "PIPE_MTE2",
+          "cycles": 1,
+          "transfer_bytes": 64,
+          "spill_logical_tid": 102
+        }
+      ],
+      "n_rename_records": 0,
+      "_has_rename_records_key": false,
+      "renamed_tensors": [
+        {
+          "id": 113,
+          "logical_tid": 102,
+          "version": 1,
+          "pos": "UB",
+          "size": 64
+        }
+      ],
+      "victim_and_renamed_cache_keys": {
+        "102": {
+          "pos": "UB",
+          "size": 64,
+          "logical_tid": null,
+          "cache_key_if_copy_in_out_tid": 102
+        },
+        "113": {
+          "pos": "UB",
+          "size": 64,
+          "logical_tid": 102,
+          "cache_key_if_copy_in_out_tid": 102
+        }
+      }
+    },
+    {
+      "capacity_ub": 64,
+      "capacity": {
+        "L1": 524288,
+        "UB": 64
+      },
+      "outcome": "raised",
+      "error": "Step2SchedulingError: [STEP2 ERROR] no spill victim: step=2 op=3 type=UB alloc_resid=128 capacity=64 current_tids=[102, 103] active(tid,size,next_use)=[(102, 64, 8), (103, 64, 3)]"
+    }
+  ]
+}

@@ -1,0 +1,936 @@
+{
+  "generator": "src/adversarial/build_ranking_adversarial.py",
+  "purpose": "同图/同问题/同核数生成方案候选组，寻找预测排序与官方优劣相反的案例。真值只用官方 evaluate_scene_a，未使用任何 E1/E2 内部代价模型",
+  "graph_non_copy_ops": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "num_cores": 2,
+  "constants": {
+    "bandwidth": 60,
+    "capacity": {
+      "L1": 524288,
+      "UB": 131072
+    },
+    "cross_core_wait_cycles": 1000,
+    "same_core_wait_cycles": 100,
+    "tensor_size_bytes": 256
+  },
+  "plans_evaluated": 16,
+  "plans_skipped_illegal": 14,
+  "skipped_details": [
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "5": 0,
+          "4": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "5": 0,
+          "4": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "5": 0,
+          "4": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "5": 0,
+          "4": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "5": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "dependency order violation on core 0: 1 -> 0"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "5": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "dependency order violation on core 1: 1 -> 0"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "3": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "3": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "3": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "3": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "5": 0,
+          "3": 1,
+          "4": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "5": 0,
+          "3": 1,
+          "4": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "5": 0,
+          "3": 1,
+          "4": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "5": 0,
+          "3": 1,
+          "4": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "error_type": "MulticoreCutError",
+      "error": "contracted subgraph graph contains a cycle"
+    }
+  ],
+  "skipped_by_error": {
+    "MulticoreCutError": 14
+  },
+  "official_makespan_range": {
+    "best": 42,
+    "worst": 1057
+  },
+  "inversion_summary": {
+    "added_copy_bytes": {
+      "inverted_pairs": 22,
+      "example": {
+        "predictor_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          },
+          "added_copy_bytes": 768,
+          "official_makespan": 1052
+        },
+        "official_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0,
+                1
+              ],
+              []
+            ]
+          },
+          "added_copy_bytes": 768,
+          "official_makespan": 152
+        }
+      }
+    },
+    "cross_task_traffic": {
+      "inverted_pairs": 26,
+      "example": {
+        "predictor_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          },
+          "cross_task_traffic": 256,
+          "official_makespan": 1052
+        },
+        "official_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0,
+                1
+              ],
+              []
+            ]
+          },
+          "cross_task_traffic": 256,
+          "official_makespan": 152
+        }
+      }
+    },
+    "partition_added_copy_bytes": {
+      "inverted_pairs": 22,
+      "example": {
+        "predictor_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          },
+          "partition_added_copy_bytes": 768,
+          "official_makespan": 1052
+        },
+        "official_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0,
+                1
+              ],
+              []
+            ]
+          },
+          "partition_added_copy_bytes": 768,
+          "official_makespan": 152
+        }
+      }
+    },
+    "max_subgraphs_per_core": {
+      "inverted_pairs": 72,
+      "example": {
+        "predictor_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0
+              ],
+              [
+                1
+              ]
+            ]
+          },
+          "max_subgraphs_per_core": 1,
+          "official_makespan": 1052
+        },
+        "official_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0
+            },
+            "core_schedules": [
+              [
+                0
+              ],
+              []
+            ]
+          },
+          "max_subgraphs_per_core": 1,
+          "official_makespan": 42
+        }
+      }
+    },
+    "num_nonempty_cores": {
+      "inverted_pairs": 20,
+      "example": {
+        "predictor_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 1
+            },
+            "core_schedules": [
+              [
+                0,
+                1
+              ],
+              []
+            ]
+          },
+          "num_nonempty_cores": 1,
+          "official_makespan": 152
+        },
+        "official_says_better": {
+          "plan": {
+            "node_to_subgraph": {
+              "2": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0
+            },
+            "core_schedules": [
+              [
+                0
+              ],
+              []
+            ]
+          },
+          "num_nonempty_cores": 1,
+          "official_makespan": 42
+        }
+      }
+    }
+  },
+  "candidates": [
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          []
+        ]
+      },
+      "official_makespan": 42,
+      "predictors": {
+        "added_copy_bytes": 256,
+        "cross_task_traffic": 0,
+        "partition_added_copy_bytes": 256,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0
+        },
+        "core_schedules": [
+          [],
+          [
+            0
+          ]
+        ]
+      },
+      "official_makespan": 42,
+      "predictors": {
+        "added_copy_bytes": 256,
+        "cross_task_traffic": 0,
+        "partition_added_copy_bytes": 256,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "official_makespan": 152,
+      "predictors": {
+        "added_copy_bytes": 768,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 768,
+        "max_subgraphs_per_core": 2,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "official_makespan": 152,
+      "predictors": {
+        "added_copy_bytes": 768,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 768,
+        "max_subgraphs_per_core": 2,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "official_makespan": 152,
+      "predictors": {
+        "added_copy_bytes": 1024,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 1024,
+        "max_subgraphs_per_core": 2,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "official_makespan": 152,
+      "predictors": {
+        "added_copy_bytes": 1024,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 1024,
+        "max_subgraphs_per_core": 2,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0,
+            1
+          ],
+          []
+        ]
+      },
+      "official_makespan": 157,
+      "predictors": {
+        "added_copy_bytes": 1280,
+        "cross_task_traffic": 512,
+        "partition_added_copy_bytes": 1280,
+        "max_subgraphs_per_core": 2,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "official_makespan": 157,
+      "predictors": {
+        "added_copy_bytes": 1280,
+        "cross_task_traffic": 512,
+        "partition_added_copy_bytes": 1280,
+        "max_subgraphs_per_core": 2,
+        "num_nonempty_cores": 1
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "official_makespan": 1052,
+      "predictors": {
+        "added_copy_bytes": 768,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 768,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "official_makespan": 1052,
+      "predictors": {
+        "added_copy_bytes": 768,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 768,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "5": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "official_makespan": 1052,
+      "predictors": {
+        "added_copy_bytes": 1024,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 1024,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "4": 0,
+          "5": 0,
+          "3": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "official_makespan": 1052,
+      "predictors": {
+        "added_copy_bytes": 1024,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 1024,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "official_makespan": 1052,
+      "predictors": {
+        "added_copy_bytes": 1024,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 1024,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 1,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "official_makespan": 1052,
+      "predictors": {
+        "added_copy_bytes": 1024,
+        "cross_task_traffic": 256,
+        "partition_added_copy_bytes": 1024,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "official_makespan": 1057,
+      "predictors": {
+        "added_copy_bytes": 1280,
+        "cross_task_traffic": 512,
+        "partition_added_copy_bytes": 1280,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    },
+    {
+      "plan": {
+        "node_to_subgraph": {
+          "2": 0,
+          "3": 0,
+          "4": 1,
+          "5": 1
+        },
+        "core_schedules": [
+          [
+            1
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "official_makespan": 1057,
+      "predictors": {
+        "added_copy_bytes": 1280,
+        "cross_task_traffic": 512,
+        "partition_added_copy_bytes": 1280,
+        "max_subgraphs_per_core": 1,
+        "num_nonempty_cores": 2
+      }
+    }
+  ],
+  "limitations": [
+    "单张微型图、2 核、问题 1，结论不可外推到正式用例。",
+    "反转的『预测器』是我自选的粗糙口径，不代表 lyx0217 的实际 E2 实现。",
+    "未做固定随机种子（枚举是确定性的，无随机成分）。"
+  ]
+}

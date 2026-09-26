@@ -1,0 +1,86 @@
+{
+  "fixture_id": "ranking-inversion-pair-001",
+  "produced_by": "src/adversarial/build_ranking_adversarial.py",
+  "purpose": "E2 排序对抗：两个候选的搬运统计逐字节相同，但官方 makespan 相差 900 cycles。任何仅按搬运量排序的预测器都无法区分它们，且会给出与官方相反的偏好。",
+  "problem": 1,
+  "scene": "A",
+  "num_cores": 2,
+  "constants": {
+    "bandwidth": 60,
+    "capacity": {"L1": 524288, "UB": 131072},
+    "task_cross_core_wait_cycles": 1000,
+    "task_same_core_wait_cycles": 100,
+    "tensor_size_bytes": 256,
+    "source": "data/raw/a/official/data/config.txt（冻结值，未修改）"
+  },
+  "graph": {
+    "ops": [
+      {"id": 1, "op": "COPY_IN", "pipe": "PIPE_MTE2", "cycles": 0},
+      {"id": 2, "op": "CONV", "pipe": "PIPE_M", "cycles": 8},
+      {"id": 3, "op": "CONV", "pipe": "PIPE_M", "cycles": 8},
+      {"id": 4, "op": "VADD", "pipe": "PIPE_V", "cycles": 8},
+      {"id": 5, "op": "VADD", "pipe": "PIPE_V", "cycles": 8},
+      {"id": 6, "op": "COPY_OUT", "pipe": "PIPE_MTE3", "cycles": 0}
+    ],
+    "tensors": [
+      {"id": 100, "pos": "DDR", "size": 256},
+      {"id": 101, "pos": "L1", "size": 256},
+      {"id": 102, "pos": "UB", "size": 256},
+      {"id": 103, "pos": "UB", "size": 256},
+      {"id": 104, "pos": "UB", "size": 256},
+      {"id": 105, "pos": "DDR", "size": 256}
+    ],
+    "edges": [
+      {"source": 100, "target": 1},
+      {"source": 1, "target": 101},
+      {"source": 101, "target": 2},
+      {"source": 2, "target": 102},
+      {"source": 101, "target": 3},
+      {"source": 3, "target": 103},
+      {"source": 102, "target": 4},
+      {"source": 103, "target": 4},
+      {"source": 4, "target": 104},
+      {"source": 104, "target": 5},
+      {"source": 5, "target": 105},
+      {"source": 5, "target": 6}
+    ]
+  },
+  "pair": {
+    "identical_partition": {"2": 0, "3": 0, "4": 0, "5": 1},
+    "identical_metrics": {
+      "cross_task_traffic": 256,
+      "added_copy_bytes": 768,
+      "partition_added_copy_bytes": 768
+    },
+    "a": {
+      "label": "dependency crosses cores",
+      "plan": {
+        "node_to_subgraph": {"2": 0, "3": 0, "4": 0, "5": 1},
+        "core_schedules": [[0], [1]]
+      },
+      "official_makespan": 1052
+    },
+    "b": {
+      "label": "dependency kept on one core",
+      "plan": {
+        "node_to_subgraph": {"2": 0, "3": 0, "4": 0, "5": 1},
+        "core_schedules": [[0, 1], []]
+      },
+      "official_makespan": 152
+    }
+  },
+  "observed_difference": {
+    "delta_makespan": 900,
+    "equals": "task_cross_core_wait_cycles - task_same_core_wait_cycles = 1000 - 100",
+    "related_rules": ["F-TIME-001", "F-TIME-002", "F-PLAN-004"]
+  },
+  "consequence_for_predictors": {
+    "note": "搬运统计对两个候选完全相同，因此仅按 added_copy_bytes / cross_task_traffic / partition_added_copy_bytes 排序的预测器无法区分它们，也无法解释官方 900 cycles 的差。",
+    "not_claimed": "本夹具不声称任何具体 E2 实现会犯此错；它只给出一个搬运统计不足以解释优劣的官方事实。"
+  },
+  "honest_limits": [
+    "微型构造图（6 个算子、2 核、问题 1），不是正式用例。",
+    "两个方案的 makespan 由官方 evaluate_scene_a 实测得到；本夹具不包含 E0 评分，也不构成质量结论。",
+    "另一方案 b 使用了空核（core_schedules 第二项为空），空核合法且计入核数，见 F-PLAN-004/005。"
+  ]
+}

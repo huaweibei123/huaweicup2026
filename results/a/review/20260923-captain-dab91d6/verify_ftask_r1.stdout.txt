@@ -1,0 +1,25 @@
+shared-tensor, one remote consumer task        num_cores=2 cross_task_traffic=64
+    task 0 core=0 gen_ops=[6, 7] gen_tensors=[10001, 10002] rewritten_DDR={}
+    task 1 core=1 gen_ops=[8, 9, 10] gen_tensors=[10003, 10004, 10005] rewritten_DDR={}
+    traffic={"original_graph_copy_bytes": 128, "scheduled_copy_bytes": 320, "added_copy_bytes": 192, "partition_added_copy_bytes": 192, "spill_added_copy_bytes": 0}
+shared-tensor, two remote consumer tasks       num_cores=3 cross_task_traffic=128
+    task 0 core=0 gen_ops=[6, 7] gen_tensors=[10001, 10002] rewritten_DDR={}
+    task 1 core=1 gen_ops=[8, 9] gen_tensors=[10003, 10004] rewritten_DDR={}
+    task 2 core=2 gen_ops=[10, 11] gen_tensors=[10005, 10006] rewritten_DDR={}
+    traffic={"original_graph_copy_bytes": 128, "scheduled_copy_bytes": 384, "added_copy_bytes": 256, "partition_added_copy_bytes": 256, "spill_added_copy_bytes": 0}
+shared-tensor, two remote tasks + empty core   num_cores=4 cross_task_traffic=128
+    task 0 core=0 gen_ops=[6, 7] gen_tensors=[10001, 10002] rewritten_DDR={}
+    task 1 core=1 gen_ops=[8, 9] gen_tensors=[10003, 10004] rewritten_DDR={}
+    task 2 core=2 gen_ops=[10, 11] gen_tensors=[10005, 10006] rewritten_DDR={}
+    traffic={"original_graph_copy_bytes": 128, "scheduled_copy_bytes": 384, "added_copy_bytes": 256, "partition_added_copy_bytes": 256, "spill_added_copy_bytes": 0}
+all ops in one subgraph                        num_cores=1 cross_task_traffic=0
+    task 0 core=0 gen_ops=[6, 7, 8] gen_tensors=[10001, 10002, 10003] rewritten_DDR={}
+    traffic={"original_graph_copy_bytes": 128, "scheduled_copy_bytes": 192, "added_copy_bytes": 64, "partition_added_copy_bytes": 64, "spill_added_copy_bytes": 0}
+DDR-pos tensor produced by a non-COPY op (F-TASK-002) num_cores=1 cross_task_traffic=0
+    task 0 core=0 gen_ops=[6, 7, 8] gen_tensors=[10001, 10002, 10003] rewritten_DDR={'105': 'UB'}
+    traffic={"original_graph_copy_bytes": 128, "scheduled_copy_bytes": 192, "added_copy_bytes": 64, "partition_added_copy_bytes": 64, "spill_added_copy_bytes": 0}
+original COPY_OUT consumes the shared tensor (F-TASK-003) num_cores=1 cross_task_traffic=0
+    task 0 core=0 gen_ops=[7, 8, 9, 10] gen_tensors=[10001, 10002, 10003, 10004] rewritten_DDR={}
+    traffic={"original_graph_copy_bytes": 192, "scheduled_copy_bytes": 256, "added_copy_bytes": 64, "partition_added_copy_bytes": 64, "spill_added_copy_bytes": 0}
+
+written: <PROJECT_ROOT>/results/a/form/r1-20260923-farmeruncle123/ftask-observations.json
