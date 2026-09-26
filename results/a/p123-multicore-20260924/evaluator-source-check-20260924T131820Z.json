@@ -1,0 +1,49 @@
+{
+  "schema": "p123-evaluator-source-check-v1",
+  "recorded_at": "2026-09-24T13:18:20Z",
+  "scope": "Read-only source identity check recorded after the command completed; not a new evaluation or an independent semantic reproduction.",
+  "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+  "manifest_path": "docs/a/source-manifest.json",
+  "method": [
+    "Read the ten code/* file records from the frozen source manifest.",
+    "For each actual P1/P2/P3 official source root, compare every file SHA256 against the manifest.",
+    "Compare git hash-object --no-filters of each actual source file with its blob from git ls-tree -r at the fixed source commit.",
+    "All thirty file comparisons passed. No evaluator modules were imported or executed."
+  ],
+  "evaluators": [
+    {
+      "problem": "P1",
+      "route": "E0",
+      "source_commit": "4dff90ef699fd51845cf482951e8477066f5f566",
+      "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py CLI",
+      "official_files_verified": 10,
+      "runtime_bytes_match_manifest_and_git_blobs": true,
+      "role": "Final selected-plan confirmation; E1 is used internally for candidate scoring."
+    },
+    {
+      "problem": "P2",
+      "route": "E0",
+      "source_commit": "f27ef37bb76dcf556f35d3f2328e405d92241d9c",
+      "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py::evaluate_scene_b",
+      "official_files_verified": 10,
+      "runtime_bytes_match_manifest_and_git_blobs": true,
+      "role": "Independent evaluation of the constructed plan through the hash-verifying wrapper."
+    },
+    {
+      "problem": "P3",
+      "route": "E0",
+      "source_commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+      "entrypoint": "data/raw/a/official/code/multicore_cut_evaluate_problem_3.py::evaluate_problem_3",
+      "official_files_verified": 10,
+      "runtime_bytes_match_manifest_and_git_blobs": true,
+      "role": "Online final P3 evaluation; same-plan same-core P2 pairing is separately recorded."
+    }
+  ],
+  "limitations": [
+    "These commits identify the verified source bytes; they are not an invented process checkout timestamp or the export-time HEAD.",
+    "Source identity and existing receipts do not independently prove every runtime event or global E1 equivalence.",
+    "P1 candidate scoring uses E1 commit 5bfe53a29c1ba05167239f51ea937e602f7f85b4; final admitted scores require the existing official E0 confirmation."
+  ],
+  "new_solver_starts": 0,
+  "new_evaluator_calls": 0
+}

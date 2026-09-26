@@ -1,0 +1,181 @@
+{
+  "schema": "p123-readonly-snapshot-v1",
+  "capture_started_at_utc": "2026-09-24T12:17:11.278791+00:00",
+  "capture_finished_at_utc": "2026-09-24T12:17:24.392912+00:00",
+  "non_atomic_live_snapshot": true,
+  "source_run": "results/a/p123-multicore-20260924",
+  "exporter": {
+    "path": "src/benchmarks/p123_snapshot.py",
+    "sha256": "c97eaddd6a0e9cc03b31d948567f44adb525c226afdf374601f36d0eea29b707"
+  },
+  "original_captures": {
+    "captured-comparison.csv": {
+      "source": "comparison.csv",
+      "read_started_at": "2026-09-24T12:17:11.279889+00:00",
+      "state": "captured",
+      "read_finished_at": "2026-09-24T12:17:11.279889+00:00",
+      "bytes": 321237,
+      "sha256": "e59c7abe28139eb7610aceabe5cdbf393332d5de335fc638f8583fd416071897",
+      "changed_during_read": false
+    },
+    "captured-progress.json": {
+      "source": "progress.json",
+      "read_started_at": "2026-09-24T12:17:11.282150+00:00",
+      "state": "captured",
+      "read_finished_at": "2026-09-24T12:17:11.282150+00:00",
+      "bytes": 359,
+      "sha256": "c448fefdae4f6d32bb4b26fa29610be01212560f38d471aba6e1358026b9d7d7",
+      "changed_during_read": false
+    },
+    "protocol.json": {
+      "source": "protocol.json",
+      "read_started_at": "2026-09-24T12:17:11.283217+00:00",
+      "state": "captured",
+      "read_finished_at": "2026-09-24T12:17:11.284724+00:00",
+      "bytes": 5247,
+      "sha256": "ffac1a5beb9ac1164d6798029d96cc229f009d56aff5cec3d401b6a2872ba372",
+      "changed_during_read": false
+    },
+    "harness-revisions.json": {
+      "source": "harness/revisions.json",
+      "read_started_at": "2026-09-24T12:17:11.286207+00:00",
+      "state": "captured",
+      "read_finished_at": "2026-09-24T12:17:11.286207+00:00",
+      "bytes": 871,
+      "sha256": "e32817071faaeed5fe3d507d4db8136e95172b5fb00fd8d0b3348f17bae8f9b1",
+      "changed_during_read": false
+    }
+  },
+  "coverage": {
+    "reused_baseline_anchor": {
+      "positions": 200,
+      "status": {
+        "ok": 172,
+        "timeout": 28
+      },
+      "final_receipts": 200,
+      "multicore_ratios_available": 172,
+      "P3_cache_ratios_available": 0
+    },
+    "solver": {
+      "positions": 1300,
+      "status": {
+        "ok": 697,
+        "error": 52,
+        "missing": 549,
+        "running_unconfirmed": 2
+      },
+      "final_receipts": 749,
+      "multicore_ratios_available": 648,
+      "P3_cache_ratios_available": 285
+    },
+    "per_problem": {
+      "P1": {
+        "positions": 500,
+        "solver_status": {
+          "ok": 180,
+          "error": 52,
+          "missing": 168
+        }
+      },
+      "P2": {
+        "positions": 500,
+        "solver_status": {
+          "ok": 232,
+          "missing": 168
+        }
+      },
+      "P3": {
+        "positions": 500,
+        "solver_status": {
+          "ok": 285,
+          "running_unconfirmed": 2,
+          "missing": 213
+        }
+      }
+    },
+    "successful_solver_missing_multicore_ratio": 49,
+    "successful_P3_missing_cache_ratio": 0
+  },
+  "original_progress_claim": {
+    "updated_at": "2026-09-24T12:15:33.563593+00:00",
+    "completed_cells": 745,
+    "counts": {
+      "P1": {
+        "ok": 180,
+        "failed": 52
+      },
+      "P2": {
+        "ok": 228,
+        "failed": 0
+      },
+      "P3": {
+        "ok": 285,
+        "failed": 0
+      }
+    },
+    "full_target_cells": {
+      "P1": 400,
+      "P2": 400,
+      "P3": 500
+    }
+  },
+  "original_csv_observation": {
+    "parsed_rows": 945,
+    "warnings": [
+      "row_count_differs;live_aggregate_may_lag_or_be_partial"
+    ],
+    "completed_positions_in_receipt_capture": 949,
+    "row_count_matches_receipt_capture": false
+  },
+  "receipt_evidence_count": 3022,
+  "input_observation_counts": {
+    "captured": 3030,
+    "missing": 2078
+  },
+  "inputs_changed_during_read": [],
+  "limitations": [
+    "Live files were read sequentially, once each, with no writer lock. This is not an atomic snapshot or proof of state at a single cursor/time.",
+    "Captured comparison/progress bytes may be stale, partially written, or describe a different instant. The complete table is independently derived from captured receipts.",
+    "No solver/evaluator/controller/audit import, evaluation, process launch or live-run mutation occurred. No plan/result/trace/stdout/stderr files were read or copied.",
+    "Receipt result hashes are recorded claims, not a fresh verification of large result files or plan legality. No scientific acceptance or live-process verification is asserted.",
+    "Directory existence only establishes incomplete evidence. running_unconfirmed requires a start/process receipt without completion; it is not confirmed running.",
+    "An ok cell can lack a failed/missing baseline denominator or P3 same-plan P2 pair. Ratios stay NA with reasons; failed/missing cells are never replaced by zero.",
+    "The 200 P1/P2 core1 rows reuse 100 official baselines; they are not 200 solver runs. There are 1300 actual solver positions.",
+    "result_path refers to the source run, not copied snapshot artifacts. Missing slots use the protocol-pinned source commit/algorithm as intended provenance only."
+  ],
+  "files": {
+    "captured-comparison.csv": {
+      "sha256": "e59c7abe28139eb7610aceabe5cdbf393332d5de335fc638f8583fd416071897",
+      "bytes": 321237
+    },
+    "captured-progress.json": {
+      "sha256": "c448fefdae4f6d32bb4b26fa29610be01212560f38d471aba6e1358026b9d7d7",
+      "bytes": 359
+    },
+    "protocol.json": {
+      "sha256": "ffac1a5beb9ac1164d6798029d96cc229f009d56aff5cec3d401b6a2872ba372",
+      "bytes": 5247
+    },
+    "harness-revisions.json": {
+      "sha256": "e32817071faaeed5fe3d507d4db8136e95172b5fb00fd8d0b3348f17bae8f9b1",
+      "bytes": 871
+    },
+    "comparison.csv": {
+      "sha256": "7b57b5afbc0db26bdeaecb72b0d3db6b030e8531525251e44bf3ba890ea084a3",
+      "bytes": 1032089
+    },
+    "receipts.jsonl": {
+      "sha256": "31e04eabbc88c5518a4ef58dfd8e14af3992e1b621c4f6577a87b7bf8c4510dc",
+      "bytes": 3694176
+    },
+    "lineage.json": {
+      "sha256": "a6e11b2353dfd48639671e91854aa236d369b7b911fdcc5d38b7e2a1ffa93ee6",
+      "bytes": 4494
+    },
+    "README.md": {
+      "sha256": "daefb9f1f4f9d3ad6a9e7b92e74b51d58ed3a9959f75e60a2396132a167d10fe",
+      "bytes": 2093
+    }
+  }
+}

@@ -1,0 +1,1 @@
+Figure 5-3. P2 mean per-case speedup for the complete q2-adaptive-budget method. Each speedup is computed from the common per-case single-core denominator before arithmetic averaging by core count. The prescribed k=1 display anchor is 1.0; observed single-core ratios remain in the audit table. No incomplete or historical method series is joined.

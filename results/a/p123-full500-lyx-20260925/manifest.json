@@ -1,0 +1,92 @@
+{
+  "scope": "Fixed full-coverage reference batches; not a claim of global optimality or scientific final acceptance.",
+  "approval": "https://github.com/huaweibei123/huaweicup2026/issues/15#issuecomment-5830738949",
+  "inputs": {
+    "P1": {
+      "commit": "e82c20098eb53cfb00d5f2287173f6894b3fb291",
+      "path": "results/a/q1-unified-v4-full500-20260925-s59/20260924T1952Z-s59ee/board-feed-500.json",
+      "blob_sha1": "0e8b2ba050142d723ae444ffa021d1a7d1e50a4e"
+    },
+    "P2": {
+      "commit": "e82c20098eb53cfb00d5f2287173f6894b3fb291",
+      "path": "results/a/q2-nikolastarx/active-core-full500-20260925-s59/20260924T1910Z-s59ee/board-feed-500-with-runtime-notes.json",
+      "blob_sha1": "883e1994415a495e63b0a21a390df428bba4d59c"
+    },
+    "P3": {
+      "commit": "c7931c3bdcb87c5aac5a7c3a6fbf8efed2b73254",
+      "path": "results/a/q3-nikolastarx/witness-cachepair-20260925-s59/20260924T2102Z-s59ee/board-feed-500-revision2.json",
+      "blob_sha1": "3440c04b18b157365fd72e6105a896822786cdca"
+    }
+  },
+  "batches": {
+    "P1": {
+      "algorithm_id": "q1-unified-structural-guard",
+      "algorithm_name": "P1 统一结构守卫求解器",
+      "run_id": "20260924T1952Z-s59ee",
+      "solver_commit": "a0537aeb72dc702af86d67d3194587d581ac207c",
+      "revision": 1,
+      "variant": "structural-six-plan-general-frontier-v4"
+    },
+    "P2": {
+      "algorithm_id": "q2-adaptive-budget",
+      "algorithm_name": "P2 structural frontier with guarded active-core choice",
+      "run_id": "q2-activecore-full500-20260925-s59",
+      "solver_commit": "2794ceba93acc1f7fc119154f61082511843d4b3",
+      "revision": 1,
+      "variant": "frozen-active-core-wave-v2-no-balance-split"
+    },
+    "P3": {
+      "algorithm_id": "q3-witness-structure",
+      "algorithm_name": "统一结构算法加流水切分与Attention日历次序保留",
+      "run_id": "q3-witness-full500-20260925-s59",
+      "solver_commit": "c2d628ba0fe8dce4630e5f9c0a5c8fb810fcd41a",
+      "revision": 2,
+      "variant": "unified-attention-witness-e0"
+    }
+  },
+  "formulae": {
+    "P1_P2": "arithmetic mean over cases of official_singlecore_makespan / current_makespan; k=1 is not forced to 1",
+    "P3_speedup": "arithmetic mean over cases of official_singlecore_makespan / current_cache_makespan; reported for provenance and anchor checking",
+    "P3_cache": "arithmetic mean over verified same-plan cases of no_cache_makespan / cache_makespan"
+  },
+  "valid_counts": {
+    "P1": 500,
+    "P2": 500,
+    "P3_verified_pairs": 500
+  },
+  "excluded_counts": {
+    "P1": {},
+    "P2": {},
+    "P3": {}
+  },
+  "anchor_k1": {
+    "P1_speedup": 1.0020968223600535,
+    "P2_speedup": 1.1085967079439594,
+    "P3_speedup": 1.1994067668191648,
+    "P3_cache_gain": 1.0023494122707393
+  },
+  "outputs": [
+    "results/a/p123-full500-lyx-20260925/per_case.json",
+    "results/a/p123-full500-lyx-20260925/summary.json",
+    "figures/a/p123-full500-lyx-20260925/p123_full500_preview.png",
+    "figures/a/p123-full500-lyx-20260925/p123_full500_preview.pdf",
+    "figures/a/p123-full500-lyx-20260925/p123_full500_preview.svg"
+  ],
+  "pair_verification": "P3 rows are accepted only when graph_sha256, config_sha256, official_sha256, plan_sha256, and cores match byte-identifying feed fields; artifact bytes are independently checked against SHA-256",
+  "limitations": [
+    "fixed full-coverage reference batches, not a claim of global optimum",
+    "central board verification is separately attributed to the captain approval comment"
+  ],
+  "execution_boundary": "read-only feed download/parse and plotting; no solver/E0/E1/E2 calls",
+  "environment": {
+    "python": "3.12.13 (main, Jun 23 2026, 15:23:43) [MSC v.1944 64 bit (AMD64)]",
+    "matplotlib": "3.11.2"
+  },
+  "output_sha256": {
+    "results/a/p123-full500-lyx-20260925/per_case.json": "074bfa55b25acb60504780ff3107f9c28fef3ba58ef750bee1bbb0996fb9cdfc",
+    "results/a/p123-full500-lyx-20260925/summary.json": "2a7491b69b0af22b8f8feba16fe51b70cb79be70cd80ab739f255f7dbe4315ce",
+    "figures/a/p123-full500-lyx-20260925/p123_full500_preview.png": "bafb121902f1414e70e6940657d901d7401bdbe847f2005425164e1fd00399de",
+    "figures/a/p123-full500-lyx-20260925/p123_full500_preview.pdf": "e8de0bccfb93f9a637dd09399b550b85f5d69111b5b183af716666b6707a425f",
+    "figures/a/p123-full500-lyx-20260925/p123_full500_preview.svg": "a8d50c0f4b394dd1347d3391f4522cbb2e9a39fa02eab7872c7cb0e9876018ac"
+  }
+}

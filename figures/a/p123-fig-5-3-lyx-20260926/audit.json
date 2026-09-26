@@ -1,0 +1,119 @@
+{
+  "schema": "figure-auto-review-v1",
+  "figure_id": "fig-5-3",
+  "primary": "fig53_p2_speedup.svg",
+  "files": [
+    {
+      "name": "fig53_p2_speedup.svg",
+      "role": "svg",
+      "sha256": "30f4f45d75613173900e044649bf36068f8073e219e10b98aa23df5353a7e352"
+    },
+    {
+      "name": "fig53_p2_speedup.png",
+      "role": "png",
+      "sha256": "83e04e5bcf7ae09f562c01f81c8f93f4d80d62b53a0161441ded5424e928a725"
+    },
+    {
+      "name": "fig53_p2_speedup.pdf",
+      "role": "pdf",
+      "sha256": "3a1e323b9339f006a1bed5bcaf1e5e7fcd99b661bf34af1073c01b7b759fef6f"
+    },
+    {
+      "name": "plot_figures.py",
+      "role": "source",
+      "sha256": "6dffcfbe02f57e77d0c52b88d0dc543860bb6f0561c9af579709e305ef9c07d1"
+    },
+    {
+      "name": "caption.md",
+      "role": "caption",
+      "sha256": "fdaaad1d4f58d49228f0b901efbe8d241c243d18d8dd6f1542fe6f7b7b6eba62"
+    },
+    {
+      "name": "self-check.md",
+      "role": "self_check",
+      "sha256": "f54e35ec38a57cc48062f6033f1dab3d48cd1371080e675969d0e51158faefba"
+    },
+    {
+      "name": "per_case_speedup.csv",
+      "role": "input",
+      "sha256": "4869cc4cd860b942535cfd9d74a35c12c7570881e7608549875994b4407483cf"
+    },
+    {
+      "name": "method_core_summary.csv",
+      "role": "input",
+      "sha256": "9642711afb8dae15485a0dce11d527b40a78e5ce6e36652037f67c6219715c60"
+    },
+    {
+      "name": "README.md",
+      "role": "notes",
+      "sha256": "7c7e25cd7fd96b6bd92a8d1e065cdb9de290f17c3f74b0b7d2ca647fa76658d7"
+    },
+    {
+      "name": "manifest.json",
+      "role": "notes",
+      "sha256": "1c958f44a515408ada6b0ae27bd1c3d5750b39b00c0fcabfea16094098d9548b"
+    }
+  ],
+  "command": "uv run python src/analysis/p123_figures_lyx/plot_all.py --figure 5-3",
+  "sources": [
+    {
+      "path": "results/a/p123-full500-lyx-20260925/per_case.json",
+      "commit": "5f4b7036ef7d05fcc88242742ad9ac0ab75b2b5a",
+      "git_blob": "018ebde9b33b64428fda0db4ad05746b1ec32fbf",
+      "sha256": "122da1335cf8f70e3db472ff84270cb3fc17690fcb3200607555c9dad7545847",
+      "working_copy_sha256": "074bfa55b25acb60504780ff3107f9c28fef3ba58ef750bee1bbb0996fb9cdfc"
+    }
+  ],
+  "local_inputs": [
+    {
+      "path": "results/a/p123-full500-lyx-20260925/inputs/P2.json",
+      "sha256": "0b850686966d1d7c1ce1a8babb1655051756b42f9a59d5c6f6becd6a87f2f99c",
+      "published": false,
+      "reason": "large normalized input is gitignored; the published per_case.json is the reproducible plot feed"
+    }
+  ],
+  "units": {
+    "makespan": "cycles",
+    "wall": "s",
+    "bytes": "B"
+  },
+  "panels": [
+    {
+      "id": "speedup",
+      "title": "P2 mean per-case speedup"
+    },
+    {
+      "id": "ideal",
+      "title": "Ideal linear reference"
+    }
+  ],
+  "tables": {
+    "metrics": "per_case_speedup.csv",
+    "summary": "method_core_summary.csv"
+  },
+  "coverage": {
+    "cases": 100,
+    "cores": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "cells": 500,
+    "method": "q2-adaptive-budget",
+    "per_core": 100
+  },
+  "criteria": [
+    "k=1 display anchor is 1.0; observed k=1 ratios remain in per_case_speedup.csv.",
+    "The single plotted method has 100 cases at every core count.",
+    "All ratios use the common per-case single-core denominator; no historical splice."
+  ],
+  "status": "ready_for_human_review",
+  "limitations": [
+    "Only q2-adaptive-budget has complete coverage in this fixed source batch.",
+    "SVG/PDF were generated and hashes checked; desktop reader inspection is not claimed.",
+    "yuanzhifang scientific acceptance remains pending."
+  ],
+  "notice": "audit.json is excluded from manifest.outputs to avoid a self-referential hash."
+}
