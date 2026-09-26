@@ -1,0 +1,1 @@
+Figure 5-6. Empirical distribution of U/L_global - 1, where U is the independently accepted official Makespan and L_global is a compute-only necessary lower bound. The gap is a conservative upper bound on the submitted plan's relative distance from the bound; it is neither an observed error nor a guaranteed achievable improvement, and L<U is not an optimality proof.

@@ -1,0 +1,6 @@
+event,core,op_id,endpoint,cycles,note
+makespan_end_p2,,,end,2140720,P2（无 L2）全量最晚结束 == 官方 makespan
+makespan_end_p3,,,end,2140863,P3（只读 Cache）全量最晚结束 == 官方 makespan；+143 cycles 非单调
+first_completion_gain,3,1000004905,start/end,17,"最早完成时间差异：P2 4956-5163(207 cy) vs P3 4956-4973(17 cy, CACHE_READ 命中)"
+first_start_change,3,1000006255,start,4973,最早开始时间差异：P2 5163 vs P3 4973
+first_same_start_slower_copy_in,1,1000006089,start/end,138,最早同起点但服务变慢：P2 69 cy vs P3 138 cy（走 DDR）；与 Cache 改变共享服务相容，非完整因果

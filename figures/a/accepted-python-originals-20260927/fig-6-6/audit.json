@@ -1,0 +1,232 @@
+{
+  "schema": "figure-auto-review-v1",
+  "figure_id": "fig-6-6",
+  "primary": "figure.svg",
+  "files": [
+    {
+      "name": "aligned_ops.csv",
+      "role": "input",
+      "sha256": "9cae8f2bc61982b9070b1f334521b558ce1d3d451fe0d97064598effc49172d6"
+    },
+    {
+      "name": "caption.md",
+      "role": "caption",
+      "sha256": "9d455c7845cb58b129563d665293b6fd82c3abf09ccabfc845f5e55404751973"
+    },
+    {
+      "name": "events.csv",
+      "role": "input",
+      "sha256": "ab30c5e44dcbbea00158af5755ca2c982f31641c5dd00ac7bed37489a0fd7284"
+    },
+    {
+      "name": "extract_inputs.py",
+      "role": "extraction",
+      "sha256": "c1504168f269a7767bb05403b9c9694271ad080a5e347782b3ecbba58a17ad45"
+    },
+    {
+      "name": "figure.png",
+      "role": "png",
+      "sha256": "c0e32c2078b8696105266db6ce050f85292f577b12ee31fc940b91e683864af1"
+    },
+    {
+      "name": "figure.svg",
+      "role": "svg",
+      "sha256": "5ad0e6bb7688e3b3322293febd6e13a37e253e3888c97743bcc21763b2526be2"
+    },
+    {
+      "name": "key_events.csv",
+      "role": "input",
+      "sha256": "7d1ffdcd1b086bb64fe36412a9bd82fc9cf0e624855df67d824e5779029cf8ff"
+    },
+    {
+      "name": "markers.csv",
+      "role": "input",
+      "sha256": "1ca82dd7f019b1500befc5b660e129ae475b595d8898423aee30107cd6b37174"
+    },
+    {
+      "name": "original_plot.py",
+      "role": "source",
+      "sha256": "da785fd986c2ade8fb17f8c535adc75b79b314305a62cbe8095442b7d5e5aeb0"
+    },
+    {
+      "name": "plot.py",
+      "role": "source",
+      "sha256": "ca61431b604ecf8785599b4c07198fdc5d87d7e1e49476b2c28026330bafc2da"
+    },
+    {
+      "name": "prepare_review_tables.py",
+      "role": "source",
+      "sha256": "c3ef79934eca92658dce820921a76029c8f7ad5ff389026da55b49bd72ed4780"
+    },
+    {
+      "name": "preview-insert-width.png",
+      "role": "preview_check",
+      "sha256": "a38836410b458918d2fbb9fe7b3524fa93d16bd2a5a2089d7e100afe221af393"
+    },
+    {
+      "name": "results.csv",
+      "role": "input",
+      "sha256": "c25d530e2773907a2ebc416e2b9380efa0c65fa963331f9b7ae2db1e5c92acf1"
+    },
+    {
+      "name": "self-check.md",
+      "role": "self_check",
+      "sha256": "cc3def9d225f58b23a357ef9208571277db74025682ff67f3d08a20c16fba5e0"
+    },
+    {
+      "name": "source-verification.json",
+      "role": "verification",
+      "sha256": "4784030ae458a1ab5303e2f44a3cc97fd37ce6aa93648e338f2cde192c5893cf"
+    },
+    {
+      "name": "summary_metrics.csv",
+      "role": "input",
+      "sha256": "eb2a14e231ec294b59f803417b27113efab5bed8b8ba581d679f85af6d53f572"
+    }
+  ],
+  "command": "python prepare_review_tables.py --sources <fixed-source-dir> ; python plot.py",
+  "command_notes": "工作台受控适配与绘图，无新实验；作者原脚本仅保留。固定源目录含audit.json、p2.json.gz、p3.json.gz、plan.json、pair-summary.json。",
+  "sources": [
+    {
+      "path": "results/a/q3-yuanzhifang/cache-counterexample-021-20260925/audit.json",
+      "commit": "f26704ed8748f0a575b55f1a02b83d7335a1083f",
+      "sha256": "e50a97d724f7f79355bb98e75aafc382dba726a6d23002932e5cf114690b6135"
+    },
+    {
+      "path": "results/a/q3-nikolastarx/forest-full500-20260925-s59/20260924T2122Z-s59ee/revision2-baseline-draft/cache_pair/021-k3/result.json.gz（P2，同字节复用拷贝）",
+      "commit": "19bebf35205d23fdd832781540f8879da52eeb62",
+      "sha256": "e7b6d54df96bca81730c7dadc8b59a65d988da75476be81ea0b550e4f4dad3c6"
+    },
+    {
+      "path": "results/a/q3-nikolastarx/witness-full500-20260925-s59/20260924T2032Z-s59ee/s06/cells/021-k3-unified-attention-witness-e0/evidence/result.json.gz（P3）",
+      "commit": "130dfe4c6a10d394a6d04257f660d5a66c51c624",
+      "sha256": "f6e460a78209a37b3edb003692efd590378687e4efa7575b286dfa0245c2edb5"
+    },
+    {
+      "path": "results/a/q3-nikolastarx/witness-full500-20260925-s59/20260924T2032Z-s59ee/s06/cells/021-k3-unified-attention-witness-e0/case_021_multicore_res.json（P3 plan）",
+      "commit": "130dfe4c6a10d394a6d04257f660d5a66c51c624",
+      "sha256": "13362774572585a30167aed18b9929d52f1962390d05fafb3dc4dbd318a098c4"
+    },
+    {
+      "path": "docs/a/q3-yuanzhifang/CACHE_NONMONOTONE_021.md（口径依据，未直接读入绘图）",
+      "commit": "f26704ed8748f0a575b55f1a02b83d7335a1083f",
+      "sha256": "45d73a6f3ea523c84ac258c7093c28208445941dd5240e418d0e06d4344ff213"
+    },
+    {
+      "path": "results/a/q3-yuanzhifang/cache-counterexample-021-20260925/audit_021.py（复现脚本交叉引用，未由本包执行）",
+      "commit": "f26704ed8748f0a575b55f1a02b83d7335a1083f",
+      "sha256": "81e4f8e66897730c36fccff0080d6b35dd28269e1a304cede7800cd2e15c5c9e"
+    }
+  ],
+  "units": {
+    "makespan": "cycles",
+    "wall": "s",
+    "bytes": "B"
+  },
+  "panels": [
+    {
+      "id": "1",
+      "title": "P2（无 L2）全量时间线：3 核 × 4 管道 12 行，8,881 操作真实 start/end，makespan 2,140,720 cycles"
+    },
+    {
+      "id": "2",
+      "title": "P3（只读 Cache）全量时间线：行序与面板 1 完全一致，makespan 2,140,863 cycles（+143，CacheGain 0.99993 非单调）"
+    },
+    {
+      "id": "3",
+      "title": "窗口 1（同一绝对范围 4,900–7,000 cycles）：首次命中相关变化——op 1000004905 P2 207cy vs P3 命中 17cy（CACHE_READ）；op 1000006255 起点 5,163→4,973；每行上半 P2 / 下半 P3；局部显示核3四Pipe"
+    },
+    {
+      "id": "4",
+      "title": "窗口 2（同一绝对范围 443,050–443,250 cycles）：后续 DDR 读取变化——op 1000006089 同起点 443,077，P2 69cy vs P3 138cy（DDR）；全表同起点变慢 COPY_IN 共 3 笔；局部显示核1四Pipe"
+    }
+  ],
+  "tables": {
+    "aligned_ops": "aligned_ops.csv",
+    "key_events": "key_events.csv",
+    "summary": "summary_metrics.csv",
+    "events": "events.csv",
+    "results": "results.csv",
+    "markers": "markers.csv"
+  },
+  "table_columns": {
+    "aligned_ops": [
+      "core",
+      "source_core_id",
+      "task_id",
+      "op_id",
+      "op",
+      "pipe",
+      "p2_start",
+      "p2_end",
+      "p2_duration",
+      "p3_start",
+      "p3_end",
+      "p3_duration",
+      "p3_cache_hit",
+      "p3_memory_path",
+      "start_diff",
+      "end_diff",
+      "duration_diff"
+    ],
+    "key_events": [
+      "event",
+      "core",
+      "op_id",
+      "endpoint",
+      "cycles",
+      "note"
+    ],
+    "summary": [
+      "metric",
+      "value"
+    ]
+  },
+  "parameters": {
+    "case": "021",
+    "cores": 3,
+    "audit_commit": "f26704ed8748f0a575b55f1a02b83d7335a1083f",
+    "p2_result_commit": "19bebf35205d23fdd832781540f8879da52eeb62",
+    "p3_result_commit": "130dfe4c6a10d394a6d04257f660d5a66c51c624",
+    "plan_sha256": "13362774572585a30167aed18b9929d52f1962390d05fafb3dc4dbd318a098c4",
+    "key_values": {
+      "makespan_p2": 2140720,
+      "makespan_p3": 2140863,
+      "increase": 143,
+      "cache_gain": 0.9999332045067807,
+      "operation_count_aligned": 8881,
+      "changed_start": 7485,
+      "changed_end": 7808,
+      "changed_duration": 2392,
+      "movement": {
+        "original_graph_copy_bytes": 3338240,
+        "scheduled_copy_bytes": 39993344,
+        "added_copy_bytes": 36655104,
+        "partition_added_copy_bytes": 4710400,
+        "spill_added_copy_bytes": 31944704
+      },
+      "cache_stats": {
+        "copy_in_hits": 681,
+        "copy_in_misses": 3133,
+        "hit_bytes": 3692544,
+        "miss_bytes": 22206464,
+        "hit_rate": 0.14257472718646214
+      }
+    },
+    "core_numbering": "交付表 core=原始 core_id+1（source_core_id 保留 0..2）",
+    "missing": "无"
+  },
+  "required_stages": [],
+  "criteria": [
+    "两端 plan hash 一致，核数及其余固定配置相同；局部窗口使用同一绝对时间范围。",
+    "事件起止来自原件，不为对齐而平移真实事件。",
+    "全局负收益保留；没有完整因果证明时，图注只写“事件观察”，不把某个事件认定为全部末端退化原因。"
+  ],
+  "dispatch": {
+    "issue": "huaweibei123/huaweicup2026#14",
+    "dispatch_comment_id": 5847356866,
+    "task_book_sha256": "55859ab1ed2b81b218663f60c4cf824e9e01ba0399c52113861b48e61da7dfd2"
+  },
+  "notice": "数值全部来自固定提交的实测/登记记录；机检只验证提交包内部一致性，视觉和科学结论由 Agent 逐图审查与用户最终总验收。",
+  "version_note": "68a812479ae7326f662794594aacdb5f0fae4628 / workbench local-layout-v1, three original CSV unchanged, local candidate not new remote commit"
+}
