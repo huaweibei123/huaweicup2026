@@ -1,0 +1,205 @@
+{
+  "algorithm_id": "q1-component-overload-list",
+  "variant": "any-pipe-overload-quotient-ready-list",
+  "max_rounds": 64,
+  "max_sinks": 64,
+  "base": {
+    "algorithm_id": "q1-heavy-component-suffix",
+    "variant": "dominant-pipe-suffix-waves",
+    "selected": "sink-or-bounded",
+    "dominant_percent": 80,
+    "max_rounds": 64,
+    "max_sinks": 64,
+    "base": {
+      "algorithm_id": "q1-sink-peel",
+      "variant": "exclusive-suffix-waves",
+      "selected": "bounded04",
+      "base": {
+        "algorithm_id": "q1-bounded-component-tasks",
+        "variant": "frontier-then-independent-chunks",
+        "base": {
+          "algorithm_id": "q1-tree-frontier-pack",
+          "variant": "threshold-antichain-tail",
+          "packet_factor": 4,
+          "base": {
+            "algorithm_id": "q1-component-pack",
+            "variant": "pipe-lpt-one-task-per-core",
+            "compute_ops": 31554,
+            "components": 513,
+            "largest_component_ops": 147,
+            "tasks": 5,
+            "core_compute_ops": [
+              6427,
+              6280,
+              6280,
+              6284,
+              6283
+            ],
+            "compute_pipe_work_by_core": [
+              {
+                "PIPE_M": 1796272,
+                "PIPE_V": 191027
+              },
+              {
+                "PIPE_M": 1796272,
+                "PIPE_V": 185148
+              },
+              {
+                "PIPE_M": 1796272,
+                "PIPE_V": 185148
+              },
+              {
+                "PIPE_M": 1796272,
+                "PIPE_V": 185200
+              },
+              {
+                "PIPE_M": 1796272,
+                "PIPE_V": 185187
+              }
+            ],
+            "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+          },
+          "selected": "component-pack",
+          "scope": "Structural proof only; E0 required",
+          "reason": "enough independent components or one core"
+        },
+        "chunks": {
+          "trigger_ops": 4096,
+          "chunk_ops": 1024,
+          "split_tasks": [
+            {
+              "original_task": 0,
+              "new_tasks": [
+                0,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "chunk_compute_ops": [
+                1024,
+                997,
+                973,
+                1014,
+                1003,
+                1003,
+                413
+              ]
+            },
+            {
+              "original_task": 1,
+              "new_tasks": [
+                1,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+              ],
+              "chunk_compute_ops": [
+                1005,
+                990,
+                971,
+                1013,
+                1003,
+                1003,
+                295
+              ]
+            },
+            {
+              "original_task": 2,
+              "new_tasks": [
+                2,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22
+              ],
+              "chunk_compute_ops": [
+                1003,
+                991,
+                972,
+                1013,
+                1003,
+                1003,
+                295
+              ]
+            },
+            {
+              "original_task": 3,
+              "new_tasks": [
+                3,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28
+              ],
+              "chunk_compute_ops": [
+                1010,
+                990,
+                971,
+                1012,
+                1003,
+                1003,
+                295
+              ]
+            },
+            {
+              "original_task": 4,
+              "new_tasks": [
+                4,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34
+              ],
+              "chunk_compute_ops": [
+                1010,
+                989,
+                971,
+                1012,
+                1003,
+                1003,
+                295
+              ]
+            }
+          ],
+          "oversize_indivisible_components": [],
+          "tasks_before": 5,
+          "tasks_after": 35
+        },
+        "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+      },
+      "max_rounds": 64,
+      "max_sinks": 64,
+      "scope": "Task-order proof only; no spill, performance or E0 feasibility guarantee",
+      "reason": "existing bounded04 structural route retained"
+    },
+    "scope": "Structural candidate; neither dominance nor zero spill proves quality",
+    "components": 513,
+    "dominant_pipe": "PIPE_M",
+    "total_pipe_work": {
+      "PIPE_M": 8981360,
+      "PIPE_V": 931710
+    },
+    "heavy_pipe_work": {
+      "PIPE_M": 56968,
+      "PIPE_V": 4600
+    },
+    "heavy_anchor": 56,
+    "heavy_ops": 128,
+    "reason": "no dominant component"
+  },
+  "selected": "heavy-suffix-fallback",
+  "scope": "Direct structural proposal; proxy times omit DDR, FIFO and capacity",
+  "reason": "no overloaded component with independent suffix packets"
+}
