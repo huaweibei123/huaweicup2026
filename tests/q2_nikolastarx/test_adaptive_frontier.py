@@ -1,13 +1,23 @@
 """Routing boundaries and legal plans; no evaluation or stored case lookup."""
 from unittest import TestCase
 from unittest.mock import patch
-from src.q2_nikolastarx import adaptive_frontier, component_envelope
+from src.q2_nikolastarx import adaptive_frontier, adaptive_budget, component_envelope
 from src.q2_nikolastarx.dag_direct import DAGIndex
 from src.q2_nikolastarx.direct import derive_multicore_plan
 from tests.q2_nikolastarx.test_component_envelope import jobs, config
 
 
 class FrontierTests(TestCase):
+    def test_budget_route_does_not_infer_split_benefit_from_work_alone(self):
+        graph = jobs(6)
+        graph['ops'][0]['cycles'] = 10000
+        index = DAGIndex(graph)
+        old, _ = component_envelope.build_from_index(index, 2, config())
+        plan, detail = adaptive_budget.component_route(index, 2, config())
+        self.assertEqual(plan, old)
+        self.assertTrue(detail['component_pressure']['component_exceeds_balanced_pipe_work'])
+        self.assertIn('component_split_deferred', detail['component_pressure'])
+
     def test_balanced_components_keep_existing_plan(self):
         graph = jobs(6)
         index = DAGIndex(graph)
