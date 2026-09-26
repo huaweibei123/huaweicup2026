@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "calls": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "adaptive_semantic",
+      "status": "constructed",
+      "detail": {
+        "strategy": "tensor_dag_eft",
+        "eligible_ops": 4113,
+        "components": 1,
+        "cores": 5,
+        "bandwidth": 60,
+        "cross_core_delay": 500,
+        "predicted_finish_cycles": 177691,
+        "predicted_ddr_bytes_without_spill": {
+          "external_input_bytes": 1313438,
+          "cross_core_bytes": 8166560,
+          "output_bytes": 25600
+        },
+        "predicted_cross_core_pairs": 2906,
+        "compute_load_by_core": [
+          170979,
+          189273,
+          190963,
+          196789,
+          179698
+        ],
+        "model_limitations": [
+          "isolated COPY bandwidth; shared DDR contention omitted",
+          "spill, memory reuse dependencies and Step3 reorder omitted",
+          "predicted times are not bounds or official scores"
+        ],
+        "selected_strategy": "dag_eft",
+        "adaptive_route": "dag_eft",
+        "index_constructions": 1,
+        "base_construct_calls": 1,
+        "repair_construct_calls": 0,
+        "repair_trigger": {
+          "recognized": false,
+          "large_crossings": 0,
+          "large_crossing_bytes": 0,
+          "reason": "vector lanes: all eligible ops must use PIPE_V"
+        },
+        "route_limitations": "unchanged general plan; no official feasibility/score/zero-spill certificate"
+      },
+      "plan_sha256": "5307e1d1947dbca919ed7acc110773467e587425e5021dccfd7220fc048d22a1"
+    }
+  ],
+  "started_at": "2026-09-24T17:30:39.074839+00:00",
+  "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+  "selected": "adaptive_semantic",
+  "plan_sha256": "5307e1d1947dbca919ed7acc110773467e587425e5021dccfd7220fc048d22a1",
+  "stop_reason": "single_structural_route_completed",
+  "finished_at": "2026-09-24T17:30:39.183608+00:00",
+  "internal_wall_seconds": 0.1088820000004489
+}

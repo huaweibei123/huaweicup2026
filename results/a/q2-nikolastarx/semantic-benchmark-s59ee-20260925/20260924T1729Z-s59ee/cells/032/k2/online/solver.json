@@ -1,0 +1,129 @@
+{
+  "status": "ok",
+  "calls": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "adaptive_semantic",
+      "status": "constructed",
+      "detail": {
+        "selected_strategy": "component_envelope",
+        "eligible_ops": 827,
+        "components": 25,
+        "cores": 2,
+        "capacity_bytes": {
+          "L1": 524288,
+          "UB": 131072
+        },
+        "per_core": [
+          {
+            "core": 0,
+            "components": 11,
+            "shared_tensors": 3,
+            "cohorts": [
+              {
+                "components": [
+                  1,
+                  7,
+                  8,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  18,
+                  19,
+                  22
+                ],
+                "shared_reserve_bytes": {
+                  "L1": 6144,
+                  "UB": 0
+                },
+                "private_peak_sum_bytes": {
+                  "L1": 97352,
+                  "UB": 60840
+                },
+                "raw_priority_envelope_bytes": {
+                  "L1": 103496,
+                  "UB": 60840
+                },
+                "within_capacity": true
+              }
+            ],
+            "max_open_components_bound": 11,
+            "all_raw_envelopes_fit": true
+          },
+          {
+            "core": 1,
+            "components": 14,
+            "shared_tensors": 4,
+            "cohorts": [
+              {
+                "components": [
+                  0,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  9,
+                  10,
+                  11,
+                  17,
+                  20,
+                  21,
+                  23,
+                  24
+                ],
+                "shared_reserve_bytes": {
+                  "L1": 6216,
+                  "UB": 0
+                },
+                "private_peak_sum_bytes": {
+                  "L1": 68608,
+                  "UB": 124354
+                },
+                "raw_priority_envelope_bytes": {
+                  "L1": 74824,
+                  "UB": 124354
+                },
+                "within_capacity": true
+              }
+            ],
+            "max_open_components_bound": 14,
+            "all_raw_envelopes_fit": true
+          }
+        ],
+        "certificate_scope": "raw tensor priority-prefix envelope and component open-count only",
+        "zero_spill_claim": false,
+        "limitations": [
+          "shared input residency spans cohorts and is retained in reserves",
+          "oversized singleton cohorts are emitted without a memory certificate",
+          "no Step2/Step3 or global runtime feasibility guarantee"
+        ],
+        "adaptive_route": "component_envelope",
+        "index_constructions": 1,
+        "base_construct_calls": 1,
+        "repair_construct_calls": 0,
+        "repair_trigger": {
+          "recognized": false,
+          "large_crossings": 0,
+          "large_crossing_bytes": 0,
+          "reason": "vector lanes: all eligible ops must use PIPE_V"
+        },
+        "route_limitations": "unchanged general plan; no official feasibility/score/zero-spill certificate"
+      },
+      "plan_sha256": "472da16578830ffadda50a7351295dd972eac3cc0731067cfb1b7a0d7d317348"
+    }
+  ],
+  "started_at": "2026-09-24T17:29:31.043098+00:00",
+  "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+  "selected": "adaptive_semantic",
+  "plan_sha256": "472da16578830ffadda50a7351295dd972eac3cc0731067cfb1b7a0d7d317348",
+  "stop_reason": "single_structural_route_completed",
+  "finished_at": "2026-09-24T17:29:31.058835+00:00",
+  "internal_wall_seconds": 0.015849541989155114
+}

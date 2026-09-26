@@ -1,0 +1,60 @@
+{
+  "status": "ok",
+  "calls": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "adaptive_semantic",
+      "status": "constructed",
+      "detail": {
+        "strategy": "tensor_dag_eft",
+        "eligible_ops": 4113,
+        "components": 1,
+        "cores": 4,
+        "bandwidth": 60,
+        "cross_core_delay": 500,
+        "predicted_finish_cycles": 44649,
+        "predicted_ddr_bytes_without_spill": {
+          "external_input_bytes": 674710,
+          "cross_core_bytes": 3045600,
+          "output_bytes": 14592
+        },
+        "predicted_cross_core_pairs": 1796,
+        "compute_load_by_core": [
+          33535,
+          29452,
+          28370,
+          33455
+        ],
+        "model_limitations": [
+          "isolated COPY bandwidth; shared DDR contention omitted",
+          "spill, memory reuse dependencies and Step3 reorder omitted",
+          "predicted times are not bounds or official scores"
+        ],
+        "selected_strategy": "dag_eft",
+        "adaptive_route": "dag_eft",
+        "index_constructions": 1,
+        "base_construct_calls": 1,
+        "repair_construct_calls": 0,
+        "repair_trigger": {
+          "recognized": false,
+          "large_crossings": 0,
+          "large_crossing_bytes": 0,
+          "reason": "vector lanes: all eligible ops must use PIPE_V"
+        },
+        "route_limitations": "unchanged general plan; no official feasibility/score/zero-spill certificate"
+      },
+      "plan_sha256": "a6401a97a0092dfc53a71028d7a7220bc969829507c437895ac5141c876e17b9"
+    }
+  ],
+  "started_at": "2026-09-24T17:28:56.928165+00:00",
+  "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+  "selected": "adaptive_semantic",
+  "plan_sha256": "a6401a97a0092dfc53a71028d7a7220bc969829507c437895ac5141c876e17b9",
+  "stop_reason": "single_structural_route_completed",
+  "finished_at": "2026-09-24T17:28:57.035088+00:00",
+  "internal_wall_seconds": 0.10705595900071785
+}

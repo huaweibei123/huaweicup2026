@@ -1,0 +1,58 @@
+{
+  "status": "ok",
+  "calls": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "attempts": [
+    {
+      "name": "adaptive_semantic",
+      "status": "constructed",
+      "detail": {
+        "strategy": "tensor_dag_eft",
+        "eligible_ops": 741,
+        "components": 1,
+        "cores": 2,
+        "bandwidth": 60,
+        "cross_core_delay": 500,
+        "predicted_finish_cycles": 15476,
+        "predicted_ddr_bytes_without_spill": {
+          "external_input_bytes": 160714,
+          "cross_core_bytes": 309824,
+          "output_bytes": 9984
+        },
+        "predicted_cross_core_pairs": 193,
+        "compute_load_by_core": [
+          13533,
+          9955
+        ],
+        "model_limitations": [
+          "isolated COPY bandwidth; shared DDR contention omitted",
+          "spill, memory reuse dependencies and Step3 reorder omitted",
+          "predicted times are not bounds or official scores"
+        ],
+        "selected_strategy": "dag_eft",
+        "adaptive_route": "dag_eft",
+        "index_constructions": 1,
+        "base_construct_calls": 1,
+        "repair_construct_calls": 0,
+        "repair_trigger": {
+          "recognized": false,
+          "large_crossings": 0,
+          "large_crossing_bytes": 0,
+          "reason": "vector lanes: all eligible ops must use PIPE_V"
+        },
+        "route_limitations": "unchanged general plan; no official feasibility/score/zero-spill certificate"
+      },
+      "plan_sha256": "8efdd0fa88ab56cb498efcb7599511a5cf4474b3d529a7011283c19ea532a6fe"
+    }
+  ],
+  "started_at": "2026-09-24T17:30:12.096772+00:00",
+  "validation_scope": "official structural validation only; no E0/Step2/Step3 certificate",
+  "selected": "adaptive_semantic",
+  "plan_sha256": "8efdd0fa88ab56cb498efcb7599511a5cf4474b3d529a7011283c19ea532a6fe",
+  "stop_reason": "single_structural_route_completed",
+  "finished_at": "2026-09-24T17:30:12.110208+00:00",
+  "internal_wall_seconds": 0.013532834011130035
+}
