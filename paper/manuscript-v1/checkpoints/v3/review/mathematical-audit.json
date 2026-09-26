@@ -1,0 +1,26 @@
+{
+  "iteration": "v3",
+  "kind": "independent analytical audit; no new solver or evaluator run",
+  "B3_issue": {
+    "problem": "A threshold chosen as the maximum head/tail across all selected operations need not be valid for every selected operation. S must be restricted to one pipe.",
+    "counterexample": "Local interval: one V-pipe prefix takes 10 cycles and precedes a 1-cycle M operation; another 100-cycle M operation is ready at the interval start. With one core the V prefix overlaps the 100-cycle M operation, followed by the 1-cycle M operation, so the interval is 101 cycles. Taking a=max(heads)=10 and W_M=101 incorrectly yields 111. Taking a<=min(heads)=0 is valid. This is an algebraic counterexample, not an official-evaluator experiment.",
+    "repair": "For each v in nonempty same-pipe S, compute internal head/tail excluding v and separator endpoints; select a<=min h_i(v), b<=min t_i(v)."
+  },
+  "B3_recheck": {
+    "capacity": "Each operation fits within [a,x-b]; required cross-core boundary delay further reduces the interval by (tau-a)+ and/or (tau-b)+ only when the retained dependency path guarantees it. Same-pipe nonoverlap bounds total work by total available core-pipe time.",
+    "different_boundary_cores": "For z,A,B>=0, (z-A)+ +(z-B)+ <= z +(z-A-B)+. Hence the same-core expression is an upper bound on available capacity also when endpoints differ.",
+    "inverse": "For W,c>=0 and integer cycles, min z satisfying W<=z+(K-1)(z-c)+ equals min(W,ceil((W+(K-1)c)/K)).",
+    "atom_bound": "Among the longest (r-1)K+1 operations one core receives at least r; even the shortest r among them require the displayed A_K time. Take max with the capacity bound, not sum.",
+    "composition": "Only disjoint intervals separated by an ordered dependency chain can be summed; separators counted once; arbitrary overlapping windows only give a maximum."
+  },
+  "B4_recheck": "Fixed reference runtime and deterministic action/observation semantics, closure, preservation of enabled actions, state updates and observations imply equivalence by finite-word induction. Not a minimality theorem or implemented general compression.",
+  "causality_scope": "Paired complete-version outcomes show M/D changes, not isolated attribution to communication versus parallelism.",
+  "literature": "Keep 12 previously verified, actually cited sources. Pro reports supply research leads and audited conditions; do not cite hidden reasoning or present unverified historical experiments as current runs.",
+  "final_followup": {
+    "Gemini_idle_steps": 825,
+    "B3": "Added per-operation core mismatch indicators delta_L/delta_R; boundary existence alone does not impose cross-core waiting on same-core operations. Nonnegative integer thresholds.",
+    "B4": "Fixed G,K,q,config, official source and deterministic reference runtime.",
+    "Cache": "Verified official multicore_cut_evaluate_problem_3.py lines417-428: FIFO total-byte capacity, not contiguous-memory allocation.",
+    "abstract": "Removed unverified uniform four-worker resource claim and efficiency-interval wording; specified noninterleaved subtrees and peak-minus-retained order."
+  }
+}

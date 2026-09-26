@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "manuscript": "frozen v8",
+  "purpose": "fixed source and cell IDs for language/caption mapping",
+  "figures": [
+    {
+      "figure_id": "fig:p1-complete-flow",
+      "source_commit": "83e03c093af991ec7414f80787984726ebdea329",
+      "source_path": "figures/a/p1-834-flow-20260926/p1-834-flow-clean.drawio",
+      "source_sha256": "65ca4c43a1ec9dbffaeaa5551ea12304eead954d3e0f60168920dbacd3b77e48",
+      "labels": [
+        {
+          "cell_id": "input",
+          "original": "输入：原始计算图、核数（1～5）及固定硬件配置"
+        },
+        {
+          "cell_id": "base",
+          "original": "01  根据计算图结构生成基础方案"
+        },
+        {
+          "cell_id": "base1",
+          "original": "仅把过大的独立计算部分\n切成较小任务"
+        },
+        {
+          "cell_id": "base2",
+          "original": "把主导计算部分按\n独立输出区域分段"
+        },
+        {
+          "cell_id": "base3",
+          "original": "拆分超过各核合理\n工作份额的部分"
+        },
+        {
+          "cell_id": "base4",
+          "original": "按共享输入选择用核数；\n或按分叉分配子树¹"
+        },
+        {
+          "cell_id": "base5",
+          "original": "在符合条件的计算链上\n调整末段切分点¹"
+        },
+        {
+          "cell_id": "base6",
+          "original": "按分叉阶段把独立子树\n分配到多个核¹"
+        },
+        {
+          "cell_id": "base_note",
+          "original": "¹ 按结构尝试；重复不评分；可选构造或评分失败回退；E1 最多调用 6 次。"
+        },
+        {
+          "cell_id": "response",
+          "original": "02  对符合条件的有序计算链重新分组"
+        },
+        {
+          "cell_id": "response_text",
+          "original": "仅当上一阶段选中经评分的链切分方案时，\n构造至多一份完整新方案；E1 最多调用一次。\n不适用、重复或失败时保留原方案。"
+        },
+        {
+          "cell_id": "intact",
+          "original": "03  尝试两种独立计算链的局部执行顺序"
+        },
+        {
+          "cell_id": "mode1",
+          "original": "均衡分配计算链；\n汇合计算另列"
+        },
+        {
+          "cell_id": "mode2",
+          "original": "主核多留计算链；\n合并可执行的汇合计算"
+        },
+        {
+          "cell_id": "intact_note",
+          "original": "先检查结构、去除重复；E1 最多调用 2 次；失败时保留已选方案。"
+        },
+        {
+          "cell_id": "branch",
+          "original": "04  按依赖层批量移动可独立执行的计算分支"
+        },
+        {
+          "cell_id": "donor",
+          "original": "同一依赖层的原计算任务\n（移出方）"
+        },
+        {
+          "cell_id": "x",
+          "original": "X：移出的整条计算分支"
+        },
+        {
+          "cell_id": "yj",
+          "original": "Y：其余计算；J：汇合后计算\n都留在原核"
+        },
+        {
+          "cell_id": "helper",
+          "original": "同一层已有独立计算任务\n（接收方）"
+        },
+        {
+          "cell_id": "helper_text",
+          "original": "多个 X 各成新任务\n先排 X，再排原任务\n本层不兼任移出方"
+        },
+        {
+          "cell_id": "branch_note",
+          "original": "每个原任务最多移出一支；批量形成一份完整方案；E1 最多调用一次。"
+        },
+        {
+          "cell_id": "guard",
+          "original": "先比较完工时间（周期）；只有相同时才比较计划 COPY 搬运量（字节）。\n新方案在这一顺序下严格更优，才替换原方案。"
+        },
+        {
+          "cell_id": "output",
+          "original": "输出任务划分与各核执行顺序｜在线 E1 总调用上限：10 次（6＋1＋2＋1）"
+        },
+        {
+          "cell_id": "e0",
+          "original": "官方 E0 独立复评，不进入在线选优"
+        }
+      ],
+      "edge_count": 8,
+      "topology_sha256": "8bbe02555fd5bb11c721dcdd9dac9932fa0283a00791b57cfdec842d4ee12f97"
+    },
+    {
+      "figure_id": "fig:p2-local-cut",
+      "source_commit": "4eb1dd426b25bde8871a31835416676314a50519",
+      "source_path": "figures/a/p2-local-cut-v4-20260926/p2-local-cut.drawio",
+      "source_sha256": "c1bdbb3adfabeab5fe23f593f9a9c99ac01307f7fa0940e659f08332e51280ea",
+      "labels": [
+        {
+          "cell_id": "scope",
+          "original": "所选两个核心：a、b；至多 16 条可移动计算链\nFₑ：同一超边在调整区域外已固定触及的核心集合"
+        },
+        {
+          "cell_id": "a_title",
+          "original": "例 A｜Fₑ = ∅，超边连接两条可移动链 u、v，权重为 w 字节"
+        },
+        {
+          "cell_id": "a_formula",
+          "original": "复制字节数 C = w ×（触及核心数 − 1）；源侧代表核心 a，汇侧代表核心 b。"
+        },
+        {
+          "cell_id": "a_pins1",
+          "original": "u、v"
+        },
+        {
+          "cell_id": "a_aux1",
+          "original": "辅助节点 q_a"
+        },
+        {
+          "cell_id": "a_sink",
+          "original": "汇侧：b"
+        },
+        {
+          "cell_id": "a_source",
+          "original": "源侧：a"
+        },
+        {
+          "cell_id": "a_aux2",
+          "original": "辅助节点 q_b"
+        },
+        {
+          "cell_id": "a_pins2",
+          "original": "u、v"
+        },
+        {
+          "cell_id": "a_note",
+          "original": "两行的 u、v 是同一组链；分别列出“有链在 a”和“有链在 b”的容量边。"
+        },
+        {
+          "cell_id": "a_cost",
+          "original": "同侧：割容量 w，偏移 −w，C = 0。     分侧：割容量 2w，偏移 −w，C = w。"
+        },
+        {
+          "cell_id": "b_title",
+          "original": "例 B｜Fₑ = {a, c}：已固定触及所选核心 a 和另一个核心 c"
+        },
+        {
+          "cell_id": "b_formula",
+          "original": "a 已在 Fₑ 中，不再建立“有链在 a”的容量边；只有新增核心 b 才增加复制。"
+        },
+        {
+          "cell_id": "b_source",
+          "original": "源侧：a"
+        },
+        {
+          "cell_id": "b_aux",
+          "original": "辅助节点 q_b"
+        },
+        {
+          "cell_id": "b_pins",
+          "original": "u、v"
+        },
+        {
+          "cell_id": "b_cost",
+          "original": "全部在 a：割容量 0，偏移 +w，C = w。   有链在 b：割容量 w，偏移 +w，C = 2w。"
+        },
+        {
+          "cell_id": "guard_title",
+          "original": "局部最小割之后，检查计算工作量（模拟时钟周期）"
+        },
+        {
+          "cell_id": "guard_cut",
+          "original": "求最小割\n精确比较当前区域的\n原始 COPY 字节数"
+        },
+        {
+          "cell_id": "guard_cap",
+          "original": "逐核、逐类检查\n计算流水线（Pipe）工作量\n超限：移入链回原核\n并重求最小割"
+        },
+        {
+          "cell_id": "guard_accept",
+          "original": "只在工作量满足上限、\n局部复制字节数严格减少时\n保留新的核心分配"
+        },
+        {
+          "cell_id": "guard_bound",
+          "original": "若有 r 条可移动链，最多求解 r + 1 次；原分配始终可行。"
+        },
+        {
+          "cell_id": "a_or_a_inf",
+          "original": "∞"
+        },
+        {
+          "cell_id": "a_or_a_w",
+          "original": "w"
+        },
+        {
+          "cell_id": "a_or_b_w",
+          "original": "w"
+        },
+        {
+          "cell_id": "a_or_b_inf",
+          "original": "∞"
+        },
+        {
+          "cell_id": "b_or_b_w",
+          "original": "w"
+        },
+        {
+          "cell_id": "b_or_b_inf",
+          "original": "∞"
+        }
+      ],
+      "edge_count": 8,
+      "topology_sha256": "48e8db92af36efb7b94d797d456d6e6e220cd141b3382da1fcbf4f47066f7ad7"
+    },
+    {
+      "figure_id": "fig:p2-three-plans:a",
+      "source_commit": "4eb1dd426b25bde8871a31835416676314a50519",
+      "source_path": "figures/a/p2-three-plans-v4-20260926/a-construction.drawio",
+      "source_sha256": "7d9b352f7b3e095e739c7e36b585ab213c6240ee581d75382f89b318d1751654",
+      "labels": [
+        {
+          "cell_id": "pa",
+          "original": "(a) 构造候选完整方案"
+        },
+        {
+          "cell_id": "p0",
+          "original": "P0：基础方案\n始终保留"
+        },
+        {
+          "cell_id": "p1",
+          "original": "尝试构造 P1"
+        },
+        {
+          "cell_id": "keep",
+          "original": "保留原始 P1\n相同则不重复入列"
+        },
+        {
+          "cell_id": "refine",
+          "original": "以原始 P1\n尝试局部调整"
+        },
+        {
+          "cell_id": "gate",
+          "original": "原始 COPY 字节数\n有效且严格下降？"
+        },
+        {
+          "cell_id": "p2",
+          "original": "尝试重排\n成功则生成完整 P2"
+        },
+        {
+          "cell_id": "fallback",
+          "original": "立即返回 P0"
+        },
+        {
+          "cell_id": "skip",
+          "original": "不构造 P2\n保留已有方案"
+        },
+        {
+          "cell_id": "lerr1",
+          "original": "失败"
+        },
+        {
+          "cell_id": "lerr2",
+          "original": "错误／无效证据"
+        },
+        {
+          "cell_id": "lno",
+          "original": "不支持／否"
+        },
+        {
+          "cell_id": "lyes",
+          "original": "是"
+        },
+        {
+          "cell_id": "lretime",
+          "original": "不支持"
+        },
+        {
+          "cell_id": "lretime_error",
+          "original": "错误"
+        }
+      ],
+      "edge_count": 10,
+      "topology_sha256": "e007ba12fb4d1b4e64c22fa79988ee75c377322d3b9573673a5d965aa5aeb1c2"
+    },
+    {
+      "figure_id": "fig:p2-three-plans:b",
+      "source_commit": "4eb1dd426b25bde8871a31835416676314a50519",
+      "source_path": "figures/a/p2-three-plans-v4-20260926/b-scoring.drawio",
+      "source_sha256": "5077a89afa03f9cf117fd505bc8e3838f2065ef2891d263ac7c3dd98242e9fac",
+      "labels": [
+        {
+          "cell_id": "pb",
+          "original": "(b) 去重、评分与选择"
+        },
+        {
+          "cell_id": "dedup",
+          "original": "完整方案去重\nP0 → P1 → P2"
+        },
+        {
+          "cell_id": "score",
+          "original": "逐份评分\n总请求 ≤ 3"
+        },
+        {
+          "cell_id": "choose",
+          "original": "先比较总完成时间\n相同再比较\n额外 COPY 字节数"
+        },
+        {
+          "cell_id": "only",
+          "original": "仅一份：直接返回 P0"
+        },
+        {
+          "cell_id": "error",
+          "original": "评分错误：返回 P0"
+        },
+        {
+          "cell_id": "tie",
+          "original": "平局：保留先构造者"
+        },
+        {
+          "cell_id": "b_many",
+          "original": "≥ 2 份"
+        },
+        {
+          "cell_id": "b_one",
+          "original": "= 1 份"
+        }
+      ],
+      "edge_count": 5,
+      "topology_sha256": "aac287a9cd5438a5dbca128159e1bdcad853afa34d6e1d2038a3b6c8147a582a"
+    },
+    {
+      "figure_id": "fig:p3-forest-decision",
+      "source_commit": "4eb1dd426b25bde8871a31835416676314a50519",
+      "source_path": "figures/a/p3-forest-decision-v4-20260926/p3-forest-decision.drawio",
+      "source_sha256": "391ce699cf7493e90034891cc58727bd5630f5d90b86a0ff23b57e162da88ad7",
+      "labels": [
+        {
+          "cell_id": "a",
+          "original": "(a) 归约树内部结果的排序"
+        },
+        {
+          "cell_id": "scope",
+          "original": "适用：至少两棵互不交错的归约树，且存在汇合；\n单输出且字节数已知；非根输出仅供唯一父操作。"
+        },
+        {
+          "cell_id": "order",
+          "original": "同一父操作的各子树：\n计算 hᵢ − rᵢ，按差值递减；\n同值按操作编号排序。"
+        },
+        {
+          "cell_id": "guarantee",
+          "original": "只保证此非交错树模型内，每棵树内部结果的峰值占用最小。"
+        },
+        {
+          "cell_id": "b",
+          "original": "(b) 树状排序方案与其他方案共用官方评价预算"
+        },
+        {
+          "cell_id": "prior",
+          "original": "基础方案与先行方案已产生当前最优方案"
+        },
+        {
+          "cell_id": "budget",
+          "original": "① 官方评价器 E0 已调用次数 < 3？"
+        },
+        {
+          "cell_id": "structure",
+          "original": "② 树状方案通过构造与本地检查？"
+        },
+        {
+          "cell_id": "distinct",
+          "original": "③ 序列化字节表示与当前最优方案不同？"
+        },
+        {
+          "cell_id": "bound",
+          "original": "④ 若可得下界：是否 ≥ 当前最优完成时间？\n下界不可得时继续评价。"
+        },
+        {
+          "cell_id": "e0",
+          "original": "⑤ 在剩余预算内调用官方 E0；结果有效？"
+        },
+        {
+          "cell_id": "select",
+          "original": "⑥ 官方完成时间严格更短？"
+        },
+        {
+          "cell_id": "replace",
+          "original": "替换当前最优方案"
+        },
+        {
+          "cell_id": "retain",
+          "original": "保留当前最优方案"
+        },
+        {
+          "cell_id": "no_budget",
+          "original": "否"
+        },
+        {
+          "cell_id": "no_structure",
+          "original": "否"
+        },
+        {
+          "cell_id": "no_distinct",
+          "original": "否"
+        },
+        {
+          "cell_id": "no_bound",
+          "original": "下界排除"
+        },
+        {
+          "cell_id": "no_e0",
+          "original": "无效"
+        },
+        {
+          "cell_id": "no_select",
+          "original": "否"
+        }
+      ],
+      "edge_count": 16,
+      "topology_sha256": "91dd5b807e5448a29507d68d4a3263daaa12495a6f4ca3a430dee90aa6c62d3b"
+    }
+  ]
+}

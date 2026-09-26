@@ -1,0 +1,146 @@
+[
+  {
+    "file": "figures/fig-progression-v3.png",
+    "sha256": "d4a75c65f85de8c7b83beecf9b46d05fa3295061e666bad3849c6eed8fbf1d43",
+    "caption": "三问条件的差别。问题一为图中不同子图所对应的操作分别建立Task，数据经DDR中转；问题二允许同一个核心保留数据；问题三另为符合条件的COPY\\_IN提供共享只读Cache。下部示意数据能够装入Cache时的读取过程；所有请求仍须满足原依赖及规定等待。",
+    "label": "fig:progression"
+  },
+  {
+    "file": "figures/fig-framework-v2.png",
+    "sha256": "b751a7c597f8e20d9b1a867796faab6621c08f066f0bd08542a5eed4dad89e8d",
+    "caption": "三问共用的方案构造与比较步骤。各分支只在结构条件满足时采用，所形成的完整方案需检查依赖与容量，并通过执行评价比较完成时间。下界只在其证明条件成立时用于提前排除候选。",
+    "label": "fig:framework"
+  },
+  {
+    "file": "figures/paper-v2/fig-p1-results.pdf",
+    "sha256": "4214eb53dd1dd1350dbedf0c48bbc4c668e0d5cfce210d50732024c7638cb0a0",
+    "caption": "问题一的完整版本比较。上：每个核心数量的 100 图平均加速比；下：全部500种图与核心数量组合的时间与搬运量配对变化。核心数量用点形区分，横轴采用对称对数。",
+    "label": "fig:p1-results"
+  },
+  {
+    "file": "figures/fig4-2-fang-A.png",
+    "sha256": "76b1b13c073f404dc7c51e60f7ceecbcd51aaeb5cc9fdc3ea775614061592b3f",
+    "caption": "三核心场景下的分叉汇聚结构任务划分与多核分配示意。包含 5 个 Task 与 3 个计算核心（核心 0 处理 Task 0 与 Task 1，核心 1 处理 Task 2 与 Task 4，核心 2 处理 Task 3）。实线有向边表示同一核心内部的执行全序，虚线有向边表示跨核心的任务数据依赖，所有 Task 边界的数据流动均通过外部主存（DDR）中转。",
+    "label": "fig:fang-fork"
+  },
+  {
+    "file": "figures/p1-834-flow-clean.png",
+    "sha256": "87f2b3c72c3b5067aa5c86abd5096ed57e72089d0bfb12650fd0bc83832f9a12",
+    "caption": "问题一固定算法的全流程构造与评测选优逻辑。展示六类基础候选生成、两级细化阶段的在线 E1 评测守卫与逐阶段择优规则，全流程评测调用上限为 10 次，最终方案由 E0 独立复评验证。",
+    "label": "fig:p1-complete-flow"
+  },
+  {
+    "file": "figures/fig-p1-cuts-xy-corrected.png",
+    "sha256": "32c7183d3dc385f5c3ed305fceb21f7ddddc25d7488769cc226442e156fef522",
+    "caption": "典型用例 case_026（5 Cores）独立分支重分配前后的切分结构映射。展示原始划分中 Core 0 上的超大任务解构为保留在 Core 0 上的独立支路 Y（算子 710、712、720）与汇合计算 J（算子 724、726），以及重分配至 Core 1 的导出独立支路 X（算子 714、716、722）。图中黑实线表示计算依赖，橙虚线表示跨子图数据依赖，点线端口表示连接至局部裁剪窗口外部的算子依赖（非孤立无依赖节点）。图示仅对应特定用例局部的 8 节点子图结构，不代表构造器处理的一般计算图全局结构。",
+    "label": "fig:p1-cuts"
+  },
+  {
+    "file": "figures/team-v8/p1-timeline-full.pdf",
+    "sha256": "4e472da1d8bb544b031130d4a6e26d23d7c7100dfcb6922a8479552099543be7",
+    "caption": "用例 case_026 在 5 核配置下重分配前后的完整执行时间线对比。基于官方模拟事件绘制，(a) 原始方案 Makespan 为 44,114 cycles，额外数据搬运量为 211,680 B；(b) 分支援助重分配后 Makespan 为 42,014 cycles，额外数据搬运量为 375,532 B。各核心 Task 行表示任务执行区间，M、V、MTE2、MTE3 分别表示四类硬件流水线的已记录操作区间，图中浅色区域标出 5,200–9,400 cycles 局部观察窗口。",
+    "label": "fig:p1-overlap"
+  },
+  {
+    "file": "figures/team-v8/p1-timeline-zoom.pdf",
+    "sha256": "d599fe2c0dca44b1a4edeeb6ebc6c6d8f553be4b45f489681cc8df2bc4b6a503",
+    "caption": "用例 case_026 在 5,200–9,400 cycles 窗口内的局部微架构流水线时序放大图（对应图 \\ref{fig:p1-overlap} 浅色区域）。展示核心 0 与核心 1 在该时段内的任务切换与各流水线操作事件分布。图中执行资源对应行的空白仅表示该时段未记录到流水线占用事件，不推定具体的外部等待原因。",
+    "label": "fig:p1-overlap-zoom"
+  },
+  {
+    "file": "figures/paper-v2/fig-p2-results.pdf",
+    "sha256": "7e5d6eead4f31cc8b809df8863d153d3b22286e783b4d7abcea6e8ac3f5c3ed3",
+    "caption": "问题二的完整版本比较。上：按题目要求计算的平均加速比；下：500种组合配对结果。部分时间改善伴随额外搬运增加，两项指标分别报告。",
+    "label": "fig:p2-results"
+  },
+  {
+    "file": "figures/team-v8/p2-lifetimes.pdf",
+    "sha256": "3eb3f3f4c2d7f79e956c3fcfd98638f957a1b707a09212b8240b1c6c49d2a8a8",
+    "caption": "单核心张量生命周期与片上私有缓存容量占用手算示例。上部展示 9 个物理张量在闭区间 $[f(t), \\ell(t)]$ 内的驻留条带（如 $T_6 = [5, 6]$ 与 $U_3 = [4, 6]$）；中部与下部展示基于模仿 Step 2 静态编译操作序号下的 L1 Buffer（容量 512 KiB，步骤 2 达峰值 512 KiB）与 Unified Buffer（容量 128 KiB，步骤 4 达峰值 72 KiB）存储占用阶梯曲线，说明输入与输出张量在操作边界共同驻留对局部容量峰值的影响。图中无官方 spill 事件记录且未绘制溢出事件，横轴为静态操作序号而非微架构物理执行周期。",
+    "label": "fig:p2-lifetimes"
+  },
+  {
+    "file": "figures/fig-hypercut-v2.png",
+    "sha256": "8a28dda4bec1f03b2d582e85d8fb538081d56ebd711682c35b119a75574e61d6",
+    "caption": "同一张量的计算操作分配。图中 $u$ 生成 $t$，$v_1, v_2$ 读取 $t$；$\\lambda_t$ 表示这三个操作所在的不同核心数量。16 B、16 B、0 B 仅统计该张量的边界复制，线条只表示集合关联。",
+    "label": "fig:hypercut"
+  },
+  {
+    "file": "figures/team-v8/p2-local-cut.pdf",
+    "sha256": "25486533c19d69f08e0ffcb02a822bdd59f7094c13fd2c4b56aa98ee861b31f4",
+    "caption": "二核心局部超图割辅助网络构建与工作量保护流程。展示超边在固定核心集合为空集与非空集合时的有向辅助网络映射，以及结合流水线工作量上限保护的迭代锚定求解机制。",
+    "label": "fig:p2-local-cut"
+  },
+  {
+    "file": "figures/team-v8/p2-three-plans-a.pdf",
+    "sha256": "5a1f2718f299ec70db4ead088d042752c0e17c6cb9b8fa24c9def259809d0910",
+    "caption": "问题二三种候选方案的构造分支与评测选优决策流。展示基础方案 P0、空闲区间方案 P1 与局部超图调整方案 P2 的构造分支条件、按构造顺序去重机制以及至多 3 次在线评分的字典序择优规则。",
+    "label": "fig:p2-three-plans"
+  },
+  {
+    "file": "figures/team-v8/p2-three-plans-b.pdf",
+    "sha256": "ff6df38e9a9b69596212dddea1019ac122e6ddf0712d0c104af5775f3045217e",
+    "caption": "问题二三种候选方案的构造分支与评测选优决策流。展示基础方案 P0、空闲区间方案 P1 与局部超图调整方案 P2 的构造分支条件、按构造顺序去重机制以及至多 3 次在线评分的字典序择优规则。",
+    "label": "fig:p2-three-plans"
+  },
+  {
+    "file": "figures/team-v8/p2-timeline-full.pdf",
+    "sha256": "69c658d3471b0d238072bc9198b9b30a92820000e09298be47b5f9e9779187ba",
+    "caption": "case_019（5 核心）主算法与 C04 对照方案全景执行时序对比。展示两方案在全流程时间尺度（0 至 28,514 cycles）下各核心 Task 与 Pipe 活跃区间；C04 方案无容量不足引起的缓存换入换出（spill 为 0），但完成时间（28,514 cycles）劣于主算法（16,247 cycles）。",
+    "label": "fig:p2-counterexample"
+  },
+  {
+    "file": "figures/team-v8/p2-timeline-zoom.pdf",
+    "sha256": "e08ea67f9cf2ebd62c11bcc2f3b28b391a7108dd7da0cf879335a40529e7ab38",
+    "caption": "case_019（5 核心）两方案在关键局部时间窗（13,800 至 17,400 cycles）的时序放大对比。展示主算法与 C04 在 Core 0（C0:T0）及 Core 3（C3:T3）等任务上的流水线事件分布。图中未着色空白区域仅客观反映对应流水线未记录操作占用，不作未经事件级归因分析的机理臆测。",
+    "label": "fig:p2-counterexample-zoom"
+  },
+  {
+    "file": "figures/paper-v2/fig-forest-example.pdf",
+    "sha256": "8181906ad4852fcc458bfcb223bb0941d90198bdc758a0a6890c32ef804a0659",
+    "caption": "两种子树处理顺序的内部结果占用。左：先A后B，峰值10 KiB；右：先B后A，峰值13 KiB。横轴为处理步骤，不是模拟时钟；数字为第6章的公式示例。",
+    "label": "fig:forest-example"
+  },
+  {
+    "file": "figures/paper-v2/fig-p3-results.pdf",
+    "sha256": "4a2235a79364a19df448a71ef72c237d13b80eed0eba437755c19eec8629a2ef",
+    "caption": "问题三的保持方案不变的配对评价。上：无 L2 与只读 Cache 的平均基线加速比；下：逐图$M_2/M_3$的均值，每种核心数量包含100对结果。",
+    "label": "fig:p3-results"
+  },
+  {
+    "file": "figures/paper-v2/fig-cache-gain.pdf",
+    "sha256": "00bcca89c97a2085c3b124d0ba0edc7dcd63c07b02a339850b5be542c2231fbb",
+    "caption": "500 个保持方案不变的配对结果中的字节命中率与 Cache 收益。保留低于 1 的负收益点；100 个用例的不同核心数量结果相关，不能当作 500 个独立随机样本。",
+    "label": "fig:cache-gain"
+  },
+  {
+    "file": "figures/team-v8/p3-forest-decision.pdf",
+    "sha256": "f554749f66c34a210ad78749703a895d739ec3be57763b4e2203fb759c998bcd",
+    "caption": "树状分支排序准则与完整候选方案的评测决策流程。展示基于指标差值 $h_i - r_i$ 降序排定非交错子树顺序与单树内部存储峰值最小化范围，以及共享至多 3 次在线 E0 评测预算下的前置检查、去重、下界剪枝与严格 Makespan 改善择优决策链。",
+    "label": "fig:p3-forest-decision"
+  },
+  {
+    "file": "figures/paper-v2/fig-runtime.pdf",
+    "sha256": "8360b3485c4bbacc68a9c6f4fce7d78fa36503ce4a8094b08cfa92211f45202d",
+    "caption": "三种求解程序的实际经过时间累计分布，每题500次。时间包含方案构造及在线评价，横轴采用对数刻度；批次资源不同，不据此比较独占机器的速度。",
+    "label": "fig:runtime"
+  },
+  {
+    "file": "figures/team-v8/dataset.pdf",
+    "sha256": "22ce51a26e45fe0e05d707be84c96afc0df8240eb525fdd13c8ab37410411bea",
+    "caption": "官方 100 张原始计算图的规模与操作标称时长构成。（a）计算图操作数量与张量大小分布；（b）矩阵类操作标称计算时长占矩阵与向量标称计算时长之和的比例分布。",
+    "label": "fig:dataset"
+  },
+  {
+    "file": "figures/team-v8/bound-gap.pdf",
+    "sha256": "f53e32e7dc4f90f676a827c8ec3bd99303024117ed25f88fb2b680a449a05459",
+    "caption": "同一输入、配置与合法解空间下的平均加速比及理论界对比。展示当前可行方案平均加速比 $\\operatorname{mean}(B/U)$ 与全局下界平均加速比 $\\operatorname{mean}(B/L)$ 随核心数演进的数学界限（阴影区域表示松弛理论间隙，非可实现加速比）。",
+    "label": "fig:bound-gap"
+  },
+  {
+    "file": "figures/team-v8/p1-paced-diagnostic.png",
+    "sha256": "c0ac9d63820aa9925fed7bda69769d7fa9248db8708b91391be81df82963db84",
+    "caption": "算例 case_051（3核）control 对照组（291,222 cycles，额外 DDR 搬运量 9,045,304 B）与 paced 步调组（278,618 cycles，额外 DDR 搬运量 9,045,350 B）的执行时间线对比。图内呈现彩色流水线操作与灰色 Task 执行区间两层结构；Core 1–3 对应官方 Core 0–2；“归约尾”标注最终汇合 Task 的起始时刻。",
+    "label": "fig:p1-paced-diagnostic"
+  }
+]

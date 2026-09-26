@@ -1,0 +1,290 @@
+{
+  "generated_at": "2026-09-27T05:26:45+08:00",
+  "author": "Gemini (core Markdown writer)",
+  "worktree": "/Users/nikolastar/Projects/huaweicup2026/.worktrees/paper-planning-20260926",
+  "baseline_reference": "paper/manuscript-v1/review/code-compression-v10/before-algorithms.json",
+  "summary": {
+    "total_algorithms": 6,
+    "total_lines_before": 226,
+    "total_lines_after": 142,
+    "total_lines_reduced": 84,
+    "total_reduction_percentage": "37.17%",
+    "range_target": "约 15–24 行（复杂局部确需可保留至 26 行，排版行宽 80–90 半角字符以内）",
+    "range_achieved": "19–26 行（全部在 19–26 物理行，最大行宽控制在 85 字符以内，语法全部编译通过）"
+  },
+  "review_fixes_applied": [
+    {
+      "issue": "alg:p1-branch-aid 浅拷贝导致负载失真",
+      "fix": "移除 defaultdict(Counter, loads) 浅拷贝，恢复为各核心独立深拷贝：{c: Counter(loads[c]) for c in range(cores)}，避免后续 subtract/update 修改原始 loads 造成 old_max 评估失真。"
+    },
+    {
+      "issue": "alg:p1-branch-aid helper 评分超长行与主导流水线语义",
+      "fix": "将 helper 评分抽为规范过程 helper_load_key(new_loads, w, c)，在源码对应中明确定义三元组排序键 (max(after.values()), sum(after.values()), c)；total 包含全芯片核心（含未分配核心零负载），主导流水线 p* 按全芯片总工作量最大且流水线 ID 升序破平确定；旁注由“320任务上限”修正为“构造器任务数限制”，保留 max(320, n_tasks) 源码条件且不宣称为官方限制。"
+    },
+    {
+      "issue": "alg:p2-adaptive-hypergap 无法区分跳过与致命异常",
+      "fix": "safe_refine_and_retime 显式返回 (status, hyper)；status=='fatal'（非预期异常或字节证据无效）时立即全流程回退 baseline，status=='skip'（结构不支持或未产生严格下降）时安全跳过并继续评测既有候选；源码对应说明明确要求 before/after 为有效非负整数且仅在 after < before 时重排；select_best_by_lexicographic 明确任一次评测异常全流程回退 baseline，平局保留先构造方案；输出描述修正为“选中的多核调度方案 winner_plan”。"
+    },
+    {
+      "issue": "alg:p3-forest-memory-order 隐藏核心递推循环与 live 语义误称",
+      "fix": "直接在正文伪代码中展开核心短循环：live, frontier = 0, 0; for c in children: frontier = max(frontier, live + peak[c]); live += retained[c]，并在子树释放前计入 own_output；后序遍历栈实现抽为 dfs_postorder；源码对应纠正关于 live 的“前序输出量”误称，准确说明其在循环中维护已处理子树输出总和、循环结束为全部孩子输出之和。"
+    },
+    {
+      "issue": "代码排版宽度与工程腔说明精简",
+      "fix": "排版宽度严格控制在 80–90 半角字符以内，长推导式与条件语句合理换行，禁止单行塞入长列表推导式；各算法紧随的源码对应说明压缩至 1–3 句，去除长篇重复限制，直接声明辅助过程规范契约。"
+    },
+    {
+      "issue": "附录 E 与实际已打包附件 source-code-v10.zip 对齐",
+      "fix": "附件包大小与文件数核准为 326 文件约 1.1 MiB；删除“源码切片”误称（标定的 7 个算法均为完整模块）；明确收录三题 src 全部固定代码、官方评测源码/配置、依赖锁文件、dependencies/E2-source/（仅指定 C++ 源码与清单，不含 macOS arm64 编译二进制，P2 依赖原 Git 对象核验）；明确附件包为源码审阅附件，本次未做跨平台可运行性验证，不宣称解压即开箱复现；保留 OpenAI / GPT-6 Astra (gpt-6-astra, 2026-09-03) 针对已核验 7 个模块的规范 AI 辅助编程声明，不得推断至其他队友源码。"
+    },
+    {
+      "issue": "alg:p1-unified 目标函数字段与异常安全回退对齐",
+      "fix": "对齐固定提交 834d8c9 的 response_refine.py::objective 真实返回字段 (makespan, scheduled_copy_bytes)，纠正注释与源码对应中的 added_copy_bytes 误报；将评分校验与目标解析统一纳入 safe_score_e1 契约或 short try/except 块中，杜绝非法评分或解析异常导致漏退 parent。"
+    },
+    {
+      "issue": "alg:p3-forest-solve 评测预算前置与下界剪枝语义修正",
+      "fix": "对齐固定提交 311322b 的 evaluate_candidates 真实控制流，将 calls >= 3 预算判断移至 construct 之前，避免预算耗尽仍执行无意义计算；明确 safe_evaluate 仅捕获 EvaluationValidationError 校验异常并回退 None，不吞噬其余非预期异常；修正下界说明为“下界不小于当前完成时间时跳过评分（L >= U 意味着已不能严格改善当前方案）；下界不适用则正常评测”，去除夸大当且仅当的绝对化表述。"
+    }
+  ],
+  "algorithms": [
+    {
+      "id": "alg:p1-unified",
+      "title": "问题一多候选协同生成与评测选优算法",
+      "file": "paper/manuscript-v1/chapters/04-p1.md",
+      "fixed_commit": "834d8c9",
+      "source_files": [
+        "src/q1/branch_refine.py::solve",
+        "src/q1/unified.py"
+      ],
+      "lines_before": 29,
+      "lines_after": 19,
+      "max_display_width": 85,
+      "reduction_lines": 10,
+      "reduction_percentage": "34.48%",
+      "helpers_abstracted": [
+        {
+          "name": "safe_construct_branch_aid",
+          "contract": "输入 (graph, cores, parent_plan)；封装 branch_aid.construct 候选构造、2.0s 软耗时控制与拓扑合法性校验；若结构不支持、软超时或抛出异常返回 None，成功返回 candidate。"
+        },
+        {
+          "name": "safe_score_e1",
+          "contract": "输入 (graph, candidate)；封装单次在线 E1 评测调用、状态 ok 校验与 (makespan, scheduled_copy_bytes) 目标解析；若评测抛出异常或状态非 ok 返回 None，成功返回合法目标二元组。"
+        }
+      ],
+      "key_constraints_preserved": [
+        "全流程在线 E1 评测预算由基础候选(<=6)、动态分组(<=1)、保序(<=2)与分支援助(<=1)共享（6+1+2+1 <= 10 次）",
+        "按字典序 (Makespan, scheduled_copy_bytes) 严格改善才采纳，平局不替换",
+        "父解证据有效性检查（cores >= 2 与 valid_parent_evidence）",
+        "方案对象字节去重（plan_bytes(candidate) == plan_bytes(parent_plan)）",
+        "评分解析异常或字段缺失通过 short try/except 安全回退父方案"
+      ]
+    },
+    {
+      "id": "alg:p1-branch-aid",
+      "title": "分支援助重分配的波次分支选择与分配算法",
+      "file": "paper/manuscript-v1/chapters/04-p1.md",
+      "fixed_commit": "834d8c9",
+      "source_files": [
+        "src/q1/branch_aid.py::construct (lines 359-438)"
+      ],
+      "lines_before": 54,
+      "lines_after": 26,
+      "max_display_width": 73,
+      "reduction_lines": 28,
+      "reduction_percentage": "51.85%",
+      "helpers_abstracted": [
+        {
+          "name": "dominant_pipe_workloads",
+          "contract": "输入 (by_core, cores)；为各核心（含未分配核心）统计或补充流水线工作量计数器，并按全芯片总工作量最大且流水线 ID 升序破平确定主导流水线 p*。"
+        },
+        {
+          "name": "find_exportable_branches",
+          "contract": "输入 (donors, by_core)；在捐赠核心内部通过 Tarjan 桥树分析寻找双连通分量，提取可导出支路 X、保留支路 Y 与汇聚 J，按工作量降序与导出前驱 ID 排序返回候选列表。"
+        },
+        {
+          "name": "helper_load_key",
+          "contract": "输入 (new_loads, w, c)；给出援助核心贪心指派的三元组排序键：(max((new_loads[c] + w['work']).values(), default=0), sum((new_loads[c] + w['work']).values()), c)。"
+        },
+        {
+          "name": "max_load",
+          "contract": "输入 loads 字典；遍历各核心各流水线，返回全芯片最大单一流水线工作量峰值。"
+        },
+        {
+          "name": "update_branch_pieces",
+          "contract": "输入 (pieces, found, placement, h, next_id)；为导出分支分配新子图 ID（X=next_id+1, J=next_id, Y=task），记录波次 h、导出次序与 helper 放置，累积写入 pieces。"
+        }
+      ],
+      "key_constraints_preserved": [
+        "各核心独立深拷贝负载字典：{c: Counter(loads[c]) for c in range(cores)}，避免 loads 原位修改导致 old_max 失真",
+        "主导流水线 p* 工作量汇总包含全核心（含空闲核 zero loads），角色互斥划分仅在已有任务的 by_core 核心中选择 donors 与 helpers",
+        "前置条件假定算子包单汇点合法且同高任务间无跨核计算边（外围抛出 UnsupportedStructure）",
+        "轻载贪心指派 helper（按增加后最大流水线工作量、总工作量、核心 ID 严格多级破平）",
+        "严格要求全核心最大流水线工作量下降（max_load(new_loads) < max_load(loads)）",
+        "构造器内部任务数限制 max(320, n_tasks)，保留源码条件且不宣称为官方限制",
+        "X 迁入 helper、Y 与 J 保留原 donor 的三相映射记录"
+      ]
+    },
+    {
+      "id": "alg:p2-load-guarded-cut",
+      "title": "受工作量保护的二核心局部超图割算法",
+      "file": "paper/manuscript-v1/chapters/05-p2.md",
+      "fixed_commit": "c66559a",
+      "source_files": [
+        "src/q2_nikolastarx/binary_hypercut.py::load_guarded_cut"
+      ],
+      "lines_before": 24,
+      "lines_after": 20,
+      "max_display_width": 82,
+      "reduction_lines": 4,
+      "reduction_percentage": "16.67%",
+      "helpers_abstracted": [
+        {
+          "name": "validate_guard_inputs",
+          "contract": "输入校验外围化（源码第 198–240 行）；验证 Pipe 集合一致性、工作量非负性以及初始分配满足 caps。"
+        },
+        {
+          "name": "GuardedCutResult",
+          "contract": "返回值解包简化为 (labels, cost) 二元组表示，省略诊断字段组装。"
+        }
+      ],
+      "key_constraints_preserved": [
+        "单次局部求解至多执行 |order| + 1 次（r <= 16 为自由移动链数量）有限最大流求解终止界",
+        "满足上限时保证局部预 Step 2 复制成本不增加（Cost <= Cost0）",
+        "各流水线工作量上限（caps）硬约束防护",
+        "在首个超额流水线中选取耗时最长（具有正工作量）的迁入流动链锁定回初始分配（单元 ID 升序破平）",
+        "明确声明该机制旨在防范计算倾斜，不保证片上私有缓存无换出（spill 为 0），亦不构成全局 Makespan 缩短保证",
+        "超额判断与流动链筛选代码合理折行，单行字符严格控制在 82 字符以内"
+      ]
+    },
+    {
+      "id": "alg:p2-adaptive-hypergap",
+      "title": "问题二自适应超图细化与多核调度算法",
+      "file": "paper/manuscript-v1/chapters/05-p2.md",
+      "fixed_commit": "c66559a",
+      "source_files": [
+        "src/q2_nikolastarx/adaptive_hypergap_guarded.py::build"
+      ],
+      "lines_before": 47,
+      "lines_after": 25,
+      "max_display_width": 75,
+      "reduction_lines": 22,
+      "reduction_percentage": "46.81%",
+      "helpers_abstracted": [
+        {
+          "name": "safe_build_gap",
+          "contract": "输入 (graph, cores, config)；封装 gap_candidate.build 构造 P1，捕获 UnsupportedStructure 与异常，失败返回 None。"
+        },
+        {
+          "name": "safe_refine_and_retime",
+          "contract": "输入 (graph, gap, config)；封装 gap_hyperrefine.refine 与 gap_retime.retime；校验预 Step 2 原始复制字节数为有效非负整数且仅在严格下降门槛（0 <= after < before）时调用重排；结构不支持或重排跳过返回 ('skip', None)，遇到非预期异常或无效证据返回 ('fatal', None)，成功生成返回 ('ok', hyper)。"
+        },
+        {
+          "name": "select_best_by_lexicographic",
+          "contract": "输入 (oracle, plans, baseline)；按构造顺序向 oracle 发起评测（至多 3 次），任一次评测异常或失败均全流程回退 baseline；按 (Makespan, added_copy_bytes) 严格字典序选优，平局保留先构造方案。"
+        }
+      ],
+      "key_constraints_preserved": [
+        "基础方案 P0 保底",
+        "空闲区间方案 P1 即使与 P0 完全相同仍作为局部细化的输入基准",
+        "局部超图优化显式区分跳过（继续评测 P0/P1）与致命异常（立即回退 P0 保底，不发起评测）",
+        "局部超图优化门槛严格为预 Step 2 原始复制字节数有效且严格下降（0 <= after < before）",
+        "全流程在线评测严格受限于至多 3 次调用，平局保留先构造方案",
+        "输出描述准确界定为选中的多核调度方案 winner_plan，不妄称全局最优"
+      ]
+    },
+    {
+      "id": "alg:p3-forest-memory-order",
+      "title": "归约森林核心排序与DFS局部步骤",
+      "file": "paper/manuscript-v1/chapters/06-p3.md",
+      "fixed_commit": "311322b",
+      "source_files": [
+        "src/q3/forest_memory_order.py::construct (lines 153-192)"
+      ],
+      "lines_before": 36,
+      "lines_after": 26,
+      "max_display_width": 79,
+      "reduction_lines": 10,
+      "reduction_percentage": "27.78%",
+      "helpers_abstracted": [
+        {
+          "name": "dfs_postorder",
+          "contract": "输入 (root, child_order)；按排定的子节点次序（逆序压栈）执行显式栈深度优先搜索，生成单棵树的后序算子执行序列。"
+        }
+      ],
+      "key_constraints_preserved": [
+        "直接在正文伪代码中完整保留核心 h/r 递推循环：live, frontier = 0, 0; for c in children: frontier = max(frontier, live + peak[c]); live += retained[c]，不隐藏于黑箱函数中",
+        "准确界定 live 语义为已处理子树输出总和、循环结束为全部孩子输出之和，不误称为前序输出量",
+        "父算子输出空间在子算子完全释放前分配（own_output 严格计入峰值：peak = max(frontier, live + own_output)）",
+        "非交错树模型推导与子树按 (peak - retained) 降序排序（同值按算子 ID 升序破平）",
+        "后序遍历与分量按最小算子 ID 排序拼接执行序列，单行字符折行控制在 79 字符以内"
+      ]
+    },
+    {
+      "id": "alg:p3-forest-solve",
+      "title": "问题三归约森林与多候选协同求解算法",
+      "file": "paper/manuscript-v1/chapters/06-p3.md",
+      "fixed_commit": "311322b",
+      "source_files": [
+        "src/q3/forest_solve.py::evaluate_candidates"
+      ],
+      "lines_before": 36,
+      "lines_after": 26,
+      "max_display_width": 85,
+      "reduction_lines": 10,
+      "reduction_percentage": "27.78%",
+      "helpers_abstracted": [
+        {
+          "name": "safe_construct_forest",
+          "contract": "输入 (index, cores)；封装 forest_memory_order.construct，捕获 UnsupportedStructure 异常并安全返回 None。"
+        },
+        {
+          "name": "safe_evaluate",
+          "contract": "输入 (evaluate, proposal)；封装 evaluate(proposal) 官方评测调用，仅捕获 EvaluationValidationError 校验异常并安全返回 None，不捕获其余异常。"
+        }
+      ],
+      "key_constraints_preserved": [
+        "在候选方案构造之前先检查评测预算（calls >= 3 立即返回），避免无意义计算",
+        "全求解链共享至多 3 次在线 E0 评测预算",
+        "继承 witness 阶段暂定最优解 winner，方案编码直接比对去重（encoded(proposal) == encoded(winner[0])）",
+        "依据底层硬件依赖与 FIFO 必要不等式推导理论完成时间下界 L(proposal)",
+        "下界不小于当前完成时间时跳过评分（lower >= winner[1][makespan]，意味着已不能严格改善当前方案）；下界不适用（UnsupportedBound）则正常推进评测",
+        "新方案仅在官方 Makespan 严格缩短时采纳，平局不以 DDR 搬运量破平",
+        "输出描述准确界定为选中的调度方案 winner[0]"
+      ]
+    }
+  ],
+  "appendix_updates": {
+    "c1_mapping_note": {
+      "file": "paper/manuscript-v1/chapters/10-appendix.md",
+      "section": "C.1",
+      "summary": "简明重写表 C.2 后的说明段落，明确 6 段伪代码为核心控制流与数学决策的高层抽象，完整程序实现与模块接口归档于程序附件包 attachments/v10/source-code-v10.zip（见附录 E），对应固定历史提交；保持官方代码与配置哈希，保留 export_tables.py 离线导出说明，去除长篇免责声明。"
+    },
+    "appendix_e_attachment": {
+      "file": "paper/manuscript-v1/chapters/10-appendix.md",
+      "section": "附录E",
+      "new_title": "## 附录E 核心算法程序附件说明",
+      "regex_preserved": "^## 附录[A-Z] ",
+      "zip_package_details": {
+        "path": "attachments/v10/source-code-v10.zip",
+        "files_count": 326,
+        "size_approx": "1.1 MiB",
+        "contents": [
+          "paper-listings/：收录附录 C 标定的 7 个核心算法完整实现模块（非代码切片），含逐字原始副本（1464 行）与规范展示副本（1520 行，含 56 行规范 AI 注释，AST 完全等价）及 manifest.json",
+          "src/ 与三题快照：收录各题固定历史提交下的全部 Python 算法源码、官方评价器源码与配置文件，以及项目依赖锁文件（uv.lock）",
+          "dependencies/E2-source/：包含官方指定的 E2 评价器 C++ 源码文件与清单，不包含本机 macOS arm64 架构的编译二进制文件；问题二入口依赖原 Git 对象核验",
+          "README.md 与完整 SHA-256 校验清单：提供逐文件哈希与运行说明"
+        ]
+      },
+      "reproducibility_disclaimer": "本附件包定位为源码审阅附件，本次归档未执行跨平台可运行性与环境安装验证，不能宣称解压即完整复现运行；README 中已明确说明最终用于生产运行的自包含完整包须由各程序责任人补齐原生依赖并独立验证。",
+      "ai_declaration_boundary": "附录标定的 7 个核心算法模块在编程实现过程中借助了由 OpenAI 开发的 GPT-6 Astra (gpt-6-astra, 2026-09-03) 提供辅助编程支持；展示版本均在文件头部包含规范的 AI 使用声明注释。此声明严格限定于上述 7 个模块，不推断至其他队友协同编写的源码模块。",
+      "compressed_metrics": {
+        "paragraphs_count": 3,
+        "chinese_characters_count": 231,
+        "total_characters_count": 387,
+        "target_range": "约 200–300 汉字、2–3 短段",
+        "status": "pass"
+      },
+      "summary": "精简为 3 个简短段落（231 汉字，总字符 387），明确完整代码移至 attachments/v10/source-code-v10.zip；包内固定三题源模块、七模块原始/带声明副本、依赖源码与哈希清单，详细目录和运行限制看 README；此为源码审阅附件，P2 所需原 Git 对象、认证原生二进制及最终运行验证按 README 由责任人独立补齐；严格保留七模块 AI 使用声明事实（OpenAI/GPT-6 Astra/gpt-6-astra/2026-09-03），不外推至全队其他代码；彻底移除逐项 326 文件、行数、AST 审计细节与纠错解释腔，有效压缩末页版面，解决尾部两行文字独立溢出成页的问题。"
+    }
+  }
+}

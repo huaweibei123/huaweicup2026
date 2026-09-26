@@ -1,0 +1,58 @@
+{
+  "schema": "figure-auto-review-v1",
+  "figure_id": "fig-5-2",
+  "primary": "figure.svg",
+  "files": [
+    {"name": "figure.svg", "role": "svg", "sha256": "5b6ba802adfb190b9e37b76acf0686029919d44ed0db1225f1e0472cf5f801a8"},
+    {"name": "figure.png", "role": "png", "sha256": "a63b35b2a2130a0f80757ce5758521a5419b91d3243bd8c68ef984a6199499b8"},
+    {"name": "plot.py", "role": "source", "sha256": "60a7d7aca4550e05a7757b10f7bea76230183b6e7d48b3a9a6f693aa743adc86"},
+    {"name": "caption.md", "role": "caption", "sha256": "60a16f0e4ee5da49383c475f975f0d38a935c3dad844c8e21eaf44aeff68bdad"},
+    {"name": "self-check.md", "role": "self_check", "sha256": "3b1345afaf405568f98b6be2350f935c0aa91900e6e333cd91209c139206f7d3"},
+    {"name": "lifetimes.csv", "role": "input", "sha256": "b4345b48c783322b5a0027c6987d260558e6d5fad8770181e81dd368a621ee36"},
+    {"name": "occupancy.csv", "role": "input", "sha256": "f773c176ac181a6faa10f4cbbc0491b5431081c9dc6641bf0079d16f1fbc43f0"},
+    {"name": "capacity.csv", "role": "input", "sha256": "171b4ffb3db0f5b9d07c3c4c3bbb3f2a1bc11cc6021586a999127778d04fe192"},
+    {"name": "handcheck.csv", "role": "input", "sha256": "5bc060e047aab5fbae8708c21e0449027ac22cf5be550913cfe3900be329db4e"}
+  ],
+  "command": ".venv/Scripts/python.exe figures/a/jia-fig5-2-20260926/plot.py（工作目录=仓库根；脚本内部断言：occupancy 恰含 16 个唯一 (step,space) 覆盖 i=0..max(last)+1=7、lifetimes 闭区间重算==occupancy.csv、handcheck==占用曲线、max_i H_p(i)<=C_p 两池成立；断言通过后经 matplotlib Agg 后端写出 figure.svg 与 figure.png(300 dpi)。工具版本：Python 3.13.12（.venv，matplotlib））",
+  "sources": [
+    {"path": "paper/sections/a-q2.md", "commit": "615b1a5f7913a97fff8924cfec9936d3d303c6fc", "sha256": "bb286fba0835ce78c08473f420f7669452519a3ab9b87f41008bc75e4113e8e2", "note": "P2 初稿；使用 5.5.1 节（式 5-12/5-13 闭区间语义与命题 2）与表 5-1 固定配置（L1=524288 B、UB=131072 B）；哈希=固定提交抓取字节；手算示例为派发单授权路径（5.5.1 图 5-2 占位说明明示'可手工核验的小型结构示意'）"}
+  ],
+  "units": {"makespan": "cycles", "wall": "s", "bytes": "B"},
+  "panels": [
+    {"id": "1", "title": "物理张量生命周期（闭区间 f(t)≤i≤ℓ(t)，按身份去重；共同驻留紫带标注）"},
+    {"id": "2", "title": "L1 占用 H_L1(i) 阶梯 + 容量线 512 KiB（手算三点：416/512/64 KiB；i=0..7 全区间，步 7 全部释放 0）"},
+    {"id": "3", "title": "UB 占用 H_UB(i) 阶梯 + 容量线 128 KiB（手算三点：48/72/24 KiB；i=0..7 全区间，步 7 全部释放 0）"}
+  ],
+  "tables": {
+    "lifetimes": "lifetimes.csv",
+    "occupancy": "occupancy.csv",
+    "capacity": "capacity.csv",
+    "handcheck": "handcheck.csv"
+  },
+  "table_columns": {
+    "lifetimes": ["tensor", "start", "last", "bytes", "space"],
+    "occupancy": ["step", "space", "bytes"],
+    "capacity": ["space", "bytes"],
+    "handcheck": ["step", "space", "bytes"]
+  },
+  "parameters": {
+    "x_axis": "Step2 操作序号 i（执行序，非时间），覆盖完整范围 i=0..max(last)+1=7",
+    "interval_semantics": "闭区间 f(t)<=i<=l(t)（式 5-12；同一步输入输出共同驻留；末触步仍计入占用，下一步释放，T6=[5,6]、U3=[4,6] 为两端闭合例证）",
+    "example_type": "手算可核小型结构示例（派发单授权；静态估计，非实际并行峰值；无官方 spill 记录，未绘制 spill 事件）",
+    "valid_samples": "9 物理张量（L1×6、UB×3）、occupancy 16 个唯一 (step,space) 覆盖 i=0..7、2 池",
+    "missing": "无"
+  },
+  "required_stages": [],
+  "criteria": [
+    "物理张量按身份去重，区间端点符合所用闭区间语义；三个手算位置与曲线数值一致。",
+    "横轴明确是执行序号或真实周期，不能混用；L1 与 UB 分开核对。",
+    "静态估计不标为实际并行峰值；没有官方 spill 记录时不画虚构 spill 事件。"
+  ],
+  "dispatch": {
+    "issue": "huaweibei123/huaweicup2026#14",
+    "dispatch_comment_id": 5845363006,
+    "task_book_sha256": "55859ab1ed2b81b218663f60c4cf824e9e01ba0399c52113861b48e61da7dfd2"
+  },
+  "notice": "手算示例不含成绩声明；容量取固定配置表 5-1 真实值。机检只验证提交包内部一致性，视觉和科学结论由 Agent 逐图审查与用户最终总验收。",
+  "version_note": "v2（F52-R01/R02 返工，意见 5845634878）：occupancy.csv 扩为 16 行（补 i=0/7 两端零行），阶梯图覆盖完整范围 i=0..7、首尾 0 与全部释放可见；第 6 步标注改'部分释放后'、步 7 标注'全部释放 0'；删除'首次即末次触碰（T6、U3 尾段）'不实断言（9 行 lifetimes 无 start==last），改为'末触步仍计入占用，下一步释放；T6=[5,6]、U3=[4,6] 即两端闭合例证'，caption/自查/底注同步；底部长说明精简移入 caption（建议项）；lifetimes/capacity/handcheck 未改动，handcheck 6 行保留。L1 序列 [0,425984,524288,425984,229376,196608,65536,0]、UB 序列 [0,32768,49152,49152,73728,40960,24576,0] 与返工单一致。哈希按暂存区/提交 Git 字节一次性重算（不含 audit.json 自身），不含 Windows 工作副本换行差异"
+}

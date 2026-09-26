@@ -1,0 +1,56 @@
+--- v9/frozen-builder
++++ v10/content-only-builder
+@@ -6,8 +6,8 @@
+ from pathlib import Path
+ import csv, json, re, shutil, subprocess, hashlib, os
+ 
+-P=Path(__file__).resolve().parents[1]
+-SOURCE_P=Path(os.environ.get('PAPER_SOURCE_ROOT', str(P)))
++P=Path(__file__).resolve().parents[2]
++SOURCE_P=Path(os.environ.get('PAPER_SOURCE_ROOT', str(P/'review/code-compression-v10/content-source')))
+ CHECKPOINT=os.environ.get('PAPER_CHECKPOINT','checkpoint-03')
+ VERSION=os.environ.get('PAPER_VERSION','v2')
+ DISPLAY_VERSION=os.environ.get('PAPER_DISPLAY_VERSION', VERSION)
+@@ -19,7 +19,7 @@
+ OUT=P/'checkpoints'/CHECKPOINT
+ if (OUT/'annotation-lock.json').exists():
+     raise SystemExit('This checkpoint is frozen for user annotations. Set PAPER_CHECKPOINT to a new checkpoint directory.')
+-T=P.parent/'template-2026'
++T=P/'checkpoints/v9'
+ FIG=P/'figures'
+ B.mkdir(parents=True,exist_ok=True);OUT.mkdir(parents=True,exist_ok=True)
+ # Freeze inputs before conversion; later agent edits cannot leak into this build.
+@@ -375,23 +375,8 @@
+ # figure. Flush before the first actual listing, not at every appendix heading.
+ # Keep short appendix tables with their explanatory paragraphs.
+ appendix=appendix.replace(r'\begin{table}[!htbp]',r'\begin{table}[H]')
+-if r'\section{核心程序代码}' not in appendix:
+-    appendix+='\n'+r'\section{核心程序代码}'+'\n'
++# v10 content selection: full program listings are delivered in the source attachment.
+ code_manifest=json.loads((B/'source/appendix-code/manifest.json').read_text())
+-appendix+='\n'+r'\FloatBarrier'+'\n'
+-for item in code_manifest['files']:
+-    code_path=B/'source/appendix-code'/item['file']
+-    assert hashlib.sha256(code_path.read_bytes()).hexdigest()==item['sha256'], item['file']
+-    listing_file=item['listing_file']
+-    listing_path=B/'source/appendix-code'/listing_file
+-    listing_bytes=listing_path.read_bytes()
+-    assert hashlib.sha256(listing_bytes).hexdigest()==item['listing_sha256'], listing_file
+-    assert listing_bytes[item['declaration_bytes']:]==code_path.read_bytes(), listing_file
+-    title=item['problem']+' '+item['file'].split('/')[-1]
+-    # Keep the declaration with its module title and the start of the program.
+-    appendix+=r'\Needspace{12\baselineskip}'+'\n'
+-    appendix+=r'\subsection{'+title.replace('_',r'\_')+'}\n'
+-    appendix+=r'\lstinputlisting[style=gmcmappendix,language=Python,belowskip=0.4em]{source/appendix-code/'+listing_file+'}\n'
+ 
+ citation_order=[]
+ def cite_match(m):
+@@ -556,7 +541,7 @@
+          'template_hashes':{str(f.relative_to(T)):hashlib.sha256(f.read_bytes()).hexdigest()
+                             for f in T.rglob('*') if f.is_file() and (f.suffix in ['.cls','.bst','.ttf','.otf'])},
+          'citations_in_display_order':citation_order,'uncited_references':sorted(uncited),
+-         'code_files':len(code_manifest['files']),
++         'code_files':0, 'external_code_files':len(code_manifest['files']),
+          'compile_passes':compile_passes,
+          'toc_sha256':hashlib.sha256((B/'main.toc').read_bytes()).hexdigest(),
+          'pdf_sha256':hashlib.sha256((OUT/('anonymous-paper-'+VERSION+'.pdf')).read_bytes()).hexdigest()}

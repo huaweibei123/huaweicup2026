@@ -1,0 +1,207 @@
+{
+  "fixed_solver_commit": "c66559a6f8a31ef7b4720e1f7c3c28d61f8dff3f",
+  "didactic_example": true,
+  "symbols": {
+    "a": "chosen source-side core",
+    "b": "chosen sink-side core",
+    "c": "another fixed core",
+    "F_e": "set of cores already touched by pins outside the local region; distinct from scalar maximum-flow value f_max",
+    "w": "positive hyperedge weight in bytes",
+    "u,v": "the same two movable chain pins repeated in both auxiliary-edge rows"
+  },
+  "nodes": [
+    {
+      "id": "scope",
+      "label": "所选两个核心：a、b；至多 16 条可移动计算链\nFₑ：同一超边在调整区域外已固定触及的核心集合",
+      "role": "scope"
+    },
+    {
+      "id": "a_panel",
+      "label": "",
+      "role": "panel"
+    },
+    {
+      "id": "a_title",
+      "label": "例 A｜Fₑ = ∅，超边连接两条可移动链 u、v，权重为 w 字节",
+      "role": "heading"
+    },
+    {
+      "id": "a_formula",
+      "label": "复制字节数 C = w ×（触及核心数 − 1）；源侧代表核心 a，汇侧代表核心 b。",
+      "role": "formula"
+    },
+    {
+      "id": "a_pins1",
+      "label": "u、v",
+      "role": "pin"
+    },
+    {
+      "id": "a_aux1",
+      "label": "辅助节点 q_a",
+      "role": "aux"
+    },
+    {
+      "id": "a_sink",
+      "label": "汇侧：b",
+      "role": "side"
+    },
+    {
+      "id": "a_source",
+      "label": "源侧：a",
+      "role": "side"
+    },
+    {
+      "id": "a_aux2",
+      "label": "辅助节点 q_b",
+      "role": "aux"
+    },
+    {
+      "id": "a_pins2",
+      "label": "u、v",
+      "role": "pin"
+    },
+    {
+      "id": "a_note",
+      "label": "两行的 u、v 是同一组链；分别列出“有链在 a”和“有链在 b”的容量边。",
+      "role": "note"
+    },
+    {
+      "id": "a_cost",
+      "label": "同侧：割容量 w，偏移 −w，C = 0。     分侧：割容量 2w，偏移 −w，C = w。",
+      "role": "result"
+    },
+    {
+      "id": "b_panel",
+      "label": "",
+      "role": "panel"
+    },
+    {
+      "id": "b_title",
+      "label": "例 B｜Fₑ = {a, c}：已固定触及所选核心 a 和另一个核心 c",
+      "role": "heading"
+    },
+    {
+      "id": "b_formula",
+      "label": "a 已在 Fₑ 中，不再建立“有链在 a”的容量边；只有新增核心 b 才增加复制。",
+      "role": "formula"
+    },
+    {
+      "id": "b_source",
+      "label": "源侧：a",
+      "role": "side"
+    },
+    {
+      "id": "b_aux",
+      "label": "辅助节点 q_b",
+      "role": "aux"
+    },
+    {
+      "id": "b_pins",
+      "label": "u、v",
+      "role": "pin"
+    },
+    {
+      "id": "b_cost",
+      "label": "全部在 a：割容量 0，偏移 +w，C = w。   有链在 b：割容量 w，偏移 +w，C = 2w。",
+      "role": "result"
+    },
+    {
+      "id": "guard_panel",
+      "label": "",
+      "role": "panel"
+    },
+    {
+      "id": "guard_title",
+      "label": "局部最小割之后，检查计算工作量（模拟时钟周期）",
+      "role": "heading"
+    },
+    {
+      "id": "guard_cut",
+      "label": "求最小割\n精确比较当前区域的\n原始 COPY 字节数",
+      "role": "step"
+    },
+    {
+      "id": "guard_cap",
+      "label": "逐核、逐类检查\n计算流水线（Pipe）工作量\n超限：移入链回原核\n并重求最小割",
+      "role": "step_small"
+    },
+    {
+      "id": "guard_accept",
+      "label": "只在工作量满足上限、\n局部复制字节数严格减少时\n保留新的核心分配",
+      "role": "step"
+    },
+    {
+      "id": "guard_bound",
+      "label": "若有 r 条可移动链，最多求解 r + 1 次；原分配始终可行。",
+      "role": "result"
+    }
+  ],
+  "edges": [
+    {
+      "id": "a_or_a_inf",
+      "source": "a_pins1",
+      "target": "a_aux1",
+      "label": "∞"
+    },
+    {
+      "id": "a_or_a_w",
+      "source": "a_aux1",
+      "target": "a_sink",
+      "label": "w"
+    },
+    {
+      "id": "a_or_b_w",
+      "source": "a_source",
+      "target": "a_aux2",
+      "label": "w"
+    },
+    {
+      "id": "a_or_b_inf",
+      "source": "a_aux2",
+      "target": "a_pins2",
+      "label": "∞"
+    },
+    {
+      "id": "b_or_b_w",
+      "source": "b_source",
+      "target": "b_aux",
+      "label": "w"
+    },
+    {
+      "id": "b_or_b_inf",
+      "source": "b_aux",
+      "target": "b_pins",
+      "label": "∞"
+    },
+    {
+      "id": "guard_1",
+      "source": "guard_cut",
+      "target": "guard_cap",
+      "label": ""
+    },
+    {
+      "id": "guard_2",
+      "source": "guard_cap",
+      "target": "guard_accept",
+      "label": ""
+    }
+  ],
+  "source_refs": [
+    "src/q2_nikolastarx/binary_hypercut.py:43-72",
+    "src/q2_nikolastarx/binary_hypercut.py:144-195",
+    "src/q2_nikolastarx/binary_hypercut.py:198-258",
+    "src/q2_nikolastarx/gap_hyperrefine.py:88-142"
+  ],
+  "verification": {
+    "empty_F_e": {
+      "offset": "-w",
+      "same_side_cost": "0",
+      "split_cost": "w"
+    },
+    "F_e_contains_a_and_c": {
+      "offset": "+w",
+      "all_a_cost": "w",
+      "any_b_cost": "2w"
+    }
+  }
+}

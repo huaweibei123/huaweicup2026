@@ -1,0 +1,162 @@
+{
+  "comment": "供图件负责人（Fang）用于生成 team-v9 数据图矢量 PDF 的中文图内文字、轴标签、图例与排版指令。本规范要求去掉烘焙总图号标题、去除底部长脚注及数据表格，英文标识仅在必要处保留，Makespan 标注明确中文单位（时钟周期 cycles）。",
+  "figures": {
+    "fig-5-5": {
+      "target_file": "../figures/team-v9/p2-quality-cost.pdf",
+      "target_label": "fig:p2-quality-cost",
+      "layout_instructions": [
+        "移除顶部总标题「图 5-5 | P2 c665 质量、求解耗时与尾部延迟」",
+        "移除底部数据表格（核数 / n / Median / P95 / Max）与底部长脚注说明（数据与统计说明已由正文及表 5-1 承接）",
+        "保留上下两个子面板 (a) 与 (b)，两面板共享横轴对齐"
+      ],
+      "panel_a": {
+        "title": "(a) 500 个测试组合运行质量与求解耗时",
+        "x_axis": "求解程序端到端墙钟时间（秒，对数刻度）",
+        "y_axis": "官方仿真完成时间（cycles，对数刻度）",
+        "legend": ["1 核", "2 核", "3 核", "4 核", "5 核"]
+      },
+      "panel_b": {
+        "title": "(b) 各核心数求解耗时经验累积分布（每组 100 种测试组合）",
+        "x_axis": "求解程序端到端墙钟时间（秒，对数刻度）",
+        "y_axis": "累积比例（%）",
+        "legend": ["1 核", "2 核", "3 核", "4 核", "5 核"]
+      }
+    },
+    "fig-5-6": {
+      "target_file": "../figures/team-v9/p2-bound-distribution.pdf",
+      "target_label": "fig:p2-bound-distribution",
+      "layout_instructions": [
+        "移除顶部总标题「Figure 5-6 | Global lower-bound gap distribution」",
+        "保持单一面板，保留 5% 参考虚线及其文字标注",
+        "将全部英文字段替换为规范中文"
+      ],
+      "panel": {
+        "title": "",
+        "x_axis": "相对理论全局下界间隙 U/L - 1",
+        "y_axis": "经验累积比例（ECDF）",
+        "legend": [
+          "1 核 (n=100)",
+          "2 核 (n=100)",
+          "3 核 (n=100)",
+          "4 核 (n=100)",
+          "5 核 (n=100)",
+          "5% 间隙参考线"
+        ]
+      }
+    },
+    "fig-6-3": {
+      "target_file": "../figures/team-v9/p3-cache-comparison.pdf",
+      "target_label": "fig:p3-results",
+      "layout_instructions": [
+        "移除顶部总标题与底部数据表格",
+        "展示 1 至 5 核心下的算术平均加速比曲线，保留单核实际比值（无 L2 为 1.197143，只读 Cache 为 1.199760），不强制设为 1"
+      ],
+      "panel": {
+        "title": "",
+        "x_axis": "NPU 核心数",
+        "y_axis": "平均加速比（倍）",
+        "legend": ["同计划无 L2", "同计划只读 Cache"]
+      }
+    },
+    "fig-6-4": {
+      "target_file": "../figures/team-v9/p3-cache-gain.pdf",
+      "target_label": "fig:cache-gain",
+      "layout_instructions": [
+        "三面板横向布局 (a), (b), (c)",
+        "移除顶部总标题与冗余长图例，保留规范面板子标题",
+        "点集仅客观反映分布特征，不作单独因果断言"
+      ],
+      "panel_a": {
+        "title": "(a) 各核心数平均 CacheGain",
+        "x_axis": "NPU 核心数",
+        "y_axis": "平均 CacheGain"
+      },
+      "panel_b": {
+        "title": "(b) 逐用例分布与四分位",
+        "x_axis": "NPU 核心数",
+        "y_axis": "CacheGain（逐用例）",
+        "legend": ["负收益用例（CacheGain < 1）"]
+      },
+      "panel_c": {
+        "title": "(c) 字节命中率与 CacheGain 关系",
+        "x_axis": "字节命中率",
+        "y_axis": "CacheGain（逐用例）",
+        "legend": ["正收益/持平", "负收益", "无访问样本"]
+      }
+    },
+    "fig-6-6": {
+      "target_files": [
+        "../figures/team-v9/cache-counterexample-full.pdf",
+        "../figures/team-v9/cache-counterexample-zoom.pdf"
+      ],
+      "target_labels": [
+        "fig:cache-counterexample-full",
+        "fig:cache-counterexample-zoom"
+      ],
+      "layout_instructions": [
+        "将原四面板拆分为两份独立矢量图文件，避免单个页面排版过密",
+        "全图统一采用基于 0 的核心编号：原「核1」改为「Core 0」，原「核2」改为「Core 1」，原「核3」改为「Core 2」",
+        "移除底部长脚注说明，由论文图注与邻近正文承接",
+        "图 1 (full) 包含面板 (a) 与 (b)，展示全量执行时间线",
+        "图 2 (zoom) 包含面板 (c) 与 (d)，展示两处关键局部事件窗口"
+      ],
+      "figure_1_full": {
+        "panel_a": {
+          "title": "(a) 问题二无 L2 运行 | 完成时间 = 2,140,720 cycles",
+          "legend": ["MTE2 搬入", "M 矩阵乘", "V 向量计算", "MTE3 搬出"],
+          "y_ticks": [
+            "Core 0 MTE2", "Core 0 M", "Core 0 V", "Core 0 MTE3",
+            "Core 1 MTE2", "Core 1 M", "Core 1 V", "Core 1 MTE3",
+            "Core 2 MTE2", "Core 2 M", "Core 2 V", "Core 2 MTE3"
+          ],
+          "x_axis": "时间（cycles）"
+        },
+        "panel_b": {
+          "title": "(b) 问题三只读 Cache 运行 | 完成时间 = 2,140,863 cycles（慢 143 cycles）",
+          "legend": ["MTE2 搬入", "M 矩阵乘", "V 向量计算", "MTE3 搬出"],
+          "y_ticks": [
+            "Core 0 MTE2", "Core 0 M", "Core 0 V", "Core 0 MTE3",
+            "Core 1 MTE2", "Core 1 M", "Core 1 V", "Core 1 MTE3",
+            "Core 2 MTE2", "Core 2 M", "Core 2 V", "Core 2 MTE3"
+          ],
+          "x_axis": "时间（cycles）"
+        }
+      },
+      "figure_2_zoom": {
+        "panel_c": {
+          "title": "(a) 窗口 1 | Core 2, 4,900–7,000 cycles（Cache 首次命中及关联变动）",
+          "annotation": "算子 1000004905: 耗时 207 → 17 cycles (Cache 命中，绿色标注)；后序算子 1000006255 提前至 4,973 cycles 启动",
+          "y_ticks": ["Core 2 MTE2", "Core 2 M", "Core 2 V", "Core 2 MTE3"],
+          "x_axis": "时间（cycles）"
+        },
+        "panel_d": {
+          "title": "(b) 窗口 2 | Core 0, 443,050–443,250 cycles（同起点 DDR 访问变慢）",
+          "annotation": "算子 1000006089: 同在 443,077 cycles 启动，DDR 访问耗时由 69 cycles 变为 138 cycles",
+          "y_ticks": ["Core 0 MTE2", "Core 0 M", "Core 0 V", "Core 0 MTE3"],
+          "x_axis": "时间（cycles）"
+        }
+      }
+    },
+    "fig-6-7": {
+      "target_file": "../figures/team-v9/p3-quality-cost.pdf",
+      "target_label": "fig:p3-quality-cost",
+      "layout_instructions": [
+        "移除顶部总标题「图 6-7 | P3 forest 质量、求解耗时与尾部延迟」",
+        "移除底部数据表格与长脚注说明（数据与统计说明已由正文及表 6-1 承接）",
+        "保留上下两个子面板 (a) 与 (b)，两面板共享横轴对齐"
+      ],
+      "panel_a": {
+        "title": "(a) 500 个测试组合运行质量与求解耗时",
+        "x_axis": "求解程序端到端墙钟时间（秒，对数刻度）",
+        "y_axis": "官方仿真完成时间（cycles，对数刻度）",
+        "legend": ["1 核", "2 核", "3 核", "4 核", "5 核"]
+      },
+      "panel_b": {
+        "title": "(b) 各核心数求解耗时经验累积分布（每组 100 种测试组合）",
+        "x_axis": "求解程序端到端墙钟时间（秒，对数刻度）",
+        "y_axis": "累积比例（%）",
+        "legend": ["1 核", "2 核", "3 核", "4 核", "5 核"]
+      }
+    }
+  }
+}

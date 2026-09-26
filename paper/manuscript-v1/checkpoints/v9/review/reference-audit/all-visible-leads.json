@@ -1,0 +1,3837 @@
+[
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 267,
+    "text": "我还按照 Dijkstra Banker 算法的安全状态思想，实现了一个保守的完成次序检查：判断能否依次完成活动作业并释放资源，而不只看当前余量。这一关联来自原始安全性论证，不是名称类比。[[图片：]UT Austin Computer Science](https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD623.html)",
+    "urls": [
+      "https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD623.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 345,
+    "text": "**内存结构方面，最值得继续读的是《New Tools for Peak Memory Scheduling》。**它研究整个内存 profile 的支配关系，并给出特殊图类的结构化算法；同时也揭示了看似简单图类上的困难。对本题的启发是保留生命周期与完整内存变化，而非只保留一个标量峰值。但它的模型不等于本题双 Pipe、两类私有内存、异步 COPY 与共享 DDR，不能直接把其支配关系当成官方执行等价。[[图片：]arXiv](https://arxiv.org/abs/2312.13526)",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 347,
+    "text": "**学习位置方面，REGAL 比“端到端生成调度”更接近我们的需求。**它让网络学习搜索提议分布，在未见图上引导优化，而不是为每个新图重新训练。它采用每设备最多一个操作、同步阻塞传输等假设，与本题不同；应借鉴网络参与优化的位置，而不是照搬其性能模型。[[图片：]arXiv](https://arxiv.org/html/1905.02494v4)",
+    "urls": [
+      "https://arxiv.org/html/1905.02494v4"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 349,
+    "text": "**数据组织与大图训练方面，TpuGraphs 和 GST 有直接参考价值。**TpuGraphs 的样本是“图、编译配置、执行时间”，支持候选条件化；GST 用分段训练降低大图属性预测的训练内存需求。本题若分段，必须额外保留跨段接口和长期共享权重，否则恰好丢掉关键驻留信息。作者代码可借鉴，但 TPU 布局、分块标签不能当成本题 E0 标签。[[图片：]arXiv+2](https://arxiv.org/abs/2308.13490)",
+    "urls": [
+      "https://arxiv.org/abs/2308.13490"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 353,
+    "text": "前沿实验室路线中，**AlphaEvolve 的离线“生成构造函数—评估—保留”流程**值得借鉴。但我的建议是演化可复用构造规则，而不是每个正式实例临时调用 LLM 大量搜索。后者会把研究成本、单例预算与测试集反馈混在一起。本轮没有运行 AlphaEvolve。[[图片：]arXiv](https://arxiv.org/abs/2506.13131)",
+    "urls": [
+      "https://arxiv.org/abs/2506.13131"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 378,
+    "text": "对你现有资源，我的取舍是：**先用 CPU/Apple 上的 Python、NumPy 完成非学习验收；只有候选条件化 GNN 的批量训练确实成为瓶颈，再使用 CUDA 或 MPS。**Colab 的 200 CU 不能直接换算成固定 A100 小时数，实际分配、费率和限制需要在运行环境中确认。[[图片：]Google Research](https://research.google.com/colaboratory/faq.html)",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 695,
+    "text": "但论文的资源池模型、开始时间和skip动作，不等于本题官方接口；不能把它的可达性结论或跨资源动作交换等价，直接套到共享DDR、生成COPY和固定FIFO上。[[图片：]arXiv](https://arxiv.org/html/2603.23249v2)",
+    "urls": [
+      "https://arxiv.org/html/2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 701,
+    "text": "| **DAN-Scheduler，2026** | 内存压力、布局与计算流水需要协同考虑 | 它的核内调度与评价语义不等于本题；不能替换官方Step2／Step3来取得成绩。[[图片：]arXiv](https://arxiv.org/html/2607.17422v1) |",
+    "urls": [
+      "https://arxiv.org/html/2607.17422v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 702,
+    "text": "| **New Tools for Peak Memory Scheduling** | 内存profile、受限子图线性化、参数化结构工具 | 内存支配不等于Makespan支配；主导profile存在也不代表一般图有便宜构造。[[图片：]arXiv](https://arxiv.org/html/2312.13526v1) |",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 703,
+    "text": "| **Intel：Optimal Software Pipelining using an SMT-Solver，2026** | 按需加入压力约束，利用不可满足核解释阻塞 | 本轮没有实现SMT；适合考虑小窗口研究对照，不是把35705操作整图放进完整时标模型。[[图片：]arXiv](https://arxiv.org/html/2601.21842v1) |",
+    "urls": [
+      "https://arxiv.org/html/2601.21842v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 707,
+    "text": "Hugging Face上核对的 **SCHEDBench** 是自然语言约束调度基准，而非具有本题张量、DDR、spill语义的数据。因此，这次检查的开源资源中，**没有确认到可以直接拿来训练本题官方成本模型的标签集**。这不是说外部数据毫无价值，而是不能混用标签语义。[[图片：]Hugging Face](https://huggingface.co/datasets/SCHEDBench/SCHEDBench)",
+    "urls": [
+      "https://huggingface.co/datasets/SCHEDBench/SCHEDBench"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 796,
+    "text": "**网络层：**3～4层、宽约64的算子—张量消息传递，加少量核心资源聚合。一次前向输出候选优先级或少量构造参数，不对几万个操作反复重新调用网络。这与WeCAN的一次前向设计方向相近，但需要本题自己的解码器与验证器。[[图片：]arXiv](https://arxiv.org/html/2603.23249v2)",
+    "urls": [
+      "https://arxiv.org/html/2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 802,
+    "text": "硬件安排上，当前构造与E0继续优先用CPU；不同图可以分片做标签，但正式配对计时要隔离其他进程。Apple有官方MPS后端支持，但本轮没有测这些图操作在MPS上的支持和端到端收益。[[图片：]Apple Developer](https://developer.apple.com/metal/pytorch/)",
+    "urls": [
+      "https://developer.apple.com/metal/pytorch/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Branch-算法方案设计-会议讲解/完整问答-20260925T210033Z.md",
+    "line": 804,
+    "text": "**A100的合理启动条件**是：小模型在新的图族和规模组上，三个种子都显示稳定的总预算收益，且训练或批量图表示确实成为瓶颈。届时先做约5CU上限的小试验，而不是直接用掉200CU。Colab的实际GPU、运行时和扣费速率须按账户面板核对，CU不是固定GPU小时。[[图片：]Google Research](https://research.google.com/colaboratory/faq.html)",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 123,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 125,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 130,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 131,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 152,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 154,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 202,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 283,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 306,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 658,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r01-response-c800fcd4.md",
+    "line": 796,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/r07-response-1cd008d0.md",
+    "line": 319,
+    "text": "**本轮没有得到一般双池模型显著优于二次网格的精确算法，也没有证明二次复杂度不可突破。**相关 peak-memory 文献中的 dominant schedule 工具针对其明确的计算图／pebbling模型，不能直接替代这里双池、两种转移峰和固定 Pipe 字的证明。[arXiv](https://arxiv.org/abs/2312.13526)",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 167,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 169,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 174,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 175,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 196,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 198,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 246,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 327,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 350,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 702,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T155704Z.md",
+    "line": 840,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 167,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 169,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 174,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 175,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 196,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 198,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 246,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 327,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 350,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 702,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T171838Z.md",
+    "line": 840,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 162,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 164,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 169,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 170,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 191,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 193,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 241,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 322,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 345,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 697,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T180726Z.md",
+    "line": 835,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 162,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 164,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 169,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 170,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 191,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 193,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 241,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 322,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 345,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 697,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T190156Z.md",
+    "line": 835,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 160,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 162,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 167,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 168,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 189,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 191,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 239,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 320,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 343,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 695,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T194235Z.md",
+    "line": 833,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 160,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 162,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 167,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 168,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 189,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 191,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 239,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 320,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 343,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 695,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T211802Z.md",
+    "line": 833,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 160,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 162,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 167,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 168,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 189,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 191,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 239,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 320,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 343,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 695,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T214744Z.md",
+    "line": 833,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 160,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 162,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 167,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 168,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 189,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 191,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 239,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 320,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 343,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 695,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T220635Z.md",
+    "line": 833,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 160,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 162,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 167,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 168,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 189,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 191,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 239,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 320,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 343,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 695,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260924T225119Z.md",
+    "line": 833,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 160,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 162,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 167,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 168,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 189,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 191,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 239,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 320,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 343,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 695,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T035215Z.md",
+    "line": 833,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 167,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 169,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 174,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 175,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 196,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 198,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 246,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 327,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 350,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 702,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T043158Z.md",
+    "line": 840,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 174,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 176,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 181,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 182,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 203,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 205,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 253,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 334,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 357,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 709,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T053614Z.md",
+    "line": 847,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 182,
+    "text": "### 3.1 两个 Johnson 排列给出 \\(3/2\\) 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 184,
+    "text": "对两段时长 \\((x_i,y_i)\\)，Johnson 顺序是：将 \\(x_i\\le y_i\\) 的 job 按 \\(x_i\\) 升序放前面，其余按 \\(y_i\\) 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 189,
+    "text": "\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 190,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 211,
+    "text": "构造复杂度为 \\(O(n\\log n)\\)。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 213,
+    "text": "**文献定位要明确：这个 \\(3/2\\) 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 \\(M_1\\to M_2\\to M_1\\) 路径给出 \\(O(n\\log n)\\)、\\(4/3\\) 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。([Springer Nature Link][1])",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 261,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 342,
+    "text": "它同时保留两个 Johnson 的 \\(3/2\\) 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 365,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 \\(3/2\\)**。这时需要另给证书，或者使用 \\(U/L\\) 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 717,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 855,
+    "text": "[1]: https://link.springer.com/article/10.1023/A%3A1018927407164 \"https://link.springer.com/article/10.1023/A%3A1018927407164\"",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164",
+      "https://link.springer.com/article/10.1023/A%3A1018927407164\""
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T061355Z.md",
+    "line": 4995,
+    "text": "**本轮没有得到一般双池模型显著优于二次网格的精确算法，也没有证明二次复杂度不可突破。**相关 peak-memory 文献中的 dominant schedule 工具针对其明确的计算图／pebbling模型，不能直接替代这里双池、两种转移峰和固定 Pipe 字的证明。[arXiv](https://arxiv.org/abs/2312.13526)",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 162,
+    "text": "### 3.1 两个 Johnson 排列给出 $3/2$ 保底",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 164,
+    "text": "对两段时长 $(x_i,y_i)$，Johnson 顺序是：将 $x_i\\le y_i$ 的 job 按 $x_i$ 升序放前面，其余按 $y_i$ 降序放后面。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 168,
+    "text": "$$\\pi_{AB}=\\operatorname{Johnson}(a,b),\\qquad",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 169,
+    "text": "\\pi_{BC}=\\operatorname{Johnson}(b,c),$$",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 185,
+    "text": "构造复杂度为 $O(n\\log n)$。完整报告中给出了 Johnson 相邻交换论证，不依赖把它当作黑箱。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 187,
+    "text": "**文献定位要明确：这个 $3/2$ 不是该问题已知最好的近似比。**Drobouchevitch–Strusevich 的 1999 年论文摘要，已经针对相同的 $M_1\\to M_2\\to M_1$ 路径给出 $O(n\\log n)$、$4/3$ 算法。我读到的是摘要和书目信息，没有读到全文，因此没有把其算法伪装成已复现；本轮实现的是上述能够完整说明和核验的保底。[[图片：]Springer Nature Link+1](https://link.springer.com/article/10.1023/A%3A1018927407164)",
+    "urls": [
+      "https://link.springer.com/article/10.1023/A%3A1018927407164"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 227,
+    "text": "这是已给出证明的、较保守的推广；**量化分支未加入本轮代码**。代码使用精确类型交织，并与两个 Johnson 排列取优，不需要参数网格。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 298,
+    "text": "它同时保留两个 Johnson 的 $3/2$ 界和类型交织的加性界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 319,
+    "text": "但**把不满足容量的 Johnson 候选删掉，再选剩下一个，不自动保留 $3/2$**。这时需要另给证书，或者使用 $U/L$ 的事后界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 606,
+    "text": "    生成两个 Johnson 排列、一个类型交织排列",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-P2-异构流水与最优性界/完整问答-20260925T211215Z.md",
+    "line": 4421,
+    "text": "**本轮没有得到一般双池模型显著优于二次网格的精确算法，也没有证明二次复杂度不可突破。**相关 peak-memory 文献中的 dominant schedule 工具针对其明确的计算图／pebbling模型，不能直接替代这里双池、两种转移峰和固定 Pipe 字的证明。[arXiv](https://arxiv.org/abs/2312.13526)",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-P3-归约森林切分/完整问答-20260924T153228Z.md",
+    "line": 722,
+    "text": "- [ScienceDirect: S0166218X06000485](https://www.sciencedirect.com/science/article/pii/S0166218X06000485)",
+    "urls": [
+      "https://www.sciencedirect.com/science/article/pii/S0166218X06000485"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-P3-归约森林切分/完整问答-20260924T153228Z.md",
+    "line": 723,
+    "text": "- [arXiv: 1410.0329](https://arxiv.org/abs/1410.0329)",
+    "urls": [
+      "arXiv: 1410.0329",
+      "https://arxiv.org/abs/1410.0329"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-P3-归约森林切分/完整问答-r02-20260924T165413Z.md",
+    "line": 526,
+    "text": "这样全部 $D_v$ 可在 $O(nP^3)$ 内求得，时间 DP 为 $O(nk^2)$，回溯使用指针，不逐层复制完整词。max-plus 表达用于调度并非新的数学工具；这里有用的是封闭子树把接口维度固定到了 pipe 数量，而不是片段边界大小。[ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0166218X06000485)",
+    "urls": [
+      "https://www.sciencedirect.com/science/article/pii/S0166218X06000485"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-P3-归约森林切分/完整问答-r02-20260924T165413Z.md",
+    "line": 747,
+    "text": "这类输入输出同时驻留、子树遍历顺序影响峰值的模型，与已有树形任务内存调度研究相吻合；其联合 makespan 优化也确实需要区分受限模型与一般问题。[arXiv](https://arxiv.org/abs/1410.0329)",
+    "urls": [
+      "https://arxiv.org/abs/1410.0329"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-P3-归约森林切分/完整问答-r02-20260924T1659Z.md",
+    "line": 722,
+    "text": "- [ScienceDirect: S0166218X06000485](https://www.sciencedirect.com/science/article/pii/S0166218X06000485)",
+    "urls": [
+      "https://www.sciencedirect.com/science/article/pii/S0166218X06000485"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-P3-归约森林切分/完整问答-r02-20260924T1659Z.md",
+    "line": 723,
+    "text": "- [arXiv: 1410.0329](https://arxiv.org/abs/1410.0329)",
+    "urls": [
+      "arXiv: 1410.0329",
+      "https://arxiv.org/abs/1410.0329"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260923T193850Z.md",
+    "line": 553,
+    "text": "- 引用 19：[GCC Optimize Options](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)",
+    "urls": [
+      "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260923T193850Z.md",
+    "line": 554,
+    "text": "- 引用 20：[Rocq — Synchronization and Linearity](https://www.rocq.inria.fr/metalau/cohen/SED/SED1-book.html)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/SED/SED1-book.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 556,
+    "text": "- [GCC](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html)",
+    "urls": [
+      "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 557,
+    "text": "- [Rocq](https://www.rocq.inria.fr/metalau/cohen/SED/SED1-book.html)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/SED/SED1-book.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 1145,
+    "text": "- [Iridia+1](https://iridia.ulb.ac.be/supp/IridiaSupp2016-003/index.html)",
+    "urls": [
+      "https://iridia.ulb.ac.be/supp/IridiaSupp2016-003/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 1146,
+    "text": "- [NIST Publications](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-142.pdf)",
+    "urls": [
+      "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-142.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 1147,
+    "text": "- [Proceedings of Machine Learning Research+1](https://proceedings.mlr.press/v51/jamieson16.pdf)",
+    "urls": [
+      "https://proceedings.mlr.press/v51/jamieson16.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 1148,
+    "text": "- [arXiv](https://arxiv.org/abs/1810.08240)",
+    "urls": [
+      "https://arxiv.org/abs/1810.08240"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/完整问答-20260924T013357Z.md",
+    "line": 1149,
+    "text": "- [Journal of Machine Learning Research](https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf)",
+    "urls": [
+      "https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 57,
+    "text": "- López-Ibáñez et al. (2016), The irace Package: Iterated Racing for Automatic Algorithm Configuration. 作者补充材料： https://iridia.ulb.ac.be/supp/IridiaSupp2016-003/index.html",
+    "urls": [
+      "https://iridia.ulb.ac.be/supp/IridiaSupp2016-003/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 58,
+    "text": "- Jamieson & Talwalkar (2016), Non-stochastic Best Arm Identification and Hyperparameter Optimization. PMLR： https://proceedings.mlr.press/v51/jamieson16.html",
+    "urls": [
+      "https://proceedings.mlr.press/v51/jamieson16.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 59,
+    "text": "- Li et al. (2018), Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization. JMLR： https://www.jmlr.org/papers/volume18/16-558/16-558.pdf",
+    "urls": [
+      "https://www.jmlr.org/papers/volume18/16-558/16-558.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 60,
+    "text": "- Kuhn, Kacker & Lei (2010), NIST SP 800-142, Practical Combinatorial Testing. 官方： https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-142.pdf",
+    "urls": [
+      "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-142.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 61,
+    "text": "- Cawley & Talbot (2010), On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation. JMLR： https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf",
+    "urls": [
+      "https://www.jmlr.org/papers/volume11/cawley10a/cawley10a.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 62,
+    "text": "- Lindauer et al. (2022), SMAC3: A Versatile Bayesian Optimization Package for Hyperparameter Optimization. JMLR： https://jmlr.org/papers/volume23/21-0888/21-0888.pdf",
+    "urls": [
+      "https://jmlr.org/papers/volume23/21-0888/21-0888.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro-评估器加速/附件/r02-R02_SOURCE_AUDIT.md",
+    "line": 63,
+    "text": "- Howard et al. (2021), Time-uniform, nonparametric, nonasymptotic confidence sequences. 作者稿/期刊元数据： https://arxiv.org/abs/1810.08240",
+    "urls": [
+      "https://arxiv.org/abs/1810.08240"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 494,
+    "text": "- [Erik Demaine](https://erikdemaine.org/papers/PebblesRedBlue_SPAA2018/)",
+    "urls": [
+      "https://erikdemaine.org/papers/PebblesRedBlue_SPAA2018/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1444,
+    "text": "每项关键文献给准确题名、作者、年份、出处和可访问链接/DOI/arXiv号，说明实际读到的定理/算法/假设，映射到本题哪一部分，哪些条件不成立及如何修补。避免只列文献名字；检索不到就如实说，不编造引用、不用二手摘要代替定理来源。",
+    "urls": [
+      "DOI/arXiv号"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1660,
+    "text": "**文献 L8：**Dengyong Zhou, Jiayuan Huang, Bernhard Schölkopf，*Learning with Hypergraphs: Clustering, Classification, and Embedding*，NIPS 2006，*Advances in NIPS* 19，1601–1608。[开放原文](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf?utm_source=chatgpt.com)。本轮读了关联矩阵、归一化割松弛及 Theorem 1。[[图片：]Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf)",
+    "urls": [
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1676,
+    "text": "**L1：**Merten Popp, Sebastian Schlag, Christian Schulz, Daniel Seemaier，*Multilevel Acyclic Hypergraph Partitioning*，ALENEX 2021，1–15，DOI **10.1137/1.9781611976472.1**，[原文 arXiv:2002.02962](https://arxiv.org/pdf/2002.02962?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1678,
+    "text": "实际读到的是模型、初始划分和 Theorem 3.1／3.2 的无环粗化条件。可移植的是**粗化过程中维护方向合法性**，不是直接继承其通信目标或调度成绩。其有向超边方向约定与本题生产者—消费者约定还需要转换。[[图片：]arXiv](https://arxiv.org/pdf/2002.02962)",
+    "urls": [
+      "https://arxiv.org/pdf/2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1680,
+    "text": "**L2：**M. Yusuf Özkaya, Ümit V. Çatalyürek，*A Simple and Elegant Mathematical Formulation for the Acyclic DAG Partitioning Problem*，2022，[arXiv:2207.13638](https://arxiv.org/pdf/2207.13638?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1682,
+    "text": "实际读了 §4 的分配变量与商图三角约束。它支持用有序分区表示无环聚合，但**抽象标签重排不意味着本题含固定 ID 的编译结果保持不变**。未核实最终期刊出处，保留预印本身份。[[图片：]arXiv](https://arxiv.org/pdf/2207.13638)",
+    "urls": [
+      "https://arxiv.org/pdf/2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1686,
+    "text": "实际使用的是 §4.1 中最简单的 **all-or-nothing 超边割装置**。不声称任意高阶子模代价都能用同一装置表示。[[图片：]arXiv](https://arxiv.org/pdf/2001.02817)",
+    "urls": [
+      "https://arxiv.org/pdf/2001.02817"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1688,
+    "text": "**L4：**Giorgio Gallo, Michael D. Grigoriadis, Robert E. Tarjan，*A Fast Parametric Maximum Flow Algorithm and Applications*，*SIAM Journal on Computing* 18(1)，30–55，1989，DOI **10.1137/0218003**。[实际读到的作者上传全文](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications?utm_source=chatgpt.com)。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1690,
+    "text": "读了单调源／汇容量条件及 §3.4 的断点算法。它解释为什么一族相关价格问题可以共享计算，而不是每次从零开始。**本轮原型只是重复 Dinic，不是该参数最大流算法的完整实现。**[[图片：]ResearchGate](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1830,
+    "text": "**L6：**Ce Jin, Manish Purohit, Zoya Svitkina, Erik Vee, Joshua R. Wang，*New Tools for Peak Memory Scheduling*，2023，[arXiv:2312.13526](https://arxiv.org/html/2312.13526v1?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1832,
+    "text": "本轮读了模型、§5 的 isolation、Lemma 5.3 的交换论证、Lemma 5.4 的线性化，以及 Appendix C 的证明。最有价值的思想是：**若一个区域对外接口足够封闭，可以用支配的内部内存剖面替换它，而不必枚举全部内部顺序。**但保持的是其 peak-memory 模型，不是本题的多 Pipe Makespan。[[图片：]arXiv](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1836,
+    "text": "读了静态邻域存储模型、树分解 DP、trimming 和 Theorem 1。可借用“只保留边界状态”的方法，但其存储模型不同，而且双指标近似允许容量放宽。**不能据此声称本题存在满足硬容量的 FPTAS。**[[图片：]arXiv+1](https://arxiv.org/pdf/2202.08704)",
+    "urls": [
+      "https://arxiv.org/pdf/2202.08704"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1838,
+    "text": "**L9：**Oguz Selvitopi, Emin Ozturk, Jie Chen, Ponnuswamy Sadayappan, Robert G. Edwards, Aydın Buluç，*Fast Algorithms for Scheduling Many-body Correlation Functions on Accelerators*，2025，[arXiv:2511.02257](https://arxiv.org/html/2511.02257v1?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2511.02257"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1840,
+    "text": "读了 sibling 构造、tree gain 和增量更新算法。它利用二叉收缩图里的共同输入与张量释放机会，和本题有实际联系。但其 tree gain 明确未计入处理树时的临时内存，不能直接替代本题瞬态申请检查，也不能据此改写原归约树。[[图片：]arXiv+1](https://arxiv.org/html/2511.02257v1)",
+    "urls": [
+      "https://arxiv.org/html/2511.02257v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 1990,
+    "text": "读了 Chapter 3 的 Theorem 3.17／3.20、矩阵路径解释和相关闭包。这里适用的是固定依赖、固定时延的最早事件系统；**不把最大环均值当成有限 DAG 单次执行的 Makespan，也不把动态 DDR／FIFO Cache 整体称为 max-plus 线性。**[[图片：]TU Delft Repository+1](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)",
+    "urls": [
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2204,
+    "text": "本轮查阅了当前 NVIDIA CUDA Programming Guide、Best Practices、CUDA Graphs 与浮点说明；CUDA 文档入口显示更新日期为 2026-09-10。[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-programming-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2206,
+    "text": "Apple 的 2026-05-21 Metal Feature Set Tables 将 M5 列入 Apple10，并列出相应 Metal 与整数功能支持；还阅读了 WWDC26 关于 Metal tensors 的官方讲解。**这些资料不能推出你这台 Mac 的具体 GPU 核数、内存带宽、系统版本，或者游戏本的 NVIDIA 型号。**[[图片：]Apple Developer+1](https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf)",
+    "urls": [
+      "https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2232,
+    "text": "NVIDIA 官方 Best Practices 对访存合并、传输最小化和 profiling 的要求支持这种布局方向。CUDA Graphs 可以摊销重复短任务的启动，但实例化与同步也要计时；**CUDA 的命令图不是赛题执行图的替代品。**[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2238,
+    "text": "Apple 官方 Metal tensors 讲解的矩阵乘、卷积加速路径不能直接当作这些内核的加速证明。采用 log-sum-exp 等近似来强行映射，还会引入新的目标与数值误差，不适合精确构造线。[[图片：]Apple Developer](https://developer.apple.com/videos/play/wwdc2026/330/)",
+    "urls": [
+      "https://developer.apple.com/videos/play/wwdc2026/330/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2267,
+    "text": "整数 max-plus 使用安全的负无穷哨兵和溢出检查；不能让 FP32 承载所有大整数时刻。浮点池必须保留 EPS、`ceil`、事件顺序和运算分组；不能打开改变语义的 fast-math 后仍称 E1 零差分。NVIDIA 的浮点文档也明确区分舍入、FMA 和不同执行路径。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2302,
+    "text": "- [Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf)",
+    "urls": [
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2303,
+    "text": "- [原文 arXiv:2002.02962](https://arxiv.org/pdf/2002.02962?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2304,
+    "text": "- [arXiv](https://arxiv.org/pdf/2002.02962)",
+    "urls": [
+      "https://arxiv.org/pdf/2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2305,
+    "text": "- [arXiv:2207.13638](https://arxiv.org/pdf/2207.13638?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2306,
+    "text": "- [arXiv](https://arxiv.org/pdf/2207.13638)",
+    "urls": [
+      "https://arxiv.org/pdf/2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2308,
+    "text": "- [arXiv](https://arxiv.org/pdf/2001.02817)",
+    "urls": [
+      "https://arxiv.org/pdf/2001.02817"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2310,
+    "text": "- [ResearchGate](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2311,
+    "text": "- [arXiv:2312.13526](https://arxiv.org/html/2312.13526v1?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2312,
+    "text": "- [arXiv](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2314,
+    "text": "- [arXiv+1](https://arxiv.org/pdf/2202.08704)",
+    "urls": [
+      "https://arxiv.org/pdf/2202.08704"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2315,
+    "text": "- [arXiv:2511.02257](https://arxiv.org/html/2511.02257v1?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:2511.02257"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2316,
+    "text": "- [arXiv+1](https://arxiv.org/html/2511.02257v1)",
+    "urls": [
+      "https://arxiv.org/html/2511.02257v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2319,
+    "text": "- [TU Delft Repository+1](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)",
+    "urls": [
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2320,
+    "text": "- [NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-programming-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2321,
+    "text": "- [Apple Developer+1](https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf)",
+    "urls": [
+      "https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2322,
+    "text": "- [NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2323,
+    "text": "- [Apple Developer](https://developer.apple.com/videos/play/wwdc2026/330/)",
+    "urls": [
+      "https://developer.apple.com/videos/play/wwdc2026/330/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2324,
+    "text": "- [NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260923T195552Z.md",
+    "line": 2731,
+    "text": "- [UCSB Computer Science](https://cs.ucsb.edu/research/tech-reports/1994-12)",
+    "urls": [
+      "https://cs.ucsb.edu/research/tech-reports/1994-12"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1425,
+    "text": "每项关键文献给准确题名、作者、年份、出处和可访问链接/DOI/arXiv号，说明实际读到的定理/算法/假设，映射到本题哪一部分，哪些条件不成立及如何修补。避免只列文献名字；检索不到就如实说，不编造引用、不用二手摘要代替定理来源。",
+    "urls": [
+      "DOI/arXiv号"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1633,
+    "text": "**文献 L8：**Dengyong Zhou, Jiayuan Huang, Bernhard Schölkopf，*Learning with Hypergraphs: Clustering, Classification, and Embedding*，NIPS 2006，*Advances in NIPS* 19，1601–1608。[开放原文](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf?utm_source=chatgpt.com)。本轮读了关联矩阵、归一化割松弛及 Theorem 1。[[图片：]Microsoft](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf)",
+    "urls": [
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1649,
+    "text": "**L1：**Merten Popp, Sebastian Schlag, Christian Schulz, Daniel Seemaier，*Multilevel Acyclic Hypergraph Partitioning*，ALENEX 2021，1–15，DOI **10.1137/1.9781611976472.1**，[原文 arXiv:2002.02962](https://arxiv.org/pdf/2002.02962?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1651,
+    "text": "实际读到的是模型、初始划分和 Theorem 3.1／3.2 的无环粗化条件。可移植的是**粗化过程中维护方向合法性**，不是直接继承其通信目标或调度成绩。其有向超边方向约定与本题生产者—消费者约定还需要转换。[[图片：]arXiv](https://arxiv.org/pdf/2002.02962)",
+    "urls": [
+      "https://arxiv.org/pdf/2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1653,
+    "text": "**L2：**M. Yusuf Özkaya, Ümit V. Çatalyürek，*A Simple and Elegant Mathematical Formulation for the Acyclic DAG Partitioning Problem*，2022，[arXiv:2207.13638](https://arxiv.org/pdf/2207.13638?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1655,
+    "text": "实际读了 §4 的分配变量与商图三角约束。它支持用有序分区表示无环聚合，但**抽象标签重排不意味着本题含固定 ID 的编译结果保持不变**。未核实最终期刊出处，保留预印本身份。[[图片：]arXiv](https://arxiv.org/pdf/2207.13638)",
+    "urls": [
+      "https://arxiv.org/pdf/2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1659,
+    "text": "实际使用的是 §4.1 中最简单的 **all-or-nothing 超边割装置**。不声称任意高阶子模代价都能用同一装置表示。[[图片：]arXiv](https://arxiv.org/pdf/2001.02817)",
+    "urls": [
+      "https://arxiv.org/pdf/2001.02817"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1661,
+    "text": "**L4：**Giorgio Gallo, Michael D. Grigoriadis, Robert E. Tarjan，*A Fast Parametric Maximum Flow Algorithm and Applications*，*SIAM Journal on Computing* 18(1)，30–55，1989，DOI **10.1137/0218003**。[实际读到的作者上传全文](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications?utm_source=chatgpt.com)。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1663,
+    "text": "读了单调源／汇容量条件及 §3.4 的断点算法。它解释为什么一族相关价格问题可以共享计算，而不是每次从零开始。**本轮原型只是重复 Dinic，不是该参数最大流算法的完整实现。**[[图片：]ResearchGate](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1803,
+    "text": "**L6：**Ce Jin, Manish Purohit, Zoya Svitkina, Erik Vee, Joshua R. Wang，*New Tools for Peak Memory Scheduling*，2023，[arXiv:2312.13526](https://arxiv.org/html/2312.13526v1?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1805,
+    "text": "本轮读了模型、§5 的 isolation、Lemma 5.3 的交换论证、Lemma 5.4 的线性化，以及 Appendix C 的证明。最有价值的思想是：**若一个区域对外接口足够封闭，可以用支配的内部内存剖面替换它，而不必枚举全部内部顺序。**但保持的是其 peak-memory 模型，不是本题的多 Pipe Makespan。[[图片：]arXiv](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1809,
+    "text": "读了静态邻域存储模型、树分解 DP、trimming 和 Theorem 1。可借用“只保留边界状态”的方法，但其存储模型不同，而且双指标近似允许容量放宽。**不能据此声称本题存在满足硬容量的 FPTAS。**[[图片：]arXiv+1](https://arxiv.org/pdf/2202.08704)",
+    "urls": [
+      "https://arxiv.org/pdf/2202.08704"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1811,
+    "text": "**L9：**Oguz Selvitopi, Emin Ozturk, Jie Chen, Ponnuswamy Sadayappan, Robert G. Edwards, Aydın Buluç，*Fast Algorithms for Scheduling Many-body Correlation Functions on Accelerators*，2025，[arXiv:2511.02257](https://arxiv.org/html/2511.02257v1?utm_source=chatgpt.com)。",
+    "urls": [
+      "arXiv:2511.02257"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1813,
+    "text": "读了 sibling 构造、tree gain 和增量更新算法。它利用二叉收缩图里的共同输入与张量释放机会，和本题有实际联系。但其 tree gain 明确未计入处理树时的临时内存，不能直接替代本题瞬态申请检查，也不能据此改写原归约树。[[图片：]arXiv+1](https://arxiv.org/html/2511.02257v1)",
+    "urls": [
+      "https://arxiv.org/html/2511.02257v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 1963,
+    "text": "读了 Chapter 3 的 Theorem 3.17／3.20、矩阵路径解释和相关闭包。这里适用的是固定依赖、固定时延的最早事件系统；**不把最大环均值当成有限 DAG 单次执行的 Makespan，也不把动态 DDR／FIFO Cache 整体称为 max-plus 线性。**[[图片：]TU Delft Repository+1](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)",
+    "urls": [
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 2177,
+    "text": "本轮查阅了当前 NVIDIA CUDA Programming Guide、Best Practices、CUDA Graphs 与浮点说明；CUDA 文档入口显示更新日期为 2026-09-10。[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-programming-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 2179,
+    "text": "Apple 的 2026-05-21 Metal Feature Set Tables 将 M5 列入 Apple10，并列出相应 Metal 与整数功能支持；还阅读了 WWDC26 关于 Metal tensors 的官方讲解。**这些资料不能推出你这台 Mac 的具体 GPU 核数、内存带宽、系统版本，或者游戏本的 NVIDIA 型号。**[[图片：]Apple Developer+1](https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf)",
+    "urls": [
+      "https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 2205,
+    "text": "NVIDIA 官方 Best Practices 对访存合并、传输最小化和 profiling 的要求支持这种布局方向。CUDA Graphs 可以摊销重复短任务的启动，但实例化与同步也要计时；**CUDA 的命令图不是赛题执行图的替代品。**[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 2211,
+    "text": "Apple 官方 Metal tensors 讲解的矩阵乘、卷积加速路径不能直接当作这些内核的加速证明。采用 log-sum-exp 等近似来强行映射，还会引入新的目标与数值误差，不适合精确构造线。[[图片：]Apple Developer](https://developer.apple.com/videos/play/wwdc2026/330/)",
+    "urls": [
+      "https://developer.apple.com/videos/play/wwdc2026/330/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 2240,
+    "text": "整数 max-plus 使用安全的负无穷哨兵和溢出检查；不能让 FP32 承载所有大整数时刻。浮点池必须保留 EPS、`ceil`、事件顺序和运算分组；不能打开改变语义的 fast-math 后仍称 E1 零差分。NVIDIA 的浮点文档也明确区分舍入、FMA 和不同执行路径。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 5625,
+    "text": "**Max-plus：受限 Go。**固定依赖、固定时延和给定释放的最早事件问题有成熟代数结构。本轮核对了 Baccelli 等书中 Theorem 3.17／3.20 的路径闭包解释；它不赋予动态 DDR／Cache 一个固定线性响应矩阵。[[图片：]Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/完整问答-20260924T103700Z.md",
+    "line": 5631,
+    "text": "**Bisimulation／Nerode：作为检验工具 Go。**本轮封闭 24 状态实验可以逐轮细化到不动点；正式大图的抽样邻域不能冒充封闭状态空间。Paige–Tarjan 的最粗划分思想提供方法背景，但本轮实现只是直接细化，不是其优化算法。[[图片：]CS Princeton](https://www.cs.princeton.edu/techreports/1986/038.pdf)",
+    "urls": [
+      "https://www.cs.princeton.edu/techreports/1986/038.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/本轮回答-20260924T103700Z.md",
+    "line": 462,
+    "text": "**Max-plus：受限 Go。**固定依赖、固定时延和给定释放的最早事件问题有成熟代数结构。本轮核对了 Baccelli 等书中 Theorem 3.17／3.20 的路径闭包解释；它不赋予动态 DDR／Cache 一个固定线性响应矩阵。[[图片：]Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/本轮回答-20260924T103700Z.md",
+    "line": 468,
+    "text": "**Bisimulation／Nerode：作为检验工具 Go。**本轮封闭 24 状态实验可以逐轮细化到不动点；正式大图的抽样邻域不能冒充封闭状态空间。Paige–Tarjan 的最粗划分思想提供方法背景，但本轮实现只是直接细化，不是其优化算法。[[图片：]CS Princeton](https://www.cs.princeton.edu/techreports/1986/038.pdf)",
+    "urls": [
+      "https://www.cs.princeton.edu/techreports/1986/038.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 3,
+    "text": "检索/核对日期：2026-09-23。以下为本轮实际读取的原文，不是根据搜索摘要补写定理。论文 PDF/HTML 经联网工具读取；由于容器网络 DNS 失败，没有把网页 PDF 下载到本证据包。书和论文的原件不随包再分发。未确认最终出版出处的论文保留 arXiv 身份。",
+    "urls": [
+      "arXiv 身份"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 6,
+    "text": "Merten Popp, Sebastian Schlag, Christian Schulz, Daniel Seemaier. **Multilevel Acyclic Hypergraph Partitioning**. ALENEX 2021, pp. 1–15. DOI: [10.1137/1.9781611976472.1](https://doi.org/10.1137/1.9781611976472.1). [开放原文 arXiv:2002.02962](https://arxiv.org/pdf/2002.02962).",
+    "urls": [
+      "https://doi.org/10.1137/1.9781611976472.1",
+      "arXiv:2002.02962",
+      "https://arxiv.org/pdf/2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 11,
+    "text": "M. Yusuf Özkaya, Ümit V. Çatalyürek. **A Simple and Elegant Mathematical Formulation for the Acyclic DAG Partitioning Problem**. 2022. [arXiv:2207.13638](https://arxiv.org/abs/2207.13638); [PDF](https://arxiv.org/pdf/2207.13638).",
+    "urls": [
+      "arXiv:2207.13638",
+      "https://arxiv.org/abs/2207.13638",
+      "https://arxiv.org/pdf/2207.13638"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 16,
+    "text": "Nate Veldt, Austin R. Benson, Jon Kleinberg. **Hypergraph Cuts with General Splitting Functions**. *SIAM Review* 64(3), 650–685, 2022. DOI: [10.1137/20M1321048](https://doi.org/10.1137/20M1321048). [开放原文 arXiv:2001.02817](https://arxiv.org/pdf/2001.02817).",
+    "urls": [
+      "https://doi.org/10.1137/20M1321048",
+      "arXiv:2001.02817",
+      "https://arxiv.org/pdf/2001.02817"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 21,
+    "text": "Giorgio Gallo, Michael D. Grigoriadis, Robert E. Tarjan. **A Fast Parametric Maximum Flow Algorithm and Applications**. *SIAM Journal on Computing* 18(1), 30–55, 1989. DOI: [10.1137/0218003](https://doi.org/10.1137/0218003).",
+    "urls": [
+      "https://doi.org/10.1137/0218003"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 23,
+    "text": "[Princeton 技术报告入口](https://www.cs.princeton.edu/research/techreps/633)；[实际读到的作者上传全文](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)。Princeton PDF 下载未成功，不能声称从该入口读到 PDF。",
+    "urls": [
+      "https://www.cs.princeton.edu/research/techreps/633",
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 30,
+    "text": "[作者开放版入口](https://www.rocq.inria.fr/metalau/cohen/SED/book-online.html)；[Delft 存档](https://repository.tudelft.nl/record/uuid:1add64d4-0dfc-4b5d-9db0-2d4be33dfeb3)；[实际阅读 PDF](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee).",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/SED/book-online.html",
+      "https://repository.tudelft.nl/record/uuid:1add64d4-0dfc-4b5d-9db0-2d4be33dfeb3",
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 35,
+    "text": "Ce Jin, Manish Purohit, Zoya Svitkina, Erik Vee, Joshua R. Wang. **New Tools for Peak Memory Scheduling**. 2023. [arXiv:2312.13526](https://arxiv.org/abs/2312.13526); [实际阅读 HTML](https://arxiv.org/html/2312.13526v1).",
+    "urls": [
+      "arXiv:2312.13526",
+      "https://arxiv.org/abs/2312.13526",
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 37,
+    "text": "已读：§1.1–1.3 的模型与主要结论；§5 的 isolation、Lemma 5.3 exchange、Lemma 5.4 linearization；Appendix C 的指针推进交换证明。其“用支配调度将孤立子图替换为路径”保持的是 peak-memory 模型，而不是本题多 Pipe Makespan。权重 one-shot pebbling 在某些简单图族仍强 NP-hard；有界出度的串并联特例才有相应参数算法。可借支配剖面/封闭接口思想，不直接继承其保证。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 40,
+    "text": "Eric Angel, Sébastien Morais, Damien Regnault. **A Bi-Criteria FPTAS for Scheduling with Memory Constraints on Graphs with Bounded Tree-Width**. *Euro-Par 2022: Parallel Processing*, LNCS 13440, pp. 136–151. DOI: [10.1007/978-3-031-12597-3_9](https://doi.org/10.1007/978-3-031-12597-3_9). [开放预印本 arXiv:2202.08704](https://arxiv.org/pdf/2202.08704)（预印本题名使用 Graph 单数）。",
+    "urls": [
+      "https://doi.org/10.1007/978-3-031-12597-3_9",
+      "arXiv:2202.08704",
+      "https://arxiv.org/pdf/2202.08704"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 45,
+    "text": "Dengyong Zhou, Jiayuan Huang, Bernhard Schölkopf. **Learning with Hypergraphs: Clustering, Classification, and Embedding**. NIPS 2006, *Advances in Neural Information Processing Systems* 19, pp. 1601–1608. [作者单位开放 PDF](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf).",
+    "urls": [
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2017/01/HYPER.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 50,
+    "text": "Oguz Selvitopi, Emin Ozturk, Jie Chen, Ponnuswamy Sadayappan, Robert G. Edwards, Aydın Buluç. **Fast Algorithms for Scheduling Many-body Correlation Functions on Accelerators**. 2025. [arXiv:2511.02257](https://arxiv.org/abs/2511.02257); [实际阅读 HTML](https://arxiv.org/html/2511.02257v1).",
+    "urls": [
+      "arXiv:2511.02257",
+      "https://arxiv.org/abs/2511.02257",
+      "https://arxiv.org/html/2511.02257v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 57,
+    "text": "- [CUDA Programming Guide](https://docs.nvidia.com/cuda/cuda-programming-guide/index.html)，入口显示最近更新 2026-09-10。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 58,
+    "text": "- [CUDA C++ Best Practices Guide 13.4](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)，读取 profiling、host/device 传输、coalescing、数值精度部分。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 59,
+    "text": "- [CUDA Graphs](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cuda-graphs.html)，读取实例化和重复 launch 的摊销说明。CUDA Graph 是主机命令图，不是替代赛题执行语义的许可。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cuda-graphs.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 60,
+    "text": "- [Floating-point documentation](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html)，核对 FMA、舍入及平台差异。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/mathematical-functions.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 63,
+    "text": "- [Metal Feature Set Tables](https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf)，2026-05-21 版本；实际查看第2、4、6页截图：M5 对应 Apple10，表列 Metal 3/4；整数64位功能与64位原子功能有不同条件。",
+    "urls": [
+      "https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 64,
+    "text": "- [WWDC26: Optimize custom machine learning operations with Metal tensors](https://developer.apple.com/videos/play/wwdc2026/330/)，实际读 transcript。M5 Neural Accelerators/MPP tensor operations 重点是矩阵乘和卷积，不等价于 max-plus 半环或整数最大流。",
+    "urls": [
+      "https://developer.apple.com/videos/play/wwdc2026/330/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r05-LITERATURE.md",
+    "line": 65,
+    "text": "- [Metal what's new](https://developer.apple.com/metal/whats-new/)。",
+    "urls": [
+      "https://developer.apple.com/metal/whats-new/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r06-RESEARCH_MEMO.md",
+    "line": 209,
+    "text": "DAG聚类、关键路径列表构造不是本轮新发明。Tao Yang、Apostolos Gerasoulis的DSC研究以无界、完全连通处理器为背景；不能把其近似界用于这里固定2–5核、共享DDR和固定FIFO。主文献元数据：IEEE TPDS 5(9),951–967,1994, DOI10.1109/71.308533；本轮实际再次读取UCSB作者机构报告页及摘要，未重新阅读全文证明：https://cs.ucsb.edu/research/tech-reports/1994-12 。",
+    "urls": [
+      "DOI10.1109/71.308533",
+      "https://cs.ucsb.edu/research/tech-reports/1994-12"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r11-EVIDENCE_INDEX.md",
+    "line": 43,
+    "text": "- Paige/Tarjan，Three Partition Refinement Algorithms：1986 Princeton TR038原稿前两页引言/关系最粗细化问题的截图，及1987期刊元数据；本轮代码是直接逐轮细化，不冒称实现了该论文优化算法。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro1-A题方法/附件/r11-RESEARCH_MEMO.md",
+    "line": 256,
+    "text": "本轮只作定点一手来源核对，不开展长综述：Baccelli等《Synchronization and Linearity》（1992）本轮进一步读了§3.2.3中Theorem 3.17/3.20与证明的路径解释，本轮进一步读了§3.2.3中Theorem 3.17/3.20与证明的路径解释，用于固定事件图/max-plus背景；Paige–Tarjan《Three Partition Refinement Algorithms》（SIAM J. Comput. 16(6),1987,973–989，DOI10.1137/0216062）核对元数据，并通过原稿前两页截图读了关系最粗细化问题的定义，本实现是简单逐轮细化而非该论文优化算法；Alur–Dill《A Theory of Timed Automata》（TCS126(2),1994,183–235，DOI10.1016/0304-3975(94)90010-8）仅核对摘要/元数据，全文下载未成功，不援引具体定理。所有本题命题以上述代码或本报告证明为依据。",
+    "urls": [
+      "DOI10.1137/0216062",
+      "DOI10.1016/0304-3975"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 38,
+    "text": "每项关键文献给准确题名、作者、年份、出处和可访问链接/DOI/arXiv号，说明实际读到的定理/算法/假设，映射到本题哪一部分，哪些条件不成立及如何修补。避免只列文献名字；检索不到就如实说，不编造引用、不用二手摘要代替定理来源。",
+    "urls": [
+      "DOI/arXiv号"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 241,
+    "text": "但它优化的无向归一化切割并不等于本题按目标核心、COPY 对和时间计费的目标；固定 ID、FIFO、同步和资源历史也都没有进入。**我把它保留为种子或消融基线，不作为主求解器。**[[图片：]NeurIPS Papers+1](https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf)",
+    "urls": [
+      "https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 384,
+    "text": "且锚点固定，就满足经典参数化最小割的单调容量条件，可以获得嵌套的规范割族并复用残量网络。Gallo–Grigoriadis–Tarjan 的原文明确依赖源侧容量单调增加、汇侧容量单调减少、其他容量不变；不能随意变更多个参数还声称保留该性质。[[图片：]ResearchGate](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 392,
+    "text": "这与无环平衡划分文献中的困难性相符，但不能把该文献的割目标困难性不经归约直接改称本题的困难性定理。[[图片：]arXiv](https://arxiv.org/pdf/1704.00705)",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 481,
+    "text": "超图通信建模文献已经说明，共享数据应按 net 触达分区计费，而不是按全部操作对展开计费；数组访问映射与通信下界文献则给出了从访问结构推导矩形块形状的思路。这里只借用其结构机制，不借用它们不符合本题的重排自由度。[[图片：]Bilkent University Computer Science+1](https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf)",
+    "urls": [
+      "https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 590,
+    "text": "DAG 上的 max-plus 闭包是有限最长路。这是离散事件系统中可以严格使用的线性结构。[[图片：]TU Delft Repository](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)",
+    "urls": [
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 654,
+    "text": "原图树宽小也不保证这个状态小。Jin 等的近年工作提供了峰值内存调度的 dominant schedule、隔离子图交换和受参数限制的算法，但其优化者可以选择调度顺序；本题不能直接拿它的最优顺序替换固定 Step1–3。[[图片：]arXiv+1](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 664,
+    "text": "| **Giorgio Gallo, Michael D. Grigoriadis, Robert E. Tarjan. *A Fast Parametric Maximum Flow Algorithm and Applications*. SIAM J. Computing 18(1):30–55, 1989. [DOI](https://doi.org/10.1137/0218003)** | 原文 §2.3 单调参数网络条件、嵌套割与复用 | 路线 A 的固定锚点扫描；不保证严格平衡，不保证原题 Makespan |",
+    "urls": [
+      "https://doi.org/10.1137/0218003"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 665,
+    "text": "| **Orlando Moreira, Merten Popp, Christian Schulz. *Graph Partitioning with Acyclicity Constraints*. 2017, [arXiv:1704.00705](https://arxiv.org/abs/1704.00705?utm_source=chatgpt.com)** | 定义、平衡二分困难、拓扑初始化 | 合法聚合和对照构造；没有本题的官方展开与资源状态 |",
+    "urls": [
+      "arXiv:1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 666,
+    "text": "| **Ce Jin, Manish Purohit, Zoya Svitkina, Erik Vee, Joshua R. Wang. *New Tools for Peak Memory Scheduling*. 2023, [arXiv:2312.13526](https://arxiv.org/abs/2312.13526?utm_source=chatgpt.com)** | dominant schedule、隔离子图交换/线性化、参数化与困难性部分 | 启发接口和状态压缩；其排序自由度在本题不成立 |",
+    "urls": [
+      "arXiv:2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 668,
+    "text": "| **Michael Christ, James Demmel, Nicholas Knight, Thomas Scanlon, Katherine Yelick. *Communication Lower Bounds and Optimal Algorithms for Programs That Reference Arrays—Part 1*. UCB/EECS-2013-61；[arXiv:1308.0068](https://arxiv.org/abs/1308.0068?utm_source=chatgpt.com)** | 数组访问映射、§7.2 矩形块构造和证明、适用限制 | 路线 B 的坐标轴和形状；不能拆分或重排原 op 内部循环 |",
+    "urls": [
+      "arXiv:1308.0068"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 672,
+    "text": "这些来源分别支持上述机制，而不是支持任何未经运行的“本题加速比”。[[图片：]TU Delft Repository+6[图片：]ResearchGate+6[图片：]arXiv+6](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 711,
+    "text": "min-cut 代理值、无向谱能量、自由重排下的 pebbling 最优峰值，都不是可直接代入的原问题 Makespan 下界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 826,
+    "text": "CUDA 官方指南也强调先定位真实热点、计入传输成本，并根据实际并行规模决定是否迁移，而不是“出现矩阵就上 GPU”。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 848,
+    "text": "它与 max-plus 更新非常吻合。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 850,
+    "text": "**但“能调用 DPX intrinsic”不等于“设备原生加速”。**当前能力表区分 Native 与 Multiple Instr.，当前语言扩展文档要求按 compute capability 核对；不能沿用旧文档中“所有 CC≥9 都原生”的笼统假设。应查询真实 GPU、编译目标并查看生成指令。[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 854,
+    "text": "Apple 方面，官方 M5 Pro/M5 Max 资料确认存在明显不同的 CPU/GPU 和统一内存配置，不能拿系列上限当成本机配置；本轮没有实测你的 Mac。Metal 4 与最新 feature tables 则需要按 GPU family 检查 SIMD、64 位整数和原子能力。M5 的 Neural Accelerators 也不能被直接解释成 graph cut、事件队列或 max-plus 的专用加速器。[[图片：]Apple Developer+3[图片：]Apple+3[图片：]Apple Developer+3](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 858,
+    "text": "统一内存不代表没有同步成本。Apple 官方文档明确区分共享存储与 CPU/GPU 访问完成的同步要求。[[图片：]Apple Developer+1](https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu)",
+    "urls": [
+      "https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 918,
+    "text": "- [NeurIPS Papers+1](https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf)",
+    "urls": [
+      "https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 919,
+    "text": "- [ResearchGate](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 920,
+    "text": "- [arXiv](https://arxiv.org/pdf/1704.00705)",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 921,
+    "text": "- [Bilkent University Computer Science+1](https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf)",
+    "urls": [
+      "https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 922,
+    "text": "- [TU Delft Repository](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)",
+    "urls": [
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 923,
+    "text": "- [arXiv+1](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 924,
+    "text": "- [DOI](https://doi.org/10.1137/0218003)",
+    "urls": [
+      "https://doi.org/10.1137/0218003"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 925,
+    "text": "- [arXiv:1704.00705](https://arxiv.org/abs/1704.00705?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 926,
+    "text": "- [arXiv:2312.13526](https://arxiv.org/abs/2312.13526?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 927,
+    "text": "- [arXiv:1308.0068](https://arxiv.org/abs/1308.0068?utm_source=chatgpt.com)",
+    "urls": [
+      "arXiv:1308.0068"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 930,
+    "text": "- [TU Delft Repository+6ResearchGate+6arXiv+6](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 931,
+    "text": "- [NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 932,
+    "text": "- [NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 933,
+    "text": "- [NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 934,
+    "text": "- [Apple Developer+3Apple+3Apple Developer+3](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 935,
+    "text": "- [Apple Developer+1](https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu)",
+    "urls": [
+      "https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 1222,
+    "text": "我重新阅读了 Popp、Schlag、Schulz、Seemaier 的 *Multilevel Acyclic Hypergraph Partitioning*，特别是其无环收缩条件及证明。论文并不支持“同一块内任意收缩都安全”；本轮采用的是上面直接证明的 SCC 最细闭包，并没有声称实现了该论文完整的多层与模因算法。:chatgpt-content-reference{index=\"7\"}",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 1388,
+    "text": "- [arXiv](https://arxiv.org/pdf/2002.02962)",
+    "urls": [
+      "https://arxiv.org/pdf/2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260923T195552Z.md",
+    "line": 1389,
+    "text": "- [Bilkent University Computer Science](https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf)",
+    "urls": [
+      "https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 38,
+    "text": "每项关键文献给准确题名、作者、年份、出处和可访问链接/DOI/arXiv号，说明实际读到的定理/算法/假设，映射到本题哪一部分，哪些条件不成立及如何修补。避免只列文献名字；检索不到就如实说，不编造引用、不用二手摘要代替定理来源。",
+    "urls": [
+      "DOI/arXiv号"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 235,
+    "text": "但它优化的无向归一化切割并不等于本题按目标核心、COPY 对和时间计费的目标；固定 ID、FIFO、同步和资源历史也都没有进入。**我把它保留为种子或消融基线，不作为主求解器。**[[图片：]NeurIPS Papers+1](https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf)",
+    "urls": [
+      "https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 378,
+    "text": "且锚点固定，就满足经典参数化最小割的单调容量条件，可以获得嵌套的规范割族并复用残量网络。Gallo–Grigoriadis–Tarjan 的原文明确依赖源侧容量单调增加、汇侧容量单调减少、其他容量不变；不能随意变更多个参数还声称保留该性质。[[图片：]ResearchGate](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 386,
+    "text": "这与无环平衡划分文献中的困难性相符，但不能把该文献的割目标困难性不经归约直接改称本题的困难性定理。[[图片：]arXiv](https://arxiv.org/pdf/1704.00705)",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 475,
+    "text": "超图通信建模文献已经说明，共享数据应按 net 触达分区计费，而不是按全部操作对展开计费；数组访问映射与通信下界文献则给出了从访问结构推导矩形块形状的思路。这里只借用其结构机制，不借用它们不符合本题的重排自由度。[[图片：]Bilkent University Computer Science+1](https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf)",
+    "urls": [
+      "https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 584,
+    "text": "DAG 上的 max-plus 闭包是有限最长路。这是离散事件系统中可以严格使用的线性结构。[[图片：]TU Delft Repository](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)",
+    "urls": [
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 648,
+    "text": "原图树宽小也不保证这个状态小。Jin 等的近年工作提供了峰值内存调度的 dominant schedule、隔离子图交换和受参数限制的算法，但其优化者可以选择调度顺序；本题不能直接拿它的最优顺序替换固定 Step1–3。[[图片：]arXiv+1](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 658,
+    "text": "| **Giorgio Gallo, Michael D. Grigoriadis, Robert E. Tarjan. *A Fast Parametric Maximum Flow Algorithm and Applications*. SIAM J. Computing 18(1):30–55, 1989. [DOI](https://doi.org/10.1137/0218003)** | 原文 §2.3 单调参数网络条件、嵌套割与复用 | 路线 A 的固定锚点扫描；不保证严格平衡，不保证原题 Makespan |",
+    "urls": [
+      "https://doi.org/10.1137/0218003"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 659,
+    "text": "| **Orlando Moreira, Merten Popp, Christian Schulz. *Graph Partitioning with Acyclicity Constraints*. 2017, [arXiv:1704.00705](https://arxiv.org/abs/1704.00705?utm_source=chatgpt.com)** | 定义、平衡二分困难、拓扑初始化 | 合法聚合和对照构造；没有本题的官方展开与资源状态 |",
+    "urls": [
+      "arXiv:1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 660,
+    "text": "| **Ce Jin, Manish Purohit, Zoya Svitkina, Erik Vee, Joshua R. Wang. *New Tools for Peak Memory Scheduling*. 2023, [arXiv:2312.13526](https://arxiv.org/abs/2312.13526?utm_source=chatgpt.com)** | dominant schedule、隔离子图交换/线性化、参数化与困难性部分 | 启发接口和状态压缩；其排序自由度在本题不成立 |",
+    "urls": [
+      "arXiv:2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 662,
+    "text": "| **Michael Christ, James Demmel, Nicholas Knight, Thomas Scanlon, Katherine Yelick. *Communication Lower Bounds and Optimal Algorithms for Programs That Reference Arrays—Part 1*. UCB/EECS-2013-61；[arXiv:1308.0068](https://arxiv.org/abs/1308.0068?utm_source=chatgpt.com)** | 数组访问映射、§7.2 矩形块构造和证明、适用限制 | 路线 B 的坐标轴和形状；不能拆分或重排原 op 内部循环 |",
+    "urls": [
+      "arXiv:1308.0068"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 666,
+    "text": "这些来源分别支持上述机制，而不是支持任何未经运行的“本题加速比”。[[图片：]TU Delft Repository+6[图片：]ResearchGate+6[图片：]arXiv+6](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)",
+    "urls": [
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 705,
+    "text": "min-cut 代理值、无向谱能量、自由重排下的 pebbling 最优峰值，都不是可直接代入的原问题 Makespan 下界。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 820,
+    "text": "CUDA 官方指南也强调先定位真实热点、计入传输成本，并根据实际并行规模决定是否迁移，而不是“出现矩阵就上 GPU”。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 842,
+    "text": "它与 max-plus 更新非常吻合。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 844,
+    "text": "**但“能调用 DPX intrinsic”不等于“设备原生加速”。**当前能力表区分 Native 与 Multiple Instr.，当前语言扩展文档要求按 compute capability 核对；不能沿用旧文档中“所有 CC≥9 都原生”的笼统假设。应查询真实 GPU、编译目标并查看生成指令。[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 848,
+    "text": "Apple 方面，官方 M5 Pro/M5 Max 资料确认存在明显不同的 CPU/GPU 和统一内存配置，不能拿系列上限当成本机配置；本轮没有实测你的 Mac。Metal 4 与最新 feature tables 则需要按 GPU family 检查 SIMD、64 位整数和原子能力。M5 的 Neural Accelerators 也不能被直接解释成 graph cut、事件队列或 max-plus 的专用加速器。[[图片：]Apple Developer+3[图片：]Apple+3[图片：]Apple Developer+3](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 852,
+    "text": "统一内存不代表没有同步成本。Apple 官方文档明确区分共享存储与 CPU/GPU 访问完成的同步要求。[[图片：]Apple Developer+1](https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu)",
+    "urls": [
+      "https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/完整问答-20260924T103700Z.md",
+    "line": 1188,
+    "text": "我重新阅读了 Popp、Schlag、Schulz、Seemaier 的 *Multilevel Acyclic Hypergraph Partitioning*，特别是其无环收缩条件及证明。论文并不支持“同一块内任意收缩都安全”；本轮采用的是上面直接证明的 SCC 最细闭包，并没有声称实现了该论文完整的多层与模因算法。:chatgpt-content-reference{index=\"7\"}",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 244,
+    "text": "二分时取 `c_v(lambda)=a_v-lambda*w_v,w_v≥0`。锚点固定时，源侧容量单调增加、汇侧容量单调减少、其他容量不变，满足 Gallo–Grigoriadis–Tarjan 的参数化网络条件，可选择嵌套的规范最小割并复用残量网络。[L1]",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 493,
+    "text": "min-cut 代理最优值、无向谱能量、一个允许自由重排的 pebbling 最优峰值、理想调度器生成的一条可行日程、只按字节估计的 makespan，都不能未经单独证明用来剪掉原题好方案。",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 655,
+    "text": "Giorgio Gallo, Michael D. Grigoriadis, Robert E. Tarjan. **A Fast Parametric Maximum Flow Algorithm and Applications.** SIAM Journal on Computing 18(1), 30–55, 1989. DOI: [10.1137/0218003](https://doi.org/10.1137/0218003).",
+    "urls": [
+      "https://doi.org/10.1137/0218003"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 657,
+    "text": "可访问版本：[Princeton TR633 入口](https://www.cs.princeton.edu/research/techreps/633)；[作者上传全文](https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications)。实际读取作者上传原文 §2.3 的参数网络容量条件、嵌套割和复用机制；不是依赖 ResearchGate 的二手摘要。Princeton 直接 PDF 获取未成功。",
+    "urls": [
+      "https://www.cs.princeton.edu/research/techreps/633",
+      "https://www.researchgate.net/publication/220616489_A_Fast_Parametric_Maximum_Flow_Algorithm_and_Applications"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 663,
+    "text": "Orlando Moreira, Merten Popp, Christian Schulz. **Graph Partitioning with Acyclicity Constraints.** 2017, arXiv:[1704.00705](https://arxiv.org/abs/1704.00705). [全文 PDF](https://arxiv.org/pdf/1704.00705)。",
+    "urls": [
+      "https://arxiv.org/abs/1704.00705",
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 665,
+    "text": "读取定义、Theorem 1 的平衡二分困难、拓扑初始构造及多级方法的相关段落。本文采用 arXiv 出处，不补写未核对的会议元数据。",
+    "urls": [
+      "arXiv 出处"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 671,
+    "text": "Ce Jin, Manish Purohit, Zoya Svitkina, Erik Vee, Joshua R. Wang. **New Tools for Peak Memory Scheduling.** 2023, arXiv:[2312.13526](https://arxiv.org/abs/2312.13526). [v1 原文 HTML](https://arxiv.org/html/2312.13526v1)。",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526",
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 679,
+    "text": "Ümit V. Çatalyürek, Cevdet Aykanat. **Hypergraph-Partitioning-Based Decomposition for Parallel Sparse-Matrix Vector Multiplication.** IEEE Transactions on Parallel and Distributed Systems 10(7), 673–693, 1999. DOI: [10.1109/71.780863](https://doi.org/10.1109/71.780863). [作者全文](https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf)。",
+    "urls": [
+      "https://doi.org/10.1109/71.780863",
+      "https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 687,
+    "text": "Michael Christ, James Demmel, Nicholas Knight, Thomas Scanlon, Katherine Yelick. **Communication Lower Bounds and Optimal Algorithms for Programs That Reference Arrays — Part 1.** UCB/EECS-2013-61；2013, arXiv:[1308.0068](https://arxiv.org/abs/1308.0068). [全文 HTML](https://arxiv.org/html/1308.0068)。",
+    "urls": [
+      "https://arxiv.org/abs/1308.0068",
+      "https://arxiv.org/html/1308.0068"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 695,
+    "text": "Dengyong Zhou, Jiayuan Huang, Bernhard Schölkopf. **Learning with Hypergraphs: Clustering, Classification, and Embedding.** NIPS 2006, Advances in Neural Information Processing Systems 19, 1601–1608. [官方全文](https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf)。",
+    "urls": [
+      "https://papers.nips.cc/paper_files/paper/2006/file/dff8e9c2ac33381546d96deea9922999-Paper.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 703,
+    "text": "François Baccelli, Guy Cohen, Geert Jan Olsder, Jean-Pierre Quadrat. **Synchronization and Linearity: An Algebra for Discrete Event Systems.** Wiley, 1992. ISBN 0-471-93609-X. [作者在线书入口](https://www.rocq.inria.fr/metalau/cohen/SED/book-online.html)；[TU Delft 全文](https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee)。",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/SED/book-online.html",
+      "https://repository.tudelft.nl/file/File_681d1849-7274-4560-a103-aeb57d4d87ee"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 717,
+    "text": "- **H1** NVIDIA, CUDA C++ Best Practices Guide 13.4：<https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/>。实际核对 profiling、数据搬运/批量、浮点非结合性与端到端收益原则。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 718,
+    "text": "- **H2** NVIDIA, CUDA Programming Guide 当前版本：能力表 <https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html>；DPX <https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/cpp-language-extensions.html#dynamic-programming-extension-dpx-instructions>；Math API <https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html>。原生/多指令映射须按当前表和实际目标验证。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+      "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/cpp-language-extensions.html#dynamic-programming-extension-dpx-instructions",
+      "https://docs.nvidia.com/cuda/cuda-math-api/cuda_math_api/group__CUDA__MATH__INTRINSIC__SIMD.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 719,
+    "text": "- **H3** NVIDIA 设备能力查询：<https://developer.nvidia.com/cuda/gpus>。目标机可运行 `nvidia-smi --query-gpu=name,compute_cap`，再记录驱动、显存等；本会话没有运行目标机查询。",
+    "urls": [
+      "https://developer.nvidia.com/cuda/gpus"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 720,
+    "text": "- **H4** Apple, 2026-03-03, M5 Pro/M5 Max 官方发布：<https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/>。系列规格不能当成本机配置。",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 721,
+    "text": "- **H5** Apple, Metal What's New：<https://developer.apple.com/metal/whats-new/>。Metal 4 和 M5 tensor 加速用途。",
+    "urls": [
+      "https://developer.apple.com/metal/whats-new/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 722,
+    "text": "- **H6** Apple, Metal Feature Set Tables, 2026-05-21：<https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf>。读取 SIMD/64 位整数/原子与同步相关表格，并实际查看相应 PDF 页截图。",
+    "urls": [
+      "https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r01-RESEARCH_MEMO_20260923.md",
+    "line": 723,
+    "text": "- **H7** Apple, Resource synchronization：<https://developer.apple.com/documentation/metal/resource-synchronization>；CPU/GPU events <https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu>；managed vs shared resource <https://developer.apple.com/documentation/metal/synchronizing-a-managed-resource-in-macos>。",
+    "urls": [
+      "https://developer.apple.com/documentation/metal/resource-synchronization",
+      "https://developer.apple.com/documentation/metal/synchronizing-events-between-a-gpu-and-the-cpu",
+      "https://developer.apple.com/documentation/metal/synchronizing-a-managed-resource-in-macos"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r02-RESEARCH_MEMO_ROUND2.md",
+    "line": 391,
+    "text": "1. Ümit V. Çatalyürek, Cevdet Aykanat. **Hypergraph-Partitioning-Based Decomposition for Parallel Sparse-Matrix Vector Multiplication.** IEEE Transactions on Parallel and Distributed Systems, 10(7):673–693, 1999. DOI **10.1109/71.780863**。作者原文：<https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf>。实际读取 §3 的 row/column-net 与 connectivity 对应、矩阵非零列段解释。它支持按共享数据触达分区而非操作对边数计费；没有我们题目的固定核内展开、FIFO Cache 或动态带宽，因此不继承其 Makespan 结论。",
+    "urls": [
+      "https://www.cs.bilkent.edu.tr/~aykanat/papers/99IEEETPDS.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro2-华为杯A题算法研究/附件/r02-RESEARCH_MEMO_ROUND2.md",
+    "line": 392,
+    "text": "2. Merten Popp, Sebastian Schlag, Christian Schulz, Daniel Seemaier. **Multilevel Acyclic Hypergraph Partitioning.** 2020，arXiv **2002.02962v2**。<https://arxiv.org/abs/2002.02962>。实际读取 §3.1 无向划分后修复、§3.2 Theorem3.1/3.2 条件和证明、相关收缩算法。Theorem3.2 依赖 toplevel 及 mixed-level cluster 间 forbidden-hyperedge 条件，不能写成“同块任意收缩都安全”。我们实际用 SCC 最细闭包，非论文完整实现。",
+    "urls": [
+      "https://arxiv.org/abs/2002.02962"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 46,
+    "text": "每项关键文献给准确题名、作者、年份、出处和可访问链接/DOI/arXiv号，说明实际读到的定理/算法/假设，映射到本题哪一部分，哪些条件不成立及如何修补。避免只列文献名字；检索不到就如实说，不编造引用、不用二手摘要代替定理来源。",
+    "urls": [
+      "DOI/arXiv号"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 225,
+    "text": "表达最早时刻传播。Baccelli 等关于离散事件系统的教材给出了这类闭包与最小解的代数基础；下面是针对有限执行 DAG 的边界消元构造，而不是声称教材已经解决本题。[[图片：]Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 313,
+    "text": "`egg` 提供了条件重写和 e-class analysis 的工程机制，但它通常使用的局部成本 extraction 不能直接替代全局资源竞争下的 makespan 优化。这里借用的是“带条件的等价管理”，不是把低局部成本当成全局最优。[[图片：]arXiv](https://arxiv.org/pdf/2004.03082)",
+    "urls": [
+      "https://arxiv.org/pdf/2004.03082"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 358,
+    "text": "Moreira–Popp–Schulz 的无环图分区论文也使用拓扑顺序与连续块构造；但其 cut/balance 目标不等于本题 makespan，所以这里只继承合法性机制，不继承目标函数。[[图片：]arXiv](https://arxiv.org/pdf/1704.00705)",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 475,
+    "text": "修复是改变产生边的合法决策，而不是删除官方数据或内存依赖。`egglog` 可管理已证明的事实和守卫；其半朴素增量推理结果不自动涵盖计划编辑引起的事实删除，失效范围仍需单独处理。[[图片：]arXiv](https://arxiv.org/pdf/2304.04332)",
+    "urls": [
+      "https://arxiv.org/pdf/2304.04332"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 604,
+    "text": "因此，只维护一个时钟和标签最小堆，就不必在每次到达时改写全部在飞请求。Demers–Keshav–Shenker 的原文 §2.2 给出了 round number 与 finishing tag 的相关构造；这里只借用流体参考过程，**不把官方 processor-sharing 换成分组公平排队**。[[图片：]Stanford University](https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf)",
+    "urls": [
+      "https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 647,
+    "text": "Flanagan–Godefroid 的 DPOR 要求动作交换保持使能性、且两种顺序得到相同状态。这个要求比“两个算子没有数据边”强得多。官方事件过程本身固定，DPOR 更适合减少语义对抗测试的冗余，而不是再去搜索官方不允许的任意执行交错。[[图片：]UCSC Users](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf)",
+    "urls": [
+      "https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 669,
+    "text": "Markov–Shi 将张量收缩复杂度联系到线图树宽。其低成本成立依赖相应宽度和局部维度条件，而不是仅凭原图稀疏。[[图片：]arXiv](https://arxiv.org/pdf/quant-ph/0511069)",
+    "urls": [
+      "https://arxiv.org/pdf/quant-ph/0511069"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 683,
+    "text": "| **Baccelli、Cohen、Olsder、Quadrat，1992，*Synchronization and Linearity: An Algebra for Discrete Event Systems***，Wiley | §4.5.3，Theorem 4.75 | 用闭包支撑固定时序消元；不把动态资源当固定线性系统。[[图片：]Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf) |",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 684,
+    "text": "| **Moreira、Popp、Schulz，2017，*Graph Partitioning with Acyclicity Constraints***，arXiv:1704.00705 | §5.1、§5.2 | 用拓扑词和无环移动；不把 cut/balance 当 makespan。[[图片：]arXiv](https://arxiv.org/pdf/1704.00705) |",
+    "urls": [
+      "arXiv:1704.00705",
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 685,
+    "text": "| **Demers、Keshav、Shenker，1989，*Analysis and Simulation of a Fair Queueing Algorithm***，SIGCOMM | §2.2 | 用流体 finishing tag；不替换成 packetized FQ。[[图片：]Stanford University](https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf) |",
+    "urls": [
+      "https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 686,
+    "text": "| **Flanagan、Godefroid，2005，*Dynamic Partial-Order Reduction for Model Checking Software***，POPL | Definition 1、算法与 Theorem 1 | 用严格交换条件；不把拓扑独立当资源独立。[[图片：]UCSC Users](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf) |",
+    "urls": [
+      "https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 687,
+    "text": "| **Willsey 等，2021，*egg: Fast and Extensible Equality Saturation***，POPL，DOI 10.1145/3434304 | §4.1–4.3 | 用条件重写与等价类分析；拒绝用局部 extraction 优化全局争用。[[图片：]arXiv](https://arxiv.org/pdf/2004.03082) |",
+    "urls": [
+      "DOI 10.1145/3434304",
+      "https://arxiv.org/pdf/2004.03082"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 688,
+    "text": "| **Zhang 等，2023，*Better Together: Unifying Datalog and Equality Saturation***，PLDI，arXiv:2304.04332 | §3、§4.3、Theorem 4.1 | 用增量事实推理；不把单调增量定理当成任意删改的失效算法。[[图片：]arXiv](https://arxiv.org/pdf/2304.04332) |",
+    "urls": [
+      "arXiv:2304.04332",
+      "https://arxiv.org/pdf/2304.04332"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 689,
+    "text": "| **Markov、Shi，2008，*Simulating Quantum Computation by Contracting Tensor Networks***，SIAM J. Comput.，DOI 10.1137/050644756 | Proposition 3.6、4.2 及证明 | 用于判定张量方法的宽度成本；不假设赛题低宽。[[图片：]arXiv](https://arxiv.org/pdf/quant-ph/0511069) |",
+    "urls": [
+      "DOI 10.1137/050644756",
+      "https://arxiv.org/pdf/quant-ph/0511069"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 690,
+    "text": "| **Ishii，2026，*Optimizing Optimizations, Declaratively: Optimizing the Higher-Order Functions in Mathematical Optimization with egglog***，arXiv:2605.17884，预印本 | §4、§4.1 | 采用“侧条件与预处理本身可能很贵”的实现教训，不将其作为本题压缩定理。[[图片：]arXiv](https://arxiv.org/pdf/2605.17884) |",
+    "urls": [
+      "arXiv:2605.17884",
+      "https://arxiv.org/pdf/2605.17884"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 702,
+    "text": "官方 2026 年资料确认了 M5 Pro/Max 产品，以及 M5-series 对应 Apple10、支持 Metal 3/4 等能力。但这些是产品/SDK 信息，不是本队机器检测结果。[[图片：]Apple+1](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 704,
+    "text": "Apple 的 MPP 指南介绍了 Metal 4 tensor API、M5 GPU neural accelerator 与标准 GEMM；**标准乘加不是 max-plus 运算，不能因为写出了矩阵公式，就声称能直接使用这些矩阵加速器。**[[图片：]Apple Developer](https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf)",
+    "urls": [
+      "https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 721,
+    "text": "这与 NVIDIA 官方文档对合并访存、减少传输、批量小传输的建议一致；但具体盈亏仍由本题内核实测决定。[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 739,
+    "text": "若只能加速整条程序的 10%，即使该部分提速 10 倍，整体理论上限也约为 1.10 倍。这是代数算例，不是本队成绩。NVIDIA 官方 strong-scaling 文档同样强调这一限制。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 745,
+    "text": "动态带宽内核则需要镜像官方浮点与退休规则。CUDA 的浮点运算次序、FMA 等可能产生差异；禁用 fast-math 不等于已经满足 E1。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 825,
+    "text": "- [Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 826,
+    "text": "- [arXiv](https://arxiv.org/pdf/2004.03082)",
+    "urls": [
+      "https://arxiv.org/pdf/2004.03082"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 827,
+    "text": "- [arXiv](https://arxiv.org/pdf/1704.00705)",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 828,
+    "text": "- [arXiv](https://arxiv.org/pdf/2304.04332)",
+    "urls": [
+      "https://arxiv.org/pdf/2304.04332"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 829,
+    "text": "- [Stanford University](https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf)",
+    "urls": [
+      "https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 830,
+    "text": "- [UCSC Users](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf)",
+    "urls": [
+      "https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 831,
+    "text": "- [arXiv](https://arxiv.org/pdf/quant-ph/0511069)",
+    "urls": [
+      "https://arxiv.org/pdf/quant-ph/0511069"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 832,
+    "text": "- [arXiv](https://arxiv.org/pdf/2605.17884)",
+    "urls": [
+      "https://arxiv.org/pdf/2605.17884"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 833,
+    "text": "- [Apple+1](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 834,
+    "text": "- [Apple Developer](https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf)",
+    "urls": [
+      "https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 835,
+    "text": "- [NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 836,
+    "text": "- [NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 1281,
+    "text": "**Acar、Blume、Donham，2011 全文版本，*A Consistent Semantics of Self-Adjusting Computation*，arXiv:1106.0478。** 重读 store／trace 语义、正确性与一致性定理及实现讨论。对本题有用的是：复用必须有完整的输入和依赖条件，且抽象语义不自动变成高效实现。本文中的堆地址与本题的字面算子 ID 不是同一种对象，不能借其重命名观点删除赛题 ID。W 的具体守卫与证明是本轮根据官方代码给出的，不是该论文已经证明本题。:chatgpt-content-reference{index=\"14\"}",
+    "urls": [
+      "arXiv:1106.0478"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 1345,
+    "text": "- [NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 1346,
+    "text": "- [Apple Developer](https://developer.apple.com/videos/play/wwdc2026/330/)",
+    "urls": [
+      "https://developer.apple.com/videos/play/wwdc2026/330/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 1347,
+    "text": "- [Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260923T195552Z.md",
+    "line": 1348,
+    "text": "- [arXiv](https://arxiv.org/pdf/1106.0478)",
+    "urls": [
+      "https://arxiv.org/pdf/1106.0478"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 46,
+    "text": "每项关键文献给准确题名、作者、年份、出处和可访问链接/DOI/arXiv号，说明实际读到的定理/算法/假设，映射到本题哪一部分，哪些条件不成立及如何修补。避免只列文献名字；检索不到就如实说，不编造引用、不用二手摘要代替定理来源。",
+    "urls": [
+      "DOI/arXiv号"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 215,
+    "text": "表达最早时刻传播。Baccelli 等关于离散事件系统的教材给出了这类闭包与最小解的代数基础；下面是针对有限执行 DAG 的边界消元构造，而不是声称教材已经解决本题。[[图片：]Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 303,
+    "text": "`egg` 提供了条件重写和 e-class analysis 的工程机制，但它通常使用的局部成本 extraction 不能直接替代全局资源竞争下的 makespan 优化。这里借用的是“带条件的等价管理”，不是把低局部成本当成全局最优。[[图片：]arXiv](https://arxiv.org/pdf/2004.03082)",
+    "urls": [
+      "https://arxiv.org/pdf/2004.03082"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 348,
+    "text": "Moreira–Popp–Schulz 的无环图分区论文也使用拓扑顺序与连续块构造；但其 cut/balance 目标不等于本题 makespan，所以这里只继承合法性机制，不继承目标函数。[[图片：]arXiv](https://arxiv.org/pdf/1704.00705)",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 465,
+    "text": "修复是改变产生边的合法决策，而不是删除官方数据或内存依赖。`egglog` 可管理已证明的事实和守卫；其半朴素增量推理结果不自动涵盖计划编辑引起的事实删除，失效范围仍需单独处理。[[图片：]arXiv](https://arxiv.org/pdf/2304.04332)",
+    "urls": [
+      "https://arxiv.org/pdf/2304.04332"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 594,
+    "text": "因此，只维护一个时钟和标签最小堆，就不必在每次到达时改写全部在飞请求。Demers–Keshav–Shenker 的原文 §2.2 给出了 round number 与 finishing tag 的相关构造；这里只借用流体参考过程，**不把官方 processor-sharing 换成分组公平排队**。[[图片：]Stanford University](https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf)",
+    "urls": [
+      "https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 637,
+    "text": "Flanagan–Godefroid 的 DPOR 要求动作交换保持使能性、且两种顺序得到相同状态。这个要求比“两个算子没有数据边”强得多。官方事件过程本身固定，DPOR 更适合减少语义对抗测试的冗余，而不是再去搜索官方不允许的任意执行交错。[[图片：]UCSC Users](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf)",
+    "urls": [
+      "https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 659,
+    "text": "Markov–Shi 将张量收缩复杂度联系到线图树宽。其低成本成立依赖相应宽度和局部维度条件，而不是仅凭原图稀疏。[[图片：]arXiv](https://arxiv.org/pdf/quant-ph/0511069)",
+    "urls": [
+      "https://arxiv.org/pdf/quant-ph/0511069"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 673,
+    "text": "| **Baccelli、Cohen、Olsder、Quadrat，1992，*Synchronization and Linearity: An Algebra for Discrete Event Systems***，Wiley | §4.5.3，Theorem 4.75 | 用闭包支撑固定时序消元；不把动态资源当固定线性系统。[[图片：]Rocq](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf) |",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 674,
+    "text": "| **Moreira、Popp、Schulz，2017，*Graph Partitioning with Acyclicity Constraints***，arXiv:1704.00705 | §5.1、§5.2 | 用拓扑词和无环移动；不把 cut/balance 当 makespan。[[图片：]arXiv](https://arxiv.org/pdf/1704.00705) |",
+    "urls": [
+      "arXiv:1704.00705",
+      "https://arxiv.org/pdf/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 675,
+    "text": "| **Demers、Keshav、Shenker，1989，*Analysis and Simulation of a Fair Queueing Algorithm***，SIGCOMM | §2.2 | 用流体 finishing tag；不替换成 packetized FQ。[[图片：]Stanford University](https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf) |",
+    "urls": [
+      "https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 676,
+    "text": "| **Flanagan、Godefroid，2005，*Dynamic Partial-Order Reduction for Model Checking Software***，POPL | Definition 1、算法与 Theorem 1 | 用严格交换条件；不把拓扑独立当资源独立。[[图片：]UCSC Users](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf) |",
+    "urls": [
+      "https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 677,
+    "text": "| **Willsey 等，2021，*egg: Fast and Extensible Equality Saturation***，POPL，DOI 10.1145/3434304 | §4.1–4.3 | 用条件重写与等价类分析；拒绝用局部 extraction 优化全局争用。[[图片：]arXiv](https://arxiv.org/pdf/2004.03082) |",
+    "urls": [
+      "DOI 10.1145/3434304",
+      "https://arxiv.org/pdf/2004.03082"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 678,
+    "text": "| **Zhang 等，2023，*Better Together: Unifying Datalog and Equality Saturation***，PLDI，arXiv:2304.04332 | §3、§4.3、Theorem 4.1 | 用增量事实推理；不把单调增量定理当成任意删改的失效算法。[[图片：]arXiv](https://arxiv.org/pdf/2304.04332) |",
+    "urls": [
+      "arXiv:2304.04332",
+      "https://arxiv.org/pdf/2304.04332"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 679,
+    "text": "| **Markov、Shi，2008，*Simulating Quantum Computation by Contracting Tensor Networks***，SIAM J. Comput.，DOI 10.1137/050644756 | Proposition 3.6、4.2 及证明 | 用于判定张量方法的宽度成本；不假设赛题低宽。[[图片：]arXiv](https://arxiv.org/pdf/quant-ph/0511069) |",
+    "urls": [
+      "DOI 10.1137/050644756",
+      "https://arxiv.org/pdf/quant-ph/0511069"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 680,
+    "text": "| **Ishii，2026，*Optimizing Optimizations, Declaratively: Optimizing the Higher-Order Functions in Mathematical Optimization with egglog***，arXiv:2605.17884，预印本 | §4、§4.1 | 采用“侧条件与预处理本身可能很贵”的实现教训，不将其作为本题压缩定理。[[图片：]arXiv](https://arxiv.org/pdf/2605.17884) |",
+    "urls": [
+      "arXiv:2605.17884",
+      "https://arxiv.org/pdf/2605.17884"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 692,
+    "text": "官方 2026 年资料确认了 M5 Pro/Max 产品，以及 M5-series 对应 Apple10、支持 Metal 3/4 等能力。但这些是产品/SDK 信息，不是本队机器检测结果。[[图片：]Apple+1](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 694,
+    "text": "Apple 的 MPP 指南介绍了 Metal 4 tensor API、M5 GPU neural accelerator 与标准 GEMM；**标准乘加不是 max-plus 运算，不能因为写出了矩阵公式，就声称能直接使用这些矩阵加速器。**[[图片：]Apple Developer](https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf)",
+    "urls": [
+      "https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 711,
+    "text": "这与 NVIDIA 官方文档对合并访存、减少传输、批量小传输的建议一致；但具体盈亏仍由本题内核实测决定。[[图片：]NVIDIA Docs+1](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 729,
+    "text": "若只能加速整条程序的 10%，即使该部分提速 10 倍，整体理论上限也约为 1.10 倍。这是代数算例，不是本队成绩。NVIDIA 官方 strong-scaling 文档同样强调这一限制。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 735,
+    "text": "动态带宽内核则需要镜像官方浮点与退休规则。CUDA 的浮点运算次序、FMA 等可能产生差异；禁用 fast-math 不等于已经满足 E1。[[图片：]NVIDIA Docs](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 1247,
+    "text": "**Acar、Blume、Donham，2011 全文版本，*A Consistent Semantics of Self-Adjusting Computation*，arXiv:1106.0478。** 重读 store／trace 语义、正确性与一致性定理及实现讨论。对本题有用的是：复用必须有完整的输入和依赖条件，且抽象语义不自动变成高效实现。本文中的堆地址与本题的字面算子 ID 不是同一种对象，不能借其重命名观点删除赛题 ID。W 的具体守卫与证明是本轮根据官方代码给出的，不是该论文已经证明本题。:chatgpt-content-reference{index=\"14\"}",
+    "urls": [
+      "arXiv:1106.0478"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/完整问答-20260924T103700Z.md",
+    "line": 4319,
+    "text": "下面是候选完成契约，没有创建或启动任何 Goal。`/goal` 应围绕可验证终点与边界来写，而不是“持续优化直到满意”；这也符合当前官方 Goals 文档对 completion contract 的定位。[[图片：]OpenAI Developers](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex)",
+    "urls": [
+      "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/本轮回答-20260924T103700Z.md",
+    "line": 743,
+    "text": "下面是候选完成契约，没有创建或启动任何 Goal。`/goal` 应围绕可验证终点与边界来写，而不是“持续优化直到满意”；这也符合当前官方 Goals 文档对 completion contract 的定位。[[图片：]OpenAI Developers](https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex)",
+    "urls": [
+      "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 225,
+    "text": "由此获得一个不产生商图环的候选语法：选择拓扑词，再选择区间切点。固定一个词只是合法方案的一个子族，不能宣称覆盖所有最优分区。Moreira–Popp–Schulz 的论文 §5.1 也以拓扑顺序和连续块构造无环分区；其目标是有向图分区的 cut/balance，不是本题的模拟 makespan。[R2]",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 692,
+    "text": "以下只把实际读到的段落作为依据，不声称全文精读每一本书。链接是作者/机构、arXiv 原文或出版社 DOI。公开文献检索截至 2026-09-23。",
+    "urls": [
+      "arXiv 原文或出版社"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 698,
+    "text": "原文：[作者公开 PDF](https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf)，[作者说明页](https://www.rocq.inria.fr/metalau/cohen/SED/book-online.html)。实际读 §4.5.3、Theorem 4.75（印刷页 190，PDF 第 206 页），并检查对应页面。",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf",
+      "https://www.rocq.inria.fr/metalau/cohen/SED/book-online.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 704,
+    "text": "Orlando Moreira, Merten Popp, Christian Schulz. **Graph Partitioning with Acyclicity Constraints.** 2017, arXiv:1704.00705.",
+    "urls": [
+      "arXiv:1704.00705."
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 706,
+    "text": "原文：[PDF](https://arxiv.org/pdf/1704.00705)，[记录](https://arxiv.org/abs/1704.00705)。实际读 §5.1 的拓扑序构造、§5.2 的移动条件和 cycle-check；检查 PDF 第 6 页。",
+    "urls": [
+      "https://arxiv.org/pdf/1704.00705",
+      "https://arxiv.org/abs/1704.00705"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 714,
+    "text": "原文：[机构课程保存的论文 PDF](https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf)。实际读 §2.2 的 round number、活动连接数与 finishing tag；检查 PDF 第 3 页。",
+    "urls": [
+      "https://web.stanford.edu/class/cs244/papers/demers-queueing.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 720,
+    "text": "Max Willsey, Chandrakana Nandi, Yisu Remy Wang, Oliver Flatt, Zachary Tatlock, Pavel Panchekha. **egg: Fast and Extensible Equality Saturation.** POPL / Proceedings of the ACM on Programming Languages, 2021. DOI: [10.1145/3434304](https://doi.org/10.1145/3434304), arXiv:2004.03082.",
+    "urls": [
+      "https://doi.org/10.1145/3434304",
+      "arXiv:2004.03082."
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 722,
+    "text": "原文：[PDF](https://arxiv.org/pdf/2004.03082)。实际读 §4.1 e-class analysis 的半格/幂等条件、§4.2 条件重写、§4.3 extraction 的局部成本条件。",
+    "urls": [
+      "https://arxiv.org/pdf/2004.03082"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 728,
+    "text": "Yihong Zhang, Yisu Remy Wang, Oliver Flatt, David Cao, Philip Zucker, Eli Rosenthal, Zachary Tatlock, Max Willsey. **Better Together: Unifying Datalog and Equality Saturation.** PLDI, 2023. arXiv:2304.04332.",
+    "urls": [
+      "arXiv:2304.04332."
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 730,
+    "text": "原文：[PDF](https://arxiv.org/pdf/2304.04332)，[记录](https://arxiv.org/abs/2304.04332)。实际读 §3 和 §4.3，检查 Theorem 4.1 与 Algorithm 1（PDF 第 12 页）：半朴素求值与朴素求值的结果一致。",
+    "urls": [
+      "https://arxiv.org/pdf/2304.04332",
+      "https://arxiv.org/abs/2304.04332"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 738,
+    "text": "原文：[作者 PDF](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf)。实际读 Definition 1（PDF 第 3 页）、算法及 Theorem 1 的 persistent-set 条件。",
+    "urls": [
+      "https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 744,
+    "text": "Igor L. Markov, Yaoyun Shi. **Simulating Quantum Computation by Contracting Tensor Networks.** SIAM Journal on Computing 38(3):963–981, 2008. DOI: [10.1137/050644756](https://doi.org/10.1137/050644756), arXiv:quant-ph/0511069.",
+    "urls": [
+      "https://doi.org/10.1137/050644756",
+      "arXiv:quant-ph/0511069."
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 746,
+    "text": "原文：[PDF](https://arxiv.org/pdf/quant-ph/0511069)，[记录](https://arxiv.org/abs/quant-ph/0511069)。实际读 Proposition 3.6、Proposition 4.2 及其证明、局部维数/度数与线图关系，检查 PDF 第 10 页。",
+    "urls": [
+      "https://arxiv.org/pdf/quant-ph/0511069",
+      "https://arxiv.org/abs/quant-ph/0511069"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 752,
+    "text": "Hiromi Ishii. **Optimizing Optimizations, Declaratively: Optimizing the Higher-Order Functions in Mathematical Optimization with egglog.** 2026 preprint, arXiv:2605.17884.",
+    "urls": [
+      "arXiv:2605.17884."
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 754,
+    "text": "原文：[PDF](https://arxiv.org/pdf/2605.17884)。实际读 §4 侧条件传播及 §4.1 大表达式预处理/查询成本，检查 PDF 第 5 页。",
+    "urls": [
+      "https://arxiv.org/pdf/2605.17884"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 760,
+    "text": "- **H1 Apple, 2026-03-03.** [Apple debuts M5 Pro and M5 Max to supercharge the most demanding pro workflows](https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/)。只用于核对产品系列存在与公开规格范围，不用作团队配置证据。",
+    "urls": [
+      "https://www.apple.com/newsroom/2026/03/apple-debuts-m5-pro-and-m5-max-to-supercharge-the-most-demanding-pro-workflows/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 761,
+    "text": "- **H2 Apple, 2026-05-21.** [Metal Feature Set Tables](https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf)。读取并检查 GPU family 表及 64-bit integer math/SIMD 能力页面。",
+    "urls": [
+      "https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 762,
+    "text": "- **H3 Apple, 2026-03-16.** [Metal Performance Primitives Programming Guide](https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf)。实际读 §1–§2、§3 和算术强度附录的有关部分；其 GEMM 不被当作 max-plus。",
+    "urls": [
+      "https://developer.apple.com/download/files/Metal-Performance-Primitives-Programming-Guide.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 763,
+    "text": "- **H4 NVIDIA CUDA 13.4.** [CUDA C++ Best Practices Guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html)。读取 strong scaling、floating point、host-device transfer 和 coalesced access 相关节。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r01-RESEARCH_MEMO.md",
+    "line": 764,
+    "text": "- **H5 NVIDIA CUDA 13.4.** [Windows installation guide](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)，[Linux installation guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)。用于部署前提与工具链/设备验证，不表示在本队机器上安装或测试过。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html",
+      "https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r02-REPORT.md",
+    "line": 394,
+    "text": "François Baccelli, Guy Cohen, Geert Jan Olsder, Jean-Pierre Quadrat. **Synchronization and Linearity: An Algebra for Discrete Event Systems**. Wiley,1992。作者公开全文：<https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf>。",
+    "urls": [
+      "https://www.rocq.inria.fr/metalau/cohen/documents/BCOQ-book.pdf"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r02-REPORT.md",
+    "line": 400,
+    "text": "Umut A. Acar, Matthias Blume, Jacob Donham. **A Consistent Semantics of Self-Adjusting Computation**.2011全文arXiv:1106.0478；期刊版Journal of Functional Programming23(3),249–292,2013，DOI10.1017/S0956796813000099。全文：<https://arxiv.org/pdf/1106.0478>。",
+    "urls": [
+      "arXiv:1106.0478",
+      "DOI10.1017/S0956796813000099",
+      "https://arxiv.org/pdf/1106.0478"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r02-REPORT.md",
+    "line": 406,
+    "text": "A.B.Kahn. **Topological sorting of large networks**. Communications of the ACM5(11),558–562,1962，DOI10.1145/368996.369025，<https://doi.org/10.1145/368996.369025>。",
+    "urls": [
+      "DOI10.1145/368996.369025",
+      "https://doi.org/10.1145/368996.369025"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r02-REPORT.md",
+    "line": 427,
+    "text": "NVIDIA当前官方CUDA C++ Best Practices Guide13.4，读取§3.2主机设备传输/并行化与§7.3.2/7.3.3浮点不结合/FMA：<https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html>。",
+    "urls": [
+      "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro3-数学结构算法构造/附件/r02-REPORT.md",
+    "line": 429,
+    "text": "Apple官方WWDC26 **Optimize custom machine learning operations with Metal tensors**，读取TensorOps、matmul/convolution与M5 neural accelerators相关讲稿：<https://developer.apple.com/videos/play/wwdc2026/330/>。官方MPSMatrixMultiplication描述的是通常GEMM；这不意味着整数max-plus或本题binary64池可自动映射到矩阵加速器。",
+    "urls": [
+      "https://developer.apple.com/videos/play/wwdc2026/330/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 405,
+    "text": "- [UT Austin Computer Science](https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD623.html)",
+    "urls": [
+      "https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD623.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 406,
+    "text": "- [arXiv](https://arxiv.org/abs/2312.13526)",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 407,
+    "text": "- [arXiv](https://arxiv.org/html/1905.02494v4)",
+    "urls": [
+      "https://arxiv.org/html/1905.02494v4"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 408,
+    "text": "- [arXiv+2arXiv+2](https://arxiv.org/abs/2308.13490)",
+    "urls": [
+      "https://arxiv.org/abs/2308.13490"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 410,
+    "text": "- [arXiv](https://arxiv.org/abs/2506.13131)",
+    "urls": [
+      "https://arxiv.org/abs/2506.13131"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 411,
+    "text": "- [Google Research](https://research.google.com/colaboratory/faq.html)",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 867,
+    "text": "- [arXiv](https://arxiv.org/html/2603.23249v2)",
+    "urls": [
+      "https://arxiv.org/html/2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 868,
+    "text": "- [arXiv](https://arxiv.org/html/2607.17422v1)",
+    "urls": [
+      "https://arxiv.org/html/2607.17422v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 869,
+    "text": "- [arXiv](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 870,
+    "text": "- [arXiv](https://arxiv.org/html/2601.21842v1)",
+    "urls": [
+      "https://arxiv.org/html/2601.21842v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 873,
+    "text": "- [Hugging Face](https://huggingface.co/datasets/SCHEDBench/SCHEDBench)",
+    "urls": [
+      "https://huggingface.co/datasets/SCHEDBench/SCHEDBench"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 874,
+    "text": "- [Apple Developer](https://developer.apple.com/metal/pytorch/)",
+    "urls": [
+      "https://developer.apple.com/metal/pytorch/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260923T195552Z.md",
+    "line": 875,
+    "text": "- [Google Research](https://research.google.com/colaboratory/faq.html)",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 267,
+    "text": "我还按照 Dijkstra Banker 算法的安全状态思想，实现了一个保守的完成次序检查：判断能否依次完成活动作业并释放资源，而不只看当前余量。这一关联来自原始安全性论证，不是名称类比。[[图片：]UT Austin Computer Science](https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD623.html)",
+    "urls": [
+      "https://www.cs.utexas.edu/~EWD/transcriptions/EWD06xx/EWD623.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 345,
+    "text": "**内存结构方面，最值得继续读的是《New Tools for Peak Memory Scheduling》。**它研究整个内存 profile 的支配关系，并给出特殊图类的结构化算法；同时也揭示了看似简单图类上的困难。对本题的启发是保留生命周期与完整内存变化，而非只保留一个标量峰值。但它的模型不等于本题双 Pipe、两类私有内存、异步 COPY 与共享 DDR，不能直接把其支配关系当成官方执行等价。[[图片：]arXiv](https://arxiv.org/abs/2312.13526)",
+    "urls": [
+      "https://arxiv.org/abs/2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 347,
+    "text": "**学习位置方面，REGAL 比“端到端生成调度”更接近我们的需求。**它让网络学习搜索提议分布，在未见图上引导优化，而不是为每个新图重新训练。它采用每设备最多一个操作、同步阻塞传输等假设，与本题不同；应借鉴网络参与优化的位置，而不是照搬其性能模型。[[图片：]arXiv](https://arxiv.org/html/1905.02494v4)",
+    "urls": [
+      "https://arxiv.org/html/1905.02494v4"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 349,
+    "text": "**数据组织与大图训练方面，TpuGraphs 和 GST 有直接参考价值。**TpuGraphs 的样本是“图、编译配置、执行时间”，支持候选条件化；GST 用分段训练降低大图属性预测的训练内存需求。本题若分段，必须额外保留跨段接口和长期共享权重，否则恰好丢掉关键驻留信息。作者代码可借鉴，但 TPU 布局、分块标签不能当成本题 E0 标签。[[图片：]arXiv+2](https://arxiv.org/abs/2308.13490)",
+    "urls": [
+      "https://arxiv.org/abs/2308.13490"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 353,
+    "text": "前沿实验室路线中，**AlphaEvolve 的离线“生成构造函数—评估—保留”流程**值得借鉴。但我的建议是演化可复用构造规则，而不是每个正式实例临时调用 LLM 大量搜索。后者会把研究成本、单例预算与测试集反馈混在一起。本轮没有运行 AlphaEvolve。[[图片：]arXiv](https://arxiv.org/abs/2506.13131)",
+    "urls": [
+      "https://arxiv.org/abs/2506.13131"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 378,
+    "text": "对你现有资源，我的取舍是：**先用 CPU/Apple 上的 Python、NumPy 完成非学习验收；只有候选条件化 GNN 的批量训练确实成为瓶颈，再使用 CUDA 或 MPS。**Colab 的 200 CU 不能直接换算成固定 A100 小时数，实际分配、费率和限制需要在运行环境中确认。[[图片：]Google Research](https://research.google.com/colaboratory/faq.html)",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 695,
+    "text": "但论文的资源池模型、开始时间和skip动作，不等于本题官方接口；不能把它的可达性结论或跨资源动作交换等价，直接套到共享DDR、生成COPY和固定FIFO上。[[图片：]arXiv](https://arxiv.org/html/2603.23249v2)",
+    "urls": [
+      "https://arxiv.org/html/2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 701,
+    "text": "| **DAN-Scheduler，2026** | 内存压力、布局与计算流水需要协同考虑 | 它的核内调度与评价语义不等于本题；不能替换官方Step2／Step3来取得成绩。[[图片：]arXiv](https://arxiv.org/html/2607.17422v1) |",
+    "urls": [
+      "https://arxiv.org/html/2607.17422v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 702,
+    "text": "| **New Tools for Peak Memory Scheduling** | 内存profile、受限子图线性化、参数化结构工具 | 内存支配不等于Makespan支配；主导profile存在也不代表一般图有便宜构造。[[图片：]arXiv](https://arxiv.org/html/2312.13526v1) |",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 703,
+    "text": "| **Intel：Optimal Software Pipelining using an SMT-Solver，2026** | 按需加入压力约束，利用不可满足核解释阻塞 | 本轮没有实现SMT；适合考虑小窗口研究对照，不是把35705操作整图放进完整时标模型。[[图片：]arXiv](https://arxiv.org/html/2601.21842v1) |",
+    "urls": [
+      "https://arxiv.org/html/2601.21842v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 707,
+    "text": "Hugging Face上核对的 **SCHEDBench** 是自然语言约束调度基准，而非具有本题张量、DDR、spill语义的数据。因此，这次检查的开源资源中，**没有确认到可以直接拿来训练本题官方成本模型的标签集**。这不是说外部数据毫无价值，而是不能混用标签语义。[[图片：]Hugging Face](https://huggingface.co/datasets/SCHEDBench/SCHEDBench)",
+    "urls": [
+      "https://huggingface.co/datasets/SCHEDBench/SCHEDBench"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 796,
+    "text": "**网络层：**3～4层、宽约64的算子—张量消息传递，加少量核心资源聚合。一次前向输出候选优先级或少量构造参数，不对几万个操作反复重新调用网络。这与WeCAN的一次前向设计方向相近，但需要本题自己的解码器与验证器。[[图片：]arXiv](https://arxiv.org/html/2603.23249v2)",
+    "urls": [
+      "https://arxiv.org/html/2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 802,
+    "text": "硬件安排上，当前构造与E0继续优先用CPU；不同图可以分片做标签，但正式配对计时要隔离其他进程。Apple有官方MPS后端支持，但本轮没有测这些图操作在MPS上的支持和端到端收益。[[图片：]Apple Developer](https://developer.apple.com/metal/pytorch/)",
+    "urls": [
+      "https://developer.apple.com/metal/pytorch/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/完整问答-20260925T210033Z.md",
+    "line": 804,
+    "text": "**A100的合理启动条件**是：小模型在新的图族和规模组上，三个种子都显示稳定的总预算收益，且训练或批量图表示确实成为瓶颈。届时先做约5CU上限的小试验，而不是直接用掉200CU。Colab的实际GPU、运行时和扣费速率须按账户面板核对，CU不是固定GPU小时。[[图片：]Google Research](https://research.google.com/colaboratory/faq.html)",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r02-HuaweiCup_A_R4_Report.md",
+    "line": 218,
+    "text": "1. Jin等《New Tools for Peak Memory Scheduling》，arXiv2312.13526。其dominant schedule比较整个内存profile而不只是峰值，允许在相应条件下把孤立子图线性化。启发本轮保存张量前沿与剩余峰值；但其峰值模型不是本题双Pipe、L1/UB、异步COPY和共享DDR完整语义。不能把“存在dominant schedule”说成通用多项式构造，更不能说一条标量峰值足以描述官方执行。",
+    "urls": [
+      "arXiv2312.13526"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r02-HuaweiCup_A_R4_Report.md",
+    "line": 220,
+    "text": "3. Paliwal等REGAL，《Reinforced Genetic Algorithm Learning for Optimizing Computation Graphs》，ICLR2020，arXiv1905.02494。网络学搜索提议分布，而非为每张新图从零训练。其模型每设备一次一个op、跨设备阻塞传输，与本题不同；借鉴学习位置，不移植评估语义。",
+    "urls": [
+      "arXiv1905.02494"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r02-HuaweiCup_A_R4_Report.md",
+    "line": 221,
+    "text": "4. TpuGraphs，NeurIPS2023，arXiv2308.13490，源码google-research-datasets/tpu_graphs。数据单位是图、编译配置、运行时间；适合学习“候选条件化”的数据组织。仓库已在2025-08-28归档，应借鉴协议而不是当现成维护中的NPU求解器。",
+    "urls": [
+      "arXiv2308.13490"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r02-HuaweiCup_A_R4_Report.md",
+    "line": 222,
+    "text": "5. Cao等GST，arXiv2305.12322，作者仓库kaidic/GST。用于大图属性预测的分段训练，是未来图模型内存方案，不是当前已验证贡献。",
+    "urls": [
+      "arXiv2305.12322"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r02-HuaweiCup_A_R4_Report.md",
+    "line": 224,
+    "text": "7. Google DeepMind AlphaEvolve，arXiv2506.13131及官方技术说明。可借鉴离线演化构造函数、由独立评估器打分的研发流程。本轮没有运行该产品；不建议在每个正式实例上让LLM大量生成方案并以测试集为反馈反复搜索。",
+    "urls": [
+      "arXiv2506.13131及官方技术说明"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 203,
+    "text": "*A Learning Method with Gap-Aware Generation for Heterogeneous DAG Scheduling*，arXiv:2603.23249v2，2026-06-13。一遍网络输出任务—资源分数和全局参数，再由生成器完成调度；论文分析生成器可达顺序造成的最优性缺口。",
+    "urls": [
+      "arXiv:2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 207,
+    "text": "https://arxiv.org/html/2603.23249v2",
+    "urls": [
+      "https://arxiv.org/html/2603.23249v2"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 211,
+    "text": "*DAN-Scheduler: Deterministic Three-Stage Co-Optimization of Scheduling, Memory Layout, and Pipeline Overlap for General-Purpose NPUs*，arXiv:2607.17422v1。其内存压力、布局与关键路径流水优化值得对照，尤其说明仅追并行度不够。但研究使用核内调度/自己的评价语义，本题不能替换官方 Step2/Step3。未把论文作者收益数字当成本题成绩。",
+    "urls": [
+      "arXiv:2607.17422v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 213,
+    "text": "https://arxiv.org/html/2607.17422v1",
+    "urls": [
+      "https://arxiv.org/html/2607.17422v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 219,
+    "text": "https://arxiv.org/html/2312.13526v1",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 223,
+    "text": "Roorda：*Optimal Software Pipelining using an SMT-Solver*，arXiv:2601.21842v1。值得借鉴按需加入寄存器压力约束和利用 UNSAT core 解释阻塞。完整寄存器分配在该论文中也有高成本，压力条件不自动保证物理分配。本轮没有实现 SMT；可能的落点是少量小窗口的研究对照，绝非把 35705 操作整图扔进时标整数规划。",
+    "urls": [
+      "arXiv:2601.21842v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 225,
+    "text": "https://arxiv.org/html/2601.21842v1",
+    "urls": [
+      "https://arxiv.org/html/2601.21842v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 239,
+    "text": "https://huggingface.co/datasets/SCHEDBench/SCHEDBench",
+    "urls": [
+      "https://huggingface.co/datasets/SCHEDBench/SCHEDBench"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 255,
+    "text": "https://developer.apple.com/metal/pytorch/",
+    "urls": [
+      "https://developer.apple.com/metal/pytorch/"
+    ]
+  },
+  {
+    "path": "AI chats/20260924-Pro4-算法方案设计/附件/r03-HuaweiCup_Route4_Report.md",
+    "line": 259,
+    "text": "https://research.google.com/colaboratory/faq.html",
+    "urls": [
+      "https://research.google.com/colaboratory/faq.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/c01-response-799ca0a0.md",
+    "line": 167,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T061355Z.md",
+    "line": 209,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T1038Z-C02在途.md",
+    "line": 213,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T1129Z-C02完成.md",
+    "line": 221,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T1300Z-C03在途.md",
+    "line": 229,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T1330Z-C03完成.md",
+    "line": 235,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T1910Z-C04完成.md",
+    "line": 244,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260925-P2-零spill通信与流水联合构造/完整问答-20260925T210033Z.md",
+    "line": 173,
+    "text": "**不能从一次观察唯一识别四种机制各自的反事实 Makespan 贡献。**活动量与端到端优化收益的区别，也是因果性能分析所强调的基本问题。[[图片：]arXiv](https://arxiv.org/abs/1608.03676)",
+    "urls": [
+      "https://arxiv.org/abs/1608.03676"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 114,
+    "text": "而且今年还有一个特别重要的变化：官方明确允许使用 AI 做**信息搜集、思路开拓、建模、数据处理、论文写作和辅助编程**，但要求最终文字自行表述，并对 AI 辅助的数据分析、程序等作相应标注；无来源、无推导的模型和公式可能不被认可。[[图片：]CMATHC](https://www.cmathc.org.cn/cpmcm/news/643.html)",
+    "urls": [
+      "https://www.cmathc.org.cn/cpmcm/news/643.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 837,
+    "text": "今年官方仍然明确说，论文先经过网络评审再进入集中评审；摘要最多两页，而且必须包括建模思路、主要方法、模型、结果、结论和创新点。[[图片：]CpIpc](https://cpipc.acge.org.cn/cw/contestNews/list/4/1)",
+    "urls": [
+      "https://cpipc.acge.org.cn/cw/contestNews/list/4/1"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 924,
+    "text": "还有一点跟你们准备采用 AI-heavy workflow 特别相关：**2026 规则已经明确要求 AI 只能作为辅助工具，不能代替参赛队伍的独立思考和答题主体工作，并且使用的 AI 产品/输出、程序等需要按规定注明来源。**[[图片：]CpIpc](https://cpipc.acge.org.cn/cw/contestNews/list/4/1)",
+    "urls": [
+      "https://cpipc.acge.org.cn/cw/contestNews/list/4/1"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 4249,
+    "text": "**这里确实能找到非常贴近的理论。**《New Tools for Peak Memory Scheduling》讨论了带正负权的 *node-sum* 模型、它与计算图内存模型之间的转换，以及用“主导调度”处理子图的工具；论文还给出了特定串并联图类别上的参数化算法。[[图片：]arXiv](https://arxiv.org/html/2312.13526v1)",
+    "urls": [
+      "https://arxiv.org/html/2312.13526v1"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 4272,
+    "text": "一种路线是把它当组合优化，让多个 Agent 设计启发式；另一种路线是识别出这是线性指派问题，并转为最小费用流求解。OR-Tools 的官方文档就展示了这种转换，同时明确提醒：网络流适用于特定结构，不能替代能够处理更广泛约束的 MIP 或 CP-SAT。[[图片：]Google for Developers](https://developers.google.com/optimization/flow/assignment_min_cost_flow)",
+    "urls": [
+      "https://developers.google.com/optimization/flow/assignment_min_cost_flow"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 4328,
+    "text": "这与 Hyperband 等方法采用的“自适应资源分配、对部分候选提前停止”的思想相近；但它们研究的是特定的超参数优化场景，不能机械照搬成数学研究分支的淘汰规则。[[图片：]Journal of Machine Learning Research](https://jmlr.org/papers/v18/16-558.html)",
+    "urls": [
+      "https://jmlr.org/papers/v18/16-558.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 4441,
+    "text": "反复在有限验证数据上比较大量候选，也可能把验证标准本身过拟合；模型选择带来的选择偏差，是已有研究明确讨论过的问题。[[图片：]Journal of Machine Learning Research](https://jmlr.org/papers/v11/cawley10a.html)",
+    "urls": [
+      "https://jmlr.org/papers/v11/cawley10a.html"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-选择建模题目策略/完整问答-20260925T210033Z.md",
+    "line": 4453,
+    "text": "在竞赛使用上，协作范围仍需限定在参赛队内。2026 年开赛公告明确禁止与队外人员讨论赛题，并要求 AI 作为辅助工具、不能替代队伍的独立思考和主体工作；模型、公式、代码等引用也需要注明来源。因此，来源记录、人工理解与关键结论审核应直接进入你们现有协议。[[图片：]中国研究生创新实践系列大赛管理平台](https://cpipc.acge.org.cn/cw/contestNews/list/4/1)",
+    "urls": [
+      "https://cpipc.acge.org.cn/cw/contestNews/list/4/1"
+    ]
+  },
+  {
+    "path": "AI chats/20260926-项目仓库与进展/完整问答-20260925T210033Z.md",
+    "line": 1147,
+    "text": "> → 参考文献",
+    "urls": []
+  },
+  {
+    "path": "AI chats/20260926-项目仓库与进展/完整问答-20260925T210033Z.md",
+    "line": 1172,
+    "text": "**参考文献**",
+    "urls": []
+  }
+]
