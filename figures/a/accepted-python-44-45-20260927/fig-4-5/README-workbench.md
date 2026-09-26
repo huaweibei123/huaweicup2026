@@ -1,0 +1,2 @@
+工作台独立副本：仅将P95主报告切换为AUTO_REVIEW既定线性插值，最近秩次另列；图像和metrics字节不改。原始summary在original-summary.csv。图例总DDR在本图明确限于scheduled COPY搬运量，见caption；不扩展为全部物理总线流量。全部来源和实核范围见independent-review.json。绘图命令python plot.py仅为作者原命令，本机未运行上传脚本。prepare_data.py使用原相邻sources目录，原交付目录保留；本包绘图直接读取本目录metrics。
+本包复现：先python normalize_summary.py，后python plot.py。前者是工作台自编只读现有metrics的规范汇总转换，本机实际执行并与交付summary字节完全一致；后者为原作者绘图入口，本机只作静态读取和现图审查，没有执行队友上传代码。
