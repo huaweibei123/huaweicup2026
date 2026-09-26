@@ -1,0 +1,20 @@
+source,target,note
+in,route,
+route,p0,"①②③④按序；①②成功立即返回，③后条件向量修复"
+p0,guard,
+guard,gap,"是：守卫通过"
+guard,dedup,"否：仅 Π₀ 进入去重"
+gap,hyper,
+hyper,dec,
+dec,retime,"是：字节严格下降"
+dec,dedup,"否：省略第三候选，保留 Πgap（S3）"
+retime,dedup,
+dedup,dec2,
+dec2,score,"否：多候选"
+dec2,plan,"是：唯一计划直接保留，不启动 E2"
+score,select,"全部评分有效"
+score,plan,"异常/未知：记录 unknown 并退回 Π₀（入口 :85–100；构造意外异常/字节证据非法见 :27–100）"
+select,plan,
+plan,e0,"E0 复评（虚线，实验阶段）"
+cap,select,"仅诊断（开放虚线）"
+stat,hyper,"仅优先序（开放虚线）"

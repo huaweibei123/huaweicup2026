@@ -1,0 +1,40 @@
+Create a polished Chinese academic algorithm flowchart by beautifying the FIRST reference image, matching the pastel academic STYLE of the SECOND reference and the user-approved THIRD reference. Preserve the verified scientific flow; prioritize error-free readable Chinese and explicit arrow routing. Draw.io conventions: uniform rounded rectangles for actions, diamonds only for decisions, clear arrowheads anchored at box edges, consistent grid alignment, orthogonal connectors with small rounded elbows or simple curves. Thin strokes, modest corner radius, ample padding, no crossing text or unrelated boxes. Dark navy #243244 serif/Song-like text, muted blue #416A93, purple #8877A8, teal #2D918A, amber #C9874D; very pale local fills. No glow, no giant title, no figure number, no (a)/(b), no watermark, no file paths, no commit ids, no decorative illustrations. Native transparent background preferred; pure white accepted. No simulated checkerboard. Long proof conditions and code function lists are supplied in EXTERNAL caption, not image. Do NOT copy all dense prose from source image. Use ONLY the exact concise labels listed below; preserve all branch meaning and numbers. Produce a complete portrait figure with large readable text, preferably 1536x2048 or maximum available resolution. Never label it as an accepted/final figure. This is a flow illustration, no measured numbers or invented performance claims.
+P2 ALGORITHM CONTENT. Arrange main flow top to bottom occupying about 72% width, and 3 calm side note boxes in remaining width. Keep branches readable. Node IDs below are instructions only, do not print IDs.
+IN rectangle: “输入图 G、Core 数 k 与固定配置”
+ROUTE larger rectangle: “按结构构造初始方案”
+Inside four ordered short rows:
+“① resource_word 适用时返回”
+“② tree_paired_leaves 适用时返回”
+“③ 分量数 ≥ k：分量分配；否则按 DAG 构造”
+“④ 满足条件时进行向量操作重排”
+P0 small rectangle: “初始完整方案 Π₀”
+GUARD diamond: “满足分叉汇合结构及物理依赖条件？”
+GAP rectangle: “链收缩与间隙排程” next line “构造 Πgap”
+HYPER rectangle: “两核区域内改进操作分配” next line “区域 ≤ 16 条链；以 COPY 字节量为目标”
+DEC diamond: “基础 COPY 字节量严格下降？”
+RETIME rectangle: “保持 Core 分配，调整操作顺序” next line “构造 Πhypergap”
+DEDUP rectangle: “对完整候选方案去重” next line “C = {Π₀, Πgap, Πhypergap}，|C| ≤ 3”
+DEC2 diamond: “仅剩一个候选？”
+SCORE rectangle: “E2 评价完整方案” next line “每方案至多 1 次，总计至多 3 次”
+SELECT rectangle: “先比较 Makespan，再比较额外 DDR 字节量” next line “相同则保留先前方案”
+PLAN amber rectangle: “输出方案” next line “node_to_subgraph ｜ core_schedules”
+E0 teal rectangle: “未修改的官方 E0 独立复评”
+Scientific arrows EXACT:
+IN→ROUTE→P0→GUARD.
+GUARD YES labelled “是” →GAP→HYPER→DEC.
+GUARD NO labelled “否：仅保留 Π₀” bypasses outside left →DEDUP.
+DEC YES labelled “是”→RETIME→DEDUP.
+DEC NO labelled “否：保留已有候选” bypasses outside right →DEDUP. This means retain Π₀ AND Πgap, not discard gap.
+DEDUP→DEC2.
+DEC2 YES labelled “是：直接保留” bypasses SCORE and SELECT →PLAN.
+DEC2 NO labelled “否”→SCORE.
+SCORE normal→SELECT labelled “评分有效”; SCORE failure→PLAN along side route labelled “评分异常：退回 Π₀”.
+SELECT→PLAN.
+PLAN→E0 only dashed arrow meaning external review after solve, not online feedback loop.
+3 SIDE NOTE boxes, NO solid arrows to main:
+“容量条件与必要下界” / “仅用于诊断”
+“静态字节估计与日历时间” / “用于构造；不等同于官方 Makespan”
+“未接入本入口的研究” / “容量保护、就绪匹配” / “不参与候选构造与评分”
+small separate annotation beside scoring area “在线评价计入求解耗时”.
+Do not add a loop from E0 back to selection. Do not omit any bypass arrow or change branch direction. Source unsupported-construction/invalid-byte exceptions explained EXTERNALLY: do not guess new routes. Route details and at most k² pairs also external. Keep Greek Π with true zero subscript; preserve literal English identifiers accurately. No use of the compressed terms “守卫”,“流水”,“触核”,“前沿”,“核内”.
+VARIANT A: closest to approved figure4-2 A. Soft pastel blue action boxes, purple candidate construction group, teal scoring, amber decision diamonds and output. Gently curved bypass connections, elegantly restrained rounded corners. Main chain straight vertical with abundant branch gutters.

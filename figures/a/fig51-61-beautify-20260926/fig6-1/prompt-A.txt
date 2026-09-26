@@ -1,0 +1,34 @@
+Create a polished Chinese academic algorithm flowchart by beautifying the FIRST reference image, matching the pastel academic STYLE of the SECOND reference and the user-approved THIRD reference. Preserve the verified scientific flow; prioritize error-free readable Chinese and explicit arrow routing. Draw.io conventions: uniform rounded rectangles for actions, diamonds only for decisions, clear arrowheads anchored at box edges, consistent grid alignment, orthogonal connectors with small rounded elbows or simple curves. Thin strokes, modest corner radius, ample padding, no crossing text or unrelated boxes. Dark navy #243244 serif/Song-like text, muted blue #416A93, purple #8877A8, teal #2D918A, amber #C9874D; very pale local fills. No glow, no giant title, no figure number, no (a)/(b), no watermark, no file paths, no commit ids, no decorative illustrations. Native transparent background preferred; pure white accepted. No simulated checkerboard. Long proof conditions and code function lists are supplied in EXTERNAL caption, not image. Do NOT copy all dense prose from source image. Use ONLY the exact concise labels listed below; preserve all branch meaning and numbers. Produce a complete portrait figure with large readable text, preferably 1536x2048 or maximum available resolution. Never label it as an accepted/final figure. This is a flow illustration, no measured numbers or invented performance claims.
+P3 ALGORITHM CONTENT. Arrange main top-down process occupying about 70% width; a small detached research note upper right and a same-plan comparison branch at lower right. No giant containing frame. IDs instructions only, not printed.
+IN rectangle: “输入图 G、Core 数 K 与固定配置” / “共享只读 Cache”
+IDX rectangle: “识别依赖与张量生产、使用关系” / “记录 Pipe 类型、计算时长与张量字节量”
+BASE rectangle: “按结构构造并评价基准方案” / “阶段迁移 → 一般阶段 → 注意力或前馈 → 一般 DAG” / “仅在适用条件不满足时尝试下一路线”
+INC larger group: “按顺序、适用条件与剩余预算构造候选”
+four short ordered rows:
+“attention_gap：注意力结构且多个 Core”
+“shared_pipeline：多个 Core 且构造条件满足”
+“attention_witness：放置代理更优且 calls < 3”
+“forest_memory_order：森林条件满足且 calls < 3”
+DEDUP rectangle: “按规范化提交字节去重” / “重复方案跳过评价，继续后续候选”
+PRUNE rectangle: “检查下界的适用条件” / “适用且 L(P) ≥ 当前 M₃：跳过评价” / “条件不满足：照常评价”
+EVAL amber rectangle: “使用未修改的官方 P3 评估器” / “在线至多 3 次，包含基准方案”
+ACC rectangle: “合法且 M₃ 严格减小：更新方案” / “否则保留已有合法方案” / “评价异常向外报告”
+PLAN amber rectangle: “输出最终合法方案” / “node_to_subgraph ｜ core_schedules”
+NOL2 rectangle in branch right: “对同一方案进行无 L2 评价” / “保持方案字节不变，得到 M₂”
+GAIN pale amber rectangle below NOL2: “CacheGain：C = M₂ / M₃” / “M₂：同计划无 L2；M₃：只读 Cache” / “C > 1 改善；C < 1 退化”
+EXT detached dashed gray note upper right: “未纳入完整批次的扩展” / “容量切分、部分预加载” / “单尾切分与首波阶梯” / “四系数响应压缩”
+Another small note next to EVAL: “Cache 替换规则、容量与带宽固定”
+Another small note next to GAIN: “仅作对照报告；候选选择仍比较 M₃”
+EXACT arrows:
+IN→IDX→BASE→INC→DEDUP→PRUNE→EVAL→ACC→PLAN.
+Label BASE→INC “已有合法方案与已用评价次数”.
+Label INC→DEDUP “每个可行候选”.
+Label PRUNE→EVAL “仅未被剪枝的候选”.
+PLAN→NOL2 DASHED arrow (reporting only).
+NOL2→GAIN solid arrow.
+EXT has no execution arrow.
+This is compact view of repeated candidate procedure: no invented single pass claim. Optional clean outer thin return arrow ACC→INC labelled “还有候选且预算允许” if spacious; do not add a backward edge from GAIN or NOL2 to main (that branch is report only).
+Preserve C=M₂/M₃ NEVER inverted, both Makespans are cycles, online budget 3 INCLUDING baseline. Do not substitute independently optimized P2 as M₂. Do not put research extension into mainline. E0 official P3 is online here, distinct from P2 flow. No number476/24 in image (external report context only). Exact bound validity assumptions and fallback reporting live in caption, no invented extra assumptions.
+Avoid “守卫”“流水”“核内”“触核”; all compact Chinese labels above are exact. Do not add a claim that solver can change Cache settings.
+
+VARIANT A: same visual family as approved figure4-2 A and paired P2 flow. Soft blue action rectangles, purple candidate group, teal acceptance, amber evaluator/output/comparison. Clear top-to-bottom chain. Simple graceful curves for reporting branch only. Do not include optional return arrow; repeated semantics is explicitly stated in candidate and dedup labels.

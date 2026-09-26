@@ -1,0 +1,13 @@
+id,stage,module,note
+in,input,"算法输入（P3 初稿 6.2/6.3）","原始图 G、核数 K、固定配置 θ（P3 共享只读 Cache 场景）"
+idx,index,"construct（311322b）","计算依赖、张量生产者/消费者；流水线类型、计算时长、张量字节"
+baseroute,structure,"witness_solve/construct 基础结构路由（6.3.1 表①；实际链 expanded→calendar→pipeline→witness→forest 前段）","窄条件阶段迁移→一般阶段→注意力/前馈→一般 DAG/通用；仅结构守卫拒绝时依序尝试下一路；构造基准并评价→当前合法方案与已用 calls"
+incloop,candidate,"attention_rows（attention_gap）/pipeline_solve+calendar_solve（shared_pipeline）/witness_solve（attention_witness）/forest_solve+forest_memory_order（forest_memory_order）","增量候选按序、守卫及剩余预算尝试：②仅注意力且多核 ③仅多核且守卫通过 ④仅放置代理严格优于就绪代理且 calls<3 ⑤仅森林守卫通过且 calls<3"
+dedup,deduplicate,"forest_solve/witness_solve encoded 字节比较","规范化提交字节去重；重复跳过评分继续剩余流程"
+prune,conditional_prune,"pipe_bound.analyze（式 6-10；:78–112 适用检查）","适用：每子图恰一个原始非 COPY 计算节点、仅 PIPE_M/PIPE_V、非负整数 cycles、固定非负整数跨核 delay、COPY 收缩不引入未证依赖；L(P)≥当前合法方案 Makespan→bound_pruned；不支持则不用界照常评价"
+e0,official_p3,"官方 P3 评估器（未修改）","仅评未被剪枝的候选；总上限 3 次在线含基准；求解器不可修改 Cache 替换规则/容量/带宽"
+acc,strict_improvement,"forest_solve 严格改进接受","执行合法且 M₃ 严格更小→更新；合法性拒绝/相同成绩→保留已有合法方案；评价异常向外报告"
+plan,final_plan,"safe_solve/run_solver 输出（算法步骤 5）","最终合法方案及指标：两字段方案+评价账本/选择原因/墙钟"
+nol2,same_plan_no_l2,"同计划无 L2 对照（式 6-4；cache_trace_audit 与 forest-cachepair-delta 配对审计）","同一方案字节在无 L2 场景评 M₂；仅 Cache 场景变化；计划身份绑定；476 份复用/24 份另评为已发布批次口径（初稿 6.6.1）"
+cg,cache_gain,"CacheGain 出口（式 6-4）","C=M₂/M₃（M₂=同计划无 L2，M₃=只读 Cache）；C>1 改善、C<1 退化；仅报告指标，候选接受仍只比较 M₃"
+ext,sidebar,"派发单旁注口径","未纳入完整批次的扩展：容量切分/部分预加载/单尾切分与首波阶梯/四系数响应压缩（6.4/6.5）"
