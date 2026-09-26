@@ -1,0 +1,229 @@
+{
+  "schema": "figure-auto-review-v1",
+  "figure_id": "fig-6-4",
+  "primary": "figure.svg",
+  "files": [
+    {
+      "name": "figure.svg",
+      "role": "svg",
+      "sha256": "e8124ba5faec9d21b39afe5ee4529c37e7c8728c98a03e971a47a722bc518fdf"
+    },
+    {
+      "name": "figure.png",
+      "role": "png",
+      "sha256": "1181a58b04dd2460f471b982b3b0efeba3998953eb03aaa34cfbe86bd714442e"
+    },
+    {
+      "name": "plot.py",
+      "role": "source",
+      "sha256": "6e033032004ba6b704e02c9e637fa4c2644893e5c8e8b2c7793e4cc922603fae"
+    },
+    {
+      "name": "extract_pairs.py",
+      "role": "extraction",
+      "sha256": "228a4e5591f4793e3e4831dfe85d29578d3c0ec89ac599ea65172dfac2b4f531"
+    },
+    {
+      "name": "fetch_pair_inputs.py",
+      "role": "fetch_script",
+      "sha256": "2b6326f9d204bbaf3b2811279e556ae90ef5ab3bdff214f34ea9cca947ea0bea"
+    },
+    {
+      "name": "caption.md",
+      "role": "caption",
+      "sha256": "bfb5186bc97178fee04078096946fc4614f13e59aa0585eb911e8354bbde7c1c"
+    },
+    {
+      "name": "self-check.md",
+      "role": "self_check",
+      "sha256": "c5748e1ec308ecbf1c2ea054a19484021defd52483f2dc828ff2f379e4478d95"
+    },
+    {
+      "name": "pair_metrics.csv",
+      "role": "input",
+      "sha256": "2e358c80a252269febd8b26bcc07670964f9041c29c7723263e20ccf18099e99"
+    },
+    {
+      "name": "negative_cases.csv",
+      "role": "input",
+      "sha256": "5f3f8fee0876c32e1637782fdd90cf65d159b1de2dd84e1717fe0e57eba78e57"
+    },
+    {
+      "name": "per_core_summary.csv",
+      "role": "input",
+      "sha256": "68b0cad667f748e25ce1d0f45aa29c5b778e501d82ade891de9dc94f0328d522"
+    },
+    {
+      "name": "verified-pairs.json",
+      "role": "input_receipt",
+      "sha256": "3d2af94eb86ad5dc7da7d215c7faf8a2d0b702039150f95937fb03ec3ff5e885"
+    },
+    {
+      "name": "source-index.json",
+      "role": "input_receipt",
+      "sha256": "f666bc70d110d863e752bd2a11de307abafe616260c4d014612448bfb261c94d"
+    },
+    {
+      "name": "preview-insert-width.png",
+      "role": "preview_check",
+      "sha256": "7d79b948a9525174e6041667686d92ebc2d4bb74fa458279a36965480678e73d"
+    }
+  ],
+  "command": "env -u PYTHONPATH python figures/a/jia-fig6-4-20260926/fetch_pair_inputs.py --out <verified-inputs dir> && env -u PYTHONPATH python figures/a/jia-fig6-4-20260926/extract_pairs.py --pairs <verified-inputs dir>/verified-pairs.json && .venv/Scripts/python.exe figures/a/jia-fig6-4-20260926/plot.py",
+  "command_notes": "三步、工作目录=仓库根、退出码 0：第 1 步 fetch_pair_inputs.py（工作台提供 v2 脚本副本随包，SHA 2b6326f9…）只读 GitHub 固定对象取得 500 格同计划配对并逐格断言（probe 先行 2 格验证；全量日志 500 条 verified + DONE 500 pairs）；第 2 步 extract_pairs.py 从 verified-pairs.json 构建三张交付 CSV；第 3 步 plot.py 只读交付 CSV 复现图件，内置断言（500 格、cache_gain==no_l2/cache_makespan、byte_hit_rate==hit/(hit+miss)、负例类别一致）。原始 1500+ 个 bytes 文件不复制入图包，逐格 SHA 见随包 verified-pairs.json 与 source-index.json（2013 条映射）。工具版本：Python 3.13.12（.venv，matplotlib）；字体 Microsoft YaHei。",
+  "sources": [
+    {
+      "path": "results/a/q3-nikolastarx/forest-cachepair-delta-20260925/manifest.json（500 records）",
+      "commit": "cf4d77a018def540358c3b4667c2d2466390981a",
+      "sha256": "3c2f7854c88d4d1eb83e47c1b6058394bbc95a550f0cd797612817855116bba8"
+    },
+    {
+      "path": "results/a/q3-nikolastarx/forest-cachepair-delta-20260925/20260924T2205Z-s3172/run.json（24 补算 jobs 全 ok）",
+      "commit": "cf4d77a018def540358c3b4667c2d2466390981a",
+      "sha256": "cd72a9c6aee583c8f902bfff355f5db28aa51919"
+    },
+    {
+      "path": "results/a/q2-nikolastarx/hypergap-full500-audit-20260925/completed-summary.json",
+      "commit": "1c00079aadbd071de62db17686d5ba3fed1da0f2",
+      "sha256": "083c3f5b603cb61dd8b132718b6437b35c7706ff3aa165bdcdd490617547a2f2"
+    },
+    {
+      "path": "results/a/q3-nikolastarx/forest-full500-20260925-s59/20260924T2122Z-s59ee/revision2-baseline-draft/board-feed-s01-revision2.json（10 个 feed 之一样例；全部 10 个 SHA 见 source-index.json）",
+      "commit": "19bebf35205d23fdd832781540f8879da52eeb62",
+      "sha256": "dc65ad8ed72fab83"
+    },
+    {
+      "path": "results/a/q3-nikolastarx/cachepair500-feedback-20260925/summary.json（配对摘要身份引用，实核由 manifest 内 SHA 完成）",
+      "commit": "27409658d869671d30e940f536bbab30d50d3ef9",
+      "sha256": "SEE_SOURCE_INDEX"
+    },
+    {
+      "path": "fetch 脚本副本（工作台 Issue15 评论 5847529179 v2 原文）",
+      "commit": "n/a（Issue15 评论附件，非仓库文件）",
+      "sha256": "2b6326f9d204bbaf3b2811279e556ae90ef5ab3bdff214f34ea9cca947ea0bea"
+    }
+  ],
+  "units": {
+    "cycles": "cycles",
+    "bytes": "B",
+    "cache_gain": "ratio",
+    "byte_hit_rate": "ratio"
+  },
+  "panels": [
+    {
+      "id": "1",
+      "title": "五核数平均 CacheGain 折线：k1 1.00234 / k2 1.00792 / k3 1.03138 / k4 1.05120 / k5 1.08292（y=1 参考线；500 格）"
+    },
+    {
+      "id": "2",
+      "title": "逐例分布：散点+箱线（按核数分组）；负收益 CacheGain<1 共 4 格（038/k2、021/k3、079/k3、092/k4，红▼全部保留）"
+    },
+    {
+      "id": "3",
+      "title": "字节命中率与逐例 CacheGain 关系散点（y=1 参考线；仅展示分布不构成命中率决定总体加速的证据；无访问样本 0 格，口径命中率留空单独列示）"
+    }
+  ],
+  "tables": {
+    "pair_metrics": "pair_metrics.csv",
+    "negative_cases": "negative_cases.csv",
+    "per_core_summary": "per_core_summary.csv",
+    "verified_pairs": "verified-pairs.json",
+    "source_index": "source-index.json"
+  },
+  "table_columns": {
+    "pair_metrics": [
+      "case",
+      "cores",
+      "plan_sha256",
+      "p2_sha256",
+      "p3_sha256",
+      "no_l2_makespan",
+      "cache_makespan",
+      "cache_gain",
+      "hit_bytes",
+      "miss_bytes",
+      "byte_hit_rate",
+      "category"
+    ],
+    "negative_cases": [
+      "case",
+      "cores",
+      "no_l2_makespan",
+      "cache_makespan",
+      "cache_gain",
+      "hit_bytes",
+      "miss_bytes",
+      "byte_hit_rate"
+    ],
+    "per_core_summary": [
+      "cores",
+      "n_cases",
+      "mean_cache_gain",
+      "mean_byte_hit_rate_case_wise",
+      "pooled_byte_hit_rate",
+      "no_access_cells"
+    ]
+  },
+  "parameters": {
+    "data_version": "forest solver 311322b996c0948e8a6a9c7ec6ddfe6ae41fbee1 revision2，500 格同计划配对（476 reuse_existing_p2 + 24 补算）",
+    "fetch_commits": {
+      "F_forest_feed": "19bebf35205d23fdd832781540f8879da52eeb62",
+      "D_delta": "cf4d77a018def540358c3b4667c2d2466390981a",
+      "P2_fixed": "11d5d3ba1820864626bb49acccbeec7a75553e80",
+      "OLD_plan": "f0ead1a3722f70a59a084acc70700a963945b567",
+      "completed_summary": "1c00079aadbd071de62db17686d5ba3fed1da0f2"
+    },
+    "key_values": {
+      "n_pairs": 500,
+      "negative_cases": [
+        [
+          "038",
+          2
+        ],
+        [
+          "021",
+          3
+        ],
+        [
+          "079",
+          3
+        ],
+        [
+          "092",
+          4
+        ]
+      ],
+      "mean_cache_gain_by_cores": {
+        "1": 1.0023396456,
+        "2": 1.0079236455,
+        "3": 1.0313799263,
+        "4": 1.0512016361,
+        "5": 1.0829171727
+      },
+      "pooled_byte_hit_rate_by_cores": {
+        "1": 0.0995492815,
+        "2": 0.3641649086,
+        "3": 0.4123871102,
+        "4": 0.424395893,
+        "5": 0.474459024
+      },
+      "no_access_cells": 0
+    },
+    "metric_definitions": "CacheGain=no_l2_makespan/cache_makespan 逐格复算；byte_hit_rate=hit_bytes/(hit_bytes+miss_bytes)，分母 0 留空；逐例均值与汇总命中率分列不混用",
+    "missing": "无"
+  },
+  "required_stages": [],
+  "criteria": [
+    "CacheGain＝同核数无 L2 Makespan / Cache Makespan，参考线为 1，所有负收益保留。",
+    "命中率按字节计算，逐例均值与汇总字节命中率明确区分；无访问样本单独标记。",
+    "当前版本负例清单应与 021/k3、038/k2、079/k3、092/k4 对应；若版本变更先核对来源，不强行凑数量。",
+    "不以散点相关性证明命中率决定总体加速。"
+  ],
+  "dispatch": {
+    "issue": "huaweibei123/huaweicup2026#14",
+    "dispatch_comment_id": 5848057031,
+    "task_book_sha256": "55859ab1ed2b81b218663f60c4cf824e9e01ba0399c52113861b48e61da7dfd2"
+  },
+  "notice": "数值全部来自固定提交的实测/登记记录；机检只验证提交包内部一致性，视觉和科学结论由 Agent 逐图审查与用户最终总验收。",
+  "version_note": "v1（首版）：按派发单 5848057031（用户转派）绘制三面板；数据为 forest311322b 完整 500 格同计划配对（工作台脚本全量取得并逐格断言，probe 2 格先行）；负例复算 4 格与派发单清单一致；无访问样本 0 格如实报告。0 新实验。哈希按最终字节重算（不含 audit.json 自身）。"
+}
