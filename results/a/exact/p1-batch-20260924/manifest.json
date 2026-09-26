@@ -1,0 +1,64 @@
+{
+  "recorded_utc": "2026-09-23T17:26:08.516092+00:00",
+  "files": {
+    "benchmark/case_002.plans.json.gz": {
+      "sha256": "0f766212369cde1f8e6bfe87f721fae80b5a433fb297b6d1ca209de0a3071c92",
+      "bytes": 117428
+    },
+    "benchmark/case_002.resources.json": {
+      "sha256": "8f3d522133b7f357aaaf5e4845c3935d5691d38b63ac5a50d173da2720bb1248",
+      "bytes": 126847
+    },
+    "benchmark/case_003.plans.json.gz": {
+      "sha256": "b950ed19423cc49688448bdf0f68d89de8d140c35f0969d9dd79407690414c9b",
+      "bytes": 877150
+    },
+    "benchmark/case_003.resources.json": {
+      "sha256": "f05c4b0a6c16abd43eda82832f0be5a37ddc05de92ac4a9e304890f486da6eb5",
+      "bytes": 127190
+    },
+    "benchmark/paired.json": {
+      "sha256": "f69a511e8817a4d2baf5c988773c8c9590801289c7e037847738601a5c8ca800",
+      "bytes": 44731
+    },
+    "benchmark/run.json": {
+      "sha256": "c3651d72d6fb1e997c9e24bb64eae5b6442195c307c37e7b90e65702db9b844e",
+      "bytes": 1928
+    },
+    "benchmark/summary.json": {
+      "sha256": "b3183782434ad4ba1047f0fcc07b95f8bc8e3eee8072c8806e765b36e73a8d30",
+      "bytes": 3524
+    },
+    "benchmark.txt": {
+      "sha256": "8670560ac8c75a712bc1a69e9cc181246d74d47b3ac2f940efecb00456a32da4",
+      "bytes": 2605
+    },
+    "tests.txt": {
+      "sha256": "137adc7403a869fd1533d6419a682bd1fd1ba5e204866ee9693e50325bccea19",
+      "bytes": 3136
+    }
+  },
+  "compressed_plans": [
+    {
+      "file": "benchmark/case_002.plans.json.gz",
+      "uncompressed_file": "case_002.plans.json",
+      "uncompressed_sha256": "58e5cb6d089f393035983c6a3da0ef3ebe5ac8f75799cbe39f85e5be3c98f657",
+      "uncompressed_bytes": 767723,
+      "method": "Python gzip.compress(raw, mtime=0); byte-for-byte decompression verified"
+    },
+    {
+      "file": "benchmark/case_003.plans.json.gz",
+      "uncompressed_file": "case_003.plans.json",
+      "uncompressed_sha256": "1d4dca0ebcafb7f4b46afa6807118714ad731fdb62b4a89f590f5143e9e0cbfe",
+      "uncompressed_bytes": 6154686,
+      "method": "Python gzip.compress(raw, mtime=0); byte-for-byte decompression verified"
+    }
+  ],
+  "commands": [
+    "uv sync --locked",
+    "uv run --locked python -B scripts/a_materials.py --extract",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 uv run --locked python -m unittest discover -s tests/eval_exact -p test_*.py -v",
+    "PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 uv run --locked python -m src.eval_exact.batch_benchmark --output results/a/exact/p1-batch-20260924/benchmark --cases 002 003 --repeats 3 --candidates 12 --resource-count 64"
+  ],
+  "working_tree_note": "Implementation measured before first commit; run.json source_sha256 identifies exact measured implementation. Tests are implementer self-checks."
+}
