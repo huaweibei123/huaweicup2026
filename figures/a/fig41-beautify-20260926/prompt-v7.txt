@@ -1,0 +1,43 @@
+Create a freshly typeset, camera-ready scientific flowchart by REDRAWING image 1 from the content specification below. Image 1 is the accepted original scientific structure; image 2 is the captain's STYLE reference only. Do NOT preserve old typography or text from image 1. Discard any previously edited raster layout. Use this exact new Chinese text. Aim portrait format 1536x2048 or similarly high native resolution. Increase canvas height for comfortably legible Chinese. All text navy, refined Song/Ming serif Chinese and serif Latin as in image 2; pale blue/mint group fills, lavender cards, restrained amber interface; fine outlines and arrows; minimal gradients. No title badges or huge lettering. Genuine transparent RGBA outside group panels, keep inner group fills. No title, caption, figure number, footer, paragraph or extra labels.
+
+CONTENT, ordered TOP TO BOTTOM in two panels:
+
+Upper panel header: “方案构造与选择”
+Top row, two boxes, left→right:
+A “输入计算图与配置” / “计算图 G · Core 数 K” / “固定硬件配置 Θ”
+B “分析计算图结构” / “识别连通分量、分叉与链结构” / “统计各 Pipe 计算量与共享输入量”
+
+Below B, broad group C with heading “生成候选方案（至多 6 个）”. Six roomy cards in TWO columns by THREE rows, exactly these labels with suggested line breaks:
+“① 按连通分量与树结构划分 Task” / “必需的初始方案”
+“② 拆分计算量集中的连通分量” / “按可到达的末端操作划分”
+“③ 按各 Pipe 的平均负载” / “拆分计算量过大的连通分量”
+“④ 根据共享输入量与计算量” / “选择参与计算的 Core”
+“⑤ 按存储容量确定链分组大小” / “在末端 PIPE_M 操作前切分”
+“⑥ 在分叉处分阶段” / “分配各阶段内的子树”
+
+Below C, D box: “序列化候选方案” / “依据输出字节的 SHA-256 值去重”
+Below D, two parallel alternative branch boxes:
+E left: “仅有一个候选方案” / “直接选定，不调用 E1”
+F right: “存在多个候选方案” / “使用 E1 评价候选方案” / “优先比较 Makespan，再比较总搬运量” / “评分异常时停止，保留当前选定方案”
+A small dashed side note attached to solver selection: “单独保存求解过程记录” / “不写入提交文件”
+
+G full-width amber box at bottom of upper panel: “输出提交文件（仅含两个字段）”. Inside G show exactly two field cards:
+“node_to_subgraph” / “操作节点到子图的映射”
+“core_schedules” / “各 Core 执行的子图及其次序”
+
+Lower panel header: “使用未修改的官方程序评价方案”
+H: “读取提交文件” / “重建子图及其执行顺序”
+I: “重建子图边界的数据搬运操作” / “COPY_OUT → DDR → COPY_IN”
+J: “生成各 Core 的操作执行顺序” / “Step1：确定拓扑顺序” / “Step2：安排数据换入与换出” / “Step3：生成四条 Pipe 的执行时间线”
+K: “模拟多个 Core 的执行过程” / “DDR 带宽：60 B/cycle” / “同一／不同 Core 的 Task 间等待：” / “100／1000 cycles”
+Arrange H,I,J,K in a clean sequence with wide enough boxes; can use two rows with obvious continuous path.
+Two separate metric boxes below K:
+L “总完成时间 Makespan（cycles）”
+M “额外 DDR 搬运量（B）”
+Small NON-directional dashed note within lower panel: “使用 E0 独立复评最终方案” / “与候选选择阶段的 E1 评价分开”
+
+MANDATORY DIRECTED EDGE LIST:
+A→B; B→C; C→D; D→E; D→F; E→G; F→G; G→H; H→I; I→J; J→K; K→L; K→M.
+Every one of these edges MUST have a clear arrowhead ending on its target box boundary. G→H must start at G border and end at H border, NOT the panel heading. All lines travel exclusively through whitespace. No line passes through text/box contents. Keep six candidate cards IN C, they are choices not six serial operations. Diagnostics is dashed annotation only, never an official data field. E0 note is annotation only, no output/feedback edge. Do not add any additional data-flow edges.
+
+Text correctness is paramount. Each text string above must be copied accurately; no fake glyphs, misspelling or duplicate characters. In particular 树结构, 计算的, 带宽, 映射, node_to_subgraph, core_schedules, SHA-256, PIPE_M are exact. Use readable LARGE enough body text and increase box/canvas size rather than compressing. Retain all numbers/units verbatim. Do not add invented terminology. This is a full clean redraw of accepted content with revised academic wording, not successive pixel editing.

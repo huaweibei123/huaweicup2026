@@ -1,0 +1,84 @@
+Use case: precise text edit and academic style preservation. Edit target Image 1 is the flow diagram. Image 2 is captain's academic paper visual style reference; use its dark navy Song/Ming-style Chinese serif typography, thin outlines, soft lavender/blue/mint/amber fills. Keep the flow diagram's nodes, six construction cards, scientific meaning, two-layer structure and branches. User requests academically precise, natural Chinese in alignment with the paper's language acceptance rules. Replace ALL text according to this exact list; use the RIGHT-hand text verbatim. Reflow/resize boxes to fit with breathing room and readable font. Never shrink labels to microscopic size. Do not retain old terminology, code class names, workers or configuration details that have been removed from the map: they are now in external caption/source records.
+REPLACEMENT MAP (old -> new):
+求解器决策 -> 方案构造与选择
+
+输入 -> 输入计算图与配置
+
+图 G · Core 数 K / 冻结配置 Θ -> 计算图 G · Core 数 K
+固定硬件配置 Θ
+
+结构识别 -> 分析计算图结构
+
+弱连通分量 · Pipe 工作量 (4-10) / 分叉阶段 (4-11) · 共享输入 · 同型链 -> 识别连通分量、分叉与链结构
+统计各 Pipe 计算量与共享输入量
+
+六类候选构造（≤6） -> 生成候选方案（至多 6 个）
+
+① 完整分量＋有界树前沿（必需） -> ① 按连通分量与树结构划分 Task
+（必需的初始方案）
+
+② 重分量＋独占后缀 -> ② 拆分计算量集中的连通分量
+按可到达的末端操作划分
+
+③ 超载分量分解 -> ③ 按各 Pipe 的平均负载
+拆分计算量过大的连通分量
+
+④ 输入预算＋活跃 Core -> ④ 根据共享输入量与计算量
+选择参与计算的 Core
+
+⑤ 容量约束回转分组 -> ⑤ 按存储容量确定链分组大小
+在末端 PIPE_M 操作前切分
+
+⑥ 分叉阶段前沿 -> ⑥ 在分叉处分阶段
+分配各阶段内的子树
+
+构造输出候选 plan → plan_bytes / 按输出字节 SHA-256 去重 -> 序列化候选方案
+依据输出字节的 SHA-256 值去重
+
+仅 1 个候选 → 直接选定 / 不启动在线 E1；仍由独立 E0 复评 -> 仅有一个候选方案
+直接选定，不调用 E1
+
+多个候选 → 固定 E1 在线选优 / 队内加速评价，非正式成绩 / P1BatchEvaluator... / 按 (Makespan, COPY B) 择优；评分失败即停，保留已知最好 -> 存在多个候选方案
+使用 E1 计算候选方案的评价指标
+优先比较 Makespan，再比较总搬运量
+评分异常时停止，保留当前选定方案
+
+诊断记录 --diagnostics / 求解器自留，不提交官方 -> 单独保存求解过程记录
+不写入提交文件
+
+官方方案文件（严格仅两字段） -> 输出提交文件（仅含两个字段）
+
+node_to_subgraph（切图） -> node_to_subgraph
+操作节点到子图的映射
+
+core_schedules（分 Core 与每 Core Task 顺序） -> core_schedules
+各 Core 执行的子图及其次序
+
+冻结官方评价（提交者不可修改） -> 使用未修改的官方程序评价方案
+
+读入方案文件 / 按两键重建子图／Task -> 读取提交文件
+重建子图及其执行顺序
+
+边界 COPY 重建 / Task 边界数据搬运 -> 重建子图边界的数据搬运操作
+COPY_OUT → DDR → COPY_IN
+
+官方 Core 内调度 / Step1 拓扑顺序 / Step2 缓存换入／换出 / Step3 四 Pipe 时间线 -> 生成各 Core 的操作执行顺序
+Step1：确定拓扑顺序
+Step2：安排数据换入与换出
+Step3：生成四条 Pipe 的执行时间线
+
+多 Core 事件模拟 / DDR 60 B/cycle / Task 门控 100/1000 cycles -> 模拟多个 Core 的执行过程
+DDR 带宽：60 B/cycle
+同一／不同 Core 的 Task 间等待：
+100／1000 cycles
+
+E0 独立最终复评 / 未修改官方评估器 / 与在线 E1 分开表示 -> 使用 E0 独立复评最终方案
+与候选选择阶段的 E1 评价分开
+
+Makespan（cycles） -> 总完成时间 Makespan（cycles）
+
+额外数据搬运量（B） -> 额外 DDR 搬运量（B）
+
+Graph: input → structure → six candidate group → serialization/dedup. Dedup branches to single-candidate direct choice and multi-candidate E1 evaluation. BOTH feed the official two-field submission file. Dashed solver diagnostic sidecar is outside official data flow. Submission file → lower FIRST card '读取提交文件' → COPY reconstruction → Step1/2/3 → multicore simulation. ONLY simulation forks to the two final metrics. E0 is a NON-directional dashed explanatory annotation in the evaluation layer, not a computational stage or output. Critical: the connection from submission file must end on '读取提交文件', not the lower container or section title. Place lower section heading toward center/right if required, run this arrow from lower left border of submission box straight into top of read card through whitespace, without crossing any text. No feedback.
+
+VERY IMPORTANT BACKGROUND: Image 1's grey checkerboard is a DEFECT, not part of the design. REMOVE it. Deliver TRUE alpha transparent PNG, no drawn checkerboard, no white/grey board outside panels, no texture outside panels. Do not paint checkerboard pixels. Clean antialiasing and transparent margin around all sides. Internal light group fills stay. Aim native high resolution, 3000px-wide class if supported, with portrait/square proportions if necessary for readable expanded Chinese. No giant title badges, top figure number/name, external caption, footer, subfigure letters, file paths, watermark or extra words. Paper art only. Preserve exact official identifiers node_to_subgraph, core_schedules, COPY_OUT, COPY_IN, DDR, PIPE_M, Core, Task, Pipe, E0, E1, SHA-256, Makespan and all values/units. Do not improvise additional text.
