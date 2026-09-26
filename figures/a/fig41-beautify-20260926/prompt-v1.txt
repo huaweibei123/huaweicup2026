@@ -1,0 +1,31 @@
+Use case: style-transfer. Edit target: supplied accepted scientific flow diagram fig4-1 v8, old P1 v4 a0537aeb. Create one polished high-resolution Chinese academic paper flow diagram, native transparent PNG, approximately square, 3000px or larger if possible, for 165mm print width. Beautify the accepted diagram while preserving its science and all meaningful branches. White/light paper look: translucent pale blue solver panel, teal construction cards, subtle lavender selection, amber plan interface and official evaluation. Crisp dark text, restrained rounded rectangles, consistent elegant arrows, generous padding. No 3D, shadows, decorative icons, gradients, watermark.
+
+IMPORTANT omit the original top figure number/title AND original bottom explanatory paragraph: they belong in external LaTeX caption. Do not burn figure title, figure number, file paths, caption, long explanations into image. Keep two internal section labels “求解器决策” and “冻结官方评价” and sublabel “提交者不可修改”. No source code paths. Transparent outside softly tinted panels.
+
+All Chinese and English text must be sharp, correct and readable. English tokens must remain verbatim: Core, Task, Pipe, COPY, DDR, E1, E0, P1BatchEvaluator, Makespan, JSON, plan, plan_bytes, SHA-256, node_to_subgraph, core_schedules, --diagnostics, Step1, Step2, Step3. Use Core rather than 核 for object labels. Keep numbers, units and formulas verbatim: G, K, Θ, (4-10), (4-11), ≤6, 1, 16 MiB, 60 s/项, 60 B/cycle, 100/1000 cycles.
+
+Content and topology, faithfully preserve, optimize layout:
+Upper panel left-to-right input -> structure -> six candidate group; then candidate group -> byte dedup -> two alternative selection branches -> SAME official plan output interface.
+Input exact labels: “输入”, “图 G · Core 数 K”, “冻结配置 Θ”.
+Structure exact labels: “结构识别”, “弱连通分量 · Pipe 工作量 (4-10)”, “分叉阶段 (4-11) · 共享输入 · 同型链”.
+Candidate group heading “六类候选构造（≤6）”, six distinct cards arranged 2 columns x 3 rows, exact labels:
+“① 完整分量＋有界树前沿（必需）”
+“② 重分量＋独占后缀”
+“③ 超载分量分解”
+“④ 输入预算＋活跃 Core”
+“⑤ 容量约束回转分组”
+“⑥ 分叉阶段前沿”.
+Dedup exact lines “构造输出候选 plan → plan_bytes”, “按输出字节 SHA-256 去重”.
+Selection A exact lines “仅 1 个候选 → 直接选定”, “不启动在线 E1；仍由独立 E0 复评”.
+Selection B exact lines “多个候选 → 固定 E1 在线选优”, “队内加速评价，非正式成绩”, “P1BatchEvaluator：1 worker · 16 MiB · 60 s/项”, “按 (Makespan, COPY B) 择优”, “评分失败即停，保留已知最好”.
+Separate small dashed diagnostic sidecar: “诊断记录 --diagnostics”, “求解器自留，不提交官方”. Dashed side branch only, must NOT look like a mandatory stage toward official evaluation.
+Amber full-width official interface between layers exact labels “官方方案文件（严格仅两字段）”, “node_to_subgraph（切图）”, “core_schedules（分 Core 与每 Core Task 顺序）”. Both selection branches feed this interface, no other official fields.
+Lower panel left-to-right nodes:
+“读入方案文件”, “按两键重建子图／Task”
+-> “边界 COPY 重建”, “Task 边界数据搬运”
+-> “官方 Core 内调度”, “Step1 拓扑顺序”, “Step2 缓存换入／换出”, “Step3 四 Pipe 时间线”
+-> “多 Core 事件模拟”, “DDR 60 B/cycle”, “Task 门控 100/1000 cycles”
+-> branch to TWO distinct output boxes “Makespan（cycles）” and “额外数据搬运量（B）”.
+Official plan interface connects only into lower read-input step.
+Separate dashed note “E0 独立最终复评”, “未修改官方评估器”, “与在线 E1 分开表示”, associated with lower evaluation region. This is final evaluator, not online feedback.
+Do not invent extra workflow edges, loop back final metrics to solver, omit candidates, change decision branches or imply submitter controls Pipe order. Keep every arrow outside text and unrelated cards. Diagram-only output, no top figure title or bottom caption.
