@@ -1,0 +1,619 @@
+#!/usr/bin/env python3
+"""Build the anonymous review checkpoint from chapter Markdown and frozen figures.
+
+No solver/evaluator calls. Figure captions remain searchable LaTeX text.
+"""
+from pathlib import Path
+import csv, json, re, shutil, subprocess, hashlib, os
+
+P=Path(__file__).resolve().parents[1]
+SOURCE_P=Path(os.environ.get('PAPER_SOURCE_ROOT', str(P)))
+CHECKPOINT=os.environ.get('PAPER_CHECKPOINT','checkpoint-03')
+VERSION=os.environ.get('PAPER_VERSION','v2')
+DISPLAY_VERSION=os.environ.get('PAPER_DISPLAY_VERSION', VERSION)
+if not re.fullmatch(r'v[1-9][0-9]*(?:-preview[1-9][0-9]*)?', DISPLAY_VERSION):
+    raise SystemExit('Invalid display version')
+if not re.fullmatch(r'v[1-9][0-9]*', VERSION):
+    raise SystemExit('PAPER_VERSION must be v followed by a positive integer')
+B=P/'build'/CHECKPOINT
+OUT=P/'checkpoints'/CHECKPOINT
+if (OUT/'annotation-lock.json').exists():
+    raise SystemExit('This checkpoint is frozen for user annotations. Set PAPER_CHECKPOINT to a new checkpoint directory.')
+T=P.parent/'template-2026'
+FIG=P/'figures'
+B.mkdir(parents=True,exist_ok=True);OUT.mkdir(parents=True,exist_ok=True)
+# Freeze inputs before conversion; later agent edits cannot leak into this build.
+snapshot={str(f.relative_to(SOURCE_P)): f.read_bytes() for folder in ['chapters','appendix-code','data','ai-disclosure']
+          for f in (SOURCE_P/folder).rglob('*') if f.is_file()}
+for relative,content in snapshot.items():
+    target=B/'source'/relative
+    target.parent.mkdir(parents=True,exist_ok=True)
+    target.write_bytes(content)
+CHAPTERS=B/'source/chapters'
+for n in ['gmcm2026.cls','gmcm-numerical.bst']:
+    shutil.copy2(T/n,B/n)
+for n,src in [('fonts',T/'fonts')]:
+    if not (B/n).exists(): (B/n).symlink_to(src,target_is_directory=True)
+# Selected image bytes are frozen by figure()/timeline_pair() before compilation.
+if (B/'figures').is_symlink(): (B/'figures').unlink()
+(B/'figures').mkdir(exist_ok=True)
+
+def freeze_figure(path):
+    content=path.read_bytes()
+    target=B/'figures'/path.relative_to(FIG)
+    target.parent.mkdir(parents=True,exist_ok=True)
+    target.write_bytes(content)
+    return hashlib.sha256(content).hexdigest()
+
+used=[]
+# v10: author-controlled short titles and separate figure notes.
+figure_text_path = os.environ.get('PAPER_FIGURE_TEXT')
+figure_text = {}
+if figure_text_path:
+    figure_text_bytes = Path(figure_text_path).read_bytes()
+    figure_text = {x['label']: x for x in json.loads(figure_text_bytes)['figures']}
+    target = B/'source/typesetting/figure-text.json'
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(figure_text_bytes)
+
+def figure_caption(caption, label):
+    spec = figure_text.get(label)
+    title = spec['title'] if spec else caption
+    out = r'\caption{' + pandoc(title).strip() + '}\n'
+    out += r'\label{' + label + '}\n'
+    if spec and spec.get('note'):
+        out += (r'\par\vspace{3pt}\begingroup\normalfont\normalsize\songti\raggedright'
+                + '\n' + r'\noindent\textbf{注：}' + pandoc(spec['note']).strip()
+                + '\n' + r'\par\endgroup' + '\n')
+    return out
+
+def prepare_figure_text(caption, label):
+    return (r'\begin{lrbox}{\paperfigurecaptionbox}\begin{minipage}{\linewidth}' + '\n'
+            + figure_caption(caption, label)
+            + r'\end{minipage}\end{lrbox}' + '\n'
+            + r'\setlength{\paperfiguremaxheight}{\dimexpr\textheight-\ht\paperfigurecaptionbox-\dp\paperfigurecaptionbox-18pt\relax}'
+            + '\n')
+
+PAIRED_FIGURES = {
+    'fig:p1-cuts', 'fig:forest-example',
+}
+OVERVIEW_FIGURES = {
+    '04-p1': ['fig:p1-complete-flow'],
+    '05-p2': ['fig:p2-local-cut', 'fig:p2-three-plans'],
+    '06-p3': ['fig:p3-forest-decision'],
+}
+
+def raw_tex(source):
+    """Protect generated TeX from a second Markdown interpretation.
+
+    In particular, Markdown may escape a bare TeX group as literal braces,
+    leaving a font-size switch active for the rest of the document.
+    """
+    return '\n\n```{=latex}\n' + source.strip() + '\n```\n\n'
+
+def figure(file,caption,label,trim=None):
+    caption_tex = pandoc(caption).strip()
+    if file == 'fig-p1-cuts-xy-corrected.png' and trim is None:
+        # Preserve the previously accepted crop when the author uses an image
+        # instead of the former figure-plan marker. Explanations belong in TeX.
+        trim = '0 235 0 0'
+    files=[file]
+    if file in ('team-v8/p2-three-plans-a.pdf', 'team-v9/p2-three-plans-a.pdf'):
+        files.append(file.replace('-a.pdf', '-b.pdf'))
+    parts=[]
+    options = (r'width=\linewidth,height=\dimexpr\paperfiguremaxheight/'
+               + str(len(files)) + r'\relax,keepaspectratio')
+    if trim: options+=',trim='+trim+',clip'
+    for name in files:
+        path=FIG/name
+        assert path.is_file(),path
+        used.append(dict(file=str(path.relative_to(P)),sha256=freeze_figure(path),caption=caption,label=label,
+                         displayed_title=figure_text.get(label, {}).get('title', caption),
+                         displayed_note=figure_text.get(label, {}).get('note', '')))
+        parts.append(r'\includegraphics['+options+']{figures/'+name+'}')
+    # This compact example is followed by a long, breakable algorithm. Keep it
+    # in the text stream so flushing a float does not leave a half-empty page.
+    placement = '[H]' if label in PAIRED_FIGURES else '[!htbp]'
+    return ('\n\n'+r'\begin{figure}'+placement+'\n'+r'\centering'+'\n'
+            +prepare_figure_text(caption,label)
+            +('\n'+r'\par\vspace{4pt}'+'\n').join(parts)+'\n'
+            +r'\par\usebox{\paperfigurecaptionbox}'+'\n'+r'\end{figure}'+'\n\n')
+
+def datafig(name,caption,label):
+    replacements={'fig-dataset':'dataset.pdf','fig-bound-gap':'bound-gap.pdf'}
+    if name in replacements:
+        return figure('team-v8/'+replacements[name],caption,label)
+    return figure('paper-v2/'+name+'.pdf',caption,label)
+
+def timeline_pair(first,second,caption,label):
+    parts=[]
+    for name in [first,second]:
+        path=FIG/'paper-v2'/(name+'.pdf')
+        used.append(dict(file=str(path.relative_to(P)),sha256=freeze_figure(path),caption=caption,label=label))
+        parts.append(r'\includegraphics[width=\linewidth]{figures/paper-v2/'+name+'.pdf}')
+    return '\n\n'+r'\begin{figure}[!htbp]\centering'+'\n'+ ('\n'+r'\par\vspace{4pt}'+'\n').join(parts)+'\n'+figure_caption(caption,label)+r'\end{figure}'+'\n\n'
+
+def replace_plan(m):
+    key=m.group(1)
+    if key=='fig-progression':
+        return figure('fig-progression-v3.png',r'三问条件的差别。问题一为图中不同子图所对应的操作分别建立Task，数据经DDR中转；问题二允许同一个核心保留数据；问题三另为符合条件的COPY\_IN提供共享只读Cache。下部示意数据能够装入Cache时的读取过程；所有请求仍须满足原依赖及规定等待。','fig:progression')
+    if key=='fig-coherent':
+        return figure('fig-framework-v2.png','三问共用的方案构造与比较步骤。各分支只在结构条件满足时采用，所形成的完整方案需检查依赖与容量，并通过执行评价比较完成时间。下界只在其证明条件成立时用于提前排除候选。','fig:framework')
+    if key=='fig-p1-cuts':
+        return figure('fig-p1-cuts-xy-corrected.png',r'case\_026、5个核心的真实归约片段。左为原始划分，右为将独立支路改分到另一个核心；八个 ADD 节点的编号和依赖不变。点线端口连接裁剪范围外的输入或后继，橙色虚线为位于不同子图中的操作之间的依赖。','fig:p1-cuts','0 235 0 0')
+    if key=='fig-p1-overlap':
+        return timeline_pair('fig-p1-overlap-old','fig-p1-overlap-new',
+            r'case\_026、5个核心 两种切分的执行时间线。上：修改前方案，$M=44{,}114$ cycles，额外搬运211,680 B；下：分支重新分配后，$M=42{,}014$ cycles，额外搬运375,532 B。每组分别显示Task持续区间及四条Pipe的操作区间，横轴范围相同，数据来自官方模拟事件。','fig:p1-overlap')
+    if key=='fig-p1-results':
+        return datafig('fig-p1-results','问题一的完整版本比较。上：每个核心数量的 100 图平均加速比；下：全部500种图与核心数量组合的时间与搬运量配对变化。核心数量用点形区分，横轴采用对称对数。','fig:p1-results')
+    if key=='fig-p2-transition':
+        return '\n同一个核心保留数据与在不同核心之间复制数据的区别见图 \\ref{fig:progression}。后续按这个区别计算边界复制量。\n'
+    if key=='fig-state-meaning': return '\n'
+    if key=='fig-p2-results':
+        return datafig('fig-p2-results','问题二的完整版本比较。上：按题目要求计算的平均加速比；下：500种组合配对结果。部分时间改善伴随额外搬运增加，两项指标分别报告。','fig:p2-results')
+    if key=='fig-p2-counterexample':
+        return timeline_pair('fig-p2-counterexample-control','fig-p2-counterexample-c04',
+            r'case\_019、5个核心的官方模拟的执行时间线。上：主算法，$M=16{,}247$ cycles；下：C04，$M=28{,}514$ cycles。每组分别显示Task和四条Pipe，共用横轴范围。C04的搬运量较少，且没有容量不足引起的缓存换入换出，但完成时间更长。','fig:p2-counterexample')
+    if key=='fig-cache-story':
+        return r'''
+例如，case\_021、3个核心的编译后张量 t1000000001 大小为 4096 B。官方事件给出以下生命周期；事件时刻为 cycles，表中间隔不表示等长处理阶段。
+
+\begin{table}[!htbp]\centering
+\caption{同一张量的 Cache 事件}\label{tab:cache-events}
+\begin{tabularx}{\linewidth}{rX}\toprule
+时刻 / cycle & 事件 \\\midrule
+0 & COPY\_IN开始时未命中 \\
+207 & DDR COPY\_IN 完成，张量放入Cache，记下插入顺序 \\
+4,956 & 另一个核心读命中，插入次序不变 \\
+323,850 & 插入张量 t1000000487 时，该最早插入的项被移除 \\\bottomrule
+\end{tabularx}\end{table}
+'''
+    if key=='fig-forest-frontier':
+        return datafig('fig-forest-example','两种子树处理顺序的内部结果占用。左：先A后B，峰值10 KiB；右：先B后A，峰值13 KiB。横轴为处理步骤，不是模拟时钟；数字为第6章的公式示例。','fig:forest-example')
+    if key=='fig-p3-results':
+        return datafig('fig-p3-results','问题三的保持方案不变的配对评价。上：无 L2 与只读 Cache 的平均基线加速比；下：逐图$M_2/M_3$的均值，每种核心数量包含100对结果。','fig:p3-results')
+    if key=='fig-cache-gain':
+        return datafig('fig-cache-gain','500 个保持方案不变的配对结果中的字节命中率与 Cache 收益。保留低于 1 的负收益点；100 个用例的不同核心数量结果相关，不能当作 500 个独立随机样本。','fig:cache-gain')
+    if key=='fig-policy-tradeoff': return '\n'
+    if key=='fig-dataset':
+        return datafig('fig-dataset','官方 100 张计算图的结构统计。上：非 COPY 操作数与张量大小总和；下：按矩阵计算的时长占两类计算总时长的比例排序的用例分布。','fig:dataset')
+    if key=='fig-runtime':
+        return datafig('fig-runtime','三种求解程序的实际经过时间累计分布，每题500次。时间包含方案构造及在线评价，横轴采用对数刻度；批次资源不同，不据此比较独占机器的速度。','fig:runtime')
+    if key=='fig-bound-gap':
+        return datafig('fig-bound-gap',r'同一输入、配置与方案范围下的时间上界和下界。$L\le\mathrm{OPT}\le U$，阴影是必要界给出的上限与当前结果之间的差距，不代表一定可实现的收益。','fig:bound-gap')
+    raise ValueError(key)
+
+def pandoc(s, keep_long_tables=False):
+    proc=subprocess.run(['pandoc','-f','markdown+raw_tex+implicit_figures-auto_identifiers','-t','latex','--wrap=none'],input=s,text=True,capture_output=True,check=True)
+    x=proc.stdout.replace(r'\def\LTcaptype{none}', r'\def\LTcaptype{table}')
+    # Allow the objective pair to wrap at the comma without changing notation.
+    x=x.replace(r'(M_2, \text{added\_copy\_bytes})',
+                r'(M_2,\allowbreak \text{added\_copy\_bytes})')
+    # Short tables should stay together. Keep the long symbol list breakable.
+    def short_table(m):
+        t=m.group(0)
+        if t.count(r"\\") > 12:
+            return t
+        t=t.replace(r'\begin{longtable}[]',r'\begin{tabular}').replace(r'\end{longtable}',r'\bottomrule\end{tabular}')
+        t=t.replace(r'\endhead','').replace(r'\bottomrule\noalign{}'+'\n'+r'\endlastfoot','')
+        return r'\begin{table}[!htbp]\centering\normalsize'+'\n'+t+'\n'+r'\end{table}'
+    if not keep_long_tables:
+        x=re.sub(r'\\begin\{longtable\}[\s\S]*?\\end\{longtable\}',short_table,x)
+    x=re.sub(r'\\texttt\{([^{}]{12,})\}',lambda m:r'\texttt{\seqsplit{'+m.group(1)+'}}',x)
+    x=re.sub(r'\\textbf\{证明。\}([\s\S]*?)\\\(\\square\\\)', lambda m: r'\begin{proof}'+m.group(1)+r'\end{proof}', x)
+    # EQ-01: gmcm2026 numbers equations within each section (the paper chapter).
+    # Pandoc's default display delimiters suppress that numbering.
+    x=re.sub(r'\\\[([\s\S]*?)\\\]',
+             lambda m: '\\begin{equation}\n'+m.group(1).strip()+'\n\\end{equation}', x)
+    return x
+
+def number_tables(x, chapter, captions=None, authored=None):
+    """Caption previously unnumbered tables with their existing section wording."""
+    index = 0
+    def add(m):
+        nonlocal index
+        index += 1
+        table = m.group(0)
+        explicit = (authored or {}).get(index)
+        if explicit:
+            label, title = explicit
+        else:
+            label = 'tab:' + chapter + '-' + str(index)
+            title = None
+        if r'\caption{' in table:
+            return table
+        headings = re.findall(r'\\(?:sub)*section\{([^}]*)\}', x[:m.start()])
+        if not headings:
+            raise ValueError('Missing heading for table in ' + chapter)
+        title = title or (captions or {}).get(index, headings[-1])
+        caption = r'\caption{' + title + r'}\label{' + label + '}'
+        if m.group(1) == 'longtable':
+            # Label only the first page; a repeated header must not repeat it.
+            start = table.index(r'\toprule')
+            end = table.index(r'\endhead')
+            head = table[start:end]
+            headers = (caption + r'\\' + '\n' + head + r'\endfirsthead' + '\n'
+                       + r'\caption[]{' + title + '（续）' + r'}\\' + '\n'
+                       + head + r'\endhead')
+            return table[:start] + headers + table[end + len(r'\endhead'):]
+        return table.replace(r'\centering', r'\centering' + '\n' + caption, 1)
+    return re.sub(r'\\begin\{(table|longtable)\}[\s\S]*?\\end\{\1\}', add, x)
+
+def clean_md(s, chapter=None):
+    s=re.sub(r'<!--[\s\S]*?-->','',s)
+    if chapter == '04-p1':
+        # Explain wave/role variables before their worked example and code.
+        # Move the whole pair, without rewriting either block or splitting the
+        # figure from its algorithm; intervening prose can fill the prior page.
+        pair=re.search(r'!\[[^\n]+\]\([^\n]+\)\{#fig:p1-cuts[^\n]*\}\s*'
+                       r'::: algorithm \{#alg:p1-branch-aid[^\n]*\}\n[\s\S]*?\n:::',s)
+        anchor='### 依赖关系与全序构建规则'
+        if pair and anchor in s:
+            block=pair.group()
+            s=s[:pair.start()]+s[pair.end():]
+            s=s.replace(anchor,block+'\n\n'+anchor,1)
+    # TeX supplies section numbers; do not repeat a Markdown manual prefix.
+    s=re.sub(r'(?m)^(#{1,6})\s+\d+\.\s+', r'\1 ', s)
+    def plan(m):
+        result = replace_plan(m)
+        return raw_tex(result) if r'\begin{' in result else result
+    s=re.sub(r'::: figure-plan \{#([^}]+)\}[\s\S]*?\n:::',plan,s)
+    def render_algorithm(m):
+        label, title, content = m.groups()
+        code = re.search(r'```python\n([\s\S]*?)\n```', content)
+        if code:
+            code_text = code.group(1)
+            if len(code_text.splitlines()) > 34:
+                code_text = '\n'.join(line for line in code_text.splitlines() if line.strip())
+            source_note = pandoc(content[code.end():].strip())
+            rendered = (pandoc(content[:code.start()].strip()) +
+                        '\n' + r'\begin{lstlisting}[style=paperpseudo]' + '\n' +
+                        code_text + '\n' + r'\end{lstlisting}' + '\n' +
+                        source_note)
+        else:
+            rendered = pandoc(content.strip())
+        # All six algorithms stay in reading order and can break across pages.
+        # Never place an entire long listing in an unbreakable float/minipage.
+        # Tall overview diagrams can float earlier across their own explanatory
+        # paragraphs, but must have appeared by the time their algorithm starts.
+        barrier = r'\FloatBarrier'+'\n' if label in {'alg:p1-unified', 'alg:p2-load-guarded-cut', 'alg:p2-adaptive-hypergap', 'alg:p3-forest-solve'} else ''
+        return raw_tex(barrier+r'\par\Needspace{6\baselineskip}\begingroup\normalsize'+'\n'+
+                r'\captionsetup{type=algorithm,position=top,justification=raggedright,singlelinecheck=false,labelfont=bf}'+'\n'+
+                r'\captionof{algorithm}{'+title+'}'+r'\label{'+label+'}\n'+
+                r'\nopagebreak\hrule\nopagebreak'+'\n'+rendered+'\n'+
+                r'\par\hrule\endgroup')
+    s=re.sub(r'::: algorithm \{#([^ }]+) title="([^"]+)"\}\n([\s\S]*?)\n:::',render_algorithm,s)
+    table_heading = ''
+    if chapter == '04-p1' and r'\ref{tab:p1-results}' in s and '表题 {#tab:p1-results}' not in s:
+        table_heading = r'\caption{全量实验评测与结果分析}\label{tab:p1-results}'
+    def results_table(m):
+        lines=m.group(0).strip().splitlines()
+        rows=[line.strip().strip('|').split('|') for line in lines]
+        rows=[r for r in rows if not all(re.fullmatch(r'\s*:?[-]+:?\s*',c) for c in r)]
+        rendered=[]
+        for row in rows:
+            row=[c.strip() for c in row]
+            row[0]=row[0].replace('按题目要求计算平均加速比','官方平均加速比').replace('算法输出方案的','优化方案').replace('优化方案的','优化方案').replace('对前一固定完整版本改善/持平/退化','改善/持平/退化').replace('对前版改善/持平/退化','改善/持平/退化')
+            rendered.append(' & '.join(row)+r' \\')
+        return raw_tex(r'\begin{table}[!htbp]\centering\normalsize'+ '\n'+table_heading+'\n'+r'\begin{tabularx}{\linewidth}{@{}Xrrrrr@{}}\toprule'+'\n'+rendered[0]+'\n'+r'\midrule'+'\n'+'\n'.join(rendered[1:])+'\n'+r'\bottomrule\end{tabularx}\end{table}')
+    s=re.sub(r'^\| 核心数量(?: \$K\$)? \| 1 \| 2 \| 3 \| 4 \| 5 \|\n(?:\|[^\n]+\n)+',results_table,s,flags=re.M)
+    def code(m):
+        if m.group(1).strip() not in ('', 'text'):
+            return m.group(0)
+        return raw_tex('\\begin{lstlisting}[style=gmcmappendix,language={}]\n'+m.group(2).strip()+'\n\\end{lstlisting}')
+    # Consume each complete fence, including raw LaTeX and Python. Matching a
+    # closing fence as a new opener would turn intervening prose into code.
+    s=re.sub(r'^```([^\n]*)\n([\s\S]*?)^```[ \t]*$',code,s,flags=re.M)
+    # LIST-01: preserve colon-introduced Markdown lists in the PDF.
+    s=re.sub(r'(?m)([：:])\n(?=(?:1[.)]|[-+*]) )', r'\1\n\n', s)
+    s=s.replace('框架 为主线','框架为主线')
+    s=re.sub(r'(?<=[\u4e00-\u9fff])Core',' Core',s)
+    s=re.sub(r'Core(?=[\u4e00-\u9fff])','Core ',s)
+    return s
+
+def render_images(s):
+    return re.sub(r'!\[(.*?)\]\(\.\./figures/([^()]+)\)\{#([^} ]+)[^}]*\}',
+                  lambda m:raw_tex(figure(m.group(2),m.group(1),m.group(3))),s)
+
+def render_chapter(s, chapter, captions=None):
+    for figure_label in OVERVIEW_FIGURES.get(chapter, []):
+        # Queue the tall overview at the start of its discussion, so preceding
+        # explanatory paragraphs can fill the page before the diagram page.
+        # Keep the actual cutting diagram adjacent to its local algorithm.
+        pattern = r'!\[[^\n]*\]\([^\n]+\)\{#' + re.escape(figure_label) + r'[^\n]*\}'
+        match = re.search(pattern, s)
+        if match:
+            headings = list(re.finditer(r'^#{2,3} ', s[:match.start()], flags=re.M))
+            heading = headings[-1].start() - 1 if headings else s.rfind('\n## ', 0, match.start())
+            end = s.index('\n', heading + 1)
+            diagram = match.group(0)
+            s = s[:match.start()] + s[match.end():]
+            s = s[:end] + '\n\n' + diagram + '\n' + s[end:]
+    s = render_images(clean_md(s, chapter))
+    # The author supplies table wording; LaTeX supplies the actual number.
+    markers = []
+    def marker(m):
+        token = 'PAPERTABLECAPTION' + str(len(markers)) + 'TOKEN'
+        markers.append((token, m.group(1), pandoc(m.group(2)).strip()))
+        return '\n\n' + token + '\n\n'
+    s = re.sub(r'^表题 \{#([^}]+)\}[：:]\s*(.+)$', marker, s, flags=re.M)
+    # Appendix source mappings contain long paths even with few logical rows.
+    # Keep them breakable and repeat their headers rather than forcing a page.
+    x = pandoc(s, keep_long_tables=(chapter == 'appendix'))
+    authored = {}
+    for token, label, title in markers:
+        before = x[:x.index(token)]
+        index = len(re.findall(r'\\begin\{(?:table|longtable)\}', before)) + 1
+        if index in authored:
+            raise ValueError('Two authored captions target the same table')
+        authored[index] = (label, title)
+        x = x.replace(token, '')
+    return number_tables(x, chapter, captions=captions, authored=authored)
+
+abstract=(CHAPTERS/'00-abstract.md').read_text().split('\n',1)[1]
+abstract,keywords=abstract.split('**关键词：**')
+body=[]
+for f in sorted(CHAPTERS.glob('*.md')):
+    if f.name.startswith(('00','09','10')): continue
+    body.append(render_chapter(f.read_text(), f.stem)+'\n')
+
+# Authored bibliography is the sole source. Stable keys survive display renumbering.
+reference_md=re.sub(r'<!--[\s\S]*?-->','',(CHAPTERS/'09-references.md').read_text())
+references={m.group(1):m.group(2).strip() for m in re.finditer(
+    r'^\[(\d+)\] (.*?)(?=^\[\d+\] |\Z)',reference_md,re.M|re.S)}
+if not references: raise ValueError('No authored references')
+
+def format_reference(entry):
+    """Attachment 2 field order, keeping the author's verified metadata.
+
+    This is only a presentation transform: no source, author, year, page range
+    or access date is inferred or added. DOI identifiers remain supplemental.
+    """
+    journal = re.fullmatch(r'(.+?)\. (.+)\[J\]\. (.+), (\d{4}), ([^:]+): ([^.]+)\.(.*)', entry)
+    if journal:
+        author, title, journal_name, year, volume, pages, doi = journal.groups()
+        return f'{author}，{title}，{journal_name}，{volume}：{pages}，{year}。{doi.strip()}'
+    conference = re.fullmatch(r'(.+?)\. (.+)\[C\]//(.+)\. (\d{4}): ([^.]+)\.(.*)', entry)
+    if conference:
+        author, title, proceedings, year, pages, doi = conference.groups()
+        return f'{author}，{title}，{proceedings}：{pages}，{year}。{doi.strip()}'
+    book = re.fullmatch(r'(.+?)\. (.+)\[M\]\. (.+?): (.+), (\d{4})\.(.*)', entry)
+    if book:
+        author, title, city, publisher, year, extra = book.groups()
+        cited_pages = re.search(r'引用页码[：:]\s*([0-9–—-]+)[。.]?', extra)
+        if cited_pages:
+            remainder = extra.replace(cited_pages.group(0), '').strip()
+            return f'{author}，{title}，{city}：{publisher}，{cited_pages.group(1)}，{year}。{remainder}'
+        return f'{author}，{title}，{city}：{publisher}，{year}。{extra.strip()}'
+    report = re.fullmatch(r'(.+?)\. (.+)\[R\]\. (.+), (\d{4})\.(.*)', entry)
+    if report:
+        author, title, institution, year, extra = report.groups()
+        return f'{author}，{title}，{institution}，{year}。{extra.strip()}'
+    web = re.fullmatch(r'(.+?)\. (.+)\[EB/OL\]\. (.*?)\[(\d{4})-(\d{2})-(\d{2})\]\. (https?://\S+)\.(.*)', entry)
+    if web:
+        author, title, metadata, year, month, day, url, doi = web.groups()
+        metadata = metadata.strip().rstrip('.').strip()
+        resource = title + ('（' + metadata + '）' if metadata else '')
+        return f'{author}，{resource}，{url}，访问时间：{year}年{month}月{day}日。{doi.strip()}'
+    document = re.fullmatch(r'(.+?)\. (.+)\[Z\]\. (\d{4})\.', entry)
+    if document:
+        author, title, year = document.groups()
+        return f'{author}，{title}，{year}。'
+    raise ValueError('Unrecognized bibliography entry; preserve and review rather than guessing: ' + entry)
+bodytext='\n'.join(body)
+app=(CHAPTERS/'10-appendix.md').read_text()
+appendix_captions={int(m.group(1)):m.group(2) for m in
+                  re.finditer(r'^表 C\.(\d+)：\s*(.+)$', app, re.M)}
+app=re.sub(r'^表 C\.\d+：\s*.+\n', '', app, flags=re.M)
+app=re.sub(r'表 C\.(\d+)', lambda m:r'表 \ref{tab:appendix-'+m.group(1)+'}', app)
+app=re.sub(r'^# 附录\s*\n','',app)
+app=re.sub(r'^## 附录[A-Z] ', '# ',app,flags=re.M)
+app=re.sub(r'^### [A-Z]\.\d+ ', '## ',app,flags=re.M)
+appendix=render_chapter(app, 'appendix', appendix_captions)
+# Let the code-appendix introduction fill the page before a pending diagnostic
+# figure. Flush before the first actual listing, not at every appendix heading.
+# Keep short appendix tables with their explanatory paragraphs.
+appendix=appendix.replace(r'\begin{table}[!htbp]',r'\begin{table}[H]')
+if r'\section{核心程序代码}' not in appendix:
+    appendix+='\n'+r'\section{核心程序代码}'+'\n'
+code_manifest=json.loads((B/'source/appendix-code/manifest.json').read_text())
+appendix+='\n'+r'\FloatBarrier'+'\n'
+for item in code_manifest['files']:
+    code_path=B/'source/appendix-code'/item['file']
+    assert hashlib.sha256(code_path.read_bytes()).hexdigest()==item['sha256'], item['file']
+    listing_file=item['listing_file']
+    listing_path=B/'source/appendix-code'/listing_file
+    listing_bytes=listing_path.read_bytes()
+    assert hashlib.sha256(listing_bytes).hexdigest()==item['listing_sha256'], listing_file
+    assert listing_bytes[item['declaration_bytes']:]==code_path.read_bytes(), listing_file
+    title=item['problem']+' '+item['file'].split('/')[-1]
+    # Keep the declaration with its module title and the start of the program.
+    appendix+=r'\Needspace{12\baselineskip}'+'\n'
+    appendix+=r'\subsection{'+title.replace('_',r'\_')+'}\n'
+    appendix+=r'\lstinputlisting[style=gmcmappendix,language=Python,belowskip=0.4em]{source/appendix-code/'+listing_file+'}\n'
+
+citation_order=[]
+def cite_match(m):
+    key=m.group(1) or m.group(2)
+    if key not in references: raise ValueError('Undefined reference '+key)
+    if key not in citation_order: citation_order.append(key)
+    return r'\citep{ref'+key+'}'
+def convert_citations(x):
+    # Numeric indexing in block or inline code is not a bibliography citation.
+    # Parse balanced texttt groups so nested seqsplit and escaped braces survive.
+    parts=[]
+    cursor=0
+    for start in re.finditer(r'\\begin\{lstlisting\}|\\texttt\{', x):
+        if start.start() < cursor:
+            continue
+        parts.append(re.sub(r'\{\[\}(\d+)\{\]\}|\[(\d+)\]',cite_match,x[cursor:start.start()]))
+        end=start.end()
+        if start.group().startswith(r'\begin'):
+            close=x.index(r'\end{lstlisting}', end)
+            end=close+len(r'\end{lstlisting}')
+        else:
+            depth=1
+            while depth and end < len(x):
+                if x[end]=='\\':
+                    end+=2
+                    continue
+                if x[end]=='{': depth+=1
+                elif x[end]=='}': depth-=1
+                end+=1
+            if depth:
+                raise ValueError('Unclosed inline code group')
+        parts.append(x[start.start():end])
+        cursor=end
+    parts.append(re.sub(r'\{\[\}(\d+)\{\]\}|\[(\d+)\]',cite_match,x[cursor:]))
+    return ''.join(parts)
+bodytext=convert_citations(bodytext)
+appendix=convert_citations(appendix)
+def merge_citation_group(m):
+    keys = re.findall(r'\\citep\{(ref\d+)\}', m.group())
+    return r'\citep{' + ','.join(keys) + '}'
+bodytext=re.sub(r'(?:\\citep\{ref\d+\}\s*){2,}',merge_citation_group,bodytext)
+appendix=re.sub(r'(?:\\citep\{ref\d+\}\s*){2,}',merge_citation_group,appendix)
+uncited=set(references)-set(citation_order)
+if uncited: raise ValueError('Uncited references: '+str(sorted(uncited)))
+bib=r'\Needspace{8\baselineskip}\begin{thebibliography}{'+str(len(references))+'}\n'+r'\raggedright'+'\n'
+for key in citation_order:
+    bib+=r'\bibitem{ref'+key+'} '+pandoc(format_reference(references[key])).strip()+'\n'
+bib+=r'\end{thebibliography}'+'\n'
+main_appendix=appendix
+appendix=''
+rows=list(csv.DictReader((B/'source/data/all-results.csv').open()))
+assert len(rows)==1500
+appendix+=r'''
+\section{逐用例完整结果}
+周期单位为 cycle，搬运单位为 B。各表来自同一份1500行冻结CSV；M为Makespan，D为额外DDR搬运量。P3另给相同方案关闭L2的M和D，以及按字节计算的命中率H。正文平均值使用未舍入原值计算。
+'''
+def table(caption,head,cols,values):
+    return ('\n\\begin{longtable}{'+cols+'}\n\\caption{'+caption+'}\\\\\n\\toprule\n'+head+'\\\\\\midrule\n\\endfirsthead\n\\toprule\n'+head+'\\\\\\midrule\n\\endhead\n\\bottomrule\\endfoot\n'+'\n'.join(' & '.join(v)+r' \\' for v in values)+'\n\\end{longtable}\n')
+for problem in ['P1','P2','P3']:
+    for k in range(1,6):
+        rr=[r for r in rows if r['problem']==problem and int(r['cores'])==k]
+        assert len(rr)==100
+        values=[[r['case_id'],r['makespan_cycles'],r['extra_ddr_bytes'],f"{float(r['solver_wall_seconds']):.3f}"] for r in rr]
+        appendix+=table(f'{problem}、{k}个核心的逐用例结果','case & M / cycle & D / B & 求解时间 / s','lrrr',values)
+        if problem=='P3':
+            values=[[r['case_id'],r['no_l2_makespan_cycles'],r['no_l2_extra_ddr_bytes'],f"{float(r['cache_hit_rate_bytes'])*100:.3f}"] for r in rr]
+            appendix+=table(f'P3、{k}个核心的相同方案关闭L2对照及Cache命中率','case & 无L2 M / cycle & 无L2 D / B & H / \\%','lrrr',values)
+tables_appendix=appendix
+preamble=r'''\documentclass[anonymous,withtoc]{gmcm2026}
+\usepackage{placeins}
+\usepackage{seqsplit,calc,needspace,float,etoolbox}
+\newsavebox{\paperfigurecaptionbox}
+\newlength{\paperfiguremaxheight}
+% Local paper override: a modest contrast increase, preserving the shared template.
+\definecolor{gmcmcodekeyword}{HTML}{214E80}
+\definecolor{gmcmcodecomment}{HTML}{4C7163}
+\definecolor{gmcmcodestring}{HTML}{785449}
+\lstdefinestyle{gmcmappendix}{
+  basicstyle=\normalsize\ttfamily\songti\color{gmcmcodetext},
+  numbers=none,frame=single,framerule=0.3pt,
+  backgroundcolor=\color{gmcmcodebackground},rulecolor=\color{gmcmcodeborder},
+  framesep=4pt,xleftmargin=6pt,xrightmargin=6pt,
+  aboveskip=0.8em,belowskip=0.8em,
+  keywordstyle=\bfseries\color{gmcmcodekeyword},
+  commentstyle=\color{gmcmcodecomment},stringstyle=\color{gmcmcodestring}}
+\lstdefinestyle{paperpseudo}{style=gmcmappendix,language=Python,
+  basicstyle=\normalsize\ttfamily\songti\color{gmcmcodetext},
+  numbers=left,numberstyle=\tiny\color{black!45},numbersep=6pt,
+  xleftmargin=18pt,xrightmargin=4pt,frame=none,
+  backgroundcolor=\color{white},aboveskip=4pt,belowskip=4pt}
+\AtBeginEnvironment{proof}{\upshape}
+% The review manuscript is continuous: do not strand a short final reference
+% on an otherwise empty page solely to force the appendix to a new page.
+\patchcmd{\appendix}{\clearpage}{}{}{\PackageError{paper}{Cannot patch appendix page break}{Review the template}}
+\counterwithin{figure}{subsection}
+\renewcommand{\thefigure}{\thesubsection-\arabic{figure}}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\setcitestyle{super,square,comma,sort&compress}
+\captionsetup[figure]{font={normalsize,bf},labelfont=bf,
+  justification=centering,singlelinecheck=false,labelsep=quad}
+% Three visible levels; page numbers and destinations remain automatic.
+\makeatletter
+\renewcommand*\l@subsection{\@dottedtocline{2}{1.8em}{2.8em}}
+\renewcommand*\l@subsubsection{\@dottedtocline{3}{4.6em}{3.8em}}
+\makeatother
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+\setlength{\emergencystretch}{2em}
+\makeatletter\setlength{\@fptop}{0pt}\makeatother
+\renewcommand{\topfraction}{.90}
+\renewcommand{\bottomfraction}{.85}
+\renewcommand{\textfraction}{.08}
+\renewcommand{\floatpagefraction}{.84}
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\renewcommand{\qedsymbol}{\ensuremath{\scriptstyle\square}}
+\gmcmsetup{title={多核神经网络处理器的计算图切分与调度优化},year=2026,edition={第二十三届},problem=A}
+\begin{document}
+\maketitle
+\begin{abstract}
+'''
+preamble=preamble.replace(r'\begin{document}',r'\begin{document}'+'\n'+r'\hypersetup{pdfsubject={Paper review '+VERSION+r'}}').replace(r'\maketitle',r'\maketitle'+'\n'+r'\begin{center}\small 审阅稿 '+VERSION+r'\end{center}')
+if DISPLAY_VERSION != VERSION:
+    preamble=preamble.replace('审阅稿 '+VERSION, '审阅稿 '+DISPLAY_VERSION+'（排版预览，算法待复核）')
+tex=preamble+pandoc(clean_md(abstract))+r'\keywords{'+keywords.strip()+'}\n'+r'\end{abstract}'+'\n'+r'\maketoc'+'\n'+bodytext+'\n\\FloatBarrier\n'+bib+'\n\\appendix\n'+main_appendix+'\n\\end{document}\n'
+(B/'figure-manifest.json').write_text(json.dumps(used,ensure_ascii=False,indent=2)+'\n')
+supplement=preamble.split(r'\begin{document}')[0]+r'\begin{document}\pagestyle{plain}'+r'\hypersetup{pdfsubject={Paper review '+VERSION+r' supplementary tables}}'+r'\begin{center}\large 审阅稿 '+VERSION+r'：逐用例结果附表\end{center}'+tables_appendix+'\n'+r'\end{document}'
+compile_passes = {}
+for name,source,output in [('main',tex,'anonymous-paper-'+VERSION+'.pdf'),('result-tables',supplement,'result-tables.pdf')]:
+    (B/(name+'.tex')).write_text(source)
+    previous_navigation = None
+    for run in range(6):
+        with (B/f'{name}-compile-{run+1}.txt').open('w') as out:
+            result=subprocess.run(['xelatex','-no-pdf','-interaction=nonstopmode','-halt-on-error',name+'.tex'],cwd=B,stdout=out,stderr=subprocess.STDOUT)
+        if result.returncode:
+            print((B/f'{name}-compile-{run+1}.txt').read_text()[-5000:]);raise SystemExit(result.returncode)
+        log=(B/(name+'.log')).read_text(errors='replace')
+        rerun = ('Label(s) may have changed' in log or
+                 'There were undefined references' in log or
+                 'Rerun to get' in log)
+        navigation = tuple((B/(name+ext)).read_bytes() if (B/(name+ext)).exists() else b''
+                           for ext in ['.aux', '.toc', '.out'])
+        if run >= 1 and not rerun and navigation == previous_navigation:
+            break
+        previous_navigation = navigation
+    else:
+        raise RuntimeError(name + ': TOC and cross-references did not stabilize after six passes')
+    compile_passes[name] = run + 1
+    # Resolve references first; embed the large vector figures only once.
+    with (B/f'{name}-pdf-export.txt').open('w') as out:
+        result=subprocess.run(['xdvipdfmx','-E','-q','-o',name+'.pdf',name+'.xdv'],cwd=B,stdout=out,stderr=subprocess.STDOUT)
+    if result.returncode:
+        raise RuntimeError((B/f'{name}-pdf-export.txt').read_text()[-3000:])
+    shutil.copy2(B/(name+'.pdf'),OUT/output)
+    shutil.copy2(B/(name+'.tex'),OUT/(name+'.tex'))
+shutil.copy2(B/'figure-manifest.json',OUT/'figure-manifest.json')
+shutil.copytree(B/'source', OUT/'source', dirs_exist_ok=True)
+for item in used:
+    dest=OUT/item['file']
+    dest.parent.mkdir(parents=True,exist_ok=True)
+    shutil.copy2(B/item['file'],dest)
+    assert hashlib.sha256(dest.read_bytes()).hexdigest()==item['sha256']
+shutil.copy2(Path(__file__),OUT/'source/build_checkpoint.py')
+for name in ['gmcm2026.cls','gmcm-numerical.bst']:
+    shutil.copy2(B/name,OUT/name)
+shutil.copytree(T/'fonts',OUT/'fonts',dirs_exist_ok=True)
+receipt={'version':VERSION,'checkpoint':CHECKPOINT,'source_hashes':
+         {k:hashlib.sha256(v).hexdigest() for k,v in snapshot.items()},
+         'tex_sha256':hashlib.sha256(tex.encode()).hexdigest(),
+         'template_hashes':{str(f.relative_to(T)):hashlib.sha256(f.read_bytes()).hexdigest()
+                            for f in T.rglob('*') if f.is_file() and (f.suffix in ['.cls','.bst','.ttf','.otf'])},
+         'citations_in_display_order':citation_order,'uncited_references':sorted(uncited),
+         'code_files':len(code_manifest['files']),
+         'compile_passes':compile_passes,
+         'toc_sha256':hashlib.sha256((B/'main.toc').read_bytes()).hexdigest(),
+         'pdf_sha256':hashlib.sha256((OUT/('anonymous-paper-'+VERSION+'.pdf')).read_bytes()).hexdigest()}
+(OUT/'build-receipt.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+print(OUT/('anonymous-paper-'+VERSION+'.pdf'))
