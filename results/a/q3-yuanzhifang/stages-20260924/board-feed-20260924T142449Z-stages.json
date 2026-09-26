@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "yuanzhifang-q3-stages-20260924-044-shared_stages-P2",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-stages-20260924",
+      "algorithm_id": "q3-shared-stages",
+      "algorithm_name": "共享权重同构链同层交错",
+      "variant": "shared_stages",
+      "solver_commit": "b4f7f67673bce89d3032042795c08a149bb68410",
+      "parameters": {
+        "cores": 4,
+        "deterministic": true,
+        "candidate_policy": "one guarded same-stage plan",
+        "guard": "serial homogeneous jobs with identical shared-input stage signatures",
+        "fallback": "baseline on guard rejection; pilot stops before E0 if 044 guard fails",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 1,
+          "E0_limit": 2,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 120,
+          "dispatch_until_seconds": 90,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P2",
+      "case_id": "044",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 67339,
+        "solver_wall_seconds": 0.9638694000004762,
+        "evaluation_wall_seconds": 1.1634545000006256,
+        "ddr_bytes": 3766656,
+        "extra_ddr_bytes": 2791200,
+        "spill_bytes": 0,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "bae8b09b615a6afddc440f3701755914eca94918",
+        "entrypoint": "multicore_cut_evaluate_problem_2.evaluate_scene_b"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "40cffb732fc68bbad0e352cd612b3c4fcfc51be316dc28fe68e9c4042cbc270b"
+      },
+      "artifacts": {
+        "result": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P2/result.json.gz",
+          "sha256": "7dff303406da5c2e5874d1f502d6d889b2b036211f0b870521b9694bbb976d5b"
+        },
+        "trace": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P2/trace.json.gz",
+          "sha256": "91da3c621bde9aa1db3fbec9f8275ae89a31f6aa4f4917999b5beea52fa3358d"
+        },
+        "log": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P2/result.log.gz",
+          "sha256": "6cbd3d7302c5be021177a734230e8ea79623966e4fc3b1f35f579c7d10cf58ad"
+        },
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/case_044_multicore_res.json",
+          "sha256": "40cffb732fc68bbad0e352cd612b3c4fcfc51be316dc28fe68e9c4042cbc270b"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P2/run.json",
+          "sha256": "bf35fa1ec4a93e162b1d0901dcb5d12f4b36cad1dbbb5bcc0d5e64ac5f3d7ed0"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/manifest.json",
+          "sha256": "c092580438b8e5faca5beb92a280a116aec317ec922cfb65ba4e4ffd0ff654a8"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T14:24:16.642134Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "b4f7f67673bce89d3032042795c08a149bb68410",
+            "path": "src/q3_yuanzhifang/stages.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Strictly guard serial homogeneous jobs and their common-weight consumer signatures, retain baseline whole-job placement, then interleave one original operation per job per stage. No parameter sweep or online evaluation. Structural fallback exists; this batch only tests guarded 044.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/b4f7f67673bce89d3032042795c08a149bb68410/docs/a/q3-yuanzhifang/STAGE_ALIGNMENT.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "bae8b09b615a6afddc440f3701755914eca94918",
+            "path": "src/q3_yuanzhifang/stage_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/stage_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/stages-20260924"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; CPU-only algorithm and official Python evaluators; installed adapters: AskLink Display Adapter (HDR); Todesk Virtual Display Adapter; NVIDIA GeForce RTX 3050 Laptop GPU",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; solver and E0 use Python standard library only",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:24:15.568984Z",
+          "finished_at": "2026-09-24T14:24:17.813982Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 120,
+            "candidate_limit": 1,
+            "stop_reason": "one guarded stage construction and its P2/P3 pair completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or precomputation for the live input. Parent performed static chain/signature/live-interval checks and synthetic structure tests before fixing the algorithm; these are separate development costs. Environment was prepared by uv sync --locked before this batch; preparation wall unrecorded.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak process RSS was not instrumented in this batch.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed."
+        }
+      },
+      "notes": [
+        "New independent 044/k4 stage batch; one actual cold construction and its actual P2/P3 pair.",
+        "Both records share the one construction; actual totals are in call-ledger.json.",
+        "Hardware inventory reused from the same host's first pilot, with acquisition times in manifest; all process times and results here are newly measured. OS file cache was not flushed.",
+        "One public development graph, one observation, CPU host not proven exclusive. No online selector, blind review or final independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/044/result.json.gz",
+          "sha256": "73f1d15fdea4f706b22099d2339a0e74a76c4114a68672077a98a8e15faa913c"
+        }
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "yuanzhifang-q3-stages-20260924-044-shared_stages-P3",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-stages-20260924",
+      "algorithm_id": "q3-shared-stages",
+      "algorithm_name": "共享权重同构链同层交错",
+      "variant": "shared_stages",
+      "solver_commit": "b4f7f67673bce89d3032042795c08a149bb68410",
+      "parameters": {
+        "cores": 4,
+        "deterministic": true,
+        "candidate_policy": "one guarded same-stage plan",
+        "guard": "serial homogeneous jobs with identical shared-input stage signatures",
+        "fallback": "baseline on guard rejection; pilot stops before E0 if 044 guard fails",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 1,
+          "E0_limit": 2,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 120,
+          "dispatch_until_seconds": 90,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P3",
+      "case_id": "044",
+      "cores": 4,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 66992,
+        "solver_wall_seconds": 0.9638694000004762,
+        "evaluation_wall_seconds": 2.7686234000002514,
+        "ddr_bytes": 3766656,
+        "extra_ddr_bytes": 2791200,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.007025400840996889
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "bae8b09b615a6afddc440f3701755914eca94918",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "40cffb732fc68bbad0e352cd612b3c4fcfc51be316dc28fe68e9c4042cbc270b"
+      },
+      "artifacts": {
+        "result": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P3/result.json.gz",
+          "sha256": "1fee3389fd0eb62892aa1b9fdba7a0d3c0b93efa1a4666d490237269f4777ff0"
+        },
+        "trace": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P3/trace.json.gz",
+          "sha256": "5c1ec46e37861a6216b2ff3109a5539dc40079d1f96150ffe25d6b77704775b1"
+        },
+        "log": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P3/result.log.gz",
+          "sha256": "bb6f1c87bb413401a98a53601c4bfe312eec909b4d9c8a2bfff3980dbe5b90fc"
+        },
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/case_044_multicore_res.json",
+          "sha256": "40cffb732fc68bbad0e352cd612b3c4fcfc51be316dc28fe68e9c4042cbc270b"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P3/run.json",
+          "sha256": "6c5ee17f4f6f5fd02dafa73553ac17126bf654cf952888e32c3389fa2d096fb2"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/manifest.json",
+          "sha256": "c092580438b8e5faca5beb92a280a116aec317ec922cfb65ba4e4ffd0ff654a8"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T14:24:18.101449Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "b4f7f67673bce89d3032042795c08a149bb68410",
+            "path": "src/q3_yuanzhifang/stages.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Strictly guard serial homogeneous jobs and their common-weight consumer signatures, retain baseline whole-job placement, then interleave one original operation per job per stage. No parameter sweep or online evaluation. Structural fallback exists; this batch only tests guarded 044.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/b4f7f67673bce89d3032042795c08a149bb68410/docs/a/q3-yuanzhifang/STAGE_ALIGNMENT.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "bae8b09b615a6afddc440f3701755914eca94918",
+            "path": "src/q3_yuanzhifang/stage_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/stage_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/stages-20260924"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; CPU-only algorithm and official Python evaluators; installed adapters: AskLink Display Adapter (HDR); Todesk Virtual Display Adapter; NVIDIA GeForce RTX 3050 Laptop GPU",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; solver and E0 use Python standard library only",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T14:24:15.568984Z",
+          "finished_at": "2026-09-24T14:24:20.883913Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 120,
+            "candidate_limit": 1,
+            "stop_reason": "one guarded stage construction and its P2/P3 pair completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or precomputation for the live input. Parent performed static chain/signature/live-interval checks and synthetic structure tests before fixing the algorithm; these are separate development costs. Environment was prepared by uv sync --locked before this batch; preparation wall unrecorded.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak process RSS was not instrumented in this batch.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed."
+        }
+      },
+      "notes": [
+        "New independent 044/k4 stage batch; one actual cold construction and its actual P2/P3 pair.",
+        "Both records share the one construction; actual totals are in call-ledger.json.",
+        "Hardware inventory reused from the same host's first pilot, with acquisition times in manifest; all process times and results here are newly measured. OS file cache was not flushed.",
+        "One public development graph, one observation, CPU host not proven exclusive. No online selector, blind review or final independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/044/result.json.gz",
+          "sha256": "73f1d15fdea4f706b22099d2339a0e74a76c4114a68672077a98a8e15faa913c"
+        }
+      },
+      "cache_pair": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "40cffb732fc68bbad0e352cd612b3c4fcfc51be316dc28fe68e9c4042cbc270b",
+        "cores": 4,
+        "route": "E0",
+        "result": {
+          "path": "results/a/q3-yuanzhifang/stages-20260924/044/shared_stages/P2/result.json.gz",
+          "sha256": "7dff303406da5c2e5874d1f502d6d889b2b036211f0b870521b9694bbb976d5b"
+        }
+      }
+    }
+  ]
+}

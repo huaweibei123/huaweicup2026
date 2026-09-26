@@ -1,0 +1,848 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "yuanzhifang-q3-dag-list-20260924-069-dag_chain_list-P2",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-dag-list-20260924",
+      "algorithm_id": "q3-dag-chain-list",
+      "algorithm_name": "串行链凝聚与释放时间感知分核",
+      "variant": "dag_chain_list",
+      "solver_commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": 5,
+        "deterministic": true,
+        "candidate_policy": "one communication-aware chain-DAG list schedule",
+        "guard": "physical computation edges match official original tensor/direct edges; fork and join exist",
+        "fallback": "algorithm has structural fallback; this pilot stops before E0 on guard rejection",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 2,
+          "E0_limit": 4,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 180,
+          "dispatch_until_seconds": 150,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P2",
+      "case_id": "069",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 17901,
+        "solver_wall_seconds": 0.5615526999990834,
+        "evaluation_wall_seconds": 1.9744439000005514,
+        "ddr_bytes": 822294,
+        "extra_ddr_bytes": 696240,
+        "spill_bytes": 0,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+        "entrypoint": "multicore_cut_evaluate_problem_2.evaluate_scene_b"
+      },
+      "identity": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "683a9b67dcd96cd650d5195aa788d97d4af1395a91df036520c9a637c9d8cce8"
+      },
+      "artifacts": {
+        "result": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P2/result.json.gz",
+          "sha256": "b0284470edf260a093326f14f809d0a8c15eb2ea61497eed30400588999ca889"
+        },
+        "trace": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P2/trace.json.gz",
+          "sha256": "680139781247af5599c77e4f6c13cb4013d800769de9f56b3b9cd0d910282c7e"
+        },
+        "log": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P2/result.log.gz",
+          "sha256": "ed9f7f4e77ad24ff91091355515e102fcc3f44f231d533781ec33517d9019c34"
+        },
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/case_069_multicore_res.json",
+          "sha256": "683a9b67dcd96cd650d5195aa788d97d4af1395a91df036520c9a637c9d8cce8"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P2/run.json",
+          "sha256": "f2eb2de11ce396c9e908a33abf0b8f582885a776f35c4fb592cbce0804d24d06"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/manifest.json",
+          "sha256": "04394be78ce2003de736b33d50698a83fd9661e5b8fdeb97f40c4415904c9c48"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T15:38:38.569568Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+            "path": "src/q3_yuanzhifang/dag_list.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Guard edge agreement and fork/join structure. Condense maximal serial chains, then assign ready chains by remaining-path priority to the core with earliest modeled finish, using per-pipe clocks and static all-miss cross-edge transfer estimates. Build one plan and validate its structure. No E0, capacity or shared COPY-pool simulation inside the model; the model is not an official duration or a general lower bound.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/docs/a/q3-yuanzhifang/DAG_LIST.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "build"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+            "path": "src/q3_yuanzhifang/dag_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/dag_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/dag-list-20260924"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; CPU-only algorithm and official Python evaluators; installed adapters: AskLink Display Adapter (HDR); Todesk Virtual Display Adapter; NVIDIA GeForce RTX 3050 Laptop GPU",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; solver and E0 use Python standard library only",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:38:37.906207Z",
+          "finished_at": "2026-09-24T15:38:40.551717Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 180,
+            "candidate_limit": 2,
+            "stop_reason": "two guarded DAG constructions and four external E0s completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or precomputed plans. Parent developed a direct DAG constructor and reports ten synthetic structure tests before freeze. Existing 100-graph structure analysis (22.365 s) and lower-bound analysis (49.296 s parent report) informed development case selection, not per-input online selection. These are separate development costs. uv sync --locked preceded all batches; environment preparation wall unrecorded.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak process RSS was not instrumented in this batch.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed."
+        }
+      },
+      "notes": [
+        "Independent 069/071 k5 DAG development pilot, two cold constructions and four E0s at most.",
+        "Each P2/P3 pair shares its one actual construction; authoritative totals are in call-ledger.json.",
+        "Same-host static hardware inventory reused with acquisition time in manifest; all reported process times and results are new. OS file cache not flushed; CPU host not proven exclusive.",
+        "Two public development graphs; this is not a full100 result, blind review or independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/069/result.json.gz",
+          "sha256": "a255f440c21f43b045890a66c405288df6705a6b1eafaea6b26ecada92ebc147"
+        }
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "yuanzhifang-q3-dag-list-20260924-069-dag_chain_list-P3",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-dag-list-20260924",
+      "algorithm_id": "q3-dag-chain-list",
+      "algorithm_name": "串行链凝聚与释放时间感知分核",
+      "variant": "dag_chain_list",
+      "solver_commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": 5,
+        "deterministic": true,
+        "candidate_policy": "one communication-aware chain-DAG list schedule",
+        "guard": "physical computation edges match official original tensor/direct edges; fork and join exist",
+        "fallback": "algorithm has structural fallback; this pilot stops before E0 on guard rejection",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 2,
+          "E0_limit": 4,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 180,
+          "dispatch_until_seconds": 150,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P3",
+      "case_id": "069",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 16554,
+        "solver_wall_seconds": 0.5615526999990834,
+        "evaluation_wall_seconds": 3.4037492999996175,
+        "ddr_bytes": 822294,
+        "extra_ddr_bytes": 696240,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.25864281997417465
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "683a9b67dcd96cd650d5195aa788d97d4af1395a91df036520c9a637c9d8cce8"
+      },
+      "artifacts": {
+        "result": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P3/result.json.gz",
+          "sha256": "388cc051eea4c9c1be19f7f9ad690fd52194c4a53480369982546f24e8fadf24"
+        },
+        "trace": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P3/trace.json.gz",
+          "sha256": "e20e53666ff1c1379e893e0bc644075bb818e787108bf51b41f5958b3d9d27aa"
+        },
+        "log": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P3/result.log.gz",
+          "sha256": "45c75553f10083333beb3bad2d042c7b4d7d09a8990399e4ef30b796cc5d8a5f"
+        },
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/case_069_multicore_res.json",
+          "sha256": "683a9b67dcd96cd650d5195aa788d97d4af1395a91df036520c9a637c9d8cce8"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P3/run.json",
+          "sha256": "a8d21041a04fdf33752768c0404a0381da03d8bee5324ad197fe6e87f142d828"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/manifest.json",
+          "sha256": "04394be78ce2003de736b33d50698a83fd9661e5b8fdeb97f40c4415904c9c48"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T15:38:41.268295Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+            "path": "src/q3_yuanzhifang/dag_list.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Guard edge agreement and fork/join structure. Condense maximal serial chains, then assign ready chains by remaining-path priority to the core with earliest modeled finish, using per-pipe clocks and static all-miss cross-edge transfer estimates. Build one plan and validate its structure. No E0, capacity or shared COPY-pool simulation inside the model; the model is not an official duration or a general lower bound.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/docs/a/q3-yuanzhifang/DAG_LIST.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "build"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+            "path": "src/q3_yuanzhifang/dag_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/dag_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/dag-list-20260924"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; CPU-only algorithm and official Python evaluators; installed adapters: AskLink Display Adapter (HDR); Todesk Virtual Display Adapter; NVIDIA GeForce RTX 3050 Laptop GPU",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; solver and E0 use Python standard library only",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:38:37.906207Z",
+          "finished_at": "2026-09-24T15:38:44.727809Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 180,
+            "candidate_limit": 2,
+            "stop_reason": "two guarded DAG constructions and four external E0s completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or precomputed plans. Parent developed a direct DAG constructor and reports ten synthetic structure tests before freeze. Existing 100-graph structure analysis (22.365 s) and lower-bound analysis (49.296 s parent report) informed development case selection, not per-input online selection. These are separate development costs. uv sync --locked preceded all batches; environment preparation wall unrecorded.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak process RSS was not instrumented in this batch.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed."
+        }
+      },
+      "notes": [
+        "Independent 069/071 k5 DAG development pilot, two cold constructions and four E0s at most.",
+        "Each P2/P3 pair shares its one actual construction; authoritative totals are in call-ledger.json.",
+        "Same-host static hardware inventory reused with acquisition time in manifest; all reported process times and results are new. OS file cache not flushed; CPU host not proven exclusive.",
+        "Two public development graphs; this is not a full100 result, blind review or independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/069/result.json.gz",
+          "sha256": "a255f440c21f43b045890a66c405288df6705a6b1eafaea6b26ecada92ebc147"
+        }
+      },
+      "cache_pair": {
+        "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "683a9b67dcd96cd650d5195aa788d97d4af1395a91df036520c9a637c9d8cce8",
+        "cores": 5,
+        "route": "E0",
+        "result": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/069/dag_chain_list/P2/result.json.gz",
+          "sha256": "b0284470edf260a093326f14f809d0a8c15eb2ea61497eed30400588999ca889"
+        }
+      }
+    },
+    {
+      "attempt_id": "yuanzhifang-q3-dag-list-20260924-071-dag_chain_list-P2",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-dag-list-20260924",
+      "algorithm_id": "q3-dag-chain-list",
+      "algorithm_name": "串行链凝聚与释放时间感知分核",
+      "variant": "dag_chain_list",
+      "solver_commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": 5,
+        "deterministic": true,
+        "candidate_policy": "one communication-aware chain-DAG list schedule",
+        "guard": "physical computation edges match official original tensor/direct edges; fork and join exist",
+        "fallback": "algorithm has structural fallback; this pilot stops before E0 on guard rejection",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 2,
+          "E0_limit": 4,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 180,
+          "dispatch_until_seconds": 150,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P2",
+      "case_id": "071",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 12856,
+        "solver_wall_seconds": 0.6178727999995317,
+        "evaluation_wall_seconds": 1.4125095999988844,
+        "ddr_bytes": 560502,
+        "extra_ddr_bytes": 439056,
+        "spill_bytes": 0,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+        "entrypoint": "multicore_cut_evaluate_problem_2.evaluate_scene_b"
+      },
+      "identity": {
+        "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "882c16cda4e66466431780b57cb68cb0f3726e8bba4e9130884f20d7682207c3"
+      },
+      "artifacts": {
+        "result": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P2/result.json.gz",
+          "sha256": "8eda89070e3bfa60ed8afdd30c3a561f6f4c1ae81d4b3a7edf5a0c46e97c203c"
+        },
+        "trace": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P2/trace.json.gz",
+          "sha256": "d6fb636f396ece60f5a86bf94e1ac2c153e0358e219e9f5c350763a3d95ea3a4"
+        },
+        "log": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P2/result.log.gz",
+          "sha256": "79d33e6a399b69885468d919f5ac3703f40fc8e9aed823b3c64861f9a1cca8e6"
+        },
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/case_071_multicore_res.json",
+          "sha256": "882c16cda4e66466431780b57cb68cb0f3726e8bba4e9130884f20d7682207c3"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P2/run.json",
+          "sha256": "2b0e2fc4145a0967a21c59cee591d09b1860c567bb1a90970d6c26430502a343"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/manifest.json",
+          "sha256": "04394be78ce2003de736b33d50698a83fd9661e5b8fdeb97f40c4415904c9c48"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T15:38:45.841018Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+            "path": "src/q3_yuanzhifang/dag_list.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Guard edge agreement and fork/join structure. Condense maximal serial chains, then assign ready chains by remaining-path priority to the core with earliest modeled finish, using per-pipe clocks and static all-miss cross-edge transfer estimates. Build one plan and validate its structure. No E0, capacity or shared COPY-pool simulation inside the model; the model is not an official duration or a general lower bound.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/docs/a/q3-yuanzhifang/DAG_LIST.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "build"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+            "path": "src/q3_yuanzhifang/dag_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/dag_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/dag-list-20260924"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; CPU-only algorithm and official Python evaluators; installed adapters: AskLink Display Adapter (HDR); Todesk Virtual Display Adapter; NVIDIA GeForce RTX 3050 Laptop GPU",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; solver and E0 use Python standard library only",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:38:45.111646Z",
+          "finished_at": "2026-09-24T15:38:47.262355Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 180,
+            "candidate_limit": 2,
+            "stop_reason": "two guarded DAG constructions and four external E0s completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or precomputed plans. Parent developed a direct DAG constructor and reports ten synthetic structure tests before freeze. Existing 100-graph structure analysis (22.365 s) and lower-bound analysis (49.296 s parent report) informed development case selection, not per-input online selection. These are separate development costs. uv sync --locked preceded all batches; environment preparation wall unrecorded.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak process RSS was not instrumented in this batch.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed."
+        }
+      },
+      "notes": [
+        "Independent 069/071 k5 DAG development pilot, two cold constructions and four E0s at most.",
+        "Each P2/P3 pair shares its one actual construction; authoritative totals are in call-ledger.json.",
+        "Same-host static hardware inventory reused with acquisition time in manifest; all reported process times and results are new. OS file cache not flushed; CPU host not proven exclusive.",
+        "Two public development graphs; this is not a full100 result, blind review or independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/071/result.json.gz",
+          "sha256": "d2e46fd00db3766c4ca574084cde6d94b1aa062cab5b5199474c86013e51daa5"
+        }
+      },
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "yuanzhifang-q3-dag-list-20260924-071-dag_chain_list-P3",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-dag-list-20260924",
+      "algorithm_id": "q3-dag-chain-list",
+      "algorithm_name": "串行链凝聚与释放时间感知分核",
+      "variant": "dag_chain_list",
+      "solver_commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": 5,
+        "deterministic": true,
+        "candidate_policy": "one communication-aware chain-DAG list schedule",
+        "guard": "physical computation edges match official original tensor/direct edges; fork and join exist",
+        "fallback": "algorithm has structural fallback; this pilot stops before E0 on guard rejection",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 2,
+          "E0_limit": 4,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 180,
+          "dispatch_until_seconds": 150,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P3",
+      "case_id": "071",
+      "cores": 5,
+      "status": "ok",
+      "metrics": {
+        "makespan_cycles": 12149,
+        "solver_wall_seconds": 0.6178727999995317,
+        "evaluation_wall_seconds": 0.936249599999428,
+        "ddr_bytes": 560502,
+        "extra_ddr_bytes": 439056,
+        "spill_bytes": 0,
+        "cache_hit_rate": 0.24184893446834657
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "882c16cda4e66466431780b57cb68cb0f3726e8bba4e9130884f20d7682207c3"
+      },
+      "artifacts": {
+        "result": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P3/result.json.gz",
+          "sha256": "7fcefcddc1903664c599c4825bf59bd1a895cabc3a8315ba0b82dc8cf0ada29f"
+        },
+        "trace": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P3/trace.json.gz",
+          "sha256": "c283624f6693abe6e32f17401cab9ac7350718418437d77f4e9f98fbd1f406c6"
+        },
+        "log": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P3/result.log.gz",
+          "sha256": "26e5e2a7b761c0b577bf87c4b3263aac76836c503496b2863a5a17d29c2f70c7"
+        },
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/case_071_multicore_res.json",
+          "sha256": "882c16cda4e66466431780b57cb68cb0f3726e8bba4e9130884f20d7682207c3"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P3/run.json",
+          "sha256": "eb70f6cba74f8404fd331863a3806452b80575a71fc64f42ab9b55de26a5066f"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/manifest.json",
+          "sha256": "04394be78ce2003de736b33d50698a83fd9661e5b8fdeb97f40c4415904c9c48"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T15:38:47.665330Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "20fbf33b310b6e9959e45d67361f580601f5959f",
+            "path": "src/q3_yuanzhifang/dag_list.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Guard edge agreement and fork/join structure. Condense maximal serial chains, then assign ready chains by remaining-path priority to the core with earliest modeled finish, using per-pipe clocks and static all-miss cross-edge transfer estimates. Build one plan and validate its structure. No E0, capacity or shared COPY-pool simulation inside the model; the model is not an official duration or a general lower bound.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/20fbf33b310b6e9959e45d67361f580601f5959f/docs/a/q3-yuanzhifang/DAG_LIST.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "build"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "c50a8b9b55f60fdcce8368d79571ca8a472febf5",
+            "path": "src/q3_yuanzhifang/dag_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/dag_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/dag-list-20260924"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; CPU-only algorithm and official Python evaluators; installed adapters: AskLink Display Adapter (HDR); Todesk Virtual Display Adapter; NVIDIA GeForce RTX 3050 Laptop GPU",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4; solver and E0 use Python standard library only",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T15:38:45.111646Z",
+          "finished_at": "2026-09-24T15:38:48.616174Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 180,
+            "candidate_limit": 2,
+            "stop_reason": "two guarded DAG constructions and four external E0s completed"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 1,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or precomputed plans. Parent developed a direct DAG constructor and reports ten synthetic structure tests before freeze. Existing 100-graph structure analysis (22.365 s) and lower-bound analysis (49.296 s parent report) informed development case selection, not per-input online selection. These are separate development costs. uv sync --locked preceded all batches; environment preparation wall unrecorded.",
+          "failure": null
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak process RSS was not instrumented in this batch.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed."
+        }
+      },
+      "notes": [
+        "Independent 069/071 k5 DAG development pilot, two cold constructions and four E0s at most.",
+        "Each P2/P3 pair shares its one actual construction; authoritative totals are in call-ledger.json.",
+        "Same-host static hardware inventory reused with acquisition time in manifest; all reported process times and results are new. OS file cache not flushed; CPU host not proven exclusive.",
+        "Two public development graphs; this is not a full100 result, blind review or independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": {
+        "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "route": "E0",
+        "entrypoint": "singlecore_evaluate.evaluate_singlecore",
+        "result": {
+          "path": "results/benchmark-board/official-singlecore-20260924/071/result.json.gz",
+          "sha256": "d2e46fd00db3766c4ca574084cde6d94b1aa062cab5b5199474c86013e51daa5"
+        }
+      },
+      "cache_pair": {
+        "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "882c16cda4e66466431780b57cb68cb0f3726e8bba4e9130884f20d7682207c3",
+        "cores": 5,
+        "route": "E0",
+        "result": {
+          "path": "results/a/q3-yuanzhifang/dag-list-20260924/071/dag_chain_list/P2/result.json.gz",
+          "sha256": "8eda89070e3bfa60ed8afdd30c3a561f6f4c1ae81d4b3a7edf5a0c46e97c203c"
+        }
+      }
+    }
+  ]
+}

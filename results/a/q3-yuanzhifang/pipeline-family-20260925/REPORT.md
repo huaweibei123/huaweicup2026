@@ -1,0 +1,7 @@
+# Frozen family batch stopped by a runner validation defect
+
+The 63810a050187049357975ac81b7e6009e1d570b3 runner dispatched 2 cold solvers and 2 E0 P2 calls, all subprocesses exited successfully. Batch T0 2026-09-24T19:00:48.294014Z, T1 19:00:57.625954Z, wall 9.33194 seconds. Luna medium ran one two-worker script, with no retries. Minimum dispatch RAM was 2912018432 bytes and free disk 24232361984 bytes. P2 and recent P1 activity were conservatively recorded as shared resource context; P1 current activity was unknown.
+
+Both P2 outputs were rejected by the new parent validation because it incorrectly required result.problem == 2. The frozen official P2 output has scene B, num_cores and Makespan but no problem field; only P3 has problem == 3 and cache_mode. The parent therefore stopped new dispatch; already-running 044 and 046 P2 processes finished and their bytes were sealed. No P3 or other four case was dispatched. This is a runner defect, not an invalid solver plan or an unfavorable P3 measurement.
+
+All original receipts remain unchanged, including the two validation failures. Raw P2 files report 044/k5=63413 and 046/k5=96034, but this stopped batch's standard feed reports the recorded validation failures, not corrected successful attempts. A separate read-only recovery must check process identity, official source/config/graph/plan hashes and result/trace/log compressed/raw hashes before treating these as reusable E0 evidence. Missing P3 and four remaining cases will require a separately frozen followup. Do not rerun or overwrite this directory.

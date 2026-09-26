@@ -1,0 +1,128 @@
+{
+  "schema": "q3-021-k3-cache-nonmonotone-audit-v1",
+  "source": {
+    "p2": {
+      "commit": "19bebf35205d23fdd832781540f8879da52eeb62",
+      "path": "results/a/q3-nikolastarx/forest-full500-20260925-s59/20260924T2122Z-s59ee/revision2-baseline-draft/cache_pair/021-k3/result.json.gz",
+      "gzip_sha256": "e7b6d54df96bca81730c7dadc8b59a65d988da75476be81ea0b550e4f4dad3c6",
+      "gzip_bytes": 191811
+    },
+    "p3": {
+      "commit": "130dfe4c6a10d394a6d04257f660d5a66c51c624",
+      "path": "results/a/q3-nikolastarx/witness-full500-20260925-s59/20260924T2032Z-s59ee/s06/cells/021-k3-unified-attention-witness-e0/evidence/result.json.gz",
+      "gzip_sha256": "f6e460a78209a37b3edb003692efd590378687e4efa7575b286dfa0245c2edb5",
+      "gzip_bytes": 293211
+    },
+    "summary_commit": "27409658d869671d30e940f536bbab30d50d3ef9",
+    "summary_path": "results/a/q3-nikolastarx/cachepair500-feedback-20260925/summary.json",
+    "source_plan_sha256": "13362774572585a30167aed18b9929d52f1962390d05fafb3dc4dbd318a098c4",
+    "p3_plan_path": "results/a/q3-nikolastarx/witness-full500-20260925-s59/20260924T2032Z-s59ee/s06/cells/021-k3-unified-attention-witness-e0/case_021_multicore_res.json"
+  },
+  "identity": {
+    "p2_scene": "B",
+    "p3_scene": "B",
+    "p2_cores": 3,
+    "p3_cores": 3,
+    "p3_problem": 3,
+    "p3_cache_mode": "read_only"
+  },
+  "makespan": {
+    "p2": 2140720,
+    "p3": 2140863,
+    "increase": 143,
+    "cache_gain": 0.9999332045067807
+  },
+  "movement_equal": true,
+  "movement": {
+    "original_graph_copy_bytes": 3338240,
+    "scheduled_copy_bytes": 39993344,
+    "added_copy_bytes": 36655104,
+    "partition_added_copy_bytes": 4710400,
+    "spill_added_copy_bytes": 31944704
+  },
+  "operation_keys_equal": true,
+  "per_core_list_order_equal": false,
+  "first_per_core_list_order_difference": {
+    "core_id": 2,
+    "list_index": 29,
+    "p2_op_key": [
+      2,
+      2,
+      551
+    ],
+    "p2_start": 6708,
+    "p2_end": 9804,
+    "p3_op_key": [
+      2,
+      2,
+      1000005175
+    ],
+    "p3_start": 6329,
+    "p3_end": 6536
+  },
+  "per_core_pipe_filtered_list_order_equal": true,
+  "operation_count": 8881,
+  "op_type_counts": {
+    "COPY_IN": 3814,
+    "MATMUL": 2000,
+    "COPY_OUT": 1147,
+    "ADD": 1920
+  },
+  "changed_start_count": 7485,
+  "changed_end_count": 7808,
+  "changed_duration_count": 2392,
+  "changed_end_by_type": {
+    "COPY_IN": 3523,
+    "COPY_OUT": 970,
+    "ADD": 1788,
+    "MATMUL": 1527
+  },
+  "first_start_change": {
+    "core_id": 2,
+    "task_id": 2,
+    "op_id": 1000006255,
+    "op": "COPY_IN",
+    "pipe": "PIPE_MTE2",
+    "p2_start": 5163,
+    "p2_end": 5472,
+    "p2_duration": 309,
+    "p3_start": 4973,
+    "p3_end": 5281,
+    "p3_duration": 308,
+    "p3_cache_hit": false,
+    "p3_memory_path": "DDR"
+  },
+  "first_completion_time_change": {
+    "core_id": 2,
+    "task_id": 2,
+    "op_id": 1000004905,
+    "op": "COPY_IN",
+    "pipe": "PIPE_MTE2",
+    "p2_start": 4956,
+    "p2_end": 5163,
+    "p2_duration": 207,
+    "p3_start": 4956,
+    "p3_end": 4973,
+    "p3_duration": 17,
+    "p3_cache_hit": true,
+    "p3_memory_path": "CACHE_READ"
+  },
+  "first_same_start_slower_copy_in": {
+    "core_id": 0,
+    "task_id": 0,
+    "op_id": 1000006089,
+    "op": "COPY_IN",
+    "pipe": "PIPE_MTE2",
+    "p2_start": 443077,
+    "p2_end": 443146,
+    "p2_duration": 69,
+    "p3_start": 443077,
+    "p3_end": 443215,
+    "p3_duration": 138,
+    "p3_cache_hit": false,
+    "p3_memory_path": "DDR"
+  },
+  "same_start_slower_copy_in_count": 3,
+  "definition": "First by earliest min(P2,P3) start/end timestamp, then (core,task,op); tied event ordering is not inferred",
+  "limitation": "Two observed timelines; differences and unchanged movement do not establish a complete causal path"
+}

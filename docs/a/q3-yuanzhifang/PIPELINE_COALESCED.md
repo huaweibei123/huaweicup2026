@@ -1,0 +1,13 @@
+# 流水分核不变，合并同阶段优先级桶
+
+现有044/k4连续分段流水官方P3=40927，固定计划L500=28642。旧trace显示核心2/3首个MTE2分别等到10560/19742，随后独立共享权重才开始读取。提交自由度不能直接交换COPY或插入预取指令，但包含原op到subgraph的分组。
+
+冻结官方`multicore_cut_evaluate_problem_2.py`的`_build_scene_b_tasks`每核合并成一个Task；先由Step1生成raw_seq，再由`_prioritize_task_seq`稳定地按提交子图优先级分桶。一个singleton对应的输入COPY随该子图一起移动；桶内保留Step1次序。将同核心连续流水阶段的全部原计算op合成一个subgraph，可以解除人为的singleton桶顺序，让Step1在阶段内安排独立COPY与计算。不引入新算子、Cache key、带宽或起止时刻，也不存在本代码新增的“等所有输入才能开子图”机制；实际官方内存和管线规则照常生效。
+
+新`pipeline_coalesced.py`只调用既有流水分割一次、保持每个原计算op核心不变，再每个非空核心给一个subgraph。依然先通过严格同构共享链守卫和≤512位置限制；不满足时原样返回原方法fallback。流水方向使阶段商图无环，另由官方静态derive_multicore_plan实际检查。构造复杂度沿用分割O(k L²)加图处理，不枚举子图粗细、顺序或E0候选。
+
+此候选会改变M/V与COPY次序，不能继承singleton的固定FIFO下界、无spill观察或先前flowshop时间。大桶也可能拉长tensor生命周期、增加spill或官方时间；这正是需要证伪的风险。比较只使用原同分核的pipeline控制，避免把核心调整和分桶变化混在同一干预中。
+
+三个合成检查分别验证前向阶段商图/核心保持、守卫外fallback保持、冻结官方分桶语义确实可把独立输入从后桶释放到前面。最后一项只给一个合法raw_seq，不宣称Step1会在044选中该词。没有执行真实图solver/Step1/Step2/Step3/E0，未取得正式成绩。
+
+后续最小实验另冻结runner/spec：只044/k4，一次冷构造、同plan P2/P3各一次；首失败停止、零重试。需等本机评分lane实际释放再启动；不能用当前理论或单测替代官方结果。控制固定e6b5500dcbf3818034804168ee79d0f65c16706b的pipeline原件，不重跑控制。

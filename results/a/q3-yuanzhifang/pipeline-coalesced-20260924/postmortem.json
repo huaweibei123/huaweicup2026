@@ -1,0 +1,63 @@
+{
+  "schema": "q3-coalesced-existing-timeline-postmortem-v1",
+  "status": "stopped",
+  "started_at": "2026-09-24T18:01:42.383154Z",
+  "finished_at": "2026-09-24T18:01:42.833375Z",
+  "budget": {
+    "workers": 1,
+    "priority_requested": "below normal",
+    "watchdog_seconds": 60,
+    "retries": 0
+  },
+  "calls": {
+    "solver": 0,
+    "build": 0,
+    "derive": 0,
+    "Step1": 0,
+    "Step2": 0,
+    "Step3": 0,
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "watchdog": {
+    "outer_wall_seconds": 0.4504365000029793,
+    "exit_code": 1,
+    "limit_seconds": 60
+  },
+  "analysis_cpu_seconds": null,
+  "cpu_missing_reason": "Worker stopped before its completion record; process CPU was not captured.",
+  "failure": {
+    "stage": "worker priority initialization before fixed-artifact reads",
+    "type": "AssertionError",
+    "expression": "ctypes.windll.kernel32.SetPriorityClass(ctypes.windll.kernel32.GetCurrentProcess(), 0x00004000)",
+    "reason": "Win32 call returned false; handle ctypes types were not declared. No successful independent data check follows this failure."
+  },
+  "intended_sources": [
+    {
+      "commit": "e6b5500dcbf3818034804168ee79d0f65c16706b",
+      "label": "old pipeline044",
+      "verified_in_this_attempt": false
+    },
+    {
+      "commit": "3a476e5992540f55713a2a138470e2c3aa607dad",
+      "label": "new coalesced044",
+      "verified_in_this_attempt": false
+    }
+  ],
+  "completed_checks": [],
+  "independent_findings": [],
+  "retry_count": 0,
+  "evidence": {
+    "driver_location": "external task temp/coalesced_postmortem.py",
+    "driver_sha256": "878f47325fb39e1bb66beeac29404a7d3901e16a27c5f98b45c50eb671d60bf4",
+    "watchdog_location": "external task temp/run_coalesced_postmortem.py",
+    "watchdog_sha256": "5b12634ac5c5b49193e078e8ab10fd11c0ab2bef7041219e9aaa4cd14fe41f6a",
+    "stderr_location": "external task temp/postmortem.stderr.txt",
+    "stderr_sha256": "b5c7498b461e2e0d163d2b99fbd23e51032d6da43bd0641f8cb9b53ae9c9d704",
+    "stdout_location": "external task temp/postmortem.stdout.txt",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "note": "Exact stderr remains in the external task temp because Python embeds a personal absolute path. This shared receipt retains the failure expression and original-byte hashes."
+  },
+  "interpretation": "The parent reported a preliminary FIFO observation, but this independent attempt did not verify it and claims no bound reuse or blocking witness."
+}

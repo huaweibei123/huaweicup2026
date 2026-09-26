@@ -1,0 +1,17 @@
+# 理论界补充适用条件：原 tensor 的唯一生产者
+
+在与本机P2会话去重理论工作时，对方指出其实现还限制每个原tensor至多一个producer。根会话随后重读冻结官方Step2的backing选择、incarnation重命名和消费边重接。我们原来的IO路径与区间工作量证明没有独立处理同一原tensor多producer、跨核COPY及复用DDR backing的组合。因此收紧程序的证明域：**每个原tensor至多一个原producer（包括原COPY），有多producer时拒绝给出这一组界**；不根据“已有结果未超过T”扩张结论。
+
+这是保守收紧，不宣称已构造出多producer下的官方反例，也不宣称此前实际500格数值已被证伪。原依赖不收缩COPY桥的规则、IO的no logical_tid守卫、逐pipe区间工作量不等式及阈值优化证明不变。零字节COPY仍按官方最少1周期；重读官方发现共享DDR池确实以_op_duration作为工作量，不能擅自把它换成未取整的bytes/bandwidth。
+
+head_tail_bound.py与lower_bounds.py增加相同拒绝守卫，合成测试分别检查多producer拒绝及唯一producer的既有数值。没有修改任何旧原件、线上solver、计划或E0结果。新源只收紧入口，对通过守卫的图运算不变；不重跑100图阈值计算或500次E0。
+
+原始500格材料保存在91bc9159c38e697cb50b5f7af13a1a810249415a。发布时未单列这一守卫的逐图审计，随后暂按有条件理论界引用，未凭500格LB≤T代替条件检查。下面已用固定结构证据完成补核；不重算旧界，不覆盖旧原件。
+
+## 固定证据复用完成
+
+复用P2固定提交 [bd36d30a6d883a645632748b8cf22cc6ec885b7a](https://github.com/huaweibei123/huaweicup2026/blob/bd36d30a6d883a645632748b8cf22cc6ec885b7a/results/a/q2-yuanzhifang/feedback-20260924/theory/review-structure.json) 的100图结构审计，并阅读同提交的THEORY_REVIEW.md与test_bounds.py中census函数。其原审计用4.756613秒读取699118个操作、747786个tensor，逐原op→tensor边计数（含COPY），100/100图的多producer数量均为零。该原审计未记录执行时的测试文件commit；这里固定并核验的是已提交证据及同提交检查代码，不补造as-run来源。
+
+本会话逐一核对100个case唯一且覆盖001–100，全部graph SHA与本分支冻结source-manifest及既有500行head-tail结果一致，重新求和全部计数并核对4个官方源码SHA。P2结构文件没有logical_tid统计；该条件另由固定91bc9159的500行unaliased_io_guard=true及对应09abe6b0源码的原tensor字段检查支持，不能把它归给P2 census。读回仅0.572936秒、0原图读取、0solver/0E0；具体文件hash、时间及每项检查见 [bound-domain-reuse.json](bound-domain-reuse.json)。准备过的audit_bound_domain.py未执行，无额外100图扫描。
+
+因此冻结100图已满足补充适用条件，旧500格可继续按文中证明作为解析必要界引用。这个补核不证明界可达、当前方案最优或浮点事件模拟与理想连续服务模型已被机器形式化验证。多producer一般图仍由程序拒绝；COPY桥不作计算依赖收缩。

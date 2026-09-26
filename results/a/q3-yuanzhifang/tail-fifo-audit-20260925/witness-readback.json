@@ -1,0 +1,35 @@
+{
+  "schema": "q3-tail-fifo-witness-readback-v1",
+  "receipt_source": "receipt.json",
+  "analysis_source": "analysis.json.gz and analysis.stdout.json",
+  "checks": {
+    "gzip_sha256_matches_receipt": true,
+    "raw_sha256_matches_receipt": true,
+    "raw_bytes_matches_receipt": true,
+    "stdout_json_matches_gzip_json": true,
+    "graph_sha256_matches_receipt": true,
+    "config_sha256_matches_receipt": true,
+    "path_positive_cycle_sum_is_12218400": true,
+    "original_path_edges_verified_against_direct_or_op_tensor_op": true,
+    "fifo_path_edges_same_pipe_distinct_op": true,
+    "bound_minus_work_is_19501": true,
+    "bound_exceeds_work_but_not_incumbent": true
+  },
+  "counts": {
+    "path_ops": 882,
+    "path_edges": 881,
+    "original_path_edges": 147,
+    "original_edges_verified": 147,
+    "fifo_path_edges": 734,
+    "fifo_edges_same_pipe_distinct_op": 734
+  },
+  "values": {
+    "path_positive_cycles": 12218400,
+    "lower_bound_cycles": 12218400,
+    "incumbent_cycles": 12237901,
+    "bound_minus_incumbent": -19501,
+    "workload_peak_cycles": 11791696,
+    "bound_minus_work": 426704
+  },
+  "scope": "Read-only certificate/raw graph/config consistency check. No analyzer, constructor, official derive, Step or E0. FIFO checks only endpoint pipe/id; does not independently verify complete schedule projection. Bound derivation and source proof are not reproved here; cross-core COPY/necessary-lag audit remains separate."
+}

@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "yuanzhifang-q3-pipeline-family-20260925-046-failure-1",
+      "revision": 2,
+      "run_id": "yuanzhifang-q3-pipeline-family-20260925",
+      "algorithm_id": "q3-pipeline-family",
+      "algorithm_name": "连续流水阶段结构构造",
+      "variant": "pipeline_stages",
+      "solver_commit": "6bae8dfa317bc71226068344b59dd65d2612c32b",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": 5,
+        "deterministic": true,
+        "candidate_policy": "one frozen O(k L^2) contiguous pipeline partition per graph",
+        "guard": "stage_structure plus positions<=512 and jobs>=cores",
+        "fallback": "runner stops before E0 when structural guard rejects candidate",
+        "batch_budget": {
+          "workers": 2,
+          "cold_solver_limit": 6,
+          "E0_limit": 12,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 300,
+          "dispatch_until_seconds": 270,
+          "retries": 0
+        },
+        "resource_context": {
+          "concurrent_work": "P1+P2",
+          "workers": 2,
+          "exclusive_host_claim": false,
+          "process_priority": "BELOW_NORMAL_PRIORITY_CLASS",
+          "dispatch_gate": "global lock; >=2 GiB available RAM and >=2 GiB free output disk"
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P2",
+      "case_id": "046",
+      "cores": 5,
+      "status": "failed",
+      "metrics": {
+        "makespan_cycles": null,
+        "solver_wall_seconds": 1.0080189000000246,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": null,
+        "extra_ddr_bytes": null,
+        "spill_bytes": null,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "63810a050187049357975ac81b7e6009e1d570b3",
+        "entrypoint": "multicore_cut_evaluate_problem_2.evaluate_scene_b"
+      },
+      "identity": {
+        "graph_sha256": "1917fbb2bfe1141fd8dc4bdac6119dd44014df9a13eb18faa3e55f25bcc91659",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "adfe1f29ab97d628316f311034be98f1c05fcd152c116996adb0551631972070"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/pipeline-family-20260925/046/pipeline_stages/case_046_multicore_res.json",
+          "sha256": "adfe1f29ab97d628316f311034be98f1c05fcd152c116996adb0551631972070"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/pipeline-family-20260925/046/pipeline_stages/failed-046-failure-1/run.json",
+          "sha256": "8726cedfc1a0ad28bf7412c604a36ca162627d7deeaf6ae4fa75bf8f56a4a6e1"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/pipeline-family-20260925/manifest.json.gz",
+          "sha256": "593f042786ad45152e54b3d31d96f92a8cf1b023c6d554923b10dd1e54ee70b2"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T19:00:57.625954Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "6bae8dfa317bc71226068344b59dd65d2612c32b",
+            "path": "src/q3_yuanzhifang/pipeline_stages.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Direct contiguous stage partition by exact O(k L^2) DP for a copy-free flowshop abstraction; one plan per graph, no internal evaluator. Official E0 determines real makespan.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/63810a050187049357975ac81b7e6009e1d570b3/docs/a/q3-yuanzhifang/PIPELINE_FAMILY.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/baseline.py",
+              "entrypoint": "dependency"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "63810a050187049357975ac81b7e6009e1d570b3",
+            "path": "src/q3_yuanzhifang/pipeline_family_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/pipeline_family_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/pipeline-family-20260925",
+            "--concurrent-work",
+            "P1+P2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; installed adapters not inventoried",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "Python standard library solver/E0; project environment prepared with uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": 1,
+          "workers": 2,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T19:00:53.874083Z",
+          "finished_at": "2026-09-24T19:00:57.625954Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 300,
+            "candidate_limit": 1,
+            "stop_reason": "official E0 result identity mismatch: 046-pipeline_stages"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 0,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or case-specific precomputation in this batch. Prior algorithm development and environment preparation are outside measured cold calls. Each fresh Python solver call includes graph read/indexing, construction, validation and plan write.",
+          "failure": {
+            "stage": "validation",
+            "reason": "official E0 result identity mismatch: 046-pipeline_stages",
+            "exit_code": null,
+            "elapsed_seconds": 0
+          }
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not instrumented; not inferred from total RAM.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed.",
+          "provenance.measurement.failure.exit_code": "No child exit code."
+        }
+      },
+      "notes": [
+        "Six public structural-family k5 cases, up to six cold constructions and twelve external E0s.",
+        "One fresh construction is shared by each P2/P3 pair; count unique calls in sealed ledger.",
+        "At most two concurrent cases; calls within each case are cold/P2/P3 in order.",
+        "This development batch is not the unified full500 algorithm result or independent acceptance.",
+        "Revision 2 removes the unsupported artifacts.call_ledger field; immutable ledger remains hash-linked inside run/manifest. Original feed and failed precheck retained; no measurements changed."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": null,
+      "cache_pair": null
+    },
+    {
+      "attempt_id": "yuanzhifang-q3-pipeline-family-20260925-044-failure-2",
+      "revision": 2,
+      "run_id": "yuanzhifang-q3-pipeline-family-20260925",
+      "algorithm_id": "q3-pipeline-family",
+      "algorithm_name": "连续流水阶段结构构造",
+      "variant": "pipeline_stages",
+      "solver_commit": "6bae8dfa317bc71226068344b59dd65d2612c32b",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": 5,
+        "deterministic": true,
+        "candidate_policy": "one frozen O(k L^2) contiguous pipeline partition per graph",
+        "guard": "stage_structure plus positions<=512 and jobs>=cores",
+        "fallback": "runner stops before E0 when structural guard rejects candidate",
+        "batch_budget": {
+          "workers": 2,
+          "cold_solver_limit": 6,
+          "E0_limit": 12,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 300,
+          "dispatch_until_seconds": 270,
+          "retries": 0
+        },
+        "resource_context": {
+          "concurrent_work": "P1+P2",
+          "workers": 2,
+          "exclusive_host_claim": false,
+          "process_priority": "BELOW_NORMAL_PRIORITY_CLASS",
+          "dispatch_gate": "global lock; >=2 GiB available RAM and >=2 GiB free output disk"
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P2",
+      "case_id": "044",
+      "cores": 5,
+      "status": "failed",
+      "metrics": {
+        "makespan_cycles": null,
+        "solver_wall_seconds": 0.8200638000016625,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": null,
+        "extra_ddr_bytes": null,
+        "spill_bytes": null,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "63810a050187049357975ac81b7e6009e1d570b3",
+        "entrypoint": "multicore_cut_evaluate_problem_2.evaluate_scene_b"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": "53b3cc6a8697008752607dd0b6fb117036e706e03325bc233f7a6908c22a1490"
+      },
+      "artifacts": {
+        "plan": {
+          "path": "results/a/q3-yuanzhifang/pipeline-family-20260925/044/pipeline_stages/case_044_multicore_res.json",
+          "sha256": "53b3cc6a8697008752607dd0b6fb117036e706e03325bc233f7a6908c22a1490"
+        },
+        "run": {
+          "path": "results/a/q3-yuanzhifang/pipeline-family-20260925/044/pipeline_stages/failed-044-failure-2/run.json",
+          "sha256": "82f4dddb97f20fa9b905ad63817565ce37b30a323b239267b8fc4f3bfa501540"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/pipeline-family-20260925/manifest.json.gz",
+          "sha256": "593f042786ad45152e54b3d31d96f92a8cf1b023c6d554923b10dd1e54ee70b2"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T19:00:57.625954Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "6bae8dfa317bc71226068344b59dd65d2612c32b",
+            "path": "src/q3_yuanzhifang/pipeline_stages.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Direct contiguous stage partition by exact O(k L^2) DP for a copy-free flowshop abstraction; one plan per graph, no internal evaluator. Official E0 determines real makespan.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/63810a050187049357975ac81b7e6009e1d570b3/docs/a/q3-yuanzhifang/PIPELINE_FAMILY.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/baseline.py",
+              "entrypoint": "dependency"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "63810a050187049357975ac81b7e6009e1d570b3",
+            "path": "src/q3_yuanzhifang/pipeline_family_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/pipeline_family_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/pipeline-family-20260925",
+            "--concurrent-work",
+            "P1+P2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; installed adapters not inventoried",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "Python standard library solver/E0; project environment prepared with uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": 1,
+          "workers": 2,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T19:00:53.651854Z",
+          "finished_at": "2026-09-24T19:00:57.625954Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 300,
+            "candidate_limit": 1,
+            "stop_reason": "official E0 result identity mismatch: 046-pipeline_stages"
+          },
+          "calls": {
+            "solver": 1,
+            "E0": 0,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or case-specific precomputation in this batch. Prior algorithm development and environment preparation are outside measured cold calls. Each fresh Python solver call includes graph read/indexing, construction, validation and plan write.",
+          "failure": {
+            "stage": "validation",
+            "reason": "official E0 result identity mismatch: 046-pipeline_stages",
+            "exit_code": null,
+            "elapsed_seconds": 0
+          }
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not instrumented; not inferred from total RAM.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed.",
+          "provenance.measurement.failure.exit_code": "No child exit code."
+        }
+      },
+      "notes": [
+        "Six public structural-family k5 cases, up to six cold constructions and twelve external E0s.",
+        "One fresh construction is shared by each P2/P3 pair; count unique calls in sealed ledger.",
+        "At most two concurrent cases; calls within each case are cold/P2/P3 in order.",
+        "This development batch is not the unified full500 algorithm result or independent acceptance.",
+        "Revision 2 removes the unsupported artifacts.call_ledger field; immutable ledger remains hash-linked inside run/manifest. Original feed and failed precheck retained; no measurements changed."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": null,
+      "cache_pair": null
+    }
+  ]
+}

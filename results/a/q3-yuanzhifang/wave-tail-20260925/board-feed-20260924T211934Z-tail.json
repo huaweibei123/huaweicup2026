@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "yuanzhifang-q3-wave-tail-20260925-067-failure-1",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-wave-tail-20260925",
+      "algorithm_id": "q3-wave-tail",
+      "algorithm_name": "单余量作业切分波次构造",
+      "variant": "wave_tail",
+      "solver_commit": "1b0da8c9f92d868209d0cada77a170eb558c997c",
+      "parameters": {
+        "cores": 5,
+        "requested_cores": 5,
+        "active_cores": null,
+        "deterministic": true,
+        "candidate_policy": "one fixed single-tail wave construction; no E0 selection",
+        "guard": "strict homogeneous jobs and private tensor signatures; J=qk+1, k=5, one split tail",
+        "fallback": "runner stops before E0 when structural guard rejects candidate",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 1,
+          "E0_limit": 2,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 60,
+          "batch_seconds": 180,
+          "dispatch_until_seconds": 120,
+          "retries": 0
+        },
+        "resource_context": {
+          "concurrent_work": "P1+P2",
+          "workers": 1,
+          "exclusive_host_claim": false,
+          "process_priority": "BELOW_NORMAL_PRIORITY_CLASS",
+          "dispatch_gate": "global lock; >=2 GiB available RAM and >=2 GiB free output disk"
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0
+      },
+      "problem": "P3",
+      "case_id": "067",
+      "cores": 5,
+      "status": "failed",
+      "metrics": {
+        "makespan_cycles": null,
+        "solver_wall_seconds": null,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": null,
+        "extra_ddr_bytes": null,
+        "spill_bytes": null,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "acfdded597311c355e8bb13aad8c56d27767fd94",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "f49b5087689e18c6bf231843f8f3bbaca238a547ea5309b2492c76d5f170b542",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": null
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q3-yuanzhifang/wave-tail-20260925/067/wave_tail/failed-067-failure-1/run.json",
+          "sha256": "9f9e4d9fdc7b46b7f10d765acc26cf57162d4c1b04a913dd03d602959117d003"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/wave-tail-20260925/manifest.json.gz",
+          "sha256": "40c578f0b25c66b576fb72ebddf52f5c42eab30114a436cfbae14803f04b1f51"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T21:18:38.367667Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "1b0da8c9f92d868209d0cada77a170eb558c997c",
+            "path": "src/q3_yuanzhifang/wave_tail.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Strict homogeneous job guard; distribute 70 complete jobs evenly and split only the final job into five consecutive segments. Two-pass bounded DP minimizes the maximum per-core M/V compute workload, then a boundary-byte proxy. Singleton plan and no internal E0; workload/capacity proxies are not official score bounds.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/acfdded597311c355e8bb13aad8c56d27767fd94/docs/a/q3-yuanzhifang/TAIL_MEASUREMENT.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "1b0da8c9f92d868209d0cada77a170eb558c997c",
+              "path": "docs/a/q3-yuanzhifang/WAVE_TAIL.md",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "2cf325fb717077cd902830e7f01c920d27cbf8ec",
+              "path": "src/q3_yuanzhifang/wave_capacity.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "dependency"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/baseline.py",
+              "entrypoint": "dependency"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "acfdded597311c355e8bb13aad8c56d27767fd94",
+            "path": "src/q3_yuanzhifang/tail_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/tail_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/wave-tail-20260925",
+            "--concurrent-work",
+            "P1+P2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; installed adapters not inventoried",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "Python standard library solver/E0; project environment prepared with uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T21:18:30.953890Z",
+          "finished_at": "2026-09-24T21:18:38.367667Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 180,
+            "candidate_limit": 1,
+            "stop_reason": "RAM/disk below 2 GiB or unknown; no child dispatched"
+          },
+          "calls": {
+            "solver": 0,
+            "E0": 0,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, compilation or case-specific precomputation in this batch. Prior algorithm development and environment preparation are outside measured cold calls. The fresh Python solver call includes graph read/indexing, strict guard, two-pass tail DP, construction, validation and plan write. No online E0 selection. Prior pipeline 067 P2/P3 at c514edf0 is historical only.",
+          "failure": {
+            "stage": "validation",
+            "reason": "RAM/disk below 2 GiB or unknown; no child dispatched",
+            "exit_code": null,
+            "elapsed_seconds": 0
+          }
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not instrumented; not inferred from total RAM.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed.",
+          "provenance.measurement.failure.exit_code": "No child exit code."
+        }
+      },
+      "notes": [
+        "067 k5 research pilot: one cold tail plan and up to two external E0s.",
+        "P2/P3 share the same construction ID and plan; new calls counted once in sealed ledger.",
+        "One worker; only the final job is split across five cores; no online E0 selection.",
+        "Historical pipeline 067 P2/P3=15686331 at c514edf0 is reference only, not rerun or included in new calls.",
+        "Whole-job lower bound 12446880 and same-identity captain result 12237901 are historical references, not candidate-selection inputs.",
+        "This is not a unified full500 result or independent acceptance."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": null,
+      "cache_pair": null
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "q3-bound-domain-fixed-evidence-reuse-v1",
+  "scope": "Read and reconcile fixed P2 census, P3 head-tail artifact, and source manifest; no graph rescan or theorem recomputation.",
+  "started_at_utc": "2026-09-24T17:14:20.046204+00:00",
+  "finished_at_utc": "2026-09-24T17:14:20.619636+00:00",
+  "readback_wall_seconds": 0.5729360000004817,
+  "calls": {
+    "solver": 0,
+    "E0": 0,
+    "E1": 0,
+    "E2": 0,
+    "official_graph_reads": 0
+  },
+  "p2_evidence": {
+    "commit": "bd36d30a6d883a645632748b8cf22cc6ec885b7a",
+    "path": "results/a/q2-yuanzhifang/feedback-20260924/theory/review-structure.json",
+    "sha256": "4171d4ff95751deffef9e1f508bb7218f59dd981a8a170a6344d040bd7b0dd4a",
+    "bytes": 43075,
+    "historical_started_at_utc": "2026-09-24T15:32:34.133468+00:00",
+    "historical_finished_at_utc": "2026-09-24T15:32:38.890176+00:00",
+    "historical_wall_seconds": 4.756612799999857,
+    "review_path": "docs/a/q2/feedback/THEORY_REVIEW.md",
+    "review_sha256": "6e731bc18931a4807f559bbbfe7923d8e3a10a67a0f5ee742a94b6f48f402d88",
+    "inspection_code_path": "tests/q2/feedback/test_bounds.py",
+    "inspection_code_sha256": "3084e304da5fa2eb2f55258bd2c6211de13765665ae98446e65f1028ada0221a",
+    "code_provenance_note": "Inspected code is pinned at the evidence commit; the original census did not record its executing code commit. Its producer census counts all original op-to-tensor edges including COPY.",
+    "totals": {
+      "ops": 699118,
+      "tensors": 747786,
+      "eligible_ops": 634506,
+      "multiple_original_producer_tensors": 0,
+      "direct_op_edges": 0,
+      "zero_size_tensors": 0
+    },
+    "official_sources": [
+      {
+        "path": "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+        "sha256": "0b39f84d5ec0a7fba9a4c92a598a9044b97ab79c71393824c1ba130ecfe6c464",
+        "matches_frozen_git_bytes": true
+      },
+      {
+        "path": "data/raw/a/official/code/schedule_step2.py",
+        "sha256": "2836baac176f4e0bdd9eec59b8d9ce254e209e5f7a251e23837ab684312fa0c3",
+        "matches_frozen_git_bytes": true
+      },
+      {
+        "path": "data/raw/a/official/code/schedule_step3.py",
+        "sha256": "50053db0436f1d166dd75436693ba3af49b5c339576beb6e7299477f6b69fc7a",
+        "matches_frozen_git_bytes": true
+      },
+      {
+        "path": "data/raw/a/official/code/stub_multicore_cut_and_schedule.py",
+        "sha256": "0a3a3b79b5173b466fc05fc8d33b72d11d90b4df78995435853d91c632a35892",
+        "matches_frozen_git_bytes": true
+      }
+    ]
+  },
+  "p3_evidence": {
+    "data_commit": "91bc9159c38e697cb50b5f7af13a1a810249415a",
+    "path": "docs/a/q3-yuanzhifang/head-tail-bounds-100.json",
+    "sha256": "348c5e9beab1ee8b62150cc9ffcf45bf6bc497917686890ca8d9932aee2f819f",
+    "source_commit": "09abe6b043d4292e091985151232b5b2861cb07d",
+    "source_path": "src/q3_yuanzhifang/head_tail_bound.py",
+    "source_sha256": "39e6ec33b7b1c54cea2a4b03e5ca63803b999016d0f632d27f57fe7283eb8bf2",
+    "guard_source": "all('logical_tid' not in t for t in graph['tensors'])",
+    "unaliased_io_rows_passed": 500,
+    "note": "The P2 census has no logical_tid field; absence of aliases is supported independently by the frozen P3 guard results."
+  },
+  "identity": {
+    "source_manifest_sha256": "975cefc85ecc34d529c8f3f4798e9b86a099ea65ede69595708ea40aad0da264",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_code_hash": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "case_to_graph_sha256_digest": "880822d46d427bb4b3ec342c379aa7b1f25f9dc8d08e3892ca8a42123fa5ba2a",
+    "mapping_digest_definition": "SHA256 UTF-8 sorted case_id + TAB + graph SHA256 + LF"
+  },
+  "checks": {
+    "all_100_case_ids_unique_and_complete": true,
+    "all_100_graph_hashes_match_source_manifest": true,
+    "all_500_head_tail_graph_hashes_match": true,
+    "census_totals_recomputed_from_all_rows": true,
+    "all_100_have_at_most_one_original_producer_per_tensor": true,
+    "all_500_unaliased_io_guards_true": true,
+    "all_4_p2_official_source_hashes_match_manifest": true,
+    "old_head_tail_artifact_bytes_unchanged": true
+  },
+  "conclusion": "All 100 frozen graphs satisfy the supplemental producer guard; the 500 existing head-tail rows retain their analytical necessary-bound interpretation. This does not prove attainability, optimality, or IEEE event-arithmetic equivalence.",
+  "remaining_limits": [
+    "No new E0 evaluation or independent graph census was performed here.",
+    "The inspected P2 theorem review is supporting analysis, not a machine-checked proof.",
+    "General graphs with multiple original producers remain rejected by the revised bound implementations."
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "submission_version": 1,
+  "records": [
+    {
+      "attempt_id": "yuanzhifang-q3-pipeline-setup-20260924-044-pipeline-setup-preflight",
+      "revision": 1,
+      "run_id": "yuanzhifang-q3-pipeline-setup-20260924",
+      "algorithm_id": "q3-pipeline-cold-setup",
+      "algorithm_name": "共同输入首次搬运的连续流水阶段DP",
+      "variant": "pipeline_cold_setup",
+      "solver_commit": "f14e8f0ae38033e83d9f497301595b7568a55cb6",
+      "parameters": {
+        "cores": 4,
+        "requested_cores": 4,
+        "active_cores": null,
+        "deterministic": true,
+        "candidate_policy": "one O(k L^2) cold-setup contiguous partition with singleton mapping and job-major priorities",
+        "guard": "homogeneous serial jobs; positive integer M/V cycles; each shared input consumed at one position; jobs>=cores and length<=512",
+        "fallback": "algorithm has structural fallback; this pilot stops before E0 on guard rejection",
+        "batch_budget": {
+          "workers": 1,
+          "cold_solver_limit": 1,
+          "E0_limit": 2,
+          "E1_limit": 0,
+          "E2_limit": 0,
+          "per_call_seconds": 30,
+          "batch_seconds": 120,
+          "dispatch_until_seconds": 90,
+          "retries": 0
+        },
+        "internal_E0": 0,
+        "internal_E1": 0,
+        "internal_E2": 0,
+        "resource_context": {
+          "concurrent_work": "P2",
+          "workers": 1,
+          "exclusive_host_claim": false,
+          "source": "Actual run CLI declaration after coordinated START",
+          "memory_gate": "at least 1 GiB immediately before each child dispatch",
+          "child_priority": "Windows BELOW_NORMAL_PRIORITY_CLASS via process creation flag; driver priority not instrumented"
+        }
+      },
+      "problem": "P3",
+      "case_id": "044",
+      "cores": 4,
+      "status": "failed",
+      "metrics": {
+        "makespan_cycles": null,
+        "solver_wall_seconds": null,
+        "evaluation_wall_seconds": null,
+        "ddr_bytes": null,
+        "extra_ddr_bytes": null,
+        "spill_bytes": null,
+        "cache_hit_rate": null
+      },
+      "evaluator": {
+        "route": "E0",
+        "commit": "8a9d7bef5adca9f5b536b6dd837ac88e834db987",
+        "entrypoint": "multicore_cut_evaluate_problem_3.evaluate_problem_3"
+      },
+      "identity": {
+        "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+        "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+        "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+        "plan_sha256": null
+      },
+      "artifacts": {
+        "run": {
+          "path": "results/a/q3-yuanzhifang/pipeline-setup-20260924/044/pipeline_cold_setup/failed-044-pipeline-setup-preflight/run.json",
+          "sha256": "2fc5b0498ae1cfc3d37398306c01d466bc12195c5824f9ee57c448a60dad1fb6"
+        },
+        "manifest": {
+          "path": "results/a/q3-yuanzhifang/pipeline-setup-20260924/manifest.json",
+          "sha256": "4f6c2ca57b104283a2634054aeef69f37006dfe3b702c6efa9847908acf7fcdb"
+        }
+      },
+      "runtime_id": "yuanzhifang-windows-ryzen5600h-py31214-w1-20260924",
+      "observed_at": "2026-09-24T18:26:49.542813Z",
+      "timing": {
+        "solver_includes_evaluation": false,
+        "evaluation_precision": "time.perf_counter outer process wall; seconds, no rounding",
+        "utc": "UTC"
+      },
+      "provenance": {
+        "producer_session": "yuanzhifang30-sudo/s-3d9c78db26714786b88b987ca6f58e2b",
+        "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+        "solver": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "f14e8f0ae38033e83d9f497301595b7568a55cb6",
+            "path": "src/q3_yuanzhifang/pipeline_setup.py",
+            "entrypoint": "main"
+          },
+          "authors": [
+            "yuanzhifang30-sudo",
+            "NikolaStarx"
+          ],
+          "method": "Guard homogeneous positive M/V serial chains with each shared input consumed at a unique job position. Price each shared tensor once as ceil(bytes/bandwidth). Solve an O(k L^2), O(k L) dynamic program exactly for a serial-stage first-job cold-setup abstraction, then submit one contiguous singleton pipeline plan. Core ownership may change from the compute-only control. Real M/V overlap, COPY contention, private inputs, cross-core delay and capacity are outside this model; model time is neither an official bound nor actual makespan. No internal E0.",
+          "references": [
+            "https://github.com/huaweibei123/huaweicup2026/blob/f14e8f0ae38033e83d9f497301595b7568a55cb6/docs/a/q3-yuanzhifang/PIPELINE_SETUP.md"
+          ],
+          "upstream": [
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "6bae8dfa317bc71226068344b59dd65d2612c32b",
+              "path": "src/q3_yuanzhifang/pipeline_stages.py",
+              "entrypoint": "build"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+              "path": "src/q3_yuanzhifang/active_stages.py",
+              "entrypoint": "stage_structure"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "8f8bfce73b0b8e350de1dc40af21f3787c8ac8d6",
+              "path": "src/q3_yuanzhifang/construct.py",
+              "entrypoint": "SharingIndex"
+            },
+            {
+              "repo": "huaweibei123/huaweicup2026",
+              "commit": "a4e7ee13310d693ec4fb5cc236669ceb3b172d1f",
+              "path": "src/q3/construct.py",
+              "entrypoint": "Index"
+            }
+          ],
+          "selected_algorithm_id": null,
+          "selected_solver_commit": null
+        },
+        "runner": {
+          "source": {
+            "repo": "huaweibei123/huaweicup2026",
+            "commit": "8a9d7bef5adca9f5b536b6dd837ac88e834db987",
+            "path": "src/q3_yuanzhifang/pipeline_setup_benchmark.py",
+            "entrypoint": "main"
+          },
+          "argv": [
+            ".venv/Scripts/python.exe",
+            "-B",
+            "src/q3_yuanzhifang/pipeline_setup_benchmark.py",
+            "--graph-dir",
+            "../huaweicup2026/data/raw/a/official-cases/data",
+            "--output",
+            "results/a/q3-yuanzhifang/pipeline-setup-20260924",
+            "--concurrent-work",
+            "P2"
+          ],
+          "working_directory": "."
+        },
+        "environment": {
+          "os": "Windows-11-10.0.26200-SP0",
+          "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+          "gpu": "none used; installed adapters not inventoried",
+          "ram_bytes": 17024741376,
+          "python": "3.12.14",
+          "dependencies": "Python standard library solver/E0; project environment prepared with uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+          "threads": 1,
+          "workers": 1,
+          "peak_rss_bytes": null
+        },
+        "measurement": {
+          "started_at": "2026-09-24T18:26:49.542813Z",
+          "finished_at": "2026-09-24T18:27:05.836412Z",
+          "seed": null,
+          "repeat_index": 0,
+          "cold_start": true,
+          "solver_scope": "Outer fresh Python process startup through import, input read, analysis, construction, structural checks, final plan write and process exit. E0 is external, excluded. OS cache not flushed.",
+          "evaluation_scope": "Outer fresh official CLI process startup through config/graph/plan read, evaluation, complete result/trace/log writes and process exit; no source modification.",
+          "budget": {
+            "wall_seconds": 120,
+            "candidate_limit": 1,
+            "stop_reason": "available RAM below 1 GiB or unknown; no child dispatched"
+          },
+          "calls": {
+            "solver": 0,
+            "E0": 0,
+            "E1": 0,
+            "E2": 0
+          },
+          "offline_costs": "No training, precomputed plan or real-graph construction during preparation. Parent reports four synthetic tests, including 100 independent event-recursion/full-cut oracle examples, changed cuts for late setup, legal coverage and guard fallback. These are development costs, not official results. Cold solver includes graph/chain indexing, one O(k L^2) cold-setup flowshop DP, singleton plan construction, official static validation, output and exit. No internal E0. uv sync --locked preceded this batch; preparation wall unrecorded.",
+          "failure": {
+            "stage": "preflight",
+            "reason": "available RAM below 1 GiB or unknown; no child dispatched",
+            "exit_code": null,
+            "elapsed_seconds": 16.293722700000217
+          }
+        },
+        "missing_reasons": {
+          "provenance.environment.peak_rss_bytes": "Peak RSS was not instrumented; not inferred from total RAM.",
+          "provenance.measurement.seed": "Deterministic direct constructor; no random seed. PYTHONHASHSEED=0 is fixed.",
+          "provenance.measurement.failure.exit_code": "No child exit code for preflight or spawn failure."
+        }
+      },
+      "notes": [
+        "Independent 044 k4 cold-setup pipeline pilot: at most one cold construction and two E0s, no control rerun.",
+        "Each P2/P3 pair shares its one actual construction; authoritative totals are in call-ledger.json.",
+        "Live hardware inventory acquired in this batch; all reported process times and results are new. OS file cache not flushed; CPU host not proven exclusive.",
+        "One public development graph; this is not a full100 result, blind review or independent acceptance.",
+        "Actual concurrent work: P2; available RAM checked before each child, >=1 GiB required. This is not an exclusive-host latency claim."
+      ],
+      "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/51",
+      "baseline": null,
+      "cache_pair": null
+    }
+  ]
+}

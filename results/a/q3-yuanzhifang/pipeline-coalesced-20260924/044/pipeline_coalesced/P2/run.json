@@ -1,0 +1,275 @@
+{
+  "schema": "q3-pipeline-coalesced-attempt-v1",
+  "solver_commit": "6e620b5e005a281003d516ce070228934e8a03af",
+  "runner_commit": "97bfd6d99a9ef9d6bd05c07477cb3f608119a12a",
+  "identity": {
+    "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "5da52df3ddf81fa44872bc3a2b92217253b3b1053a2b10989a628ec851354093"
+  },
+  "construction": {
+    "construction_id": "044-pipeline_coalesced",
+    "case_id": "044",
+    "variant": "pipeline_coalesced",
+    "cores": 4,
+    "requested_cores": 4,
+    "active_cores": 4,
+    "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+    "plan": {
+      "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/case_044_multicore_res.json",
+      "sha256": "5da52df3ddf81fa44872bc3a2b92217253b3b1053a2b10989a628ec851354093"
+    },
+    "solver": {
+      "call_id": "044-pipeline_coalesced",
+      "kind": "solver",
+      "argv": [
+        ".venv/Scripts/python.exe",
+        "-B",
+        "-m",
+        "src.q3_yuanzhifang.pipeline_coalesced",
+        "../huaweicup2026/data/raw/a/official-cases/data/case_044.json",
+        "--cores",
+        "4",
+        "--config",
+        "data/raw/a/official/data/config.txt",
+        "--output",
+        "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/case_044_multicore_res.json"
+      ],
+      "working_directory": ".",
+      "started_at": "2026-09-24T17:52:35.747986Z",
+      "batch_elapsed_at_dispatch": 16.813412600000447,
+      "status": "ok",
+      "timeout_seconds": 30,
+      "pid": 26664,
+      "exit_code": 0,
+      "wall_seconds": 0.7916942000010749,
+      "finished_at": "2026-09-24T17:52:36.547911Z",
+      "stdout": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/solver/stdout.txt.gz",
+        "sha256": "4959b8801e191963f821ed1dc59cdb61415b95969827c001f91de3a9590133a8",
+        "raw_sha256": "ba5f60bf185c69b29cfe11977506e9d1564a235e295b51c7f75ab07ec487ea20",
+        "raw_bytes": 848,
+        "gzip_bytes": 459
+      },
+      "stderr": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/solver/stderr.txt.gz",
+        "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+        "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw_bytes": 0,
+        "gzip_bytes": 20
+      }
+    },
+    "detail": {
+      "active_cores": 4,
+      "assumption": "official Step1 decides within-stage order; no fixed-FIFO, spill or quality guarantee",
+      "core_ownership": "identical to pipeline_stages; one subgraph per nonempty stage",
+      "cuts": [
+        0,
+        28,
+        58,
+        91,
+        124
+      ],
+      "guard": true,
+      "original_singletons": 1364,
+      "pipeline_reference": {
+        "active_cores": 4,
+        "assumption": "copy-free serial-server flowshop; not an E0 lower or upper bound",
+        "bottleneck_cycles": 1947,
+        "crossing_tensor_net_bytes": 67584,
+        "crossing_tensor_net_copies": 110,
+        "cuts": [
+          0,
+          28,
+          58,
+          91,
+          124
+        ],
+        "guard": true,
+        "ideal_flowshop_cycles": 27142,
+        "jobs": 11,
+        "positions": 124,
+        "requested_cores": 4,
+        "selected": "pipeline_stages",
+        "shared_input_bytes_by_stage": [
+          13536,
+          428544,
+          472064,
+          16256
+        ],
+        "stage_compute_cycles": [
+          1928,
+          1947,
+          1883,
+          1914
+        ]
+      },
+      "requested_cores": 4,
+      "selected": "pipeline_coalesced",
+      "subgraphs": 4
+    },
+    "alias_of": null,
+    "evaluation_ids": [
+      "044-pipeline_coalesced-P2",
+      "044-pipeline_coalesced-P3"
+    ],
+    "historical_control_comparison": {
+      "bytes_equal": false,
+      "full_two_field_json_equal": false,
+      "control_commit": "e6b5500dcbf3818034804168ee79d0f65c16706b",
+      "control_attempts": {
+        "P2": "yuanzhifang-q3-pipeline-20260924-044-pipeline_stages-P2",
+        "P3": "yuanzhifang-q3-pipeline-20260924-044-pipeline_stages-P3"
+      },
+      "core_ownership_equal": true,
+      "operations_checked": 1364,
+      "ownership_mismatch_ops": [],
+      "ownership_sha256": "6cef633890ef04b3431a825cad963a428b034fd4300e321bb4d5984f55e4a6d9",
+      "operations_by_core": [
+        308,
+        330,
+        363,
+        363
+      ],
+      "new_subgraphs": 4,
+      "old_subgraphs": 1364,
+      "quotient_static_validation": {
+        "passed": true,
+        "scope": "inside the successful cold solver before plan write",
+        "function": "derive_multicore_plan",
+        "source": "data/raw/a/official/code/stub_multicore_cut_and_schedule.py",
+        "source_sha256": "0a3a3b79b5173b466fc05fc8d33b72d11d90b4df78995435853d91c632a35892"
+      },
+      "note": "Every submitted op checked against the frozen control; no second construction or control evaluation. Static quotient validity does not establish memory feasibility, M/V FIFO, COPY order or quality."
+    }
+  },
+  "evaluation": {
+    "evaluation_id": "044-pipeline_coalesced-P2",
+    "construction_id": "044-pipeline_coalesced",
+    "case_id": "044",
+    "variant": "pipeline_coalesced",
+    "problem": "P2",
+    "makespan_cycles": 97641,
+    "call": {
+      "call_id": "044-pipeline_coalesced-P2",
+      "kind": "E0",
+      "argv": [
+        ".venv/Scripts/python.exe",
+        "-B",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+        "../huaweicup2026/data/raw/a/official-cases/data/case_044.json",
+        "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/case_044_multicore_res.json",
+        "--config",
+        "data/raw/a/official/data/config.txt",
+        "--output",
+        "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/result.json",
+        "--trace-output",
+        "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/trace.json",
+        "--log-output",
+        "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/result.log"
+      ],
+      "working_directory": ".",
+      "started_at": "2026-09-24T17:52:36.961960Z",
+      "batch_elapsed_at_dispatch": 18.032435900000564,
+      "status": "ok",
+      "timeout_seconds": 30,
+      "pid": 36916,
+      "exit_code": 0,
+      "wall_seconds": 1.2099209999978484,
+      "finished_at": "2026-09-24T17:52:38.177402Z",
+      "stdout": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/stdout.txt.gz",
+        "sha256": "a85d517872931ae3641f54d2b23cb9429081307fde372e0144cd9a581e05f30a",
+        "raw_sha256": "53ed03034b70f719606df868ebc876c41ecb5201ff94cd4f819d79bc06186bbf",
+        "raw_bytes": 202,
+        "gzip_bytes": 173
+      },
+      "stderr": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/stderr.txt.gz",
+        "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e",
+        "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw_bytes": 0,
+        "gzip_bytes": 20
+      }
+    },
+    "artifacts": {
+      "result": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/result.json.gz",
+        "sha256": "fcf41cc0666a0fd092a1ed0721b09600d3b7d8aae82491c9df9610fe8bcc576f",
+        "raw_sha256": "95cf888bdfc4a99db0aa05476953f2b97204d590c5b39e8568125962031282c5",
+        "raw_bytes": 454433,
+        "gzip_bytes": 23360
+      },
+      "trace": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/trace.json.gz",
+        "sha256": "e711562a7169ea34a63704009a5338ee3891be68943617e6bca3e544ca8f3e25",
+        "raw_sha256": "8e4838194dbba958298ccd5a35787ff9ff2451f883ef3e5ce465a9b1ee590e13",
+        "raw_bytes": 521801,
+        "gzip_bytes": 19938
+      },
+      "log": {
+        "path": "results/a/q3-yuanzhifang/pipeline-coalesced-20260924/044/pipeline_coalesced/P2/result.log.gz",
+        "sha256": "cd9a50a998e95d92984eac985bf3031127cf40ca81819c7af5a3897af863d0a0",
+        "raw_sha256": "2aadd20937c8a8d5626edb4e2e2fbea9b393820689e5463abe04e0c660ffa25c",
+        "raw_bytes": 254,
+        "gzip_bytes": 185
+      }
+    }
+  },
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+    "gpu": "none used; installed adapters not inventoried",
+    "ram_bytes": 17024741376,
+    "python": "3.12.14",
+    "dependencies": "Python standard library solver/E0; project environment prepared with uv sync --locked; uv.lock sha256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+    "threads": 1,
+    "workers": 1,
+    "peak_rss_bytes": null
+  },
+  "resource_context": {
+    "concurrent_work": "P2",
+    "workers": 1,
+    "exclusive_host_claim": false,
+    "source": "Actual run CLI declaration after coordinated START",
+    "memory_gate": "at least 1 GiB immediately before each child dispatch"
+  },
+  "memory_checks": [
+    {
+      "checked_at": "2026-09-24T17:52:35.733992Z",
+      "available_phys_bytes": 2127110144,
+      "minimum_bytes": 1073741824,
+      "passed": true,
+      "method": "Windows GlobalMemoryStatusEx",
+      "total_phys_bytes": 17024741376,
+      "kind": "solver",
+      "call_id": "044-pipeline_coalesced"
+    },
+    {
+      "checked_at": "2026-09-24T17:52:36.953403Z",
+      "available_phys_bytes": 2045837312,
+      "minimum_bytes": 1073741824,
+      "passed": true,
+      "method": "Windows GlobalMemoryStatusEx",
+      "total_phys_bytes": 17024741376,
+      "kind": "E0",
+      "call_id": "044-pipeline_coalesced-P2"
+    },
+    {
+      "checked_at": "2026-09-24T17:52:38.591661Z",
+      "available_phys_bytes": 2007953408,
+      "minimum_bytes": 1073741824,
+      "passed": true,
+      "method": "Windows GlobalMemoryStatusEx",
+      "total_phys_bytes": 17024741376,
+      "kind": "E0",
+      "call_id": "044-pipeline_coalesced-P3"
+    }
+  ],
+  "environment_inventory_source": {
+    "acquired_at": "2026-09-24T17:52:35.726367Z",
+    "scope": "Live hardware inventory in this batch; no previous process timing reused. Peak RSS unmeasured."
+  },
+  "note": "P2/P3 share one construction per graph. Nonduplicated batch count is in call-ledger.json."
+}
