@@ -1,0 +1,461 @@
+完成了这次定点“推理影响范围审计”。没有启动第三轮研究，也没有跑大批实验。
+
+先更新证据状态：这次我确实通过已授权 GitHub 连接读取了镜像 Vioano/huaweicup2026 固定提交 e1575a1de5e3b921aef350e920720f0584fb1719 的三份指定文件：REVIEW.md、src/review/q1_form_semantic_probes.py、probes-v2/summary.json。同时再次从镜像固定官方提交 8ba6248... 直接读取了 schedule_step2.py 对应 spill 代码。组织仓库 huaweibei123/huaweicup2026 本会话确实无权读取，先前 PR #28 的 404 不再作为证据入口。
+
+新探针中我实际读到：Q1 合成图经官方 CLI 可达；同一 logical_tid=10002 连续产生 version 1、2；两次均 spill_out_id=null、spill_out_copies_data=false、backing_source=original_copy_in，且两个新化身都是 L1；Makespan 为 43728，profile 观察前后完整函数结果一致，CLI 对应字段也一致。这个不是只依据你的转述。冻结源码本身也直接确认：是否需要 COPY_OUT 取决于 logical_tid 是否已有 backing，已有 backing 会复用；version 每次递增；新 incarnation 的 pos 直接复制 sp['pos']。
+
+02_官方源码与契约 +1
+
+另外，86b095f 的 F-TASK-006 的确仍把一次 version=1/UB/new backing+COPY pair 的样本写成了无条件通则，而同一文档又把它标为 verified-by-probe；因此这次不能把“探针通过”理解成规则全文已证明。
+
+01_形式化阅读包_86b095f +1
+
+一、先给总体影响结论
+
+三个勘误对第三路现有成果的影响并不对称：
+
+F-EXEC-001 量词错误：对我已有 Q1 数值实验和 S 没有发现直接污染；对“合法候选生成器若自己复刻校验”的实现边界有实质影响。
+
+24/44 加核因果错误：我在第一轮正式回答时已经主动识别并纠正，第二轮也用了同图对照；没有发现第三路算法因此剪掉核数候选。
+
+F-TASK-006 spill 通则错误：这是这次真正需要重点修订的项。
+它不推翻 S，不推翻 W 的核心等价定理，也不使既有官方 E0 数值失效；但它确实要求：
+
+收紧所有关于 spill 结构的文字；
+
+给 W 的“缓存键充分性”和输出重标注补一个新分支回归；
+
+禁止任何代理/局部代价模型把一次 spill 固定当成“写出+写回两次搬运、UB、version=1、新 DDR backing”；
+
+重新审视此前是否因这种错误代价模型搜索偏置而少探索“已有 backing、重复换入”的候选。
+
+也就是说，当前 Q1 主线里最值得担心的不是历史分数被算错，而是未来候选评价与搜索启发式若用了错误 spill 简化，会系统性错估方案。
+
+题面本身明确说 Step2 的条件是“若 DDR 中没有有效副本，才先插入 COPY_OUT；随后再 COPY_IN”，因此新反例实际上也与题面附录的条件性描述一致。
+
+A题原始题面
+
+二、Q1 / 情况 A：逐项影响审计
+原结论（定位）	实际依赖假设	影响范围	判断	依据	最小修复 / 验证动作
+第一轮 §机制二：合法分区后还要检查“商图＋每核 Task 顺序边”的组合无环	只要存在需要加入的核内相邻顺序边，就必须检查组合环；没有依赖错误的提前返回量词	Q1 候选合法性理论	仍成立	修正版 F-EXEC-001：只有所有核都 ≤1 Task 才能提前返回；只要某核长度>1就进入组合环检查。
+
+01_形式化阅读包_86b095f
+
+	文档里显式写成“all ≤1 才早退”；禁止任何自写 validator 使用 any(len<=1)
+第一轮：用一个全局块拓扑序限制到各核，可构造不会由核序产生环的保守子族	各核顺序都是同一个全局拓扑序的子序列	Q1 构造定理	仍成立	该构造本身保证所有新增核序边都沿全局序向前；与早退条件无关	不需重推；实现仍最终过官方 validator
+“所有核≤1 时无需增加核内顺序边”	每核无相邻 Task 对	Q1 校验特例	仍成立	正确量词正是 all≤1；86b 已修。
+
+01_形式化阅读包_86b095f
+
+	无
+若曾隐含采用“存在一个空核/单 Task 核即可跳过组合环检查”	错误 any 量词	自定义 Q1 快速合法性筛选	需重新推理；但未发现我的交付代码这样做	我重新检查第二轮第三路源码，没有找到这种自写早退；S 沿用官方 validation，搜索原型依赖 E0/官方合法性	若后续写轻量 validator，加入两个混合长度回归：[2-task core]+[] 和 [2-task core]+[1-task core]
+第二轮 S：保留事件，只把重复全状态扫描改为计数器，式 T3-206	一个 op 恰好一次由非 done 变 done；Task 完成 ⇔ remaining=0	Q1 E1 精确加速	仍成立	S 没改 evaluation_validation.py，也没改 schedule_step2.py；只改 Step1 depth、Step3 队列结构、P1 完成计数。E1 的零差分标准本来要求 full JSON 精确相等。
+
+02_官方源码与契约
+
+	不必因 F-EXEC 修订重写 S；但把混合长度核放入 S/E0 failure/accept 回归集
+S case_025/P1 6.28× 等既有数字	该具体输入、计划和被冻结 E0/S 代码	实测性能	实测数值仍有效	三项勘误都不会追溯改变当时实际运行的官方字节或记录；规范也要求把有限测试零差分与全域证明分开。
+
+EVALUATOR_AMENDMENT_20260923
+
+	不需要重跑这些数值来“修正文档”；新语义分支单独加回归即可
+S 的“原因解释”：收益来自维护 Task/op 完成计数，而非改资源过程	Step2 结构可任意复杂，但完成查询仍只是“是否全部 done”	机制解释	仍成立	新 spill 只改变扩展出的 op/tensor；S 对这些 op 照样逐个完成计数，不假设 spill 必有 COPY_OUT	加新反例作 S 与 E0 full diff 回归，主要用于覆盖而非重新证明
+第一/二轮浮点反例：不能把实数 processor-sharing 等价直接升级成 E1 零差分，式 T3-201	Python binary64 逐事件结算顺序会影响舍入，再经 ceil 放大	Q1/Q2/Q3 evaluator 设计	仍成立，完全不受三项勘误影响	E1 契约明确要求整数/full JSON 零差分，不能用浮点容差。
+
+02_官方源码与契约
+
+；题面也明确最终 DDR 时间按共享带宽事件过程重算。
+
+A题原始题面
+
+	无需重跑；保留为所有“代数合并事件”路线的硬反例
+旧 FORM 24/44 只能说明共享 DDR 争用，不能证明同图加核变慢	对照必须固定图和工作量	Q1 核数/分配因果解释	我此前已纠正；仍成立	86b 明确将原对照降格，并给出同图分配反例：独立链分核 148→44；有依赖两段分核 148→1048。
+
+01_形式化阅读包_86b095f
+
+	后文统一避免“核越多越慢”；只能说“某个具体分配使用更多非空核可能更慢”
+“核预算增大时最优值可能变差”	把具体分配的变差误投射到最优值	Q1 数学优化问题	应删除，不成立于该证据链	若允许的方案集合随核预算扩张且空核可保留，旧方案通常仍可嵌入；至少现有证据完全不能证明最优值恶化	若以后研究核预算单调性，应单独基于接口/空核语义证明；不要用经验对照
+第二轮 Q1 候选/代理“不要只看搬运量”	搬运量不是 Makespan 的充分统计量	搜索启发式	仍成立	同图同切分，仅核心归属改变，搬运统计相同而 1052/152 不同；该证据与 24/44 错误无关。
+
+01_形式化阅读包_86b095f
+
+	无
+第一轮闭合 Task min-plus 分段 DP	每段真实代价 d(i,j) 只依赖该段和固定边界契约	Q1 特例构造	理论公式仍成立；适用条件需进一步强调	F-TASK-006 修订改变的是 d(i,j) 如何由官方 Step2 产生，不破坏“若成本闭合可加则最短路”的数学命题	若画像由 E0/精确局部编译生成，无改动；若画像用简化 spill 公式，必须废弃并重做
+“spill 每次代价≈2×size”作为一般代价	错误假设每次都 COPY_OUT + COPY_IN	Q1 任何 spill 风险代理	需重新推理，不能继续使用	新源码分支直接说明已有 backing 时只有 COPY_IN；成员自己的搬运公式其实早就写成条件形式 size*(1+spill_out_copies_data)。
+
+01_形式化阅读包_86b095f
+
+	代理必须至少引入 has_backing/logical_tid 状态；不能用固定 2×size
+“spill 一定生成新的 DDR backing”	F-TASK-006 的错误泛化	Q1 Step2 状态模型	错误，必须删除	冻结源码：已有 backing_by_tid 时直接复用。
+
+02_官方源码与契约
+
+	改成条件分支
+“spill 一定产生 COPY_OUT/COPY_IN 对”	同上	Q1 事件数/流量/pipe 压力模型	错误，必须删除	已有 backing 时 spill_out_id=None，只创建 COPY_IN	任何 event-count proxy、MTE3 压力代理都需分支
+“rename incarnation 恒 version=1”	只观察过第一次 spill	Q1 tensor 状态与重写	错误	官方 incarnation_version[logical_tid] += 1；新探针观测 [1,2]。
+
+02_官方源码与契约
+
+	版本必须作为同一 logical tensor 的递增状态，而非布尔“是否重命名”
+“rename incarnation 恒 UB”	单次样本 victim 恰为 UB	Q1 容量/内存复用模型	错误	官方为 pos=sp['pos']；新探针是 L1→L1 两次	L1、UB 各自容量状态必须独立追踪
+F-LOCAL-005：SPILL_OUT 总在 prev_use 后	假设一定存在 spill_out	Q1 序列描述	需收紧条件	新反例中根本没有 spill_out；只有 spill_in	改成“若 spill_out_id is not None，才在 prev_use 后插入”；spill_in 规则保持
+F-METRIC-001 条件搬运公式	spill_out_copies_data 是实际布尔分支	Q1 搬运统计	仍成立，而且新勘误加强了其必要性	官方公式本来就是条件形式，不是固定两次搬运。
+
+01_形式化阅读包_86b095f
+
+	保留，不改成简化常数倍
+
+这里最重要的区分是：
+
+43728 这个新反例不是用来证明旧 E0 成绩错了，而是证明“如何解释和预测 spill”不能再用单一样本模板。
+
+题面自身也把 Step2 描述为：只有不存在有效 DDR 副本时才先写出；否则直接换入。
+
+A题原始题面
+
+三、S 专项审计
+1. S 的核心正确性没有依赖 F-TASK-006
+
+S 的三类改写是：
+
+Step1 最长路深度算法替换，但保持相同整数 depth；
+
+Step3 list.pop(0) → deque.popleft()，保持 FIFO；
+
+Q1/Step3 的“每次扫描所有状态检查是否完成” → 维护剩余计数。
+
+它没有改 schedule_step2.py。
+
+因此新 spill 语义不会让 S 突然把 version=2 算成 1，也不会凭空生成 COPY_OUT。
+
+但这里要区分两个层次：
+
+局部变换的推理：不受影响；
+
+S 整体“有限范围零差分”覆盖：新反例是一个此前未明确覆盖的语义分支，应该补进回归。
+
+所以我的判断是：
+
+S：理论机制仍成立；历史实测仍有效；发布覆盖需增加一个 targeted regression，不需要重写。
+
+最小动作只有一项：用新 spill.graph.json + spill.plan.json 跑一次当前 S 与 E0 full JSON 对比。如果不一致，才进一步定位；不是现在就假定它会失败。
+
+四、W 完整增广词等价：这次最需要仔细审的地方
+
+这是这次审计里我最认真重新检查的部分。
+
+1. 核心等价命题本身没有被 F-TASK-006 推翻
+
+我第二轮的 W 命题大意是：
+
+固定原图、配置、problem、核心映射、mapping 迭代顺序和官方版本；如果两个方案给每个核心产生完全相同的字面增广操作词，则它们送给 Step2 的图和序列相同，因此 Step2/Step3 以及资源模拟产生相同的操作性程序。
+
+这里真正依赖的是：
+
+(raw Task graph, literal word, C)⟼Step2 output
+(T3-210)
+
+是一个确定函数，而不是
+
+“每次 spill 都固定变成一对 COPY + 一个 UB version1 incarnation”。
+
+新源码反而把这个区别说得更清楚：backing map、current incarnation、version 都是 Step2 内部确定性状态；当 Step2 输入完全相同时，这些状态演化也完全相同。冻结代码还明确维护 current_incarnation 与递增 incarnation_version。
+
+02_官方源码与契约
+
+因此：
+
+W 的核心理论结论仍成立。
+
+2. 但第二轮的证明文字要补一层
+
+我原来的表述：
+
+“相同完整词 → 相同 Step2 spill 扩展、物理 ID、版本、Step3……”
+
+逻辑上是对的，但现在应该把隐含步骤显式写出：
+
+同 raw graph + 同 seq⇒
+⎩
+⎨
+⎧
+	​
+
+同 pending_spills
+同 backing_by_tid 演化
+同 current_incarnation
+同 incarnation_version
+同物理 ID 分配
+同 sp[
+′
+pos
+′
+]
+	​
+
+⇒同 Step2 扩展图.
+(T3-211)
+
+这使证明更严格，而不是使它失效。
+
+3. W 的缓存键是否需要加入 logical_tid/version/backing？
+
+不需要直接加入，只要现有固定上下文守卫成立。
+
+当前 W key 是每核完整字面操作词：
+
+K
+W
+	​
+
+=(W
+0
+	​
+
+,W
+1
+	​
+
+,…,W
+K−1
+	​
+
+).
+(T3-212)
+
+同时 WordEvaluator 已冻结：
+
+原图；
+
+problem；
+
+config；
+
+非 COPY op→core 映射；
+
+mapping 迭代顺序；
+
+核数；
+
+raw Task 图和生成边界 COPY 的字面 ID。
+
+在这些条件下，logical_tid/version/backing/physical_tid 都是 Step2 由同一输入确定地生成的派生状态，不是额外自由输入。因此把它们重复塞进 key 不是正确性必需。
+
+但如果以后扩大 W 的复用范围，例如跨：
+
+不同 raw Task 图；
+
+不同核心映射；
+
+不同 mapping/ID 生成顺序；
+
+不同配置；
+
+不同官方版本，
+
+那么这个结论立即失效。契约本身也明确警告缓存键不能因为“图同构”就忽略 ID、输入顺序、生成 ID 和 tie-break。
+
+02_官方源码与契约
+
+所以应把 W 的定义写成：
+
+不是“操作词自身是全局万能缓存键”，而是“固定编译上下文中的操作词是充分的局部商键”。
+
+这是一个重要措辞修正。
+
+五、W 输出重标注：理论没坏，但新分支需要专门复测
+
+我重新看了第二轮原型的 _labels_with_spills：
+
+Python
+Run
+if sp['spill_out_id'] is not None:
+    result[c][sp['spill_out_id']] = prev if prev is not None else nxt
+result[c][sp['spill_in_id']] = nxt
+
+这实际上已经正确处理了“没有 spill_out”的分支：None 时不会伪造标签。
+
+流量也使用：
+
+Python
+Run
+size * (1 + int(sp['spill_out_copies_data']))
+
+而不是固定两倍。
+
+所以从代码结构看，新 F-TASK-006 勘误没有暴露一个显然的 W implementation bug。
+
+但还不能把这一点升级为“新分支已验收”。原因是现有 case_097 的 spill 证据虽然有真实 spill，却不能从我当前证据中证明它覆盖了：
+
+已有 original COPY_IN backing；
+
+同一 logical_tid 连续 version 1→2；
+
+spill_out_id=None；
+
+L1 incarnation。
+
+因此：
+
+W 子结论	当前判断
+相同编译上下文＋相同完整词 ⇒ Step2 物理程序相同	理论仍成立
+key 无需显式添加 version/backing	仍成立，但仅限固定上下文 specialization
+_labels_with_spills 对 spill_out_id=None 的代码路径	代码看起来已正确覆盖
+重复 version / L1 / reused backing 下的 full JSON 重标注	需定点复测
+case_097 6592→4 的既有官方数值	仍有效
+case_097 已证明所有 spill 分支都被 W 覆盖	不能这样说
+
+最小验证动作不是大批实验，只需要：
+
+把新的 8-op Q1 机制图改造成 W 所支持的 Q2/Q3 等价细分对，或寻找已有一个 Q2/Q3 同类分支；比较两个等价 plan 的 E0 full JSON 与 W full JSON。
+
+如果只审当前 Q1 主线，这项可以暂缓到 Q2/Q3 再继续。
+
+六、物理 ID、logical_tid、version、backing、内存复用各自扮演什么角色
+
+这次勘误后，建议中间层把这几个概念彻底拆开：
+
+对象	正确角色	不能做的简化
+logical_tid	同一逻辑数据跨 incarnation 的稳定身份；也是 Q3 Cache key 的基础	不能拿 physical tid 替代
+physical tid / incarnation tid	当前实际扩展图里的 tensor 节点身份，数据边和内存生命周期围绕它建立	不能因为 logical_tid 相同就把多个 incarnation 合成一个 tensor 节点
+version	同一 logical tensor 每次 reload 后递增的 incarnation 序号	不能当布尔变量，也不能恒写 1
+backing_tid	当前 logical tensor 在 DDR 中可复用的持久副本	不能假设每次 spill 都新建
+spill_out_copies_data	决定本次 eviction 是否真的要写 DDR，是搬运成本与 MTE3 行为的关键分支	不能固定为 true
+pos	新 incarnation 恢复到原 sp['pos']，可 L1 或 UB	不能统一写 UB
+Step3 MEMORY_REUSE 边	由物理 incarnation 的生命周期、容量额度和消费者/生产者关系形成执行依赖	不能仅靠 logical_tid 判断，也不能因为 backing 已存在就忽略
+
+题面也强调：Step2 会更新 tensor 引用和空间复用依赖，Step3 再基于这些扩展结果排布。
+
+A题原始题面
+
+这意味着：
+
+行为等价不能只要求 logical_tid 序列相同。精确等价要么保留整个 Step2 确定输入，要么显式证明产生的 physical-incarnation graph、Pipe FIFO 和 memory-reuse dependencies 相同。
+
+W 采取的是第一种，所以仍安全。
+
+七、Q2/Q3 受影响项单列
+
+当前主线是 Q1，因此以下不建议现在展开实验。
+
+我此前的 Q2/Q3 结论	影响	判断
+W 完整增广词商	spill 的内部状态模型比原 FORM 描述复杂	理论仍成立；新 spill 分支需回归，不需重写
+6592→4 case097 证书与 E0 数字	新文档勘误不改变当时官方运行	实测数值仍有效
+“完整词相同 → physical IDs/version相同”	需要依赖 Step2 确定性，而不能依赖固定 spill 模板	结论成立，证明文字需补充
+Q3 logical_tid 跨 rename 保持 Cache key	version 可>1、物理 tid 多次变化	反而更应保留 logical identity；结论仍成立
+Q3 缓存状态商	future set 必须区分 pending/in-flight reload；多 incarnation 同 logical key 会增加 aliasing	需更谨慎，继续维持低优先级
+“hit 完成也可能重新 insert”反例	与新 spill backing 规则正交	仍成立
+矩形候选 Q2/Q3 数值	来自 E0；不依赖错误 F-TASK-006 解释	数值有效
+矩形方案为什么 Q3 变差的因果解释	原本就承认未完成完整消融；spill 分支复杂化进一步说明不能简单归因	仍属未确定因果，不升级结论
+
+Q3 特别要注意，logical_tid 是缓存观察身份，而 physical incarnation/version 是执行与内存身份。题面说 Cache 在 COPY_IN 发射时按逻辑 tensor id 查询。
+
+A题原始题面
+
+八、这三个错误有没有导致我“排除错误的候选方向”？
+
+这是这次审计里比“已有分数还对不对”更重要的问题。
+
+F-EXEC-001：目前没有发现已造成搜索偏置
+
+第三路没有实现一个使用错误 any≤1 的快速合法性剪枝器；第二轮实际候选最终都交官方 E0。因此没有找到已经被错误剔除的候选集。
+
+但以后如果为了 Q1 提速写自有 legality prefilter，这个错误会造成假合法，主要不是错杀好解，而是放进本该继续检查的方案，浪费评估预算或导致 E1/E2 与 E0 不一致。
+
+24/44：没有发现第三路因此偏向少核
+
+第一轮我已经主动指出旧对照改变了工作量；第二轮也明确采用修正后的同图结论。因此没有找到“因为相信核越多越慢，而系统性少搜多核方案”的实现痕迹。
+
+F-TASK-006：这里存在真实的潜在搜索偏置
+
+如果一个候选生成器把高 spill 风险理解成：
+
+“每次 spill 都需要写出 + 读回，两倍字节，而且都走 UB”
+
+那么它会过度惩罚这样的方案：
+
+tensor 原本就有 DDR backing；
+
+未来需要多次 reload；
+
+reload 落在 L1；
+
+后续 physical incarnation version>1。
+
+这类方案实际只需 COPY_IN 的某些 spill，可能比错误代理估计便宜很多。
+
+反过来，如果错误代理忽略 version/physical incarnation，还可能低估内存复用依赖和生命周期复杂度。
+
+所以这里应该标记：
+
+已有官方成绩不需要作废；但凡候选筛选、代理代价或剪枝规则曾把 spill 固定成两次 DDR 搬运，都必须重新审。
+
+我第二轮交付的主要构造——W、结构矩形、E0确认——没有用这个固定两倍规则做硬剪枝；因此没有发现已交付候选池被这一假设直接删减的证据。
+
+九、现在不值得重做什么
+
+本轮不建议因为这个勘误而：
+
+重跑已有 100 case；
+
+重跑全部 S benchmark；
+
+重做浮点反例；
+
+推翻 W；
+
+重做 case_097 的 E0 官方数字；
+
+重开 CUDA/Metal 分析；
+
+重新做文献检索。
+
+这些都不是当前影响链上的最小必要动作。
+
+十、确实值得留到审核后第三轮再深想的 4 个问题
+
+等中间层形式化文档审核稳定后，我认为只有下面四个问题值得真正重新深想。
+
+1. Q1 的“Task profile”到底最小需要什么状态。
+原先若想把一个 Task 压成固定局部代价，新的 backing/version 分支说明 Task 成本可能依赖“进入 Task 前有什么持久 DDR backing”这类状态。情况 A 会清私有缓存，但 DDR backing 并不会因此自动消失。需要明确哪些 backing 属于 Task 内局部生成，哪些来源于 Task 边界构造，然后才能决定 min-plus DP 的闭合状态维数。
+
+2. spill-aware 低成本代理是否能做成小状态自动机。
+现在最自然的最小状态不是“spilled/not spilled”，而至少涉及：
+
+(logical id, backing exists/source, incarnation version, pos).
+(T3-213)
+
+但 version 本身未必需要进入代价状态，只可能作为物理 ID/输出诊断状态。这要等中间层明确哪些字段实际反馈到未来决策后再做状态最小化。
+
+3. W 是否能从 Q2/Q3 的固定-core specialization 扩展到 Q1。
+Q1 每个子图一个 Task，切分本身改变边界 COPY 和 100/1000 等待，所以“同 word”远不够。可能存在更大的“Task transducer signature”，但现在不应急着猜。
+
+4. 搜索是否应该主动利用已有 backing 的 spill。
+新反例揭示一种以前容易被看作纯损失的结构：如果 DDR 副本已经存在，临时 eviction 的成本可能只有 reload。是否存在“故意保留/制造 backing 以降低未来 spill 成本”的有用构造，需要正式 case 统计才能判断。现在只把它列作研究问题，不立刻升级为算法路线。
+
+最终审计标签
+
+可以把第三路当前状态压缩成下面这张表：
+
+资产	当前状态
+S 保事件精确加速思想	保留
+S 历史零差分/性能数字	保留原身份，不追溯改写
+S 对全部语义的发布级证明	从未成立；新 spill 反例应加入回归
+W 固定上下文＋完整字面词的等价商	保留，证明补强
+W cache key	固定 specialization 下仍充分；不得扩大语境
+W spill 输出重标注	代码结构兼容新分支，但需定点复测
+6592→4 E0 观察	保留
+浮点事件反例	完全保留
+“任一核≤1即可跳过 Q1 顺序环”	删除
+“更多核的最优值可能更差”	删除该证据推论
+“每次 spill 都新 backing + COPY pair + UB version1”	删除
+条件 spill 搬运公式	保留
+logical_tid 作为稳定逻辑身份	保留
+physical tid / version 可忽略	不能这样说
+仅凭已有 E0 好成绩证明搜索方向无偏	不能这样说
+
+因此，如果现在冻结第三路等待中间层审查，我会给它一个很明确的状态：
+
+S 主线可以继续；W 理论不撤回但冻结扩域；Q1 的 spill proxy / Task-summary 类理论暂缓，直到 backing—incarnation—memory-reuse 关系在审核后的形式化中写清。
+
+这正好把“实测数值是否仍有效”“因果解释是否仍有效”“理论命题是否仍成立”分开了，没有因为一条 FORM 勘误把整条研究线一起推翻。
