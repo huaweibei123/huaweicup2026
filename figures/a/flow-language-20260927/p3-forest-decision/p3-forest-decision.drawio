@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="deterministic-python" version="30.0.2" type="device">
+  <diagram id="p3-forest-v4" name="树状排序与官方评价">
+    <mxGraphModel dx="1000" dy="860" grid="0" page="1" pageScale="1" pageWidth="1000" pageHeight="860" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="a" value="(a) 归约树内部结果的排序" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#183246;fontFamily=PingFang SC;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="16" width="920" height="43" />
+        </mxCell>
+        <mxCell id="scope" value="适用：至少两棵互不交错的归约树，且存在汇合；&lt;br&gt;单输出且字节数已知；非根输出仅供唯一父操作。" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EAF3F8;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="78" width="280" height="214" />
+        </mxCell>
+        <mxCell id="order" value="同一父操作的各子树：&lt;br&gt;计算 hᵢ − rᵢ，按差值递减；&lt;br&gt;同值按操作编号排序。" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#E7F4EF;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=23;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="360" y="78" width="280" height="214" />
+        </mxCell>
+        <mxCell id="guarantee" value="只保证此非交错树模型内，每棵树内部结果的峰值占用最小。" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFF2DD;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="680" y="78" width="280" height="214" />
+        </mxCell>
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="scope" target="order" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="order" target="guarantee" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b" value="(b) 树状排序方案与其他方案共用官方评价预算" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#183246;fontFamily=PingFang SC;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="40" y="332" width="920" height="43" />
+        </mxCell>
+        <mxCell id="prior" value="基础方案与先行方案已产生当前最优方案" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EAF3F8;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=23;fontStyle=1;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="390" width="610" height="58" />
+        </mxCell>
+        <mxCell id="budget" value="① 官方评价器 E0 已调用次数 &lt; 3？" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F2F5F6;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="480" width="610" height="70" />
+        </mxCell>
+        <mxCell id="structure" value="② 树状方案通过构造与本地检查？" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F2F5F6;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="575" width="610" height="70" />
+        </mxCell>
+        <mxCell id="distinct" value="③ 序列化字节表示与当前最优方案不同？" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F2F5F6;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=23;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="670" width="610" height="70" />
+        </mxCell>
+        <mxCell id="bound" value="④ 若可得下界：是否 ≥ 当前最优完成时间？&lt;br&gt;下界不可得时继续评价。" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFF2DD;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=22;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="765" width="610" height="70" />
+        </mxCell>
+        <mxCell id="e0" value="⑤ 在剩余预算内调用官方 E0；结果有效？" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#E7F4EF;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="860" width="610" height="70" />
+        </mxCell>
+        <mxCell id="select" value="⑥ 官方完成时间严格更短？" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#EAF3F8;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=24;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="955" width="610" height="70" />
+        </mxCell>
+        <mxCell id="replace" value="替换当前最优方案" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#E7F4EF;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="80" y="1060" width="610" height="70" />
+        </mxCell>
+        <mxCell id="retain" value="保留当前最优方案" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F2F5F6;strokeColor=#68879A;strokeWidth=1.6;fontColor=#183246;fontFamily=PingFang SC;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;spacingLeft=14;spacingRight=14;spacingTop=9;spacingBottom=9;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="730" y="1060" width="230" height="70" />
+        </mxCell>
+        <mxCell id="b0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="prior" target="budget" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="budget" target="structure" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="structure" target="distinct" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="distinct" target="bound" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="bound" target="e0" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="e0" target="select" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="b6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#68879A;strokeWidth=2.2;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="select" target="replace" parent="1">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="fail_budget" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=none;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="515" />
+            <mxPoint as="targetPoint" x="845" y="515" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fail_structure" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=none;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="610" />
+            <mxPoint as="targetPoint" x="845" y="610" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fail_distinct" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=none;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="705" />
+            <mxPoint as="targetPoint" x="845" y="705" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fail_bound" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=none;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="800" />
+            <mxPoint as="targetPoint" x="845" y="800" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fail_e0" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=none;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="895" />
+            <mxPoint as="targetPoint" x="845" y="895" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fail_select" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=none;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="990" />
+            <mxPoint as="targetPoint" x="845" y="990" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="retained" style="edgeStyle=none;html=1;rounded=0;strokeColor=#B54E48;strokeWidth=2.2;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="845" y="515" />
+            <mxPoint as="targetPoint" x="845" y="1060" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="no_budget" value="否" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#B54E48;fontFamily=PingFang SC;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="710" y="478" width="123" height="31" />
+        </mxCell>
+        <mxCell id="no_structure" value="否" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#B54E48;fontFamily=PingFang SC;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="710" y="573" width="123" height="31" />
+        </mxCell>
+        <mxCell id="no_distinct" value="否" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#B54E48;fontFamily=PingFang SC;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="710" y="668" width="123" height="31" />
+        </mxCell>
+        <mxCell id="no_bound" value="下界排除" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#B54E48;fontFamily=PingFang SC;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="710" y="763" width="123" height="31" />
+        </mxCell>
+        <mxCell id="no_e0" value="无效" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#B54E48;fontFamily=PingFang SC;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="710" y="858" width="123" height="31" />
+        </mxCell>
+        <mxCell id="no_select" value="否" style="text;html=1;whiteSpace=wrap;fillColor=none;strokeColor=none;fontColor=#B54E48;fontFamily=PingFang SC;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="710" y="953" width="123" height="31" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

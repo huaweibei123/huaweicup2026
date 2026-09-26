@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-09-26T00:00:00.000Z" agent="Codex" version="30.0.2" type="device">
+  <diagram id="p1-834-flow" name="P1 fixed-834 flow candidate">
+    <mxGraphModel dx="960" dy="1420" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="960" pageHeight="1420" math="0" shadow="0" background="#F8FAFC">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="paper-background" value="" style="fillColor=#F8FAFC;strokeColor=none;movable=0;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="0" width="856" height="1420" as="geometry" />
+        </mxCell>
+        <mxCell id="input" value="输入：原始计算图、核数（1～5）及固定硬件配置" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#EAF2F9;strokeColor=#254D71;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="32" width="856" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="base" value="01  根据计算图结构生成基础方案" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#314B62;strokeWidth=2;fontColor=#173042;fontFamily=PingFang SC;fontSize=23;fontStyle=1;align=left;verticalAlign=top;spacingLeft=18;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="130" width="856" height="236" as="geometry" />
+        </mxCell>
+        <mxCell id="base1" value="仅把过大的独立计算部分&#10;切成较小任务" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="78" y="200" width="250" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="base2" value="把主导计算部分按&#10;独立输出区域分段" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="355" y="200" width="250" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="base3" value="拆分超过各核合理&#10;工作份额的部分" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="632" y="200" width="250" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="base4" value="按共享输入选择用核数；&#10;或按分叉分配子树¹" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="78" y="272" width="250" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="base5" value="在符合条件的计算链上&#10;调整末段切分点¹" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="355" y="272" width="250" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="base6" value="按分叉阶段把独立子树&#10;分配到多个核¹" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="632" y="272" width="250" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="base_note" value="¹ 按结构尝试；重复不评分；可选构造或评分失败回退；E1 最多调用 6 次。" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#40566A;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="75" y="334" width="810" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="response" value="02  对符合条件的有序计算链重新分组" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#314B62;strokeWidth=2;fontColor=#173042;fontFamily=PingFang SC;fontSize=23;fontStyle=1;align=left;verticalAlign=top;spacingLeft=18;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="408" width="856" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="response_text" value="仅当上一阶段选中经评分的链切分方案时，&#10;构造至多一份完整新方案；E1 最多调用一次。&#10;不适用、重复或失败时保留原方案。" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="464" width="800" height="83" as="geometry" />
+        </mxCell>
+        <mxCell id="intact" value="03  尝试两种独立计算链的局部执行顺序" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#314B62;strokeWidth=2;fontColor=#173042;fontFamily=PingFang SC;fontSize=23;fontStyle=1;align=left;verticalAlign=top;spacingLeft=18;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="605" width="856" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="mode1" value="均衡分配计算链；&#10;汇合计算另列" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="95" y="676" width="318" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="mode2" value="主核多留计算链；&#10;合并可执行的汇合计算" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E8F4F5;strokeColor=#26777C;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="515" y="676" width="318" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="intact_note" value="先检查结构、去除重复；E1 最多调用 2 次；失败时保留已选方案。" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#40566A;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="81" y="735" width="800" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="branch" value="04  按依赖层批量移动可独立执行的计算分支" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#314B62;strokeWidth=2;fontColor=#173042;fontFamily=PingFang SC;fontSize=23;fontStyle=1;align=left;verticalAlign=top;spacingLeft=18;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="801" width="856" height="355" as="geometry" />
+        </mxCell>
+        <mxCell id="donor" value="同一依赖层的原计算任务&#10;（移出方）" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FFF5E7;strokeColor=#B46F25;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="84" y="879" width="353" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="x" value="X：移出的整条计算分支" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FCEAD2;strokeColor=#A65F18;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="112" y="950" width="297" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="yj" value="Y：其余计算；J：汇合后计算&#10;都留在原核" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#FFF9EF;strokeColor=#B46F25;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="112" y="1021" width="297" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="helper" value="同一层已有独立计算任务&#10;（接收方）" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#EAF2F9;strokeColor=#2D668A;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=left;verticalAlign=top;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="532" y="879" width="345" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="helper_text" value="多个 X 各成新任务&#10;先排 X，再排原任务&#10;本层不兼任移出方" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#173042;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="554" y="948" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="branch_note" value="每个原任务最多移出一支；批量形成一份完整方案；E1 最多调用一次。" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#FFFFFF;strokeColor=#FFFFFF;strokeWidth=1.5;fontColor=#40566A;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="82" y="1112" width="804" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="guard" value="先比较完工时间（周期）；只有相同时才比较计划 COPY 搬运量（字节）。&#10;新方案在这一顺序下严格更优，才替换原方案。" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#E9F3EB;strokeColor=#3B7754;strokeWidth=2;fontColor=#173042;fontFamily=PingFang SC;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="1198" width="856" height="77" as="geometry" />
+        </mxCell>
+        <mxCell id="output" value="输出任务划分与各核执行顺序｜在线 E1 总调用上限：10 次（6＋1＋2＋1）" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#254D71;strokeColor=#254D71;strokeWidth=2;fontColor=#FFFFFF;fontFamily=PingFang SC;fontSize=21;fontStyle=1;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="1314" width="856" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="官方 E0 独立复评，不进入在线选优" style="rounded=0;whiteSpace=wrap;html=0;fillColor=#F8FAFC;strokeColor=#F8FAFC;strokeWidth=1.5;fontColor=#40566A;fontFamily=PingFang SC;fontSize=19;fontStyle=0;align=center;verticalAlign=middle;spacingLeft=12;spacingRight=12;shadow=0;glass=0;rotatable=0;" vertex="1" parent="1">
+          <mxGeometry x="52" y="1387" width="856" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e_input_base" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="input" target="base">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_base_response" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="base" target="response">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_response_intact" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="response" target="intact">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_intact_branch" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="intact" target="branch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_x_helper" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="x" target="helper_text">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_branch_guard" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="branch" target="guard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_guard_output" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="guard" target="output">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_output_e0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=0;strokeColor=#55758B;strokeWidth=2;endArrow=block;endFill=1;dashed=1;dashPattern=6 4;" edge="1" parent="1" source="output" target="e0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
