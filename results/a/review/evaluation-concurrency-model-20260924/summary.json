@@ -1,0 +1,567 @@
+{
+  "kind": "synthetic_control_plane_model_only",
+  "evaluations": {
+    "E0": 0,
+    "E1": 0,
+    "E2": 0
+  },
+  "real_workers_started": 0,
+  "units": "invented_integer_ticks_and_memory_units_not_seconds_or_bytes",
+  "checks_passed": [
+    "slow_candidate_does_not_hold_completed_result_or_next_dispatch",
+    "three_tenants_share_dispatch_without_fifo_queue_starvation",
+    "simulated_global_memory_and_per_tenant_inflight_caps_hold",
+    "idempotent_submit_conflict_and_prestart_cancel_preserve_budget",
+    "started_timeout_keeps_oracle_reservation_and_does_not_retry",
+    "native_proof_releases_reservation_but_official_rejection_costs_one",
+    "backpressure_has_no_cost_and_zero_budget_blocks_automatic_fallback",
+    "fixed_round_ties_late_epochs_and_incomplete_pairs_are_explicit"
+  ],
+  "fixtures": {
+    "skew": [
+      {
+        "candidate_id": "slow",
+        "tenant": "a",
+        "ticks": 100,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-1",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-2",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-3",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-4",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-5",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-6",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-7",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "short-8",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      }
+    ],
+    "mixed": [
+      {
+        "candidate_id": "a-0",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-1",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-2",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-3",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-4",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-5",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-6",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-7",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "a-8",
+        "tenant": "a",
+        "ticks": 8,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "b-0",
+        "tenant": "b",
+        "ticks": 2,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "b-1",
+        "tenant": "b",
+        "ticks": 2,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "b-2",
+        "tenant": "b",
+        "ticks": 2,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "c-0",
+        "tenant": "c",
+        "ticks": 1,
+        "memory_units": 1
+      }
+    ],
+    "resource": [
+      {
+        "candidate_id": "large",
+        "tenant": "a",
+        "ticks": 7,
+        "memory_units": 3
+      },
+      {
+        "candidate_id": "a2",
+        "tenant": "a",
+        "ticks": 1,
+        "memory_units": 1
+      },
+      {
+        "candidate_id": "b",
+        "tenant": "b",
+        "ticks": 2,
+        "memory_units": 2
+      },
+      {
+        "candidate_id": "c",
+        "tenant": "c",
+        "ticks": 1,
+        "memory_units": 1
+      }
+    ]
+  },
+  "results": {
+    "barrier": {
+      "makespan_ticks": 104,
+      "records": [
+        {
+          "candidate_id": "slow",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 100,
+          "delivered_tick": 100
+        },
+        {
+          "candidate_id": "short-1",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 1,
+          "delivered_tick": 100
+        },
+        {
+          "candidate_id": "short-2",
+          "tenant": "a",
+          "start_tick": 100,
+          "finish_tick": 101,
+          "delivered_tick": 101
+        },
+        {
+          "candidate_id": "short-3",
+          "tenant": "a",
+          "start_tick": 100,
+          "finish_tick": 101,
+          "delivered_tick": 101
+        },
+        {
+          "candidate_id": "short-4",
+          "tenant": "a",
+          "start_tick": 101,
+          "finish_tick": 102,
+          "delivered_tick": 102
+        },
+        {
+          "candidate_id": "short-5",
+          "tenant": "a",
+          "start_tick": 101,
+          "finish_tick": 102,
+          "delivered_tick": 102
+        },
+        {
+          "candidate_id": "short-6",
+          "tenant": "a",
+          "start_tick": 102,
+          "finish_tick": 103,
+          "delivered_tick": 103
+        },
+        {
+          "candidate_id": "short-7",
+          "tenant": "a",
+          "start_tick": 102,
+          "finish_tick": 103,
+          "delivered_tick": 103
+        },
+        {
+          "candidate_id": "short-8",
+          "tenant": "a",
+          "start_tick": 103,
+          "finish_tick": 104,
+          "delivered_tick": 104
+        }
+      ]
+    },
+    "rolling": {
+      "makespan_ticks": 100,
+      "peak_workers": 2,
+      "peak_memory_units": 2,
+      "records": [
+        {
+          "candidate_id": "slow",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 100,
+          "delivered_tick": 100
+        },
+        {
+          "candidate_id": "short-1",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 1,
+          "delivered_tick": 1
+        },
+        {
+          "candidate_id": "short-2",
+          "tenant": "a",
+          "start_tick": 1,
+          "finish_tick": 2,
+          "delivered_tick": 2
+        },
+        {
+          "candidate_id": "short-3",
+          "tenant": "a",
+          "start_tick": 2,
+          "finish_tick": 3,
+          "delivered_tick": 3
+        },
+        {
+          "candidate_id": "short-4",
+          "tenant": "a",
+          "start_tick": 3,
+          "finish_tick": 4,
+          "delivered_tick": 4
+        },
+        {
+          "candidate_id": "short-5",
+          "tenant": "a",
+          "start_tick": 4,
+          "finish_tick": 5,
+          "delivered_tick": 5
+        },
+        {
+          "candidate_id": "short-6",
+          "tenant": "a",
+          "start_tick": 5,
+          "finish_tick": 6,
+          "delivered_tick": 6
+        },
+        {
+          "candidate_id": "short-7",
+          "tenant": "a",
+          "start_tick": 6,
+          "finish_tick": 7,
+          "delivered_tick": 7
+        },
+        {
+          "candidate_id": "short-8",
+          "tenant": "a",
+          "start_tick": 7,
+          "finish_tick": 8,
+          "delivered_tick": 8
+        }
+      ]
+    },
+    "fifo_mixed": {
+      "makespan_ticks": 27,
+      "peak_workers": 3,
+      "peak_memory_units": 3,
+      "records": [
+        {
+          "candidate_id": "a-0",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 8,
+          "delivered_tick": 8
+        },
+        {
+          "candidate_id": "a-1",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 8,
+          "delivered_tick": 8
+        },
+        {
+          "candidate_id": "a-2",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 8,
+          "delivered_tick": 8
+        },
+        {
+          "candidate_id": "a-3",
+          "tenant": "a",
+          "start_tick": 8,
+          "finish_tick": 16,
+          "delivered_tick": 16
+        },
+        {
+          "candidate_id": "a-4",
+          "tenant": "a",
+          "start_tick": 8,
+          "finish_tick": 16,
+          "delivered_tick": 16
+        },
+        {
+          "candidate_id": "a-5",
+          "tenant": "a",
+          "start_tick": 8,
+          "finish_tick": 16,
+          "delivered_tick": 16
+        },
+        {
+          "candidate_id": "a-6",
+          "tenant": "a",
+          "start_tick": 16,
+          "finish_tick": 24,
+          "delivered_tick": 24
+        },
+        {
+          "candidate_id": "a-7",
+          "tenant": "a",
+          "start_tick": 16,
+          "finish_tick": 24,
+          "delivered_tick": 24
+        },
+        {
+          "candidate_id": "a-8",
+          "tenant": "a",
+          "start_tick": 16,
+          "finish_tick": 24,
+          "delivered_tick": 24
+        },
+        {
+          "candidate_id": "b-0",
+          "tenant": "b",
+          "start_tick": 24,
+          "finish_tick": 26,
+          "delivered_tick": 26
+        },
+        {
+          "candidate_id": "b-1",
+          "tenant": "b",
+          "start_tick": 24,
+          "finish_tick": 26,
+          "delivered_tick": 26
+        },
+        {
+          "candidate_id": "b-2",
+          "tenant": "b",
+          "start_tick": 24,
+          "finish_tick": 26,
+          "delivered_tick": 26
+        },
+        {
+          "candidate_id": "c-0",
+          "tenant": "c",
+          "start_tick": 26,
+          "finish_tick": 27,
+          "delivered_tick": 27
+        }
+      ]
+    },
+    "fair_mixed": {
+      "makespan_ticks": 28,
+      "peak_workers": 3,
+      "peak_memory_units": 3,
+      "records": [
+        {
+          "candidate_id": "a-0",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 8,
+          "delivered_tick": 8
+        },
+        {
+          "candidate_id": "b-0",
+          "tenant": "b",
+          "start_tick": 0,
+          "finish_tick": 2,
+          "delivered_tick": 2
+        },
+        {
+          "candidate_id": "c-0",
+          "tenant": "c",
+          "start_tick": 0,
+          "finish_tick": 1,
+          "delivered_tick": 1
+        },
+        {
+          "candidate_id": "a-1",
+          "tenant": "a",
+          "start_tick": 1,
+          "finish_tick": 9,
+          "delivered_tick": 9
+        },
+        {
+          "candidate_id": "b-1",
+          "tenant": "b",
+          "start_tick": 2,
+          "finish_tick": 4,
+          "delivered_tick": 4
+        },
+        {
+          "candidate_id": "a-2",
+          "tenant": "a",
+          "start_tick": 4,
+          "finish_tick": 12,
+          "delivered_tick": 12
+        },
+        {
+          "candidate_id": "b-2",
+          "tenant": "b",
+          "start_tick": 8,
+          "finish_tick": 10,
+          "delivered_tick": 10
+        },
+        {
+          "candidate_id": "a-3",
+          "tenant": "a",
+          "start_tick": 9,
+          "finish_tick": 17,
+          "delivered_tick": 17
+        },
+        {
+          "candidate_id": "a-4",
+          "tenant": "a",
+          "start_tick": 10,
+          "finish_tick": 18,
+          "delivered_tick": 18
+        },
+        {
+          "candidate_id": "a-5",
+          "tenant": "a",
+          "start_tick": 12,
+          "finish_tick": 20,
+          "delivered_tick": 20
+        },
+        {
+          "candidate_id": "a-6",
+          "tenant": "a",
+          "start_tick": 17,
+          "finish_tick": 25,
+          "delivered_tick": 25
+        },
+        {
+          "candidate_id": "a-7",
+          "tenant": "a",
+          "start_tick": 18,
+          "finish_tick": 26,
+          "delivered_tick": 26
+        },
+        {
+          "candidate_id": "a-8",
+          "tenant": "a",
+          "start_tick": 20,
+          "finish_tick": 28,
+          "delivered_tick": 28
+        }
+      ]
+    },
+    "resource_model": {
+      "makespan_ticks": 9,
+      "peak_workers": 2,
+      "peak_memory_units": 4,
+      "records": [
+        {
+          "candidate_id": "large",
+          "tenant": "a",
+          "start_tick": 0,
+          "finish_tick": 7,
+          "delivered_tick": 7
+        },
+        {
+          "candidate_id": "c",
+          "tenant": "c",
+          "start_tick": 0,
+          "finish_tick": 1,
+          "delivered_tick": 1
+        },
+        {
+          "candidate_id": "a2",
+          "tenant": "a",
+          "start_tick": 7,
+          "finish_tick": 8,
+          "delivered_tick": 8
+        },
+        {
+          "candidate_id": "b",
+          "tenant": "b",
+          "start_tick": 7,
+          "finish_tick": 9,
+          "delivered_tick": 9
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "No real evaluation or speedup claim",
+    "No worker/IPC/OS tests",
+    "No persistence, concurrent transactions or restart recovery",
+    "Round robin is dispatch fairness, not CPU-time fairness",
+    "All fixture jobs arrive at tick zero; no dynamic admission"
+  ],
+  "python_version": "3.12.13",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "script_sha256": "b533a0a88da73776c48a1457ad24ab4903d2a0cad3c7dfe9635e309e93c0f4c5",
+  "model_check_wall_seconds": 0.010378999984823167,
+  "command": "python research/a/evaluation_service/model_checks.py --output <new-output.json>"
+}
