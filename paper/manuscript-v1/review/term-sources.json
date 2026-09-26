@@ -1,0 +1,796 @@
+{
+  "schema_version": 1,
+  "authority_policy": "Official problem and fixed code determine task semantics. English reference alone does not establish an official Chinese translation. Null means no borrowed term is needed, not an invented English expansion.",
+  "entries": [
+    {
+      "id": "TERM-001",
+      "old": "流水/真实流水重叠",
+      "english_full": "pipeline",
+      "chinese": "流水线",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2，执行管道；附录D",
+      "definition": "在本题中指某一Core上按固定顺序处理同类操作的硬件执行资源；四种Pipe彼此独立，每条同时至多执行一条操作。不能推断内部指令阶段。",
+      "first_definition_verified": true,
+      "limits": "从任何同时发生的操作推称pipeline均不成立。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 23,
+          "excerpt": "题面把操作占用的执行管道写作 Pipe，并称其对应资源为硬件流水线（pipeline）。在本文中，硬件流水线（pipeline）特指一个 Core 内处理某一类操作的执行资源及其固定操作顺序：`PIPE_M`使用 Cube，`PIPE_V`使用 Vector，`PIPE_MTE2`和`PIPE_MTE3`处理题面规定方向的数据搬运。官方模拟规定每条 Pipe 在同一时刻至多执行一个操作；不同 Pipe 可以在依赖和资源条件允许时同时执行。本文不描述这些单元内部的取指、译码等电路阶段。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 23,
+        "excerpt": "题面把操作占用的执行管道写作 Pipe，并称其对应资源为硬件流水线（pipeline）。在本文中，硬件流水线（pipeline）特指一个 Core 内处理某一类操作的执行资源及其固定操作顺序：`PIPE_M`使用 Cube，`PIPE_V`使用 Vector，`PIPE_MTE2`和`PIPE_MTE3`处理题面规定方向的数据搬运。官方模拟规定每条 Pipe 在同一时刻至多执行一个操作；不同 Pipe 可以在依赖和资源条件允许时同时执行。本文不描述这些单元内部的取指、译码等电路阶段。"
+      }
+    },
+    {
+      "id": "TERM-002",
+      "old": "Pipe",
+      "english_full": "pipeline",
+      "chinese": "执行管道 / 硬件流水线",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2；schedule_step3.py:27–36",
+      "definition": "输入操作的pipe字段指定执行资源，取PIPE_M、PIPE_V、PIPE_MTE2、PIPE_MTE3。",
+      "first_definition_verified": true,
+      "limits": "Pipe是题面原标识；不等同Ascend C API中的TPipe资源管理对象。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 23,
+          "excerpt": "题面把操作占用的执行管道写作 Pipe，并称其对应资源为硬件流水线（pipeline）。在本文中，硬件流水线（pipeline）特指一个 Core 内处理某一类操作的执行资源及其固定操作顺序：`PIPE_M`使用 Cube，`PIPE_V`使用 Vector，`PIPE_MTE2`和`PIPE_MTE3`处理题面规定方向的数据搬运。官方模拟规定每条 Pipe 在同一时刻至多执行一个操作；不同 Pipe 可以在依赖和资源条件允许时同时执行。本文不描述这些单元内部的取指、译码等电路阶段。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 23,
+        "excerpt": "题面把操作占用的执行管道写作 Pipe，并称其对应资源为硬件流水线（pipeline）。在本文中，硬件流水线（pipeline）特指一个 Core 内处理某一类操作的执行资源及其固定操作顺序：`PIPE_M`使用 Cube，`PIPE_V`使用 Vector，`PIPE_MTE2`和`PIPE_MTE3`处理题面规定方向的数据搬运。官方模拟规定每条 Pipe 在同一时刻至多执行一个操作；不同 Pipe 可以在依赖和资源条件允许时同时执行。本文不描述这些单元内部的取指、译码等电路阶段。"
+      }
+    },
+    {
+      "id": "TERM-003",
+      "old": "Tensor/张量大小",
+      "english_full": "tensor",
+      "chinese": "张量",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2，张量节点",
+      "definition": "原图中表示一块输入、中间结果或输出数据的节点；b_t为size字段给出的字节数，不是维数或元素个数。",
+      "first_definition_verified": true,
+      "limits": "多维数组仅作解释性例子；不外推为多重线性代数定义。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 13,
+          "excerpt": "题面用张量节点（Tensor）表示一块数据，用操作节点（Op）表示一次计算或搬运。本文采用题面的含义：张量可以是输入、计算的中间结果或最终输出。例如，一个包含四个16位数的$2\\times2$数组占用$4\\times2=8$ B。这里的8 B是数据大小，既不是数组的维数，也不是元素个数。正式计算始终读取输入文件的`size`字段，不从这个示例推测实际用例的数据类型。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 13,
+        "excerpt": "题面用张量节点（Tensor）表示一块数据，用操作节点（Op）表示一次计算或搬运。本文采用题面的含义：张量可以是输入、计算的中间结果或最终输出。例如，一个包含四个16位数的$2\\times2$数组占用$4\\times2=8$ B。这里的8 B是数据大小，既不是数组的维数，也不是元素个数。正式计算始终读取输入文件的`size`字段，不从这个示例推测实际用例的数据类型。"
+      }
+    },
+    {
+      "id": "TERM-004",
+      "old": "操作/Op",
+      "english_full": "operation",
+      "chinese": "操作节点",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2，操作节点",
+      "definition": "一次计算或数据搬运；本文划分对象是除COPY_IN/COPY_OUT外的原始操作。",
+      "first_definition_verified": true,
+      "limits": "op为原始字段，不按节点名称猜pipe。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 13,
+          "excerpt": "题面用张量节点（Tensor）表示一块数据，用操作节点（Op）表示一次计算或搬运。本文采用题面的含义：张量可以是输入、计算的中间结果或最终输出。例如，一个包含四个16位数的$2\\times2$数组占用$4\\times2=8$ B。这里的8 B是数据大小，既不是数组的维数，也不是元素个数。正式计算始终读取输入文件的`size`字段，不从这个示例推测实际用例的数据类型。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 13,
+        "excerpt": "题面用张量节点（Tensor）表示一块数据，用操作节点（Op）表示一次计算或搬运。本文采用题面的含义：张量可以是输入、计算的中间结果或最终输出。例如，一个包含四个16位数的$2\\times2$数组占用$4\\times2=8$ B。这里的8 B是数据大小，既不是数组的维数，也不是元素个数。正式计算始终读取输入文件的`size`字段，不从这个示例推测实际用例的数据类型。"
+      }
+    },
+    {
+      "id": "TERM-005",
+      "old": "边",
+      "english_full": "directed edge",
+      "chinese": "有向边",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2，有向边",
+      "definition": "t→o表示该操作读取t，o→t表示该操作输出t；原图不允许Op→Op或Tensor→Tensor。",
+      "first_definition_verified": true,
+      "limits": "计算依赖图的操作间边是另行定义的表示。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 15,
+          "excerpt": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 15,
+        "excerpt": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。"
+      }
+    },
+    {
+      "id": "TERM-006",
+      "old": "DAG",
+      "english_full": "directed acyclic graph",
+      "chinese": "有向无环图",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2",
+      "definition": "顺着有向边不能回到出发节点的图。",
+      "first_definition_verified": true,
+      "limits": "原图无环不保证划分后子图关系无环。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 15,
+          "excerpt": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 15,
+        "excerpt": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。"
+      }
+    },
+    {
+      "id": "TERM-007",
+      "old": "Task",
+      "english_full": "task",
+      "chinese": "执行任务",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2、§1.5",
+      "definition": "CPU主控向单个NPU Core一次下发并统一调度的最小执行单元。",
+      "first_definition_verified": true,
+      "limits": "问题一一个子图对应一个Task；问题二、三将分配到同一个Core的子图合成一个Task。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 31,
+          "excerpt": "执行任务（Task）是主控处理器向一个Core一次下发并统一调度的最小执行单元。子图是算法的划分结果，Task 是官方评价程序按场景组织的执行对象。两者的对应关系决定了三问的差别。"
+        },
+        {
+          "file": "chapters/05-p2.md",
+          "line": 5,
+          "excerpt": "问题二把被分配到同一个Core的各个子图合并为一个执行任务（Task）。前面子图生成的数据，可以留在这个Core的L1/UB中，供后面子图中的操作使用。如果生成和读取数据的操作分配到了不同Core，数据仍须通过COPY_OUT写入DDR，再由目标Core的COPY_IN读入；目标读取须等待源COPY_OUT完成后500 cycles。此时，把每个计算操作单独划成子图，也不意味着为每个操作建立独立Task。提交文件中的子图顺序会影响官方程序在这个Core中安排操作的先后次序。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 31,
+        "excerpt": "执行任务（Task）是主控处理器向一个Core一次下发并统一调度的最小执行单元。子图是算法的划分结果，Task 是官方评价程序按场景组织的执行对象。两者的对应关系决定了三问的差别。"
+      }
+    },
+    {
+      "id": "TERM-008",
+      "old": "Core",
+      "english_full": "core",
+      "chinese": null,
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.1、附录A",
+      "definition": "一个包含独立计算和搬运资源及私有L1/UB的计算核心；正文依用户要求保留Core。",
+      "first_definition_verified": true,
+      "limits": "不译作核心0。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 5,
+          "excerpt": "题目要求把一张神经网络计算图交给多个计算核心执行。本文沿用题面的标识，将一个计算核心写作 Core。每个 Core 包含矩阵计算单元 Cube、向量计算单元 Vector、数据搬运单元，以及私有的 L1 和 UB 缓存。所有 Core 共享核外主存。题面把这部分主存简称为 DDR，其名称来自双倍数据率动态随机存取内存（double data rate dynamic random-access memory）。这些硬件对象的容量和带宽由题目固定，算法只能改变计算任务的划分、分配和执行顺序[1]。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 5,
+        "excerpt": "题目要求把一张神经网络计算图交给多个计算核心执行。本文沿用题面的标识，将一个计算核心写作 Core。每个 Core 包含矩阵计算单元 Cube、向量计算单元 Vector、数据搬运单元，以及私有的 L1 和 UB 缓存。所有 Core 共享核外主存。题面把这部分主存简称为 DDR，其名称来自双倍数据率动态随机存取内存（double data rate dynamic random-access memory）。这些硬件对象的容量和带宽由题目固定，算法只能改变计算任务的划分、分配和执行顺序[1]。"
+      }
+    },
+    {
+      "id": "TERM-009",
+      "old": "DDR",
+      "english_full": "double data rate dynamic random-access memory",
+      "chinese": "双倍数据率动态随机存取内存",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.1",
+      "definition": "题面把所有Core共享的核外主存简称DDR。",
+      "first_definition_verified": true,
+      "limits": "带宽是全体读写请求共享的总量。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 5,
+          "excerpt": "题目要求把一张神经网络计算图交给多个计算核心执行。本文沿用题面的标识，将一个计算核心写作 Core。每个 Core 包含矩阵计算单元 Cube、向量计算单元 Vector、数据搬运单元，以及私有的 L1 和 UB 缓存。所有 Core 共享核外主存。题面把这部分主存简称为 DDR，其名称来自双倍数据率动态随机存取内存（double data rate dynamic random-access memory）。这些硬件对象的容量和带宽由题目固定，算法只能改变计算任务的划分、分配和执行顺序[1]。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 5,
+        "excerpt": "题目要求把一张神经网络计算图交给多个计算核心执行。本文沿用题面的标识，将一个计算核心写作 Core。每个 Core 包含矩阵计算单元 Cube、向量计算单元 Vector、数据搬运单元，以及私有的 L1 和 UB 缓存。所有 Core 共享核外主存。题面把这部分主存简称为 DDR，其名称来自双倍数据率动态随机存取内存（double data rate dynamic random-access memory）。这些硬件对象的容量和带宽由题目固定，算法只能改变计算任务的划分、分配和执行顺序[1]。"
+      }
+    },
+    {
+      "id": "TERM-010",
+      "old": "Cache/L2",
+      "english_full": "Level 2 Cache",
+      "chinese": "二级缓存",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.5",
+      "definition": "P3在Core之外添加共享只读缓存，命中只改变读请求使用的服务资源。",
+      "first_definition_verified": true,
+      "limits": "本题规则优先于其他硬件的一般Cache行为。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 38,
+          "excerpt": "| 共享只读缓存 | 无 | 无 | 增加二级缓存（Level 2 Cache，L2） |"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 38,
+        "excerpt": "| 共享只读缓存 | 无 | 无 | 增加二级缓存（Level 2 Cache，L2） |"
+      }
+    },
+    {
+      "id": "TERM-011",
+      "old": "FIFO",
+      "english_full": "first in, first out",
+      "chinese": "先进先出",
+      "chinese_status": "official_implementation",
+      "source": "官方附件 multicore_cut_evaluate_problem_3.py:1–6；schedule_step3.py:282–284",
+      "definition": "Cache按插入次序淘汰最早进入的对象，命中不刷新次序；操作队列按官方排定次序处理。",
+      "first_definition_verified": true,
+      "limits": "两处对象不同，须分别定义。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/02-assumptions.md",
+          "line": 11,
+          "excerpt": "执行操作前，官方程序还检查数据依赖、各Pipe的固定顺序、Task是否允许开始及存储空间。先进先出（first in, first out，FIFO）在本文有两个明确对象：对操作队列，它指按官方预先排定的队列顺序处理；对问题三的Cache，它指空间不足时先移除最早放入的缓存项，读命中不会改变该项的插入次序。两处顺序不能混为同一个队列。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/02-assumptions.md",
+        "line": 11,
+        "excerpt": "执行操作前，官方程序还检查数据依赖、各Pipe的固定顺序、Task是否允许开始及存储空间。先进先出（first in, first out，FIFO）在本文有两个明确对象：对操作队列，它指按官方预先排定的队列顺序处理；对问题三的Cache，它指空间不足时先移除最早放入的缓存项，读命中不会改变该项的插入次序。两处顺序不能混为同一个队列。"
+      }
+    },
+    {
+      "id": "TERM-012",
+      "old": "spill",
+      "english_full": "spill",
+      "chinese": "缓存换出和缓存换入",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.4；schedule_step2.py:1–31",
+      "definition": "容量不足时保留数据的DDR副本并在后续需要时重新读入；具体插入操作以官方代码为准。",
+      "first_definition_verified": true,
+      "limits": "不把所有COPY都称spill，不把它与总搬运重复相加。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/02-assumptions.md",
+          "line": 13,
+          "excerpt": "官方程序安排一个Core中的操作时，如果发现L1/UB空间不足，就会插入缓存换出和缓存换入（spill）。需要保留的数据借助DDR保存副本，后续计算需要时再重新读入；搬运次数由官方程序决定。这部分搬运、原始输入输出和不同Task之间的数据搬运分别核算，不重复求和。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/02-assumptions.md",
+        "line": 13,
+        "excerpt": "官方程序安排一个Core中的操作时，如果发现L1/UB空间不足，就会插入缓存换出和缓存换入（spill）。需要保留的数据借助DDR保存副本，后续计算需要时再重新读入；搬运次数由官方程序决定。这部分搬运、原始输入输出和不同Task之间的数据搬运分别核算，不重复求和。"
+      }
+    },
+    {
+      "id": "TERM-013",
+      "old": "COPY费用",
+      "english_full": "copy / data transfer",
+      "chinese": "数据搬运",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.2–1.4",
+      "definition": "COPY_IN为搬入，COPY_OUT为搬出。复制量用B，搬运持续时间用cycle。",
+      "first_definition_verified": true,
+      "limits": "两者量纲不同；旧组合词没有标准定义。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 19,
+          "excerpt": "COPY_IN 和 COPY_OUT 是题面规定的数据搬运操作。前者把数据从 DDR 搬入 L1/UB，后者把数据从 L1/UB 搬回 DDR。ADD、MUL 等操作则使用指定的计算单元。张量的`id`标识数据节点，操作的`id`标识计算或搬运节点；两者不能混用。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 19,
+        "excerpt": "COPY_IN 和 COPY_OUT 是题面规定的数据搬运操作。前者把数据从 DDR 搬入 L1/UB，后者把数据从 L1/UB 搬回 DDR。ADD、MUL 等操作则使用指定的计算单元。张量的`id`标识数据节点，操作的`id`标识计算或搬运节点；两者不能混用。"
+      }
+    },
+    {
+      "id": "TERM-014",
+      "old": "Makespan",
+      "english_full": "makespan",
+      "chinese": "总体任务执行时间",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf §1.4",
+      "definition": "官方模拟中所有操作完成时刻的最大值，单位cycle。",
+      "first_definition_verified": true,
+      "limits": "不等于程序运行经过的秒数。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/00-abstract.md",
+          "line": 5,
+          "excerpt": "本文针对题目给出的三种硬件条件设计调度算法。三种算法都先根据数据依赖生成少量可执行方案，再按完整方案的总体任务执行时间（Makespan）选择输出。"
+        },
+        {
+          "file": "chapters/01-problem.md",
+          "line": 9,
+          "excerpt": "题目的主要评价指标是总体任务执行时间（Makespan）：从模拟起点到全部操作完成的时间，即所有操作结束时刻的最大值，单位为时钟周期（cycle）。算法程序在计算机上生成方案所经过的时间以秒计，本文称为求解时间。前者衡量方案，后者衡量程序运行效率。本文的执行时刻均来自官方模拟，不作为真实硬件测量结果。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/00-abstract.md",
+        "line": 5,
+        "excerpt": "本文针对题目给出的三种硬件条件设计调度算法。三种算法都先根据数据依赖生成少量可执行方案，再按完整方案的总体任务执行时间（Makespan）选择输出。"
+      }
+    },
+    {
+      "id": "TERM-015",
+      "old": "超边/超图",
+      "english_full": "hyperedge / hypergraph",
+      "chinese": "超边 / 超图",
+      "chinese_status": "author_translation",
+      "source": "https://xlinux.nist.gov/dads/HTML/hyperedge.html；https://xlinux.nist.gov/dads/HTML/hypergraph.html",
+      "definition": "超边是一个顶点集合；本文一个集合包含生成及读取同一张量的计算操作，用于统计这些操作被分到多少个不同Core。",
+      "first_definition_verified": true,
+      "limits": "NIST定义可核；未核到官方中文译名，中文不标为官方翻译。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/05-p2.md",
+          "line": 31,
+          "excerpt": "为表示这种多操作共同使用一块数据的关系，引入超边（hyperedge）：它是一个顶点集合，可以同时包含两个以上顶点；由顶点与这些集合组成的结构称为超图（hypergraph）[3][5]。本文以计算操作为顶点，对中间张量$t$建立集合$e_t=\\{u,v_1,v_2,\\ldots\\}$，其中包含生成$t$的计算操作和所有读取$t$的计算操作。超边只表示共同关联，不表示执行方向；原来的有向依赖仍单独保留。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/05-p2.md",
+        "line": 31,
+        "excerpt": "为表示这种多操作共同使用一块数据的关系，引入超边（hyperedge）：它是一个顶点集合，可以同时包含两个以上顶点；由顶点与这些集合组成的结构称为超图（hypergraph）[3][5]。本文以计算操作为顶点，对中间张量$t$建立集合$e_t=\\{u,v_1,v_2,\\ldots\\}$，其中包含生成$t$的计算操作和所有读取$t$的计算操作。超边只表示共同关联，不表示执行方向；原来的有向依赖仍单独保留。"
+      }
+    },
+    {
+      "id": "TERM-016",
+      "old": "锚点/工作帽",
+      "english_full": null,
+      "chinese": null,
+      "chinese_status": "remove_custom_label",
+      "source": "src/q2_nikolastarx @ c66559a6f8a31ef7b4720e1f7c3c28d61f8dff3f",
+      "definition": "分别写明不允许更换Core的操作，以及每个Core各Pipe的累计计算时长上限。",
+      "first_definition_verified": true,
+      "limits": "不为作者组合词创造英文译名。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/05-p2.md",
+          "line": 55,
+          "excerpt": "算法在上一节的时间区间构造结果上，选择两个Core及最多16条计算链组成局部调整范围。计算链指按依赖前后相接的一串计算操作；范围之外的操作以及必须保持位置的链不允许更换Core。其余操作在所选两个Core之间选择位置。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/05-p2.md",
+        "line": 55,
+        "excerpt": "算法在上一节的时间区间构造结果上，选择两个Core及最多16条计算链组成局部调整范围。计算链指按依赖前后相接的一串计算操作；范围之外的操作以及必须保持位置的链不允许更换Core。其余操作在所选两个Core之间选择位置。"
+      }
+    },
+    {
+      "id": "TERM-017",
+      "old": "内部存活前沿",
+      "english_full": null,
+      "chinese": null,
+      "chinese_status": "remove_custom_label",
+      "source": "本文第6章的h_i、r_i与H公式",
+      "definition": "改为处理一棵子树时仍须保留的内部计算结果及其最大总字节数。",
+      "first_definition_verified": true,
+      "limits": "局部模型不是全机器内存占用。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/06-p3.md",
+          "line": 21,
+          "excerpt": "为了单独分析这个影响，先固定一棵树状计算结构：每个内部操作只输出一个张量，该结果只被唯一的父操作读取，其他树或分支不使用它。每次完整处理一棵子树后才处理下一棵，子树之间不交错执行。对子树$i$定义$h_i$为处理它时内部计算结果占用的最大总字节数，$r_i$为子树完成后必须保留的输出字节数。这里统计的是此模型内的结果数据，不包括外部输入，也不分别区分L1和UB。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/06-p3.md",
+        "line": 21,
+        "excerpt": "为了单独分析这个影响，先固定一棵树状计算结构：每个内部操作只输出一个张量，该结果只被唯一的父操作读取，其他树或分支不使用它。每次完整处理一棵子树后才处理下一棵，子树之间不交错执行。对子树$i$定义$h_i$为处理它时内部计算结果占用的最大总字节数，$r_i$为子树完成后必须保留的输出字节数。这里统计的是此模型内的结果数据，不包括外部输入，也不分别区分L1和UB。"
+      }
+    },
+    {
+      "id": "TERM-018",
+      "old": "日历/gap",
+      "english_full": null,
+      "chinese": null,
+      "chinese_status": "remove_custom_label",
+      "source": "src/q2_nikolastarx @ c66559a6f8a31ef7b4720e1f7c3c28d61f8dff3f",
+      "definition": "改为记录各Core各Pipe已占用的时间区间，把操作安排进足够长的空闲区间。",
+      "first_definition_verified": true,
+      "limits": "估计开始时刻不等于官方执行时刻。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/05-p2.md",
+          "line": 13,
+          "excerpt": "设$v$的估计最早开始时刻为$r_v$，计算时长为$d_v$；$\\mathcal I_{k,p_v}$是Core $k$的Pipe $p_v$已经占用的时间区间的并集。选取最早的$s_v$使"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/05-p2.md",
+        "line": 13,
+        "excerpt": "设$v$的估计最早开始时刻为$r_v$，计算时长为$d_v$；$\\mathcal I_{k,p_v}$是Core $k$的Pipe $p_v$已经占用的时间区间的并集。选取最早的$s_v$使"
+      }
+    },
+    {
+      "id": "TERM-019",
+      "old": "生产者/消费者",
+      "english_full": null,
+      "chinese": null,
+      "chinese_status": "remove_metaphor",
+      "source": "data/raw/a/problem.pdf §1.2；图中的o→t及t→o",
+      "definition": "分别改为生成该张量的计算操作、读取该张量的操作。",
+      "first_definition_verified": true,
+      "limits": "无需另设拟人化名称。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/05-p2.md",
+          "line": 31,
+          "excerpt": "为表示这种多操作共同使用一块数据的关系，引入超边（hyperedge）：它是一个顶点集合，可以同时包含两个以上顶点；由顶点与这些集合组成的结构称为超图（hypergraph）[3][5]。本文以计算操作为顶点，对中间张量$t$建立集合$e_t=\\{u,v_1,v_2,\\ldots\\}$，其中包含生成$t$的计算操作和所有读取$t$的计算操作。超边只表示共同关联，不表示执行方向；原来的有向依赖仍单独保留。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/05-p2.md",
+        "line": 31,
+        "excerpt": "为表示这种多操作共同使用一块数据的关系，引入超边（hyperedge）：它是一个顶点集合，可以同时包含两个以上顶点；由顶点与这些集合组成的结构称为超图（hypergraph）[3][5]。本文以计算操作为顶点，对中间张量$t$建立集合$e_t=\\{u,v_1,v_2,\\ldots\\}$，其中包含生成$t$的计算操作和所有读取$t$的计算操作。超边只表示共同关联，不表示执行方向；原来的有向依赖仍单独保留。"
+      }
+    },
+    {
+      "id": "TERM-020",
+      "old": "物理张量/逻辑别名",
+      "english_full": null,
+      "chinese": null,
+      "chinese_status": "use_exact_fields",
+      "source": "官方附件 schedule_step2.py:12–31；schedule_step3.py:197、212",
+      "definition": "分别说明原图id、换入换出后新建id、logical_tid用于识别同一份逻辑数据。",
+      "first_definition_verified": true,
+      "limits": "字段名须从冻结源码核对；不凭词典推断实例关系。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/02-assumptions.md",
+          "line": 19,
+          "excerpt": "官方代码还使用`logical_tid`记录这些副本对应的逻辑数据标识。问题三据此判断请求的数据是否已经存在于Cache。本文涉及这三种对象时分别写“原图张量节点”“调度后新建的数据副本”和“Cache查询标识”，不以一个未限定的名称代替它们。后文的某些数学公式要求原图不同张量标识不合并为同一个逻辑标识；不满足此条件时，不套用相应公式。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/02-assumptions.md",
+        "line": 19,
+        "excerpt": "官方代码还使用`logical_tid`记录这些副本对应的逻辑数据标识。问题三据此判断请求的数据是否已经存在于Cache。本文涉及这三种对象时分别写“原图张量节点”“调度后新建的数据副本”和“Cache查询标识”，不以一个未限定的名称代替它们。后文的某些数学公式要求原图不同张量标识不合并为同一个逻辑标识；不满足此条件时，不套用相应公式。"
+      }
+    },
+    {
+      "id": "TERM-021",
+      "old": "未来充分状态/机制DAG/容量返回赢家",
+      "english_full": null,
+      "chinese": null,
+      "chinese_status": "remove_custom_label",
+      "source": "本文附录B.4及相应固定实现",
+      "definition": "撤销名称，直接描述需要保留的信息、方案如何产生及何时采用。",
+      "first_definition_verified": true,
+      "limits": "自定义数学函数可保留，但必须先定义集合和量词。",
+      "status": "author_checked_pending_independent_review",
+      "definition_locations": [
+        {
+          "file": "chapters/10-appendix.md",
+          "line": 89,
+          "excerpt": "**命题B.1。** 设$S(P)$为准备保存的信息。对每种修改$a$，若存在判定函数$d_a$、更新函数$\\bar a$和观测恢复函数$o$，使声明范围内的全部方案满足"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/10-appendix.md",
+        "line": 89,
+        "excerpt": "**命题B.1。** 设$S(P)$为准备保存的信息。对每种修改$a$，若存在判定函数$d_a$、更新函数$\\bar a$和观测恢复函数$o$，使声明范围内的全部方案满足"
+      }
+    },
+    {
+      "id": "TERM-022",
+      "english_full": "bipartite graph",
+      "chinese": "二部图",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://igraph.org/c/doc/igraph-Bipartite.html",
+      "definition": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 15,
+          "excerpt": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 15,
+        "excerpt": "有向边（directed edge）用箭头表示数据依赖。$u\\to t$表示操作$u$输出张量$t$；$t\\to v$表示操作$v$读取$t$。因此，$u\\to t\\to v$要求$u$先生成数据，$v$再使用数据。原图只连接操作节点与张量节点，不直接连接两个操作节点。这样的图是二部图（bipartite graph），即节点分成两类，边只连接不同类别。题面还要求它是有向无环图（directed acyclic graph，DAG）：沿箭头前进不能回到起点。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-023",
+      "english_full": "connected component",
+      "chinese": "连通分量",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://xlinux.nist.gov/dads/HTML/maximallyConnectedComponent.html",
+      "definition": "算法首先识别计算图中彼此没有计算依赖的部分。把有依赖的操作间连线暂时看作无向边，能够沿连线互相到达的操作构成一个连通分量（connected component）。不同连通分量可以分别安排，但若它们读取同一外部输入，搬运仍可能相互影响。",
+      "definition_locations": [
+        {
+          "file": "chapters/04-p1.md",
+          "line": 17,
+          "excerpt": "算法首先识别计算图中彼此没有计算依赖的部分。把有依赖的操作间连线暂时看作无向边，能够沿连线互相到达的操作构成一个连通分量（connected component）。不同连通分量可以分别安排，但若它们读取同一外部输入，搬运仍可能相互影响。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/04-p1.md",
+        "line": 17,
+        "excerpt": "算法首先识别计算图中彼此没有计算依赖的部分。把有依赖的操作间连线暂时看作无向边，能够沿连线互相到达的操作构成一个连通分量（connected component）。不同连通分量可以分别安排，但若它们读取同一外部输入，搬运仍可能相互影响。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-024",
+      "english_full": "critical path length",
+      "chinese": "关键路径长度",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://xlinux.nist.gov/dads/HTML/criticalPath.html",
+      "definition": "记$W_M$为全部Cube操作的时长之和，$W_V$为全部Vector操作的时长之和，单位均为cycle。设$L_{\\mathrm{cp}}$为保留的计算依赖图中路径时长的最大值，即关键路径长度（critical path length）。因为同一路径上的操作必须依次完成，且每类Pipe仅有$K$份同类执行资源，所以",
+      "definition_locations": [
+        {
+          "file": "chapters/03-framework.md",
+          "line": 57,
+          "excerpt": "记$W_M$为全部Cube操作的时长之和，$W_V$为全部Vector操作的时长之和，单位均为cycle。设$L_{\\mathrm{cp}}$为保留的计算依赖图中路径时长的最大值，即关键路径长度（critical path length）。因为同一路径上的操作必须依次完成，且每类Pipe仅有$K$份同类执行资源，所以"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/03-framework.md",
+        "line": 57,
+        "excerpt": "记$W_M$为全部Cube操作的时长之和，$W_V$为全部Vector操作的时长之和，单位均为cycle。设$L_{\\mathrm{cp}}$为保留的计算依赖图中路径时长的最大值，即关键路径长度（critical path length）。因为同一路径上的操作必须依次完成，且每类Pipe仅有$K$份同类执行资源，所以"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-025",
+      "english_full": "minimum source–target cut",
+      "chinese": "源点与汇点之间的最小割",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://igraph.org/c/doc/igraph-Flows.html#igraph_st_mincut",
+      "definition": "对于固定范围与固定操作，目标是减少这一范围影响的边界复制量。借助辅助节点，可以把两种Core选择表示为源点与汇点之间的最小割问题（minimum source–target cut）：在一个带非负边权的有向网络中，将指定的源点和汇点分到两侧，并使从源点一侧指向汇点一侧的边的权重和最小。辅助节点把“某条超边是否同时涉及两侧”转换为相应边权，因此求得的是当前局部复制字节目标的精确最小值。",
+      "definition_locations": [
+        {
+          "file": "chapters/05-p2.md",
+          "line": 57,
+          "excerpt": "对于固定范围与固定操作，目标是减少这一范围影响的边界复制量。借助辅助节点，可以把两种Core选择表示为源点与汇点之间的最小割问题（minimum source–target cut）：在一个带非负边权的有向网络中，将指定的源点和汇点分到两侧，并使从源点一侧指向汇点一侧的边的权重和最小。辅助节点把“某条超边是否同时涉及两侧”转换为相应边权，因此求得的是当前局部复制字节目标的精确最小值。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/05-p2.md",
+        "line": 57,
+        "excerpt": "对于固定范围与固定操作，目标是减少这一范围影响的边界复制量。借助辅助节点，可以把两种Core选择表示为源点与汇点之间的最小割问题（minimum source–target cut）：在一个带非负边权的有向网络中，将指定的源点和汇点分到两侧，并使从源点一侧指向汇点一侧的边的权重和最小。辅助节点把“某条超边是否同时涉及两侧”转换为相应边权，因此求得的是当前局部复制字节目标的精确最小值。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-026",
+      "english_full": "95th percentile",
+      "chinese": "95%分位数",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc262.htm",
+      "definition": "95%分位数（95th percentile，P95）表示按时间排序后接近95%位置的值。问题一原始报告采用线性插值，问题二、三采用向上取整得到的第$\\lceil0.95n\\rceil$个次序值；$n$是样本数量。本文保留各自实际报告的方法，不混合定义后声称细微的性能差别。",
+      "definition_locations": [
+        {
+          "file": "chapters/07-experiments.md",
+          "line": 45,
+          "excerpt": "95%分位数（95th percentile，P95）表示按时间排序后接近95%位置的值。问题一原始报告采用线性插值，问题二、三采用向上取整得到的第$\\lceil0.95n\\rceil$个次序值；$n$是样本数量。本文保留各自实际报告的方法，不混合定义后声称细微的性能差别。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/07-experiments.md",
+        "line": 45,
+        "excerpt": "95%分位数（95th percentile，P95）表示按时间排序后接近95%位置的值。问题一原始报告采用线性插值，问题二、三采用向上取整得到的第$\\lceil0.95n\\rceil$个次序值；$n$是样本数量。本文保留各自实际报告的方法，不混合定义后声称细微的性能差别。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-027",
+      "english_full": "elapsed time",
+      "chinese": "求解时间",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://docs.python.org/3/library/time.html#time.perf_counter",
+      "definition": "求解时间（elapsed time）采用从程序启动、读取输入到最终方案写入文件的实际经过时间，包含在线产生和比较方案的时间。这里的“在线”指求解当前输入期间发生的工作。独立于求解程序运行的最终官方评价另行计时。",
+      "definition_locations": [
+        {
+          "file": "chapters/02-assumptions.md",
+          "line": 58,
+          "excerpt": "求解时间（elapsed time）采用从程序启动、读取输入到最终方案写入文件的实际经过时间，包含在线产生和比较方案的时间。这里的“在线”指求解当前输入期间发生的工作。独立于求解程序运行的最终官方评价另行计时。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/02-assumptions.md",
+        "line": 58,
+        "excerpt": "求解时间（elapsed time）采用从程序启动、读取输入到最终方案写入文件的实际经过时间，包含在线产生和比较方案的时间。这里的“在线”指求解当前输入期间发生的工作。独立于求解程序运行的最终官方评价另行计时。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-028",
+      "english_full": "cache hit",
+      "chinese": "命中",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "官方附件 multicore_cut_evaluate_problem_3.py:399–414,539–546",
+      "definition": "问题一需要权衡增加并行计算与增加 Task 边界。问题二可以在同一 Core 内重复使用已经保存的数据，但保存时间越长，占用缓存的时间也越长。问题三允许多个 Core 从共享只读 Cache 读取数据；查询时所需数据已在Cache中称为命中（cache hit），否则为未命中（cache miss）。因此，请求到达前数据是否已经放入Cache、是否已经被移除，都会改变读取结果。",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 40,
+          "excerpt": "问题一需要权衡增加并行计算与增加 Task 边界。问题二可以在同一 Core 内重复使用已经保存的数据，但保存时间越长，占用缓存的时间也越长。问题三允许多个 Core 从共享只读 Cache 读取数据；查询时所需数据已在Cache中称为命中（cache hit），否则为未命中（cache miss）。因此，请求到达前数据是否已经放入Cache、是否已经被移除，都会改变读取结果。"
+        },
+        {
+          "file": "chapters/06-p3.md",
+          "line": 5,
+          "excerpt": "问题三保留问题二的Task组成和分配到不同Core的操作之间的数据依赖，增加全部Core共享的只读Cache。按官方代码，操作类型为COPY_IN、能够确定搬入数据的逻辑标识且搬运字节数大于0时，操作开始就查询Cache。程序使用这一逻辑标识查找数据。若数据存在，则为命中（cache hit），从Cache读取；否则为未命中（cache miss），从DDR读取，并在传输完成后把数据放入Cache。FIFO规则按插入时间选择需要移除的对象，命中不刷新该对象的次序。单份数据大于Cache容量时，不将它插入Cache。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 40,
+        "excerpt": "问题一需要权衡增加并行计算与增加 Task 边界。问题二可以在同一 Core 内重复使用已经保存的数据，但保存时间越长，占用缓存的时间也越长。问题三允许多个 Core 从共享只读 Cache 读取数据；查询时所需数据已在Cache中称为命中（cache hit），否则为未命中（cache miss）。因此，请求到达前数据是否已经放入Cache、是否已经被移除，都会改变读取结果。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-029",
+      "english_full": "cache miss",
+      "chinese": "未命中",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "官方附件 multicore_cut_evaluate_problem_3.py:399–414,539–546",
+      "definition": "问题一需要权衡增加并行计算与增加 Task 边界。问题二可以在同一 Core 内重复使用已经保存的数据，但保存时间越长，占用缓存的时间也越长。问题三允许多个 Core 从共享只读 Cache 读取数据；查询时所需数据已在Cache中称为命中（cache hit），否则为未命中（cache miss）。因此，请求到达前数据是否已经放入Cache、是否已经被移除，都会改变读取结果。",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 40,
+          "excerpt": "问题一需要权衡增加并行计算与增加 Task 边界。问题二可以在同一 Core 内重复使用已经保存的数据，但保存时间越长，占用缓存的时间也越长。问题三允许多个 Core 从共享只读 Cache 读取数据；查询时所需数据已在Cache中称为命中（cache hit），否则为未命中（cache miss）。因此，请求到达前数据是否已经放入Cache、是否已经被移除，都会改变读取结果。"
+        },
+        {
+          "file": "chapters/06-p3.md",
+          "line": 5,
+          "excerpt": "问题三保留问题二的Task组成和分配到不同Core的操作之间的数据依赖，增加全部Core共享的只读Cache。按官方代码，操作类型为COPY_IN、能够确定搬入数据的逻辑标识且搬运字节数大于0时，操作开始就查询Cache。程序使用这一逻辑标识查找数据。若数据存在，则为命中（cache hit），从Cache读取；否则为未命中（cache miss），从DDR读取，并在传输完成后把数据放入Cache。FIFO规则按插入时间选择需要移除的对象，命中不刷新该对象的次序。单份数据大于Cache容量时，不将它插入Cache。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 40,
+        "excerpt": "问题一需要权衡增加并行计算与增加 Task 边界。问题二可以在同一 Core 内重复使用已经保存的数据，但保存时间越长，占用缓存的时间也越长。问题三允许多个 Core 从共享只读 Cache 读取数据；查询时所需数据已在Cache中称为命中（cache hit），否则为未命中（cache miss）。因此，请求到达前数据是否已经放入Cache、是否已经被移除，都会改变读取结果。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-030",
+      "english_full": "speedup",
+      "chinese": "加速比",
+      "chinese_status": "official_problem",
+      "source": "data/raw/a/problem.pdf 问题1–3",
+      "definition": "平均加速比（speedup）先对每张图计算基线完成时间与方案完成时间之比，再对全部100图取算术平均：",
+      "definition_locations": [
+        {
+          "file": "chapters/02-assumptions.md",
+          "line": 48,
+          "excerpt": "平均加速比（speedup）先对每张图计算基线完成时间与方案完成时间之比，再对全部100图取算术平均："
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/02-assumptions.md",
+        "line": 48,
+        "excerpt": "平均加速比（speedup）先对每张图计算基线完成时间与方案完成时间之比，再对全部100图取算术平均："
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-031",
+      "english_full": "overlap of computation and data transfer",
+      "chinese": "计算与数据搬运的时间重叠",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "https://www.hiascend.com/developer/techArticles/20240819-1",
+      "definition": "例如，Vector 正在处理已经搬入的数据时，MTE2 可以搬入另一块尚待计算的数据。两项操作若有一段共同的执行时间区间，就发生了计算与数据搬运的时间重叠（overlap of computation and data transfer）。是否能够重叠，取决于输入数据是否可用、执行单元是否空闲、任务是否允许开始，以及 L1/UB 是否有足够空间。官方时间线中的空白只表示没有操作在该资源上执行；没有对应事件证据时，不能进一步断言是哪一项条件造成了等待。",
+      "definition_locations": [
+        {
+          "file": "chapters/01-problem.md",
+          "line": 25,
+          "excerpt": "例如，Vector 正在处理已经搬入的数据时，MTE2 可以搬入另一块尚待计算的数据。两项操作若有一段共同的执行时间区间，就发生了计算与数据搬运的时间重叠（overlap of computation and data transfer）。是否能够重叠，取决于输入数据是否可用、执行单元是否空闲、任务是否允许开始，以及 L1/UB 是否有足够空间。官方时间线中的空白只表示没有操作在该资源上执行；没有对应事件证据时，不能进一步断言是哪一项条件造成了等待。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/01-problem.md",
+        "line": 25,
+        "excerpt": "例如，Vector 正在处理已经搬入的数据时，MTE2 可以搬入另一块尚待计算的数据。两项操作若有一段共同的执行时间区间，就发生了计算与数据搬运的时间重叠（overlap of computation and data transfer）。是否能够重叠，取决于输入数据是否可用、执行单元是否空闲、任务是否允许开始，以及 L1/UB 是否有足够空间。官方时间线中的空白只表示没有操作在该资源上执行；没有对应事件证据时，不能进一步断言是哪一项条件造成了等待。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-032",
+      "english_full": "lower bound",
+      "chinese": "下界",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "chapters/03-framework.md：必要条件与不等式证明",
+      "definition": "下界（lower bound）是任何符合所述条件的方案都不能低于的数值。先考虑只统计原始计算的必要条件：每个计算保留原时长，每个Core的同一Pipe同时至多执行一个操作，并保留能够从官方执行中证明必然成立的计算依赖。",
+      "definition_locations": [
+        {
+          "file": "chapters/03-framework.md",
+          "line": 55,
+          "excerpt": "下界（lower bound）是任何符合所述条件的方案都不能低于的数值。先考虑只统计原始计算的必要条件：每个计算保留原时长，每个Core的同一Pipe同时至多执行一个操作，并保留能够从官方执行中证明必然成立的计算依赖。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/03-framework.md",
+        "line": 55,
+        "excerpt": "下界（lower bound）是任何符合所述条件的方案都不能低于的数值。先考虑只统计原始计算的必要条件：每个计算保留原时长，每个Core的同一Pipe同时至多执行一个操作，并保留能够从官方执行中证明必然成立的计算依赖。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    },
+    {
+      "id": "TERM-033",
+      "english_full": "candidate solution",
+      "chinese": "候选方案",
+      "chinese_status": "not_verified_as_official_Chinese; contextual_translation",
+      "source": "chapters/03-framework.md：本文方案集合的直接定义",
+      "definition": "第一，从原图识别有明确含义的关系。例如，哪些计算互不依赖，哪些操作读取同一张量，哪些中间结果只供唯一后续操作使用。第二，针对这些关系生成少量完整方案。本文把等待比较的方案称为候选方案（candidate solution）；每份候选都包含切分、Core分配和顺序。第三，检查覆盖、重复安排和循环依赖。第四，在有证明依据时，用完成时间下界排除无法改善的候选。最后，完整评价剩余方案并选择输出。",
+      "definition_locations": [
+        {
+          "file": "chapters/03-framework.md",
+          "line": 29,
+          "excerpt": "第一，从原图识别有明确含义的关系。例如，哪些计算互不依赖，哪些操作读取同一张量，哪些中间结果只供唯一后续操作使用。第二，针对这些关系生成少量完整方案。本文把等待比较的方案称为候选方案（candidate solution）；每份候选都包含切分、Core分配和顺序。第三，检查覆盖、重复安排和循环依赖。第四，在有证明依据时，用完成时间下界排除无法改善的候选。最后，完整评价剩余方案并选择输出。"
+        }
+      ],
+      "first_definition_location": {
+        "file": "chapters/03-framework.md",
+        "line": 29,
+        "excerpt": "第一，从原图识别有明确含义的关系。例如，哪些计算互不依赖，哪些操作读取同一张量，哪些中间结果只供唯一后续操作使用。第二，针对这些关系生成少量完整方案。本文把等待比较的方案称为候选方案（candidate solution）；每份候选都包含切分、Core分配和顺序。第三，检查覆盖、重复安排和循环依赖。第四，在有证明依据时，用完成时间下界排除无法改善的候选。最后，完整评价剩余方案并选择输出。"
+      },
+      "first_definition_verified": true,
+      "status": "author_checked_pending_independent_review"
+    }
+  ],
+  "manuscript_commit": "94dae95a31826c0f3171075c547ee5975be17de8",
+  "independent_status": "unreviewed"
+}
