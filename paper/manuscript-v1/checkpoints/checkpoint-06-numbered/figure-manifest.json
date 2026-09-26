@@ -1,0 +1,98 @@
+[
+  {
+    "file": "figures/fig-progression-v3.png",
+    "sha256": "d4a75c65f85de8c7b83beecf9b46d05fa3295061e666bad3849c6eed8fbf1d43",
+    "caption": "三问条件的差别。问题一为图中不同子图所对应的操作分别建立Task，数据经DDR中转；问题二允许同一个核心保留数据；问题三另为符合条件的COPY\\_IN提供共享只读Cache。下部示意数据能够装入Cache时的读取过程；所有请求仍须满足原依赖及规定等待。",
+    "label": "fig:progression"
+  },
+  {
+    "file": "figures/fig-framework-v2.png",
+    "sha256": "b751a7c597f8e20d9b1a867796faab6621c08f066f0bd08542a5eed4dad89e8d",
+    "caption": "三问共用的方案构造与比较步骤。各分支只在结构条件满足时采用，所形成的完整方案需检查依赖与容量，并通过执行评价比较完成时间。下界只在其证明条件成立时用于提前排除候选。",
+    "label": "fig:framework"
+  },
+  {
+    "file": "figures/fig-p1-cuts-zh.png",
+    "sha256": "ce7f192887ec4860ff4767b7322907c36605465f34c81975d67e5ed52a8f9c3f",
+    "caption": "case\\_026、5个核心的真实归约片段。左为原始划分，右为将独立支路改分到另一个核心；八个 ADD 节点的编号和依赖不变。点线端口连接裁剪范围外的输入或后继，橙色虚线为位于不同子图中的操作之间的依赖。",
+    "label": "fig:p1-cuts"
+  },
+  {
+    "file": "figures/paper-v2/fig-p1-results.pdf",
+    "sha256": "4214eb53dd1dd1350dbedf0c48bbc4c668e0d5cfce210d50732024c7638cb0a0",
+    "caption": "问题一的完整版本比较。上：每个核心数量的 100 图平均加速比；下：全部500种图与核心数量组合的时间与搬运量配对变化。核心数量用点形区分，横轴采用对称对数。",
+    "label": "fig:p1-results"
+  },
+  {
+    "file": "figures/paper-v2/fig-p1-overlap-old.pdf",
+    "sha256": "c82bd550c953e2ba0471a25ecc338275b593419a9141cec576b77423a9076bdf",
+    "caption": "case\\_026、5个核心 两种切分的执行时间线。上：修改前方案，$M=44{,}114$ cycles，额外搬运211,680 B；下：分支重新分配后，$M=42{,}014$ cycles，额外搬运375,532 B。每组分别显示Task持续区间及四条Pipe的操作区间，横轴范围相同，数据来自官方模拟事件。",
+    "label": "fig:p1-overlap"
+  },
+  {
+    "file": "figures/paper-v2/fig-p1-overlap-new.pdf",
+    "sha256": "65b74e4e24fb31e74d30ec7c2f432f2840b3a06b0313ae2f78f03794eaccfb04",
+    "caption": "case\\_026、5个核心 两种切分的执行时间线。上：修改前方案，$M=44{,}114$ cycles，额外搬运211,680 B；下：分支重新分配后，$M=42{,}014$ cycles，额外搬运375,532 B。每组分别显示Task持续区间及四条Pipe的操作区间，横轴范围相同，数据来自官方模拟事件。",
+    "label": "fig:p1-overlap"
+  },
+  {
+    "file": "figures/paper-v2/fig-p2-results.pdf",
+    "sha256": "7e5d6eead4f31cc8b809df8863d153d3b22286e783b4d7abcea6e8ac3f5c3ed3",
+    "caption": "问题二的完整版本比较。上：按题目要求计算的平均加速比；下：500种组合配对结果。部分时间改善伴随额外搬运增加，两项指标分别报告。",
+    "label": "fig:p2-results"
+  },
+  {
+    "file": "figures/paper-v2/fig-p2-counterexample-control.pdf",
+    "sha256": "8dcd7825785c3b66f5dc0cbc0392ecde4ac48b5e3ce6cb6d787ac90704b96a54",
+    "caption": "case\\_019、5个核心的官方模拟的执行时间线。上：主算法，$M=16{,}247$ cycles；下：C04，$M=28{,}514$ cycles。每组分别显示Task和四条Pipe，共用横轴范围。C04的搬运量较少，且没有容量不足引起的缓存换入换出，但完成时间更长。",
+    "label": "fig:p2-counterexample"
+  },
+  {
+    "file": "figures/paper-v2/fig-p2-counterexample-c04.pdf",
+    "sha256": "99f1886607786fae23c23640ec396433e34d04e3cd2f52ba8c7aab355096b911",
+    "caption": "case\\_019、5个核心的官方模拟的执行时间线。上：主算法，$M=16{,}247$ cycles；下：C04，$M=28{,}514$ cycles。每组分别显示Task和四条Pipe，共用横轴范围。C04的搬运量较少，且没有容量不足引起的缓存换入换出，但完成时间更长。",
+    "label": "fig:p2-counterexample"
+  },
+  {
+    "file": "figures/fig-hypercut-v2.png",
+    "sha256": "8a28dda4bec1f03b2d582e85d8fb538081d56ebd711682c35b119a75574e61d6",
+    "caption": "同一张量的计算操作分配。图中$u$生成$t$，$v_1,v_2$读取$t$；$\\lambda_t$表示这三个操作所在的不同核心数量。16 B、16 B、0 B仅统计该张量的边界复制，线条只表示集合关联。",
+    "label": "fig:hypercut"
+  },
+  {
+    "file": "figures/paper-v2/fig-forest-example.pdf",
+    "sha256": "8181906ad4852fcc458bfcb223bb0941d90198bdc758a0a6890c32ef804a0659",
+    "caption": "两种子树处理顺序的内部结果占用。左：先A后B，峰值10 KiB；右：先B后A，峰值13 KiB。横轴为处理步骤，不是模拟时钟；数字为第6章的公式示例。",
+    "label": "fig:forest-example"
+  },
+  {
+    "file": "figures/paper-v2/fig-p3-results.pdf",
+    "sha256": "4a2235a79364a19df448a71ef72c237d13b80eed0eba437755c19eec8629a2ef",
+    "caption": "问题三的保持方案不变的配对评价。上：无 L2 与只读 Cache 的平均基线加速比；下：逐图$M_2/M_3$的均值，每种核心数量包含100对结果。",
+    "label": "fig:p3-results"
+  },
+  {
+    "file": "figures/paper-v2/fig-cache-gain.pdf",
+    "sha256": "00bcca89c97a2085c3b124d0ba0edc7dcd63c07b02a339850b5be542c2231fbb",
+    "caption": "500 个保持方案不变的配对结果中的字节命中率与 Cache 收益。保留低于 1 的负收益点；100 个用例的不同核心数量结果相关，不能当作 500 个独立随机样本。",
+    "label": "fig:cache-gain"
+  },
+  {
+    "file": "figures/paper-v2/fig-dataset.pdf",
+    "sha256": "be1d32bcc509c1cbb1df421bc20b2d5c46bf08d363c3cd669e6555c59d3e7fc4",
+    "caption": "官方 100 张计算图的结构统计。上：非 COPY 操作数与张量大小总和；下：按矩阵计算的时长占两类计算总时长的比例排序的用例分布。",
+    "label": "fig:dataset"
+  },
+  {
+    "file": "figures/paper-v2/fig-runtime.pdf",
+    "sha256": "8360b3485c4bbacc68a9c6f4fce7d78fa36503ce4a8094b08cfa92211f45202d",
+    "caption": "三种求解程序的实际经过时间累计分布，每题500次。时间包含方案构造及在线评价，横轴采用对数刻度；批次资源不同，不据此比较独占机器的速度。",
+    "label": "fig:runtime"
+  },
+  {
+    "file": "figures/paper-v2/fig-bound-gap.pdf",
+    "sha256": "0b860b91d7bc37411e8b2392a75bcac31cff90f35d1d62631db9ccf617193628",
+    "caption": "同一输入、配置与方案范围下的时间上界和下界。$L\\le\\mathrm{OPT}\\le U$，阴影是必要界给出的上限与当前结果之间的差距，不代表一定可实现的收益。",
+    "label": "fig:bound-gap"
+  }
+]

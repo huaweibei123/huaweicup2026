@@ -1,0 +1,4206 @@
+{
+  "schema_version": 1,
+  "task_id": "language-v8-audit",
+  "review_type": "language_specialist_initial",
+  "standard_version": "2026-09-26.6",
+  "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+  "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+  "source_hash_method": "SHA-256 over each chapter filename, NUL, raw bytes, NUL, in filename order",
+  "pdf_sha256": "51cd3c6fefd4885c7978bf46d6ad279297c170f3c8b590ae649aa4963df51ff0",
+  "model": "Sol / medium (task assignment; runtime model selection not independently observable)",
+  "budget": {
+    "tokens_soft": 12000,
+    "actual_tokens": "unavailable",
+    "max_tool_calls": 24,
+    "max_wall_minutes": 10,
+    "evaluator_calls": 0
+  },
+  "scope_notes": [
+    "11 chapter Markdown files reviewed as blank-line units; bibliography checked only for obvious non-bibliographic prose; algorithm listings not language-audited line by line.",
+    "figure-plan blocks recorded as internal placeholders; no PDF leakage finding made from Markdown alone.",
+    "Appendix D finding independently confirmed in PDF text; other figure text and layout not visually audited.",
+    "Scientific proof and numeric correctness reserved for main review."
+  ],
+  "findings": [
+    {
+      "id": "LANG-V8-001",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 3,
+      "line_end": 3,
+      "quote": "针对递进的硬件执行语义，本文构建了基于拓扑特征的结构化候选生成、理论下界护栏与受限模拟择优框架",
+      "standard_ids": [
+        "L01",
+        "L13"
+      ],
+      "issue": "摘要已有三题条件的后文说明，但此句把三种具体决策与下界使用范围压成标签；读者尚不能知道哪个问题使用哪种下界或评价器。",
+      "minimal_revision_direction": "分别点出三题生成方案与筛选的关键动作；下界只写实际使用的分支，保留摘要篇幅。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-002",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 71,
+      "line_end": 71,
+      "quote": "计算量显著超过核心平均工作量的核心被判定为**捐赠核心候选（donor candidates）**",
+      "standard_ids": [
+        "L03",
+        "L09"
+      ],
+      "issue": "“显著超过”是决定候选角色的触发条件，却未在此定义差额、比例或阈值；无法复现角色判定。",
+      "minimal_revision_direction": "给出固定阈值或精确判定式，并说明比较的是哪条流水线、哪个波次。",
+      "status": "needs_context"
+    },
+    {
+      "id": "LANG-V8-003",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 5,
+      "line_end": 5,
+      "quote": "这一微架构语义的变化带来了根本性的数据流动革新",
+      "standard_ids": [
+        "L07",
+        "L11"
+      ],
+      "issue": "前后实际规则是同一核心内子图可共享私有缓存；“根本性革新”是自评，未增加可检验内容。",
+      "minimal_revision_direction": "直接写出同核保留、跨核仍经DDR的条件和动作。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-004",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 11,
+      "line_end": 11,
+      "quote": "可彻底消除跨核 DDR 往返读写流量以及 500 cycles 的跨核同步等待",
+      "standard_ids": [
+        "L09",
+        "L10"
+      ],
+      "issue": "同核聚集只消除被这次分配改动所取消的跨核边界；其他消费者或外部输入仍可能产生DDR访问，绝对化范围过宽。",
+      "minimal_revision_direction": "限定为该张量在相关生产者和消费者同核、且没有其他跨核消费者时，免去相应边界传输与等待。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-005",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 17,
+      "line_end": 17,
+      "quote": "而是通过超图割与流水线工作量保护进行结构化解耦",
+      "standard_ids": [
+        "L05",
+        "L13"
+      ],
+      "issue": "“结构化解耦”没有指出模型分别约束什么，也无法承接前句的容量溢出风险。",
+      "minimal_revision_direction": "说明超图割估计哪类复制字节、工作量上限约束哪类计算负载，并保留不能保证无溢出的限定。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-006",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 5,
+      "line_end": 5,
+      "quote": "还可以通过该共享 Cache 存取跨核心共享的只读数据",
+      "standard_ids": [
+        "L03",
+        "L09"
+      ],
+      "issue": "此处把只读Cache写成泛化的“存取”通道；后文实际限定为满足条件的COPY_IN读取查询，写入发生于DDR搬运完成时，范围不一致。",
+      "minimal_revision_direction": "按后文规则写成符合条件的COPY_IN可从Cache读取；未命中后的插入另句说明。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-007",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 129,
+      "line_end": 129,
+      "quote": "前序研发积累的流水线链条，形成了一条清晰的递进式父子演化链条",
+      "standard_ids": [
+        "L05",
+        "L11"
+      ],
+      "issue": "句子在代码调用关系前使用研发过程与“链条”自评，未先说明当前固定求解器实际如何调用、如何选优。",
+      "minimal_revision_direction": "直接说明forest依次调用哪些父级求解器及共享的评价预算。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-008",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 138,
+      "line_end": 138,
+      "quote": "针对多核场景下的共享输入流水线结构，构造一种连续极小化极大划分（contiguous minimax partition）候选",
+      "standard_ids": [
+        "L01",
+        "L03",
+        "L13"
+      ],
+      "issue": "“共享输入流水线结构”没有指出输入由哪些算子读取、流水线指硬件Pipe还是算子链，以及连续划分的对象。",
+      "minimal_revision_direction": "说明触发所需图结构、被连续划分的序列与优化的最大工作量；作者核对实际代码语义。",
+      "status": "needs_context"
+    },
+    {
+      "id": "LANG-V8-009",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 275,
+      "line_end": 275,
+      "quote": "这三份被拒绝的候选方案在实际执行中，**其实同时显著缩短了 $M_2$ 与 $M_3$**",
+      "standard_ids": [
+        "L09",
+        "L10"
+      ],
+      "issue": "三份样本的改善幅度差异很大；case_064的周期变化较小，“显著”未给阈值且容易被读作统计显著性。",
+      "minimal_revision_direction": "逐例报告相对降幅或仅写三份方案的M2与M3均下降，不加未定义的显著程度。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-010",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 31,
+      "line_end": 31,
+      "quote": "三道题目之间的性能演进直接反映了硬件执行语义与调度算法的协同深化",
+      "standard_ids": [
+        "L10",
+        "L13"
+      ],
+      "issue": "三题同时改变硬件规则与求解器；表中平均加速比差异不能独立归因于两者协同，更不能证明“深化”。",
+      "minimal_revision_direction": "把表述限于三题各自配置与方案的结果差异；机制解释另引同方案控制对比。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-011",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 40,
+      "line_end": 40,
+      "quote": "表明算法重排算子次序后在单核上亦能提升指令流水线的重叠密度",
+      "standard_ids": [
+        "L09",
+        "L10"
+      ],
+      "issue": "单核B/M大于1只说明方案完成时间优于官方基线；未在此提供Pipe重叠事件或单因素对照来确定收益来自重排和重叠密度。",
+      "minimal_revision_direction": "保留单核比值事实；若要归因，补同方案事件或消融证据。",
+      "status": "needs_context"
+    },
+    {
+      "id": "LANG-V8-012",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 57,
+      "line_end": 57,
+      "quote": "说明自适应选择、拓扑守卫与前置下界剪枝机制有效规避了无希望候选的盲目评测",
+      "standard_ids": [
+        "L09",
+        "L10"
+      ],
+      "issue": "平均约2次调用只能证明调用预算内的频次，不能单凭调用总数分辨三种机制各自是否有效，也不能判定被跳过候选“无希望”。",
+      "minimal_revision_direction": "报告调用分布与跳过原因；机制有效性需对应计数或反事实对照。",
+      "status": "needs_context"
+    },
+    {
+      "id": "LANG-V8-013",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 68,
+      "line_end": 68,
+      "quote": "这表明算法通过局部容忍合理的边界搬运，换取了计算算子在多核心流水线上的并发展开",
+      "standard_ids": [
+        "L09",
+        "L10"
+      ],
+      "issue": "上一句仅给完整版本的平均加速比与搬运总量变化，未隔离分支重排、前沿细化及其与Pipe并发的因果路径。",
+      "minimal_revision_direction": "改为前后版本两指标同时变化的观察；有事件轨迹或消融后再解释换取机制。",
+      "status": "confirmed"
+    },
+    {
+      "id": "LANG-V8-014",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 78,
+      "line_end": 78,
+      "quote": "由于任意合法执行的物理完成时间 $\\mathrm{OPT}$ 必然满足 $L \\le \\mathrm{OPT} \\le U$",
+      "standard_ids": [
+        "L03",
+        "L09",
+        "L10"
+      ],
+      "issue": "本段先把L限定为给定单操作子图与流水线次序的下界，随即用“任意合法执行”及OPT推到全局最优，适用方案集合未保持一致。此处标语言与结论范围疑点，不判定数学证明真伪。",
+      "minimal_revision_direction": "作者明确OPT的方案集合，给出L对该集合全体方案成立的依据；否则把误差结论限制在已证范围。",
+      "status": "needs_context"
+    },
+    {
+      "id": "LANG-V8-015",
+      "source_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+      "source_sha256": "feca33a5d2086623378ec24a574b7706044cd0d5e4df192fcb297f75722c8008",
+      "standard_version": "2026-09-26.6",
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 139,
+      "line_end": 139,
+      "quote": "原图片段保留节点编号、张量字节数和裁剪外的依赖。",
+      "standard_ids": [
+        "L07",
+        "L11"
+      ],
+      "issue": "这句是给制图者的操作指令，已在v7 PDF文本中出现，不是向读者解释图中对象和证据的附录说明。",
+      "minimal_revision_direction": "若附录D需保留，改为说明已入稿图实际包含哪些标注及其含义；移走尚未执行的制图要求。",
+      "status": "confirmed"
+    }
+  ],
+  "coverage": [
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-001"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 9,
+      "line_end": 9,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 11,
+      "line_end": 11,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/00-abstract.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 9,
+      "line_end": 9,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 11,
+      "line_end": 11,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 17,
+      "line_end": 17,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 19,
+      "line_end": 19,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 23,
+      "line_end": 23,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 25,
+      "line_end": 25,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 27,
+      "line_end": 27,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 29,
+      "line_end": 32,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 34,
+      "line_end": 34,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 36,
+      "line_end": 36,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 38,
+      "line_end": 38,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 40,
+      "line_end": 40,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 42,
+      "line_end": 44,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 46,
+      "line_end": 46,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 48,
+      "line_end": 48,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 50,
+      "line_end": 56,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 58,
+      "line_end": 58,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 60,
+      "line_end": 62,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 64,
+      "line_end": 64,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 66,
+      "line_end": 68,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 70,
+      "line_end": 70,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 72,
+      "line_end": 72,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 74,
+      "line_end": 74,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 76,
+      "line_end": 76,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 78,
+      "line_end": 78,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 80,
+      "line_end": 80,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/01-problem.md",
+      "line_start": 82,
+      "line_end": 85,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 9,
+      "line_end": 12,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 14,
+      "line_end": 14,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 16,
+      "line_end": 16,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 18,
+      "line_end": 18,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 20,
+      "line_end": 20,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 22,
+      "line_end": 24,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 26,
+      "line_end": 26,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 28,
+      "line_end": 30,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 32,
+      "line_end": 32,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 34,
+      "line_end": 34,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 36,
+      "line_end": 36,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 38,
+      "line_end": 57,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 59,
+      "line_end": 59,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 61,
+      "line_end": 61,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 63,
+      "line_end": 63,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 65,
+      "line_end": 65,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 67,
+      "line_end": 67,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 69,
+      "line_end": 69,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 71,
+      "line_end": 71,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 73,
+      "line_end": 73,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 75,
+      "line_end": 75,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 77,
+      "line_end": 80,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 82,
+      "line_end": 82,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 84,
+      "line_end": 84,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 86,
+      "line_end": 86,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 88,
+      "line_end": 89,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 91,
+      "line_end": 91,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 93,
+      "line_end": 93,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 95,
+      "line_end": 97,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/02-assumptions.md",
+      "line_start": 99,
+      "line_end": 99,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 9,
+      "line_end": 11,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 17,
+      "line_end": 18,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 20,
+      "line_end": 20,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 22,
+      "line_end": 22,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 24,
+      "line_end": 24,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 26,
+      "line_end": 26,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 28,
+      "line_end": 28,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 30,
+      "line_end": 30,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 32,
+      "line_end": 32,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 34,
+      "line_end": 34,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 36,
+      "line_end": 36,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 38,
+      "line_end": 38,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 40,
+      "line_end": 44,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 46,
+      "line_end": 46,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 48,
+      "line_end": 50,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 52,
+      "line_end": 52,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 54,
+      "line_end": 56,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 58,
+      "line_end": 58,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 60,
+      "line_end": 60,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 62,
+      "line_end": 62,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 64,
+      "line_end": 64,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 66,
+      "line_end": 68,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 70,
+      "line_end": 72,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 74,
+      "line_end": 74,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 76,
+      "line_end": 76,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 78,
+      "line_end": 78,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 80,
+      "line_end": 80,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 82,
+      "line_end": 82,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 84,
+      "line_end": 86,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 88,
+      "line_end": 88,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 90,
+      "line_end": 90,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 92,
+      "line_end": 92,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 94,
+      "line_end": 94,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 96,
+      "line_end": 98,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 100,
+      "line_end": 100,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 102,
+      "line_end": 102,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 104,
+      "line_end": 104,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 106,
+      "line_end": 106,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 108,
+      "line_end": 108,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 110,
+      "line_end": 110,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 112,
+      "line_end": 112,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 114,
+      "line_end": 114,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 116,
+      "line_end": 120,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 122,
+      "line_end": 122,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/03-framework.md",
+      "line_start": 124,
+      "line_end": 126,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 9,
+      "line_end": 9,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 11,
+      "line_end": 11,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 17,
+      "line_end": 18,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 20,
+      "line_end": 20,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 22,
+      "line_end": 22,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 24,
+      "line_end": 24,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 26,
+      "line_end": 26,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 28,
+      "line_end": 33,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 35,
+      "line_end": 39,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 41,
+      "line_end": 41,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 43,
+      "line_end": 43,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 45,
+      "line_end": 46,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 48,
+      "line_end": 48,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 50,
+      "line_end": 50,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 52,
+      "line_end": 54,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 56,
+      "line_end": 56,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 58,
+      "line_end": 58,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 60,
+      "line_end": 60,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 62,
+      "line_end": 62,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 64,
+      "line_end": 64,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 66,
+      "line_end": 66,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 68,
+      "line_end": 68,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 70,
+      "line_end": 75,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-002"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 77,
+      "line_end": 77,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 79,
+      "line_end": 79,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 81,
+      "line_end": 84,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 86,
+      "line_end": 86,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 88,
+      "line_end": 90,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 92,
+      "line_end": 92,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 94,
+      "line_end": 94,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 96,
+      "line_end": 96,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 98,
+      "line_end": 98,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 100,
+      "line_end": 106,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 108,
+      "line_end": 108,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 110,
+      "line_end": 123,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 125,
+      "line_end": 125,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 127,
+      "line_end": 127,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 129,
+      "line_end": 129,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 131,
+      "line_end": 131,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 133,
+      "line_end": 148,
+      "unit_kind": "algorithm_listing_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 150,
+      "line_end": 150,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 152,
+      "line_end": 155,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 157,
+      "line_end": 157,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 159,
+      "line_end": 159,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 161,
+      "line_end": 161,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 163,
+      "line_end": 168,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 170,
+      "line_end": 170,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 172,
+      "line_end": 175,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 177,
+      "line_end": 179,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 181,
+      "line_end": 181,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 183,
+      "line_end": 183,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 185,
+      "line_end": 185,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 187,
+      "line_end": 188,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 190,
+      "line_end": 190,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 192,
+      "line_end": 192,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 194,
+      "line_end": 196,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 198,
+      "line_end": 200,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/04-p1.md",
+      "line_start": 202,
+      "line_end": 202,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-003"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 9,
+      "line_end": 9,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 11,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-004"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 17,
+      "line_end": 17,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-005"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 19,
+      "line_end": 19,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 23,
+      "line_end": 23,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 25,
+      "line_end": 25,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 27,
+      "line_end": 27,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 29,
+      "line_end": 29,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 31,
+      "line_end": 31,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 33,
+      "line_end": 35,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 37,
+      "line_end": 37,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 39,
+      "line_end": 39,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 41,
+      "line_end": 41,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 43,
+      "line_end": 43,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 45,
+      "line_end": 45,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 47,
+      "line_end": 47,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 49,
+      "line_end": 51,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 53,
+      "line_end": 53,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 55,
+      "line_end": 55,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 57,
+      "line_end": 60,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 62,
+      "line_end": 62,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 64,
+      "line_end": 64,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 66,
+      "line_end": 66,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 68,
+      "line_end": 68,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 70,
+      "line_end": 70,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 72,
+      "line_end": 72,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 74,
+      "line_end": 74,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 76,
+      "line_end": 76,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 78,
+      "line_end": 78,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 80,
+      "line_end": 80,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 82,
+      "line_end": 82,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 84,
+      "line_end": 84,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 86,
+      "line_end": 86,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 88,
+      "line_end": 88,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 90,
+      "line_end": 90,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 92,
+      "line_end": 92,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 94,
+      "line_end": 94,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 96,
+      "line_end": 96,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 98,
+      "line_end": 98,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 100,
+      "line_end": 104,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 106,
+      "line_end": 106,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 108,
+      "line_end": 110,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 112,
+      "line_end": 112,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 114,
+      "line_end": 114,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 116,
+      "line_end": 116,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 118,
+      "line_end": 118,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 120,
+      "line_end": 120,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 122,
+      "line_end": 122,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 124,
+      "line_end": 124,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 126,
+      "line_end": 126,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 128,
+      "line_end": 128,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 130,
+      "line_end": 144,
+      "unit_kind": "algorithm_listing_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 146,
+      "line_end": 146,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 148,
+      "line_end": 153,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 155,
+      "line_end": 155,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 157,
+      "line_end": 157,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 159,
+      "line_end": 159,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 161,
+      "line_end": 161,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 163,
+      "line_end": 168,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 170,
+      "line_end": 170,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 172,
+      "line_end": 174,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 176,
+      "line_end": 178,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 180,
+      "line_end": 180,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 182,
+      "line_end": 182,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 184,
+      "line_end": 184,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 186,
+      "line_end": 193,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 195,
+      "line_end": 195,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 197,
+      "line_end": 197,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 199,
+      "line_end": 201,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 203,
+      "line_end": 203,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 205,
+      "line_end": 205,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 207,
+      "line_end": 207,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 209,
+      "line_end": 213,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/05-p2.md",
+      "line_start": 215,
+      "line_end": 215,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-006"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 9,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 17,
+      "line_end": 19,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 23,
+      "line_end": 23,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 25,
+      "line_end": 25,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 27,
+      "line_end": 27,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 29,
+      "line_end": 29,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 31,
+      "line_end": 34,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 36,
+      "line_end": 36,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 38,
+      "line_end": 38,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 40,
+      "line_end": 43,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 45,
+      "line_end": 45,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 47,
+      "line_end": 50,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 52,
+      "line_end": 52,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 54,
+      "line_end": 56,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 58,
+      "line_end": 58,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 60,
+      "line_end": 60,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 62,
+      "line_end": 62,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 64,
+      "line_end": 64,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 66,
+      "line_end": 66,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 68,
+      "line_end": 68,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 70,
+      "line_end": 70,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 72,
+      "line_end": 72,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 74,
+      "line_end": 74,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 76,
+      "line_end": 76,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 78,
+      "line_end": 78,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 80,
+      "line_end": 80,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 82,
+      "line_end": 82,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 84,
+      "line_end": 84,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 86,
+      "line_end": 86,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 88,
+      "line_end": 88,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 90,
+      "line_end": 90,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 92,
+      "line_end": 92,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 94,
+      "line_end": 94,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 96,
+      "line_end": 96,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 98,
+      "line_end": 101,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 103,
+      "line_end": 103,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 105,
+      "line_end": 105,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 107,
+      "line_end": 107,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 109,
+      "line_end": 109,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 111,
+      "line_end": 117,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 119,
+      "line_end": 119,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 121,
+      "line_end": 121,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 123,
+      "line_end": 123,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 125,
+      "line_end": 125,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 127,
+      "line_end": 127,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 129,
+      "line_end": 129,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-007"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 131,
+      "line_end": 131,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 133,
+      "line_end": 133,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 135,
+      "line_end": 135,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 137,
+      "line_end": 140,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-008"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 142,
+      "line_end": 142,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 144,
+      "line_end": 144,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 146,
+      "line_end": 151,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 153,
+      "line_end": 153,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 155,
+      "line_end": 155,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 157,
+      "line_end": 157,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 159,
+      "line_end": 159,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 161,
+      "line_end": 164,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 166,
+      "line_end": 166,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 168,
+      "line_end": 172,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 174,
+      "line_end": 174,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 176,
+      "line_end": 176,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 178,
+      "line_end": 178,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 180,
+      "line_end": 180,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 182,
+      "line_end": 182,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 184,
+      "line_end": 184,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 186,
+      "line_end": 186,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 188,
+      "line_end": 211,
+      "unit_kind": "algorithm_listing_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 213,
+      "line_end": 216,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 218,
+      "line_end": 218,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 220,
+      "line_end": 220,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 222,
+      "line_end": 222,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 224,
+      "line_end": 229,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 231,
+      "line_end": 231,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 233,
+      "line_end": 233,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 235,
+      "line_end": 235,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 237,
+      "line_end": 237,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 239,
+      "line_end": 239,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 241,
+      "line_end": 247,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 249,
+      "line_end": 249,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 251,
+      "line_end": 254,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 256,
+      "line_end": 258,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 260,
+      "line_end": 262,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 264,
+      "line_end": 264,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 266,
+      "line_end": 266,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 268,
+      "line_end": 271,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 273,
+      "line_end": 273,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 275,
+      "line_end": 275,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-009"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 277,
+      "line_end": 281,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 283,
+      "line_end": 283,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 285,
+      "line_end": 285,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 287,
+      "line_end": 287,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/06-p3.md",
+      "line_start": 289,
+      "line_end": 289,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 9,
+      "line_end": 11,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 15,
+      "line_end": 17,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 19,
+      "line_end": 19,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 23,
+      "line_end": 29,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 31,
+      "line_end": 31,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-010"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 33,
+      "line_end": 40,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-011"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 42,
+      "line_end": 42,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 44,
+      "line_end": 44,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 46,
+      "line_end": 46,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 48,
+      "line_end": 52,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 54,
+      "line_end": 54,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 56,
+      "line_end": 58,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-012"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 60,
+      "line_end": 62,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 64,
+      "line_end": 64,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 66,
+      "line_end": 66,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 68,
+      "line_end": 72,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-013"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 74,
+      "line_end": 74,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 76,
+      "line_end": 76,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 78,
+      "line_end": 78,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-014"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 80,
+      "line_end": 82,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 84,
+      "line_end": 86,
+      "unit_kind": "internal_figure_plan",
+      "status": "internal_placeholder_not_reported",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 88,
+      "line_end": 88,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 90,
+      "line_end": 90,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/07-experiments.md",
+      "line_start": 92,
+      "line_end": 94,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 7,
+      "line_end": 9,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 11,
+      "line_end": 11,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 15,
+      "line_end": 17,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 19,
+      "line_end": 19,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/08-conclusion.md",
+      "line_start": 23,
+      "line_end": 23,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 9,
+      "line_end": 9,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 11,
+      "line_end": 11,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 17,
+      "line_end": 17,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 19,
+      "line_end": 19,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 23,
+      "line_end": 23,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/09-references.md",
+      "line_start": 25,
+      "line_end": 25,
+      "unit_kind": "bibliography_limited",
+      "status": "limited_review_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 1,
+      "line_end": 1,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 3,
+      "line_end": 3,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 5,
+      "line_end": 5,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 7,
+      "line_end": 7,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 9,
+      "line_end": 9,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 11,
+      "line_end": 11,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 13,
+      "line_end": 13,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 15,
+      "line_end": 15,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 17,
+      "line_end": 17,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 19,
+      "line_end": 19,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 21,
+      "line_end": 21,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 23,
+      "line_end": 23,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 25,
+      "line_end": 25,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 27,
+      "line_end": 27,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 29,
+      "line_end": 29,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 31,
+      "line_end": 31,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 33,
+      "line_end": 33,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 35,
+      "line_end": 35,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 37,
+      "line_end": 37,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 39,
+      "line_end": 39,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 41,
+      "line_end": 41,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 43,
+      "line_end": 43,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 45,
+      "line_end": 45,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 47,
+      "line_end": 47,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 49,
+      "line_end": 51,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 53,
+      "line_end": 53,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 55,
+      "line_end": 57,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 59,
+      "line_end": 59,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 61,
+      "line_end": 61,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 63,
+      "line_end": 63,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 65,
+      "line_end": 65,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 67,
+      "line_end": 67,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 69,
+      "line_end": 69,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 71,
+      "line_end": 71,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 73,
+      "line_end": 73,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 75,
+      "line_end": 75,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 77,
+      "line_end": 77,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 79,
+      "line_end": 79,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 81,
+      "line_end": 81,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 83,
+      "line_end": 83,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 85,
+      "line_end": 85,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 87,
+      "line_end": 87,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 89,
+      "line_end": 89,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 91,
+      "line_end": 91,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 93,
+      "line_end": 93,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 95,
+      "line_end": 95,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 97,
+      "line_end": 97,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 99,
+      "line_end": 99,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 101,
+      "line_end": 101,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 103,
+      "line_end": 107,
+      "unit_kind": "math_display",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 109,
+      "line_end": 109,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 111,
+      "line_end": 121,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 123,
+      "line_end": 123,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 125,
+      "line_end": 125,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 127,
+      "line_end": 131,
+      "unit_kind": "table",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 133,
+      "line_end": 133,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 135,
+      "line_end": 135,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 137,
+      "line_end": 137,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 139,
+      "line_end": 139,
+      "unit_kind": "prose",
+      "status": "finding",
+      "finding_ids": [
+        "LANG-V8-015"
+      ]
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 141,
+      "line_end": 141,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 143,
+      "line_end": 143,
+      "unit_kind": "heading",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 145,
+      "line_end": 145,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    },
+    {
+      "path": "paper/manuscript-v1/checkpoints/v7/source/chapters/10-appendix.md",
+      "line_start": 147,
+      "line_end": 147,
+      "unit_kind": "prose",
+      "status": "reviewed_no_finding",
+      "finding_ids": []
+    }
+  ],
+  "coverage_summary": {
+    "files": 11,
+    "units": 485,
+    "findings": 15,
+    "statuses": {
+      "finding": 15,
+      "internal_placeholder_not_reported": 15,
+      "limited_review_no_finding": 16,
+      "reviewed_no_finding": 439
+    }
+  }
+}

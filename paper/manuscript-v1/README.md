@@ -1,4 +1,4 @@
-# 论文第一版：匿名整稿
+# 论文整稿与审阅检查点
 
 题目：**多核神经网络处理器的计算图切分与调度优化**。
 
@@ -12,7 +12,7 @@
 2. [问题重述与分析](chapters/01-problem.md)
 3. [模型条件与符号说明](chapters/02-assumptions.md)
 4. [计算图切分与调度模型](chapters/03-framework.md)
-5. [问题一：子图分别执行时的切分与调度](chapters/04-p1.md)
+5. [问题一：子图对应的任务分别执行时的调度](chapters/04-p1.md)
 6. [问题二：联合安排计算位置与数据搬运](chapters/05-p2.md)
 7. [问题三：安排计算顺序并利用共享只读Cache](chapters/06-p3.md)
 8. [实验结果与分析](chapters/07-experiments.md)
@@ -45,6 +45,10 @@ P3 R9F 的 500 个输出与 Forest 相同，仅作选择政策负消融；其求
 
 ## 当前制作阶段
 
-最新完整版本是[检查点02](checkpoints/checkpoint-02/README.md)，正文31页，用户标注期间冻结。各章已重写，但独立语言与科学审读尚未通过，后续修改进入检查点03。检查点01保留原件，不覆盖。
+最新已交付审阅版为 [v3 PDF](checkpoints/v3/anonymous-paper-v3.pdf)（87页），另有 [1500行完整结果附表](checkpoints/v3/result-tables.pdf)。[v2 PDF](checkpoints/v2/anonymous-paper-v2.pdf)（86页）与v3均已冻结；旧CP01–CP06归属于v1系列，历史PDF及批注位置保留。版本收据、源稿与哈希随每个检查点保存。
+
+正文由Antigravity原对话中的Gemini撰写；Codex负责事实、数学与算法复核，以及材料、图件选用、LaTeX与PDF。用户继续审阅中文表达。论文验收界面任务接收图件与批注，总调度负责向主库及研究镜像发布；本地生成与Git发布分别记录。排版、编号和代码格式要求见[排版规则](TYPESETTING_RULES.md)。
+
+v2与v3均含12条已核对并在正文引用的参考文献，以及从固定源码导出的7个核心模块（1464行）。第二轮已修正附录B.3的同流水线集合、逐操作共同阈值和跨核指示条件，补充B.4固定参考执行环境，并修正摘要与缓存语义；依据记录于[本轮数学复核](review/v3/mathematical-audit.json)。三张额外的P2/P3图件候选仍由验收任务检查与比选，未混入本轮冻结稿。各版本均为审阅稿，不代表用户语言验收或全篇科学验收已完成。
 
 Fang样张和同步文档已推送并通过Issue26发出，详见[FANG_FIGURE_HANDOFF.md](FANG_FIGURE_HANDOFF.md)。实际已读、图件汇总、论文采用与独立验收分别记录。
