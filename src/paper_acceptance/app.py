@@ -68,6 +68,64 @@ class Documents:
             return target
 
 
+class CheckpointDocuments:
+    """Serve a registered frozen PDF only when its bytes match the checkpoint ledger."""
+    def __init__(self, board):
+        self.board = board
+        self.locations_file = board.state / 'checkpoint-locations.json'
+        self.cache = board.state / 'checkpoint-pages'
+        self.cache.mkdir(exist_ok=True)
+        self.lock = threading.Lock()
+        self.fetch_lock = threading.Lock()
+
+    @staticmethod
+    def record(checkpoint_id):
+        records = json.loads((ROOT / 'docs/paper-acceptance/checkpoint-status.json').read_text())['checkpoints']
+        result = next((item for item in records if item['id'] == checkpoint_id), None)
+        if result is None:
+            raise FileNotFoundError('未知论文检查点')
+        return result
+
+    def locate(self, checkpoint_id):
+        record = self.record(checkpoint_id)
+        locations = json.loads(self.locations_file.read_text()) if self.locations_file.exists() else {}
+        path = Path(locations.get(checkpoint_id, ROOT / record['pdf_path'])).resolve()
+        if not path.is_file():
+            if not record.get('git_commit'):
+                raise FileNotFoundError('本机尚未登记此检查点PDF；公开链接可在检查点记录中查看')
+            with self.fetch_lock:
+                path = self.cache / f"{record['pdf_sha256']}.pdf"
+                if not path.exists():
+                    result = subprocess.run(['git', '-C', str(ROOT), 'show',
+                                             f"{record['git_commit']}:{record['pdf_path']}"],
+                                            capture_output=True, timeout=30)
+                    if result.returncode:
+                        raise FileNotFoundError('本机缺固定论文Git对象；请使用公开PDF链接')
+                    if hashlib.sha256(result.stdout).hexdigest() != record['pdf_sha256']:
+                        raise ValueError('Git论文对象哈希与检查点不一致')
+                    temp = path.with_suffix('.tmp')
+                    temp.write_bytes(result.stdout)
+                    temp.replace(path)
+        if hashlib.sha256(path.read_bytes()).hexdigest() != record['pdf_sha256']:
+            raise ValueError('PDF字节与检查点哈希不一致，拒绝展示旧页码')
+        return path, record
+
+    def page(self, checkpoint_id, page):
+        with self.lock:
+            pdf, record = self.locate(checkpoint_id)
+            if not 1 <= page <= record['pages']:
+                raise ValueError('页码越界')
+            target = self.cache / f"{record['pdf_sha256']}-{page}.png"
+            if not target.exists():
+                try:
+                    subprocess.run(['pdftoppm', '-f', str(page), '-l', str(page), '-singlefile',
+                                    '-scale-to', '1450', '-png', str(pdf), str(target.with_suffix(''))],
+                                   check=True, capture_output=True, timeout=35)
+                except FileNotFoundError:
+                    raise FileNotFoundError('缺少pdftoppm，仍可打开PDF原件审阅') from None
+            return target
+
+
 class TeamImages:
     """Serve only pinned teammate PNGs, after checking their Git blob identity."""
     def __init__(self, board):
@@ -132,6 +190,7 @@ class TeamImages:
 
 def serve(board, port):
     docs = Documents(board)
+    checkpoint_docs = CheckpointDocuments(board)
     team_images = TeamImages(board)
     web = Path(__file__).with_name('web')
 
@@ -227,8 +286,18 @@ def serve(board, port):
                     return self.reply(team_images.refresh())
                 if p.path == '/api/v1/figure-requests':
                     return self.reply(json.loads((ROOT / 'docs/paper-acceptance/figure-requests.json').read_text()))
+                if p.path == '/api/v1/figure-review-v7':
+                    return self.reply(json.loads((ROOT / 'docs/paper-acceptance/figure-review-v7.json').read_text()))
                 if p.path == '/api/v1/checkpoints':
                     return self.reply(json.loads((ROOT / 'docs/paper-acceptance/checkpoint-status.json').read_text()))
+                if p.path in ('/figure-review-assets/p28-crop.pdf', '/figure-review-assets/p28-crop.png'):
+                    suffix = '.pdf' if p.path.endswith('.pdf') else '.png'
+                    path = ROOT / 'docs/paper-acceptance/candidates' / f'p28-figure-5.1-1-crop-candidate{suffix}'
+                    return self.reply(path.read_bytes(), mime='application/pdf' if suffix == '.pdf' else 'image/png')
+                match = re.fullmatch(r'/checkpoints/([a-z0-9]+)(?:/(\d+)\.png|\.pdf)', p.path)
+                if match:
+                    path = checkpoint_docs.page(match[1], int(match[2])) if match[2] else checkpoint_docs.locate(match[1])[0]
+                    return self.reply(path.read_bytes(), mime='image/png' if match[2] else 'application/pdf')
                 match = re.fullmatch(r'/team-figures/([a-z0-9-]+)\.png', p.path)
                 if match:
                     return self.reply(team_images.image(match[1]), mime='image/png')
@@ -286,10 +355,19 @@ def main():
     s = sub.add_parser('import-author'); s.add_argument('commit'); s.add_argument('path')
     s = sub.add_parser('check-annotations'); s.add_argument('file')
     s = sub.add_parser('register'); s.add_argument('doc_id', choices=['current','ref1','ref2','ref3','ref4']); s.add_argument('file')
+    s = sub.add_parser('register-checkpoint'); s.add_argument('checkpoint_id'); s.add_argument('file')
     a = p.parse_args(); board = Board(a.state, a.catalogue)
     if a.command == 'serve':
         return serve(board, a.port)
-    if a.command == 'register':
+    if a.command == 'register-checkpoint':
+        checkpoint = CheckpointDocuments.record(a.checkpoint_id)
+        path = Path(a.file).resolve()
+        if hashlib.sha256(path.read_bytes()).hexdigest() != checkpoint['pdf_sha256']:
+            raise ValueError('PDF哈希与登记的检查点不一致')
+        f = board.state / 'checkpoint-locations.json'; data = json.loads(f.read_text()) if f.exists() else {}
+        data[a.checkpoint_id] = str(path); f.write_text(json.dumps(data, ensure_ascii=False, indent=2)+'\n')
+        result = {'registered_checkpoint': a.checkpoint_id, 'sha256': checkpoint['pdf_sha256']}
+    elif a.command == 'register':
         doc = next(d for d in board.cat['documents'] if d['id'] == a.doc_id)
         path = Path(a.file).resolve()
         if hashlib.sha256(path.read_bytes()).hexdigest() != doc['sha256']:

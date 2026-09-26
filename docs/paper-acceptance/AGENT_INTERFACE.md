@@ -16,10 +16,11 @@
 | `GET /api/v1/annotation-workflow` | 用户原始批注、问题类别、来源与专项检查范围 |
 | `GET /api/v1/standards` | 标准原件与哈希 |
 | `GET /api/v1/author-reports` | 导入的作者自报，包含固定来源及每条scope |
-| `GET /api/v1/handoffs` | 写作交接与待交付事实 |
+| `GET /api/v1/handoffs` | 写作交接与待交付事实；包括 USER-V8-P47-WHITESPACE-01、USER-FANG-FIG53-OPTIMIZE-01、USER-V9-AUTO-TOC-01 三条相互独立的用户要求，原话与作者解释分开保存 |
 | `GET /api/v1/team-figures` | 队友与验收台图件、Fang明确选版优先级、待Fang比选队列、固定来源与待审状态；`curation_priority`与`review_queue_rank`仅控制展示顺序，不代表科学或论文验收 |
-| `GET /api/v1/figure-requests` | 论文组织任务定义的缺图需求、派工与接收状态 |
-| `GET /api/v1/checkpoints` | 最新已知冻结稿与当前验收基线的不同版本、发布链接及原件哈希 |
+| `GET /api/v1/figure-requests` | 论文组织任务定义的缺图需求、派工与接收状态；FIG-FANG-5-3 记录Fang已确认停写并按原样交接的半成品、验收台修订候选及待入稿状态；原旧图与新候选保留不同固定来源和哈希，不把候选自动视为正式验收 |
+| `GET /api/v1/checkpoints` | 最新已知冻结稿与当前验收基线的不同版本、发布链接及原件哈希；v8 `figure_inventory` 列出23个实际图号、页码与图件SHA-256，`board_visual_check`只表示验收台抽样看过整页 |
+| `GET /checkpoints/v8.pdf`、`GET /checkpoints/v8/71.png` | 本机已注册且逐次核对SHA-256的冻结稿及指定整页预览；当前第71页为附录图D.2-1，旧稿批注坐标不迁移 |
 | `GET /api/v1/export` | 当前共享状态和本机草稿快照 |
 
 语言列表默认最多1000项。使用total_matching判断是否需要继续offset，不假设一页等于全部。

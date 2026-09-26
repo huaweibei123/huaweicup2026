@@ -5,9 +5,10 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 from src.paper_acceptance.core import Board, Conflict, MARKER, ROOT
-from src.paper_acceptance.app import Documents, TeamImages
+from src.paper_acceptance.app import CheckpointDocuments, Documents, TeamImages
 from src.paper_acceptance.language import scan_text, import_author_report
 
 
@@ -30,12 +31,66 @@ class ReviewContractTest(unittest.TestCase):
 
     def test_team_figure_manifest_and_blob_integrity(self):
         gallery = TeamImages(self.board)
-        self.assertEqual(len(gallery.by_id), 47)
+        self.assertGreaterEqual(len(gallery.by_id), 56)
         self.assertTrue(gallery.by_id['fang-fig42-a']['curation_priority'])
+        for item_id, digest in (
+            ('fang-fig5-1-a', '16e0b22aeb7849fdc986d8bb06548ac1c0a7378173fbaa2f93ae4ecb90b734f4'),
+            ('fang-fig6-1-a', '9f134160b9c88c150229a4c3893583960bd2af4e74ea53dd3564d8b5dfaf8b90'),
+        ):
+            figure = gallery.by_id[item_id]
+            self.assertTrue(figure['curation_priority'])
+            self.assertEqual(figure['sha256'], digest)
+            self.assertEqual(figure['fang_selection_state'], 'user_confirmed_a')
+            self.assertNotIn('manuscript_placement', figure)
+        self.assertLess(gallery.by_id['fang-fig5-1-a']['curation_rank'],
+                        gallery.by_id['fang-fig42-a']['curation_rank'])
+        original = gallery.by_id['fang-fig43-original-v2']
+        preview = gallery.by_id['fang-fig43-insert-preview-v2']
+        self.assertEqual(original['sha256'], 'c0ac9d63820aa9925fed7bda69769d7fa9248db8708b91391be81df82963db84')
+        self.assertEqual(preview['sha256'], 'cc698a9e292c0c569417e91ed4e33e9b2129805f1197fec9ed1950c226c82779')
+        self.assertEqual(original['family'], preview['family'])
+        self.assertEqual(original['number'], preview['number'])
+        self.assertEqual(original['number'], '图 D.2-1')
+        self.assertEqual(original['fang_selection_state'], 'user_confirmed_original')
+        self.assertEqual(original['review_stage'], 'review_pending')
+        self.assertEqual(original['manuscript_placement']['checkpoint'], 'v8')
+        self.assertEqual(original['manuscript_placement']['page'], 71)
+        self.assertNotIn('manuscript_placement', preview)
+        for original_id, preview_id, original_sha, preview_sha in (
+            ('fang-fig54-layout-v1-original', 'fang-fig54-layout-v1-insert-preview',
+             '9506e1f95cea2fa431ae98b1ae2b898bf3b7a916c4a5d3996154b73722ed1d57',
+             'babc097056fa18ef6c1783120db832ca507203befe596b3084cf870976d45d6d'),
+            ('fang-fig65-layout-v1-original', 'fang-fig65-layout-v1-insert-preview',
+             '9e384b0029ddaca7658686730a853c144b128c6b02c99b3987b90a3b7e5a41ed',
+             '7fb7c06d33f150ca2c4874ad2e584aca3819bedf1780d4feda2b0ffe8379bcde'),
+        ):
+            selected, paper_width = gallery.by_id[original_id], gallery.by_id[preview_id]
+            self.assertEqual((selected['sha256'], paper_width['sha256']), (original_sha, preview_sha))
+            self.assertEqual(selected['source_commit'], '5999965e8effe7baf60b7bda7b734ce86fdc0ba1')
+            self.assertEqual(selected['family'], paper_width['family'])
+            self.assertEqual(selected['fang_selection_state'], 'user_confirmed_workbench_original')
+            self.assertNotIn('manuscript_placement', selected)
+        self.assertEqual(gallery.by_id['fang-fig65-layout-v1-original']['number'], '图 6.9-1')
+        self.assertFalse(gallery.by_id['fang-fig41']['curation_priority'])
+        self.assertEqual(gallery.by_id['fang-fig41']['fang_selection_state'], 'not_adopted_current_algorithm')
         self.assertFalse(gallery.by_id['acceptance-case026-xy']['curation_priority'])
         self.assertFalse(gallery.by_id['acceptance-p1-834-flow-clean']['curation_priority'])
-        self.assertEqual(gallery.by_id['fang-fig42-a']['curation_rank'], 1)
-        self.assertEqual(len({item['family'] for item in gallery.by_id.values()}), 26)
+        self.assertEqual(gallery.by_id['fang-fig42-a']['curation_rank'], 3)
+        self.assertGreaterEqual(len({item['family'] for item in gallery.by_id.values()}), 32)
+        for item_id in (
+            'acceptance-p2-cut-v4', 'acceptance-dataset-v4', 'acceptance-bound-gap-v4',
+            'acceptance-p1-timeline-full-v4', 'acceptance-p1-timeline-zoom-v4',
+            'acceptance-p2-timeline-full-v4', 'acceptance-p2-timeline-zoom-v4',
+        ):
+            self.assertIn(item_id, gallery.by_id)
+            self.assertFalse(gallery.by_id[item_id]['curation_priority'])
+            self.assertNotIn('manuscript_placement', gallery.by_id[item_id])
+        checkpoints = json.loads((ROOT / 'docs/paper-acceptance/checkpoint-status.json').read_text())['checkpoints']
+        v5 = {item['gallery_id']: item for item in next(c for c in checkpoints if c['id'] == 'v5')['figures_checked']}
+        for item_id in ('farmer-fig52-v2', 'acceptance-p2-local-cut', 'acceptance-p2-three-plans', 'acceptance-p3-forest-decision'):
+            placed = gallery.by_id[item_id]['manuscript_placement']
+            self.assertEqual((placed['page'], placed['label']), (v5[item_id]['page'], v5[item_id]['label']))
+            self.assertFalse(gallery.by_id[item_id]['curation_priority'])
         self.assertFalse(gallery.by_id['acceptance-p2-three-plans']['curation_priority'])
         self.assertFalse(gallery.by_id['acceptance-p2-local-cut']['curation_priority'])
         self.assertFalse(gallery.by_id['acceptance-p3-forest-decision']['curation_priority'])
@@ -63,12 +118,104 @@ class ReviewContractTest(unittest.TestCase):
     def test_checkpoint_registry_keeps_new_freeze_separate_from_review_baseline(self):
         registry = json.loads((ROOT / 'docs/paper-acceptance/checkpoint-status.json').read_text())
         by_id = {item['id']: item for item in registry['checkpoints']}
+        self.assertEqual(registry['latest_known_checkpoint'], 'v8')
+        self.assertEqual(registry['acceptance_baseline'], 'CP01')
+        self.assertEqual(by_id['v8']['kind'], 'frozen_published_checkpoint')
+        self.assertEqual(by_id['v8']['pages'], 103)
+        self.assertEqual(by_id['v8']['supplement_pages'], 57)
+        self.assertEqual(len(by_id['v8']['figure_inventory']), 23)
+        self.assertEqual(next(x for x in by_id['v8']['figures_checked'] if x['gallery_id'] == 'fang-fig43-original-v2')['page'], 71)
+        self.assertFalse(by_id['v8']['human_final_acceptance'])
+        self.assertIn(by_id['v8']['git_commit'], by_id['v8']['public_pdf_url'])
+        self.assertEqual(by_id['v7']['kind'], 'frozen_published_checkpoint')
+        self.assertIn(by_id['v7']['git_commit'], by_id['v7']['public_pdf_url'])
+        self.assertEqual(by_id['v7']['pages'], 95)
+        self.assertEqual({x['gallery_id'] for x in by_id['v7']['figures_checked']},
+                         {x['gallery_id'] for x in by_id['v6']['figures_checked']})
+        self.assertEqual(by_id['v6']['kind'], 'frozen_published_checkpoint')
+        self.assertIn(by_id['v6']['git_commit'], by_id['v6']['public_pdf_url'])
+        self.assertEqual(by_id['v6']['pages'], 95)
+        self.assertEqual({x['gallery_id'] for x in by_id['v6']['figures_checked']},
+                         {x['gallery_id'] for x in by_id['v5']['figures_checked']})
+        self.assertEqual(by_id['v5']['kind'], 'frozen_published_checkpoint')
+        self.assertIn(by_id['v5']['git_commit'], by_id['v5']['public_pdf_url'])
         self.assertEqual(by_id[registry['acceptance_baseline']]['pdf_sha256'],
                          json.loads((ROOT / 'docs/paper-acceptance/catalogue.json').read_text())['paper_sha256'])
         self.assertNotEqual(by_id[registry['latest_known_checkpoint']]['pdf_sha256'],
                             by_id[registry['acceptance_baseline']]['pdf_sha256'])
         self.assertIn(by_id['CP06']['git_commit'], by_id['CP06']['public_pdf_url'])
         self.assertEqual(len({by_id[x]['pdf_sha256'] for x in ('CP04', 'CP05', 'CP06')}), 3)
+
+    def test_new_user_requests_keep_figure_and_typesetting_separate(self):
+        handoffs = json.loads((ROOT / 'docs/paper-acceptance/handoffs.json').read_text())
+        by_id = {item['annotation_id']: item for item in handoffs if item.get('annotation_id')}
+        whitespace = by_id['USER-V8-P47-WHITESPACE-01']
+        figure = by_id['USER-FANG-FIG53-OPTIMIZE-01']
+        contents = by_id['USER-V9-AUTO-TOC-01']
+        self.assertEqual(whitespace['url'], '/checkpoints/v8/47.png')
+        self.assertIn('与Fang图5-3无关', whitespace['review'])
+        self.assertIn('LYX旧版', figure['expected'])
+        self.assertEqual(figure['state'], 'fang_source_received_rework_candidate_published')
+        self.assertIn('5848146593', figure['notice_url'])
+        self.assertIn('5848204054', figure['fang_receipt_url'])
+        self.assertEqual(contents['state'], 'v9_layout_preflight_passed_not_frozen')
+        self.assertEqual(whitespace['state'], 'v9_layout_preflight_passed_not_frozen')
+        self.assertEqual(contents['preflight_sha256'], whitespace['preflight_sha256'])
+        self.assertIn('正式最新版本仍为v8', contents['review'])
+        self.assertEqual(len({x['source_request_sha256'] for x in (whitespace, figure, contents)}), 1)
+        requests = json.loads((ROOT / 'docs/paper-acceptance/figure-requests.json').read_text())['requests']
+        current = next(x for x in requests if x['id'] == 'FIG-FANG-5-3')
+        self.assertEqual(current['user_annotation_id'], figure['annotation_id'])
+        self.assertIn('待论文监督会话选版', current['state'])
+        self.assertIn('5848146593', current['dispatch_url'])
+        self.assertEqual(current['candidate_commit'], figure['candidate_commit'])
+        gallery = TeamImages(self.board)
+        revised = gallery.by_id['acceptance-fig53-rework-v1']
+        self.assertEqual(revised['source_commit'], current['candidate_commit'])
+        self.assertEqual(revised['review_stage'], 'review_pending')
+        self.assertNotIn('manuscript_placement', revised)
+
+    def test_v7_figure_review_keeps_user_words_separate_from_ai_advice(self):
+        review = json.loads((ROOT / 'docs/paper-acceptance/figure-review-v7.json').read_text())
+        checkpoints = json.loads((ROOT / 'docs/paper-acceptance/checkpoint-status.json').read_text())
+        self.assertEqual(review['pdf_sha256'], next(x for x in checkpoints['checkpoints'] if x['id'] == 'v7')['pdf_sha256'])
+        self.assertEqual(len(review['figure_coverage']), 20)
+        self.assertEqual(review['figure_count'], 20)
+        self.assertTrue(review['asset_hashes_matched'])
+        self.assertEqual(review['user_annotation']['id'], 'USER-V7-FIGTEXT-01')
+        self.assertIsNone(review['user_annotation']['rect'])
+        self.assertIn('LaTeX', review['user_annotation']['user_verbatim'])
+        self.assertNotEqual(review['user_annotation']['user_verbatim'],
+                            review['user_annotation']['interpretation'])
+        self.assertEqual(review['source_records']['publication_state'], 'local_unpublished')
+        self.assertFalse(review['human_final_acceptance'])
+        crop = review['user_annotation']['crop_candidate']
+        self.assertEqual(crop['status'], 'board_preview_only_not_in_manuscript')
+        self.assertEqual(crop['crop_box_pt_bottom_left'], [0, 23.639, 426.009, 478.639])
+        for suffix in ('pdf', 'png'):
+            path = ROOT / 'docs/paper-acceptance/candidates' / f'p28-figure-5.1-1-crop-candidate.{suffix}'
+            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), crop[f'preview_{suffix}_sha256'])
+
+    def test_registered_checkpoint_refuses_changed_pdf(self):
+        checkpoints = CheckpointDocuments(self.board)
+        checkpoints.locations_file.write_text(json.dumps({'v5': str(self.pdf)}))
+        fixed = {'pdf_sha256': hashlib.sha256(self.pdf.read_bytes()).hexdigest(), 'pages': 1,
+                 'pdf_path': str(self.pdf)}
+        with patch.object(CheckpointDocuments, 'record', return_value=fixed):
+            self.assertEqual(checkpoints.locate('v5')[0], self.pdf.resolve())
+            self.pdf.write_bytes(b'changed source')
+            with self.assertRaisesRegex(ValueError, '哈希'):
+                checkpoints.locate('v5')
+
+    def test_published_checkpoint_uses_fixed_git_object_when_local_file_is_missing(self):
+        checkpoints = CheckpointDocuments(self.board)
+        fixed = {'pdf_sha256': hashlib.sha256(self.pdf.read_bytes()).hexdigest(), 'pages': 1,
+                 'pdf_path': 'paper.pdf', 'git_commit': 'a'*40}
+        with patch.object(CheckpointDocuments, 'record', return_value=fixed), \
+             patch('src.paper_acceptance.app.subprocess.run', return_value=SimpleNamespace(returncode=0, stdout=self.pdf.read_bytes())):
+            pdf, _ = checkpoints.locate('v5')
+            self.assertEqual(pdf.read_bytes(), self.pdf.read_bytes())
+            self.assertEqual(pdf.parent, checkpoints.cache)
 
     def values(self, decision='comment', revision=0, actor='author'):
         return dict(item_id='L01', paper_sha256=self.cat['paper_sha256'], standard_hash=self.board.standard_hash,
