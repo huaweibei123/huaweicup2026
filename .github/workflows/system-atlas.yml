@@ -20,6 +20,24 @@ permissions:
   contents: read
 
 jobs:
+  windows-compat-candidate:
+    # OS-level regression only; this does not prove any teammate's machine,
+    # browser, GitHub credentials, or live rehearsal connection works.
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: .agents/skills/system-atlas/package-lock.json
+      - run: npm ci --ignore-scripts --prefix .agents/skills/system-atlas
+      - run: npm run test:windows-compat --prefix .agents/skills/system-atlas
+      - run: python scripts/rehearsal_smoke.py
   atlas:
     strategy:
       fail-fast: false

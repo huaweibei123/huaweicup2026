@@ -15,7 +15,17 @@ function sealed(value){return {...value,checksum:checksum(value)};}
 function unseal(value){const {checksum:hash,...body}=value;if(hash!==checksum(body))problem('authority/integrity','Authority record checksum mismatch');return body;}
 export function atomicWrite(file,bytes){
   fs.mkdirSync(path.dirname(file),{recursive:true});const tmp=file+'.tmp-'+randomUUID();let fd;
-  try{fd=fs.openSync(tmp,'wx',0o600);fs.writeFileSync(fd,bytes);fs.fsyncSync(fd);fs.closeSync(fd);fd=undefined;fs.renameSync(tmp,file);const dir=fs.openSync(path.dirname(file),'r');try{fs.fsyncSync(dir);}finally{fs.closeSync(dir);}}
+  try{
+    fd=fs.openSync(tmp,'wx',0o600);fs.writeFileSync(fd,bytes);fs.fsyncSync(fd);fs.closeSync(fd);fd=undefined;
+    fs.renameSync(tmp,file);
+    // Node cannot portably open/fsync a directory on native Windows. Keep the
+    // file flush and same-directory replacement; do not suppress file I/O or
+    // rename errors. Windows does not get the POSIX directory-flush guarantee
+    // against power loss. Checksummed history/recovery remain unchanged.
+    if(process.platform!=='win32'){
+      const dir=fs.openSync(path.dirname(file),'r');try{fs.fsyncSync(dir);}finally{fs.closeSync(dir);}
+    }
+  }
   finally{if(fd!==undefined)fs.closeSync(fd);if(fs.existsSync(tmp))fs.unlinkSync(tmp);}
 }
 export function sourceFingerprint(input){try{return digest(fs.readFileSync(input));}catch(e){return `missing:${e.code}`;}}
