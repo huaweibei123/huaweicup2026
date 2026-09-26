@@ -1,0 +1,145 @@
+{
+  "case_id": "048",
+  "cores": 4,
+  "variant": "frontier-then-independent-chunks",
+  "solver_commit": "05f8fa0f7e52f5914f14815f6bdbcb851b631556",
+  "runner_commit": "0179332f79563a0bf378f05c50dad3eef6400383",
+  "started_at": "2026-09-24T15:26:02.555384Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/result.json.gz",
+      "sha256": "dd01ca378f536cae3512465e7572c5d4ee76674b3a52af8750314f5bace7f190",
+      "raw_sha256": "ecce915935a70526b819393fafcb8200a5965b9d820cc7ddc827fc0c5aa3d577",
+      "raw_bytes": 451315,
+      "gzip_bytes": 25567
+    },
+    "trace.json": {
+      "path": "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/trace.json.gz",
+      "sha256": "8a03cf7d7e842ce01bc9b44f0e96f3730281ffb214747beb479a2138df81b5f8",
+      "raw_sha256": "aab89ef4f4c91098cbe3dc32f870754fbf0298a307b1fb24c94cf80cb2ae8cb4",
+      "raw_bytes": 599806,
+      "gzip_bytes": 23379
+    }
+  },
+  "failure": null,
+  "solver": {
+    "stage": "solver",
+    "argv": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "../huaweicup-p1-bounded-pinned-yuanzhifang/src/q1/bounded_tasks.py",
+      "../huaweicup2026/.worktrees/q1-research-yuanzhifang/data/raw/a/official/data/case_048.json",
+      "--output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/case_048_multicore_res.json",
+      "--cores",
+      "4",
+      "--packet-factor",
+      "4",
+      "--trigger-ops",
+      "4096",
+      "--chunk-ops",
+      "1024",
+      "--diagnostics",
+      "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/diagnostics.json"
+    ],
+    "working_directory": ".",
+    "started_at": "2026-09-24T15:26:02.556383Z",
+    "timeout_seconds": 30,
+    "returncode": 0,
+    "status": "ok",
+    "wall_seconds": 0.624121799999557,
+    "finished_at": "2026-09-24T15:26:03.183510Z"
+  },
+  "plan_sha256": "83d1aba3da9e488da547b9a42ce504d547266a1ca68faca6c74b7d4a9279e0c8",
+  "diagnostics": {
+    "algorithm_id": "q1-bounded-component-tasks",
+    "variant": "frontier-then-independent-chunks",
+    "base": {
+      "algorithm_id": "q1-tree-frontier-pack",
+      "variant": "threshold-antichain-tail",
+      "packet_factor": 4,
+      "base": {
+        "algorithm_id": "q1-component-pack",
+        "variant": "pipe-lpt-one-task-per-core",
+        "compute_ops": 1728,
+        "components": 1,
+        "largest_component_ops": 1728,
+        "tasks": 1,
+        "core_compute_ops": [
+          1728,
+          0,
+          0,
+          0
+        ],
+        "compute_pipe_work_by_core": [
+          {
+            "PIPE_M": 139536,
+            "PIPE_V": 120060
+          },
+          {},
+          {},
+          {}
+        ],
+        "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+      },
+      "selected": "component-pack",
+      "scope": "Structural proof only; E0 required",
+      "reason": "not an in-tree forest"
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [],
+      "oversize_indivisible_components": [],
+      "tasks_before": 1,
+      "tasks_after": 1
+    },
+    "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+  },
+  "evaluation": {
+    "stage": "evaluation",
+    "argv": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "../huaweicup2026/.worktrees/q1-research-yuanzhifang/data/raw/a/official/data/case_048.json",
+      "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/case_048_multicore_res.json",
+      "--config",
+      "../huaweicup2026/.worktrees/q1-research-yuanzhifang/data/raw/a/official/data/config.txt",
+      "--output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/result.json",
+      "--trace-output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/trace.json",
+      "--log-output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/048-k4-frontier-then-independent-chunks/result.txt"
+    ],
+    "working_directory": ".",
+    "started_at": "2026-09-24T15:26:03.203778Z",
+    "timeout_seconds": 90,
+    "returncode": 0,
+    "status": "ok",
+    "wall_seconds": 2.0947845999999117,
+    "finished_at": "2026-09-24T15:26:05.300679Z"
+  },
+  "makespan_cycles": 222220,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 414790,
+    "scheduled_copy_bytes": 414790,
+    "added_copy_bytes": 0,
+    "partition_added_copy_bytes": 0,
+    "spill_added_copy_bytes": 0
+  },
+  "task_count": 1,
+  "finished_at": "2026-09-24T15:26:05.400559Z"
+}

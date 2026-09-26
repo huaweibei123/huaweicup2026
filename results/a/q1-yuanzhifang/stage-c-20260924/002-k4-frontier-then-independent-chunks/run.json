@@ -1,0 +1,211 @@
+{
+  "case_id": "002",
+  "cores": 4,
+  "variant": "frontier-then-independent-chunks",
+  "solver_commit": "05f8fa0f7e52f5914f14815f6bdbcb851b631556",
+  "runner_commit": "0179332f79563a0bf378f05c50dad3eef6400383",
+  "started_at": "2026-09-24T15:24:08.486927Z",
+  "status": "ok",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "artifacts": {
+    "result.json": {
+      "path": "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/result.json.gz",
+      "sha256": "4f03574fb6dd2dc5accb69acfc2604b6ed6e26dc9d2512ce1a1e267824744f37",
+      "raw_sha256": "1532b066df9b6e84e0952890e43f325cea2d5cecce71bcf7b05104fed23aeb05",
+      "raw_bytes": 675398,
+      "gzip_bytes": 34358
+    },
+    "trace.json": {
+      "path": "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/trace.json.gz",
+      "sha256": "ad8b08928425a1964dda43cbf9621b2fbdf35b9e508f65e9079b5fc3a5ccf538",
+      "raw_sha256": "e3561d920b3d9d9d53f388fc561c5e522bf981ff9bd10de3579b601bbc77a999",
+      "raw_bytes": 712654,
+      "gzip_bytes": 26434
+    }
+  },
+  "failure": null,
+  "solver": {
+    "stage": "solver",
+    "argv": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "../huaweicup-p1-bounded-pinned-yuanzhifang/src/q1/bounded_tasks.py",
+      "../huaweicup2026/.worktrees/q1-research-yuanzhifang/data/raw/a/official/data/case_002.json",
+      "--output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/case_002_multicore_res.json",
+      "--cores",
+      "4",
+      "--packet-factor",
+      "4",
+      "--trigger-ops",
+      "4096",
+      "--chunk-ops",
+      "1024",
+      "--diagnostics",
+      "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/diagnostics.json"
+    ],
+    "working_directory": ".",
+    "started_at": "2026-09-24T15:24:08.487928Z",
+    "timeout_seconds": 30,
+    "returncode": 0,
+    "status": "ok",
+    "wall_seconds": 1.2666606000002503,
+    "finished_at": "2026-09-24T15:24:09.760744Z"
+  },
+  "plan_sha256": "4c2d8229be50a0b9cb1263f596751b8c2b518fd8932a146ec63f4cff9ef10483",
+  "diagnostics": {
+    "algorithm_id": "q1-bounded-component-tasks",
+    "variant": "frontier-then-independent-chunks",
+    "base": {
+      "algorithm_id": "q1-tree-frontier-pack",
+      "variant": "threshold-antichain-tail",
+      "packet_factor": 4,
+      "base": {
+        "algorithm_id": "q1-component-pack",
+        "variant": "pipe-lpt-one-task-per-core",
+        "compute_ops": 1798,
+        "components": 1,
+        "largest_component_ops": 1798,
+        "tasks": 1,
+        "core_compute_ops": [
+          1798,
+          0,
+          0,
+          0
+        ],
+        "compute_pipe_work_by_core": [
+          {
+            "PIPE_M": 240000,
+            "PIPE_V": 35928
+          },
+          {},
+          {},
+          {}
+        ],
+        "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+      },
+      "selected": "tree-frontier",
+      "scope": "Structural proof only; E0 required",
+      "frontier_roots": [
+        2148,
+        2149,
+        2150,
+        2151,
+        2152,
+        2153,
+        2154,
+        2155,
+        2156,
+        2157,
+        2158,
+        2159,
+        2160,
+        2161,
+        2162,
+        2163,
+        2164,
+        2165,
+        2166,
+        2167,
+        2168,
+        2169,
+        2170,
+        2171,
+        2172
+      ],
+      "frontier_packet_count": 25,
+      "tail_ops": 24,
+      "tail_core": 1,
+      "tail_work_by_pipe": {
+        "PIPE_V": 864
+      },
+      "core_frontier_ops": [
+        434,
+        488,
+        426,
+        426
+      ],
+      "root_core": {
+        "2156": 0,
+        "2148": 1,
+        "2149": 2,
+        "2150": 3,
+        "2151": 1,
+        "2152": 2,
+        "2153": 3,
+        "2154": 0,
+        "2155": 1,
+        "2157": 2,
+        "2158": 3,
+        "2159": 0,
+        "2160": 1,
+        "2161": 2,
+        "2162": 3,
+        "2163": 0,
+        "2164": 1,
+        "2165": 2,
+        "2166": 3,
+        "2167": 0,
+        "2168": 1,
+        "2169": 2,
+        "2170": 3,
+        "2171": 0,
+        "2172": 1
+      },
+      "tasks": 5
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [],
+      "oversize_indivisible_components": [],
+      "tasks_before": 5,
+      "tasks_after": 5
+    },
+    "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+  },
+  "evaluation": {
+    "stage": "evaluation",
+    "argv": [
+      "python",
+      "-X",
+      "utf8",
+      "-B",
+      "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "../huaweicup2026/.worktrees/q1-research-yuanzhifang/data/raw/a/official/data/case_002.json",
+      "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/case_002_multicore_res.json",
+      "--config",
+      "../huaweicup2026/.worktrees/q1-research-yuanzhifang/data/raw/a/official/data/config.txt",
+      "--output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/result.json",
+      "--trace-output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/trace.json",
+      "--log-output",
+      "results/a/q1-yuanzhifang/stage-c-20260924/002-k4-frontier-then-independent-chunks/result.txt"
+    ],
+    "working_directory": ".",
+    "started_at": "2026-09-24T15:24:09.794178Z",
+    "timeout_seconds": 90,
+    "returncode": 0,
+    "status": "ok",
+    "wall_seconds": 1.5434833999988768,
+    "finished_at": "2026-09-24T15:24:11.341062Z"
+  },
+  "makespan_cycles": 73544,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 1224192,
+    "scheduled_copy_bytes": 1300992,
+    "added_copy_bytes": 76800,
+    "partition_added_copy_bytes": 76800,
+    "spill_added_copy_bytes": 0
+  },
+  "task_count": 5,
+  "finished_at": "2026-09-24T15:24:11.454615Z"
+}

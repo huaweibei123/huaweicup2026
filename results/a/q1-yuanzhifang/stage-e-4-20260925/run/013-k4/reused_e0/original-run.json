@@ -1,0 +1,171 @@
+{
+  "case_id": "013",
+  "cores": 4,
+  "status": "ok",
+  "started_at": "2026-09-24T14:39:15.556Z",
+  "finished_at": "2026-09-24T14:39:15.994Z",
+  "graph_sha256": "b95d97cf90bdd0fe64a0fd1ecd5a36a7b091ecadef204ef8c6ae430f6ccfac3c",
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "failure": null,
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/case_013_multicore_res.json",
+      "sha256": "945980ad94cabb131a8a505029b1d0c99157abe6a6b9e40db1528d3e6627651a"
+    },
+    "diagnostics": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/diagnostics.json",
+      "sha256": "d524c254f8517929bfacc883e6f9574bc72abdc9ccd91c6bdabb05c7cd6ab02d"
+    },
+    "result": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/result.json.gz",
+      "sha256": "38f48df519ece26e0fdb12f4e6a237bc67d209a0713d916ed748079e6680e848"
+    },
+    "trace": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/trace.json.gz",
+      "sha256": "6bc0de7eda64edf2b5b23207401aa307b0e8ad91e2ed060db1b17b3541b30cc2"
+    },
+    "log": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/official.log",
+      "sha256": "625725a6a8f89e055b589f7efb9c19449b7d4ca7b72e00109140900fdc6f3885"
+    }
+  },
+  "makespan_cycles": 66982,
+  "solver": {
+    "argv": [
+      "./.venv/bin/python3",
+      "-B",
+      "src/q1/bounded_tasks.py",
+      "<verified-inputs>/case_013.json",
+      "--output",
+      "./results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/case_013_multicore_res.json",
+      "--cores",
+      "4",
+      "--packet-factor",
+      "4",
+      "--trigger-ops",
+      "4096",
+      "--chunk-ops",
+      "1024",
+      "--diagnostics",
+      "./results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/diagnostics.json"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T14:39:15.556Z",
+    "finished_at": "2026-09-24T14:39:15.633Z",
+    "wall_seconds": 0.07598804100416601,
+    "timeout_seconds": 30,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/solver.stdout.txt",
+      "sha256": "69e2ac52a173bd4d267da5dae00472c5acb4388ae63d8827592adc552ddee8db"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/solver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "diagnostics": {
+    "algorithm_id": "q1-bounded-component-tasks",
+    "variant": "frontier-then-independent-chunks",
+    "base": {
+      "algorithm_id": "q1-tree-frontier-pack",
+      "variant": "threshold-antichain-tail",
+      "packet_factor": 4,
+      "base": {
+        "algorithm_id": "q1-component-pack",
+        "variant": "pipe-lpt-one-task-per-core",
+        "compute_ops": 1968,
+        "components": 246,
+        "largest_component_ops": 8,
+        "tasks": 4,
+        "core_compute_ops": [
+          496,
+          496,
+          488,
+          488
+        ],
+        "compute_pipe_work_by_core": [
+          {
+            "PIPE_M": 66464,
+            "PIPE_V": 10912
+          },
+          {
+            "PIPE_M": 66464,
+            "PIPE_V": 10912
+          },
+          {
+            "PIPE_M": 65392,
+            "PIPE_V": 10736
+          },
+          {
+            "PIPE_M": 65392,
+            "PIPE_V": 10736
+          }
+        ],
+        "scope": "Structural Task-order check only; load is a proposal proxy, not E0 or a spill certificate"
+      },
+      "selected": "component-pack",
+      "scope": "Structural proof only; E0 required",
+      "reason": "enough independent components or one core"
+    },
+    "chunks": {
+      "trigger_ops": 4096,
+      "chunk_ops": 1024,
+      "split_tasks": [],
+      "oversize_indivisible_components": [],
+      "tasks_before": 4,
+      "tasks_after": 4
+    },
+    "scope": "Structural validation only; bounds on common Task size are not E0, spill or runtime guarantees"
+  },
+  "plan_sha256": "945980ad94cabb131a8a505029b1d0c99157abe6a6b9e40db1528d3e6627651a",
+  "evaluation": {
+    "argv": [
+      "./.venv/bin/python3",
+      "-B",
+      "./data/raw/a/official/code/multicore_cut_evaluate_problem_1.py",
+      "<verified-inputs>/case_013.json",
+      "./results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/case_013_multicore_res.json",
+      "--config",
+      "./data/raw/a/official/data/config.txt",
+      "--output",
+      "./results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/result.json",
+      "--trace-output",
+      "./results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/trace.json",
+      "--log-output",
+      "./results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/official.log"
+    ],
+    "cwd": ".",
+    "started_at": "2026-09-24T14:39:15.634Z",
+    "finished_at": "2026-09-24T14:39:15.980Z",
+    "wall_seconds": 0.3455708749825135,
+    "timeout_seconds": 60,
+    "exit_code": 0,
+    "cleanup_confirmed": true,
+    "status": "ok",
+    "stdout": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/E0.stdout.txt",
+      "sha256": "ea00707ff71292eff06b6178efe36bdf5052fc483068c789ef3762090b58f824"
+    },
+    "stderr": {
+      "path": "results/a/q1-bounded-full4-20260924/20260924T1439Z-boundedfull4-99/cells/013/k4/E0.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "log_derivation": "UTF-8 child output with workspace and temporary input root replaced by public labels"
+  },
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 2527232,
+    "scheduled_copy_bytes": 2551808,
+    "added_copy_bytes": 24576,
+    "partition_added_copy_bytes": 24576,
+    "spill_added_copy_bytes": 0
+  }
+}

@@ -1,0 +1,439 @@
+{
+  "notice": "Analytical/reduced-model results only. No official E0 was read or run.",
+  "analytical_assumptions": [
+    "All stated compute dependencies are preserved, including root-to-next-round.",
+    "All compute nodes use one PIPE_V per core; a core has at most one active Task.",
+    "Task activation waits for predecessor Task completion and the stated 100/1000 gates.",
+    "A COPY can run only while its owning Task is active.",
+    "Every nonresident 32768-byte input of a new Task requires its own COPY_IN of work 547.",
+    "Every 32768-byte produced tensor crossing a Task boundary requires COPY_OUT plus COPY_IN, even on the same core; no inter-Task forwarding/cache exception.",
+    "The 12 distinct original inputs are used once per branch per round, as stated.",
+    "All three internal tensors of each four-node heavy chain are 32768 bytes.",
+    "DDR is work-conserving or slower, with total normalized capacity at most one; rounding cannot create extra capacity.",
+    "Spills and small COPYs may add work and dependencies; they are not subtracted from the analytical certificates."
+  ],
+  "D0_stages": {
+    "C_first5": {
+      "model": "D0; not E0 and not an E0 lower bound",
+      "counts": [
+        3,
+        3,
+        2,
+        2,
+        2
+      ],
+      "source": null,
+      "tail": 0,
+      "releases": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "input_completions": [
+        [
+          2735,
+          5470,
+          6564
+        ],
+        [
+          2735,
+          5470,
+          6564
+        ],
+        [
+          2735,
+          5470
+        ],
+        [
+          2735,
+          5470
+        ],
+        [
+          2735,
+          5470
+        ]
+      ],
+      "V_chain_completions": [
+        [
+          4831,
+          7566,
+          9662
+        ],
+        [
+          4831,
+          7566,
+          9662
+        ],
+        [
+          4831,
+          7566
+        ],
+        [
+          4831,
+          7566
+        ],
+        [
+          4831,
+          7566
+        ]
+      ],
+      "tail_start": 10662,
+      "root_completion": 10805,
+      "all_COPY_completions_integral": true,
+      "tasks": 6
+    },
+    "first4": {
+      "model": "D0; not E0 and not an E0 lower bound",
+      "counts": [
+        3,
+        3,
+        3,
+        3,
+        0
+      ],
+      "source": null,
+      "tail": 0,
+      "releases": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "input_completions": [
+        [
+          2188,
+          4376,
+          6564
+        ],
+        [
+          2188,
+          4376,
+          6564
+        ],
+        [
+          2188,
+          4376,
+          6564
+        ],
+        [
+          2188,
+          4376,
+          6564
+        ],
+        []
+      ],
+      "V_chain_completions": [
+        [
+          4284,
+          6472,
+          8660
+        ],
+        [
+          4284,
+          6472,
+          8660
+        ],
+        [
+          4284,
+          6472,
+          8660
+        ],
+        [
+          4284,
+          6472,
+          8660
+        ],
+        []
+      ],
+      "tail_start": 9660,
+      "root_completion": 9803,
+      "all_COPY_completions_integral": true,
+      "tasks": 5
+    },
+    "C_steady_rotating": {
+      "model": "D0; not E0 and not an E0 lower bound",
+      "counts": [
+        3,
+        3,
+        2,
+        2,
+        2
+      ],
+      "source": 0,
+      "tail": 1,
+      "releases": [
+        100,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "input_completions": [
+        [
+          647,
+          1970,
+          4705
+        ],
+        [
+          3735,
+          6117,
+          6664
+        ],
+        [
+          3735,
+          6117
+        ],
+        [
+          3735,
+          6117
+        ],
+        [
+          3735,
+          6117
+        ]
+      ],
+      "V_chain_completions": [
+        [
+          2743,
+          4839,
+          6935
+        ],
+        [
+          5831,
+          8213,
+          10309
+        ],
+        [
+          5831,
+          8213
+        ],
+        [
+          5831,
+          8213
+        ],
+        [
+          5831,
+          8213
+        ]
+      ],
+      "tail_start": 10409,
+      "root_completion": 10552,
+      "all_COPY_completions_integral": true,
+      "tasks": 6
+    },
+    "candidate_steady_fixed": {
+      "model": "D0; not E0 and not an E0 lower bound",
+      "counts": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "source": 0,
+      "tail": 0,
+      "releases": [
+        100,
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "input_completions": [
+        [
+          647,
+          1970,
+          4705,
+          6664
+        ],
+        [
+          3735,
+          6470
+        ],
+        [
+          3735,
+          6470
+        ],
+        [
+          3735,
+          6470
+        ],
+        [
+          3735,
+          6470
+        ]
+      ],
+      "V_chain_completions": [
+        [
+          2743,
+          4839,
+          6935,
+          9031
+        ],
+        [
+          5831,
+          8566
+        ],
+        [
+          5831,
+          8566
+        ],
+        [
+          5831,
+          8566
+        ],
+        [
+          5831,
+          8566
+        ]
+      ],
+      "tail_start": 9566,
+      "root_completion": 9709,
+      "all_COPY_completions_integral": true,
+      "tasks": 6
+    },
+    "four_core_steady": {
+      "model": "D0; not E0 and not an E0 lower bound",
+      "counts": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "source": 0,
+      "tail": 1,
+      "releases": [
+        100,
+        1000,
+        1000,
+        1000
+      ],
+      "input_completions": [
+        [
+          647,
+          1776,
+          3964
+        ],
+        [
+          3188,
+          5023,
+          6664
+        ],
+        [
+          3188,
+          5023,
+          6664
+        ],
+        [
+          3188,
+          5023,
+          6664
+        ]
+      ],
+      "V_chain_completions": [
+        [
+          2743,
+          4839,
+          6935
+        ],
+        [
+          5284,
+          7380,
+          9476
+        ],
+        [
+          5284,
+          7380,
+          9476
+        ],
+        [
+          5284,
+          7380,
+          9476
+        ]
+      ],
+      "tail_start": 10476,
+      "root_completion": 10619,
+      "all_COPY_completions_integral": true,
+      "tasks": 5
+    }
+  },
+  "D0_24round_totals": {
+    "C5_D0": {
+      "makespan": 253501,
+      "tasks": 144
+    },
+    "user_candidate_D0": {
+      "makespan": 234112,
+      "tasks": 144
+    },
+    "first4_then_candidate_D0": {
+      "makespan": 233110,
+      "tasks": 143
+    },
+    "C4_D0": {
+      "makespan": 254040,
+      "tasks": 120
+    }
+  },
+  "universal_bound": {
+    "first": 8673,
+    "later": 8773,
+    "total": 210452
+  },
+  "prefix_inequality_checks": {
+    "count_tuples_checked": 1820,
+    "minimum_epoch_bound": 8773,
+    "minimum_bound_with_any_carried_first_op": 9320,
+    "checked_inequality": "epoch >= 8773 + 524 * carried_first_ops"
+  },
+  "target_certificates": [
+    {
+      "target": 253855,
+      "M_min_from_blocking": 206,
+      "M_used_for_capacity": 206,
+      "big_internal_boundary_count_max": 129,
+      "small_COPYs_ignored_in_capacity": true
+    },
+    {
+      "target": 253855,
+      "M_min_from_blocking": 206,
+      "M_used_for_capacity": 288,
+      "big_internal_boundary_count_max": 88,
+      "small_COPYs_ignored_in_capacity": true
+    },
+    {
+      "target": 233110,
+      "M_min_from_blocking": 245,
+      "M_used_for_capacity": 245,
+      "big_internal_boundary_count_max": 90,
+      "small_COPYs_ignored_in_capacity": true
+    }
+  ],
+  "COPY_accounting_under_the_stated_boundary_rule": {
+    "uncut_big_input_COPYs": 288,
+    "uncut_small_COPYs": 715,
+    "uncut_bytes": 9438614,
+    "uncut_normalized_work": 158251,
+    "star_big_internal_cuts": 94,
+    "star_big_COPYs": 476,
+    "star_small_COPYs": 761,
+    "star_bytes": 15599090,
+    "star_normalized_work": 261133
+  },
+  "small_COPY_counterexample": {
+    "one_core_two_chains": true,
+    "MTE2_FIFO": [
+      "A_32768B",
+      "B_32768B",
+      "shared_root_2B"
+    ],
+    "each_chain_first_op_needs_shared_root": true,
+    "full_time": 5287,
+    "without_small_COPY_and_its_dependency": 4739,
+    "difference": 548
+  }
+}

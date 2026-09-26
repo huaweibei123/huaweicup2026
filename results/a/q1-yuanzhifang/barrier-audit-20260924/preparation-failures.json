@@ -1,0 +1,43 @@
+{
+  "scope": "Audit preparation and evidence continuation only; no author theorem counterexample and no solver/scorer retry",
+  "calls": {"solver": 0, "E0": 0, "E1": 0, "E2": 0, "task_compiler": 0},
+  "failures": [
+    {
+      "commit": "8812cc1ee67178daef01f6dd2618d5000cf251f1",
+      "phase": "source manifest preflight before audit output creation or computation",
+      "exception_type": "AssertionError",
+      "failed_expression": "manifest_raw == git('show', THEORY + ':docs/a/source-manifest.json')",
+      "tool_elapsed_seconds": 2.595,
+      "exact_start_utc": null,
+      "exact_end_utc": null,
+      "cause": "Local text manifest has 589 CRLF endings, fixed Git blob uses LF; otherwise raw bytes after newline normalization and parsed JSON are identical",
+      "resolution": "Use the fixed Git blob as authority; record local/fixed hashes. Official source/graph/config bytes remain strict."
+    },
+    {
+      "commit": "09a127f",
+      "phase": "config parsing before finite checks or 100-graph calculation; empty output root was created",
+      "exception_type": "configparser.ParsingError",
+      "exception_message": "Source contains parsing errors: '<string>'\n\t[line  4]: 'L1 524288\\n'\n\t[line  5]: 'UB 131072\\n'\n\t[line  8]: 'bandwidth 60\\n'\n\t[line 11]: 'task_cross_core_wait_cycles 1000\\n'\n\t[line 12]: 'task_same_core_wait_cycles 100\\n'\n\t[line 15]: 'cross_core_copy_delay_cycles 500\\n'\n\t[line 18]: 'cache_capacity_bytes 1048576\\n'\n\t[line 19]: 'cache_bandwidth_bytes_per_cycle 250\\n'",
+      "tool_elapsed_seconds": 5.8981106,
+      "exact_start_utc": null,
+      "exact_end_utc": null,
+      "cause": "Audit used default equals/colon delimiter for an official space-delimited configuration",
+      "resolution": "Parse fixed space-delimited input in 29eaa4e; final evidence continuation uses the frozen official read_scene_a_config function directly"
+    },
+    {
+      "commit": "29eaa4e3fdae2997976a34ecce5cf531ca2cee2c",
+      "phase": "Evidence loading after all finite checks and 500 lower bounds were written",
+      "exception_type": "AssertionError",
+      "exception_message": "results/benchmark-board/official-singlecore-20260924/001/run.json",
+      "tool_elapsed_seconds": null,
+      "exact_start_utc": null,
+      "exact_end_utc": null,
+      "output_directory_creation_utc": "2026-09-24T16:32:54.6184945Z",
+      "bounds_last_write_utc": "2026-09-24T16:33:29.7218343Z",
+      "observed_already_exited_utc": "2026-09-24T16:34:08.7890179Z",
+      "cause": "Existing singlecore text run.json checkout uses CRLF; original Git blob uses LF. All 100 receipts were later verified to differ only by CRLF conversion",
+      "resolution": "Keep Git blobs authoritative; log local/fixed receipt hashes. Resume evidence only from the exact hashed partial outputs, with no repeat of finite checks or lower-bound computation"
+    }
+  ],
+  "timing_limit": "No persistent start/end receipt existed for interrupted runs; do not infer an exact cold-process total from artifact timestamps. Editing and inspection costs are not estimated."
+}
