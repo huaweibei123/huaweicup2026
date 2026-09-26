@@ -1,0 +1,19 @@
+{
+  "printed_aliases": {
+    "q2\\_nikolastarx": "q2",
+    "q2_nikolastarx": "q2",
+    "q2-nikolastarx": "q2"
+  },
+  "note": "Printed paths use neutral q2 names. Resolve to the original source paths below; algorithm files and source manifests remain byte-identical.",
+  "original_paths": [
+    "  \\textbf{E2（场景二轻量精确评估工具）}：队内针对问题二场景（同核子图合并为单一 Task、跨核以 COPY 依赖推进）实现的快速评估工具（在固定源码 \\texttt{\\seqsplit{src/q2\\_nikolastarx/}} 中由 \\texttt{\\seqsplit{SceneBEvaluator}} 提供支持）。在问题二求解器（\\texttt{\\seqsplit{adaptive\\_hypergap\\_guarded.py}}）中，算法基于超图多阶段划分与空隙插入构造出 baseline、gap 与 hypergap 等有限候选后，调用在线评分适配器进行打分（单用例在线调用上限为 3 次），并根据所返回的 Makespan 与额外数据搬运量自适应选取最佳方案；若 E2 接口调用异常则自动回退至 E0。",
+    "图 \\ref{fig:framework} 概括了上述五步求解流程的通用方法逻辑。需要明确的是，上述流程属于对各题求解思想的抽象归纳，在软件实现上，三个问题对应三个独立且已固化的求解器程序，其入口脚本、候选生成逻辑与在线评价工具均不相同（问题一入口为 \\texttt{\\seqsplit{src.q1.branch\\_refine}}，在线调用至多 10 次轻量评估器 E1；问题二入口为 \\texttt{\\seqsplit{src.q2\\_nikolastarx.adaptive\\_hypergap\\_guarded}}，在线调用至多 3 次原生评估器 E2；问题三入口为 \\texttt{\\seqsplit{src.q3.forest\\_solve}}，各阶段共享至多 3 次官方仿真器 E0）。贯穿全篇的核心设计准则体现为三点：\\textbf{以结构化构造配合拓扑无环检查}、\\textbf{以图特征约束有限候选数量}，以及\\textbf{在紧凑的在线评测预算内以仿真结果闭环选优}。具体基于标号偏序的无环性证明留待后文命题展开；理论下界剪枝仅在具备严格证明条件的分支中启用，不声称三道题目统一实施了硬性下界剪枝。",
+    "\\textbf{源码对应：} \\texttt{c66559a}，\\texttt{\\seqsplit{src/q2\\_nikolastarx/binary\\_hypercut.py::load\\_guarded\\_cut}}。为突出核心流程，上述算法省略了输入合法性（源码第 198--240 行，包含相同 Pipe 集合、非负整数及初始分配完全满足 caps 等约束）的展开校验与诊断字段组装，返回 \\texttt{\\seqsplit{(labels,\\ cost)}} 为 \\texttt{\\seqsplit{GuardedCutResult}} 对象的简化表示。",
+    "\\textbf{源码对应：} \\texttt{c66559a}，\\texttt{\\seqsplit{src/q2\\_nikolastarx/adaptive\\_hypergap\\_guarded.py::build}}。",
+    "P2 & \\texttt{\\seqsplit{c66559a6f8a31ef7b4720e1f7c3c28d61f8dff3f}} & \\texttt{\\seqsplit{src.q2\\_nikolastarx.adaptive\\_hypergap\\_guarded}} & 3次E2 \\\\",
+    "算法 \\ref{alg:p2-load-guarded-cut} & 二核心负载约束超图割 & \\texttt{src/q2\\_nikolastarx/}\\newline \\texttt{binary\\_hypercut.py}\\newline \\texttt{::load\\_guarded\\_cut} & P2，\\newline 见上一表 \\\\",
+    "算法 \\ref{alg:p2-adaptive-hypergap} & 自适应保护超图分核 & \\texttt{src/q2\\_nikolastarx/}\\newline \\texttt{adaptive\\_hypergap\\_guarded.py}\\newline \\texttt{::build} & P2，\\newline 见上一表 \\\\",
+    "第 7 章中与 P2 全量方案 \\(U\\) 比较所采用的全局下界证书 \\(L(G, K)\\)，源自固定提交 \\texttt{\\seqsplit{00d311ed0eea0fd86f9840df406956041a7c192a}} 中的文档 \\texttt{\\seqsplit{docs/a/q2-nikolastarx/OPTIMALITY\\_BOUNDS.md}} 与生成脚本 \\texttt{\\seqsplit{src/q2\\_nikolastarx/global\\_bounds.py}}。该证书文件的 SHA-256 校验和为 \\texttt{\\seqsplit{fe25f7b7737dbd3d841284bc5939242982613f64e0cffa9bd3d25df1f4a0c96b}}，归档于数据资产 \\texttt{\\seqsplit{results/a/q2-nikolastarx/goal-20260924/global-bounds.json}}。",
+    "在固定复核脚本 \\texttt{\\seqsplit{results/a/q2-nikolastarx/hypergap-full500-audit-20260925/audit.py}} 中，该证书直接关联至新方案 \\(U\\) 的逐用例评估数据。该下界覆盖 100 张计算图在 1～5 核下的完整 500 个评测点，是针对任意合法无死锁多核划分可行域 \\(\\mathcal{F}_2(G, K)\\) 建立的全局理论下界；其与第 6 章针对固定完整多核候选方案 \\(P\\) 所建立的 FIFO 与依赖必要不等式下界 \\(L(P)\\) 具有不同内涵，而附录 B.3 则属于未产生本次统计的新离线理论补充推导（不构成单核方案证书），三者概念严格分离，第 7 章的数值界限比较仅采用上述全局证书 \\(L(G, K)\\)。"
+  ]
+}
