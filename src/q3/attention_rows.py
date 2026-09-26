@@ -13,6 +13,7 @@ from dataclasses import dataclass
 import heapq
 
 from .construct import UnsupportedStructure, derive_multicore_plan, topo
+from .gap_calendar import empty, earliest, reserve
 
 
 class _NotRow(Exception):
@@ -397,7 +398,30 @@ def _ffn_diagnostics(index, ports, op_owner):
     return result
 
 
-def construct(index, cores, cross_delay=500, *, pack_ffn=False):
+def _gap_trial(index, nodes, block_id, block_of, core, roots, tails,
+               finish, op_owner, weights, cross_delay):
+    """Place one topological capsule on private persistent calendar roots."""
+    trial_roots = dict(roots)
+    local, starts = {}, {}
+    inserted = 0
+    for u in nodes:
+        release = 0
+        for p in index.pred[u]:
+            if block_of[p] == block_id:
+                at = local[p]
+            else:
+                at = finish[p] + (cross_delay if op_owner[p] != core else 0)
+            release = max(release, at)
+        pipe = index.ops[u]["pipe"]
+        start = earliest(trial_roots[pipe], release, weights[u])
+        inserted += start < tails[pipe]
+        starts[u] = start
+        local[u] = start + weights[u]
+        trial_roots[pipe] = reserve(trial_roots[pipe], start, weights[u])
+    return local, trial_roots, starts, inserted
+
+
+def construct(index, cores, cross_delay=500, *, pack_ffn=False, placement_mode="append"):
     """One construction, at most k core trials/unit; optional closed FFN packing."""
     if type(cores) is not int or cores < 1:
         raise ValueError("cores must be a positive integer")
@@ -405,6 +429,8 @@ def construct(index, cores, cross_delay=500, *, pack_ffn=False):
         raise ValueError("cross_delay must be a nonnegative integer")
     if type(pack_ffn) is not bool:
         raise ValueError("pack_ffn must be a boolean")
+    if placement_mode not in ("append", "gap"):
+        raise ValueError("placement_mode must be 'append' or 'gap'")
     ports = _ports(index)
     rows = _recognize(index, ports)
     ffn_diamonds = _packed_ffn_motifs(index, ports, rows) if pack_ffn else ()
@@ -420,38 +446,54 @@ def construct(index, cores, cross_delay=500, *, pack_ffn=False):
                  if block_of.get(ports.producer.get(t)) != j}
                 for j, b in enumerate(blocks)]
     pipe_free = [{"PIPE_M": 0, "PIPE_V": 0} for _ in range(cores)]
+    calendars = [{p: empty() for p in ("PIPE_M", "PIPE_V")} for _ in range(cores)] if placement_mode == "gap" else None
     finish, op_owner = {}, {}
     degree = {j: len(predecessors[j]) for j in successors}
     ready = [(-bottom[j], blocks[j]["nodes"][0], j) for j in successors if not degree[j]]
     heapq.heapify(ready)
     schedules = [[] for _ in range(cores)]
     global_word, dispatch = [], []
+    inserted_before_tail = 0
     while ready:
         _, _, j = heapq.heappop(ready)
         trials = []
         for c in range(cores):
-            free = dict(pipe_free[c])
-            local = {}
-            starts = {}
-            for u in blocks[j]["nodes"]:
-                release = 0
-                for p in index.pred[u]:
-                    if block_of[p] == j:
-                        at = local[p]
-                    else:
-                        at = finish[p] + (cross_delay if op_owner[p] != c else 0)
-                    release = max(release, at)
-                pipe = index.ops[u]["pipe"]
-                starts[u] = max(release, free[pipe])
-                local[u] = starts[u] + weights[u]
-                free[pipe] = local[u]
+            if placement_mode == "gap":
+                local, roots, starts, inserted = _gap_trial(
+                    index, blocks[j]["nodes"], j, block_of, c, calendars[c],
+                    pipe_free[c], finish, op_owner, weights, cross_delay)
+                free = dict(pipe_free[c])
+                for u in local:
+                    pipe = index.ops[u]["pipe"]
+                    free[pipe] = max(free[pipe], local[u])
+            else:
+                free = dict(pipe_free[c])
+                local = {}
+                starts = {}
+                for u in blocks[j]["nodes"]:
+                    release = 0
+                    for p in index.pred[u]:
+                        if block_of[p] == j:
+                            at = local[p]
+                        else:
+                            at = finish[p] + (cross_delay if op_owner[p] != c else 0)
+                        release = max(release, at)
+                    pipe = index.ops[u]["pipe"]
+                    starts[u] = max(release, free[pipe])
+                    local[u] = starts[u] + weights[u]
+                    free[pipe] = local[u]
             # Distinct original remote tensor demand, not official COPY bytes.
             remote_bytes = sum(ports.tensors[t]["size"] for t in incoming[j]
                                if ports.producer.get(t) in op_owner
                                and op_owner[ports.producer[t]] != c)
-            trials.append((max(local.values()), remote_bytes, c, local, free, starts))
-        end, remote_bytes, c, local, free, starts = min(trials, key=lambda trial: trial[:3])
+            trials.append((max(local.values()), remote_bytes, c, local, free, starts,
+                           roots if placement_mode == "gap" else None,
+                           inserted if placement_mode == "gap" else 0))
+        end, remote_bytes, c, local, free, starts, roots, inserted = min(trials, key=lambda trial: trial[:3])
         pipe_free[c] = free
+        if placement_mode == "gap":
+            calendars[c] = roots
+            inserted_before_tail += inserted
         finish.update(local)
         op_owner.update((u, c) for u in blocks[j]["nodes"])
         schedules[c].extend(blocks[j]["nodes"])
@@ -518,4 +560,11 @@ def construct(index, cores, cross_delay=500, *, pack_ffn=False):
         metadata["guards"].append("four original M/V/V/M FFN ops outside rows; no raw nonterminal tensor consumer outside the diamond")
         metadata["limitations"][1] = "Only row/FFN placement is shared; each op uses its own original predecessor release, no all-frontier barrier."
         metadata["limitations"][-1] = "A fixed row/FFN/chain placement family can miss useful splits; packing does not fuse, clone or remove original ops."
+    if placement_mode == "gap":
+        metadata["strategy"] = "attention_rows_ffn_gap" if pack_ffn else "attention_rows_gap"
+        metadata["placement_mode"] = "gap"
+        metadata["operations_inserted_before_tail"] = inserted_before_tail
+        metadata["complexity"] = "recognition worst-case O(C*(V+E)); quotient/placement O(k*(V+E) log V+(V+E) log V); final ready pass O((V+E) log V+kV)"
+        metadata["limitations"][2] = "Placement trials reserve persistent M/V calendar gaps; the final op-level ready pass may improve or worsen that proxy and does not revisit ownership."
+        metadata["limitations"].append("Gap calendar timing is a placement proxy only; it does not prove E0 timing, DDR traffic, or capacity feasibility.")
     return plan, metadata
