@@ -1,0 +1,1611 @@
+{
+  "title": "P2 gap_packet full500 deterministic coverage plan",
+  "status": "approved_fixed_candidate_all_29_prior_cells_audited; remaining471_not_started",
+  "prepared_at_local_date": "2026-09-25",
+  "fixed_spec_commit": null,
+  "algorithm": {
+    "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+    "entrypoint": "python -m src.q2.feedback.construct --strategy gap_packet",
+    "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+    "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+    "source_paths": [
+      "src/q2/feedback/construct.py",
+      "src/q2/feedback/tensor_packet.py",
+      "src/q2/feedback/capacity_window.py",
+      "src/q2/feedback/gap_packet.py",
+      "src/q2/feedback/gap_calendar.py"
+    ],
+    "method": {
+      "variant": "gap_packet",
+      "algorithm_id": "q2-join-gap-packet",
+      "algorithm_name": "守卫串行链汇合配对与空隙调度",
+      "description": "在原始eligible二元依赖与COPY收缩关系相等且无alias的分叉汇合图上，以最大串行链、最长剩余路径、最后父与join至多k平方核配对、持久AVL空闲区间插入直接构造；否则回退容量窗口。明确移植P3 a37eb931方法。无真实COPY竞争/容量仿真、无在线E0或候选搜索。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/384b6c2a7ff937ca44180dee09a9d4bcaea0c50d/docs/a/q2/feedback/GAP_PACKET.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/384b6c2a7ff937ca44180dee09a9d4bcaea0c50d/docs/a/q2/feedback/GAP_PACKET_REVIEW.md"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+          "path": "src/q3_yuanzhifang/active_stages.py",
+          "entrypoint": "resource_choices/build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "7f064bbc4663b6ab5a7c26343620bfa4f32a4921",
+          "path": "src/q2_nikolastarx/dag_direct.py",
+          "entrypoint": "DAGIndex.build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+          "path": "src/q3_yuanzhifang/gap_list.py",
+          "entrypoint": "build/chain_dag/gap_calendar"
+        }
+      ]
+    }
+  },
+  "frozen_inputs": {
+    "source_spec": "results/a/q2-yuanzhifang/feedback-20260924/round13a-spec.json",
+    "source_spec_sha256": "e11e5a9cdfbcf38c13c3c652e76bb30f1f73fa2e4fd217dc1ca57ecc8a5f8f1a",
+    "official_data_manifest": "docs/a/source-manifest.json"
+  },
+  "reuse_gate": "PASSED: all 29 same-source gap_packet cells completed and saved-byte audits passed. Existing_validation records exact run/plan/result references; original solver and E0 timings remain their own observations. No capacity-only or tensor_packet score is reused.",
+  "remaining_units": 471,
+  "partition_rule": "for each core 1..5, ordered cases 001..100 excluding that core audit list; split consecutive chunks of at most 33",
+  "specs": [
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14a-spec.json",
+      "run_id": "fang-p2-gap-full500-round14a-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14a",
+      "cores": 1,
+      "cases": [
+        "001",
+        "002",
+        "003",
+        "004",
+        "006",
+        "007",
+        "008",
+        "009",
+        "010",
+        "011",
+        "012",
+        "013",
+        "014",
+        "015",
+        "017",
+        "018",
+        "019",
+        "020",
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034",
+        "035"
+      ],
+      "units": 33,
+      "sha256": "78417e76f6e9b970d8b129b365b0ba3fb94c2c5fbc8ba69d2e3b55593de82821",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14b-spec.json",
+      "run_id": "fang-p2-gap-full500-round14b-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14b",
+      "cores": 1,
+      "cases": [
+        "036",
+        "037",
+        "038",
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048",
+        "049",
+        "050",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "066",
+        "067",
+        "068"
+      ],
+      "units": 33,
+      "sha256": "85f21315892b48a6ef8d0506e8647122e2c8e479305761cb978af60ec697f256",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14c-spec.json",
+      "run_id": "fang-p2-gap-full500-round14c-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14c",
+      "cores": 1,
+      "cases": [
+        "070",
+        "071",
+        "072",
+        "073",
+        "074",
+        "075",
+        "076",
+        "077",
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085",
+        "086",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ],
+      "units": 31,
+      "sha256": "80b8bd75e9f1191d0ea146d288c098c0a8aa8a20ee9c6bb3a48b14656d93c9ae",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14d-spec.json",
+      "run_id": "fang-p2-gap-full500-round14d-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14d",
+      "cores": 2,
+      "cases": [
+        "001",
+        "002",
+        "004",
+        "006",
+        "007",
+        "008",
+        "009",
+        "010",
+        "011",
+        "012",
+        "013",
+        "014",
+        "015",
+        "017",
+        "018",
+        "019",
+        "020",
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034",
+        "035",
+        "036"
+      ],
+      "units": 33,
+      "sha256": "80b09d87c603476103fcac888838eca763a7e8ce8fb8a02edb1aecfe8f65a3ec",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14e-spec.json",
+      "run_id": "fang-p2-gap-full500-round14e-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14e",
+      "cores": 2,
+      "cases": [
+        "037",
+        "038",
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048",
+        "049",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "067",
+        "070",
+        "071",
+        "072",
+        "073"
+      ],
+      "units": 33,
+      "sha256": "1b1056f2afdee6c2dc74d1e65fed55e742663fe4be2489a23ef2a449c6c7a270",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14f-spec.json",
+      "run_id": "fang-p2-gap-full500-round14f-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14f",
+      "cores": 2,
+      "cases": [
+        "074",
+        "075",
+        "076",
+        "077",
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ],
+      "units": 26,
+      "sha256": "b8af149642dc2ff138f540afad84af9db07679503fbfa5d6084f568c351d9c83",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14g-spec.json",
+      "run_id": "fang-p2-gap-full500-round14g-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14g",
+      "cores": 3,
+      "cases": [
+        "001",
+        "002",
+        "004",
+        "006",
+        "007",
+        "008",
+        "009",
+        "010",
+        "011",
+        "012",
+        "013",
+        "014",
+        "015",
+        "017",
+        "018",
+        "019",
+        "020",
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034",
+        "035",
+        "036"
+      ],
+      "units": 33,
+      "sha256": "f1d3730e897b7b3d42cd3b92501f1aa49dacb5d047b4c1813667ba2cb3e57099",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14h-spec.json",
+      "run_id": "fang-p2-gap-full500-round14h-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14h",
+      "cores": 3,
+      "cases": [
+        "037",
+        "038",
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048",
+        "049",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "067",
+        "070",
+        "071",
+        "072",
+        "073"
+      ],
+      "units": 33,
+      "sha256": "ecc8176570f21b51c4cfce87a171d544d6a85b8307a0469dfabfb1356b1bdfb5",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14i-spec.json",
+      "run_id": "fang-p2-gap-full500-round14i-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14i",
+      "cores": 3,
+      "cases": [
+        "074",
+        "075",
+        "076",
+        "077",
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ],
+      "units": 26,
+      "sha256": "de8dd39ea41c9ab508e012c1ab83c90871e48f41daf56fba5d6a357b5f5e9eeb",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14j-spec.json",
+      "run_id": "fang-p2-gap-full500-round14j-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14j",
+      "cores": 4,
+      "cases": [
+        "001",
+        "002",
+        "004",
+        "006",
+        "007",
+        "008",
+        "009",
+        "010",
+        "011",
+        "012",
+        "013",
+        "014",
+        "015",
+        "016",
+        "017",
+        "018",
+        "019",
+        "020",
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034",
+        "035"
+      ],
+      "units": 33,
+      "sha256": "f93a0e30a5d3a3eabe8b829bfdfba2904c77c8e3608fe2252ba9df4da8568201",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14k-spec.json",
+      "run_id": "fang-p2-gap-full500-round14k-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14k",
+      "cores": 4,
+      "cases": [
+        "036",
+        "037",
+        "038",
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048",
+        "049",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "067",
+        "070",
+        "071",
+        "072"
+      ],
+      "units": 33,
+      "sha256": "9fbb553d9eb8a41f9e399a24c7a0b2261506874edec0f03ba055d04115fb0fda",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14l-spec.json",
+      "run_id": "fang-p2-gap-full500-round14l-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14l",
+      "cores": 4,
+      "cases": [
+        "073",
+        "074",
+        "075",
+        "076",
+        "077",
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085",
+        "086",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ],
+      "units": 28,
+      "sha256": "a378ec769a5a222d8136e665224453a7912887622b87afbf06b392ef7ef50619",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14m-spec.json",
+      "run_id": "fang-p2-gap-full500-round14m-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14m",
+      "cores": 5,
+      "cases": [
+        "001",
+        "002",
+        "003",
+        "004",
+        "006",
+        "007",
+        "008",
+        "009",
+        "010",
+        "011",
+        "012",
+        "013",
+        "014",
+        "015",
+        "016",
+        "017",
+        "018",
+        "019",
+        "020",
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028",
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034"
+      ],
+      "units": 33,
+      "sha256": "151f4d38c5c200c1bcfd18668e9e03670d37d146a095c266bc69d3b10ba19a71",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14n-spec.json",
+      "run_id": "fang-p2-gap-full500-round14n-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14n",
+      "cores": 5,
+      "cases": [
+        "035",
+        "036",
+        "037",
+        "038",
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048",
+        "049",
+        "050",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059",
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "066",
+        "067"
+      ],
+      "units": 33,
+      "sha256": "31b4fb7c26604f09b5e263633a85bee15fe0d048ef5a8794efbac5887ed58a62",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    },
+    {
+      "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14o-spec.json",
+      "run_id": "fang-p2-gap-full500-round14o-20260925",
+      "output": "results/a/q2-yuanzhifang/feedback-20260924/round14o",
+      "cores": 5,
+      "cases": [
+        "068",
+        "070",
+        "072",
+        "073",
+        "074",
+        "075",
+        "076",
+        "077",
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096",
+        "097",
+        "098",
+        "099",
+        "100"
+      ],
+      "units": 30,
+      "sha256": "3d38537f49522fc8eab87108a9cbe7208a54c4f8c84b08421f06cee1a33bdd1c",
+      "valid": true,
+      "solver_calls": 0,
+      "E0_calls": 0
+    }
+  ],
+  "budgets": {
+    "workers_per_batch": 1,
+    "batch_wall_seconds": 900,
+    "solver_timeout_seconds": 30,
+    "e0_timeout_seconds": 90,
+    "cleanup_reserve_seconds": 15,
+    "stop_on_first_failure": true,
+    "retry": 0,
+    "solver_calls_max": 471,
+    "E0_calls_max": 471,
+    "parallel_instances_proposed": "At most 2 P2 workers. Before each batch dispatch require at least 1.5 GiB free memory; if insufficient, wait only at a batch boundary and do not start a batch.",
+    "start_gate": "Root fixed-commit START to assigned Luna lane after pre-dispatch resource check; all29 evidence prerequisite has passed."
+  },
+  "validation": {
+    "method": "All15 existing validate_spec checks and exact500 unique partition passed; root subsequently reconciled29 completed source-identical records and audit receipts.",
+    "specs": [
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14a-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14b-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14c-spec.json",
+        "valid": true,
+        "units": 31,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14d-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14e-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14f-spec.json",
+        "valid": true,
+        "units": 26,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14g-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14h-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14i-spec.json",
+        "valid": true,
+        "units": 26,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14j-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14k-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14l-spec.json",
+        "valid": true,
+        "units": 28,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14m-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14n-spec.json",
+        "valid": true,
+        "units": 33,
+        "solver_calls": 0,
+        "E0_calls": 0
+      },
+      {
+        "spec": "results/a/q2-yuanzhifang/feedback-20260924/round14o-spec.json",
+        "valid": true,
+        "units": 30,
+        "solver_calls": 0,
+        "E0_calls": 0
+      }
+    ],
+    "matrix_unique_cells": 500,
+    "new_cells": 471,
+    "duplicate_new_cells": 0,
+    "solver_calls": 0,
+    "E0_calls": 0,
+    "prior_audited_cells": 29
+  },
+  "non_results": "No scores, graph scans, solver runs, E0 runs, capacity experiments, or historical winners are included.",
+  "fixed_spec_commit_note": "The fixed commit must be recorded by the run receipt or root START after these files are committed; embedding this plan's own commit would be self-referential.",
+  "candidate_review": {
+    "root_decision": "complete the promising frozen gap_packet algorithm: 29 prior cells have28 lower official M and1 tie vs frozen tensor_packet; DDR regressions retained; no full100 performance claim yet",
+    "tested_cells": 29,
+    "improved": 28,
+    "equal": 1,
+    "worse": 0,
+    "selection_limit": "single fixed source/entrypoint/automatic guard rules; development sample is not an unbiased generalization estimate"
+  },
+  "existing_validation": {
+    "count": 29,
+    "source_rule_and_entrypoint_match": true,
+    "saved_batch_audits_passed": true,
+    "new_solver_calls": 0,
+    "new_E0_calls": 0,
+    "records": [
+      {
+        "case_id": "003",
+        "cores": 4,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/003-gap_packet/run.json",
+        "run_sha256": "1aee3798976f17474a52ba5afd4c38210d22a3a93e8e46b583b55bc16eb23edf",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/003-gap_packet/result.json.gz",
+          "sha256": "ff0a147a00284157cd36d3095c9172aa7d9a52f8eb5bf01c9f2d7f10e192d128"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/003-gap_packet/case_003_multicore_res.json",
+          "sha256": "fed2a0d981568653c1979840bbdda9523c2906865c66ddbc5aaa3607ffe89650"
+        },
+        "identity": {
+          "graph_sha256": "2c80acfd37edcf811ce76b7e7b1f7194c706bd4d4aa6449e6a19e9eac1028ced",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "fed2a0d981568653c1979840bbdda9523c2906865c66ddbc5aaa3607ffe89650"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "005",
+        "cores": 4,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/005-gap_packet/run.json",
+        "run_sha256": "2f88af8a04673d785a0a189b8c0356ee8acec2542735753ff025a9089938bee9",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/005-gap_packet/result.json.gz",
+          "sha256": "975c9d6c5febcbdb7219f02136a440213bcaca14d81abe18b659aacabb27f0a2"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/005-gap_packet/case_005_multicore_res.json",
+          "sha256": "2f3f12e735d5d2c838f5cff06eb92ddcdb53647dbafe1e452d096b34e600fd8d"
+        },
+        "identity": {
+          "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "2f3f12e735d5d2c838f5cff06eb92ddcdb53647dbafe1e452d096b34e600fd8d"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "050",
+        "cores": 4,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/050-gap_packet/run.json",
+        "run_sha256": "3445dafaa3f7ee46b2683af6ffb260ad0fcc6fc923e83befe6f56089f1c434aa",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/050-gap_packet/result.json.gz",
+          "sha256": "519b8c984f78fa24ec34251f8782d1782c6dc0a7b20e3d7d622483a1db49ea55"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/050-gap_packet/case_050_multicore_res.json",
+          "sha256": "24ba61b074fcc86d1154c0811dac31ee80c7689165b823fb4f78e5dfac59cb79"
+        },
+        "identity": {
+          "graph_sha256": "3b6b1abd65fbfbb2a40972bdbd643c43107c4b232512741740ff351c366367aa",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "24ba61b074fcc86d1154c0811dac31ee80c7689165b823fb4f78e5dfac59cb79"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "066",
+        "cores": 4,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/066-gap_packet/run.json",
+        "run_sha256": "1aa737d6521bead887e6e46665d6dbe65a82b3f4941d4d5f02f3f3a641068d5c",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/066-gap_packet/result.json.gz",
+          "sha256": "06336dd8dfe22ad6404146d516f985f744272861489da0e08897904684f9e2b2"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/066-gap_packet/case_066_multicore_res.json",
+          "sha256": "4e809802454ad770a1073a152931854d59f64358bcab686f97597ff320dbbcf1"
+        },
+        "identity": {
+          "graph_sha256": "30e61f8760d7d595b0fc4ad76262b179c72509a0cb5b2be72333ebd9b926b465",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "4e809802454ad770a1073a152931854d59f64358bcab686f97597ff320dbbcf1"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "068",
+        "cores": 4,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/068-gap_packet/run.json",
+        "run_sha256": "75dfada942d0c9ece75b3f5fa8ed90a5cbc60825590daf744a3122d30d7fcc2c",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/068-gap_packet/result.json.gz",
+          "sha256": "b385e4a0eda8977429c3fe8fa71bfe0aca1914a094b0647b85e242bd87e8bcee"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/068-gap_packet/case_068_multicore_res.json",
+          "sha256": "b2e52454a545525bc45fb97b94c583bc05e067352e749752040b798e68b30d1a"
+        },
+        "identity": {
+          "graph_sha256": "dfd9a58ef9d26a8a4567026b50af8b4499d87eebb3d98f8208b909b11e963c6d",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "b2e52454a545525bc45fb97b94c583bc05e067352e749752040b798e68b30d1a"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "069",
+        "cores": 4,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/069-gap_packet/run.json",
+        "run_sha256": "3517933b68b9aa1ec2be23eadd539bf2338f763144a8dc6c5e00254f74e84dfc",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/069-gap_packet/result.json.gz",
+          "sha256": "91fbf0761c766556a469bb0f642c53471d0441b7d9ba00a2b076cf3ab603c00d"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11a/069-gap_packet/case_069_multicore_res.json",
+          "sha256": "d5d5418cfd6130f9f5e1d64ff1222a18e7f8bb2726fff489ba8d3310d81539c9"
+        },
+        "identity": {
+          "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "d5d5418cfd6130f9f5e1d64ff1222a18e7f8bb2726fff489ba8d3310d81539c9"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "005",
+        "cores": 1,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/005-gap_packet/run.json",
+        "run_sha256": "073681c91490e9a9adc6628d0ad2d0abbc3b70a429ba00caf99b6568add7c0be",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/005-gap_packet/result.json.gz",
+          "sha256": "ccf0a74ed6816429f93b0169c0679f026a9b67daee9c299378528cd1a0111ac3"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/005-gap_packet/case_005_multicore_res.json",
+          "sha256": "f114bd8644206fbb4927c93259bc6f0488560b78956639f0608a0e64dbcd14cd"
+        },
+        "identity": {
+          "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "f114bd8644206fbb4927c93259bc6f0488560b78956639f0608a0e64dbcd14cd"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "016",
+        "cores": 1,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/016-gap_packet/run.json",
+        "run_sha256": "d04658c7ca80fa6200d712fa61c60a99cae6a9a6d516c08cef8c4c80ea38d854",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/016-gap_packet/result.json.gz",
+          "sha256": "f9c5e3aa6853817950bd68d7fb990b4b8ee71f8b351d290df540b34b6f0e229a"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/016-gap_packet/case_016_multicore_res.json",
+          "sha256": "6e2dd19296ec45fe5b0648c9dc6fe96eb70951a9f16d5d8d72ec0eaf77160867"
+        },
+        "identity": {
+          "graph_sha256": "76537aa7163cf0748adcff2ecbd84fbc9a02a2d129ffcecd2bfebb89685e71ef",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "6e2dd19296ec45fe5b0648c9dc6fe96eb70951a9f16d5d8d72ec0eaf77160867"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "069",
+        "cores": 1,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/069-gap_packet/run.json",
+        "run_sha256": "978548d6bcb6f169895533c8db4b1f1d5fb2c0e5eb4f5651a7942efd0e128cb9",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/069-gap_packet/result.json.gz",
+          "sha256": "f87671e1ef60fa092d884b64daafa2f0cadf4d84c4303354e92f57e914b34328"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11b/069-gap_packet/case_069_multicore_res.json",
+          "sha256": "06ce1f798c4d5a4fec5b69dabf2f20caa06f5f72c54a06784a368a3908f6ad71"
+        },
+        "identity": {
+          "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "06ce1f798c4d5a4fec5b69dabf2f20caa06f5f72c54a06784a368a3908f6ad71"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "069",
+        "cores": 5,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/069-gap_packet/run.json",
+        "run_sha256": "d722ec096412dca6f5bc21d1f3bc12d0df6f785e79adec292af40b98dea2f5bf",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/069-gap_packet/result.json.gz",
+          "sha256": "094d56c0792b9af18e38c11dac4f340971f6e15bb12f4732ec1b5eb088f9b79b"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/069-gap_packet/case_069_multicore_res.json",
+          "sha256": "f99384c35b90c9995eb21b2689e561d5af80548eb3ba9c246d2716b0423cad87"
+        },
+        "identity": {
+          "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "f99384c35b90c9995eb21b2689e561d5af80548eb3ba9c246d2716b0423cad87"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "071",
+        "cores": 5,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/071-gap_packet/run.json",
+        "run_sha256": "4e82cf41e35d222561b1907d050beb3884e0fbc1fbf1a1c95860c6ae9a8c1fdb",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/071-gap_packet/result.json.gz",
+          "sha256": "34986f7a58a15e7cbccaa3421214a50898f0c6dbed659c0501db2fd120ab872f"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/071-gap_packet/case_071_multicore_res.json",
+          "sha256": "c46fa88627f0e05cd1e5ed0aab4a51db3bf05972cc69e98579a02d3f72bbb95f"
+        },
+        "identity": {
+          "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "c46fa88627f0e05cd1e5ed0aab4a51db3bf05972cc69e98579a02d3f72bbb95f"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "005",
+        "cores": 5,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/005-gap_packet/run.json",
+        "run_sha256": "a3bbc38bfd54afcef35689b5d2236bea7cb24ba25533a2ce2ff96e038b2bec3b",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/005-gap_packet/result.json.gz",
+          "sha256": "de3b111922b9d707c2fa6a9895fecddf06c2556caf63e5d6b8c41d964b842d34"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/005-gap_packet/case_005_multicore_res.json",
+          "sha256": "32790f8a6e5a543bff313dc535376a76b06b06054605e8d23d683ecd8fe3734b"
+        },
+        "identity": {
+          "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "32790f8a6e5a543bff313dc535376a76b06b06054605e8d23d683ecd8fe3734b"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "086",
+        "cores": 5,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/086-gap_packet/run.json",
+        "run_sha256": "a4179d44216c2b8e350c5d9a62fe52b5dec84b4b5ef90e882726950cb5f4ed11",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/086-gap_packet/result.json.gz",
+          "sha256": "d461ff7ad8e76052f9151a1a8fbb5789e616f796184c7aaa10047d8ad6077cfb"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round11c/086-gap_packet/case_086_multicore_res.json",
+          "sha256": "feab3c9b18268eafa02e438ecb9b4345493b94ab982a8ca47631e73e5d37eee6"
+        },
+        "identity": {
+          "graph_sha256": "ef91fda2692fd0add63db3c7f677e4e03c8d115d97db3cb959cffc62fff2434a",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "feab3c9b18268eafa02e438ecb9b4345493b94ab982a8ca47631e73e5d37eee6"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "003",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/003-gap_packet/run.json",
+        "run_sha256": "06ab665254a1a4e6c9fb5c94bdd996c1280c8765c9bc078e29faa15bf69bad2b",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/003-gap_packet/result.json.gz",
+          "sha256": "3e41961f822a8b27730bfc7102b76ab8046167ee7e9677a28691920f90f79110"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/003-gap_packet/case_003_multicore_res.json",
+          "sha256": "3a8a7b16be08c0bc274f50108620d7c9052260b69aa83f58c6541ef7530f7bf1"
+        },
+        "identity": {
+          "graph_sha256": "2c80acfd37edcf811ce76b7e7b1f7194c706bd4d4aa6449e6a19e9eac1028ced",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "3a8a7b16be08c0bc274f50108620d7c9052260b69aa83f58c6541ef7530f7bf1"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "005",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/005-gap_packet/run.json",
+        "run_sha256": "61657e240dc711026e042e95250832315e0fe57b22d98fc118a782f2091e1ef8",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/005-gap_packet/result.json.gz",
+          "sha256": "d0057957a643068b7ea41e434d556ae792976b6bea2d157ab117a1f08ed2fd85"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/005-gap_packet/case_005_multicore_res.json",
+          "sha256": "7727bcab2d66e977fc5d3f2e2597dac7da95c7c67d6a6a7fe0f6f4cefed4bf3c"
+        },
+        "identity": {
+          "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "7727bcab2d66e977fc5d3f2e2597dac7da95c7c67d6a6a7fe0f6f4cefed4bf3c"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "050",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/050-gap_packet/run.json",
+        "run_sha256": "9b61e9e24441590a6a0885b3337348bfe794dd184bbce249ada7543c8c7f9a56",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/050-gap_packet/result.json.gz",
+          "sha256": "f04d330a896ec1d557ab8f4c6d25d0578f3ef2c1675d29246d03d078d3357b3a"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/050-gap_packet/case_050_multicore_res.json",
+          "sha256": "83d0c7616692bd9ace1f3180acc363da7f47fcab2c75b1fe81f0221aa2fa6523"
+        },
+        "identity": {
+          "graph_sha256": "3b6b1abd65fbfbb2a40972bdbd643c43107c4b232512741740ff351c366367aa",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "83d0c7616692bd9ace1f3180acc363da7f47fcab2c75b1fe81f0221aa2fa6523"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "066",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/066-gap_packet/run.json",
+        "run_sha256": "8a8df3ba6df1c24e16249e901fc2245ed08c32e34bf69dff84ff0866bf6ebd12",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/066-gap_packet/result.json.gz",
+          "sha256": "14c5fad9f450546a46298a686491fbee821fefa0c6df01c70857b41dadcd61c6"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/066-gap_packet/case_066_multicore_res.json",
+          "sha256": "f4f636e0607ea6853e1fb6bb9ab4bda8b40ef044bd775fa20e448d12896c4829"
+        },
+        "identity": {
+          "graph_sha256": "30e61f8760d7d595b0fc4ad76262b179c72509a0cb5b2be72333ebd9b926b465",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "f4f636e0607ea6853e1fb6bb9ab4bda8b40ef044bd775fa20e448d12896c4829"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "068",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/068-gap_packet/run.json",
+        "run_sha256": "cf4ac857a14b1e4d9f53123128a5ba16136c9a5a823b0da0d9e92594f7ce7fb3",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/068-gap_packet/result.json.gz",
+          "sha256": "dc600a08ea275d0f856572d7a75ccb35073d49d2de843b66249c012a5ea4732b"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/068-gap_packet/case_068_multicore_res.json",
+          "sha256": "cb5c06f36120de7d43f0aa7cb607da5df085a54512b335916db19c183519dfbb"
+        },
+        "identity": {
+          "graph_sha256": "dfd9a58ef9d26a8a4567026b50af8b4499d87eebb3d98f8208b909b11e963c6d",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "cb5c06f36120de7d43f0aa7cb607da5df085a54512b335916db19c183519dfbb"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "069",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/069-gap_packet/run.json",
+        "run_sha256": "d84f72c93d4a995c31f38477bb2629de19f3c88f2252bae8434f65d67971be67",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/069-gap_packet/result.json.gz",
+          "sha256": "c98863de6027474aad11f557cdc3f8f359e0d45fc3efe8fb864a0014a3dfc08e"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/069-gap_packet/case_069_multicore_res.json",
+          "sha256": "c1ca77233bed5b46451f9e11dde80a2e07d448efdbbb39c3d1e0cf20584679d0"
+        },
+        "identity": {
+          "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "c1ca77233bed5b46451f9e11dde80a2e07d448efdbbb39c3d1e0cf20584679d0"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "016",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/016-gap_packet/run.json",
+        "run_sha256": "1463303fb8032969dbe5fabf7318b606fe8a334ff69e8a52470fc67f66702391",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/016-gap_packet/result.json.gz",
+          "sha256": "4eb8fb67743c9a40523451135138ba126a129cd90d3737b6425b0800d358bf72"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/016-gap_packet/case_016_multicore_res.json",
+          "sha256": "635748a5d4dbd85105d311188d21fde047a68121a41d47e640630937162ef959"
+        },
+        "identity": {
+          "graph_sha256": "76537aa7163cf0748adcff2ecbd84fbc9a02a2d129ffcecd2bfebb89685e71ef",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "635748a5d4dbd85105d311188d21fde047a68121a41d47e640630937162ef959"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "086",
+        "cores": 2,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/086-gap_packet/run.json",
+        "run_sha256": "a0c5b4dd7f9220f10cf7c1ca74666ce76805cd39019365031cec1c9c662f4a5b",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/086-gap_packet/result.json.gz",
+          "sha256": "eb2b9a288c1b3c573487a8ec0dcabbcb8f3eac8d801ee0f595437458bc30e446"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13a/086-gap_packet/case_086_multicore_res.json",
+          "sha256": "dc3d913f971f42e67c3f3adef9ab26b184b456e60bec62d9b962311cea47e705"
+        },
+        "identity": {
+          "graph_sha256": "ef91fda2692fd0add63db3c7f677e4e03c8d115d97db3cb959cffc62fff2434a",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "dc3d913f971f42e67c3f3adef9ab26b184b456e60bec62d9b962311cea47e705"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "003",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/003-gap_packet/run.json",
+        "run_sha256": "40df5cafe4a3a5010911ff7090964f9dcb98f4264563d0e6d918dd6c3055d11e",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/003-gap_packet/result.json.gz",
+          "sha256": "886b935643919f0563f47fe60c2c4180fca46c293825a3901494abdd6a5ca34b"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/003-gap_packet/case_003_multicore_res.json",
+          "sha256": "0e12e5cfe8c64f8ac2e6230bf9cf3fafd6f874e29addb822f04e4e382d965f35"
+        },
+        "identity": {
+          "graph_sha256": "2c80acfd37edcf811ce76b7e7b1f7194c706bd4d4aa6449e6a19e9eac1028ced",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "0e12e5cfe8c64f8ac2e6230bf9cf3fafd6f874e29addb822f04e4e382d965f35"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "005",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/005-gap_packet/run.json",
+        "run_sha256": "94ef85adfda64efb2f3faa60d8dd574458bceb616815c36363041544e8ecf28b",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/005-gap_packet/result.json.gz",
+          "sha256": "5c32653ea862654b727d0e0adde4ecf1ce50356e38787d84308680c14199a546"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/005-gap_packet/case_005_multicore_res.json",
+          "sha256": "985b638e95b105aecdc49cbf3c4720c51b4a9d43b2ec84316b0dc20ea7ac720c"
+        },
+        "identity": {
+          "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "985b638e95b105aecdc49cbf3c4720c51b4a9d43b2ec84316b0dc20ea7ac720c"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "050",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/050-gap_packet/run.json",
+        "run_sha256": "e52e28e40cf2c75152f893e6dfc1cce0313613fa50c23590d54942dcaebe3b7b",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/050-gap_packet/result.json.gz",
+          "sha256": "9084fbad27841203b157d069a322fb511dc743692ee54078097da4d1e4ed3df7"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/050-gap_packet/case_050_multicore_res.json",
+          "sha256": "378c9dde2c13b87381d2c47f6236ba5cce27c3e950592bedc4ed62cb13c26354"
+        },
+        "identity": {
+          "graph_sha256": "3b6b1abd65fbfbb2a40972bdbd643c43107c4b232512741740ff351c366367aa",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "378c9dde2c13b87381d2c47f6236ba5cce27c3e950592bedc4ed62cb13c26354"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "066",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/066-gap_packet/run.json",
+        "run_sha256": "cf9021508b93968ec706fa8452a8f2d02133daee1e62299ecb3500c39d17c19c",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/066-gap_packet/result.json.gz",
+          "sha256": "eeb97410a3a091edd554941406fc93730fe26bca24d09122b8d5b4d53c047867"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/066-gap_packet/case_066_multicore_res.json",
+          "sha256": "ec8c6936008e535d74fc2f7ce2123fb2ba323a52bbb1100495e18159529ec0d1"
+        },
+        "identity": {
+          "graph_sha256": "30e61f8760d7d595b0fc4ad76262b179c72509a0cb5b2be72333ebd9b926b465",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "ec8c6936008e535d74fc2f7ce2123fb2ba323a52bbb1100495e18159529ec0d1"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "068",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/068-gap_packet/run.json",
+        "run_sha256": "2cf9de630a70060d73d03cbdbb060801dd1b7b118d8a37800521ba22ed42c79b",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/068-gap_packet/result.json.gz",
+          "sha256": "27941f8eab173d35918d419af1366d4db1db33e686939b2d183c9a1615fee1e0"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/068-gap_packet/case_068_multicore_res.json",
+          "sha256": "1062157d587eae31be683a30606647f4cce9a91f2c64affc7f0aa09b4cf109a6"
+        },
+        "identity": {
+          "graph_sha256": "dfd9a58ef9d26a8a4567026b50af8b4499d87eebb3d98f8208b909b11e963c6d",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "1062157d587eae31be683a30606647f4cce9a91f2c64affc7f0aa09b4cf109a6"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "069",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/069-gap_packet/run.json",
+        "run_sha256": "1dd491e6fc0c04f72fc49a210890e096e93bd0408bdc846fecbe02c40ca106a6",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/069-gap_packet/result.json.gz",
+          "sha256": "5465efa9b1422228ec68d712e5edd52e952d47f8737a4200abbd5574d137455d"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/069-gap_packet/case_069_multicore_res.json",
+          "sha256": "9c71d8a736a317e7f280b8c2cb91294aaa4bcec792bd57d0f9f2cce29adce55e"
+        },
+        "identity": {
+          "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "9c71d8a736a317e7f280b8c2cb91294aaa4bcec792bd57d0f9f2cce29adce55e"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "016",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/016-gap_packet/run.json",
+        "run_sha256": "4c860d03bd0d378b26a86d6580af01ac718f80a9baacf32659d0a29414524eb4",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/016-gap_packet/result.json.gz",
+          "sha256": "f9d5d4562cef964663d981bd67f7f24e3ab46346c39e90274082c30945de6af6"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/016-gap_packet/case_016_multicore_res.json",
+          "sha256": "2412e0a58c03792b7905f0f02c8be9307acc9dd539aae879dd39aa8e738055b2"
+        },
+        "identity": {
+          "graph_sha256": "76537aa7163cf0748adcff2ecbd84fbc9a02a2d129ffcecd2bfebb89685e71ef",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "2412e0a58c03792b7905f0f02c8be9307acc9dd539aae879dd39aa8e738055b2"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      },
+      {
+        "case_id": "086",
+        "cores": 3,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/086-gap_packet/run.json",
+        "run_sha256": "804d74c448bb6e01b3478298ddb9c6e89a0c88f9ddc8a295dea51a43d20ad35e",
+        "result": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/086-gap_packet/result.json.gz",
+          "sha256": "eab8247b620759a38dfd52f611d1150092161cc8ef258de36331b6bd65e0ec2a"
+        },
+        "plan": {
+          "path": "results/a/q2-yuanzhifang/feedback-20260924/round13b/086-gap_packet/case_086_multicore_res.json",
+          "sha256": "d5d1f9e075e2f24feae49e850c6403cc6ce15d9718069c1ef1009b81720d6ffd"
+        },
+        "identity": {
+          "graph_sha256": "ef91fda2692fd0add63db3c7f677e4e03c8d115d97db3cb959cffc62fff2434a",
+          "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+          "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+          "plan_sha256": "d5d1f9e075e2f24feae49e850c6403cc6ce15d9718069c1ef1009b81720d6ffd"
+        },
+        "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+        "method": "gap_packet"
+      }
+    ]
+  },
+  "resource_limits": {
+    "max_p2_workers": 2,
+    "min_free_ram_before_batch_bytes": 1610612736,
+    "model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "token_budget": "soft: minimal context, script execution, summaries only; no tool-enforced cap available"
+  },
+  "postprocessing_auditor": {
+    "path": "src/q2/feedback/audit_batch.py",
+    "sha256": "147ed4be45042c35d6b58809a055ce48c6a2629705da58bd16ca8aa444bb9520",
+    "smoke": "existing completed round11b: 3 cases, 6 gzip, 23291 trace operations; no solver/E0"
+  },
+  "completed_audited_prior_batches": {
+    "round11a": {
+      "core": 4,
+      "cases": [
+        "003",
+        "005",
+        "050",
+        "066",
+        "068",
+        "069"
+      ]
+    },
+    "round11b": {
+      "core": 1,
+      "cases": [
+        "005",
+        "016",
+        "069"
+      ]
+    },
+    "round11c": {
+      "core": 5,
+      "cases": [
+        "005",
+        "069",
+        "071",
+        "086"
+      ]
+    },
+    "round13a": {
+      "core": 2,
+      "cases": [
+        "003",
+        "005",
+        "016",
+        "050",
+        "066",
+        "068",
+        "069",
+        "086"
+      ]
+    },
+    "round13b": {
+      "core": 3,
+      "cases": [
+        "003",
+        "005",
+        "016",
+        "050",
+        "066",
+        "068",
+        "069",
+        "086"
+      ]
+    }
+  },
+  "lane_assignment": {
+    "luna_a": [
+      "round14d",
+      "round14e",
+      "round14f",
+      "round14j",
+      "round14k",
+      "round14l",
+      "round14b"
+    ],
+    "luna_b": [
+      "round14g",
+      "round14h",
+      "round14i",
+      "round14m",
+      "round14n",
+      "round14o",
+      "round14a",
+      "round14c"
+    ]
+  },
+  "model_budget": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "reason": "fixed commands, integrity checks and exports; no algorithm design",
+    "soft_token_estimate_per_lane": 6000,
+    "hard_cap_available": false,
+    "actual_tokens": "unavailable",
+    "context": "fixed specs and concise handoff only; no recursive agents; escalate script/semantic failures without algorithm edits"
+  }
+}

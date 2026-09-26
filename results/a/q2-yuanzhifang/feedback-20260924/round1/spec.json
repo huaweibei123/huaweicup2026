@@ -1,0 +1,122 @@
+{
+  "run_id": "fang-p2-feedback-round1-20260924",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "cases": [
+    "008",
+    "095",
+    "084",
+    "044",
+    "080"
+  ],
+  "cores": 4,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round1",
+  "budget": {
+    "max_solver_calls": 20,
+    "max_e0_calls": 20,
+    "solver_timeout_seconds": 30,
+    "e0_timeout_seconds": 30,
+    "batch_wall_seconds": 600,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  },
+  "methods": [
+    {
+      "variant": "component",
+      "algorithm_id": "q2-component-order",
+      "algorithm_name": "分量顺序直接构造",
+      "description": "继承 NikolaStarx 的 Q3 Index：官方 COPY 收缩后的弱分量整作业分核，固定 singleton mapping，各核串接分量拓扑序。作为已知确定性对照；无在线评价或候选选择。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/fa6522a3266fe040379dd064092beb27c0b20a5e/docs/a/q2/feedback/METHOD.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/5f7e6f51177322db6a88a936216be36ec41dbfe7/src/q3/construct.py"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "5f7e6f51177322db6a88a936216be36ec41dbfe7",
+          "path": "src/q3/construct.py",
+          "entrypoint": "Index"
+        }
+      ]
+    },
+    {
+      "variant": "affine_eighth",
+      "algorithm_id": "q2-affine-eighth",
+      "algorithm_name": "八分之一间隔仿射优先级",
+      "description": "继承已归档 Pro2 与 NikolaStarx Q3 对照，固定分量分核/singleton mapping，以作业内累计计算时长加作业位置乘最大作业时长八分之一构造优先级。仅为计算坐标，不替代官方 COPY/内存/FIFO 评价；无在线选优。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/fa6522a3266fe040379dd064092beb27c0b20a5e/docs/a/q2/feedback/METHOD.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/5f7e6f51177322db6a88a936216be36ec41dbfe7/src/q3/construct.py"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "5f7e6f51177322db6a88a936216be36ec41dbfe7",
+          "path": "src/q3/construct.py",
+          "entrypoint": "Index"
+        }
+      ]
+    },
+    {
+      "variant": "resource_word",
+      "algorithm_id": "q2-resource-word",
+      "algorithm_name": "守卫资源词优先级",
+      "description": "继承已归档 Pro2 与 NikolaStarx Q3 的窄域 M–V–M 资源词构造，固定分核/mapping，仅在同质计算链守卫成立时构造。044/080 预注册为不支持，记录退出 2 与零 E0；不回退、不伪造通用适用性。",
+      "args": [],
+      "expected_unsupported_cases": [
+        "044",
+        "080"
+      ],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/fa6522a3266fe040379dd064092beb27c0b20a5e/docs/a/q2/feedback/METHOD.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/5f7e6f51177322db6a88a936216be36ec41dbfe7/src/q3/construct.py"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "5f7e6f51177322db6a88a936216be36ec41dbfe7",
+          "path": "src/q3/construct.py",
+          "entrypoint": "Index"
+        }
+      ]
+    },
+    {
+      "variant": "pipe_window",
+      "algorithm_id": "q2-pipe-window",
+      "algorithm_name": "有界作业窗口计算资源优先级",
+      "description": "在继承的 COPY 收缩、分量分核和固定 singleton mapping 上，以结构计算 W=min(J,8,1+ceil(总计算工作/最大 Pipe 工作))。窗口内按理想 Pipe 可用时刻安排作业内拓扑链，完成后开放窗口，生成一个优先级序列；不使用 E0 选参，不把 W 当真实驻留容量证书。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/fa6522a3266fe040379dd064092beb27c0b20a5e/docs/a/q2/feedback/METHOD.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/5f7e6f51177322db6a88a936216be36ec41dbfe7/src/q3/construct.py"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "5f7e6f51177322db6a88a936216be36ec41dbfe7",
+          "path": "src/q3/construct.py",
+          "entrypoint": "Index"
+        }
+      ]
+    }
+  ],
+  "offline_costs": "uv sync --locked 依赖安装未单独测量；100 图结构扫描 15.777617700000519 秒、零 E0；5 项结构测试 0.560 秒、零 E0；runner 的 5 项 mock 生命周期/空值原因检查没有启动真实 solver 或 E0。开发读图扫描用于事前明确样本/构造，不包含在逐例 solver 墙钟，不隐藏为免费在线预处理。无训练、编译、GPU/云计算或额外付费计算作业；模型账户成本未由 runner 测量。"
+}

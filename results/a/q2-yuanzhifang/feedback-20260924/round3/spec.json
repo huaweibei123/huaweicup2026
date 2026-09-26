@@ -1,0 +1,50 @@
+{
+  "run_id": "fang-p2-tree-dp-round3-20260924",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "8910f45c99efbf682c04358e23b37a17b3f587d2",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py",
+    "src/q2/feedback/tree.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo"
+  ],
+  "cases": [
+    "002",
+    "062",
+    "063"
+  ],
+  "cores": 4,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round3",
+  "budget": {
+    "max_solver_calls": 3,
+    "max_e0_calls": 3,
+    "solver_timeout_seconds": 60,
+    "e0_timeout_seconds": 60,
+    "batch_wall_seconds": 600,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  },
+  "methods": [
+    {
+      "variant": "tree_dp",
+      "algorithm_id": "q2-connected-tree-dp",
+      "algorithm_name": "归约树连通块标量负载动态规划",
+      "description": "单弱连通、每节点至多一个后继的 in-tree 守卫；二分整数容量并用 exact-k 最小开放块状态 DP 精确最小化标量最大连通块工作，较重子树先的 DFS 后序产生每核优先级。标量切分最优性不等于官方 Makespan 最优性。单方案，零在线评分，不按 case ID 路由。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/8910f45c99efbf682c04358e23b37a17b3f587d2/docs/a/q2/feedback/TREE_DP.md"
+      ],
+      "upstream": []
+    }
+  ],
+  "offline_costs": "既有 R1:20 solver+18 E0，130.4165338秒；R2:5 solver+5 E0，23.457400秒；两批共25构造23外部评分，原件各自保存，不在本批重跑。100图结构/理论扫描先后15.7776177、20.7048706、21.7081221秒，均零E0，属于公开开发预分析。全500格基线盘点只复算已有作者feed、核验100份单核原件，新增solver/E0/E1/E2均0。树DP独立小树枚举oracle与既有结构检查9项通过1.314秒，零E0；枚举仅测试，不进入求解器。独立理论审计在另一内置agent中进行，未运行评分；模型账户成本未测。以上全部开发时间不计入本批逐例 solver 墙钟，不隐藏它们。未使用训练、GPU、付费云作业或GitHub Actions。",
+  "coordination": "P1 Stage C 已在 2026-09-24T15:27:07.969211Z 释放同机评分窗口；P3 短批已于15:17:27.615491Z结束。理论审计与普通系统活动仍可能并存，非严格独占/重复延迟测试。"
+}

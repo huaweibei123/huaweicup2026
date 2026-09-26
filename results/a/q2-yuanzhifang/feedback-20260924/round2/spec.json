@@ -1,0 +1,61 @@
+{
+  "run_id": "fang-p2-feedback-round2-20260924",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "3e6cbe2a9d6f50ed13a236f9a9a2b098e343f7fc",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "cases": [
+    "008",
+    "095",
+    "084",
+    "044",
+    "080"
+  ],
+  "cores": 4,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round2",
+  "budget": {
+    "max_solver_calls": 5,
+    "max_e0_calls": 5,
+    "solver_timeout_seconds": 30,
+    "e0_timeout_seconds": 30,
+    "batch_wall_seconds": 240,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  },
+  "methods": [
+    {
+      "variant": "pipe_window_fill",
+      "algorithm_id": "q2-pipe-window",
+      "algorithm_name": "有界作业窗口计算资源优先级",
+      "description": "首轮公开开发反馈驱动的单一机制对照：与 pipe_window 相比，仅将理想可开始时刻并列规则改为优先较大剩余工作 tail，以检验填充重入瓶颈能否消除末段空闲。默认 W、COPY 收缩、分量分核、singleton mapping 和输出规则不变；只构造一个方案，不调用 E0 选参，不重跑既有对照。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/30f8ad352c3ff15a7c1c29fd182a9e32776fdc35/docs/a/q2/feedback/ROUND1.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/3e6cbe2a9d6f50ed13a236f9a9a2b098e343f7fc/src/q2/feedback/construct.py",
+        "https://github.com/huaweibei123/huaweicup2026/blob/fa6522a3266fe040379dd064092beb27c0b20a5e/docs/a/q2/feedback/METHOD.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/5f7e6f51177322db6a88a936216be36ec41dbfe7/src/q3/construct.py"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "5f7e6f51177322db6a88a936216be36ec41dbfe7",
+          "path": "src/q3/construct.py",
+          "entrypoint": "Index"
+        }
+      ]
+    }
+  ],
+  "offline_costs": "uv sync --locked 依赖安装未单独测量；首轮前 100 图结构扫描 15.777617700000519 秒、零 E0；首轮前 5 项结构测试 0.560 秒、零 E0；runner 的 5 项 mock 检查没有启动真实 solver 或 E0。首轮公开开发反馈实际为 20 次构造与 18 次 E0（另 2 次预期结构不支持、零 E0），批次 130.41653380000025 秒，批次前预检 6.6487685000001875 秒；其中 solver 合计 33.5625872000046 秒、独立 E0 合计 83.07127729999866 秒，以上为包含关系，不能相加重复计费。首轮固定成果 30f8ad352c3ff15a7c1c29fd182a9e32776fdc35 用于提出本次唯一 tail 并列规则修改，没有重跑首轮对照。第二轮前 6 项结构测试 2.197 秒、零 E0。以上开发、扫描、测试和既有实验成本不包含在第二轮逐例 solver 墙钟；本轮固定五例是公开开发集，不能声称独立泛化验收。无训练、编译、GPU/云计算或额外付费计算作业；模型账户成本未由 runner 测量。"
+}

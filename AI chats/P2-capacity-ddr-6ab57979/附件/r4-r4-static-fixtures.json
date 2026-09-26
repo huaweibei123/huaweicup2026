@@ -1,0 +1,248 @@
+{
+  "scope": "Five tiny static graph checks only; NOT E0 tests or a proof by examples",
+  "E0_E1_E2_calls": 0,
+  "constructor_calls": 0,
+  "fixtures": [
+    {
+      "label": "boundary-zero-byte",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "COMPUTE",
+            "pipe": "PIPE_M",
+            "cycles": 10
+          }
+        ],
+        "tensors": [
+          {
+            "id": 101,
+            "pos": "UB",
+            "size": 0
+          },
+          {
+            "id": 102,
+            "pos": "UB",
+            "size": 0
+          }
+        ],
+        "edges": [
+          {
+            "source": 101,
+            "target": 1
+          },
+          {
+            "source": 1,
+            "target": 102
+          }
+        ]
+      },
+      "cores": 1,
+      "compute_only_L": 10,
+      "event_io_L": 12,
+      "boundary_nodes": [
+        {
+          "node": "in:101",
+          "role": "input",
+          "tensor_id": 101,
+          "bytes": 0,
+          "consumers": [
+            1
+          ],
+          "event_duration_lower_bound": 1
+        },
+        {
+          "node": "out:102",
+          "role": "output",
+          "tensor_id": 102,
+          "bytes": 0,
+          "producer": 1,
+          "event_duration_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "label": "copy-contraction-excluded",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "A",
+            "pipe": "PIPE_M",
+            "cycles": 10
+          },
+          {
+            "id": 2,
+            "op": "COPY_OUT",
+            "pipe": "PIPE_MTE3",
+            "cycles": 1
+          },
+          {
+            "id": 3,
+            "op": "B",
+            "pipe": "PIPE_V",
+            "cycles": 10
+          }
+        ],
+        "tensors": [],
+        "edges": [
+          {
+            "source": 1,
+            "target": 2
+          },
+          {
+            "source": 2,
+            "target": 3
+          }
+        ]
+      },
+      "cores": 1,
+      "compute_only_L": 10,
+      "event_io_L": 10,
+      "boundary_nodes": []
+    },
+    {
+      "label": "shared-input-count-once",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "A",
+            "pipe": "PIPE_M",
+            "cycles": 5
+          },
+          {
+            "id": 2,
+            "op": "B",
+            "pipe": "PIPE_M",
+            "cycles": 5
+          }
+        ],
+        "tensors": [
+          {
+            "id": 101,
+            "pos": "DDR",
+            "size": 60
+          }
+        ],
+        "edges": [
+          {
+            "source": 101,
+            "target": 1
+          },
+          {
+            "source": 101,
+            "target": 2
+          }
+        ]
+      },
+      "cores": 2,
+      "compute_only_L": 5,
+      "event_io_L": 6,
+      "boundary_nodes": [
+        {
+          "node": "in:101",
+          "role": "input",
+          "tensor_id": 101,
+          "bytes": 60,
+          "consumers": [
+            1,
+            2
+          ],
+          "event_duration_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "label": "eligible-MTE-and-copy",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "NOT_COPY",
+            "pipe": "PIPE_MTE2",
+            "cycles": 3
+          }
+        ],
+        "tensors": [
+          {
+            "id": 101,
+            "pos": "UB",
+            "size": 0
+          }
+        ],
+        "edges": [
+          {
+            "source": 101,
+            "target": 1
+          }
+        ]
+      },
+      "cores": 1,
+      "compute_only_L": 3,
+      "event_io_L": 4,
+      "boundary_nodes": [
+        {
+          "node": "in:101",
+          "role": "input",
+          "tensor_id": 101,
+          "bytes": 0,
+          "consumers": [
+            1
+          ],
+          "event_duration_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "label": "multiple-producer-abstention",
+      "graph": {
+        "ops": [
+          {
+            "id": 1,
+            "op": "A",
+            "pipe": "PIPE_M",
+            "cycles": 2
+          },
+          {
+            "id": 2,
+            "op": "B",
+            "pipe": "PIPE_V",
+            "cycles": 2
+          },
+          {
+            "id": 3,
+            "op": "C",
+            "pipe": "PIPE_M",
+            "cycles": 2
+          }
+        ],
+        "tensors": [
+          {
+            "id": 101,
+            "pos": "UB",
+            "size": 1
+          }
+        ],
+        "edges": [
+          {
+            "source": 1,
+            "target": 101
+          },
+          {
+            "source": 2,
+            "target": 101
+          },
+          {
+            "source": 101,
+            "target": 3
+          }
+        ]
+      },
+      "static_rejection": "precedence proof requires at most one eligible producer"
+    }
+  ],
+  "static_certify_invocations": 9,
+  "note": "Four positive static fixtures were rechecked after witness-output optimization. One multiproducer abstention was also checked. No E0/E1/E2, prepare, or plan-constructor calls.",
+  "certificate_program_sha256": "f6f75c7be87f5bc8309664d0807e895d75a08e15d8a707f3aee000c1a62a616c"
+}

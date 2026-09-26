@@ -1,0 +1,3832 @@
+{
+  "scope": "One in-process structural construction per graph; plans not retained, no scores or E0/E1/E2; timings exclude process start and are not solver benchmark walls",
+  "started_at": "2026-09-24T15:46:34.631611+00:00",
+  "finished_at": "2026-09-24T15:47:42.185294+00:00",
+  "wall_seconds": 67.55372990000069,
+  "constructed": 100,
+  "new_E0_calls": 0,
+  "new_E1_calls": 0,
+  "new_E2_calls": 0,
+  "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+  "source_sha256": {
+    "src/q2/feedback/construct.py": "fc131592f1cd6a42dd3a5ee4916d152e7a49a55afd7731396cbf9c1d44083610",
+    "src/q2/feedback/tensor_packet.py": "087340a1c04edee9f3567371b95405569a8ca1521fcc76c4ff0e1e1af37e97f9",
+    "src/q2/feedback/scan_tensor_packet.py": "62d29c70d9c357a7b150ad76f618c0325b9f46f36e1cccdd6ec10c149d617aaa"
+  },
+  "routes": {
+    "shared_stages": 8,
+    "packet_eft": 89,
+    "guarded_resource_word": 3
+  },
+  "rows": [
+    {
+      "case_id": "001",
+      "cores": 4,
+      "graph_sha256": "a634cd1151c0e918dd3a143eba421b88907f7f0334bfe6a5ca0412342307f09f",
+      "plan_sha256": "ca7df19763b231bdd366941bf718b8136d6277719ed5acd6acc20c7cfda718af",
+      "in_process_construct_seconds": 0.058013200001369114,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 1152,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 232800,
+            "copy_service": 27620,
+            "ingress_bytes": 820352,
+            "model_cycles": 232800
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 116400,
+            "copy_service": 27640,
+            "ingress_bytes": 821504,
+            "model_cycles": 116400
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 77988,
+            "copy_service": 27660,
+            "ingress_bytes": 822656,
+            "model_cycles": 77988
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 58200,
+            "copy_service": 27680,
+            "ingress_bytes": 823808,
+            "model_cycles": 58200
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 600,
+        "components": 200,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "002",
+      "cores": 4,
+      "graph_sha256": "578fceeb9f66a3c083b9f27d8464cf75c1e7602cbc7290920c02aa1aef7ca352",
+      "plan_sha256": "40b4c3bc92c7090ff622554032b557637a819cfd066f6e992994a52dc7289adc",
+      "in_process_construct_seconds": 0.2495624000002863,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 397,
+        "split_components": 1,
+        "predicted_pipe_horizon": 69141,
+        "no_spill_ddr_service": 30403,
+        "no_spill_ddr_bytes": 1807872,
+        "compute_load_by_core": [
+          69576,
+          68820,
+          68640,
+          68892
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 62160
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1798,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "003",
+      "cores": 4,
+      "graph_sha256": "2c80acfd37edcf811ce76b7e7b1f7194c706bd4d4aa6449e6a19e9eac1028ced",
+      "plan_sha256": "b18e656a3eb4fe1e7c735b827f0530d128ee2c1c686f4cb78c3610c58c414799",
+      "in_process_construct_seconds": 2.539180400000987,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 9796,
+        "split_components": 1,
+        "predicted_pipe_horizon": 199230,
+        "no_spill_ddr_service": 177840,
+        "no_spill_ddr_bytes": 10172226,
+        "compute_load_by_core": [
+          199521,
+          192956,
+          186940,
+          184564
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 170836
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 13455,
+        "components": 10,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "004",
+      "cores": 4,
+      "graph_sha256": "3e01adde3c4ad143ab3d7faabcf36d849f26b5428e7c8446a7e9f89345a55faa",
+      "plan_sha256": "381f2b6c13ca67c6b77b8b95e0a9427890c863e7148f34e0b2521fc0b63ae0da",
+      "in_process_construct_seconds": 0.14689329999964684,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 111,
+        "split_components": 0,
+        "predicted_pipe_horizon": 99533,
+        "no_spill_ddr_service": 18924,
+        "no_spill_ddr_bytes": 1124352,
+        "compute_load_by_core": [
+          109368,
+          109368,
+          109368,
+          105462
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 97704
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 777,
+        "components": 111,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "005",
+      "cores": 4,
+      "graph_sha256": "c2b378c882a3039e3d66bac6cbcba39317107339b6f38d5bce1b09379839799f",
+      "plan_sha256": "61f25d4cdd1255d036537fd911d5fb692bc91628c63cb2ad54d4f40191059fe6",
+      "in_process_construct_seconds": 0.7133307999993121,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 3049,
+        "split_components": 1,
+        "predicted_pipe_horizon": 46698,
+        "no_spill_ddr_service": 45757,
+        "no_spill_ddr_bytes": 2660728,
+        "compute_load_by_core": [
+          34198,
+          32495,
+          27784,
+          30335
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 30669
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4113,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "006",
+      "cores": 4,
+      "graph_sha256": "c68392cd599b63039669ca54360ab21b514c41285151cd69180ee9be99af1a48",
+      "plan_sha256": "e125fe050196f480415225bb25796b1250babc27f8a9d60f8dec2a15d8790797",
+      "in_process_construct_seconds": 0.08408559999952558,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 70,
+        "split_components": 1,
+        "predicted_pipe_horizon": 21729,
+        "no_spill_ddr_service": 11911,
+        "no_spill_ddr_bytes": 702792,
+        "compute_load_by_core": [
+          22558,
+          20664,
+          20723,
+          23715
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 17328
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 678,
+        "components": 27,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "007",
+      "cores": 4,
+      "graph_sha256": "6e786044ca1fa5d4632f8b7d03e95364da8d88f4fff5e403d3ab8153da84b518",
+      "plan_sha256": "fd02da367d422be660338763fe7a3a4841fc4e5ab1ca8426955ae50f1bab8c9b",
+      "in_process_construct_seconds": 0.5505246000011539,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 555,
+        "split_components": 0,
+        "predicted_pipe_horizon": 253778,
+        "no_spill_ddr_service": 30708,
+        "no_spill_ddr_bytes": 1815552,
+        "compute_load_by_core": [
+          308580,
+          308580,
+          308580,
+          306360
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 245652
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3885,
+        "components": 555,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "008",
+      "cores": 4,
+      "graph_sha256": "c93bb7ab5deec5112aff0cc001fbd76d001d3de5ea7463fba59b1f1ff2ba3e1d",
+      "plan_sha256": "1935d89ad16a59a52ad62b2e00b4b43f30e783ade40fe481fc6063d905da64ce",
+      "in_process_construct_seconds": 0.15381470000102127,
+      "details": {
+        "strategy": "resource_word",
+        "components": 108,
+        "eligible_ops": 864,
+        "cores": 4,
+        "jobs_by_core": [
+          27,
+          27,
+          27,
+          27
+        ],
+        "core_detail": [
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          },
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          },
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          },
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          }
+        ],
+        "scope": "compute priority heuristic; E0 execution not checked",
+        "selected": "guarded_resource_word",
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "009",
+      "cores": 4,
+      "graph_sha256": "06b73d07c450878db8f6dace8ed08e362b45f5dd6e06fb80b098f165190f222a",
+      "plan_sha256": "5c29ac97886f328b93922d3a2f6bd74d244804b09eb0b9b06396f519b9487f8e",
+      "in_process_construct_seconds": 0.9077131999983976,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 3516,
+        "split_components": 1,
+        "predicted_pipe_horizon": 79004,
+        "no_spill_ddr_service": 25094,
+        "no_spill_ddr_bytes": 1399638,
+        "compute_load_by_core": [
+          36106,
+          48310,
+          58823,
+          41913
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 51384
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5671,
+        "components": 25,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "010",
+      "cores": 4,
+      "graph_sha256": "fd0b07588473d8b2ce05fab4798808cbc7f60cf1638e05608adc3d62061b8775",
+      "plan_sha256": "4acaa64920516e0e625229f34807539acca7506cf8aa02472ccab50bfb8451c1",
+      "in_process_construct_seconds": 0.09904009999991104,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 87,
+        "split_components": 1,
+        "predicted_pipe_horizon": 24056,
+        "no_spill_ddr_service": 10993,
+        "no_spill_ddr_bytes": 650106,
+        "compute_load_by_core": [
+          24683,
+          26139,
+          24292,
+          24992
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 20648
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 667,
+        "components": 36,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "011",
+      "cores": 4,
+      "graph_sha256": "2da7df4ccc8a4eb86347f0a567aacac628e7d30ab943cd99996f2c74620d80b9",
+      "plan_sha256": "4a6d77c9b9149dc183ac95fa5bf2ab15d5195d69b7dab510f16fb123239b34c7",
+      "in_process_construct_seconds": 0.07665500000075554,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 16,
+        "split_components": 0,
+        "predicted_pipe_horizon": 46361,
+        "no_spill_ddr_service": 19496,
+        "no_spill_ddr_bytes": 1146880,
+        "compute_load_by_core": [
+          52496,
+          52496,
+          52496,
+          52496
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 46264
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 688,
+        "components": 16,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "012",
+      "cores": 4,
+      "graph_sha256": "1a07d3a4c6d1305bec2fbdc4d106fb5c0078ec098cbf09e1b8eaa5134968e079",
+      "plan_sha256": "afaae03bee903b9f9a7e974da30a7719e804d95fcbba402ed31c056403ce84cb",
+      "in_process_construct_seconds": 0.1223398999991332,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 66,
+        "split_components": 1,
+        "predicted_pipe_horizon": 13884,
+        "no_spill_ddr_service": 10528,
+        "no_spill_ddr_bytes": 613010,
+        "compute_load_by_core": [
+          15336,
+          15145,
+          18842,
+          18486
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 11496
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 972,
+        "components": 50,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "013",
+      "cores": 4,
+      "graph_sha256": "b95d97cf90bdd0fe64a0fd1ecd5a36a7b091ecadef204ef8c6ae430f6ccfac3c",
+      "plan_sha256": "fafa50e38d5cfca1fa368330a6edd31e01003d9afc77e956754ebb4356005372",
+      "in_process_construct_seconds": 0.2845894000001863,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 246,
+        "split_components": 0,
+        "predicted_pipe_horizon": 66701,
+        "no_spill_ddr_service": 43610,
+        "no_spill_ddr_bytes": 2551808,
+        "compute_load_by_core": [
+          77376,
+          77376,
+          76128,
+          76128
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 66640
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1968,
+        "components": 246,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "014",
+      "cores": 4,
+      "graph_sha256": "e27abb053ac57786e510ba80e60a6ec60a8b0df11b2a818010a1df17c29d94dd",
+      "plan_sha256": "cd5c2fac6926425c661640d05e928293f871ea5cc5bfb9cb790882e20a370689",
+      "in_process_construct_seconds": 5.282249299998512,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1340,
+        "split_components": 0,
+        "predicted_pipe_horizon": 4319400,
+        "no_spill_ddr_service": 584066,
+        "no_spill_ddr_bytes": 34854172,
+        "compute_load_by_core": [
+          4731210,
+          4727778,
+          4712381,
+          4705803
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 4319815
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 35705,
+        "components": 1340,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "015",
+      "cores": 4,
+      "graph_sha256": "d27dfc39289fa442f29f597191ab6b05142ce6ad68b4396056b2adccb9c93253",
+      "plan_sha256": "a8de0ad8c19aca69fa6d8133e7e91fb74a4603b63d759240b905bca9f81e9ec3",
+      "in_process_construct_seconds": 0.1383728999990126,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 116,
+        "split_components": 1,
+        "predicted_pipe_horizon": 46383,
+        "no_spill_ddr_service": 24364,
+        "no_spill_ddr_bytes": 1443610,
+        "compute_load_by_core": [
+          52313,
+          47335,
+          49395,
+          47434
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 40086
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1013,
+        "components": 46,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "016",
+      "cores": 4,
+      "graph_sha256": "76537aa7163cf0748adcff2ecbd84fbc9a02a2d129ffcecd2bfebb89685e71ef",
+      "plan_sha256": "2a0581b35c5da1ba90c5ee44a0b7d194084cd625b02d72316850a2a32bd1c505",
+      "in_process_construct_seconds": 1.7323655000000144,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 7015,
+        "split_components": 1,
+        "predicted_pipe_horizon": 2237309,
+        "no_spill_ddr_service": 21055,
+        "no_spill_ddr_bytes": 802286,
+        "compute_load_by_core": [
+          1921831,
+          1917983,
+          1937548,
+          1937613
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 1957425
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 17995,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "017",
+      "cores": 4,
+      "graph_sha256": "282c5840d8e8581fb7827a6d4c996f90384bdfe566ffa665574721568b9dc85c",
+      "plan_sha256": "f5491033d9469e88f65449460ede87330da0557ff339db8163b6a3f476fc154a",
+      "in_process_construct_seconds": 0.1128433000012592,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 60,
+        "split_components": 0,
+        "predicted_pipe_horizon": 39764,
+        "no_spill_ddr_service": 15196,
+        "no_spill_ddr_bytes": 891542,
+        "compute_load_by_core": [
+          43556,
+          45220,
+          44205,
+          44821
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 35241
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1373,
+        "components": 60,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "018",
+      "cores": 4,
+      "graph_sha256": "70cf2a124573fe0ccad84b16d902efe7e28938761db791d2f4321ab2e98f0c0a",
+      "plan_sha256": "87cd9f4ff9b4f588292a26a23d94ed7465dc07f99a81dddc8460f81cc24339b7",
+      "in_process_construct_seconds": 0.2205087000002095,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 126,
+        "split_components": 0,
+        "predicted_pipe_horizon": 251446,
+        "no_spill_ddr_service": 79861,
+        "no_spill_ddr_bytes": 4745744,
+        "compute_load_by_core": [
+          270815,
+          271139,
+          271282,
+          270815
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 250451
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 2727,
+        "components": 126,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "019",
+      "cores": 4,
+      "graph_sha256": "199ccf5f40c65b63ef88efcf05a0ccbf6b9368963d7a62cabd240d7b98847429",
+      "plan_sha256": "a48f6e5b2fbedbb04f8a27f2c0356f6d84edf7736e38f0ad7e8e3e0ddb5bdb82",
+      "in_process_construct_seconds": 0.04597039999862318,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 58,
+        "split_components": 1,
+        "predicted_pipe_horizon": 20740,
+        "no_spill_ddr_service": 4842,
+        "no_spill_ddr_bytes": 284812,
+        "compute_load_by_core": [
+          22746,
+          22472,
+          21554,
+          21940
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 18990
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 647,
+        "components": 31,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "020",
+      "cores": 4,
+      "graph_sha256": "932287c2c204e475df824a3914b7b179226625caf37ae288bac90716ffe16ec4",
+      "plan_sha256": "9455f8109ec07e9f4b4008663045d1184410c20b1a3dd87336a2d8c580b0db08",
+      "in_process_construct_seconds": 0.48286649999863585,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 288,
+        "split_components": 0,
+        "predicted_pipe_horizon": 133290,
+        "no_spill_ddr_service": 39744,
+        "no_spill_ddr_bytes": 2359296,
+        "compute_load_by_core": [
+          133152,
+          133152,
+          133152,
+          133152
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 133152
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 7008,
+        "components": 288,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "021",
+      "cores": 4,
+      "graph_sha256": "d1b1b8a543eab9b359421f0d67baaee43f2890b2562bf2bfa1dfeb5fa5f87b37",
+      "plan_sha256": "7511056d8b8129a2f4fbdb66faf34f0002162e9f086e6e2de631c2da5c62df8e",
+      "in_process_construct_seconds": 0.3245999999999185,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 80,
+        "split_components": 0,
+        "predicted_pipe_horizon": 1549193,
+        "no_spill_ddr_service": 133200,
+        "no_spill_ddr_bytes": 7946240,
+        "compute_load_by_core": [
+          1743840,
+          1743840,
+          1743840,
+          1743840
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 1557792
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3920,
+        "components": 80,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "022",
+      "cores": 4,
+      "graph_sha256": "b93af0605cda612b707a91a1e9fc76348b527284a03e779b65cbe55813e331e7",
+      "plan_sha256": "27ceb51ba3a132ce1d0e5dda4233d6afce72f9f5ead53f50bd0211a89c36518f",
+      "in_process_construct_seconds": 0.09846060000018042,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 32,
+        "split_components": 0,
+        "predicted_pipe_horizon": 14283,
+        "no_spill_ddr_service": 4102,
+        "no_spill_ddr_bytes": 234422,
+        "compute_load_by_core": [
+          14499,
+          14407,
+          14844,
+          14821
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 13840
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1356,
+        "components": 32,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "023",
+      "cores": 4,
+      "graph_sha256": "73e1a5d3abe5f7b36fb7a386d586e8ed492f7fae5e7a736c475b629ab6e12739",
+      "plan_sha256": "05c137f7c2c7a9ab49314e938d6229d925bad12cbbe2721bf2e8bfe10e739664",
+      "in_process_construct_seconds": 0.08681799999976647,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 43,
+        "split_components": 0,
+        "predicted_pipe_horizon": 31079,
+        "no_spill_ddr_service": 12234,
+        "no_spill_ddr_bytes": 724148,
+        "compute_load_by_core": [
+          33099,
+          32805,
+          33739,
+          33299
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 25440
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1011,
+        "components": 43,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "024",
+      "cores": 4,
+      "graph_sha256": "f974fbf1a23b4a145b5f8c9c691eb1b247f93d8785d98bb46a9cdd8626399aec",
+      "plan_sha256": "10f55e228110e85563ff3ea7f9b1af9c3322a09cf4f3aeba6bfe676da5f9a3b3",
+      "in_process_construct_seconds": 0.4261220000007597,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 2323,
+        "split_components": 1,
+        "predicted_pipe_horizon": 741581,
+        "no_spill_ddr_service": 15751,
+        "no_spill_ddr_bytes": 791678,
+        "compute_load_by_core": [
+          636427,
+          635231,
+          641536,
+          641601
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 648153
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5959,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "025",
+      "cores": 4,
+      "graph_sha256": "f27ba0f332109eb62541879ddbc9c9d283531c191afdd7299a365134af3e0deb",
+      "plan_sha256": "47e8edf17b1e0d4aad24724b1cadf51e3784b87a7c3618f4d12338d5f7dc9a70",
+      "in_process_construct_seconds": 1.6775668000009318,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 2666,
+        "split_components": 0,
+        "predicted_pipe_horizon": 1216850,
+        "no_spill_ddr_service": 140480,
+        "no_spill_ddr_bytes": 8300544,
+        "compute_load_by_core": [
+          1480740,
+          1480740,
+          1478520,
+          1478520
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 1177044
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 18662,
+        "components": 2666,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "026",
+      "cores": 4,
+      "graph_sha256": "0ed6209c59170dc0da94703702b17402cee14c1a61624e666ed8938637b6765b",
+      "plan_sha256": "d8a236f8161b9ff170da17d148b8b0f1c1fd9e07dbeab2d51dd8f2789202df22",
+      "in_process_construct_seconds": 0.10973330000160786,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 125,
+        "split_components": 1,
+        "predicted_pipe_horizon": 30139,
+        "no_spill_ddr_service": 16623,
+        "no_spill_ddr_bytes": 984050,
+        "compute_load_by_core": [
+          27020,
+          24383,
+          31515,
+          28842
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 22130
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 636,
+        "components": 31,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "027",
+      "cores": 4,
+      "graph_sha256": "74ff3486f7a3fd5561250ac336ed57e02a998f4f34d3be742e9f3dceb98d402b",
+      "plan_sha256": "781b0ba45e54208b402982afbdb6ca5374608693035a4f2e69d271ae5a346a82",
+      "in_process_construct_seconds": 0.14632329999949434,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 16,
+        "split_components": 0,
+        "predicted_pipe_horizon": 558065,
+        "no_spill_ddr_service": 89860,
+        "no_spill_ddr_bytes": 5357568,
+        "compute_load_by_core": [
+          629088,
+          629088,
+          629088,
+          629088
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 558096
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1424,
+        "components": 16,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "028",
+      "cores": 4,
+      "graph_sha256": "89fe60e6529c5c02cf6ffd700254e003b1f51ceafc252140ef64add47ad2e212",
+      "plan_sha256": "e19417aea3c1d084382eab3c6111a2391722ed98ebafdf1392034211281504e8",
+      "in_process_construct_seconds": 1.3152064999994764,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 153,
+        "split_components": 0,
+        "predicted_pipe_horizon": 10407685,
+        "no_spill_ddr_service": 206058,
+        "no_spill_ddr_bytes": 12354048,
+        "compute_load_by_core": [
+          10438272,
+          10170624,
+          10170624,
+          10170624
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 9942120
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 19584,
+        "components": 153,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "029",
+      "cores": 4,
+      "graph_sha256": "997bcbaa3acdff628346af91df1c6ce0127372b10c71890967ec9dd685b7187b",
+      "plan_sha256": "5b3698128b262d4267f4ea89a174cfd3f091736198f1c5d084cfade68b00d9f4",
+      "in_process_construct_seconds": 0.05952849999994214,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 21,
+        "split_components": 0,
+        "predicted_pipe_horizon": 10780,
+        "no_spill_ddr_service": 7392,
+        "no_spill_ddr_bytes": 430164,
+        "compute_load_by_core": [
+          10710,
+          8925,
+          8925,
+          8925
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 10710
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 861,
+        "components": 21,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "030",
+      "cores": 4,
+      "graph_sha256": "ad80a952c48ff4d7c339349167fa9054e515009787692608863240a3546c0f90",
+      "plan_sha256": "b1bd5ed7095ee3addc259d23c0ed3f15dbeec79d6ae84ef4dc3ab5a1fa2a6396",
+      "in_process_construct_seconds": 0.7682874000001902,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 486,
+        "split_components": 0,
+        "predicted_pipe_horizon": 694636,
+        "no_spill_ddr_service": 125371,
+        "no_spill_ddr_bytes": 7392204,
+        "compute_load_by_core": [
+          795689,
+          795871,
+          795871,
+          795871
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 696995
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 10070,
+        "components": 486,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "031",
+      "cores": 4,
+      "graph_sha256": "a8d03d16b7eff2c3c84186b32994279143fd1628937e4e9bdf753f869a333f82",
+      "plan_sha256": "91453c9fa6e09ae77e020df6d94e4bfb182ea54b42c784b0c4d126f15b124a10",
+      "in_process_construct_seconds": 0.4331199000007473,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1673,
+        "split_components": 1,
+        "predicted_pipe_horizon": 372952,
+        "no_spill_ddr_service": 120631,
+        "no_spill_ddr_bytes": 7140770,
+        "compute_load_by_core": [
+          384980,
+          386188,
+          389879,
+          394470
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 347546
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 6135,
+        "components": 107,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "032",
+      "cores": 4,
+      "graph_sha256": "7b325807b10636edbb8ada6fe9086e639ece5d42d4aad151b0fc7cd8f6277385",
+      "plan_sha256": "b763343a7ed318ce917e6adc993dc9e782f2d925f3741532bc65d47ca18b1024",
+      "in_process_construct_seconds": 0.05450919999930193,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 87,
+        "split_components": 1,
+        "predicted_pipe_horizon": 11830,
+        "no_spill_ddr_service": 6098,
+        "no_spill_ddr_bytes": 350628,
+        "compute_load_by_core": [
+          9761,
+          10890,
+          11754,
+          11740
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 9521
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 827,
+        "components": 25,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "033",
+      "cores": 4,
+      "graph_sha256": "e14316f8ccbe3bf16bcee2bad80efc3a527cdc2488d9e3f616518b6e3aa9657b",
+      "plan_sha256": "480e87b4403c8db2f5cec6d506b7e1b56d51b3fe4efe1fc597d586f46d075db1",
+      "in_process_construct_seconds": 0.235961700000189,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 95,
+        "split_components": 0,
+        "predicted_pipe_horizon": 439798,
+        "no_spill_ddr_service": 122251,
+        "no_spill_ddr_bytes": 7298382,
+        "compute_load_by_core": [
+          480061,
+          479796,
+          479855,
+          480438
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 436789
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3465,
+        "components": 95,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "034",
+      "cores": 4,
+      "graph_sha256": "c4128788442a023c2224d582f7114181ca9e9439a5978deaec6a1c52c0d729d6",
+      "plan_sha256": "d31016c5c635ff07fa902c2011e2ad1fe1adc8609faaa0e6cbb88d3cfd7eb68b",
+      "in_process_construct_seconds": 0.25906509999913396,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 155,
+        "split_components": 0,
+        "predicted_pipe_horizon": 192696,
+        "no_spill_ddr_service": 85546,
+        "no_spill_ddr_bytes": 5056962,
+        "compute_load_by_core": [
+          248357,
+          239098,
+          228059,
+          228602
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 191682
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3745,
+        "components": 155,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "035",
+      "cores": 4,
+      "graph_sha256": "ab4d5e39b4d3ad430a992d6d87d7510a869b6cb03a5d9a7ba124b039ba4486e2",
+      "plan_sha256": "7e1bb140937fe80840b54857b5eb872233849160fcde6c565bfd3a0dcf35e20e",
+      "in_process_construct_seconds": 0.27342379999936384,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1767,
+        "split_components": 1,
+        "predicted_pipe_horizon": 111811,
+        "no_spill_ddr_service": 22934,
+        "no_spill_ddr_bytes": 1295064,
+        "compute_load_by_core": [
+          102102,
+          33406,
+          38707,
+          31886
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 74422
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3857,
+        "components": 16,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "036",
+      "cores": 4,
+      "graph_sha256": "3924c8904db3f85eb38d4e4b345e55f689c9d908f329dbb8caf16a3774759d21",
+      "plan_sha256": "8cdb7db349d96bbb2665474a50b246101261a86a0e5efe73f78e23b4ace4976a",
+      "in_process_construct_seconds": 0.1254622999986168,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 1152,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 931200,
+            "copy_service": 110420,
+            "ingress_bytes": 3277952,
+            "model_cycles": 931200
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 465600,
+            "copy_service": 110440,
+            "ingress_bytes": 3279104,
+            "model_cycles": 465600
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 310788,
+            "copy_service": 110460,
+            "ingress_bytes": 3280256,
+            "model_cycles": 310788
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 232800,
+            "copy_service": 110480,
+            "ingress_bytes": 3281408,
+            "model_cycles": 232800
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 2400,
+        "components": 800,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "037",
+      "cores": 4,
+      "graph_sha256": "c5ce3776f9b28b17c7e1d23c9a47395ddfaeecf2533228ab0a5cf444e3f112e3",
+      "plan_sha256": "dcca4c414a53f2ca6d2870b6eb8041615998e5c012dec5758f1db1b2a8e1c805",
+      "in_process_construct_seconds": 0.04976100000021688,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 20,
+        "split_components": 0,
+        "predicted_pipe_horizon": 53333,
+        "no_spill_ddr_service": 20900,
+        "no_spill_ddr_bytes": 1228800,
+        "compute_load_by_core": [
+          59620,
+          59620,
+          59620,
+          59620
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 53844
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 780,
+        "components": 20,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "038",
+      "cores": 4,
+      "graph_sha256": "69575019d0670552c74f386508042357a94419ed2f49d18a382a71a8cf39e5ac",
+      "plan_sha256": "d1b80fca670d8e70a8ce32a238004747bb2a4d02211b58d1bb39b3e7a053fd21",
+      "in_process_construct_seconds": 0.3933786000015971,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 130,
+        "split_components": 0,
+        "predicted_pipe_horizon": 337085,
+        "no_spill_ddr_service": 152765,
+        "no_spill_ddr_bytes": 9054470,
+        "compute_load_by_core": [
+          372268,
+          371841,
+          373207,
+          375460
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 336139
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5907,
+        "components": 130,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "039",
+      "cores": 4,
+      "graph_sha256": "8e999d9db7fe3b1060baef4bff52304267c4034700290fe0a7520f777cbc78ed",
+      "plan_sha256": "7f20cf84621277722afc1aa0b939633855940e61d34c6ba813c8f9e17f1464e6",
+      "in_process_construct_seconds": 0.34289060000082827,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 70,
+        "split_components": 0,
+        "predicted_pipe_horizon": 354967,
+        "no_spill_ddr_service": 257644,
+        "no_spill_ddr_bytes": 15384576,
+        "compute_load_by_core": [
+          358530,
+          379620,
+          379620,
+          358530
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 355718
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5250,
+        "components": 70,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "040",
+      "cores": 4,
+      "graph_sha256": "7d595de282221534f949ab7ffae0ff026d5c7652b9110c18c0031aa78400cc57",
+      "plan_sha256": "56b07d6d03a53b5db104d24bb15fbcb73ded1495de19b3d001930b7d85810a43",
+      "in_process_construct_seconds": 0.2341070000002219,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1731,
+        "split_components": 2,
+        "predicted_pipe_horizon": 89167,
+        "no_spill_ddr_service": 46051,
+        "no_spill_ddr_bytes": 2694008,
+        "compute_load_by_core": [
+          74742,
+          70427,
+          74519,
+          78035
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 64518
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3083,
+        "components": 28,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "041",
+      "cores": 4,
+      "graph_sha256": "97d875b7e79ef0257342689d0c348f86ab591d74dfa9a9c28a72f47abb531491",
+      "plan_sha256": "cba4d117e79e743cec25d89d713a391f0f4c3374ba5ebae264c282958fa859b1",
+      "in_process_construct_seconds": 1.5907595999997284,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 494,
+        "split_components": 0,
+        "predicted_pipe_horizon": 1478617,
+        "no_spill_ddr_service": 306953,
+        "no_spill_ddr_bytes": 18224092,
+        "compute_load_by_core": [
+          1625032,
+          1629797,
+          1624087,
+          1624074
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 1478658
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 16594,
+        "components": 494,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "042",
+      "cores": 4,
+      "graph_sha256": "c098a559bbb2f888a39d47b81fee2e93ae04365d4ce377982758cd3373ac33c5",
+      "plan_sha256": "2c6868a66e80e7cb8651e0af14c0723d9f40030331f0a9e6fd6391249946b5d3",
+      "in_process_construct_seconds": 0.36797979999937525,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 104,
+        "split_components": 0,
+        "predicted_pipe_horizon": 402552,
+        "no_spill_ddr_service": 127091,
+        "no_spill_ddr_bytes": 7547428,
+        "compute_load_by_core": [
+          495154,
+          442307,
+          443847,
+          443794
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 414978
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4733,
+        "components": 104,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "043",
+      "cores": 4,
+      "graph_sha256": "23270b8e711405157c6b29fd36a4a182bdccf090b2beb69f63d9580aa22e780c",
+      "plan_sha256": "f0f9b36174c3339c727ce4a5524d2dfa328f159c3d7878a6c3f8709a486c8ce7",
+      "in_process_construct_seconds": 0.9437282999988383,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 5928,
+        "split_components": 2,
+        "predicted_pipe_horizon": 228422,
+        "no_spill_ddr_service": 200258,
+        "no_spill_ddr_bytes": 11639432,
+        "compute_load_by_core": [
+          224311,
+          219629,
+          214834,
+          202819
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 187442
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 9309,
+        "components": 38,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "044",
+      "cores": 4,
+      "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+      "plan_sha256": "768f6ebfabb563b209394fe93e0ccae76181ec090c4de5a9089d45b75c542b52",
+      "in_process_construct_seconds": 0.059503700000277604,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 2,
+        "common_input_bytes": 930400,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 74404,
+            "copy_service": 16300,
+            "ingress_bytes": 952928,
+            "model_cycles": 74404
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 40584,
+            "copy_service": 31830,
+            "ingress_bytes": 1883328,
+            "model_cycles": 40584
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 27056,
+            "copy_service": 47360,
+            "ingress_bytes": 2813728,
+            "model_cycles": 47360
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 20292,
+            "copy_service": 62890,
+            "ingress_bytes": 3744128,
+            "model_cycles": 62890
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1364,
+        "components": 11,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "045",
+      "cores": 4,
+      "graph_sha256": "64dff8e23ba176573a054ef2dc00a23a3487484bad65cb719acc4f087d611793",
+      "plan_sha256": "5314cd46a549d024dffa06ccd150bbad5ce3bb398d0982634e6ded14dbc23991",
+      "in_process_construct_seconds": 0.10275960000035411,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 68,
+        "split_components": 0,
+        "predicted_pipe_horizon": 31602,
+        "no_spill_ddr_service": 9384,
+        "no_spill_ddr_bytes": 557056,
+        "compute_load_by_core": [
+          31464,
+          31464,
+          31388,
+          31160
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 31464
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1651,
+        "components": 68,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "046",
+      "cores": 4,
+      "graph_sha256": "1917fbb2bfe1141fd8dc4bdac6119dd44014df9a13eb18faa3e55f25bcc91659",
+      "plan_sha256": "bb6f90027d3ef2783608588f88a8f35dfc0b5aa18fadd4b009b598d1094411af",
+      "in_process_construct_seconds": 0.03956109999853652,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 930400,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 209248,
+            "copy_service": 17722,
+            "ingress_bytes": 995936,
+            "model_cycles": 209248
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 104624,
+            "copy_service": 33252,
+            "ingress_bytes": 1926336,
+            "model_cycles": 104624
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 78468,
+            "copy_service": 48782,
+            "ingress_bytes": 2856736,
+            "model_cycles": 78468
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 52312,
+            "copy_service": 64312,
+            "ingress_bytes": 3787136,
+            "model_cycles": 64312
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 992,
+        "components": 8,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "047",
+      "cores": 4,
+      "graph_sha256": "7c6328650b8e50e4d15a0ddf1ad0715a40d64d51f3c86c2c3b9c22e4cbb6a83f",
+      "plan_sha256": "fcb7e434dd377e83d8a099068df956cbfe78bff73daec045f15f3c41a6872895",
+      "in_process_construct_seconds": 1.2671840000002703,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 10176,
+        "split_components": 1,
+        "predicted_pipe_horizon": 127684,
+        "no_spill_ddr_service": 91216,
+        "no_spill_ddr_bytes": 5071800,
+        "compute_load_by_core": [
+          101743,
+          103411,
+          103065,
+          104911
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 97216
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 13710,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "048",
+      "cores": 4,
+      "graph_sha256": "9932aaca8ab23d020c5f5102fa3d436dd3cdf3ca8d1ee458d4c235c556c11764",
+      "plan_sha256": "93da059b91e88de0a4b39839c24b4888d1200aef3e8c475051a3efe0e97b2a2a",
+      "in_process_construct_seconds": 0.15487750000102096,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1245,
+        "split_components": 1,
+        "predicted_pipe_horizon": 102384,
+        "no_spill_ddr_service": 24349,
+        "no_spill_ddr_bytes": 1405336,
+        "compute_load_by_core": [
+          65945,
+          63918,
+          66056,
+          63677
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 91392
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1728,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "049",
+      "cores": 4,
+      "graph_sha256": "444854fe118a208ddfa10fa0ddd48d7b5e6cfd3780a8049f2145fc1a9b674a08",
+      "plan_sha256": "b928c540dc8700867ff4eb3887bc0a9d83292c318fb95f6d665796ce82893c2f",
+      "in_process_construct_seconds": 0.44444300000031944,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 2890,
+        "split_components": 1,
+        "predicted_pipe_horizon": 75792,
+        "no_spill_ddr_service": 58660,
+        "no_spill_ddr_bytes": 3329806,
+        "compute_load_by_core": [
+          59171,
+          63089,
+          68882,
+          70037
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 56806
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4303,
+        "components": 11,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "050",
+      "cores": 4,
+      "graph_sha256": "3b6b1abd65fbfbb2a40972bdbd643c43107c4b232512741740ff351c366367aa",
+      "plan_sha256": "9bc0403afebe664c2010c90e19395b990656d3c45d9914a14b0a88e55badd47f",
+      "in_process_construct_seconds": 0.5755800000006275,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 2941,
+        "split_components": 1,
+        "predicted_pipe_horizon": 70780,
+        "no_spill_ddr_service": 32222,
+        "no_spill_ddr_bytes": 1849066,
+        "compute_load_by_core": [
+          31334,
+          59269,
+          47710,
+          47066
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 46497
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4555,
+        "components": 23,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "051",
+      "cores": 4,
+      "graph_sha256": "884e8b12ac1f7a9b569958909680e8c2f6055966a59c9f929ffd5cee48aae43b",
+      "plan_sha256": "b2ba3cdabe3931a66c2d96d73dc8a1af571e3a91bb42e017b646ac3601187b4d",
+      "in_process_construct_seconds": 0.1949445000009291,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 552,
+        "split_components": 1,
+        "predicted_pipe_horizon": 177017,
+        "no_spill_ddr_service": 13749,
+        "no_spill_ddr_bytes": 787674,
+        "compute_load_by_core": [
+          151250,
+          151055,
+          152381,
+          152394
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 153967
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1416,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "052",
+      "cores": 4,
+      "graph_sha256": "6196e8c72258ff26d0ab4dcee50c4f5b39f78142729a2223cfcbd4a9181ab7d0",
+      "plan_sha256": "088aaae9ef68947d6d37733579de75dd79d4f672138dcab5fd3fd9226ddc3302",
+      "in_process_construct_seconds": 0.21083370000087598,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 52,
+        "split_components": 0,
+        "predicted_pipe_horizon": 44591,
+        "no_spill_ddr_service": 17996,
+        "no_spill_ddr_bytes": 1065180,
+        "compute_load_by_core": [
+          51453,
+          51465,
+          51444,
+          49761
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 38109
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1008,
+        "components": 52,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "053",
+      "cores": 4,
+      "graph_sha256": "f3593af4c9aa960385c5fdfaf8ad98c396f05746d9e1fe6cc731adeae7019dbc",
+      "plan_sha256": "9a813c2af843a8b9a3649d72e2e5c7789ba3241b396b0152a24539509ddd6974",
+      "in_process_construct_seconds": 1.821285899999566,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 7369,
+        "split_components": 1,
+        "predicted_pipe_horizon": 417970,
+        "no_spill_ddr_service": 257401,
+        "no_spill_ddr_bytes": 15047866,
+        "compute_load_by_core": [
+          394109,
+          388337,
+          380644,
+          393712
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 332547
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 11670,
+        "components": 39,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "054",
+      "cores": 4,
+      "graph_sha256": "4c874b67351e0a6d336af3117c1289099c54993581f90de11e8f49fb33bb9828",
+      "plan_sha256": "fea41bb9a8e604c32cb33925859c9e4340e0f90e4bbcb3ad22bb98d13ff965eb",
+      "in_process_construct_seconds": 1.6125456999998278,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 11463,
+        "split_components": 1,
+        "predicted_pipe_horizon": 257559,
+        "no_spill_ddr_service": 207304,
+        "no_spill_ddr_bytes": 12045278,
+        "compute_load_by_core": [
+          257406,
+          255380,
+          254643,
+          247459
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 222737
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 15751,
+        "components": 24,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "055",
+      "cores": 4,
+      "graph_sha256": "1121ee10f030be119d0930fe518d63aedd8cf65167627c7f66f1a7ffffd9d134",
+      "plan_sha256": "c191106fe5578367826d53dac577bef82163a6a7938810ae26f07fe1c6cb973e",
+      "in_process_construct_seconds": 0.08639930000026652,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 24,
+        "split_components": 0,
+        "predicted_pipe_horizon": 26162,
+        "no_spill_ddr_service": 12963,
+        "no_spill_ddr_bytes": 766610,
+        "compute_load_by_core": [
+          36204,
+          26975,
+          39788,
+          27878
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 26676
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1236,
+        "components": 24,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "056",
+      "cores": 4,
+      "graph_sha256": "fda213426382a3810afd172eadc10b9221330b906888537cb13b16369be3369d",
+      "plan_sha256": "3943c008b24061a8124704174fba2c6da041b2b8c1d8cb53b64389dfc68ddaa1",
+      "in_process_construct_seconds": 0.8283734999986336,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 5462,
+        "split_components": 1,
+        "predicted_pipe_horizon": 134321,
+        "no_spill_ddr_service": 98129,
+        "no_spill_ddr_bytes": 5547274,
+        "compute_load_by_core": [
+          91520,
+          98028,
+          96458,
+          90963
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 87777
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 7678,
+        "components": 19,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "057",
+      "cores": 4,
+      "graph_sha256": "89778038db7db919a13c5885aa555c8ae054a3f43845c73fe346b6123d12a525",
+      "plan_sha256": "4f5e7fcafb8a2c69562e880812a4a1488ce790ac0cb9c5904a1c3399e429ece4",
+      "in_process_construct_seconds": 0.18082359999971231,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 124,
+        "split_components": 2,
+        "predicted_pipe_horizon": 19296,
+        "no_spill_ddr_service": 8717,
+        "no_spill_ddr_bytes": 507744,
+        "compute_load_by_core": [
+          14118,
+          14252,
+          13813,
+          19444
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 17480
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 865,
+        "components": 21,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "058",
+      "cores": 4,
+      "graph_sha256": "95027788c05772259091802889106c7104efdecdaaabd002ed11a87f8f2f209d",
+      "plan_sha256": "b2b98c0be7dd352a4c46cc10fa3750a92e9685f1eafb3c2c7fd23cdf3261d1f9",
+      "in_process_construct_seconds": 2.7940383999994083,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 255,
+        "split_components": 0,
+        "predicted_pipe_horizon": 1094419,
+        "no_spill_ddr_service": 381948,
+        "no_spill_ddr_bytes": 22806528,
+        "compute_load_by_core": [
+          1171840,
+          1171840,
+          1171840,
+          1153530
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 1095232
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 16575,
+        "components": 255,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "059",
+      "cores": 4,
+      "graph_sha256": "50b062952359dc9aa22880856093e8ec7a69c66d358607de49fd5f559ac232e9",
+      "plan_sha256": "1f09ec8f5c767ba5d5a2b2674da8681c14b1e9e0ea0d3b7b4d26f0ebd290aeb3",
+      "in_process_construct_seconds": 0.40727999999944586,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 64,
+        "split_components": 0,
+        "predicted_pipe_horizon": 184697,
+        "no_spill_ddr_service": 41200,
+        "no_spill_ddr_bytes": 2424832,
+        "compute_load_by_core": [
+          209984,
+          209984,
+          209984,
+          209984
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 184600
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 2752,
+        "components": 64,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "060",
+      "cores": 4,
+      "graph_sha256": "29889cfaea8c831c2620d19191abf871694e61d4850ced26a9710847096c1e96",
+      "plan_sha256": "1cfbfd4adb4562321d2d557769d360825847b7a9ac9b5c69fc846b2d4066f9ce",
+      "in_process_construct_seconds": 0.5415468999999575,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 89,
+        "split_components": 0,
+        "predicted_pipe_horizon": 214211,
+        "no_spill_ddr_service": 85814,
+        "no_spill_ddr_bytes": 5048510,
+        "compute_load_by_core": [
+          241656,
+          243858,
+          239474,
+          268783
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 199309
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5281,
+        "components": 89,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "061",
+      "cores": 4,
+      "graph_sha256": "5da175170152a6beab3dcbda84a0910f72b079091c2ad1fdd489aaf5e31fcaf3",
+      "plan_sha256": "da3a71efbdd4364a808eed4a3bea4ee164831cfc09b9f34716537d5d3ed815db",
+      "in_process_construct_seconds": 0.12128459999985353,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 58,
+        "split_components": 1,
+        "predicted_pipe_horizon": 23675,
+        "no_spill_ddr_service": 11538,
+        "no_spill_ddr_bytes": 672700,
+        "compute_load_by_core": [
+          23369,
+          26320,
+          24597,
+          24742
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 21291
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1115,
+        "components": 40,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "062",
+      "cores": 4,
+      "graph_sha256": "fa99943eab55b174047687337a4bcd81c3967e052e22eaabf3fb7740914df2b4",
+      "plan_sha256": "3d3092ff58603f41a2679dc96af29e35b6a8c55772d99257592bc05ceb74d716",
+      "in_process_construct_seconds": 2.214061099999526,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 4361,
+        "split_components": 1,
+        "predicted_pipe_horizon": 734543,
+        "no_spill_ddr_service": 352329,
+        "no_spill_ddr_bytes": 20943360,
+        "compute_load_by_core": [
+          753864,
+          752688,
+          752292,
+          752244
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 674772
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 19636,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "063",
+      "cores": 4,
+      "graph_sha256": "511c05c1ec9c19bb3cc108e173a46e7952b92fca9b1ac21728c43713056d429d",
+      "plan_sha256": "405489d2a371ffa0042af3c85997e7e750c4f42cc6fcb473b74ff68dd119d97d",
+      "in_process_construct_seconds": 0.5736637000009068,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1633,
+        "split_components": 1,
+        "predicted_pipe_horizon": 276177,
+        "no_spill_ddr_service": 129313,
+        "no_spill_ddr_bytes": 7687680,
+        "compute_load_by_core": [
+          283320,
+          281820,
+          282036,
+          281592
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 253704
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 7360,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "064",
+      "cores": 4,
+      "graph_sha256": "871f65b73fc1da6a48501998fbfde6684fc78e5dd022ddc68085d1384d2e2280",
+      "plan_sha256": "206461d11e89e464147979c29682bc2d212ce481080f9bb69dd01bc846464de6",
+      "in_process_construct_seconds": 0.07606069999928877,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 652,
+        "split_components": 1,
+        "predicted_pipe_horizon": 15395,
+        "no_spill_ddr_service": 3080,
+        "no_spill_ddr_bytes": 168980,
+        "compute_load_by_core": [
+          5884,
+          5336,
+          9183,
+          2649
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 9517
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 906,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "065",
+      "cores": 4,
+      "graph_sha256": "23342b7c3e75f58cec3d0bdaff89bf8d6f18de4930d35ec2ceade91670f0a400",
+      "plan_sha256": "0683b3d189dabc619d52d983d400e16abe853698a80e2bfed1874e2a23883f9b",
+      "in_process_construct_seconds": 0.04323079999994661,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 42,
+        "split_components": 0,
+        "predicted_pipe_horizon": 13673,
+        "no_spill_ddr_service": 6121,
+        "no_spill_ddr_bytes": 358106,
+        "compute_load_by_core": [
+          14355,
+          14505,
+          14628,
+          14290
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 9225
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 704,
+        "components": 42,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "066",
+      "cores": 4,
+      "graph_sha256": "30e61f8760d7d595b0fc4ad76262b179c72509a0cb5b2be72333ebd9b926b465",
+      "plan_sha256": "fc8e6ab10a6af4c90069488e25168d3b5c6beaa18c72f15631ae8bc84d24f934",
+      "in_process_construct_seconds": 0.5154374999983702,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 4259,
+        "split_components": 2,
+        "predicted_pipe_horizon": 122856,
+        "no_spill_ddr_service": 100648,
+        "no_spill_ddr_bytes": 5861246,
+        "compute_load_by_core": [
+          111929,
+          109613,
+          108192,
+          110643
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 104374
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5962,
+        "components": 28,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "067",
+      "cores": 4,
+      "graph_sha256": "f49b5087689e18c6bf231843f8f3bbaca238a547ea5309b2492c76d5f170b542",
+      "plan_sha256": "0648ad12f32d0db54f1e151918ebd007dd1765a07d75740805ad0abe3eb81bc8",
+      "in_process_construct_seconds": 0.3588889000002382,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 3721600,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 58915232,
+            "copy_service": 100964,
+            "ingress_bytes": 4884864,
+            "model_cycles": 58915232
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 29872512,
+            "copy_service": 163020,
+            "ingress_bytes": 8606464,
+            "model_cycles": 29872512
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 19915008,
+            "copy_service": 225076,
+            "ingress_bytes": 12328064,
+            "model_cycles": 19915008
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 14936256,
+            "copy_service": 287132,
+            "ingress_bytes": 16049664,
+            "model_cycles": 14936256
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 8804,
+        "components": 71,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "068",
+      "cores": 4,
+      "graph_sha256": "dfd9a58ef9d26a8a4567026b50af8b4499d87eebb3d98f8208b909b11e963c6d",
+      "plan_sha256": "7b516b6e7ba06918884be0b1809c08a8070daf1645571866eebcc82ab1111c47",
+      "in_process_construct_seconds": 0.4443073000002187,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 3119,
+        "split_components": 1,
+        "predicted_pipe_horizon": 114582,
+        "no_spill_ddr_service": 104778,
+        "no_spill_ddr_bytes": 6155612,
+        "compute_load_by_core": [
+          91275,
+          103928,
+          105551,
+          103043
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 98032
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5351,
+        "components": 32,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "069",
+      "cores": 4,
+      "graph_sha256": "9632392d98cfc04291ba0546accf1f4c3ede8ff71befd3cd0ae67caf27659e52",
+      "plan_sha256": "8aaff1692c0ea8e2143d99d7aaeafee5c6a78672ec368d7b0fddd59dbb4cb0cb",
+      "in_process_construct_seconds": 0.07865069999934349,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 756,
+        "split_components": 1,
+        "predicted_pipe_horizon": 12536,
+        "no_spill_ddr_service": 11364,
+        "no_spill_ddr_bytes": 661586,
+        "compute_load_by_core": [
+          10858,
+          6940,
+          6718,
+          7446
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 9180
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1032,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "070",
+      "cores": 4,
+      "graph_sha256": "b645c07133b0d98a63ab192cdfe8b35bdc089ad49eb5a8f1e476196344b97aa0",
+      "plan_sha256": "2515bcb9db7c802c4f9bc47d7bde072a171a3903b686241fbd7bbe8476dfdfd2",
+      "in_process_construct_seconds": 0.07673569999860774,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 38,
+        "split_components": 0,
+        "predicted_pipe_horizon": 28679,
+        "no_spill_ddr_service": 13249,
+        "no_spill_ddr_bytes": 780924,
+        "compute_load_by_core": [
+          32937,
+          34114,
+          34908,
+          37087
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 28620
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1191,
+        "components": 38,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "071",
+      "cores": 4,
+      "graph_sha256": "437cc74cae9e0fc0cb89b05403c62062ceff8d5bc2224c8834c519e69524e897",
+      "plan_sha256": "e89f21d760627d987e0ea98dc8852e60baeab209bafa237446a11189e0f4d4e2",
+      "in_process_construct_seconds": 0.0508823999989545,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 541,
+        "split_components": 1,
+        "predicted_pipe_horizon": 11057,
+        "no_spill_ddr_service": 8317,
+        "no_spill_ddr_bytes": 484690,
+        "compute_load_by_core": [
+          8684,
+          6077,
+          4913,
+          3814
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 6779
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 741,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "072",
+      "cores": 4,
+      "graph_sha256": "09ecc7be74ccdd06b00843fa6cd0696fb76ed623ca2ea3c9f36590450bc2749f",
+      "plan_sha256": "79b79d5a99e5e80ac8f5a986ad32639db2f7638a8b7fb0fb64340d5967c4c866",
+      "in_process_construct_seconds": 2.3256743000001734,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 476,
+        "split_components": 0,
+        "predicted_pipe_horizon": 5765274,
+        "no_spill_ddr_service": 697091,
+        "no_spill_ddr_bytes": 41668224,
+        "compute_load_by_core": [
+          6193157,
+          6158407,
+          6158290,
+          6126439
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 5808795
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 29666,
+        "components": 476,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "073",
+      "cores": 4,
+      "graph_sha256": "aabaff04d990bac77150639be7f410acc46db644d19fd046367dc70725aea7f9",
+      "plan_sha256": "dedaede4c3ad33fb01cb4b60736960842adb60154273be4a2c8f183cce467782",
+      "in_process_construct_seconds": 0.21846519999962766,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 3721600,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 8160672,
+            "copy_service": 67438,
+            "ingress_bytes": 3881344,
+            "model_cycles": 8160672
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 4184960,
+            "copy_service": 129494,
+            "ingress_bytes": 7602944,
+            "model_cycles": 4184960
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 2720224,
+            "copy_service": 191550,
+            "ingress_bytes": 11324544,
+            "model_cycles": 2720224
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 2092480,
+            "copy_service": 253606,
+            "ingress_bytes": 15046144,
+            "model_cycles": 2092480
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4836,
+        "components": 39,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "074",
+      "cores": 4,
+      "graph_sha256": "a8a94915cbac32e098d7c54cfc73af8ea2050eb51199b949a92cfe18ae62162e",
+      "plan_sha256": "016900f1586b21f391222e492d4cb5a984e4f4cda92f82cfa4a858ef829aa4bc",
+      "in_process_construct_seconds": 0.25853970000025583,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 73,
+        "split_components": 0,
+        "predicted_pipe_horizon": 407080,
+        "no_spill_ddr_service": 160488,
+        "no_spill_ddr_bytes": 9568472,
+        "compute_load_by_core": [
+          431946,
+          443173,
+          443030,
+          459695
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 404898
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3609,
+        "components": 73,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "075",
+      "cores": 4,
+      "graph_sha256": "5c24beddea6d09e1df3c8f8843d3593b90affb117ba38450fa9bea8a8db3351c",
+      "plan_sha256": "5e470c9bb93ed3acf63e7d62afcfa1c51b74536fa1d81c6455b023b8a354516c",
+      "in_process_construct_seconds": 0.5868477999993047,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 5480,
+        "split_components": 1,
+        "predicted_pipe_horizon": 426061,
+        "no_spill_ddr_service": 203544,
+        "no_spill_ddr_bytes": 11858104,
+        "compute_load_by_core": [
+          438639,
+          439434,
+          435755,
+          438352
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 405467
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 7410,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "076",
+      "cores": 4,
+      "graph_sha256": "543a082b17fe8de0dbab92b19f27335e4c8d1db389f75251378f1f4704368307",
+      "plan_sha256": "6d96a0588b56949878ffae969229394084e21a1fe3bc4ec814a734e2ff0a58a7",
+      "in_process_construct_seconds": 3.1910893999993277,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 809,
+        "split_components": 0,
+        "predicted_pipe_horizon": 1516193,
+        "no_spill_ddr_service": 266778,
+        "no_spill_ddr_bytes": 15637074,
+        "compute_load_by_core": [
+          1752869,
+          1751727,
+          1751753,
+          1752543
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 1519248
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 32528,
+        "components": 809,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "077",
+      "cores": 4,
+      "graph_sha256": "b14c3c29f9427de1db1d12c6ebf5d15914a99299298d20a908d97285947e67b6",
+      "plan_sha256": "d55fa880af132c87729c3883732f473996006552fe871d8ccde10afeeed524ec",
+      "in_process_construct_seconds": 0.43397580000055314,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 1580,
+        "split_components": 1,
+        "predicted_pipe_horizon": 139791,
+        "no_spill_ddr_service": 64979,
+        "no_spill_ddr_bytes": 3838608,
+        "compute_load_by_core": [
+          143353,
+          134760,
+          137568,
+          136397
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 129607
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4486,
+        "components": 41,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "078",
+      "cores": 4,
+      "graph_sha256": "d30ea13a65ed4d85fd62753d3e300a04c17fdbe592b6ca19c52a3a744e4affdd",
+      "plan_sha256": "21c5c001c88851aaf20835d85bb589c4f7c96fa5c045cac8f612bc9008542afe",
+      "in_process_construct_seconds": 0.060352899999998044,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 8,
+        "split_components": 0,
+        "predicted_pipe_horizon": 534901,
+        "no_spill_ddr_service": 146608,
+        "no_spill_ddr_bytes": 8790528,
+        "compute_load_by_core": [
+          535296,
+          535296,
+          535296,
+          535296
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 512328
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1024,
+        "components": 8,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "079",
+      "cores": 4,
+      "graph_sha256": "ee341b011b5ff7f1c975fd6ba8f876217612ecd8d9e4e2127e617cecac1edad5",
+      "plan_sha256": "aaf8da570da89e29cdb1cca12fa3f0dd0b3255670a463080d51fb9070f5b3289",
+      "in_process_construct_seconds": 1.4929832000016177,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 288,
+        "split_components": 0,
+        "predicted_pipe_horizon": 7357049,
+        "no_spill_ddr_service": 340200,
+        "no_spill_ddr_bytes": 20299776,
+        "compute_load_by_core": [
+          8296128,
+          8296128,
+          8296128,
+          8296128
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 7369152
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 18720,
+        "components": 288,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "080",
+      "cores": 4,
+      "graph_sha256": "20b2fa1e14bf879ac7c5b0321f69731c8a8102bb65bbd96d7543f54f4974f98c",
+      "plan_sha256": "dff460c3e79bc676a19a5d7b20d8cb373df888d4bfd0d09c884cbbd1740fd316",
+      "in_process_construct_seconds": 0.11719169999923906,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 18,
+        "split_components": 0,
+        "predicted_pipe_horizon": 80869,
+        "no_spill_ddr_service": 77781,
+        "no_spill_ddr_bytes": 4644864,
+        "compute_load_by_core": [
+          85990,
+          68792,
+          68792,
+          85990
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 81430
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1098,
+        "components": 18,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "081",
+      "cores": 4,
+      "graph_sha256": "7c642799a54f8083f56c74d1e260ec010e3a83c37702770c862d722408c7a41e",
+      "plan_sha256": "cd19944a2c4ed2a9cf7e395ca2fe237bd07f68f1c66d0c4ccad85bef3f93bae8",
+      "in_process_construct_seconds": 0.23481820000051812,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 85,
+        "split_components": 0,
+        "predicted_pipe_horizon": 39340,
+        "no_spill_ddr_service": 29920,
+        "no_spill_ddr_bytes": 1741140,
+        "compute_load_by_core": [
+          39270,
+          37485,
+          37485,
+          37485
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "ideal_compute_coordinate_end": 39270
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3485,
+        "components": 85,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "082",
+      "cores": 4,
+      "graph_sha256": "f230fbc200ad75797f3024f84431d1d26f7747d6a284378ee83eabde77b7e70c",
+      "plan_sha256": "62ee97d6c6dddffb830da327f309c58c8e878c3e1a55af9f1ea9aab4978c1d94",
+      "in_process_construct_seconds": 0.37968159999945783,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 3043,
+        "split_components": 1,
+        "predicted_pipe_horizon": 213171,
+        "no_spill_ddr_service": 124327,
+        "no_spill_ddr_bytes": 7225368,
+        "compute_load_by_core": [
+          228558,
+          230392,
+          225437,
+          243315
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 210903
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 4113,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "083",
+      "cores": 4,
+      "graph_sha256": "26bebaecfa0ed9c4bcf57127779a198c367a5576eb7b40b9c56cc343621c5549",
+      "plan_sha256": "8c3aaedcfa67bd881516c9d73db6b852d9216e7f6bbdfb363bc9a6d488e44bb8",
+      "in_process_construct_seconds": 0.14914800000042305,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 930400,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 810836,
+            "copy_service": 24024,
+            "ingress_bytes": 1184352,
+            "model_cycles": 810836
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 418496,
+            "copy_service": 39554,
+            "ingress_bytes": 2114752,
+            "model_cycles": 418496
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 287716,
+            "copy_service": 55084,
+            "ingress_bytes": 3045152,
+            "model_cycles": 287716
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 209248,
+            "copy_service": 70614,
+            "ingress_bytes": 3975552,
+            "model_cycles": 209248
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3844,
+        "components": 31,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "084",
+      "cores": 4,
+      "graph_sha256": "1af22ac8dd69090ed25be62ae1bbb18a922ce99a8cffb2be4f89e7a1234794ee",
+      "plan_sha256": "84367ce8562db2196097c6e1d3c5aaa70a1d99db0fec5b5a1d61acfef75055a6",
+      "in_process_construct_seconds": 0.5787669999990612,
+      "details": {
+        "strategy": "resource_word",
+        "components": 1077,
+        "eligible_ops": 8616,
+        "cores": 4,
+        "jobs_by_core": [
+          270,
+          269,
+          269,
+          269
+        ],
+        "core_detail": [
+          {
+            "a": 588,
+            "b": 1152,
+            "lookahead": 3
+          },
+          {
+            "a": 588,
+            "b": 1152,
+            "lookahead": 3
+          },
+          {
+            "a": 588,
+            "b": 1152,
+            "lookahead": 3
+          },
+          {
+            "a": 588,
+            "b": 1152,
+            "lookahead": 3
+          }
+        ],
+        "scope": "compute priority heuristic; E0 execution not checked",
+        "selected": "guarded_resource_word",
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "085",
+      "cores": 4,
+      "graph_sha256": "b63169e9cd0f21dc2da6617e7138472e95937465c703b7e4bf4dbc80125ed4f6",
+      "plan_sha256": "a45b36ab6c67c4a7b275cfb9a6361c4bdf138b59dd78a6e3126680086b6ad3d4",
+      "in_process_construct_seconds": 1.8929779000009148,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 14679,
+        "split_components": 1,
+        "predicted_pipe_horizon": 872074,
+        "no_spill_ddr_service": 525816,
+        "no_spill_ddr_bytes": 30378392,
+        "compute_load_by_core": [
+          1068490,
+          1077388,
+          1069031,
+          1075013
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 964083
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 19737,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "086",
+      "cores": 4,
+      "graph_sha256": "ef91fda2692fd0add63db3c7f677e4e03c8d115d97db3cb959cffc62fff2434a",
+      "plan_sha256": "6a80464e2b399df139f4a87e6f9732feb3a97b00f261c3229d12f047dd29b9de",
+      "in_process_construct_seconds": 0.4784780999998475,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 3914,
+        "split_components": 1,
+        "predicted_pipe_horizon": 54828,
+        "no_spill_ddr_service": 54234,
+        "no_spill_ddr_bytes": 3147862,
+        "compute_load_by_core": [
+          36751,
+          38776,
+          44903,
+          36812
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 40290
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5274,
+        "components": 1,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "087",
+      "cores": 4,
+      "graph_sha256": "a234839f266f63270c7d42c558eabd68085d415029ce73bfac9d3fc47d58de83",
+      "plan_sha256": "f973fe1f5251caaabc120b5ece7a9dad4c6dcecf06206e73ed6cae37045308bc",
+      "in_process_construct_seconds": 3.180206900000485,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 15870,
+        "split_components": 2,
+        "predicted_pipe_horizon": 1098390,
+        "no_spill_ddr_service": 576578,
+        "no_spill_ddr_bytes": 33647214,
+        "compute_load_by_core": [
+          1137045,
+          1104035,
+          1117876,
+          1117108
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 1022001
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 27556,
+        "components": 196,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "088",
+      "cores": 4,
+      "graph_sha256": "2ff71575ba33875431f54823fc1f2214e018edcfc9d568edfb7c47b0f264b825",
+      "plan_sha256": "8bf1927ba694dc559abf13d552f89d18507f86f3295848f1a4e865b9e7b01516",
+      "in_process_construct_seconds": 0.41388110000116285,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 2092,
+        "split_components": 1,
+        "predicted_pipe_horizon": 75915,
+        "no_spill_ddr_service": 70715,
+        "no_spill_ddr_bytes": 4162810,
+        "compute_load_by_core": [
+          60925,
+          72671,
+          72867,
+          66889
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 63865
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 3309,
+        "components": 31,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "089",
+      "cores": 4,
+      "graph_sha256": "9561e0638071147e99d937b802f61f8a67fe2b96985159c174b47a777fd6ce84",
+      "plan_sha256": "4201124a40508df74ce0efe6047630c35d748f2344d885963ef7d3fa86e3a3b4",
+      "in_process_construct_seconds": 0.8434527999997954,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 40,
+        "split_components": 0,
+        "predicted_pipe_horizon": 173492,
+        "no_spill_ddr_service": 21560,
+        "no_spill_ddr_bytes": 1282560,
+        "compute_load_by_core": [
+          174720,
+          174720,
+          174720,
+          174720
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 148316
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 5120,
+        "components": 40,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "090",
+      "cores": 4,
+      "graph_sha256": "a91d3ad4c40e53d5731b81b3eb72bcf922f5ef06094e860b5c5729619cb2d312",
+      "plan_sha256": "ec4d81e17c66d58281c4b023131390b693391263473aeb121a7391e97fe5cb24",
+      "in_process_construct_seconds": 0.2620287999998254,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 13,
+        "split_components": 0,
+        "predicted_pipe_horizon": 276259,
+        "no_spill_ddr_service": 144680,
+        "no_spill_ddr_bytes": 8673792,
+        "compute_load_by_core": [
+          276864,
+          207648,
+          207648,
+          207648
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 259800
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1664,
+        "components": 13,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "091",
+      "cores": 4,
+      "graph_sha256": "6fa7e61f09003382ba36061d74d4be90ed3acbe750a3d46c3b6d1e1fc27579f3",
+      "plan_sha256": "e3fa61cc7b82a8ebc6b187340fe23ca8d2f0e32ddc6de199b4ab8ef46a98dde2",
+      "in_process_construct_seconds": 6.319082899999557,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 513,
+        "split_components": 0,
+        "predicted_pipe_horizon": 2261524,
+        "no_spill_ddr_service": 433406,
+        "no_spill_ddr_bytes": 25834488,
+        "compute_load_by_core": [
+          2475880,
+          2489636,
+          2470844,
+          2476710
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 2261778
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 31554,
+        "components": 513,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "092",
+      "cores": 4,
+      "graph_sha256": "ddb267b7178d1b240f76fb7ed508799fbc7621b45156064b2a229c5c0d90996d",
+      "plan_sha256": "950266028b2699b00fd514c3598e20a79da0bcce97927ae67aa8f21f4b425112",
+      "in_process_construct_seconds": 1.3060900999989826,
+      "details": {
+        "selected": "shared_stages",
+        "active_cores": 4,
+        "common_input_bytes": 930400,
+        "resource_choices": [
+          {
+            "active_cores": 1,
+            "pipe_work": 3714152,
+            "copy_service": 54438,
+            "ingress_bytes": 2093664,
+            "model_cycles": 3714152
+          },
+          {
+            "active_cores": 2,
+            "pipe_work": 1857076,
+            "copy_service": 69968,
+            "ingress_bytes": 3024064,
+            "model_cycles": 1857076
+          },
+          {
+            "active_cores": 3,
+            "pipe_work": 1255488,
+            "copy_service": 85498,
+            "ingress_bytes": 3954464,
+            "model_cycles": 1255488
+          },
+          {
+            "active_cores": 4,
+            "pipe_work": 941616,
+            "copy_service": 101028,
+            "ingress_bytes": 4884864,
+            "model_cycles": 941616
+          }
+        ],
+        "scope": "Exact no-spill COPY service for this placement; model choice is heuristic",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 17608,
+        "components": 142,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "093",
+      "cores": 4,
+      "graph_sha256": "3a68ca960cc21b10a94b0524f5c16d2ee4995f2e5a75e667d58099571a7cdc36",
+      "plan_sha256": "20b15c0e0842d4b5936affbd72e032c7b210c6746e9a6af48d298c44a9f07315",
+      "in_process_construct_seconds": 0.06216889999996056,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 69,
+        "split_components": 0,
+        "predicted_pipe_horizon": 19533,
+        "no_spill_ddr_service": 12635,
+        "no_spill_ddr_bytes": 739328,
+        "compute_load_by_core": [
+          22464,
+          21216,
+          21216,
+          21216
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 19472
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 552,
+        "components": 69,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "094",
+      "cores": 4,
+      "graph_sha256": "06e7b0eb1eecb9a98b6691dfe5f8039c6f7b21ab0f3ea8e6a072ade002a68fec",
+      "plan_sha256": "a5112016022abd965d134d9424ac90c6a98f9d9fc67f04d53783f1868659080b",
+      "in_process_construct_seconds": 0.05640599999969709,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 40,
+        "split_components": 0,
+        "predicted_pipe_horizon": 22874,
+        "no_spill_ddr_service": 14173,
+        "no_spill_ddr_bytes": 845220,
+        "compute_load_by_core": [
+          26453,
+          26566,
+          26906,
+          27635
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 19682
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 647,
+        "components": 40,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "095",
+      "cores": 4,
+      "graph_sha256": "99875b1d3025c71f87e04818e28c08915928813f495d080ae6436879f6cb540f",
+      "plan_sha256": "a6fb04a92df99d44f859508004afd172c9872e330eea982ef60ffe5b9f33f4eb",
+      "in_process_construct_seconds": 0.36444829999891226,
+      "details": {
+        "strategy": "resource_word",
+        "components": 462,
+        "eligible_ops": 3696,
+        "cores": 4,
+        "jobs_by_core": [
+          116,
+          116,
+          115,
+          115
+        ],
+        "core_detail": [
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          },
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          },
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          },
+          {
+            "a": 1158,
+            "b": 2196,
+            "lookahead": 3
+          }
+        ],
+        "scope": "compute priority heuristic; E0 execution not checked",
+        "selected": "guarded_resource_word",
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "096",
+      "cores": 4,
+      "graph_sha256": "c26df1f4c6e282279a2f86c24d13be04e5c0e8b24b36149899bf7e7a91cf579a",
+      "plan_sha256": "3608977e220bb7310aba661a07ee6902110da5236b7a63286deced6b161b5dfc",
+      "in_process_construct_seconds": 0.12568559999999707,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 171,
+        "split_components": 2,
+        "predicted_pipe_horizon": 25549,
+        "no_spill_ddr_service": 7263,
+        "no_spill_ddr_bytes": 420554,
+        "compute_load_by_core": [
+          21739,
+          26601,
+          23384,
+          21550
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 19371
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1198,
+        "components": 50,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "097",
+      "cores": 4,
+      "graph_sha256": "7dc5c8ebf92052dbdd1bf59794a8fcef74e3ab3c59d5f0b4e753bf38a741ffaf",
+      "plan_sha256": "7f8c2889ed6b58bdfcb5fc961e567881862906adfe6e788c41c6cf88f34aee01",
+      "in_process_construct_seconds": 0.833516899998358,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 64,
+        "split_components": 0,
+        "predicted_pipe_horizon": 2576657,
+        "no_spill_ddr_service": 213216,
+        "no_spill_ddr_bytes": 12713984,
+        "compute_load_by_core": [
+          2908800,
+          2908800,
+          2908800,
+          2908800
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 2576688
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 6592,
+        "components": 64,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "098",
+      "cores": 4,
+      "graph_sha256": "8cc92ed83866234532487abacb106e0298a00cf309ef75fa12e413bfb17d58f8",
+      "plan_sha256": "3d0072d2e46158b04bace6d3bd6f42847ab3145b9a50d0c25579ef6879019e88",
+      "in_process_construct_seconds": 0.1032071999998152,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 144,
+        "split_components": 1,
+        "predicted_pipe_horizon": 49437,
+        "no_spill_ddr_service": 16552,
+        "no_spill_ddr_bytes": 976746,
+        "compute_load_by_core": [
+          45249,
+          46234,
+          43991,
+          44523
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 42331
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1365,
+        "components": 27,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "099",
+      "cores": 4,
+      "graph_sha256": "6a07bc2eba4657ec873f015cb53404696202df8fe912a94340cbdc674cbd7938",
+      "plan_sha256": "e5659456b13950519a4c87f62ba47b2f1b1ffbafbd03a30e7f339e084a840fc2",
+      "in_process_construct_seconds": 0.5335177000015392,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 202,
+        "split_components": 0,
+        "predicted_pipe_horizon": 400198,
+        "no_spill_ddr_service": 137977,
+        "no_spill_ddr_bytes": 8186516,
+        "compute_load_by_core": [
+          434459,
+          434472,
+          435551,
+          435722
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 401019
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 6296,
+        "components": 202,
+        "online_E0_calls": 0
+      }
+    },
+    {
+      "case_id": "100",
+      "cores": 4,
+      "graph_sha256": "bb78167d482a9e1663bb947945def049c2d66392c3897613ce5cb145d3a2eb19",
+      "plan_sha256": "9f4dc003fec491541ec7e9f3601813b9fe7d665eb09c7f46990eb4bdc755f55c",
+      "in_process_construct_seconds": 0.11151330000029702,
+      "details": {
+        "selected": "packet_eft",
+        "packets": 177,
+        "split_components": 1,
+        "predicted_pipe_horizon": 43750,
+        "no_spill_ddr_service": 19064,
+        "no_spill_ddr_bytes": 1121022,
+        "compute_load_by_core": [
+          36873,
+          37523,
+          44202,
+          45965
+        ],
+        "priority": {
+          "method": "bounded_packet_pipeline",
+          "windows": [
+            3,
+            3,
+            3,
+            3
+          ],
+          "ideal_compute_coordinate_end": 31798
+        },
+        "scope": "Construction heuristic: local COPY clocks plus global work; memory/spill/FIFO omitted",
+        "strategy": "tensor_packet",
+        "cores": 4,
+        "eligible_ops": 1394,
+        "components": 43,
+        "online_E0_calls": 0
+      }
+    }
+  ]
+}

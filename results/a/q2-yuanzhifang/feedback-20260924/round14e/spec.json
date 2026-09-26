@@ -1,0 +1,113 @@
+{
+  "run_id": "fang-p2-gap-full500-round14e-20260925",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "384b6c2a7ff937ca44180dee09a9d4bcaea0c50d",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py",
+    "src/q2/feedback/tensor_packet.py",
+    "src/q2/feedback/capacity_window.py",
+    "src/q2/feedback/gap_packet.py",
+    "src/q2/feedback/gap_calendar.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "cases": [
+    "037",
+    "038",
+    "039",
+    "040",
+    "041",
+    "042",
+    "043",
+    "044",
+    "045",
+    "046",
+    "047",
+    "048",
+    "049",
+    "051",
+    "052",
+    "053",
+    "054",
+    "055",
+    "056",
+    "057",
+    "058",
+    "059",
+    "060",
+    "061",
+    "062",
+    "063",
+    "064",
+    "065",
+    "067",
+    "070",
+    "071",
+    "072",
+    "073"
+  ],
+  "cores": 2,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round14e",
+  "budget": {
+    "max_solver_calls": 33,
+    "max_e0_calls": 33,
+    "solver_timeout_seconds": 30,
+    "e0_timeout_seconds": 90,
+    "batch_wall_seconds": 900,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  },
+  "methods": [
+    {
+      "variant": "gap_packet",
+      "algorithm_id": "q2-join-gap-packet",
+      "algorithm_name": "守卫串行链汇合配对与空隙调度",
+      "description": "在原始eligible二元依赖与COPY收缩关系相等且无alias的分叉汇合图上，以最大串行链、最长剩余路径、最后父与join至多k平方核配对、持久AVL空闲区间插入直接构造；否则回退容量窗口。明确移植P3 a37eb931方法。无真实COPY竞争/容量仿真、无在线E0或候选搜索。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/384b6c2a7ff937ca44180dee09a9d4bcaea0c50d/docs/a/q2/feedback/GAP_PACKET.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/384b6c2a7ff937ca44180dee09a9d4bcaea0c50d/docs/a/q2/feedback/GAP_PACKET_REVIEW.md"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+          "path": "src/q3_yuanzhifang/active_stages.py",
+          "entrypoint": "resource_choices/build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "7f064bbc4663b6ab5a7c26343620bfa4f32a4921",
+          "path": "src/q2_nikolastarx/dag_direct.py",
+          "entrypoint": "DAGIndex.build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+          "path": "src/q3_yuanzhifang/gap_list.py",
+          "entrypoint": "build/chain_dag/gap_calendar"
+        }
+      ]
+    }
+  ],
+  "offline_costs": "Prior fixed tensor_packet full500 consumed501 solver and500 E0 including one recorded zero-E0 ledger failure; earlier R1-R3 consumed28 solver/26 E0. Frozen prototype pilots consumed33 plus24 solver/E0 calls and retained every tie/regression, plus two slug preflight refusals with0 solver/E0. This completion reuses exactly29 successful same-source gap_packet cells with original timing and full provenance, and measures471 missing cells; no score-based case selection, training, compilation, GPU, cloud jobs or Actions. Existing saved structural analysis, derivations and read-only artifact checks are separate offline work; model tokens/cost not instrumented.",
+  "coordination": "Root selected frozen gap_packet for complete500 coverage after29 saved same-source cells were audited. At most2 P2 GPT-6 Luna medium workers; each batch1worker and free RAM>=1.5GiB before launch. Wait at batch boundaries if below threshold; shared host with other authorized tasks. 900s batch,30s solver,90s E0,15s cleanup,0retry and first unexpected failure stop. Do not read active ledgers; use process stdout. No expansion beyond471 new solver/E0 calls.",
+  "development_scope": {
+    "fixed_units_total": 471,
+    "purpose": "deterministic full500 gap_packet coverage; one frozen automatic strategy per case/core unit; no case-specific strategy table",
+    "matrix_plan": "GAP_FULL500_PLAN.md and gap-full500-plan.json",
+    "source_spec": "round13a-spec.json",
+    "authority": "existing user continuous P2 research and latest priority-candidate benchmark completion instruction; source and rules fixed before missing-cell execution",
+    "total_matrix_cells": 500,
+    "reuse_candidate_cells": 29
+  }
+}

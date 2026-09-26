@@ -1,0 +1,138 @@
+{
+  "run_id": "fang-p2-frontier-k5-round17a-20260925",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "4a501d7f4a8b780263e097a963e12dcb66178e69",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py",
+    "src/q2/feedback/tensor_packet.py",
+    "src/q2/feedback/capacity_window.py",
+    "src/q2/feedback/gap_packet.py",
+    "src/q2/feedback/gap_calendar.py",
+    "src/q2/feedback/frontier_gap.py",
+    "src/q2/feedback/physical_frontier.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "methods": [
+    {
+      "variant": "frontier_gap",
+      "algorithm_id": "q2-frontier-capacity-gap",
+      "algorithm_name": "结构守卫与物理容量证书调度",
+      "description": "先用结构识别和闭桶物理容量证书准入既有 resource_word；否则构造唯一 gap 计划，只对证书未通过且弱分量完整同核的核心做一次有界容量重排，并对完整核序再认证。保留未解决的核与负结果。F1 尚未实现联合 DDR 队列预测；0 在线 E0，不按图号或历史成绩选优。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/4a501d7f4a8b780263e097a963e12dcb66178e69/docs/a/q2/feedback/FRONTIER_GAP.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/4a501d7f4a8b780263e097a963e12dcb66178e69/docs/a/q2/feedback/FRONTIER_GAP_REVIEW.md"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+          "path": "src/q3_yuanzhifang/active_stages.py",
+          "entrypoint": "resource_choices/build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "7f064bbc4663b6ab5a7c26343620bfa4f32a4921",
+          "path": "src/q2_nikolastarx/dag_direct.py",
+          "entrypoint": "DAGIndex.build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+          "path": "src/q3_yuanzhifang/gap_list.py",
+          "entrypoint": "build/chain_dag/gap_calendar"
+        }
+      ]
+    }
+  ],
+  "offline_costs": "Frozen F1 pilot source4a501d7 consumed6 cold solver/6 external E0, with0 retries; one earlier RAM preflight consumed0 calls and is retained. This k5 completion reuses exactly the successful014/k5 from round16b data commit90967258eea6d499b4ab4de04ba23bbe57f7b8ac, with its original identity, timings and cost; it measures99 missing k5 cases, not the five already measured k3 cases. Entire F1 evidence after successful completion would be105 distinct case/core cells from105 solver/105 E0 total. Prior tensor full500 and gap full500 separately consumed501solver/500E0 each, plus older pilot costs recorded in their original ledgers. No old/reference plans are rescored; no training/compilation/GPU/cloud/Actions; model token cost not instrumented. Original local unit/prefix tests, Pro author experiments, and static k5 analyses are offline records, not new F1 global E0 results.",
+  "coordination": "P2 six-cell final T1=2026-09-24T20:59:33.566269Z, actual6/6. P3 explicitly cancelled its unstarted whole-job wave followup after a lower-bound check; P1 reported0 scoring and authorized coordination for the next33-cell boundary (its own runner not START). One P2 worker only, sequential batches; check free RAM>=1.5GiB before every batch launch. No busy wait, lowered threshold, automatic retry, live ledger reads, or concurrent output writers. Stop lane on first unexpected failure, report actual T0/T1, and coordinate with P1/P3 at batch boundaries. Shared Windows hardware remains a limitation for wall-time inference.",
+  "development_scope": {
+    "fixed_units_total": 99,
+    "total_matrix_cells": 100,
+    "problem": "P2",
+    "cores": 5,
+    "purpose": "Complete the most promising fixed F1 candidate at k5 after its six-cell falsification gates passed; measure every missing k5 case, without a performance-based case table",
+    "plan": "docs/a/q2/feedback/FRONTIER_K5_PLAN.md",
+    "authority": "existing user P2 continuous research, lightweight evaluator subagents, and prioritize promising candidates for missing benchmark completion",
+    "reuse": [
+      {
+        "case_id": "014",
+        "cores": 5,
+        "run_path": "results/a/q2-yuanzhifang/feedback-20260924/round16b/014-frontier_gap/run.json",
+        "data_commit": "90967258eea6d499b4ab4de04ba23bbe57f7b8ac",
+        "solver_commit": "4a501d7f4a8b780263e097a963e12dcb66178e69"
+      }
+    ],
+    "global_max_solver_calls": 99,
+    "global_max_e0_calls": 99,
+    "batches": [
+      "round17a",
+      "round17b",
+      "round17c"
+    ],
+    "acceptance": [
+      "Only report a full-k5 mean after100 unique successful cases with identical frozen sources/args/official identities and baseline",
+      "Keep all negative results and resource/timeout attempts; absent scores stay null, not0 or1",
+      "Stop further batches/promotion on illegal plans, certified-but-positive-spill, source drift, or runner supervision failure",
+      "Keep official quality, extraDDR/spill, cold solver wall and externalE0 wall separate; no historical winner mixing"
+    ],
+    "no_online_candidate_selection": true
+  },
+  "cases": [
+    "001",
+    "002",
+    "003",
+    "004",
+    "005",
+    "006",
+    "007",
+    "008",
+    "009",
+    "010",
+    "011",
+    "012",
+    "013",
+    "015",
+    "016",
+    "017",
+    "018",
+    "019",
+    "020",
+    "021",
+    "022",
+    "023",
+    "024",
+    "025",
+    "026",
+    "027",
+    "028",
+    "029",
+    "030",
+    "031",
+    "032",
+    "033",
+    "034"
+  ],
+  "cores": 5,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round17a",
+  "budget": {
+    "max_solver_calls": 33,
+    "max_e0_calls": 33,
+    "solver_timeout_seconds": 60,
+    "e0_timeout_seconds": 90,
+    "batch_wall_seconds": 900,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  }
+}

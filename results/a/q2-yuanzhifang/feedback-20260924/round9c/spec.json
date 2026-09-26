@@ -1,0 +1,112 @@
+{
+  "run_id": "fang-p2-full100-k5-round9c-20260924-parallel3",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "e64723bdf99669c44f76d8e90ab0379a8578522e",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py",
+    "src/q2/feedback/tensor_packet.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "cases": [
+    "067",
+    "068",
+    "069",
+    "070",
+    "071",
+    "072",
+    "073",
+    "074",
+    "075",
+    "076",
+    "077",
+    "078",
+    "079",
+    "080",
+    "081",
+    "082",
+    "083",
+    "084",
+    "085",
+    "086",
+    "087",
+    "088",
+    "089",
+    "090",
+    "091",
+    "092",
+    "093",
+    "094",
+    "095",
+    "096",
+    "097",
+    "098",
+    "099",
+    "100"
+  ],
+  "cores": 5,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round9c",
+  "budget": {
+    "max_solver_calls": 34,
+    "max_e0_calls": 34,
+    "solver_timeout_seconds": 30,
+    "e0_timeout_seconds": 90,
+    "batch_wall_seconds": 1800,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  },
+  "methods": [
+    {
+      "variant": "tensor_packet",
+      "algorithm_id": "q2-tensor-packet",
+      "algorithm_name": "共享张量分组与有界串行块流水",
+      "description": "结构路由依次为完整同质资源词、共同输入位置兼容链的解析活跃核选择、共享外部输入有序DAG同构组、一般图的重分量串行链分解/张量COPY感知分核/增量前驱计数有限块窗口优先级。无case ID或历史赢家表，无在线评分。代理服务与理想时钟不等于官方Makespan，下界/结构测试不能替代本轮E0。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/e64723bdf99669c44f76d8e90ab0379a8578522e/docs/a/q2/feedback/TENSOR_PACKET.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/e64723bdf99669c44f76d8e90ab0379a8578522e/docs/a/q2/feedback/TENSOR_PACKET_REVIEW.md"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+          "path": "src/q3_yuanzhifang/active_stages.py",
+          "entrypoint": "resource_choices/build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "7f064bbc4663b6ab5a7c26343620bfa4f32a4921",
+          "path": "src/q2_nikolastarx/dag_direct.py",
+          "entrypoint": "DAGIndex.build"
+        }
+      ]
+    }
+  ],
+  "offline_costs": "既有三批实际28冷启动solver+26独立E0（R1另2预期unsupported），批次墙钟R1 130.4165338秒、R2 23.4574秒、R3 21.7800765秒；各批预检与原件独立保存，不在本批重跑。此前100图结构/理论扫描15.7776177、20.7048706、21.7081221秒，均零E0；全500格已有作者feed盘点与100单核原件核验没有新评分。新构造的两遍100图各1个4核进程内结构构造，67.5537299秒和51.5509169秒（第二遍全部当前源码哈希一致），这些时间包含索引/结构检查而不含逐图新进程启动，不是solver性能。两遍分别保留旧守卫与最终有序DAG守卫结果；旧工作稿源未单独提交，只保留哈希及开发记录，不能用其时间作改进提速结论。另7张公开图的早期进程内路由/分块探索和1次044移植计划语义核对，均零E0。044与P3已测active2方案映射顺序和core序列完全一致，仅JSON空格哈希不同，已有P2 44234不改称本算法新成绩。主8项小例0.066秒；含旧项与bounds域守卫31项1.319秒；独立9项0.231秒，内部包含tiny图枚举和定义对照，均零E0，非生产搜索。全部开发/单测/扫描/模型账户成本在本批solver墙钟之外单列，模型费用未测。无训练、GPU、云计算作业或GitHub Actions。 R4已实际完成10冷启动solver+10独立E0，批次71.2595583秒，预检5.421617秒另计；本补齐协议复用其10份记录，不重复评分，其余90图分为事前固定三个30图批。四核完整均值须100份均成功且身份一致后才报告；失败/未运行如实列出。 R5A另已完成30冷启动solver+30独立E0，batch210.8307337秒、预检6.1827352秒另计。旧版k1的100次评分只作为历史基线，不作为本新算法1核成绩复用。本协议仅针对同一冻结构造在k1的覆盖补齐，不进行参数搜索；全部100图各一次新solver及独立E0，33/33/34三个批各独立START，尚未运行。 新用户授权并行覆盖：同一tensor_packet源码e64723b，不增加搜索候选。P2最多2路，系统其他会话可能同时评分，全部墙钟按共享资源解释。旧串行协调字段由本spec和PARALLEL_COVERAGE.md替代；未修改旧spec或旧成绩。 本协议全100图5核各1次新solver+1次独立E0，不将旧连续算法结果冒作本算法。 在P1 T1 17:16:31.674371Z与P3 T1 17:13:28.834217Z之后，以第三位GPT6 Sol单独执行五核，A继续4/2核、B继续1/3核。旧两lane方案的未运行spec由本并行3lane spec替代，无重复评分、无新增调用预算，仍整轮431新solver/430新E0（含071事故额外1solver）。",
+  "coordination": "P1/P3重评分已释放后，用户授权的并行补齐采用3位GPT-6 Sol各1批，P2最多3个活跃solver/E0；独立目录，源/配置/官方E0不变。每批前free RAM需≥1GB，不足则在批边界暂缓；全机峰值未测。运行期间禁止读取活动ledger/run，进度只取exec stdout。墙钟明确共享CPU/内存/文件缓存，不作独占机器比较。各lane内预先固定顺序、0自动重试/首失败停。",
+  "full100_scope": {
+    "algorithm_commit": "e64723bdf99669c44f76d8e90ab0379a8578522e",
+    "problem": "P2",
+    "cores": 5,
+    "total_unique_cases": 100,
+    "new_total_solver_calls_max": 100,
+    "new_total_E0_calls_max": 100,
+    "part": "c",
+    "all_parts": [
+      "round9a",
+      "round9b",
+      "round9c"
+    ],
+    "historical_feed_reused_as_new_result": false
+  },
+  "supersedes_unrun_spec": "results/a/q2-yuanzhifang/feedback-20260924/round9c-parallel-spec.json"
+}

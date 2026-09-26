@@ -1,0 +1,21 @@
+Lane A immutable preflight failure, first attempted round12a invocation
+
+Command issued in C:/Users/24580/Desktop/huaweicup-q2-feedback-yuanzhifang:
+.venv/Scripts/python.exe -X utf8 -B -m src.q2.feedback.measure --spec results/a/q2-yuanzhifang/feedback-20260924/round12a-spec.json
+
+Python process exit code: 1. The PowerShell wrapper also threw because LASTEXITCODE was nonzero. No stdout text was returned. The following stderr is the complete Python traceback visible in the captured tool response:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\24580\Desktop\huaweicup-q2-feedback-yuanzhifang\src\q2\feedback\measure.py", line 414, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\Users\24580\Desktop\huaweicup-q2-feedback-yuanzhifang\src\q2\feedback\measure.py", line 403, in main
+    validate_spec(spec)
+  File "C:\Users\24580\Desktop\huaweicup-q2-feedback-yuanzhifang\src\q2\feedback\measure.py", line 104, in validate_spec
+    raise ValueError("run_id must be a short lowercase slug")
+ValueError: run_id must be a short lowercase slug
+
+The generated PowerShell wrapper message was: round12a measure exited 1.
+The captured tool result reported wall_time_seconds=2.0252085 for the exec invocation; this is tool timing, not an independently recorded measurement T0/T1. No runner ledger/output directory was created, and no solver/E0 call was dispatched. Read-only inspection found the original round12a/round12b run_id values contain an underscore in "capacity_window". No retry was made, and round12b was not started.

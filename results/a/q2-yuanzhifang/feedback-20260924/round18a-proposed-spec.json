@@ -1,0 +1,88 @@
+{
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "run_id": "fang-p2-component-gate-round18a-20260925",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/tree/a8a4ce538e60650594f6d9df43c9731275648599",
+  "solver_commit": "a8a4ce538e60650594f6d9df43c9731275648599",
+  "source_paths": [
+    "src/q2/feedback/construct.py",
+    "src/q2/feedback/tensor_packet.py",
+    "src/q2/feedback/capacity_window.py",
+    "src/q2/feedback/gap_packet.py",
+    "src/q2/feedback/gap_calendar.py",
+    "src/q2/feedback/frontier_gap.py",
+    "src/q2/feedback/physical_frontier.py",
+    "src/q2/feedback/component_gate.py"
+  ],
+  "methods": [
+    {
+      "variant": "component_gate",
+      "algorithm_id": "q2-component-ddr-gate",
+      "algorithm_name": "完整分量与DDR服务判据调度",
+      "description": "F1加至多一个当前图tensor候选，只有完整分量/无跨核链接/本地容量证书及理想U_A<L_B同时满足时替代，否则保留F1；这是启发式而非官方机器改进定理。0在线E0、不读图号或历史成绩。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/a8a4ce538e60650594f6d9df43c9731275648599/docs/a/q2/feedback/COMPONENT_GATE_R4.md"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+          "path": "src/q3_yuanzhifang/active_stages.py",
+          "entrypoint": "resource_choices/build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "7f064bbc4663b6ab5a7c26343620bfa4f32a4921",
+          "path": "src/q2_nikolastarx/dag_direct.py",
+          "entrypoint": "DAGIndex.build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+          "path": "src/q3_yuanzhifang/gap_list.py",
+          "entrypoint": "build/chain_dag/gap_calendar"
+        }
+      ]
+    }
+  ],
+  "cases": [
+    "007",
+    "020",
+    "045"
+  ],
+  "cores": 5,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round18a",
+  "budget": {
+    "max_solver_calls": 3,
+    "max_e0_calls": 3,
+    "solver_timeout_seconds": 60,
+    "e0_timeout_seconds": 90,
+    "batch_wall_seconds": 600,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  },
+  "offline_costs": "R4 development: 11 synthetic unit/regression tests, bounded Sol reviews, and two saved-plan static diagnostics; zero new real solver/Step2/Step3/E0. Old F1 105 solver/105 E0 and both earlier full500 ledgers retained separately. No current-case training, E0 online selection, compilation or cloud resources. Token costs are soft budgets, not measured bills.",
+  "coordination": "PROPOSAL ONLY: pending explicit Issue33/board scheduler allocation and P1/P3 resource-window check. Verify active goal and free RAM>=1.5GiB immediately before launch. No budget revival, retries, live-ledger reads, parallel workers or score-based cell replacement.",
+  "development_scope": {
+    "status": "proposed_not_dispatched",
+    "purpose": "Three public mechanism diagnostics, not held-out validation or a full100 claim",
+    "plan": "docs/a/q2/feedback/COMPONENT_GATE_R4.md",
+    "no_online_E0": true,
+    "stop_conditions": [
+      "unexpected failure or timeout",
+      "source or raw result identity mismatch",
+      "claimed capacity certificate with positive official spill"
+    ],
+    "max_extra_retries": 0
+  }
+}

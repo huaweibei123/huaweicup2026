@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "attempt_id": "fang-p2-feedback-round1-20260924-pipe_window-p2-044-k4-seed0-repeat0",
+  "run_id": "fang-p2-feedback-round1-20260924-pipe_window",
+  "case_id": "044",
+  "problem": "P2",
+  "cores": 4,
+  "method": {
+    "variant": "pipe_window",
+    "algorithm_id": "q2-pipe-window",
+    "algorithm_name": "有界作业窗口计算资源优先级",
+    "description": "在继承的 COPY 收缩、分量分核和固定 singleton mapping 上，以结构计算 W=min(J,8,1+ceil(总计算工作/最大 Pipe 工作))。窗口内按理想 Pipe 可用时刻安排作业内拓扑链，完成后开放窗口，生成一个优先级序列；不使用 E0 选参，不把 W 当真实驻留容量证书。",
+    "args": [],
+    "expected_unsupported_cases": [],
+    "references": [
+      "https://github.com/huaweibei123/huaweicup2026/blob/fa6522a3266fe040379dd064092beb27c0b20a5e/docs/a/q2/feedback/METHOD.md",
+      "https://github.com/huaweibei123/huaweicup2026/blob/5f7e6f51177322db6a88a936216be36ec41dbfe7/src/q3/construct.py"
+    ],
+    "upstream": [
+      {
+        "repo": "huaweibei123/huaweicup2026",
+        "commit": "5f7e6f51177322db6a88a936216be36ec41dbfe7",
+        "path": "src/q3/construct.py",
+        "entrypoint": "Index"
+      }
+    ]
+  },
+  "started_at": "2026-09-24T14:19:25.501283Z",
+  "finished_at": "2026-09-24T14:19:28.657130Z",
+  "status": "ok",
+  "failure": null,
+  "solver_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "identity": {
+    "graph_sha256": "9abd4468a4be365e384de47431ac914ee44fd6e7b6221dffc584561f388cd57e",
+    "config_sha256": "dcd10de54b23f8366428fb24e828812b1da9549e6eae4a3c3f38604fe5ae77b9",
+    "official_sha256": "de11a83db8d7c47ed328b15a7df71d613a833b16cd23ee9fe877999578a1ace0",
+    "plan_sha256": "898636eec1d0cc7bc517da9989f1b0000a6c89bc7dd525ece2c472bf3e301441"
+  },
+  "source_hashes": {
+    "src/q2/feedback/construct.py": "aceed026845cb32c95ca33a6cc72a865598ffd4bfbbf17e3fc58e1360979ee65",
+    "src/q2/feedback/measure.py": "02d5a9f56df7c0c3b37b84024f467b956eea0730f7e112f1e11d256606b5d4c1",
+    "data/raw/a/official/code/contest_io.py": "d5936908e4c261c7003b78e783f30bd7d65cb38d6b53a269ea67f0103cac848e",
+    "data/raw/a/official/code/evaluation_validation.py": "103206b8c5c25e37de50cc3193de3989d7c1e01d4a11cc5f509dedd8f9be9a64",
+    "data/raw/a/official/code/multicore_cut_evaluate_problem_1.py": "2095f188a6c24ce3899f156bef21d50dcd87cbd9368488046b1e77e2bf91af3f",
+    "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py": "0b39f84d5ec0a7fba9a4c92a598a9044b97ab79c71393824c1ba130ecfe6c464",
+    "data/raw/a/official/code/multicore_cut_evaluate_problem_3.py": "eab1504dead881f4b67c0f0498cbc2dbbd9039dc3c9d198c6af58773c127eeb0",
+    "data/raw/a/official/code/schedule_step1.py": "d8fe721ff3dbe036e34a20c00cce6430960860000a49eb467e63465f76b84034",
+    "data/raw/a/official/code/schedule_step2.py": "2836baac176f4e0bdd9eec59b8d9ce254e209e5f7a251e23837ab684312fa0c3",
+    "data/raw/a/official/code/schedule_step3.py": "50053db0436f1d166dd75436693ba3af49b5c339576beb6e7299477f6b69fc7a",
+    "data/raw/a/official/code/singlecore_evaluate.py": "446b753ee134ef1fec8e052356bb077a2602fbe95572ccd3dddd7928e894b77a",
+    "data/raw/a/official/code/stub_multicore_cut_and_schedule.py": "0a3a3b79b5173b466fc05fc8d33b72d11d90b4df78995435853d91c632a35892"
+  },
+  "environment": {
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "AMD Ryzen 5 5600H with Radeon Graphics",
+    "gpu": "none used (CPU-only solver and E0)",
+    "ram_bytes": 17024741376,
+    "python": "3.12.14",
+    "dependencies": "standard library execution; uv.lock SHA256=7b03fee57044ac272d8895533cbdca6d70a29d2da955f98a5552e72ef944fdc4",
+    "threads": 1,
+    "workers": 1,
+    "peak_rss_bytes": null
+  },
+  "calls": {
+    "solver": 1,
+    "E0": 1,
+    "E1": 0,
+    "E2": 0
+  },
+  "stages": {
+    "solver": {
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "src.q2.feedback.construct",
+        "data/raw/a/official/data/case_044.json",
+        "--cores",
+        "4",
+        "--strategy",
+        "pipe_window",
+        "--output",
+        "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/case_044_multicore_res.json"
+      ],
+      "started_at": "2026-09-24T14:19:25.543894Z",
+      "timeout_seconds": 30,
+      "launched": true,
+      "returncode": 0,
+      "status": "ok",
+      "failure_reason": null,
+      "wall_seconds": 0.8529096000002028,
+      "finished_at": "2026-09-24T14:19:26.396611Z"
+    },
+    "E0": {
+      "argv": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "data/raw/a/official/code/multicore_cut_evaluate_problem_2.py",
+        "data/raw/a/official/data/case_044.json",
+        "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/case_044_multicore_res.json",
+        "--config",
+        "data/raw/a/official/data/config.txt",
+        "--output",
+        "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/result.json",
+        "--trace-output",
+        "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/trace.json",
+        "--log-output",
+        "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/result.txt"
+      ],
+      "started_at": "2026-09-24T14:19:26.507091Z",
+      "timeout_seconds": 30,
+      "launched": true,
+      "returncode": 0,
+      "status": "ok",
+      "failure_reason": null,
+      "wall_seconds": 1.9090673999999126,
+      "finished_at": "2026-09-24T14:19:28.416227Z"
+    }
+  },
+  "artifacts": {
+    "plan": {
+      "path": "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/case_044_multicore_res.json",
+      "sha256": "898636eec1d0cc7bc517da9989f1b0000a6c89bc7dd525ece2c472bf3e301441"
+    },
+    "result": {
+      "path": "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/result.json.gz",
+      "sha256": "d1adcd476b4b66579af7026c654d5adb22bb45e9f256383360963befddf0d77e"
+    },
+    "trace": {
+      "path": "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/trace.json.gz",
+      "sha256": "cb3b2cb736b6aa2f1620b2c8ea824b2f392d3fa707f35bdb71aaba0a2f9baa42"
+    },
+    "log": {
+      "path": "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/result.txt",
+      "sha256": "09046bb0b073f443b05a5ef3c4a3d93c61f305f6af551a20da60f5f7bf7d81d6"
+    }
+  },
+  "metrics": {
+    "makespan_cycles": 91646,
+    "data_movement_bytes": {
+      "original_graph_copy_bytes": 975456,
+      "scheduled_copy_bytes": 5029344,
+      "added_copy_bytes": 4053888,
+      "partition_added_copy_bytes": 2791200,
+      "spill_added_copy_bytes": 1262688
+    }
+  },
+  "compression": {
+    "result.json": {
+      "raw_sha256": "9851d71df93c9db1b8be2e0f6f85d743bb35622b55931ff8d909e81f80b65c4f",
+      "raw_bytes": 596262,
+      "stored_bytes": 41981,
+      "artifact": {
+        "path": "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/result.json.gz",
+        "sha256": "d1adcd476b4b66579af7026c654d5adb22bb45e9f256383360963befddf0d77e"
+      },
+      "transformation": "gzip lossless; mtime=0"
+    },
+    "trace.json": {
+      "raw_sha256": "7db08a46f53f20c1702fffcbc2ab8ff2a31e9a1dcfc6f90a6810dd5cca353ebc",
+      "raw_bytes": 949919,
+      "stored_bytes": 48637,
+      "artifact": {
+        "path": "results/a/q2-yuanzhifang/feedback-20260924/round1/044-pipe_window/trace.json.gz",
+        "sha256": "cb3b2cb736b6aa2f1620b2c8ea824b2f392d3fa707f35bdb71aaba0a2f9baa42"
+      },
+      "transformation": "gzip lossless; mtime=0"
+    }
+  },
+  "stop_reason": "fixed direct construction and one external E0 completed"
+}

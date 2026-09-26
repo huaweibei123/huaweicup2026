@@ -1,0 +1,100 @@
+{
+  "run_id": "fang-p2-frontier-capacity-round16a-20260925",
+  "producer_session": "yuanzhifang30-sudo/s-eb28fa11a5664fdfbdd29b3d6e38ca24",
+  "task_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "source_url": "https://github.com/huaweibei123/huaweicup2026/issues/33#issuecomment-5815528240",
+  "runtime_id": "yuanzhifang-win11-5600h-python31214",
+  "solver_commit": "4a501d7f4a8b780263e097a963e12dcb66178e69",
+  "runner_commit": "fa6522a3266fe040379dd064092beb27c0b20a5e",
+  "evaluator_commit": "45f647b395b84e9569f418fd33d62c2b8eb4d190",
+  "source_paths": [
+    "src/q2/feedback/construct.py",
+    "src/q2/feedback/tensor_packet.py",
+    "src/q2/feedback/capacity_window.py",
+    "src/q2/feedback/gap_packet.py",
+    "src/q2/feedback/gap_calendar.py",
+    "src/q2/feedback/frontier_gap.py",
+    "src/q2/feedback/physical_frontier.py"
+  ],
+  "authors": [
+    "yuanzhifang30-sudo",
+    "NikolaStarx"
+  ],
+  "methods": [
+    {
+      "variant": "frontier_gap",
+      "algorithm_id": "q2-frontier-capacity-gap",
+      "algorithm_name": "结构守卫与物理容量证书调度",
+      "description": "先用结构识别和闭桶物理容量证书准入既有 resource_word；否则构造唯一 gap 计划，只对证书未通过且弱分量完整同核的核心做一次有界容量重排，并对完整核序再认证。保留未解决的核与负结果。F1 尚未实现联合 DDR 队列预测；0 在线 E0，不按图号或历史成绩选优。",
+      "args": [],
+      "expected_unsupported_cases": [],
+      "references": [
+        "https://github.com/huaweibei123/huaweicup2026/blob/4a501d7f4a8b780263e097a963e12dcb66178e69/docs/a/q2/feedback/FRONTIER_GAP.md",
+        "https://github.com/huaweibei123/huaweicup2026/blob/4a501d7f4a8b780263e097a963e12dcb66178e69/docs/a/q2/feedback/FRONTIER_GAP_REVIEW.md"
+      ],
+      "upstream": [
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "bb7a7e8702b636a0a9dda33d070daad5f4d7c212",
+          "path": "src/q3_yuanzhifang/active_stages.py",
+          "entrypoint": "resource_choices/build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "7f064bbc4663b6ab5a7c26343620bfa4f32a4921",
+          "path": "src/q2_nikolastarx/dag_direct.py",
+          "entrypoint": "DAGIndex.build"
+        },
+        {
+          "repo": "huaweibei123/huaweicup2026",
+          "commit": "a37eb931a22fb7df7e0d00d193538ce5289ae045",
+          "path": "src/q3_yuanzhifang/gap_list.py",
+          "entrypoint": "build/chain_dag/gap_calendar"
+        }
+      ]
+    }
+  ],
+  "offline_costs": "This F1 pre-registered six-cell phase adds at most6 solver and6 external E0 calls, with no automatic retry. Prior frozen tensor_packet full500 cost501 solver/500 E0; frozen gap_packet full500 separately cost501 solver/500 E0 including recorded 014/k5 timeout and separately budgeted second attempt. Prior pilot and recovery costs remain in their original specs/ledgers and are not erased or relabeled as F1. Reuse saved old tensor/gap references without recomputation. Root ran25 small unit tests; reviewer ran5 physical-frontier tests (including2 new tests) and4 official tiny-graph Step2-prefix calls in total,0 new global E0 or large-graph solver calls. The two Pro public answers, their author-reported experiments, local static review, and recovered original scripts are archived separately at AI chats/P2-capacity-ddr-6ab57979/. No training/compilation/GPU/cloud jobs/Actions; model token cost not instrumented.",
+  "coordination": "P1 StageJ finished20:38:30.988179Z; P3 window ended20:43:33.810454Z with0 cold/0 E0 after its RAM gate. This F1 phase uses one P2 worker only; batches run sequentially, prelaunch free RAM>=1.5GiB. First unexpected failure stops the lane; no live ledger reads. Shared Windows hardware, not an exclusive-resource latency comparison. Six-case phase only; no authorization implied for an unbounded matrix or retries.",
+  "development_scope": {
+    "fixed_units_total": 6,
+    "purpose": "Capacity-layer F1 falsification, not the complete joint DDR queue FQ method or a full500 performance claim",
+    "plan": "docs/a/q2/feedback/FRONTIER_GAP.md",
+    "authority": "existing user continuous P2 algorithm research, latest Pro consultation and lightweight subagent measurement instruction",
+    "frozen_cells": [
+      "008/k3",
+      "095/k3",
+      "025/k3",
+      "036/k3",
+      "072/k3",
+      "014/k5"
+    ],
+    "acceptance_gates": [
+      "008/095: capacity certificate implies E0 spill0 and Makespan<=saved tensor1.01x",
+      "025/036: Makespan<=saved gap1.01x",
+      "072: unresolved must remain explicitly uncertified with reason",
+      "014: one attempt only; failure retained as null, with resource cost",
+      "Illegal output, certified-but-spilling, source mismatch or supervision failure stops promotion"
+    ],
+    "no_online_candidate_selection": true
+  },
+  "cases": [
+    "008",
+    "095",
+    "025",
+    "036",
+    "072"
+  ],
+  "cores": 3,
+  "output": "results/a/q2-yuanzhifang/feedback-20260924/round16a",
+  "budget": {
+    "max_solver_calls": 5,
+    "max_e0_calls": 5,
+    "solver_timeout_seconds": 60,
+    "e0_timeout_seconds": 90,
+    "batch_wall_seconds": 900,
+    "cleanup_reserve_seconds": 15,
+    "workers": 1,
+    "stop_on_first_failure": true
+  }
+}
