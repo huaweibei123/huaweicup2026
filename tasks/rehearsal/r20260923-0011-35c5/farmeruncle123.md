@@ -1,0 +1,20 @@
+# 本轮合成拟合与协议验证：farmeruncle123
+
+负责人：@farmeruncle123
+
+分支：`codex/rehearsal-r20260923-0011-35c5-farmeruncle123`
+
+沟通 Issue：https://github.com/huaweibei123/huaweicup2026/issues/5
+
+1. **任务目标**：从五行合成观测实际拟合 distance_m = slope × time_s + intercept；另用独立 protocol 任务验证签名、原子拒绝、冲突与离线恢复。
+2. **输入文件**：`tests/rehearsal/observations.csv`，人为构造无噪声数据；time_s [s]、distance_m [m]。SHA-256 `816ac9cd41a026a8622d6fa81ae16bc62470717af1ba87a110ca7d4fda47d265`。
+3. **输出要求**：`src/rehearsal/r20260923-0011-35c5/farmeruncle123.py`；`results/rehearsal/r20260923-0011-35c5/farmeruncle123/result.json` 与 README.md；独立 PR。记录逐行预测、最大绝对残差、运行命令、环境/依赖版本、代码提交、输入哈希、seed=null。
+4. **限制条件**：使用现有锁定环境或标准库，不加依赖，不硬编码答案，不覆盖本地已有工作。本轮不合并 PR、不改正式模型。Atlas 不支持的环境保持阻塞；计算交付可以独立完成，不能替代签名状态闭环。
+5. **验收标准**：n=5、slope=2 m/s、intercept=1 m、MSE≤1e-20 m²，队长从独立检出重跑。Atlas 项逐项需请求版本、签名回执与已确认回读，task done 不证明科学有效性或人眼验收。
+6. **截止时间**：2026-09-23T00:56:45+08:00。
+
+Atlas task IDs：`fit-farmeruncle123`（关联 analysis）、`protocol-farmeruncle123`（entities=[]）。指派标签本身不产生写权限或 Agent 执行。
+
+## 交付记录
+
+结果与回执见最终联测报告 `docs/rehearsal/runs/r20260923-0011-35c5.md`。
