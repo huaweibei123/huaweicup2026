@@ -1,0 +1,311 @@
+{
+  "schema": "paper-figure-review-import-v1",
+  "checkpoint": "v7",
+  "pdf_sha256": "51cd3c6fefd4885c7978bf46d6ad279297c170f3c8b590ae649aa4963df51ff0",
+  "pdf_publication_commit": "1fd0420b17979c219aac34c51f1e7e2d4c2489c8",
+  "import_status": "board_copy_of_local_unpublished_review",
+  "source_records": {
+    "directory": "paper/manuscript-v1/review/v7-figure-disclosure-audit",
+    "publication_state": "local_unpublished",
+    "audit_sha256": "291c46b67e066addbd50ca842e2323b634e4d14e0edd4eeab8fc77dd5f773112",
+    "findings_sha256": "17fc518fad02d5118cb3b7310c4031ef8fb830f6408d9c222ccbb7d8d2884890",
+    "user_annotation_sha256": "86735a93163db2294131eeea6bb18acf7d42b12691449ef98bf26875f0c843c5"
+  },
+  "scope": "v7全20幅引用图的实际页面、22原图哈希、AI第4/5条可见披露；不重跑实验，不代表整体科学/中文/人工最终验收。",
+  "figure_count": 20,
+  "asset_count": 22,
+  "asset_hashes_matched": true,
+  "human_final_acceptance": false,
+  "user_annotation": {
+    "id": "USER-V7-FIGTEXT-01",
+    "page": 28,
+    "rect": null,
+    "location_note": "用户提供顶部整图标题与底部说明的两幅裁剪；无精确PDF矩形，不推算坐标。",
+    "original_figure_text": [
+      "张量生命周期与闭区间容量条件（手算示例；静态估计，非实际并行峰值）",
+      "结构示例（手算可核）：末触步仍计入占用，下一步释放；T6=[5,6]、U3=[4,6] 即两端闭合例证。无官方 spill 记录，未绘制 spill 事件。"
+    ],
+    "user_verbatim": "二十八页的图，这两个地方解释性文字是不是不应该在图上呈现，而应该是由 LaTeX 自己的文字呈现？",
+    "interpretation": "整图标题与解释性长文字由LaTeX图题、图注或邻接正文排版；必要轴标签、图例、子图标号、节点短标签留图内。是排版职责，不将其转成Gemini必须处理图形渲染的任务。",
+    "status": "recorded_pending_revision",
+    "crop_candidate": {
+      "status": "board_preview_only_not_in_manuscript",
+      "user_followup": "我想到一种简单处理方式，就是把顶部和底部截掉就可以了。",
+      "source_figure": "paper/manuscript-v1/checkpoints/v7/figures/team-v5/p2-lifetimes.pdf",
+      "source_figure_sha256": "f8763f10f803ba5e9f033f0caf93e569be1ace309e417f17bf60e91670357dbf",
+      "method": "由v7矢量PDF生成独立裁切副本，不修改冻结原件；依据PDF文本包围盒和渲染预览选边界，不将其冒充用户截图坐标。",
+      "source_page_pt": [426.009, 501.639],
+      "crop_box_pt_bottom_left": [0, 23.639, 426.009, 478.639],
+      "removed_top_text_y_pt": [7.19, 16.70],
+      "removed_bottom_text_y_pt": [488.24, 494.44],
+      "retained_axis_text_y_pt": [459.90, 467.40],
+      "preview_pdf": "/figure-review-assets/p28-crop.pdf",
+      "preview_pdf_sha256": "3eb3f3f4c2d7f79e956c3fcfd98638f957a1b707a09212b8240b1c6c49d2a8a8",
+      "preview_png": "/figure-review-assets/p28-crop.png",
+      "preview_png_sha256": "2683065c085c7e40c49841a7020a903b2aa105ccd5d8da1ec03c1ba89936eb61",
+      "revision_requirements": [
+        "整图标题交给LaTeX图题；图中三块数据区域标题、坐标轴、图例、容量线、单位和数值保留。",
+        "在图题或相邻正文说明这是九个张量的人工构造示例，按静态操作序号估计单核心占用；不是实测的多核心并行峰值。",
+        "说明生命周期按首末次使用步骤构成闭区间，末次使用步骤仍计入占用、下一步骤才释放；T6占步骤5至6，U3占步骤4至6。",
+        "说明此示例没有来自官方评测器的缓存溢出换出与换入事件记录，因此图中未绘制该类事件。",
+        "整稿维护者在下一版用裁切后的矢量图及完整图题/邻近说明入稿，再核对实际PDF第28页附近的版面、引用、字号和陈述准确性。"
+      ]
+    },
+    "source_type": "user_original_screenshot_comment",
+    "screenshots": [
+      {
+        "file": "user-p28-1.png",
+        "sha256": "d7ebdc4b71f4f5b5b282ecf60fb47790f29b836b983e953dd0f6e92bddb62f1a"
+      },
+      {
+        "file": "user-p28-2.png",
+        "sha256": "9a6f99f604518b35f118221b3460f37cf03ffc0d73261b156eb4836b5ff6e0d4"
+      }
+    ],
+    "source_annotation_publication_state": "local_unpublished"
+  },
+  "figure_coverage": [
+    {
+      "finding_id": "FIG-V7-01",
+      "pdf_page": 5,
+      "figure_number": "1.4-1",
+      "label": "fig:progression",
+      "status": "可保留，低优先级统一风格",
+      "observation": "三种条件和Cache分支可辨；图内整图说明与图题有重复。",
+      "proposal": "保留结构/数值；整体题名交LaTeX，条件短标签留图内，后续优先矢量来源。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-02",
+      "pdf_page": 12,
+      "figure_number": "3.2-1",
+      "label": "fig:framework",
+      "status": "建议优化",
+      "observation": "主流程清楚，分支次级说明偏小，渐变底与其他数据图风格不同。",
+      "proposal": "整体解释移图注；主流程保留，统一字体与颜色。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-03",
+      "pdf_page": 18,
+      "figure_number": "4.2-1",
+      "label": "fig:fang-fork",
+      "status": "可保留",
+      "observation": "Fang用户选定A版，5个Task与3核心映射、边型能辨。",
+      "proposal": "保留现行选择；后续统一字号、如有可编辑矢量源优先采用。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-04",
+      "pdf_page": 19,
+      "figure_number": "4.2-2",
+      "label": "fig:p1-complete-flow",
+      "status": "建议优化",
+      "observation": "大图主线可读，次级说明密；10次在线E1与外部E0含义需要保持。",
+      "proposal": "长解释交LaTeX，保留分支条件与预算节点；不删算法守卫。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-05",
+      "pdf_page": 20,
+      "figure_number": "4.2-3",
+      "label": "fig:p1-cuts",
+      "status": "可保留",
+      "observation": "X/Y/J与正文现行定义相符，8个ADD及外部端口可辨。",
+      "proposal": "保留已修正版本，不回退旧X/Y错误图。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-06",
+      "pdf_page": 24,
+      "figure_number": "4.5-1",
+      "label": "fig:p1-results",
+      "status": "建议优化",
+      "observation": "两条均值曲线几乎重合；配对散点重叠隐藏频数。",
+      "proposal": "用差值/局部窗突出改进，保留全部配对；样本量说明由LaTeX图注统一呈现。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-07",
+      "pdf_page": 26,
+      "figure_number": "4.6-1",
+      "label": "fig:p1-overlap",
+      "status": "优先改善可读性",
+      "observation": "两组5核多流水线压缩后条带和标签密集。",
+      "proposal": "补(a)/(b)及重点核心局部放大；保留同尺度全图，不能改事件或把空白臆断为某类等待。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-08",
+      "pdf_page": 28,
+      "figure_number": "5.1-1",
+      "label": "fig:p2-lifetimes",
+      "status": "用户批注，优先优化",
+      "observation": "整图题名与底部长解释被做入图内；正文标签部分约6–7pt，尾注很淡。",
+      "proposal": "整图标题交LaTeX图题，手算/闭区间/静态估计/无spill记录完整移到LaTeX图注或邻接正文，坐标图例及必要局部标记留图内。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-09",
+      "pdf_page": 30,
+      "figure_number": "5.3-1",
+      "label": "fig:hypercut",
+      "status": "可保留",
+      "observation": "8B张量对应16/16/0B边界复制示例和核心集合可辨。",
+      "proposal": "可统一字体与矢量格式；解释性整图题名由LaTeX承担。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-10",
+      "pdf_page": 33,
+      "figure_number": "5.4-1",
+      "label": "fig:p2-local-cut",
+      "status": "优先统一符号",
+      "observation": "图内F是固定核心集合，正文F是最大流标量，正文虽解释仍增加误读；工作量图内单位不明确。",
+      "proposal": "集合改为独立符号并同步正文；明确工作量是流水线cycles和，不是操作数。核心集合短例与网络标签保留。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-11",
+      "pdf_page": 35,
+      "figure_number": "5.5-1",
+      "label": "fig:p2-three-plans",
+      "status": "优先改善可读性",
+      "observation": "长失败条件与多分支文字拥挤，部分文字约6–7pt。",
+      "proposal": "长解释移图注/正文；增大节点字号；保留P0回退、P1保留、P2严格COPY下降、去重、至多3次评分。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-12",
+      "pdf_page": 36,
+      "figure_number": "5.6-1",
+      "label": "fig:p2-results",
+      "status": "建议优化",
+      "observation": "均值比较可读；下方散点重叠，图例靠近数据密集区。",
+      "proposal": "调整图例和重叠点表达，保留500配对；一般解释移图注。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-13",
+      "pdf_page": 38,
+      "figure_number": "5.7-1",
+      "label": "fig:p2-counterexample",
+      "status": "优先改善可读性",
+      "observation": "两组时间线细节偏小；仅靠图注上/下识别方案。",
+      "proposal": "补(a)/(b)和关键区域放大，同轴范围保留；不改16247与28514 cycles等实测数值。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-14",
+      "pdf_page": 41,
+      "figure_number": "6.2-1",
+      "label": "fig:forest-example",
+      "status": "可保留",
+      "observation": "两种顺序的10/13KiB峰值示例清楚。",
+      "proposal": "可补(a)/(b)，公式手算、非仿真时钟的说明由图注承担。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-15",
+      "pdf_page": 47,
+      "figure_number": "6.7-1",
+      "label": "fig:p3-forest-decision",
+      "status": "优先改善可读性",
+      "observation": "定理条件与多候选判定链横向挤压，部分文字约6–7pt。",
+      "proposal": "拆成清楚的(a)局部排序条件/(b)完整评价流程；长限定说明移图注，关键判断保留，尤其下界不适用时不剪枝及3次共享预算。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-16",
+      "pdf_page": 49,
+      "figure_number": "6.8-1",
+      "label": "fig:p3-results",
+      "status": "可保留",
+      "observation": "固定方案cache配对关系清楚。",
+      "proposal": "图注就近解释M2/M3与每核100对，统一核心数轴写法。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-17",
+      "pdf_page": 50,
+      "figure_number": "6.8-2",
+      "label": "fig:cache-gain",
+      "status": "建议优化",
+      "observation": "许多散点聚在收益1附近，微小负收益难辨。",
+      "proposal": "增加1附近局部窗或合适重叠表示，全部点/异常点保留；相关样本非独立的说明放LaTeX图注。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-18",
+      "pdf_page": 51,
+      "figure_number": "7.1-1",
+      "label": "fig:dataset",
+      "status": "优先统一指标名称",
+      "observation": "下图轴M工作/(M+V工作)中M容易和全文Makespan混淆。",
+      "proposal": "轴写矩阵计算时长占比，或T_M/(T_M+T_V)并定义；原计算为cycles比，数值不变。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-19",
+      "pdf_page": 53,
+      "figure_number": "7.3-1",
+      "label": "fig:runtime",
+      "status": "可保留",
+      "observation": "ECDF、对数轴及三题线型可辨。",
+      "proposal": "整图样本/共享主机说明统一放LaTeX图注；不能把共享主机批次当独占机器速度比较。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    },
+    {
+      "finding_id": "FIG-V7-20",
+      "pdf_page": 55,
+      "figure_number": "7.5-1",
+      "label": "fig:bound-gap",
+      "status": "必须修正指标标注",
+      "observation": "实际绘mean(B/U)、mean(B/L)无量纲比；纵轴平均单核基准/周期及图注时间上界和下界会混淆。",
+      "proposal": "纵轴明确平均加速比（无量纲），图注明确由完成时间界换算的加速比界；保留阴影不保证可实现收益的限制，长限制交LaTeX。",
+      "source_type": "ai_review",
+      "review_status": "confirmed_observation_not_human_acceptance"
+    }
+  ],
+  "ai_disclosure_review": {
+    "clause4": "p50现有说明有名称、型号、开发机构、发布日期，明确实测数值来源；建议明示覆盖4–7章及实际参考内容，不以位置单独判违规。",
+    "clause5": "7份展示程序的前置注释字段齐全，页64/68/78/80/83/89/90；全部剥离声明后字节与AST核同原件。完整最终代码包未逐文件核查。",
+    "clause6": "并非普遍要求全部提示词或独立AI报告；以赛题特别要求为条件。主会话检索当前题面未见额外AI输入附录要求，仍以最终提交通知为准。",
+    "other_tools": "PDF未列Gemini/Antigravity写作辅助。建议按真实记录补充工具用途清单；不能单凭此项判定违反第5条。",
+    "human_review": "第1/2条要求独立思考、深入理解并用本队语言表述；声明不能替代人工审阅。",
+    "official_docx_sha256": "5922c1f92530c88eab3214e67de981aeda195c27d5b583ddc2380ee24db0e539",
+    "online_regulation": "官方竞赛网页本次仍未成功读取，以用户提供附件4为依据，未声称独立核同网站下载。",
+    "release_date_source": "https://academy.openai.com/en/pages/chatgpt-5-6-champion-launch-resources-tzoyyc",
+    "release_date": "2026-09-03"
+  },
+  "declared_code_file_count": 7,
+  "declared_code_checks_all_pass": true,
+  "independent_review": {
+    "agent": "01a0de0e-efeb-7940-9710-4f8e850bd1a8",
+    "model": "gpt-6-sol",
+    "reasoning": "medium",
+    "scope": "p55指标量纲及AI第4/5/6条文字边界；未做视觉复查",
+    "result": "同意p55指标标注需改；7程序前置注释不等于整包合规；第6条为有条件要求",
+    "budget": "3000 tokens软预算；实际用量不可用；无实验、无文件修改。"
+  },
+  "review_limit": "AI observations are pending author revision and independent acceptance; copying them to the board does not approve them."
+}
