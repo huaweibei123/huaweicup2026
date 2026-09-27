@@ -1,0 +1,643 @@
+					653 heading 4
+					654 container
+						655 button (collapsed) Worked for 57m 47s, Secondary Actions: Expand
+						656 text **这轮最值得推进的不是先训练一个大图神经网络，而是“阶段构造＋驻留证书＋少量官方确认”的非学习组合。**我已经把它做成可运行原型，并完成了新实验。
+						657 container
+							658 text 最清楚的增量收益出现在  case002、问题2、四核 ：保持核心归属不变，逐算子构造的  67336 cycles ，通过阶段收尾优先降到  64582 cycles ，改善约  4.09% ；五项搬运统计完全相同，也没有 spill。但它不是通用胜者：追加的24组对照只有2组改善、22组持平，最大图上没有改善，反而增加了求解时间。
+						659 container
+							660 text 神经方法也做了实测，而不是只列架构： 96张合成图、480次完整官方标注、线性模型、浅树、三个随机种子的小型网络 。结果显示，网络迁移到正式图时不稳定，目前不值得为它投入大规模A100训练。
+						661 text 本轮产物：
+						662 container
+							663 button 完整研究报告：推导、实验、失败边界与文献
+								664 text 完整研究报告：推导、实验、失败边界与文献
+							665 text  ·
+							666 button 可执行原型与完整证据包，约68.8 MB
+								667 text 可执行原型与完整证据包，约68.8 MB
+							668 text  ·
+							669 button 709次主实验结果总表
+								670 text 709次主实验结果总表
+						671 heading 一、先交代实际读到了什么、测到了什么, Value: 2
+							672 text 一、先交代实际读到了什么、测到了什么
+						673 container
+							674 table
+								675 row
+									676 cell
+										677 text 材料或工作
+									678 cell
+										679 text 本轮核验结果
+									680 cell
+										681 text 不能据此声称什么
+								682 row
+									683 cell
+										684 text 完整底包
+									685 cell
+										686 text 468项payload校验通过
+									687 cell
+										688 text 不是其中全部研究结论已验收
+								689 row
+									690 cell
+										691 text 官方原件
+									692 cell
+										693 text 114份文件大小与哈希匹配，包含100个正式JSON
+									694 cell
+										695 text 不是100例新算法成绩
+								696 row
+									697 cell
+										698 text 原题、源码、FORM与修订规范
+									699 cell
+										700 text 已读取题面和关键执行路径，使用冻结版本
+									701 cell
+										702 text 不是完整形式化证明，也未把后续分支当作已测版本
+								703 row
+									704 cell
+										705 text 三路第二轮结果
+									706 cell
+										707 text 读到了索引、摘要和完整回答文字
+									708 cell
+										709 text 没有取得其新证据ZIP，不能冒充复现了其原型
+								710 row
+									711 cell
+										712 text 本轮新实验
+									713 cell
+										714 text 709次完整E0主实验，另做1次封包后复跑
+									715 cell
+										716 text 调用数不等于独立样本数
+							717 button Copy table
+						718 container
+							719 text 主实验覆盖  17个正式case和96张合成图 ；按图、方案、题型、核数身份去重为560组。所有成功记录都保存了完整官方结果和Trace。一次外层工具中断保留了原目录，没有记成“官方判定非法”。
+						720 container
+							721 text 旧295份历史完整结果、前三路新证据ZIP仍然缺失，这与附件索引披露的缺口一致。
+							722 button 00_三路二轮短索引
+								723 text 00_三路二轮短索引
+							724 button 01_三路二轮综合摘要
+								725 text 01_三路二轮综合摘要
+						726 text **实际运行环境是Linux、Python 3.13.5、CPU。**没有使用用户的Colab额度，没有CUDA、Apple MPS或Mac实测；团队Python 3.12环境还需要独立复跑。完整包的5371项payload校验为零差异；这只是文件完整性检查，不是算法验收。
+						727 heading 二、从JSON识别结构：先找调度需要的信息，不猜原始网络名称, Value: 2
+							728 text 二、从JSON识别结构：先找调度需要的信息，不猜原始网络名称
+						729 container
+							730 text 我独立扫描了全部100张图，并把自己构造的计算依赖，与官方收缩COPY后的依赖逐图比较： 100图全部一致 。
+						731 text 扫描得到：
+						732 container
+							733 table
+								734 row
+									735 cell
+										736 text 结构统计
+									737 cell
+										738 text 新实测
+								739 row
+									740 cell
+										741 text eligible计算操作总数
+									742 cell
+										743 text 634506
+								744 row
+									745 cell
+										746 text 单图最少／最多计算操作
+									747 cell
+										748 text 552／35705
+								749 row
+									750 cell
+										751 text 单图计算操作数中位数
+									752 cell
+										753 text 3720.5
+								754 row
+									755 cell
+										756 text eligible计算图只有一个弱连通分量的case
+									757 cell
+										758 text 16
+								759 row
+									760 cell
+										761 text 全部扫描及官方邻接对照累计时间
+									762 cell
+										763 text 约13.03秒
+							764 button Copy table
+						765 text 这里应该保留两种表示，而不是只做一张普通加权图。
+						766 container
+							767 text 计算DAG 负责依赖、关键路径、无分叉链、计算阶段； 算子—张量关联图 负责字节数、存储池、共享输入、生产者和消费者身份。一个张量被多个操作使用，不等于把每条操作边独立计费。题目提供的是 op/pipe/cycles 和 pos/size ，没有完整张量shape、layer信息，不能据此可靠恢复原始神经网络架构。
+							768 button A题原始题面
+								769 text A题原始题面
+						770 container
+							771 text 本轮真正进入构造和学习的特征，包括M/V工作量、计算关键路径、分量规模、资源重入阶段、张量尺寸、共享输入支撑，以及 候选方案对应的驻留区间 。最后这一项很重要：同一张图的好坏取决于候选归属和顺序，不能只输入原图、输出一个固定成本。
+						772 heading 三、新构造：阶段收尾优先，而不是无限增加“同时展开的分支”, Value: 2
+							773 text 三、新构造：阶段收尾优先，而不是无限增加“同时展开的分支”
+						774 container
+							775 text 前三路已经指出，核心归属、子图粒度和官方展开顺序应当分开处理。本轮沿用这个已获支持的区分，但新增的重点是： 怎样用一个便宜、能处理异质阶段的构造器，避免“开了很多头，却迟迟不收尾”。
+							776 button 01_三路二轮综合摘要
+								777 text 01_三路二轮综合摘要
+						778 heading 1. 核心归属与最终子图分离, Value: 3
+							779 text 1. 核心归属与最终子图分离
+						780 container
+							781 text 原型实现了三种归属单位：整个计算弱连通分量、无分叉链包、共同拓扑序的连续64操作块。分配时使用M/V虚拟时钟和粗略跨核代价；这些只是构造启发式， 不是官方时间预测 。
+						782 container
+							783 text 确定归属后，再生成粗子图或singleton子图。细方案仍然只输出题面允许的两个字段，不提交开始时间，不插入额外等待、预取或重算。
+							784 button A题原始题面
+								785 text A题原始题面
+						786 heading 2. 把一包操作拆成计算资源阶段, Value: 3
+							787 text 2. 把一包操作拆成计算资源阶段
+						788 text 在每个归属包的合法拓扑序内，把连续同Pipe操作划为阶段。它们仅在构造层合起来考虑，原始算子没有被物理融合。
+						789 text 对一个候选阶段，虚拟可开始时刻由对应资源时钟和前驱释放共同决定：
+						790 container \widehat e_s= \max\left\{ C_{k(s),p(s)}, \max_{u\prec s}\bigl(\widehat f_u+\widehat d_{us}\bigr) \right\}. \tag{R4-01}
+						791 text 阶段选择采用字典序评分：
+						792 container \operatorname{key}(s)= \left( \text{软容量超出量}, \widehat e_s, \text{剩余计算尾长}, \text{净驻留变化}, \text{原始ID} \right). \tag{R4-02}
+						793 container
+							794 text 其中，“收尾优先”版本在前两项相同时，选择 剩余计算路径较短 的阶段；对照版本优先较长关键尾长。软容量取真实容量的一部分，用来抑制过多中间结果同时存活，但它不是硬约束：有限候选都超出时，构造器仍会选择一个，并记录风险。
+						795 heading 3. 真正有作用的实现细节：不能让新分支长期遮住可收尾分支, Value: 3
+							796 text 3. 真正有作用的实现细节：不能让新分支长期遮住可收尾分支
+						797 text 只维护一个按释放时刻排序的堆，会出现一个问题：大量初始释放时刻为零的新作业，始终占据有限前视窗口；已经可以返回M执行器收尾的旧作业，却进不了候选比较。
+						798 text 因此，原型分别维护：
+						799 content list
+							800 container
+								801 AXListMarker •
+								802 text 尚未达到虚拟释放时刻的pending堆；
+							803 container
+								804 AXListMarker •
+								805 text 已达到虚拟释放时刻、按尾长排序的active堆。
+						806 text 每个堆默认只看8项。这样，旧作业的返回阶段能够及时进入比较，而不需要搜索全部排列。
+						807 text **这里的“可执行”和时钟都属于构造器的虚拟状态，不是E0实际运行状态。**生成顺序后，真实COPY、spill、内存复用边、共享DDR和Makespan仍由官方决定。
+						808 text 这个方法可以处理不同长度、不同阶段结构的作业，但没有无损性保证：阶段约束和有限前视都可能漏掉更好的顺序。因此，它应当作为少量候选之一，而不是替换所有构造。
+						809 heading 四、一个更可靠的数学产物：把部分spill判断降成加权区间重叠, Value: 2
+							810 text 四、一个更可靠的数学产物：把部分spill判断降成加权区间重叠
+						811 container
+							812 text 相比阶段优先级这个启发式，本轮更适合保留为正式方法组成部分的是一个 有明确适用条件的Step2无spill证书 。
+						813 heading 1. 适用范围, Value: 3
+							814 text 1. 适用范围
+						815 text 限定问题2、3，最终每个子图只有一个eligible操作；原图符合题面二部结构，eligible触达的张量均在L1/UB，不存在通过被排除COPY连接两个eligible操作的内部桥。方案还须通过此前的合法性检查。
+						816 text 固定每个核心上的singleton顺序。对张量在某个核心上所有eligible生产、消费操作的位置，取最早位置和最晚位置，得到一个闭区间。定义：
+						817 container M_{k,p}(i)= \sum_{\operatorname{pos}(t)=p} s_t\, \mathbf 1\!\left\{ a_{k,t}\le i\le b_{k,t} \right\}. \tag{R4-03}
+						818 text 未被该核心触达的张量不建区间。区间两端都包含，是为了保留“先为当前操作申请空间，再释放末次使用”的语义。
+						819 text 本轮推导的充分条件是：
+						820 container \left[ \forall k,p:\ \max_i M_{k,p}(i)\le C_p \right] \quad\Longrightarrow\quad \text{官方Step2不插入spill}. \tag{R4-04}
+						821 heading 2. 为什么它能对应官方实现？, Value: 3
+							822 text 2. 为什么它能对应官方实现？
+						823 container
+							824 text 冻结源码把输入COPY分配给该核心的 最早消费者子图 ，把输出COPY分配给 最晚生产者子图 ，这里比较的是核心顺序，而不是子图编号大小。
+							825 button 02_官方源码与契约 +1
+								826 text 02_官方源码与契约 +1
+						827 text 在singleton条件下，每个相关COPY和计算都落在相应操作桶内。新增边界张量是DDR，不占L1/UB；原始核内张量的分配和末次使用，则被式（R4-03）的区间覆盖。
+						828 text 于是可以归纳：假设此前没有spill，当前实际驻留及瞬时申请不会超过当前桶的区间总量；容量条件成立，就不会出现“第一次溢出”。因此整段Step2没有spill。
+						829 text 实现只需要在区间起点加字节、终点后一位减字节。公共图索引建立之后，计算成本对操作数和张量关联数是线性的，使用整数，不涉及共享带宽的浮点事件消元。
+						830 heading 3. 它不能证明什么？, Value: 3
+							831 text 3. 它不能证明什么？
+						832 text 不能证明完整执行合法，不能预测Makespan，也不能把这个峰值填进官方内存峰值字段。
+						833 text 事实上，case002的一些核心上，官方Step3局部UB峰值已经高于这个串行桶区间峰值。两者描述的不是同一个过程。无spill也不意味着不存在内存复用依赖。
+						834 container
+							835 text 最终独立检查了 521次singleton评价 ，其中 492次正证书全部对应E0的spill字节为零 ，没有发现正证书反例。此前进度消息中的516／487，是追加实验前的快照；两份记录均保留。
+						836 heading 4. 证书还能省掉一个重复构造分支, Value: 3
+							837 text 4. 证书还能省掉一个重复构造分支
+						838 container
+							839 text 对于本原型的逐算子算法，若不加容量优先项的输出已经通过全容量证书，那么在其余队列、前视、评分和更新完全相同的情况下，加上全容量优先项会得到 完全相同的方案 。
+						840 text 理由是逐步归纳：原先选中的操作每一步都没有超出容量，新增非负的溢出排序项不会改变选择。
+						841 text 本轮检查了104对满足条件的方案，对象完全一致。求解器因此可以跳过这条可证明重复的分支。
+						842 text 这省去的是重复候选，不是重写E0，更不是宣布实现了E1全域零差分加速。
+						843 heading 五、官方实验说明了哪些收益，又否定了哪些直觉？, Value: 2
+							844 text 五、官方实验说明了哪些收益，又否定了哪些直觉？
+						845 heading 1. 四个探索用例, Value: 3
+							846 text 1. 四个探索用例
+						847 container
+							848 text 以下均为本轮新跑的 问题2、四核 结果；同一行内保持核心归属一致。
+						849 container
+							850 table
+								851 row
+									852 cell
+										853 text 用例／归属方法
+									854 cell
+										855 text 粗包
+									856 cell
+										857 text 逐算子构造
+									858 cell
+										859 text 阶段收尾、半容量偏好
+									860 cell
+										861 text 同质专用资源词
+								862 row
+									863 cell
+										864 text case002／链包
+									865 cell
+										866 text 71046
+									867 cell
+										868 text 67336
+									869 cell
+										870 text 64582
+									871 cell
+										872 text 不适用
+								873 row
+									874 cell
+										875 text case008／整分量
+									876 cell
+										877 text 123060
+									878 cell
+										879 text 186992
+									880 cell
+										881 text 64806
+									882 cell
+										883 text 63768
+								884 row
+									885 cell
+										886 text case044／整分量
+									887 cell
+										888 text 124268
+									889 cell
+										890 text 66901
+									891 cell
+										892 text 68271
+									893 cell
+										894 text 不适用
+								895 row
+									896 cell
+										897 text case080／整分量
+									898 cell
+										899 text 111314
+									900 cell
+										901 text 108364
+									902 cell
+										903 text 111466
+									904 cell
+										905 text 不适用
+							906 button Copy table
+						907 container
+							908 text 完整方案、五项搬运统计、结果和Trace见
+							909 button 实验总表与证据包
+								910 text 实验总表与证据包
+							911 text 。
+						912 text **case002说明顺序优化能独立于通信优化产生收益。**三种方案的五项搬运统计完全一致，切图新增搬运均为562176 bytes，spill为零。两核时，粗包137704降到收尾构造122021；五核时，58337降到52434。
+						913 text 该图四核的M计算工作量下界为60000 cycles。因此，对已确认可行的64582：
+						914 container 0\le \frac{64582-T^\star}{T^\star} \le \frac{64582}{60000}-1 \approx 7.64\%. \tag{R4-05}
+						915 container
+							916 text 这是 距离未知全局最优的相对差距上界 ，不是证明最优值等于60000。
+						917 container
+							918 text **case008说明“尽早展开更多分支”可能非常糟糕。**逐算子无保护方案产生7340544 bytes的spill；全容量偏好仍然不能消除spill。另一方面，按Pro2文字独立重写的同质资源词得到63768，优于一般阶段收尾的64806。这个复跑支持保留其专用构造，但不等于取得了Pro2原代码。其原报告也明确把这类方法限定在同质资源阶段结构上。
+							919 button 02_三路二轮回答全文
+								920 text 02_三路二轮回答全文
+						921 text **case044则否定“优先收尾一定好”。**逐算子方案66901且无spill；全容量收尾方案71690并新增233472 bytes的spill；半容量收尾虽然消除了spill，仍然比逐算子方案慢。
+						922 text 所以，统一换成收尾策略是不合理的。
+						923 heading 2. 追加24组对照：真实增量没有探索图看起来那么大, Value: 3
+							924 text 2. 追加24组对照：真实增量没有探索图看起来那么大
+						925 text 四个探索图之后，冻结12个case，分别运行问题2、3，共24组。比较的是：
+						926 container
+							927 text **参考四候选：**粗包、topo64、ID顺序singleton、逐算子构造。
+							928 text **新四候选：**粗包、topo64、全容量偏好、阶段收尾。
+						929 text 每组测六种构造请求，共用两个参照请求；不是让新方法多拿两个候选取最好。
+						930 container
+							931 text 结果为  2组改善、22组持平、0组退化 ，改善仅在case012：
+						932 container
+							933 table
+								934 row
+									935 cell
+										936 text 场景
+									937 cell
+										938 text 参考组合
+									939 cell
+										940 text 新组合
+								941 row
+									942 cell
+										943 text case012／问题2
+									944 cell
+										945 text 13377
+									946 cell
+										947 text 13285
+								948 row
+									949 cell
+										950 text case012／问题3
+									951 cell
+										952 text 13377
+									953 cell
+										954 text 12963
+							955 button Copy table
+						956 container
+							957 text 这个组不是团队秘密封存集，一些图在以往讨论中出现过。它支持“一个有用的增量候选”， 不支持“普遍突破” 。
+						958 container
+							959 text 还必须正视一个弱点：**case026本轮组合只能做到43155，而Pro1原文报告另一方案可达到28637。**没有其方案字节，不能严格配对比较；但这个差距足以提醒我们，当前分核和切块候选仍不够强，不能只优化已经固定的顺序。
+							960 button 02_三路二轮回答全文
+								961 text 02_三路二轮回答全文
+						962 heading 3. 真正冷端到端：质量改善不等于求解速度提升, Value: 3
+							963 text 3. 真正冷端到端：质量改善不等于求解速度提升
+						964 container
+							965 table
+								966 row
+									967 cell
+										968 text 用例
+									969 cell
+										970 text 参考组合结果
+									971 cell
+										972 text 新组合结果
+									973 cell
+										974 text 参考／新组合外层耗时
+									975 cell
+										976 text E0次数
+								977 row
+									978 cell
+										979 text case002／问题2
+									980 cell
+										981 text 67336
+									982 cell
+										983 text 64582
+									984 cell
+										985 text 7.992／8.446秒
+										986 text ，三次中位数
+									987 cell
+										988 text 4／4
+								989 row
+									990 cell
+										991 text case014／问题2
+									992 cell
+										993 text 4422089
+									994 cell
+										995 text 4422089
+									996 cell
+										997 text 82.808／130.864秒
+										998 text ，各一次
+									999 cell
+										1000 text 4／6
+							1001 button Copy table
+						1002 text 计时包含冷启动、读取、构造子进程、完整E0、结果与Trace写出和选优。
+						1003 container
+							1004 text case002是 稍慢地得到更好的调度方案 。case014是 增加了时间，却没有改善质量 。最大图仍在给定预算内完成，不等于新增方法在那里有价值，更不能据此保证所有输入都满足硬时限。题面的5～10分钟是单例效率建议，仍需要全量测试。
+							1005 button A题原始题面
+								1006 text A题原始题面
+						1007 heading 4. 问题1不能照搬, Value: 3
+							1008 text 4. 问题1不能照搬
+						1009 container
+							1010 text case008、四核，问题1粗分量方案为157796；照搬问题2的singleton收尾方案，变成  588824 ，即使没有spill也很差。
+						1011 container
+							1012 text 原因不是神秘的“泛化失败”，而是Q1每个子图都是独立Task，跨Task通信和100／1000 cycles等待改变了问题。
+							1013 button A题原始题面
+								1014 text A题原始题面
+						1015 container
+							1016 text 因此，交付的Q1入口只保留两个粗粒度候选，本例选到148907。 这是可用回退，不是本轮已经充分解决Q1。
+						1017 heading 六、一手论文中，哪些东西值得迁移？, Value: 2
+							1018 text 六、一手论文中，哪些东西值得迁移？
+						1019 container
+							1020 text 本轮查到最贴近“学习＋高效构造”的一篇，是2026年的  WeCAN ，作者来自北大、中科院和华为2012实验室。它采用一次网络前向输出任务—资源分数，再由生成器完成调度，并分析生成器能够覆盖哪些顺序。对本题最重要的启发是：
+						1021 text 网络再强，也不能弥补构造器根本生成不了某类好方案的问题。
+						1022 container
+							1023 text 但论文的资源池模型、开始时间和skip动作，不等于本题官方接口；不能把它的可达性结论或跨资源动作交换等价，直接套到共享DDR、生成COPY和固定FIFO上。
+							1024 link Description: arXiv, Value: arxiv.org/html/2603.23249v2
+						1025 text 其他值得保留的研究和代码如下：
+						1026 container
+							1027 table
+								1028 row
+									1029 cell
+										1030 text 一手来源
+									1031 cell
+										1032 text 对本题有用的部分
+									1033 cell
+										1034 text 不能直接迁移的部分
+								1035 row
+									1036 cell
+										1037 text DAN-Scheduler，2026
+									1038 cell
+										1039 text 内存压力、布局与计算流水需要协同考虑
+									1040 cell
+										1041 text 它的核内调度与评价语义不等于本题；不能替换官方Step2／Step3来取得成绩。
+										1042 link Description: arXiv, Value: arxiv.org/html/2607.17422v1
+								1043 row
+									1044 cell
+										1045 text New Tools for Peak Memory Scheduling
+									1046 cell
+										1047 text 内存profile、受限子图线性化、参数化结构工具
+									1048 cell
+										1049 text 内存支配不等于Makespan支配；主导profile存在也不代表一般图有便宜构造。
+										1050 link Description: arXiv, Value: arxiv.org/html/2312.13526v1
+								1051 row
+									1052 cell
+										1053 text Intel：Optimal Software Pipelining using an SMT-Solver，2026
+									1054 cell
+										1055 text 按需加入压力约束，利用不可满足核解释阻塞
+									1056 cell
+										1057 text 本轮没有实现SMT；适合考虑小窗口研究对照，不是把35705操作整图放进完整时标模型。
+										1058 link Description: arXiv, Value: arxiv.org/html/2601.21842v1
+								1059 row
+									1060 cell
+										1061 text Google TpuGraphs＋GST作者代码
+									1062 cell
+										1063 text 图与编译配置共同输入；大图分段训练
+									1064 cell
+										1065 text TPU布局／分块运行时间不能作为本题E0标签，GST也不是本题执行器。
+										1066 link Description: GitHub +1, Value: github.com/google-research-datasets/tpu_graphs
+								1067 row
+									1068 cell
+										1069 text RL4CO
+									1070 cell
+										1071 text 可复用组合优化训练和评测基础设施
+									1072 cell
+										1073 text 不能据其框架能力假定已有匹配本题的环境。
+										1074 link Description: GitHub, Value: github.com/ai4co/rl4co
+							1075 button Copy table
+						1076 container
+							1077 text Hugging Face上核对的  SCHEDBench  是自然语言约束调度基准，而非具有本题张量、DDR、spill语义的数据。因此，这次检查的开源资源中， 没有确认到可以直接拿来训练本题官方成本模型的标签集 。这不是说外部数据毫无价值，而是不能混用标签语义。
+							1078 link Description: Hugging Face, Value: huggingface.co/datasets/SCHEDBench/SCHEDBench
+						1079 heading 七、神经方法的轻量实测：问题主要不在算力, Value: 2
+							1080 text 七、神经方法的轻量实测：问题主要不在算力
+						1081 heading 1. 怎样生成训练样本？, Value: 3
+							1082 text 1. 怎样生成训练样本？
+						1083 text 生成器使用合法的算子—张量二部图，保持原始DDR输入只搬入一次、最终输出只搬出一次，并检查单操作的L1／UB输入输出容量。
+						1084 text 变化包括作业数、计算与搬运比例、张量尺寸、共享输入，以及五种结构语法：
+						1085 content list
+							1086 container
+								1087 AXListMarker •
+								1088 text 同质与异质的
+								1089 text M → V → M
+								1090 text ；
+							1091 container
+								1092 AXListMarker •
+								1093 text M → V
+								1094 text 和
+								1095 text V → M
+								1096 text 混合；
+							1097 container
+								1098 AXListMarker •
+								1099 text 四阶段重入；
+							1100 container
+								1101 AXListMarker •
+								1102 text 分叉后汇合。
+						1103 container
+							1104 text 训练72图，来自前三类训练语法；另用12张四阶段图作校准诊断、12张分叉汇合图作测试。每图固定五个候选， 全部候选都由E0标注 。
+						1105 text 这个设计做到了图族隔离，但还没有做到完整代表性：训练图最多120个eligible操作，测试最多160个，远小于正式图，也缺少大规模跨核耦合和复杂Q3缓存时序。这个缺口会直接影响外推。
+						1106 heading 2. 实际跑了什么模型和损失？, Value: 3
+							1107 text 2. 实际跑了什么模型和损失？
+						1108 container
+							1109 text 实际是一个  25维特征、两个48宽隐层、时间与spill两输出、3698参数的MLP ，不是已训练GNN。另有Ridge、深度4的树和固定动作基线。
+						1110 text 时间标签使用官方Makespan相对计算下界的对数，实际训练损失为：
+						1111 container y=\log(T_{E0}/LB),\qquad \mathcal L= \operatorname{SmoothL1}(\hat y,y) +0.2\,\mathcal L_{\mathrm{pair}} +0.1\,\operatorname{BCE}(\hat s,s). \tag{R4-06}
+						1112 container
+							1113 text 成对项只比较 同一图的同一候选池 ，强调能否正确区分候选优劣；spill项是辅助标签，不是可行性证明。上述系数只是本轮试验配置，没有足够消融证明它们最优。
+						1114 heading 3. 结果：不能只挑最好种子宣布成功, Value: 3
+							1115 text 3. 结果：不能只挑最好种子宣布成功
+						1116 text 表中的“遗憾”定义为：
+						1117 container r= \frac{T(\text{选中方案})-\min_{P\in\mathcal C}T(P)} {\min_{P\in\mathcal C}T(P)}. \tag{R4-07}
+						1118 container
+							1119 text 这是相对 五候选池最优 ，不是相对未知全局最优。
+						1120 container
+							1121 table
+								1122 row
+									1123 cell
+										1124 text 选择方法
+									1125 cell
+										1126 text 12张合成测试图平均遗憾
+									1127 cell
+										1128 text 12张正式Q2图平均遗憾
+								1129 row
+									1130 cell
+										1131 text 固定frontier，按训练平均对数代价选择
+									1132 cell
+										1133 text 3.55%
+									1134 cell
+										1135 text 7.53%
+								1136 row
+									1137 cell
+										1138 text 固定阶段收尾，合成前已设计
+									1139 cell
+										1140 text 0.28%
+									1141 cell
+										1142 text 4.21%
+								1143 row
+									1144 cell
+										1145 text Ridge
+									1146 cell
+										1147 text 1.82%
+									1148 cell
+										1149 text 12.38%
+								1150 row
+									1151 cell
+										1152 text 深度4树
+									1153 cell
+										1154 text 3.84%
+									1155 cell
+										1156 text 10.33%
+								1157 row
+									1158 cell
+										1159 text MLP种子0
+									1160 cell
+										1161 text 0.79%
+									1162 cell
+										1163 text 1.20%
+								1164 row
+									1165 cell
+										1166 text MLP种子1
+									1167 cell
+										1168 text 1.39%
+									1169 cell
+										1170 text 12.14%
+								1171 row
+									1172 cell
+										1173 text MLP种子2
+									1174 cell
+										1175 text 1.35%
+									1176 cell
+										1177 text 4.71%
+							1178 button Copy table
+						1179 text 正式图没有用于拟合，但它们不是研究者不可见的秘密测试集。种子0看起来有价值，种子1却明显退化，最差正式图遗憾约40.65%。不能只保留种子0。
+						1180 text **数值预测比排序更差。**三个种子在正式图上的Makespan相对误差中位数分别约416.3%、476.5%、56.3%。这说明尺度与结构外推已经失效；它们不能输出可信的E2周期数。
+						1181 container
+							1182 text 此外，五候选小池不满足团队至少64候选池的验收要求，也没有测相对E1的吞吐，因此不能算E2发布通过。
+							1183 button EVALUATOR_AMENDMENT_20260923
+								1184 text EVALUATOR_AMENDMENT_20260923
+						1185 heading 4. 这次算力花在哪里？, Value: 3
+							1186 text 4. 这次算力花在哪里？
+						1187 container
+							1188 table
+								1189 row
+									1190 cell
+										1191 text 环节
+									1192 cell
+										1193 text 本轮CPU实测
+								1194 row
+									1195 cell
+										1196 text 96图、480候选的构造与官方标注
+									1197 cell
+										1198 text 约320.21秒
+								1199 row
+									1200 cell
+										1201 text 其中完整官方CLI
+									1202 cell
+										1203 text 约317.13秒
+								1204 row
+									1205 cell
+										1206 text 一个MLP种子的600次更新
+									1207 cell
+										1208 text 约0.52～0.54秒
+								1209 row
+									1210 cell
+										1211 text 已建特征、五候选一池的暖推理
+									1212 cell
+										1213 text 约24～25微秒
+							1214 button Copy table
+						1215 container
+							1216 text 最后一项 不含候选构造和特征提取 ，不能拿它除官方CLI时间来宣传整个流程加速。
+						1217 container
+							1218 text 现在的主要问题是：候选是否足够强、训练语法是否覆盖真实失败机制、表示是否包含必要信息。 把半秒训练搬到A100，不会自动解决这些问题。
+						1219 heading 八、下一步神经架构应该怎样做，什么条件下才值得用GPU？, Value: 2
+							1220 text 八、下一步神经架构应该怎样做，什么条件下才值得用GPU？
+						1221 container
+							1222 text 这部分是 尚未实测的下一轮提案 。
+						1223 text 我倾向于小型稀疏类型图网络，而不是把JSON文本交给大语言模型逐个生成操作：
+						1224 text **输入层：**算子节点携带Pipe、计算周期、依赖深度；张量节点携带字节数、存储池、生产／消费身份；候选侧加入核心归属、顺序、题型和核数，并保留影响官方tie-break的ID顺序信息。
+						1225 container
+							1226 text **网络层：**3～4层、宽约64的算子—张量消息传递，加少量核心资源聚合。一次前向输出候选优先级或少量构造参数，不对几万个操作反复重新调用网络。这与WeCAN的一次前向设计方向相近，但需要本题自己的解码器与验证器。
+							1227 link Description: arXiv, Value: arxiv.org/html/2603.23249v2
+						1228 text **约束层：**节点覆盖、商图和顺序约束由确定性构造检查；完整执行合法性由E0确认。softmax、约束损失和spill预测都不能代替这些检查。
+						1229 container
+							1230 text 下一批合成数据优先补的是 失败边界 ：容量临界两侧、强共享输入、长短异质分支、跨核出口、Q1 Task门控、Q3同刻miss及逻辑张量重命名。对ID或核心顺序做扰动，要重新E0标注，不能假定标签不变；团队契约也明确禁止未经证明使用这些不变量。
+							1231 button 02_官方源码与契约
+								1232 text 02_官方源码与契约
+						1233 container
+							1234 text 硬件安排上，当前构造与E0继续优先用CPU；不同图可以分片做标签，但正式配对计时要隔离其他进程。Apple有官方MPS后端支持，但本轮没有测这些图操作在MPS上的支持和端到端收益。
+							1235 link Description: Apple Developer, Value: developer.apple.com/metal/pytorch/
+						1236 container
+							1237 text A100的合理启动条件 是：小模型在新的图族和规模组上，三个种子都显示稳定的总预算收益，且训练或批量图表示确实成为瓶颈。届时先做约5CU上限的小试验，而不是直接用掉200CU。Colab的实际GPU、运行时和扣费速率须按账户面板核对，CU不是固定GPU小时。
+							1238 link Description: Google Research, Value: research.google.com/colaboratory/faq.html
+						1239 heading 九、当前可执行交付与下一轮判断标准, Value: 2
+							1240 text 九、当前可执行交付与下一轮判断标准
+						1241 text 解压证据包后，直接验证：
+						1242 container
+							1243 text Bash
+							1244 button Copy
+							1245 container
+								1246 text python VERIFY.py
+
+python tools/reproduce_run.py \
+  pilot3_c002_q2_k4_chain_stage_tail_g0.5_h8 \
+   --output  /tmp/huaweicup-route4-check
+						1247 text 从原图运行完整求解器：
+						1248 container
+							1249 text Bash
+							1250 button Copy
+							1251 container
+								1252 text python src/solve.py official/data/case_002.json \
+   --official  official \
+   --cores 4 --problem 2 --budget 30  \
+   --strategy  frontier \
+   --output  /tmp/case002_plan.json \
+   --evidence  /tmp/case002_evidence
+						1253 text 求解器会先获得官方确认的候选，再尝试增量候选；构造和E0子进程受剩余预算约束，超时或失败不能替换已保存的最好方案。封包后的case002复跑已经得到完整result和Trace JSON值一致；便携学习入口也复跑了三个种子，权重张量完全一致。
+						1254 text 下一轮的优先顺序应当是：先补强分核候选，再验证阶段策略的增量，最后才扩大学习。
+						1255 text 尤其需要三个可证伪检查：证书出现一条满足前提却发生spill的反例，就撤回当前证明或实现；加入前三路强候选后，阶段收尾若没有同预算增量，就不作为主策略；小GNN若仍然依赖挑种子，或计入构造、特征和E0确认后没有收益，就停止扩大GPU投入。
+						1256 text 这轮得到的不是一个“统一击败所有方法”的答案，而是两个可以继续积累的成果：**一个在真实官方图上有收益、有失败边界的阶段构造器，以及一个能把部分动态spill判断化为线性整数区间检查、并消除重复候选的证书。**对争取高水平结果，下一步最值得解决的仍是候选覆盖能力，而不是模型规模。
+						1257 container
+							1258 button HuaweiCup_Route4_Report.md
+								1259 text HuaweiCup_Route4_Report.md
+								1260 text Document
+							1261 button Download file
+						1262 container
+							1263 button HuaweiCup_Route4_Results.csv
+								1264 text HuaweiCup_Route4_Results.csv
+								1265 text Spreadsheet
+							1266 button Download file
+						1267 button Sources
+						1268 container Response actions
+							1269 button Copy response
+							1270 pop up button (collapsed) Description: Rate response, ID: radix-_r_jb_, Secondary Actions: Expand
+							1271 pop up button (collapsed) Description: Pro feedback, Secondary Actions: Expand
+							1272 button Add to project sources
+							1273 pop up button (collapsed) Description: Switch model, ID: radix-_r_jj_, Secondary Actions: Expand
+							1274 pop up button (collapsed) Description: More actions, ID: radix-_r_jm_, Secondary Actions: Expand
+					1275 text ChatGPT can make mistakes. Check important info.
+				1276 container thread-bottom-container
+					1277 container
+						1278 container
+							1279 pop up button (collapsed) Description: Add files and more, ID: composer-plus-btn, Secondary Actions: Expand
+							1280 text entry area (settable) Description: Chat with ChatGPT, ID: prompt-textarea
+								1281 text Ask ChatGPT
+							1282 pop up button (collapsed) 6 Pro, ID: radix-_r_k2_, Secondary Actions: Expand
+							1283 button Start dictation
+							1284 button Start Voice
+
+The focused UI element is 1280 text entry area (settable) Description: Chat with ChatGPT, ID: prompt-textarea
