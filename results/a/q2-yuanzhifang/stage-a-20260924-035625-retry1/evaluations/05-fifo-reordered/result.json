@@ -1,0 +1,226 @@
+{
+  "scene": "B",
+  "makespan": 10511,
+  "num_cores": 2,
+  "bandwidth_bytes_per_cycle": 60,
+  "capacity_bytes": {
+    "L1": 524288,
+    "UB": 131072
+  },
+  "memory_peak_by_core": {
+    "0": {
+      "L1": 0,
+      "UB": 128
+    },
+    "1": {
+      "L1": 0,
+      "UB": 192
+    }
+  },
+  "step3_by_core": {
+    "0": {
+      "local_makespan": 10004,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 1,
+        "PIPE_MTE3": 1,
+        "PIPE_M": 0,
+        "PIPE_V": 1
+      }
+    },
+    "1": {
+      "local_makespan": 5006,
+      "memory_dependency_count": 0,
+      "pipe_op_counts": {
+        "PIPE_MTE2": 2,
+        "PIPE_MTE3": 2,
+        "PIPE_M": 0,
+        "PIPE_V": 2
+      }
+    }
+  },
+  "cross_core_copy_delay_cycles": 500,
+  "cross_task_traffic": 64,
+  "data_movement_bytes": {
+    "original_graph_copy_bytes": 256,
+    "scheduled_copy_bytes": 384,
+    "added_copy_bytes": 128,
+    "partition_added_copy_bytes": 128,
+    "spill_added_copy_bytes": 0
+  },
+  "task_count": 2,
+  "task_dependencies": [
+    {
+      "tensor_id": 102,
+      "size": 64,
+      "source_core": 0,
+      "target_core": 1,
+      "source_copy_out_id": 112,
+      "target_copy_in_id": 113
+    }
+  ],
+  "cross_core_transfers": [
+    {
+      "tensor_id": 102,
+      "size": 64,
+      "source_core": 0,
+      "target_core": 1,
+      "source_copy_out_id": 112,
+      "target_copy_in_id": 113,
+      "transfer_id": 0,
+      "copy_out_end": 10006,
+      "copy_in_release": 10506,
+      "copy_in_start": 10506,
+      "copy_in_end": 10508
+    }
+  ],
+  "per_core_timeline": [
+    {
+      "core_id": 0,
+      "tasks": [
+        {
+          "task_id": 0,
+          "subgraph_ids": [
+            0
+          ],
+          "start": 0,
+          "end": 10006,
+          "duration": 10006
+        }
+      ],
+      "subgraphs": [
+        {
+          "subgraph_id": 0,
+          "start": 0,
+          "end": 10006,
+          "duration": 10006
+        }
+      ],
+      "ops": [
+        {
+          "task_id": 0,
+          "op_id": 110,
+          "op": "COPY_IN",
+          "subgraph_id": 0,
+          "pipe": "PIPE_MTE2",
+          "start": 0,
+          "end": 4,
+          "duration": 4
+        },
+        {
+          "task_id": 0,
+          "op_id": 2,
+          "op": "ADD",
+          "subgraph_id": 0,
+          "pipe": "PIPE_V",
+          "start": 4,
+          "end": 10004,
+          "duration": 10000
+        },
+        {
+          "task_id": 0,
+          "op_id": 112,
+          "op": "COPY_OUT",
+          "subgraph_id": 0,
+          "pipe": "PIPE_MTE3",
+          "start": 10004,
+          "end": 10006,
+          "duration": 2
+        }
+      ]
+    },
+    {
+      "core_id": 1,
+      "tasks": [
+        {
+          "task_id": 1,
+          "subgraph_ids": [
+            2,
+            1
+          ],
+          "start": 0,
+          "end": 10511,
+          "duration": 10511
+        }
+      ],
+      "subgraphs": [
+        {
+          "subgraph_id": 2,
+          "start": 0,
+          "end": 5006,
+          "duration": 5006
+        },
+        {
+          "subgraph_id": 1,
+          "start": 10506,
+          "end": 10511,
+          "duration": 5
+        }
+      ],
+      "ops": [
+        {
+          "task_id": 1,
+          "op_id": 117,
+          "op": "COPY_IN",
+          "subgraph_id": 2,
+          "pipe": "PIPE_MTE2",
+          "start": 0,
+          "end": 4,
+          "duration": 4
+        },
+        {
+          "task_id": 1,
+          "op_id": 6,
+          "op": "ADD",
+          "subgraph_id": 2,
+          "pipe": "PIPE_V",
+          "start": 4,
+          "end": 5004,
+          "duration": 5000
+        },
+        {
+          "task_id": 1,
+          "op_id": 119,
+          "op": "COPY_OUT",
+          "subgraph_id": 2,
+          "pipe": "PIPE_MTE3",
+          "start": 5004,
+          "end": 5006,
+          "duration": 2
+        },
+        {
+          "task_id": 1,
+          "op_id": 113,
+          "op": "COPY_IN",
+          "subgraph_id": 1,
+          "pipe": "PIPE_MTE2",
+          "start": 10506,
+          "end": 10508,
+          "duration": 2
+        },
+        {
+          "task_id": 1,
+          "op_id": 3,
+          "op": "ADD",
+          "subgraph_id": 1,
+          "pipe": "PIPE_V",
+          "start": 10508,
+          "end": 10509,
+          "duration": 1
+        },
+        {
+          "task_id": 1,
+          "op_id": 115,
+          "op": "COPY_OUT",
+          "subgraph_id": 1,
+          "pipe": "PIPE_MTE3",
+          "start": 10509,
+          "end": 10511,
+          "duration": 2
+        }
+      ]
+    }
+  ],
+  "input_graph": "graph.json",
+  "input_plan": "plan_1.json"
+}
